@@ -1,6 +1,8 @@
 Schema.ranks = {}
 Schema.ranks.stored = {}
 Schema.ranks.classes = {}
+Schema.ranks.access = {}
+Schema.ranks.access.stored = {}
 
 function Schema.ranks.Add(class, text, access)
 	class = string.lower(class)
@@ -40,4 +42,19 @@ function Schema.ranks.GetRankList(client)
 	end
 
 	return classes
+end
+
+function Schema.ranks.access.Add(id, text, abbreviation)
+	id = string.lower(id)
+
+	Schema.ranks.access.stored[id] = {
+		text = text,
+		abbreviation = abbreviation
+	}
+end
+
+function Schema.ranks.access.Get(id)
+    id = string.lower(key)
+    
+	return Schema.ranks.access.stored[id]
 end
