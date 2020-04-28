@@ -3,16 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
--- [[ Civil Protection Name Setup ]] --
-cpSystem.config.CityAbbreviation = "C45";
-
--- < values: city, abbreviation, rank, id, division > --
-cpSystem.config.cpName = "city.abbreviation:rank-id";
-
--- [[ Miscellaneous Settings ]] --
-cpSystem.config.DisableClassMenu = true;
-cpSystem.config.IncognitoCPScoreboard = true;
-
 -- [[ Rank Setup ]] --
 
 -- Rank Access < id | class name | abbreviation > --
