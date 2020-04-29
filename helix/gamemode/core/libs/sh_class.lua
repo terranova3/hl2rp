@@ -62,7 +62,7 @@ function ix.class.LoadFromDir(directory)
 
 			-- If a color hasn't been set, default to the faction's color.
 			if (!CLASS.color) then
-				CLASS.color = CLASS.faction.color;
+				CLASS.color = ix.faction.Get(CLASS.faction).color;
 			end
 
 			-- Allow classes to be joinable by default.

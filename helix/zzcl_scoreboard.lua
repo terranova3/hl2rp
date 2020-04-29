@@ -269,7 +269,6 @@ function PANEL:AddPlayer(client, index)
 	return true
 end
 
----[[
 function PANEL:SetFaction(faction)
 	local customclass = LocalPlayer():GetCharacter():GetData("customclass")
 
@@ -290,7 +289,6 @@ function PANEL:SetFaction(faction)
 
 	self.faction = faction
 end
----]]
 
 function PANEL:Update()
 	local faction = self.faction
@@ -328,7 +326,7 @@ function PANEL:Init()
 
 	self:Dock(FILL)
 
-	self.classes = {}
+	self.factions = {}
 	self.nextThink = 0
 
 	for i = 1, #ix.faction.indices do
