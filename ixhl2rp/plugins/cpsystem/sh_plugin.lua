@@ -12,15 +12,15 @@ PLUGIN.author = "TERRANOVA";
 PLUGIN.maxLength = 512;
 
 -- Core files
-ix.util.include("plugin/sv_plugin.lua");
+ix.util.Include("plugin/sv_plugin.lua");
 ix.util.Include("plugin/sv_hooks.lua");
-ix.util.include("plugin/sh_plugin.lua");
+ix.util.Include("plugin/sh_plugin.lua");
 ix.util.Include("plugin/cl_hooks.lua");
 ix.util.Include("plugin/libs/sh_ranks.lua");
 ix.util.Include("plugin/meta/sh_character.lua");
-ix.util.include("plugin/meta/sh_player.lua");
+ix.util.Include("plugin/meta/sh_player.lua");
 
 -- Config files
-ix.util.include("config/sv_config.lua");	
-ix.util.include("config/sh_config.lua");	
-ix.util.include("config/cl_config.lua");	
+ix.util.Include("config/sv_config.lua");	
+ix.util.Include("config/sh_config.lua");	
+ix.util.Include("config/cl_config.lua");	

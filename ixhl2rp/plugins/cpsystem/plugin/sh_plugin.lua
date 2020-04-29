@@ -3,22 +3,30 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-ix.config.Add("cpSystem_CityAbbreviation", "C17", "The abbreviation used for the 'city' value in cpSystem", nil, {
+ix.config.Add("City Name", "C17", "The abbreviation used for the 'city' value in cpSystem", nil, {
 	category = "cpSystem"
 })
 
-ix.config.Add("cpSystem_CPName", "city.abbreviation:rank-id", "Naming scheme for civil protection units. values: city, abbreviation, rank, id, division", nil, {
+ix.config.Add("Civil Protection Abbreviation", "CPF", "The abbreviation used for the 'abbreviation' value in cpSystem", nil, {
 	category = "cpSystem"
 })
 
-ix.config.Add("cpSystem_IncognitoScoreboard", true, "Whether or not Civil Protection will show on the scoreboard.", nil, {
+ix.config.Add("CP Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming scheme for civil protection units. values: city, abbreviation, rank, tagline, id, division", nil, {
+	category = "cpSystem"
+})
+
+ix.config.Add("Use Taglines", true, "Use the custom naming scheme for civil protection instead of the default ID system.", nil, {
+	category = "cpSystem"
+})
+
+ix.config.Add("Incognito Scoreboard", true, "Whether or not Civil Protection will show on the scoreboard.", nil, {
 	category = "cpSystem"
 })
 
 -- Includes all the metropolice pack files.
 do
     local directory = "models/dpfilms/metropolice/";
-	local files, folders = _file.Find(directory .. "*.mdl", "GAME");
+	local files, folders = file.Find(directory .. "*.mdl", "GAME");
 
 	for _, obj in pairs(files) do
         ix.anim.SetModelClass(directory .. obj, "metrocop");

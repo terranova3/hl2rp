@@ -6,7 +6,7 @@
 local PLUGIN = PLUGIN;
 
 function PLUGIN:SetRank(client, rank)
-    if(client:IsMetropolice())
+    if(client:IsMetropolice()) then
         local rankTable = Schema.ranks.Get(rank);
 
         if(rankTable) then
@@ -17,7 +17,7 @@ function PLUGIN:SetRank(client, rank)
 end;
 
 function PLUGIN:GetAccessLevel(client)
-    if(client:IsMetropolice())
+    if(client:IsMetropolice()) then
         return client:GetCharacter():GetData("cpAccessLevel");
     end;
 end;

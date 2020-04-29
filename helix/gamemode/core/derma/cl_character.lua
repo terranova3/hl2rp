@@ -147,7 +147,7 @@ function PANEL:Init()
 	local infoLabel = self:Add("DLabel")
 	infoLabel:SetTextColor(Color(255, 255, 255, 25))
 	infoLabel:SetFont("ixMenuMiniFont")
-	infoLabel:SetText(L("helix") .. " " .. GAMEMODE.Version)
+	infoLabel:SetText(L("TERRANOVA") .. " 1.0 " )
 	infoLabel:SizeToContents()
 	infoLabel:SetPos(ScrW() - infoLabel:GetWide() - 4, ScrH() - infoLabel:GetTall() - 4)
 
@@ -208,7 +208,7 @@ function PANEL:Init()
 		local titleLabel = logoPanel:Add("DLabel")
 		titleLabel:SetTextColor(color_white)
 		titleLabel:SetFont("ixTitleFont")
-		titleLabel:SetText(L2("schemaName") or Schema.name or L"unknown")
+		titleLabel:SetText(L"TERRA NOVA")
 		titleLabel:SizeToContents()
 		titleLabel:SetPos(halfWidth - titleLabel:GetWide() * 0.5, halfPadding)
 		titleLabel:SetPaintedManually(true)
@@ -218,7 +218,7 @@ function PANEL:Init()
 			local subtitleLabel = logoPanel:Add("DLabel")
 			subtitleLabel:SetTextColor(color_white)
 			subtitleLabel:SetFont("ixSubTitleFont")
-			subtitleLabel:SetText(subtitle)
+			subtitleLabel:SetText("Half-Life 2 Roleplay")
 			subtitleLabel:SizeToContents()
 			subtitleLabel:SetPos(halfWidth - subtitleLabel:GetWide() * 0.5, 0)
 			subtitleLabel:MoveBelow(titleLabel)
@@ -252,7 +252,7 @@ function PANEL:Init()
 
 	-- load character button
 	self.loadButton = self.mainButtonList:Add("ixMenuButton")
-	self.loadButton:SetText("load")
+	self.loadButton:SetText("LOAD")
 	self.loadButton:SizeToContents()
 	self.loadButton.DoClick = function()
 		self:Dim()
@@ -263,7 +263,7 @@ function PANEL:Init()
 		self.loadButton:SetDisabled(true)
 	end
 
-	-- community button
+--[[ 	-- community button
 	local extraURL = ix.config.Get("communityURL", "")
 	local extraText = ix.config.Get("communityText", "@community")
 
@@ -278,7 +278,7 @@ function PANEL:Init()
 		extraButton.DoClick = function()
 			gui.OpenURL(extraURL)
 		end
-	end
+	end ]]
 
 	-- leave/return button
 	self.returnButton = self.mainButtonList:Add("ixMenuButton")
