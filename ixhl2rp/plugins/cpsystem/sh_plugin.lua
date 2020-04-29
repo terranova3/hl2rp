@@ -8,7 +8,7 @@ cpSystem.config = {}
 
 PLUGIN.name = "Civil Protection System";
 PLUGIN.description = "tbd";
-PLUGIN.author = "TERRANOVA";
+PLUGIN.author = "Adolphus";
 PLUGIN.maxLength = 512;
 
 -- Core files

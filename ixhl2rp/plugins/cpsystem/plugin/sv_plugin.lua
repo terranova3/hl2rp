@@ -5,6 +5,25 @@
 
 local PLUGIN = PLUGIN;
 
+function PLUGIN:AdjustPlayer(event, client)
+    local character = client:GetCharacter();
+    local cpData = PLUGIN:GetCPDataAsTable(character);
+	
+    if(event == "Unequipped") then
+		character:SetData("cpDesc", character:GetDescription())
+        character:SetDescription(cpData.cpCitizenDesc);
+        character:SetName(cpData.cpCitizenName);
+        character:SetClass(CLASS_MPUH);  
+		character:SetData( "customclass", "Citizen" );				
+	elseif(event == "Equipped") then	        
+		character:SetData("cpCitizenDesc", character:GetDescription())
+        character:SetDescription(cpData.cpDesc);
+        character:SetName("test");
+        character:SetClass(CLASS_MPU);
+		character:SetData("customclass", "Civil Protection");			
+	end; 
+end;
+
 function PLUGIN:SetRank(client, rank)
     if(client:IsMetropolice()) then
         local rankTable = Schema.ranks.Get(rank);
@@ -20,4 +39,54 @@ function PLUGIN:GetAccessLevel(client)
     if(client:IsMetropolice()) then
         return client:GetCharacter():GetData("cpAccessLevel");
     end;
+end;
+
+function PLUGIN:GetCPName(character)
+    local template = ix.config.Get("CP Naming Scheme");
+    
+	replacements = {
+		["city"] = ix.config.Get("City Name"),
+		["abbreviation"] = ix.config.Get("Civil Protection Abbreviation"),
+		["rank"] = character:GetData("cpRank"),
+		["tagline"] = character:GetData("cpTagline"),
+		["id"] = character:GetData("cpID")
+    }
+
+    local name = string.gsub(template, "%a+", 
+	function(str)
+		return replacements[str]
+    end)
+    
+    self.SendDebug(name);
+    
+    return name;
+end;
+
+-- TODO
+function PLUGIN:DoesRankExist(rank)
+end;
+
+-- TODO
+function PLUGIN:DoesTaglineExist(tagline)
+end;
+
+function PLUGIN:GetCPDataAsTable(character)
+    if(character:GetFaction() == FACTION_MPF) then 
+        data = {}
+	    data.cpID = character:GetData("cpID");
+	    data.cpRank = character:GetData("cpRank");
+	    data.cpDesc = character:GetData("cpDesc");
+	    data.cpModel = character:GetData("cpModel");
+        data.cpDesc = character:GetData("cpDesc");
+        data.cpCitizenName = character:GetData("cpCitizenName");
+	    data.cpCitizenDesc = character:GetData("cpCitizenDesc");
+		data.faction = character:GetFaction();
+		data.name = character:Name();
+					
+	    return data;
+	end;
+end;
+
+function PLUGIN:SendDebug(text)
+    MsgC(Color(0, 255, 100, 255), "[cpSystem] ".. text .." \n");
 end;
