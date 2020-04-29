@@ -23,6 +23,11 @@ ix.config.Add("Incognito Scoreboard", true, "Whether or not Civil Protection wil
 	category = "cpSystem"
 })
 
+ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands.", nil, {
+	data = {min = 0, max = 10},
+	category = "cpSystem"
+})
+
 -- Includes all the metropolice pack files.
 do
     local directory = "models/dpfilms/metropolice/";

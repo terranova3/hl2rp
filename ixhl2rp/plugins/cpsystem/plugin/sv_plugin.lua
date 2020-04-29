@@ -62,12 +62,32 @@ function PLUGIN:GetCPName(character)
     return name;
 end;
 
--- TODO
 function PLUGIN:DoesRankExist(rank)
+    local i = 0;
+
+    for k, v in pairs(Schema.ranks.stored) do 
+        if(Schema.ranks.stored[i] == rank) then
+            return true;
+        end;
+
+		i=i+1;
+    end
+    
+    return false;
 end;
 
--- TODO
 function PLUGIN:DoesTaglineExist(tagline)
+    local i = 0;
+
+    for k, v in pairs(cpSystem.config.taglines) do
+        if(cpSystem.config.taglines[i] == tagline) then
+            return true;
+        end;
+
+        i=i+1;
+    end;
+
+    return false;
 end;
 
 function PLUGIN:GetCPDataAsTable(character)
