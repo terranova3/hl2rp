@@ -42,7 +42,7 @@ ix.command.Add("CharSetCPRank",  {
 
 				target:SetData("cpRank", newRank);
 
-				if(target:GetClass() != "CLASS_MPUH")
+				if(!target:IsUndercover())
 					target:SetName(PLUGIN:GetCpName(target));
 				end;
 

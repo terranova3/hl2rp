@@ -3,6 +3,9 @@
 	Configuration file
 --]]
 
+-- [[ Config settings ]] --
+cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
+
 -- [[ Rank Setup ]] --
 
 -- Rank Access < id | class name | abbreviation > --
@@ -10,14 +13,14 @@ Schema.ranks.access.Add(2, "Universal Union", "UU");
 Schema.ranks.access.Add(1, "Civil Protection", "CPF");
 Schema.ranks.access.Add(0, "Civil Protection", "CPF");
 
--- Rank <faction | rank tag | rank access> --
+-- Rank <rank tag | rank access level> --
 Schema.ranks.Add("A", 2);
 Schema.ranks.Add("E", 1);
 Schema.ranks.Add("Z", 0);
 Schema.ranks.Add("G", 0);
 Schema.ranks.Add("D", 0);
 
--- [[ CP Taglines ]]
+-- [[ CP Taglines ]] --
 
 cpSystem.config.taglines = {
 	"APEX",

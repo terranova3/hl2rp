@@ -16,7 +16,7 @@ ix.command.Add("CharSetCPName",  {
         if(target:GetFaction() == "Metropolice Force") then
             target:SetData("cpCitizenName", text);
 
-            if(target:GetClass() != "CLASS_MPUH")
+            if(target:IsUndercover())
                 target:SetName(target:GetData("cpCitizenName"));
             end;
 

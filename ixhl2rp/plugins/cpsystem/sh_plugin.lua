@@ -20,7 +20,5 @@ ix.util.Include("plugin/libs/sh_ranks.lua");
 ix.util.Include("plugin/meta/sh_character.lua");
 ix.util.Include("plugin/meta/sh_player.lua");
 
--- Config files
-ix.util.Include("config/sv_config.lua");	
+-- Config file
 ix.util.Include("config/sh_config.lua");	
-ix.util.Include("config/cl_config.lua");	

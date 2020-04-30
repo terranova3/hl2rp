@@ -17,7 +17,7 @@ ix.command.Add("CharSetCPID",  {
 			if(text > 0 and text < 10) then
             	target:SetData("cpID", text);
 
-				if(target:GetClass() != "CLASS_MPUH")
+				if(!target:IsUndercover())
 					target:SetName(PLUGIN:GetCpName(target));
 				end;
 				

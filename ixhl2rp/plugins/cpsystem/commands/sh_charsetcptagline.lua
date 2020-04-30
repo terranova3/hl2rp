@@ -30,7 +30,7 @@ ix.command.Add("CharSetCPTagline",  {
 			if(taglineExists)
             	target:SetData("cpTagline", text);
 
-				if(target:GetClass() != "CLASS_MPUH")
+				if(!target:IsUndercover())
 					target:SetName(PLUGIN:GetCpName(target));
 				end;
 

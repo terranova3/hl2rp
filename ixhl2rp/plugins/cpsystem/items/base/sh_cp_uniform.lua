@@ -5,7 +5,7 @@
 
 local PLUGIN = PLUGIN;
 
---ITEM.base = "base_outfit"
+ITEM.base = "base_outfit"
 ITEM.name = "Uniform";
 ITEM.model = "models/props_c17/suitcase_passenger_physics.mdl";
 ITEM.replacements = "models/props_c17/suitcase_passenger_physics.mdl";

@@ -15,7 +15,9 @@ FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPo
 function FACTION:OnCharacterCreated(client, character)
 	local count = 0
 	for _ in pairs(cpSystem.config.taglines) do count = count + 1 end
-	
+
+	character:SetData("cpCitizenName", character:GetName());
+	character:SetData("cpCitizenDesc", cpSystem.config.cpDefaultDescription)
 	character:SetData("cpRank", "D");
 	character:SetData("cpTagline", cpSystem.config.taglines[math.random(1, count)]);
 	character:SetData("cpID", Schema:ZeroNumber(math.random(1, 9), 1));

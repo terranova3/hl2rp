@@ -18,10 +18,10 @@ function PLUGIN:AdjustPlayer(event, client)
 	elseif(event == "Equipped") then	        
 		character:SetData("cpCitizenDesc", character:GetDescription())
         character:SetDescription(cpData.cpDesc);
-        character:SetName("test");
+        character:SetName(PLUGIN:GetCPName(character));
         character:SetClass(CLASS_MPU);
 		character:SetData("customclass", "Civil Protection");			
-	end; 
+    end;
 end;
 
 function PLUGIN:SetRank(client, rank)
@@ -57,7 +57,7 @@ function PLUGIN:GetCPName(character)
 		return replacements[str];
     end)
     
-    self.SendDebug(name);
+   -- self.SendDebug(name);
     
     return name;
 end;
@@ -101,7 +101,7 @@ function PLUGIN:GetCPDataAsTable(character)
         data.cpCitizenName = character:GetData("cpCitizenName");
 	    data.cpCitizenDesc = character:GetData("cpCitizenDesc");
 		data.faction = character:GetFaction();
-		data.name = character:Name();
+		data.name = character:GetName();
 					
 	    return data;
 	end;
