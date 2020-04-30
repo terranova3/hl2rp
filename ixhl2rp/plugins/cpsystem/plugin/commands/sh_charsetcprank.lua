@@ -9,7 +9,7 @@ ix.command.Add("CharSetCPRank",  {
 	description = "Sets the rank of a civil protection unit.";
 	arguments = {
 		ix.type.character,
-		bit.bor{ix.type.string, ix.type.optional}
+		ix.type.string
 	},
 	OnCheckAccess = function(self, client)
 		return client:IsDispatch();
@@ -42,9 +42,7 @@ ix.command.Add("CharSetCPRank",  {
 
 				target:SetData("cpRank", newRank);
 
-				if(!target:IsUndercover())
-					target:SetName(PLUGIN:GetCpName(target));
-				end;
+				PLUGIN:UpdateName(target);
 
 				for _, v in ipairs(player.GetAll()) do
                     if (self:OnCheckAccess(v) or v == target:GetPlayer()) then

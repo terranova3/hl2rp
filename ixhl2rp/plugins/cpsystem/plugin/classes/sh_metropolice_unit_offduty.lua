@@ -6,6 +6,4 @@
 CLASS.name = "Metropolice Unit Undercover";
 CLASS.faction = FACTION_MPF;
 CLASS.color = Color(150, 125, 100, 255);
-CLASS.isDefault = true;
-
 CLASS_MPUH = CLASS.index

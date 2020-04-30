@@ -5,6 +5,7 @@
 
 local PLUGIN = PLUGIN;
 
+-- Called when a player's uniform status has been changed
 function PLUGIN:AdjustPlayer(event, client)
     local character = client:GetCharacter();
     local cpData = PLUGIN:GetCPDataAsTable(character);
@@ -12,35 +13,46 @@ function PLUGIN:AdjustPlayer(event, client)
     if(event == "Unequipped") then
 		character:SetData("cpDesc", character:GetDescription())
         character:SetDescription(cpData.cpCitizenDesc);
-        character:SetName(cpData.cpCitizenName);
         character:SetClass(CLASS_MPUH);  
-		character:SetData( "customclass", "Citizen" );				
+        character:SetData( "customclass", "Citizen" );			
 	elseif(event == "Equipped") then	        
 		character:SetData("cpCitizenDesc", character:GetDescription())
         character:SetDescription(cpData.cpDesc);
-        character:SetName(PLUGIN:GetCPName(character));
         character:SetClass(CLASS_MPU);
 		character:SetData("customclass", "Civil Protection");			
     end;
+
+    PLUGIN:UpdateName(character);
 end;
 
+-- Called when a characters rank has been changed
 function PLUGIN:SetRank(client, rank)
+    local character = client:GetCharacter();
+
     if(client:IsMetropolice()) then
         local rankTable = Schema.ranks.Get(rank);
 
         if(rankTable) then
-            client:GetCharacter():SetData("cpRank", rank.text);
-            client:GetCharacter():SetData("cpAccessLevel", rank.access)
+            character:SetData("cpRank", rank.text);
+            character:SetData("cpAccessLevel", rank.access)
         end;
+
+        PLUGIN:UpdateName(character);
     end;
 end;
 
-function PLUGIN:GetAccessLevel(client)
-    if(client:IsMetropolice()) then
-        return client:GetCharacter():GetData("cpAccessLevel");
+-- Called when a character has had data changed that requires their name to be updated
+function PLUGIN:UpdateName(character)
+    local cpData = PLUGIN:GetCPDataAsTable(character);
+
+    if(!character:IsUndercover()) then
+        character:SetName(PLUGIN:GetCPName(character));
+    elseif(character:IsUndercover() and character:GetName() != cpData.cpCitizenName) then
+        character:SetName(cpData.cpCitizenName);
     end;
 end;
 
+-- Returns full civil protection name as a single string
 function PLUGIN:GetCPName(character)
     local template = ix.config.Get("CP Naming Scheme");
     
@@ -57,11 +69,18 @@ function PLUGIN:GetCPName(character)
 		return replacements[str];
     end)
     
-   -- self.SendDebug(name);
-    
     return name;
 end;
 
+-- Returns tagline and id together as a single string
+-- TODO: doesn't follow naming scheme
+function PLUGIN:GetCPTag(character)
+    local cpData = plugin:GetCPDataAsTable(character);
+
+    return cpData.cpTagline .. cpData.cpID;
+end;
+
+-- Returns if a rank exists in the stored table
 function PLUGIN:DoesRankExist(rank)
     local i = 0;
 
@@ -76,6 +95,7 @@ function PLUGIN:DoesRankExist(rank)
     return false;
 end;
 
+-- Returns if a tagline exists in the config tagline table
 function PLUGIN:DoesTaglineExist(tagline)
     local i = 0;
 
@@ -90,23 +110,25 @@ function PLUGIN:DoesTaglineExist(tagline)
     return false;
 end;
 
+-- Returns all of the plugin's character data as a single table
 function PLUGIN:GetCPDataAsTable(character)
+    local data = {}
+
     if(character:GetFaction() == FACTION_MPF) then 
-        data = {}
 	    data.cpID = character:GetData("cpID");
-	    data.cpRank = character:GetData("cpRank");
+        data.cpRank = character:GetData("cpRank");
+        data.cpAccessLevel = character:GetData("cpAccessLevel");	
 	    data.cpDesc = character:GetData("cpDesc");
 	    data.cpModel = character:GetData("cpModel");
         data.cpDesc = character:GetData("cpDesc");
         data.cpCitizenName = character:GetData("cpCitizenName");
-	    data.cpCitizenDesc = character:GetData("cpCitizenDesc");
-		data.faction = character:GetFaction();
-		data.name = character:GetName();
-					
-	    return data;
-	end;
+	    data.cpCitizenDesc = character:GetData("cpCitizenDesc");					
+    end;
+    
+    return data;
 end;
 
+-- Creates a debug message for server
 function PLUGIN:SendDebug(text)
     MsgC(Color(0, 255, 100, 255), "[cpSystem] ".. text .." \n");
 end;

@@ -242,7 +242,7 @@ vgui.Register("ixScoreboardRow", PANEL, "EditablePanel")
 -- faction grouping
 PANEL = {}
 
-AccessorFunc(PANEL, "faction", "Faction")
+AccessorFunc(PANEL, "class", "Class")
 
 function PANEL:Init()
 	self:DockMargin(0, 0, 0, 16)
@@ -269,39 +269,35 @@ function PANEL:AddPlayer(client, index)
 	return true
 end
 
----[[
-function PANEL:SetFaction(faction)
-	local customclass = LocalPlayer():GetCharacter():GetData("customclass")
-
-	for _, v in pairs(ix.class.list) do
-		if (v.faction == faction and v.isDefault) then
-			self:SetColor(v.color)
-			self:SetText(L(v.name))
-			break	
-		else
-			self:SetColor(faction.color)
-			self:SetText(L(faction.name))
+function PANEL:SetClass(class)
+	for i = 1, #ix.class.list do
+		if(ix.class.list[i] == class) then
+			--print(ix.class.list[i].name .. " " .. class.name)
+			self:SetColor(ix.class.list[i].color)
+			self:SetText(L(ix.class.list[i].name))
+			break;
 		end;
-	end
-
-	if(customclass != nil) then
-		self:SetText(L(customclass));
 	end;
 
-	self.faction = faction
-end
----]]
+	self.class = class;
+end;
 
 function PANEL:Update()
-	local faction = self.faction
+	local class = self.class
+	local players = ix.class.GetPlayers(class.index);
+	local playerCount = 0;
 
-	if (team.NumPlayers(faction.index) == 0) then
-		self:SetVisible(false)
-		self:GetParent():InvalidateLayout()
+	for i = 1, #players do
+		playerCount = i;
+	end;
+
+	if(playerCount == 0) then
+		self:SetVisible(false);
+		self:GetParent():InvalidateLayout();
 	else
 		local bHasPlayers
 
-		for k, v in ipairs(team.GetPlayers(faction.index)) do
+		for k, v in ipairs(ix.class.GetPlayers(class.index)) do
 			if (!IsValid(v.ixScoreboardSlot)) then
 				if (self:AddPlayer(v, k)) then
 					bHasPlayers = true
@@ -313,7 +309,7 @@ function PANEL:Update()
 		end
 
 		self:SetVisible(bHasPlayers)
-	end
+	end;
 end
 
 vgui.Register("ixScoreboardFaction", PANEL, "ixCategoryPanel")
@@ -331,6 +327,19 @@ function PANEL:Init()
 	self.classes = {}
 	self.nextThink = 0
 
+	for i = 1, #ix.class.list do
+		local class = ix.class.list[i]
+
+		local panel = self:Add("ixScoreboardFaction")
+		panel:SetClass(class)
+		panel:Dock(TOP)
+
+		self.classes[i] = panel;
+	end;
+--[[
+	self.factions = {}
+	self.nextThink = 0
+
 	for i = 1, #ix.faction.indices do
 		local faction = ix.faction.indices[i]
 
@@ -339,19 +348,26 @@ function PANEL:Init()
 		panel:Dock(TOP)
 
 		self.factions[i] = panel
-	end
+	end--]]
 
 	ix.gui.scoreboard = self
 end
 
 function PANEL:Think()
+
 	if (CurTime() >= self.nextThink) then
+		for i = 1, #self.classes do
+			local classesPanel = self.classes[i]
+
+			classesPanel:Update()
+		end;
+		--[[
 		for i = 1, #self.factions do
 			local factionPanel = self.factions[i]
 
 			factionPanel:Update()
 		end
-
+--]]
 		self.nextThink = CurTime() + 0.5
 	end
 end

@@ -27,12 +27,10 @@ ix.command.Add("CharSetCPTagline",  {
 				i=i+1;
 			end
 
-			if(taglineExists)
+			if(taglineExists) then
             	target:SetData("cpTagline", text);
 
-				if(!target:IsUndercover())
-					target:SetName(PLUGIN:GetCpName(target));
-				end;
+				PLUGIN:UpdateName(target);
 
 				for _, v in ipairs(player.GetAll()) do
 					if (self:OnCheckAccess(v) or v == target:GetPlayer()) then

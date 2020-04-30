@@ -14,6 +14,8 @@ ITEM.description = "A suitcase full of clothes.";
 ITEM.width = 2;
 ITEM.height = 2;
 ITEM.maxArmor = 100;
+ITEM.invWidth = 1
+ITEM.invHeight = 1
 
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)

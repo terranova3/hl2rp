@@ -10,15 +10,22 @@ PLUGIN.name = "Civil Protection System";
 PLUGIN.description = "tbd";
 PLUGIN.author = "Adolphus";
 PLUGIN.maxLength = 512;
+PLUGIN.newPath = PLUGIN.folder .. "/plugin";
 
--- Core files
-ix.util.Include("plugin/sv_plugin.lua");
-ix.util.Include("plugin/sv_hooks.lua");
+-- Including core files in a different location
 ix.util.Include("plugin/sh_plugin.lua");
-ix.util.Include("plugin/cl_hooks.lua");
-ix.util.Include("plugin/libs/sh_ranks.lua");
-ix.util.Include("plugin/meta/sh_character.lua");
-ix.util.Include("plugin/meta/sh_player.lua");
+ix.lang.LoadFromDir(PLUGIN.newPath.."/languages")
+ix.util.IncludeDir(PLUGIN.newPath.."/libs", true)
+ix.attributes.LoadFromDir(PLUGIN.newPath.."/attributes")
+ix.faction.LoadFromDir(PLUGIN.newPath.."/factions")
+ix.class.LoadFromDir(PLUGIN.newPath.."/classes")
+ix.item.LoadFromDir(PLUGIN.newPath.."/items")
+ix.util.IncludeDir(PLUGIN.newPath.."/derma", true)
+ix.plugin.LoadEntities(PLUGIN.newPath.."/entities")
 
--- Config file
-ix.util.Include("config/sh_config.lua");	
+--Including directories that HELIX does not natively recognise.
+PLUGIN:IncludeDirectory("config");
+PLUGIN:IncludeDirectory("plugin");
+PLUGIN:IncludeDirectory("plugin/commands")
+PLUGIN:IncludeDirectory("plugin/meta")
+

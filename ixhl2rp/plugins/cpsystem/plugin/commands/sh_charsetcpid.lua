@@ -17,9 +17,7 @@ ix.command.Add("CharSetCPID",  {
 			if(text > 0 and text < 10) then
             	target:SetData("cpID", text);
 
-				if(!target:IsUndercover())
-					target:SetName(PLUGIN:GetCpName(target));
-				end;
+				PLUGIN:UpdateName(target);
 				
 				for _, v in ipairs(player.GetAll()) do
 					if (self:OnCheckAccess(v) or v == target:GetPlayer()) then

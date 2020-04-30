@@ -7,7 +7,7 @@ ix.command.Add("CharSetCPName",  {
 	description = "Sets the citizen name of a civil protection unit.";
 	arguments = {
 		ix.type.character,
-		bit.bor{ix.type.string, ix.type.optional}
+		ix.type.string
 	},
 	OnCheckAccess = function(self, client)
 		return client:IsDispatch();
@@ -16,9 +16,7 @@ ix.command.Add("CharSetCPName",  {
         if(target:GetFaction() == "Metropolice Force") then
             target:SetData("cpCitizenName", text);
 
-            if(target:IsUndercover())
-                target:SetName(target:GetData("cpCitizenName"));
-            end;
+            PLUGIN:UpdateName(target);
 
             for _, v in ipairs(player.GetAll()) do
                 if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
