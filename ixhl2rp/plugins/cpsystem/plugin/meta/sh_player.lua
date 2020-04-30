@@ -4,7 +4,7 @@ function playerMeta:IsCombine()
 	local faction = self:Team();
 	local isCombine = (faction == FACTION_OTA);
 
-	if(faction == FACTION_MPF and self:GetCharacter():GetClass() != "CLASS_MPUH") then
+	if(faction == FACTION_MPF and !self:GetCharacter():IsUndercover()) then
 		isCombine = true;
 	else
 		isCombine = false;
@@ -34,15 +34,3 @@ function playerMeta:IsDispatch()
 
 	return bStatus;
 end
-
-function playerMeta:IsUndercover()
-	if(self:GetCharacter():GetFaction() == FACTION_MPF and self:GetCharacter():GetClassName() == "Metropolice Unit Undercover") then
-		return true;
-	else
-		return false;
-	end;
-end;
-
-function playerMeta:GetClassName()
-	return ix.class.list[self:GetCharacter():GetClass()].name;
-end;

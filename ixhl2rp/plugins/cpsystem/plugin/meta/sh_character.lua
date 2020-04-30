@@ -1,5 +1,5 @@
-
 local CHAR = ix.meta.character
+local cLIST = ix.class.list;
 
 function CHAR:IsCombine()
 	local isCombine = (faction == FACTION_OTA);
@@ -19,8 +19,12 @@ function CHAR:IsMetropolice()
 end
 
 function CHAR:IsUndercover()
-	if(self:GetFaction() == FACTION_MPF and self:GetClassName() == "Metropolice Unit Undercover") then
-		return true;
+	if(self:GetClass() != nil) then 
+		if(self:GetFaction() == FACTION_MPF and self:GetClassName() == "Metropolice Unit Undercover") then
+			return true;
+		else
+			return false;
+		end;
 	else
 		return false;
 	end;
