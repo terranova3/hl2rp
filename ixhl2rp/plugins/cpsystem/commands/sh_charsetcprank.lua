@@ -41,7 +41,10 @@ ix.command.Add("CharSetCPRank",  {
 				newRank = ranks[newRank];
 
 				target:SetData("cpRank", newRank);
-				target:SetName(PLUGIN:GetCpName(target));
+
+				if(target:GetClass() != "CLASS_MPUH")
+					target:SetName(PLUGIN:GetCpName(target));
+				end;
 
 				for _, v in ipairs(player.GetAll()) do
                     if (self:OnCheckAccess(v) or v == target:GetPlayer()) then

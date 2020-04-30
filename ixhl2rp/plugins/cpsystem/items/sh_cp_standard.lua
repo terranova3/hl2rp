@@ -4,8 +4,8 @@
 --]]
 local PLUGIN = PLUGIN;
 
-ITEM.base = "cp_base"
 ITEM.name = "Civil Protection Uniform";
+ITEM.base = "base_cp_uniform"
 ITEM.model = "models/props_c17/suitcase_passenger_physics.mdl";
 ITEM.replacement = "models/dpfilms/metropolice/hl2beta_police.mdl";
 ITEM.category = "Clothing";

@@ -54,7 +54,7 @@ function PLUGIN:GetCPName(character)
 
     local name = string.gsub(template, "%a+", 
 	function(str)
-		return replacements[str]
+		return replacements[str];
     end)
     
     self.SendDebug(name);

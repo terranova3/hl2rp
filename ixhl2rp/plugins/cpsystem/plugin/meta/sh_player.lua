@@ -11,7 +11,7 @@ function playerMeta:IsDispatch()
 	local bStatus = faction == FACTION_OTA;
 
 	if (!bStatus) then
-		if(Schema.ranks.Get(character:GetData(cpRank)).access > ix.config.Get("Dispatch Access Level")) then
+		if(Schema.ranks.Get(character:GetData(cpRank)).access >= ix.config.Get("Dispatch Access Level")) then
 			bStatus = true;
 		end;
 	end
