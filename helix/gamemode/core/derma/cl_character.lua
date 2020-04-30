@@ -147,14 +147,15 @@ function PANEL:Init()
 	local infoLabel = self:Add("DLabel")
 	infoLabel:SetTextColor(Color(255, 255, 255, 25))
 	infoLabel:SetFont("ixMenuMiniFont")
-	infoLabel:SetText(L("TERRANOVA") .. " 1.0 " )
+	infoLabel:SetText(L("TERRANOVA ") .. ix.config.Get("Terra Nova Version"))
 	infoLabel:SizeToContents()
 	infoLabel:SetPos(ScrW() - infoLabel:GetWide() - 4, ScrH() - infoLabel:GetTall() - 4)
 
 	local logoPanel = self:Add("Panel")
 	logoPanel:SetSize(ScrW(), ScrH() * 0.25)
-	logoPanel:SetPos(0, ScrH() * 0.25)
+	logoPanel:SetPos(0, ScrH() * 0.0)
 	logoPanel.Paint = function(panel, width, height)
+		---[[
 		local matrix = self.currentMatrix
 
 		-- don't scale the background because it fucks the blur
@@ -171,8 +172,8 @@ function PANEL:Init()
 		ix.util.DrawBlur(panel, 15, nil, 200)
 
 		-- background dim
-		surface.SetDrawColor(0, 0, 0, 100)
-		surface.DrawRect(0, y, width, newHeight)
+		--surface.SetDrawColor(0, 0, 0, 100)
+		--surface.DrawRect(0, y, width /, newHeight)
 
 		-- border lines
 		surface.SetDrawColor(ix.config.Get("color") or color_white)
@@ -187,7 +188,7 @@ function PANEL:Init()
 			v:PaintManual()
 		end
 
-		render.SetScissorRect(0, 0, 0, 0, false)
+		render.SetScissorRect(0, 0, 0, 0, false) ---]]
 	end
 
 	-- draw schema logo material instead of text if available
@@ -207,8 +208,8 @@ function PANEL:Init()
 
 		local titleLabel = logoPanel:Add("DLabel")
 		titleLabel:SetTextColor(color_white)
-		titleLabel:SetFont("ixTitleFont")
-		titleLabel:SetText(L"TERRA NOVA")
+		titleLabel:SetFont("ixMenuBigFont")
+		titleLabel:SetText(L"TERRA NOVA ".. ix.config.Get("Terra Nova Version"))
 		titleLabel:SizeToContents()
 		titleLabel:SetPos(halfWidth - titleLabel:GetWide() * 0.5, halfPadding)
 		titleLabel:SetPaintedManually(true)
@@ -217,7 +218,7 @@ function PANEL:Init()
 		if (subtitle) then
 			local subtitleLabel = logoPanel:Add("DLabel")
 			subtitleLabel:SetTextColor(color_white)
-			subtitleLabel:SetFont("ixSubTitleFont")
+			subtitleLabel:SetFont("ixMenuMediumFont")
 			subtitleLabel:SetText("Half-Life 2 Roleplay")
 			subtitleLabel:SizeToContents()
 			subtitleLabel:SetPos(halfWidth - subtitleLabel:GetWide() * 0.5, 0)

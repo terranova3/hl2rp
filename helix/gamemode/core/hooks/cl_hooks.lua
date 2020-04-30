@@ -54,6 +54,18 @@ function GM:LoadFonts(font, genericFont)
 		weight = 300,
 	})
 
+	surface.CreateFont("ixMenuMediumFont", {
+		font = "Roboto",
+		size = math.max(ScreenScale(12)),
+		weight = 300,
+	})
+
+	surface.CreateFont("ixMenuBigFont", {
+		font = "Roboto",
+		size = math.max(ScreenScale(30)),
+		weight = 300,
+	})
+
 	surface.CreateFont("ixMenuButtonFont", {
 		font = "Roboto Th",
 		size = ScreenScale(14),
