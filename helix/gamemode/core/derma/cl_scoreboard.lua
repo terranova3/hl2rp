@@ -229,7 +229,7 @@ function PANEL:SetPlayer(client)
 	self.player = client
 	self.team = client:Team()
 	self.character = client:GetCharacter()
-
+	self.curClass = self.character:GetClass();
 	self:Update()
 end
 
@@ -272,7 +272,6 @@ end
 function PANEL:SetClass(class)
 	for i = 1, #ix.class.list do
 		if(ix.class.list[i] == class) then
-			--print(ix.class.list[i].name .. " " .. class.name)
 			self:SetColor(ix.class.list[i].color)
 			self:SetText(L(ix.class.list[i].name))
 			break;
@@ -280,6 +279,7 @@ function PANEL:SetClass(class)
 	end;
 
 	self.class = class;
+	self:Update();
 end;
 
 function PANEL:Update()
@@ -336,38 +336,18 @@ function PANEL:Init()
 
 		self.classes[i] = panel;
 	end;
---[[
-	self.factions = {}
-	self.nextThink = 0
-
-	for i = 1, #ix.faction.indices do
-		local faction = ix.faction.indices[i]
-
-		local panel = self:Add("ixScoreboardFaction")
-		panel:SetFaction(faction)
-		panel:Dock(TOP)
-
-		self.factions[i] = panel
-	end--]]
 
 	ix.gui.scoreboard = self
 end
 
 function PANEL:Think()
-
 	if (CurTime() >= self.nextThink) then
 		for i = 1, #self.classes do
 			local classesPanel = self.classes[i]
 
 			classesPanel:Update()
 		end;
-		--[[
-		for i = 1, #self.factions do
-			local factionPanel = self.factions[i]
 
-			factionPanel:Update()
-		end
---]]
 		self.nextThink = CurTime() + 0.5
 	end
 end
@@ -377,5 +357,9 @@ vgui.Register("ixScoreboard", PANEL, "DScrollPanel")
 hook.Add("CreateMenuButtons", "ixScoreboard", function(tabs)
 	tabs["scoreboard"] = function(container)
 		container:Add("ixScoreboard")
+
+		OnSelected = function()
+			print("Selected");
+		end
 	end
 end)
