@@ -600,6 +600,14 @@ function GM:HUDPaintBackground()
 
 	local weapon = client:GetActiveWeapon()
 
+	--[[ 
+
+		MuzToday at 1:09 PM
+		ammo still shows in the bottom right
+
+		To whom it may concern: This disables ammo drawing in the bottom right of the screen, didn't want to write a plugin just to
+		hook CanDrawAmmoHUD
+
 	if (IsValid(weapon) and hook.Run("CanDrawAmmoHUD", weapon) != false and weapon.DrawAmmo != false) then
 		local clip = weapon:Clip1()
 		local clipMax = weapon:GetMaxClip1()
@@ -631,6 +639,8 @@ function GM:HUDPaintBackground()
 			ix.util.DrawText((clip == -1 or clipMax == -1) and count or clip.."/"..count, x + 64, y + 32, nil, 1, 1, "ixBigFont")
 		end
 	end
+
+	--]]
 
 	if (client:GetLocalVar("restricted") and !client:GetLocalVar("restrictNoMsg")) then
 		ix.util.DrawText(L"restricted", scrW * 0.5, scrH * 0.33, nil, 1, 1, "ixBigFont")
