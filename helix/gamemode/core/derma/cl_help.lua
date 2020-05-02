@@ -176,6 +176,8 @@ hook.Add("CreateMenuButtons", "ixHelpMenu", function(tabs)
 	end
 end)
 
+
+
 hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 	tabs["commands"] = function(container)
 		-- info text
@@ -188,6 +190,8 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 		info:SizeToContents()
 		info:SetTall(32)
 		
+		container:Add("ixTNLogo")
+
 		-- commands
 		for uniqueID, command in SortedPairs(ix.command.list) do
 			if (command.OnCheckAccess and !command:OnCheckAccess(LocalPlayer())) then
@@ -273,6 +277,7 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 		info:SizeToContents()
 		info:SetTall(32)
 
+		container:Add("ixTNLogo")
 		-- flags
 		for k, v in SortedPairs(ix.flag.list) do
 			local background = ColorAlpha(
@@ -312,6 +317,17 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 	end
 
 	tabs["plugins"] = function(container)
+		local info = container:Add("ixInfoText")
+		info:SetText(L("This is the list of loaded plugins currently on the server."))
+		info:SetContentAlignment(5)
+		info:SetInfoColor("blue");
+		info:Dock(TOP)
+		info:DockMargin(0, 0, 0, 8)
+		info:SizeToContents()
+		info:SetTall(32)
+
+		container:Add("ixTNLogo")
+
 		for _, v in SortedPairsByMemberValue(ix.plugin.list, "name") do
 			-- name
 			local title = container:Add("DLabel")
@@ -353,3 +369,34 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 		end
 	end
 end)
+
+-- logo
+local PANEL = {}
+
+function PANEL:Init()
+	self:SetTall(ScrH() * 0.1)
+	self:Dock(TOP)
+end
+
+function PANEL:Paint(width, height)
+
+
+	surface.SetMaterial( Material("materials/terra_nova.png") );
+	surface.DrawTexturedRect( width * 0.25, height * 0.22, 64, 64 );
+
+	--logo:SetImage("materials/terra_nova.png")
+
+	-- title
+	surface.SetFont("ixIntroSubtitleFont")
+	local text = L("terranova"):upper()
+	local textWidth, textHeight = surface.GetTextSize(text)
+
+	surface.SetTextColor(color_white)
+	surface.SetTextPos(width * 0.5 - textWidth * 0.5, height * 0.5 - textHeight * 0.5)
+	surface.DrawText(text)
+
+	surface.SetDrawColor(0, 0, 0, 50);
+	surface.DrawRect(0, 0, width, height)
+end
+
+vgui.Register("ixTNLogo", PANEL, "Panel")
