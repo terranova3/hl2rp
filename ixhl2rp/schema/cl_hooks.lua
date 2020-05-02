@@ -182,21 +182,14 @@ function Schema:PopulateHelpMenu(tabs)
 		end
 
 		if (#classes < 1) then
-			local info = container:Add("DLabel")
-			info:SetFont("ixSmallFont")
-			info:SetText("You do not have access to any voice lines!")
+			local info = container:Add("ixInfoText")
+			info:SetText(L("You do not have access to any voice lines!"))
 			info:SetContentAlignment(5)
-			info:SetTextColor(color_white)
-			info:SetExpensiveShadow(1, color_black)
+			info:SetInfoColor("red");
 			info:Dock(TOP)
 			info:DockMargin(0, 0, 0, 8)
 			info:SizeToContents()
-			info:SetTall(info:GetTall() + 16)
-
-			info.Paint = function(_, width, height)
-				surface.SetDrawColor(ColorAlpha(derma.GetColor("Error", info), 160))
-				surface.DrawRect(0, 0, width, height)
-			end
+			info:SetTall(32)
 
 			return
 		end

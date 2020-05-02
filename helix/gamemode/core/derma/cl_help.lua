@@ -179,22 +179,15 @@ end)
 hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 	tabs["commands"] = function(container)
 		-- info text
-		local info = container:Add("DLabel")
-		info:SetFont("ixSmallFont")
+		local info = container:Add("ixInfoText")
 		info:SetText(L("helpCommands"))
 		info:SetContentAlignment(5)
-		info:SetTextColor(color_white)
-		info:SetExpensiveShadow(1, color_black)
+		info:SetInfoColor("blue");
 		info:Dock(TOP)
 		info:DockMargin(0, 0, 0, 8)
 		info:SizeToContents()
-		info:SetTall(info:GetTall() + 16)
-
-		info.Paint = function(_, width, height)
-			surface.SetDrawColor(ColorAlpha(derma.GetColor("Info", info), 160))
-			surface.DrawRect(0, 0, width, height)
-		end
-
+		info:SetTall(32)
+		
 		-- commands
 		for uniqueID, command in SortedPairs(ix.command.list) do
 			if (command.OnCheckAccess and !command:OnCheckAccess(LocalPlayer())) then
@@ -271,21 +264,14 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 
 	tabs["flags"] = function(container)
 		-- info text
-		local info = container:Add("DLabel")
-		info:SetFont("ixSmallFont")
+		local info = container:Add("ixInfoText")
 		info:SetText(L("helpFlags"))
 		info:SetContentAlignment(5)
-		info:SetTextColor(color_white)
-		info:SetExpensiveShadow(1, color_black)
+		info:SetInfoColor("blue");
 		info:Dock(TOP)
 		info:DockMargin(0, 0, 0, 8)
 		info:SizeToContents()
-		info:SetTall(info:GetTall() + 16)
-
-		info.Paint = function(_, width, height)
-			surface.SetDrawColor(ColorAlpha(derma.GetColor("Info", info), 160))
-			surface.DrawRect(0, 0, width, height)
-		end
+		info:SetTall(32)
 
 		-- flags
 		for k, v in SortedPairs(ix.flag.list) do
