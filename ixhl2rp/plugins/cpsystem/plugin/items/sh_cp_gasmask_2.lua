@@ -10,5 +10,5 @@ ITEM.name = "[PH] Gasmask #2";
 ITEM.model = "models/newcca/gasmask2.mdl";
 ITEM.description = "[PH] Needs Description";
 ITEM.bodyGroups = {
-	["gasmask"] = 2,
+	["gasmask"] = 1,
 }
