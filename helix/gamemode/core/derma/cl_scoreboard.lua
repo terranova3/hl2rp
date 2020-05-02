@@ -306,7 +306,7 @@ function PANEL:Init()
 
 		-- Called when the spawn icon is clicked.
 		function self.spawnIcon.DoClick(spawnIcon)
-			local options = {};
+			local options = {};			
 				--Clockwork.plugin:Call("GetPlayerScoreboardOptions", info.player, options);
 				--Clockwork.kernel:AddMenuFromData(nil, options);
 		end;
