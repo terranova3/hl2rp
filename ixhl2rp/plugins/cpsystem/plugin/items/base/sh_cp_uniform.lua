@@ -7,15 +7,19 @@ local PLUGIN = PLUGIN;
 
 ITEM.base = "base_outfit"
 ITEM.name = "Uniform";
-ITEM.model = "models/props_c17/suitcase_passenger_physics.mdl";
-ITEM.replacements = "models/props_c17/suitcase_passenger_physics.mdl";
+ITEM.model = "models/vj_props/duffle_bag.mdl";
+ITEM.replacements = "models/newcca/cca_unit.mdl";
 ITEM.category = "Clothing";
 ITEM.description = "A suitcase full of clothes.";
-ITEM.width = 2;
-ITEM.height = 2;
+ITEM.width = 2
+ITEM.height = 2
+ITEM.iconCam = {
+	pos = Vector(300.84295654297, 251, 194.2449798584),
+	ang = Angle(25, 220, 0),
+	fov = 4.1176470588235
+}
 ITEM.maxArmor = 100;
-ITEM.invWidth = 1
-ITEM.invHeight = 1
+ITEM.access = "Z";
 
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)
@@ -25,8 +29,8 @@ if (CLIENT) then
 		panel:SizeToContents()
 
 		local panelID = tooltip:AddRowAfter("name", "armor")
-		panelID:SetBackgroundColor(derma.GetColor("DarkerBackground", tooltip))
-		panelID:SetText("Assigned to: " .. (self:GetData("tagline") or "a"))
+		panelID:SetBackgroundColor(derma.GetColor("Info", tooltip))
+		panelID:SetText("Assigned to: " .. (self:GetData("name") or "unassigned."))
 		panelID:SizeToContents()
 	end
 end

@@ -80,29 +80,19 @@ cpSystem.config.taglines = {
 
 -- [[ Ingame config ]] --
 -- [[ You can access these ingame, and is recommended you change their data ingame instead. ]] --
-ix.config.Add("City Name", "C17", "The abbreviation used for the 'city' value in cpSystem", nil, {
+ix.config.Add("City Name", "C17", "The abbreviation used for the 'city' value in Civil Protection System.", nil, {
 	category = "[TN] Civil Protection System"
 })
 
-ix.config.Add("Civil Protection Abbreviation", "CPF", "The abbreviation used for the 'abbreviation' value in cpSystem", nil, {
+ix.config.Add("Abbreviation", "CPF", "The text abbreviation used for the 'abbreviation' value in the Civil Protection System.", nil, {
 	category = "[TN] Civil Protection System"
 })
 
-ix.config.Add("CP Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming scheme for civil protection units. values: city, abbreviation, rank, tagline, id, division", nil, {
+ix.config.Add("Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming scheme for civil protection units. values: city, abbreviation, rank, tagline, id, division", nil, {
 	category = "[TN] Civil Protection System"
 })
 
-ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands.", nil, {
-	data = {min = 0, max = Schema.ranks.access.GetSize()},
-	category = "[TN] Civil Protection System"
-})
-
--- TODO: Functionality not added yet
-ix.config.Add("Use Taglines", true, "Use the custom naming scheme for civil protection instead of the default ID system.", nil, {
-	category = "[TN] Civil Protection System"
-})
-
--- TODO: Functionality not added yet
-ix.config.Add("Incognito Scoreboard", true, "Whether or not Civil Protection will show on the scoreboard.", nil, {
+ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands. Access level is tied to ranks in the server file config.", nil, {
+	data = {min = 0, max = Schema.ranks.access.GetSize()-1},
 	category = "[TN] Civil Protection System"
 })

@@ -54,11 +54,11 @@ end;
 
 -- Returns full civil protection name as a single string
 function PLUGIN:GetCPName(character)
-    local template = ix.config.Get("CP Naming Scheme");
+    local template = ix.config.Get("Naming Scheme");
     
 	replacements = {
 		["city"] = ix.config.Get("City Name"),
-		["abbreviation"] = ix.config.Get("Civil Protection Abbreviation"),
+		["abbreviation"] = ix.config.Get("Abbreviation"),
 		["rank"] = character:GetData("cpRank"),
 		["tagline"] = character:GetData("cpTagline"),
 		["id"] = character:GetData("cpID")

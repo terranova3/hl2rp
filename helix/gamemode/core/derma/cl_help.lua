@@ -171,7 +171,7 @@ local function DrawHelix(width, height, color) -- luacheck: ignore 211
 end
 
 hook.Add("CreateMenuButtons", "ixHelpMenu", function(tabs)
-	tabs["help"] = function(container)
+	tabs["library"] = function(container)
 		container:Add("ixHelpMenu")
 	end
 end)
