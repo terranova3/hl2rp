@@ -18,7 +18,7 @@ function FACTION:OnCharacterCreated(client, character)
 
 	character:SetData("cpCitizenName", character:GetName());
 	character:SetData("cpCitizenDesc", cpSystem.config.cpDefaultDescription)
-	character:SetData("cpRank", "D");
+	character:SetData("cpRank", cpSystem.config.cpDefaultRank);
 	character:SetData("cpTagline", cpSystem.config.taglines[math.random(1, count)]);
 	character:SetData("cpID", Schema:ZeroNumber(math.random(1, 9), 1));
 end;

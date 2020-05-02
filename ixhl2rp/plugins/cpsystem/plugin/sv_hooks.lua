@@ -23,3 +23,25 @@ function Schema:PlayerFootstep(client, position, foot, soundName, volume)
 	client:EmitSound(soundName);
 	return true;
 end
+
+function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
+	local faction = character:GetFaction()
+	
+	-- Updates player name if the city has been changed. --
+	if(faction == FACTION_MPF) then
+		if(character:GetName() == PLUGIN:GetCPName(character)) then
+			if(!string.find(character:GetName(), ix.config.Get("City Name"))) then 
+				character:SetName(PLUGIN:GetCPName(character));
+			end;
+		end;
+	end;
+
+	-- Adds player to the correct class --
+	if(faction == FACTION_MPF) then
+		if (!string.find(character:GetName(), ix.config.Get("City Name"))) then
+			character:SetClass(CLASS_MPUH);  
+		else
+			character:SetClass(CLASS_MPU); 		
+		end;
+	end;
+end;

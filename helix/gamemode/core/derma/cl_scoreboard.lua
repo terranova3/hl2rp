@@ -1,15 +1,3 @@
-local rowPaintFunctions = {
-	function(width, height)
-	end,
-
-	function(width, height)
-		surface.SetDrawColor(30, 30, 30, 25)
-		surface.DrawRect(0, 0, width, height)
-	end
-}
-
--- character icon
--- we can't customize the rendering of ModelImage so we have to do it ourselves
 local PANEL = {}
 local BODYGROUPS_EMPTY = "000000000"
 
@@ -116,250 +104,245 @@ end
 
 vgui.Register("ixScoreboardIcon", PANEL, "Panel")
 
--- player row
-PANEL = {}
+local PANEL = {};
 
-AccessorFunc(PANEL, "paintFunction", "BackgroundPaintFunction")
-
+-- Called when the panel is initialized.
 function PANEL:Init()
-	self:SetTall(64)
+	self:SetWide(800);
+	self:SetTall(400);
+	self:Dock(LEFT);
 
-	self.icon = self:Add("ixScoreboardIcon")
-	self.icon:Dock(LEFT)
-	self.icon.DoRightClick = function()
-		local client = self.player
+	self.maxWidth = ScrW() * 0.2
+	
+	self.panelList = self:Add("DPanelList")
+	self.panelList:Dock(FILL)
+	self.panelList:EnableVerticalScrollbar();
+ 	self.panelList:SetPadding(2);
+ 	self.panelList:SetSpacing(2);
+ 	self.panelList:SizeToContents();
+	
 
-		if (!IsValid(client)) then
-			return
-		end
-
-		local menu = DermaMenu()
-
-		menu:AddOption(L("viewProfile"), function()
-			client:ShowProfile()
-		end)
-
-		menu:AddOption(L("copySteamID"), function()
-			SetClipboardText(client:IsBot() and client:EntIndex() or client:SteamID())
-		end)
-
-		hook.Run("PopulateScoreboardPlayerMenu", client, menu)
-		menu:Open()
-	end
-
-	self.icon:SetHelixTooltip(function(tooltip)
-		local client = self.player
-
-		if (IsValid(self) and IsValid(client)) then
-			ix.hud.PopulatePlayerTooltip(tooltip, client)
-		end
-	end)
-
-	self.name = self:Add("DLabel")
-	self.name:DockMargin(4, 4, 0, 0)
-	self.name:Dock(TOP)
-	self.name:SetTextColor(color_white)
-	self.name:SetFont("ixGenericFont")
-
-	self.description = self:Add("DLabel")
-	self.description:DockMargin(5, 0, 0, 0)
-	self.description:Dock(TOP)
-	self.description:SetTextColor(color_white)
-	self.description:SetFont("ixSmallFont")
-
-	self.paintFunction = rowPaintFunctions[1]
-	self.nextThink = CurTime() + 1
-end
-
-function PANEL:Update()
-	local client = self.player
-	local model = client:GetModel()
-	local skin = client:GetSkin()
-	local name = client:GetName()
-	local description = hook.Run("GetCharacterDescription", client) or
-		(client:GetCharacter() and client:GetCharacter():GetDescription()) or ""
-
-	local bRecognize = false
-	local localCharacter = LocalPlayer():GetCharacter()
-	local character = IsValid(self.player) and self.player:GetCharacter()
-
-	if (localCharacter and character) then
-		bRecognize = hook.Run("IsCharacterRecognized", localCharacter, character:GetID())
-			or hook.Run("IsPlayerRecognized", self.player)
-	end
-
-	self.icon:SetHidden(!bRecognize)
-	self:SetZPos(bRecognize and 1 or 2)
-
-	-- no easy way to check bodygroups so we'll just set them anyway
-	for _, v in pairs(client:GetBodyGroups()) do
-		self.icon:SetBodygroup(v.id, client:GetBodygroup(v.id))
-	end
-
-	if (self.icon:GetModel() != model or self.icon:GetSkin() != skin) then
-		self.icon:SetModel(model, skin)
-		self.icon:SetTooltip(nil)
-	end
-
-	if (self.name:GetText() != name) then
-		self.name:SetText(name)
-		self.name:SizeToContents()
-	end
-
-	if (self.description:GetText() != description) then
-		self.description:SetText(description)
-		self.description:SizeToContents()
-	end
-end
-
-function PANEL:Think()
-	if (CurTime() >= self.nextThink) then
-		local client = self.player
-
-		if (!IsValid(client) or !client:GetCharacter() or self.character != client:GetCharacter() or self.team != client:Team()) then
-			self:Remove()
-			self:GetParent():SizeToContents()
-		end
-
-		self.nextThink = CurTime() + 1
-	end
-end
-
-function PANEL:SetPlayer(client)
-	self.player = client
-	self.team = client:Team()
-	self.character = client:GetCharacter()
-	self.curClass = self.character:GetClass();
-	self:Update()
-end
-
-function PANEL:Paint(width, height)
-	self.paintFunction(width, height)
-end
-
-vgui.Register("ixScoreboardRow", PANEL, "EditablePanel")
-
--- faction grouping
-PANEL = {}
-
-AccessorFunc(PANEL, "class", "Class")
-
-function PANEL:Init()
-	self:DockMargin(0, 0, 0, 16)
-	self:SetTall(32)
-
-	self.nextThink = 0
-end
-
-function PANEL:AddPlayer(client, index)
-	if (!IsValid(client) or !client:GetCharacter() or hook.Run("ShouldShowPlayerOnScoreboard", client) == false) then
-		return false
-	end
-
-	local id = index % 2 == 0 and 1 or 2
-	local panel = self:Add("ixScoreboardRow")
-	panel:SetPlayer(client)
-	panel:Dock(TOP)
-	panel:SetZPos(2)
-	panel:SetBackgroundPaintFunction(rowPaintFunctions[id])
-
-	self:SizeToContents()
-	client.ixScoreboardSlot = panel
-
-	return true
-end
-
-function PANEL:SetClass(class)
-	for i = 1, #ix.class.list do
-		if(ix.class.list[i] == class) then
-			self:SetColor(ix.class.list[i].color)
-			self:SetText(L(ix.class.list[i].name))
-			break;
-		end;
+	function self.panelList:Paint()
 	end;
 
-	self.class = class;
-	self:Update();
+	ix.scoreboard = self;
+	ix.scoreboard:Rebuild();
 end;
 
-function PANEL:Update()
-	local class = self.class
-	local players = ix.class.GetPlayers(class.index);
-	local playerCount = 0;
+-- A function to rebuild the panel.
+function PANEL:Rebuild()
+	self.panelList:Clear();
 
-	for i = 1, #players do
-		playerCount = i;
+	local availableClasses = {};
+	local classes = {};
+
+	if(avaliableClasses) then 
+		avaliableClasses = {}
+		classes = {}
 	end;
+	for k, v in pairs(player.GetAll()) do
+		local class = ix.class.list[v:GetCharacter():GetClass()].name
+		for i = 1, 25 do 
+		if (class) then
+			if (!availableClasses[class]) then
+				availableClasses[class] = {};
+			end;
+				
+			availableClasses[class][#availableClasses[class] + 1] = v;
+		end;
+	end;
+	end;
+	
+	for k, v in pairs(availableClasses) do
+		if (#v > 0) then
+			classes[#classes + 1] = {name = k, players = v};
 
-	if(playerCount == 0) then
-		self:SetVisible(false);
-		self:GetParent():InvalidateLayout();
+		end;
+	end;
+	
+	table.sort(classes, function(a, b)
+		return a.name < b.name;
+	end);
+
+	if (table.Count(classes) > 0) then
+	
+		local label = vgui.Create("ixInfoText", self);
+			label:SetText("Clicking a player's model icon may bring up some options.");
+			label:SetInfoColor("blue");
+		self.panelList:AddItem(label);
+		for k, v in pairs(classes) do
+			local characterForm = vgui.Create("DForm", self);
+			local panelList = vgui.Create("DPanelList", self);
+			
+			for k2, v2 in pairs(v.players) do
+				self.playerData = {
+					avatarImage = true,
+					steamName = v2:SteamName(),
+					faction = v2:GetCharacter():GetFaction(),
+					player = v2,
+					class = ix.class.list[v2:GetCharacter():GetClass()].name,
+					model = v2:GetModel(),
+					skin = v2:GetSkin(),
+					name = v2:Name()
+				};
+				
+				panelList:AddItem(vgui.Create("ixScoreboardItem", self)) ;
+			end;
+			
+			self.panelList:AddItem(characterForm);
+			
+			panelList:SetAutoSize(true);
+			panelList:SetSpacing(2);
+			
+			characterForm:SetName("");
+			characterForm:AddItem(panelList);
+			characterForm:SetPadding(4); 
+
+			function characterForm:Paint(w, h)
+				derma.SkinFunc("PaintCategoryPanel", self, "", ix.class.list[v.players[1]:GetCharacter():GetClass()].color)
+				surface.SetDrawColor(0, 0, 0, 50);	
+				surface.DrawRect(0, 0, w, h)
+
+				surface.SetFont("ixMediumLightFontSmaller")
+				surface.SetTextColor(Color(255,255,255,255))
+				surface.SetTextPos(4, 4)
+				surface.DrawText(v.name)
+			end;
+
+			function characterForm:PanelSelect()
+				print("Selected");
+			end;
+		end;
 	else
-		local bHasPlayers
-
-		for k, v in ipairs(ix.class.GetPlayers(class.index)) do
-			if (!IsValid(v.ixScoreboardSlot)) then
-				if (self:AddPlayer(v, k)) then
-					bHasPlayers = true
-				end
-			else
-				v.ixScoreboardSlot:Update()
-				bHasPlayers = true
-			end
-		end
-
-		self:SetVisible(bHasPlayers)
+		local label = vgui.Create("ixInfoText", self);
+			label:SetText("There are no players to display.");
+			label:SetInfoColor("orange");
+		self.panelList:AddItem(label);
 	end;
-end
+	
+	self.panelList:InvalidateLayout(true);
+	self:SizeToContents();
+end;
 
-vgui.Register("ixScoreboardFaction", PANEL, "ixCategoryPanel")
+-- Called when the panel is selected.
+function PANEL:OnSelected() self:Rebuild(); end;
 
--- main scoreboard panel
+-- Called when the panel is painted.
+function PANEL:Paint(w, h)
+    surface.SetDrawColor(80, 80, 80, 80);	
+	--surface.DrawOutlinedRect(0, 0, w, h)
+	--surface.SetDrawColor(0, 0, 0, 200);	
+	--surface.DrawRect(0, 0, w, h)
+end;
+
+-- Called each frame.
+function PANEL:Think()
+	self:InvalidateLayout(true);
+end;
+
+vgui.Register("ixScoreboard", PANEL, "EditablePanel")
+
 PANEL = {}
 
+-- Called when the panel is initialized.
 function PANEL:Init()
-	if (IsValid(ix.gui.scoreboard)) then
-		ix.gui.scoreboard:Remove()
-	end
+	SCOREBOARD_PANEL = true;
+		self:SetSize(self:GetParent():GetWide(), 48);
 
-	self:Dock(FILL)
+		local playerData = self:GetParent().playerData;
+		local info = {
+			avatarImage = playerData.avatarImage,
+			steamName = playerData.steamName,
+			faction = playerData.faction,
+			player = playerData.player,
+			doesRecognise = true,
+			class = playerData.class,
+			model = playerData.model,
+			skin = playerData.skin,
+			name = playerData.name
+		};
+		
+		info.text = playerData.player:GetCharacter():GetDescription(); 
+		
+		self.toolTip = info.toolTip;
+		self.player = info.player;
 
-	self.classes = {}
-	self.nextThink = 0
+		self.nameLabel = vgui.Create("DLabel", self);
+		self.nameLabel:SetFont("ixGenericFont")
+		self.nameLabel:SetText(info.name);
+		self.nameLabel:SetDark(true);
+		self.nameLabel:SizeToContents();
+		self.nameLabel:SetTextColor(Color(255,255,255,180))
 
-	for i = 1, #ix.class.list do
-		local class = ix.class.list[i]
+		self.factionLabel = vgui.Create("DLabel", self); 
+		self.factionLabel:SetText(info.faction);
+		self.factionLabel:SetFont("ixSmallFont")
+		self.factionLabel:SizeToContents();
+		self.factionLabel:SetDark(true);
+		self.factionLabel:SetTextColor(Color(255,255,255,180))
+		
+		if (type(info.text) == "string") then
+			self.factionLabel:SetText(info.text);
+			self.factionLabel:SizeToContents();
+		end;
+		
+		if (info.doesRecognise) then
+			self.spawnIcon = vgui.Create("ixScoreboardIcon", self);
+			self.spawnIcon:SetModel(info.model, info.skin);
+			self.spawnIcon:SetSize(32, 32);
+		else
+			self.spawnIcon = vgui.Create("DImageButton", self);
+			self.spawnIcon:SetImage("clockwork/unknown.png");
+			self.spawnIcon:SetSize(30, 30);
+		end;
+		
+		self.spawnIcon:SetHelixTooltip(function(tooltip)
+			local client = self.player
+	
+			if (IsValid(self) and IsValid(client)) then
+				ix.hud.PopulatePlayerTooltip(tooltip, client)
+			end
+		end)
 
-		local panel = self:Add("ixScoreboardFaction")
-		panel:SetClass(class)
-		panel:Dock(TOP)
-
-		self.classes[i] = panel;
-	end;
-
-	ix.gui.scoreboard = self
-end
-
-function PANEL:Think()
-	if (CurTime() >= self.nextThink) then
-		for i = 1, #self.classes do
-			local classesPanel = self.classes[i]
-
-			classesPanel:Update()
+		-- Called when the spawn icon is clicked.
+		function self.spawnIcon.DoClick(spawnIcon)
+			local options = {};
+				--Clockwork.plugin:Call("GetPlayerScoreboardOptions", info.player, options);
+				--Clockwork.kernel:AddMenuFromData(nil, options);
 		end;
 
-		self.nextThink = CurTime() + 0.5
-	end
-end
+	SCOREBOARD_PANEL = nil;
+end;
 
-vgui.Register("ixScoreboard", PANEL, "DScrollPanel")
+-- Called each frame.
+function PANEL:Think()
+	self.spawnIcon:SetPos(1, 1);
+	self.spawnIcon:SetSize(30, 30);
+end;
+
+function PANEL:Paint(w, h)
+   -- surface.SetDrawColor(80, 80, 80, 50);	
+	--surface.DrawOutlinedRect(0, 0, w, h)
+
+	--surface.SetDrawColor(0, 0, 0, 50);	
+	--surface.DrawRect(0, 0, w, h)
+end;
+
+-- Called when the layout should be performed.
+function PANEL:PerformLayout(w, h)
+	self.factionLabel:SizeToContents();
+	
+	self.spawnIcon:SetPos(4, 4);
+	self.spawnIcon:SetSize(40, 40);
+	self.nameLabel:SetPos(50, 8);
+	self.factionLabel:SetPos(50, 24); 
+end;
+
+vgui.Register("ixScoreboardItem", PANEL, "Panel");
 
 hook.Add("CreateMenuButtons", "ixScoreboard", function(tabs)
 	tabs["scoreboard"] = function(container)
-		container:Add("ixScoreboard")
-
-		OnSelected = function()
-			print("Selected");
-		end
+		container:SetTitle(L("scoreboard"))
+		local panel = container:Add("ixScoreboard")	
 	end
 end)

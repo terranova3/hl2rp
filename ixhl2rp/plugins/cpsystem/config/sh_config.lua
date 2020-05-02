@@ -5,6 +5,7 @@
 
 -- [[ Config settings ]] --
 cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
+cpSystem.config.cpDefaultRank = "D";
 
 -- [[ Rank Setup ]] --
 
@@ -91,15 +92,17 @@ ix.config.Add("CP Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming s
 	category = "[TN] Civil Protection System"
 })
 
+ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands.", nil, {
+	data = {min = 0, max = Schema.ranks.access.GetSize()},
+	category = "[TN] Civil Protection System"
+})
+
+-- TODO: Functionality not added yet
 ix.config.Add("Use Taglines", true, "Use the custom naming scheme for civil protection instead of the default ID system.", nil, {
 	category = "[TN] Civil Protection System"
 })
 
+-- TODO: Functionality not added yet
 ix.config.Add("Incognito Scoreboard", true, "Whether or not Civil Protection will show on the scoreboard.", nil, {
-	category = "[TN] Civil Protection System"
-})
-
-ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands.", nil, {
-	data = {min = 0, max = Schema.ranks.access.GetSize()},
 	category = "[TN] Civil Protection System"
 })

@@ -154,6 +154,13 @@ function GM:LoadFonts(font, genericFont)
 		weight = 200
 	})
 
+	surface.CreateFont("ixMediumLightFontSmaller", {
+		font = font,
+		size = 18,
+		extended = true,
+		weight = 200
+	})
+
 	surface.CreateFont("ixMediumLightBlurFont", {
 		font = font,
 		size = 25,

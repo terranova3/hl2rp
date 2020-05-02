@@ -2,20 +2,14 @@ local CHAR = ix.meta.character
 local cLIST = ix.class.list;
 
 function CHAR:IsCombine()
+	local faction = self:GetPlayer():Team();
 	local isCombine = (faction == FACTION_OTA);
 
 	if(faction == FACTION_MPF and !self:IsUndercover()) then
 		isCombine = true;
-	else
-		isCombine = false;
 	end;
 
 	return isCombine;
-end
-
-function CHAR:IsMetropolice()
-	local faction = self:GetFaction()
-	return faction == FACTION_MPF
 end
 
 function CHAR:IsUndercover()

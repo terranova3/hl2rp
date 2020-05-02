@@ -11,5 +11,5 @@ ITEM.base = "base_torso"
 ITEM.name = "Rebel Outfit";
 ITEM.description = "Torso Base";
 ITEM.bodyGroups = {
-	[ITEM.outfitCategory] = 8,
+	["torso"] = 8,
 }

@@ -7,15 +7,8 @@ function playerMeta:IsCombine()
 	if(self:GetCharacter() != nil) then 
 		if(faction == FACTION_MPF and !self:GetCharacter():IsUndercover()) then
 			isCombine = true;
-		else
-			isCombine = false;
 		end;
 	end;
 
 	return isCombine;
 end
-
-function playerMeta:IsMetropolice()
-	local faction = self:Team();
-	return faction == FACTION_MPF;
-end;
