@@ -142,14 +142,14 @@ function PANEL:Rebuild()
 	end;
 	for k, v in pairs(player.GetAll()) do
 		local class = ix.class.list[v:GetCharacter():GetClass()].name
-		for i = 1, 25 do 
+		--for i = 1, 25 do 
 		if (class) then
 			if (!availableClasses[class]) then
 				availableClasses[class] = {};
 			end;
 				
 			availableClasses[class][#availableClasses[class] + 1] = v;
-		end;
+		--end;
 	end;
 	end;
 	
@@ -210,7 +210,7 @@ function PANEL:Rebuild()
 			end;
 
 			function characterForm:PanelSelect()
-				print("Selected");
+				--print("Selected");
 			end;
 		end;
 	else
