@@ -136,21 +136,21 @@ function PANEL:Rebuild()
 	local availableClasses = {};
 	local classes = {};
 
-	if(avaliableClasses) then 
-		avaliableClasses = {}
-		classes = {}
-	end;
 	for k, v in pairs(player.GetAll()) do
+		local customclass = v:GetCharacter():GetData("customclass");
 		local class = ix.class.list[v:GetCharacter():GetClass()].name
-		--for i = 1, 25 do 
+
+		if(customclass) then
+			class = customclass;
+		end;
+		
 		if (class) then
 			if (!availableClasses[class]) then
 				availableClasses[class] = {};
 			end;
 				
 			availableClasses[class][#availableClasses[class] + 1] = v;
-		--end;
-	end;
+		end;
 	end;
 	
 	for k, v in pairs(availableClasses) do

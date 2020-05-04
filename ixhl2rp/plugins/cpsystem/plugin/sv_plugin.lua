@@ -14,7 +14,7 @@ function PLUGIN:AdjustPlayer(event, client)
 		character:SetData("cpDesc", character:GetDescription())
         character:SetDescription(cpData.cpCitizenDesc);
         character:SetClass(CLASS_MPUH);  
-        character:SetData( "customclass", "Citizen" );			
+        character:SetData( "customclass", "Citizen" );	
 	elseif(event == "Equipped") then	        
 		character:SetData("cpCitizenDesc", character:GetDescription())
         character:SetDescription(cpData.cpDesc);

@@ -8,6 +8,13 @@ PLUGIN.description = "Adds custom class functionality for the scoreboard.";
 PLUGIN.author = "Adolphus";
 PLUGIN.maxLength = 512;
 
--- TODO --
+function PLUGIN:IncludeDirectory(name)
+	local directory = PLUGIN.folder .. "/" .. name .. "/";
+	for _, v in ipairs(file.Find(directory.."*.lua", "LUA")) do
+		ix.util.Include(directory..v)
+	end
+end;
+
+PLUGIN:IncludeDirectory("commands")
 
 

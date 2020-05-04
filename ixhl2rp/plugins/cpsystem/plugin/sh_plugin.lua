@@ -11,6 +11,9 @@ do
 	for _, obj in pairs(files) do
         ix.anim.SetModelClass(directory .. obj, "metrocop");
 	end;
+
+	-- TODO Don't hardcode this
+	ix.anim.SetModelClass("models/newcca/cca_unit.mdl", "metrocop");
 end;
 
 function PLUGIN:IncludeDirectory(name)

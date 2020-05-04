@@ -17,3 +17,28 @@ ITEM.iconCam = {
 	ang = Angle(25, 220, 0),
 	fov = 4.8935679067357
 }
+ITEM.pacData = {
+	[1] = {
+		["children"] = {
+			[1] = {
+				["children"] = {
+				},
+				["self"] = {
+					-- x, y, z
+					["Angles"] = Angle(0, 95, 0),
+					["Position"] = Vector(8.5, -4, 0),
+					["UniqueID"] = "4249811628",
+					["Size"] = 1,
+					["Bone"] = "pelvis",
+					["Model"] = "models/dpfilms/metropolice/props/hd_stunbaton.mdl",
+					["ClassName"] = "model",
+				},
+			},
+		},
+		["self"] = {
+			["ClassName"] = "group",
+			["UniqueID"] = "907159817",
+			["EditorExpand"] = true,
+		},
+	},
+}

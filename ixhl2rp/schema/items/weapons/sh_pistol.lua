@@ -12,3 +12,28 @@ ITEM.iconCam = {
 	fov	= 5.0470897275697,
 	pos	= Vector(0, 200, -1)
 }
+ITEM.pacData = {
+	[1] = {
+		["children"] = {
+			[1] = {
+				["children"] = {
+				},
+				["self"] = {
+					-- x, y, z
+					["Angles"] = Angle(30,90,0),
+					["Position"] = Vector(-7, 0,1),
+					["UniqueID"] = "4249811628",
+					["Size"] = 1,
+					["Bone"] = "pelvis",
+					["Model"] = "models/weapons/w_pistol.mdl",
+					["ClassName"] = "model",
+				},
+			},
+		},
+		["self"] = {
+			["ClassName"] = "group",
+			["UniqueID"] = "907159818",
+			["EditorExpand"] = true,
+		},
+	},
+}
