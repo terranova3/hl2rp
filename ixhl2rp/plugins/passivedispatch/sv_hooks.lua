@@ -10,15 +10,14 @@ function PLUGIN:EmitRandomChatter(client)
 	
 	local randomSound = randomSounds[ math.random(1, #randomSounds) ];
 		if(randomSound == "npc/overwatch/cityvoice/f_innactionisconspiracy_spkr.wav") then
-			ix.chat.Send("Dispatch", dispatch, "Citizen reminder. Inaction is conspiracy. Report counter behaviour to a Civil Protection team immediately.");
+			ix.chat.Send(client, "dispatch", "Citizen reminder. Inaction is conspiracy. Report counter behaviour to a Civil Protection team immediately.");
 		end
 		if(randomSound == "npc/overwatch/cityvoice/f_trainstation_offworldrelocation_spkr.wav") then
-			ix.chat.Send("Dispatch", dispatch, "Citizen notice. Failure to co-operate will result in permanent off-world relocation");
+			ix.chat.Send(client, "dispatch","Citizen notice. Failure to co-operate will result in permanent off-world relocation");
 		end
 		if(randomSound == "npc/overwatch/cityvoice/fprison_missionfailurereminder.wav") then
-			ix.chat.Send("Dispatch", dispatch, "Attention ground units. Mission failure will result in permanent off-world assignment. Code reminder: SACRIFICE, COAGULATE, PLAN.");
+			ix.chat.Send(client, "dispatch", "Attention ground units. Mission failure will result in permanent off-world assignment. Code reminder: SACRIFICE, COAGULATE, PLAN.");
 		end
-		
 	client:EmitSound( randomSound, 60)
 end;
 
