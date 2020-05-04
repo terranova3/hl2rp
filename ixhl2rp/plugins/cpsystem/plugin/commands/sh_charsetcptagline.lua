@@ -3,45 +3,25 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-ix.command.Add("CharSetCPTagline",  {
-	description = "Sets the tagline of a civil protection unit.";
+local PLUGIN = PLUGIN
+
+ix.command.Add("CharSetCPTagline", {
+	adminOnly = true, -- TODO: Access based on rank, not admin.
 	arguments = {
 		ix.type.character,
 		ix.type.string
 	},
-	OnCheckAccess = function(self, client)
-		return client:IsDispatch();
-	end,
-	OnRun = function(self, client, target, text)
-		if(target:GetFaction() == "Metropolice Force") then
-			local i = 0;
-			local taglineExists;
-
-			for _ in pairs(cpSystem.config.taglines) do
-				if(string.find(text, cpSystem.config.taglines[i])) then
-					taglineExists = true;
-					break;
-				else
-					taglineExists = false;
-				end;
-				i=i+1;
-			end
-
-			if(taglineExists) then
-            	target:SetData("cpTagline", text);
-
-				PLUGIN:UpdateName(target);
-
-				for _, v in ipairs(player.GetAll()) do
-					if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
-						v:NotifyLocalized("Your cp tagline has been changed to %s-%s.", text, target:GetData("cpID"));
-					end
-				end
-			else
-				return "That is not a valid tagline.";
-			end;
+    OnRun = function(self, client, target, text)
+        if(PLUGIN:IsMetropolice(target)) then
+            if(PLUGIN:TaglineExists(text)) then
+                target:SetData("cpTagline", text);
+                PLUGIN:UpdateName(target);
+                client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
+            else
+                client:Notify(string.format("The rank '%s' does not exist.", text));
+            end;
         else
-            return "That character is not a part of the Metropolice Force faction.";
+            client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
         end;
 	end;
 })

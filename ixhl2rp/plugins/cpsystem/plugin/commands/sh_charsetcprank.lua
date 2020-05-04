@@ -3,57 +3,24 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
+local PLUGIN = PLUGIN
 
-ix.command.Add("CharSetCPRank",  {
-	description = "Sets the rank of a civil protection unit.";
+ix.command.Add("CharSetCPRank", {
+	adminOnly = true, -- TODO: Access based on rank, not admin.
 	arguments = {
 		ix.type.character,
 		ix.type.string
 	},
-	OnCheckAccess = function(self, client)
-		return client:IsDispatch();
-	end,
-	OnRun = function(self, client, target, rank)
-		local ranks = Schema.ranks.stored;
-		local name = target:GetName();
-		local newRank;
-
-		if(target:GetFaction() == "Metropolice Force") then
-			if(rank) then
-				if(!table.KeyFromValue(ranks, string.upper(rank))) then
-					return "Invalid rank input. That rank might not exist.";
-				end;
-			else
-				if(string.find(name, ranks[#ranks])) then
-					return "That character already is the highest rank possible.";
-				end;
-
-				for k, v in ipairs(ranks) do
-					if(string.find(name, v)) then
-						newRank = next(ranks, k);
-						break;
-					end;
-				end;
-			end;
-
-			if(newRank) then
-				newRank = ranks[newRank];
-
-				target:SetData("cpRank", newRank);
-
-				PLUGIN:UpdateName(target);
-
-				for _, v in ipairs(player.GetAll()) do
-                    if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
-                        v:NotifyLocalized("You have been promoted to %s!", newRank);
-                    end
-                end
-			else
-				return "Invalid rank input. That rank might not exist.";
-			end;
-		else
-			return "That player is not a part of the Metropolice Force faction.";
-		end;
+    OnRun = function(self, client, target, text)
+        if(PLUGIN:IsMetropolice(target)) then
+            if(PLUGIN:RankExists(text)) then
+                PLUGIN:SetRank(target, text);
+                client:Notify(string.format("You have set the cp rank of %s to %s.", target:GetName(), text));
+            else
+                client:Notify(string.format("The rank '%s' does not exist.", text));
+            end;
+        else
+            client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
+        end;
 	end;
 })

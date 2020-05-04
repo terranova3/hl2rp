@@ -9,36 +9,56 @@ local PLUGIN = PLUGIN;
 function PLUGIN:AdjustPlayer(event, client)
     local character = client:GetCharacter();
     local cpData = PLUGIN:GetCPDataAsTable(character);
-	
-    if(event == "Unequipped") then
-		character:SetData("cpDesc", character:GetDescription())
-        character:SetDescription(cpData.cpCitizenDesc);
-        character:SetClass(CLASS_MPUH);  
-        character:SetData( "customclass", "Citizen" );	
-	elseif(event == "Equipped") then	        
-		character:SetData("cpCitizenDesc", character:GetDescription())
-        character:SetDescription(cpData.cpDesc);
-        character:SetClass(CLASS_MPU);
-		character:SetData("customclass", "Civil Protection");			
-    end;
+    
+    if(PLUGIN:IsMetropolice(character)) then 
+        if(event == "Unequipped") then
+            character:SetData("cpDesc", character:GetDescription())
+            character:SetDescription(cpData.cpCitizenDesc);
+            character:SetClass(CLASS_MPUH);  
+            character:SetData( "customclass", "Citizen" );	
+        elseif(event == "Equipped") then	        
+            character:SetData("cpCitizenDesc", character:GetDescription())
+            character:SetDescription(cpData.cpDesc);
+            character:SetClass(CLASS_MPU);
+            character:SetData("customclass", "Civil Protection");			
+        end;
 
-    PLUGIN:UpdateName(character);
+        PLUGIN:UpdateName(character);
+    end;
 end;
 
 -- Called when a characters rank has been changed
-function PLUGIN:SetRank(client, rank)
-    local character = client:GetCharacter();
-
-    if(client:IsMetropolice()) then
-        local rankTable = Schema.ranks.Get(rank);
-
-        if(rankTable) then
+function PLUGIN:SetRank(character, rank)
+    if(PLUGIN:IsMetropolice(character)) then
+        if(PLUGIN:RankExists(rank)) then
             character:SetData("cpRank", rank.text);
             character:SetData("cpAccessLevel", rank.access)
         end;
 
         PLUGIN:UpdateName(character);
     end;
+end;
+
+-- Returns if rank exists from the rank table.
+function PLUGIN:RankExists(rank)
+    local rankTable = Schema.ranks.Get(rank);
+
+    if(rankTable) then
+        return true;
+    else
+        return false;
+    end;
+end;
+
+-- Returns if a tagline exists from the tagline config table.
+function PLUGIN:TaglineExists(tagline)
+    for i = 1, #cpSystem.config.taglines do
+        if(tagline == cpSystem.config.taglines[i]) then
+            return true;
+        end;
+    end;
+
+    return false;
 end;
 
 -- Called when a character has had data changed that requires their name to be updated
@@ -58,7 +78,8 @@ function PLUGIN:GetCPName(character)
     
 	replacements = {
 		["city"] = ix.config.Get("City Name"),
-		["abbreviation"] = ix.config.Get("Abbreviation"),
+        ["abbreviation"] = ix.config.Get("Abbreviation"),
+        ["division"] = character:GetData("cpDivision"),
 		["rank"] = character:GetData("cpRank"),
 		["tagline"] = character:GetData("cpTagline"),
 		["id"] = character:GetData("cpID")
@@ -73,48 +94,18 @@ function PLUGIN:GetCPName(character)
 end;
 
 -- Returns tagline and id together as a single string
--- TODO: doesn't follow naming scheme
-function PLUGIN:GetCPTag(character)
-    local cpData = plugin:GetCPDataAsTable(character);
+-- TODO: If name template isn't tagline and ID together then this will be incorrect.
+function PLUGIN:GetCPTagline(character)
+    local cpData = PLUGIN:GetCPDataAsTable(character);
 
-    return cpData.cpTagline .. cpData.cpID;
-end;
-
--- Returns if a rank exists in the stored table
-function PLUGIN:DoesRankExist(rank)
-    local i = 0;
-
-    for k, v in pairs(Schema.ranks.stored) do 
-        if(Schema.ranks.stored[i] == rank) then
-            return true;
-        end;
-
-		i=i+1;
-    end
-    
-    return false;
-end;
-
--- Returns if a tagline exists in the config tagline table
-function PLUGIN:DoesTaglineExist(tagline)
-    local i = 0;
-
-    for k, v in pairs(cpSystem.config.taglines) do
-        if(cpSystem.config.taglines[i] == tagline) then
-            return true;
-        end;
-
-        i=i+1;
-    end;
-
-    return false;
+    return string.match(cpData.tagline, cpData.tagline..'.-$');
 end;
 
 -- Returns all of the plugin's character data as a single table
 function PLUGIN:GetCPDataAsTable(character)
     local data = {}
 
-    if(character:GetFaction() == FACTION_MPF) then 
+    if(PLUGIN:IsMetropolice(character)) then 
 	    data.cpID = character:GetData("cpID");
         data.cpRank = character:GetData("cpRank");
         data.cpAccessLevel = character:GetData("cpAccessLevel");	
@@ -128,7 +119,11 @@ function PLUGIN:GetCPDataAsTable(character)
     return data;
 end;
 
--- Creates a debug message for server
-function PLUGIN:SendDebug(text)
-    MsgC(Color(0, 255, 100, 255), "[cpSystem] ".. text .." \n");
+-- Returns if a character is a part of the MPF faction.
+function PLUGIN:IsMetropolice(character)
+    if(character:GetFaction() == FACTION_MPF) then
+        return true;
+    else
+        return false;
+    end;
 end;
