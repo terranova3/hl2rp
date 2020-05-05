@@ -37,13 +37,13 @@ end
 
 function ITEM:OnEquipped()
 	self.player:SetArmor(self:GetData("armor", self.maxArmor))
-	PLUGIN:AdjustPlayer("Equipped", self.player);
+	PLUGIN:AdjustPlayer("Equipped", self:GetData("name"), self.player);
 end
 
 function ITEM:OnUnequipped()
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
-	PLUGIN:AdjustPlayer("Unequipped", self.player);
+	PLUGIN:AdjustPlayer("Unequipped", self:GetData("name"), self.player);
 end
 
 function ITEM:Repair(amount)
