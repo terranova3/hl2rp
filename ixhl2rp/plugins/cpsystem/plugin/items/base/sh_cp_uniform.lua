@@ -29,8 +29,17 @@ if (CLIENT) then
 		panel:SizeToContents()
 
 		local panelID = tooltip:AddRowAfter("name", "armor")
+		local panelText = ""
+		
 		panelID:SetBackgroundColor(derma.GetColor("Info", tooltip))
-		panelID:SetText("Assigned to: " .. (self:GetData("name") or "unassigned."))
+
+		if(self:GetData("name") != nil) then
+			panelText = string.format("This uniform is assigned to: %s", self:GetData("name"));
+		else
+			panelText = "This uniform is not biolocked.";
+		end;
+
+		panelID:SetText(panelText)
 		panelID:SizeToContents()
 	end
 end
