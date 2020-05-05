@@ -6,9 +6,14 @@
 local PLUGIN = PLUGIN;
 
 -- Called when a player's uniform status has been changed
-function PLUGIN:AdjustPlayer(event, client)
+function PLUGIN:AdjustPlayer(event, lockedName, client)
     local character = client:GetCharacter();
     local cpData = PLUGIN:GetCPDataAsTable(character);
+
+    -- If the uniform isn't biolocked, allow the player to access it.
+    if(lockedName == nil) then 
+        lockedName = PLUGIN:GetCPTagline(character);
+    end;
     
     if(PLUGIN:IsMetropolice(character)) then 
         if(event == "Unequipped") then
@@ -16,11 +21,15 @@ function PLUGIN:AdjustPlayer(event, client)
             character:SetDescription(cpData.cpCitizenDesc);
             character:SetClass(CLASS_MPUH);  
             character:SetData( "customclass", "Citizen" );	
-        elseif(event == "Equipped") then	        
-            character:SetData("cpCitizenDesc", character:GetDescription())
-            character:SetDescription(cpData.cpDesc);
-            character:SetClass(CLASS_MPU);
-            character:SetData("customclass", "Civil Protection");			
+        elseif(event == "Equipped") then
+            if(PLUGIN:GetCPTagline(character) == lockedName) then
+                character:SetData("cpCitizenDesc", character:GetDescription())
+                character:SetDescription(cpData.cpDesc);
+                character:SetClass(CLASS_MPU);
+                character:SetData("customclass", "Civil Protection");
+            else 
+                client:Notify(string.format("That uniform is biolocked to %s. You cannot access its mainframe.", lockedName));
+            end;
         end;
 
         PLUGIN:UpdateName(character);
@@ -98,7 +107,7 @@ end;
 function PLUGIN:GetCPTagline(character)
     local cpData = PLUGIN:GetCPDataAsTable(character);
 
-    return string.match(cpData.tagline, cpData.tagline..'.-$');
+    return string.match(PLUGIN:GetCPName(character), cpData.cpTagline..'.-$');
 end;
 
 -- Returns all of the plugin's character data as a single table
@@ -106,7 +115,8 @@ function PLUGIN:GetCPDataAsTable(character)
     local data = {}
 
     if(PLUGIN:IsMetropolice(character)) then 
-	    data.cpID = character:GetData("cpID");
+        data.cpID = character:GetData("cpID");
+        data.cpTagline = character:GetData("cpTagline");
         data.cpRank = character:GetData("cpRank");
         data.cpAccessLevel = character:GetData("cpAccessLevel");	
 	    data.cpDesc = character:GetData("cpDesc");
@@ -117,13 +127,4 @@ function PLUGIN:GetCPDataAsTable(character)
     end;
     
     return data;
-end;
-
--- Returns if a character is a part of the MPF faction.
-function PLUGIN:IsMetropolice(character)
-    if(character:GetFaction() == FACTION_MPF) then
-        return true;
-    else
-        return false;
-    end;
 end;

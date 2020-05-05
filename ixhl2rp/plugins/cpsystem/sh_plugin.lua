@@ -3,8 +3,9 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-cpSystem = {}
-cpSystem.config = {}
+cpSystem = cpSystem or {}
+cpSystem.config = cpSystem.config or {}
+cpSystem.stored = cpSystem.stored or {}
 
 PLUGIN.name = "Civil Protection System";
 PLUGIN.description = "tbd";
