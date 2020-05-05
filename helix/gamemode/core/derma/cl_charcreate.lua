@@ -228,9 +228,9 @@ function PANEL:Init()
 				self.attributesModel:SetModel(model)
 			end
 
-			self.descriptionModel.Entity:SetSkin(value);	
-			self.customizationModel.Entity:SetSkin(value);	
-			self.attributesModel.Entity:SetSkin(value);	
+			self.descriptionModel.Entity:SetSkin(curSkinValue);	
+			self.customizationModel.Entity:SetSkin(curSkinValue);	
+			self.attributesModel.Entity:SetSkin(curSkinValue);	
 		end
 	end)
 
