@@ -13,7 +13,7 @@ ix.command.Add("CharGetCPAccessLevel", {
 	},
     OnRun = function(self, client, target)
         if(PLUGIN:IsMetropolice(target)) then
-            if(PLUGIN:RankExists(target:GetData("cpRank")) then
+            if(PLUGIN:RankExists(target:GetData("cpRank"))) then
                 local rank = Schema.ranks.Get(target:GetData("cpRank"));
                 client:Notify(string.format("The access level of %s is %s.", target:GetName(), rank.access));
             else

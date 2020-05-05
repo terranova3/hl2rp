@@ -6,7 +6,7 @@ local PLUGIN = PLUGIN;
 
 ITEM.name = "Civil Protection Uniform";
 ITEM.base = "base_cp_uniform"
-ITEM.replacement = "models/newcca/cca_unit.mdl";
+ITEM.replacement = cpSystem.config.cpDefaultModel;
 ITEM.category = "Clothing";
 ITEM.description = "A complete uniform kit that includes a vulcanized rubber flak jacket, polyester metropolice slacks, kevlar vest, steel toed jackboots, rubber gloves and more.";
 ITEM.maxArmor = 100;

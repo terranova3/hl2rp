@@ -31,3 +31,13 @@ function Schema.ranks.access.Get(id)
     
 	return Schema.ranks.access.stored[id]
 end
+
+function Schema.ranks.access.GetSize()
+	local count = 0;
+
+	for i = 0, #Schema.ranks.access.stored do
+		count = count + 1;
+	end;
+    
+	return count;
+end

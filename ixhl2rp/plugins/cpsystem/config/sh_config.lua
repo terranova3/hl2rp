@@ -5,6 +5,7 @@
 
 -- [[ Config settings ]] --
 cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
+cpSystem.config.cpDefaultModel = "models/newcca/cca_unit.mdl";
 cpSystem.config.cpDefaultRank = "D";
 
 -- [[ Rank Setup ]] --
@@ -93,6 +94,6 @@ ix.config.Add("Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming sche
 })
 
 ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands. Access level is tied to ranks in the server file config.", nil, {
-	data = {min = 0, max = #Schema.ranks.access},
+	data = {min = 0, max = Schema.ranks.access.GetSize()},
 	category = "[TN] Civil Protection System"
 })
