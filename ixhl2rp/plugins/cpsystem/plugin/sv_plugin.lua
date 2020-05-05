@@ -37,9 +37,11 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
 end;
 
 -- Called when a characters rank has been changed
-function PLUGIN:SetRank(character, rank)
+function PLUGIN:SetRank(character, text)
     if(PLUGIN:IsMetropolice(character)) then
-        if(PLUGIN:RankExists(rank)) then
+        if(PLUGIN:RankExists(text)) then
+            local rank = Schema.ranks.Get(text);
+
             character:SetData("cpRank", rank.text);
             character:SetData("cpAccessLevel", rank.access)
         end;

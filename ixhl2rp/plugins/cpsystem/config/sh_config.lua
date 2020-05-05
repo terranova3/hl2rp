@@ -93,6 +93,6 @@ ix.config.Add("Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming sche
 })
 
 ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands. Access level is tied to ranks in the server file config.", nil, {
-	data = {min = 0, max = Schema.ranks.access.GetSize()-1},
+	data = {min = 0, max = #Schema.ranks.access},
 	category = "[TN] Civil Protection System"
 })

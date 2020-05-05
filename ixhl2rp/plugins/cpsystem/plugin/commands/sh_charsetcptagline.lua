@@ -6,6 +6,7 @@
 local PLUGIN = PLUGIN
 
 ix.command.Add("CharSetCPTagline", {
+    description = "Sets the tagline of a civil protection unit.",
 	adminOnly = true, -- TODO: Access based on rank, not admin.
 	arguments = {
 		ix.type.character,
@@ -14,11 +15,11 @@ ix.command.Add("CharSetCPTagline", {
     OnRun = function(self, client, target, text)
         if(PLUGIN:IsMetropolice(target)) then
             if(PLUGIN:TaglineExists(text)) then
+                client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
                 target:SetData("cpTagline", text);
                 PLUGIN:UpdateName(target);
-                client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
             else
-                client:Notify(string.format("The rank '%s' does not exist.", text));
+                client:Notify(string.format("The tagline '%s' does not exist.", text));
             end;
         else
             client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
