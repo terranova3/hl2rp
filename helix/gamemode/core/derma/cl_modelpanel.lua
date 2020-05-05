@@ -2,10 +2,12 @@
 DEFINE_BASECLASS("DModelPanel")
 
 local PANEL = {}
+AccessorFunc(PANEL, "follow", "Follow", FORCE_BOOL)
 local MODEL_ANGLE = Angle(0, 45, 0)
 
 function PANEL:Init()
 	self.brightness = 1
+	self.follow = true;
 	self:SetCursor("none")
 end
 
@@ -65,23 +67,25 @@ function PANEL:SetModel(model, skin, bodygroups)
 end
 
 function PANEL:LayoutEntity()
-	local scrW, scrH = ScrW(), ScrH()
-	local xRatio = gui.MouseX() / scrW
-	local yRatio = gui.MouseY() / scrH
-	local x, _ = self:LocalToScreen(self:GetWide() / 2)
-	local xRatio2 = x / scrW
-	local entity = self.Entity
+	if(self.follow == true) then
+		local scrW, scrH = ScrW(), ScrH()
+		local xRatio = gui.MouseX() / scrW
+		local yRatio = gui.MouseY() / scrH
+		local x, _ = self:LocalToScreen(self:GetWide() / 2)
+		local xRatio2 = x / scrW
+		local entity = self.Entity
 
-	entity:SetPoseParameter("head_pitch", yRatio*90 - 30)
-	entity:SetPoseParameter("head_yaw", (xRatio - xRatio2)*90 - 5)
-	entity:SetAngles(MODEL_ANGLE)
-	entity:SetIK(false)
+		entity:SetPoseParameter("head_pitch", yRatio*90 - 30)
+		entity:SetPoseParameter("head_yaw", (xRatio - xRatio2)*90 - 5)
+		entity:SetIK(false)
 
-	if (self.copyLocalSequence) then
-		entity:SetSequence(LocalPlayer():GetSequence())
-		entity:SetPoseParameter("move_yaw", 360 * LocalPlayer():GetPoseParameter("move_yaw") - 180)
-	end
-
+		if (self.copyLocalSequence) then
+			entity:SetSequence(LocalPlayer():GetSequence())
+			entity:SetPoseParameter("move_yaw", 360 * LocalPlayer():GetPoseParameter("move_yaw") - 180)
+		end
+	end;
+	
+	self.Entity:SetAngles(MODEL_ANGLE)
 	self:RunAnimation()
 end
 

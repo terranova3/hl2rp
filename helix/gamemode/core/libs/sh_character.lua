@@ -400,6 +400,38 @@ do
 		alias = "Desc"
 	})
 
+
+		--- Sets this character's physical description. This is automatically networked.
+	-- @realm server
+	-- @string description New description for this character
+	-- @function :SetDescription
+
+	--- Returns this character's physical description.
+	-- @realm shared
+	-- @treturn string This character's current description
+	-- @function :GetDescription
+	ix.char.RegisterVar("skin", {
+		field = "skin",
+		fieldType = ix.type.number,
+		default = 0,
+		index = 3,
+		category = "customization",
+		OnValidate = function(self, value, payload)
+			return value or 1;
+		end,
+		OnDisplay = function(self, container, payload)
+			local skinSelect = container:Add("ixAttributeBar")
+			skinSelect:Dock(TOP)
+			skinSelect:SetText(" ");
+			skinSelect.value = 1;
+			skinSelect.OnChanged = function()
+				payload:Set("skin", skinSelect.value);
+			end;
+
+			return skinSelect
+		end,
+		alias = "Skin"
+	})
 	--- Sets this character's model. This sets the player's current model to the given one, and saves it to the character.
 	-- It is automatically networked.
 	-- @realm server
@@ -414,7 +446,8 @@ do
 		field = "model",
 		fieldType = ix.type.string,
 		default = "models/error.mdl",
-		index = 3,
+		index = 4,
+		category = "customization",
 		OnSet = function(character, value)
 			local client = character:GetPlayer()
 
@@ -590,7 +623,7 @@ do
 		field = "attributes",
 		fieldType = ix.type.text,
 		default = {},
-		index = 4,
+		index = 5,
 		category = "attributes",
 		isLocal = true,
 		OnDisplay = function(self, container, payload)
@@ -982,7 +1015,7 @@ do
 			ix.char.Create(payload, function(id)
 				if (IsValid(client)) then
 					ix.char.loaded[id]:Sync(client)
-
+					
 					net.Start("ixCharacterAuthed")
 					net.WriteUInt(id, 32)
 					net.WriteUInt(#client.ixCharList, 6)

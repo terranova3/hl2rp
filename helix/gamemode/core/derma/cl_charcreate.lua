@@ -112,6 +112,52 @@ function PANEL:Init()
 			end
 
 			self.progress:IncrementProgress()
+			self:SetActiveSubpanel("customization")
+		end
+	end
+
+	-- customization subpanel
+	self.customization = self:AddSubpanel("customization")
+	self.customization:SetTitle("Character customization")
+
+	local customizationList = self.customization:Add("Panel")
+	customizationList:Dock(LEFT)
+	customizationList:SetSize(halfWidth, halfHeight)
+
+	local customizationBack = customizationList:Add("ixMenuButton")
+	customizationBack:SetText("return")
+	customizationBack:SetContentAlignment(4)
+	customizationBack:SizeToContents()
+	customizationBack:Dock(BOTTOM)
+	customizationBack.DoClick = function()
+		self.progress:DecrementProgress()
+		self:SetActiveSubpanel("description")
+	end
+
+	self.customizationModel = customizationList:Add("ixModelPanel")
+	self.customizationModel:Dock(FILL)
+	self.customizationModel:SetModel(self.factionModel:GetModel())
+	self.customizationModel:SetFOV(modelFOV - 13)
+	self.customizationModel.follow = false;
+	self.customizationModel.PaintModel = self.customizationModel.Paint
+
+	self.customPanel = self.customization:Add("Panel")
+	self.customPanel:SetWide(halfWidth + padding * 2)
+	self.customPanel:Dock(RIGHT)
+
+	local customProceed = self.customPanel:Add("ixMenuButton")
+	customProceed:SetText("proceed")
+	customProceed:SetContentAlignment(6)
+	customProceed:SizeToContents()
+	customProceed:Dock(BOTTOM)
+	customProceed.DoClick = function()
+		if (self:VerifyProgression("customization")) then
+			if (#self.attributesPanel:GetChildren() < 2) then
+				self:SendPayload()
+				return
+			end
+
+			self.progress:IncrementProgress()
 			self:SetActiveSubpanel("attributes")
 		end
 	end
@@ -131,7 +177,7 @@ function PANEL:Init()
 	attributesBack:Dock(BOTTOM)
 	attributesBack.DoClick = function()
 		self.progress:DecrementProgress()
-		self:SetActiveSubpanel("description")
+		self:SetActiveSubpanel("customization")
 	end
 
 	self.attributesModel = attributesModelList:Add("ixModelPanel")
@@ -160,6 +206,8 @@ function PANEL:Init()
 	self.progress:SizeToContents()
 	self.progress:SetPos(0, parent:GetTall() - self.progress:GetTall())
 
+	local curSkinValue = 1;
+	
 	-- setup payload hooks
 	self:AddPayloadHook("model", function(value)
 		local faction = ix.faction.indices[self.payload.faction]
@@ -171,12 +219,29 @@ function PANEL:Init()
 			if (istable(model)) then
 				self.factionModel:SetModel(model[1], model[2] or 0, model[3])
 				self.descriptionModel:SetModel(model[1], model[2] or 0, model[3])
+				self.customizationModel:SetModel(model[1], model[2] or 0, model[3])
 				self.attributesModel:SetModel(model[1], model[2] or 0, model[3])
 			else
 				self.factionModel:SetModel(model)
 				self.descriptionModel:SetModel(model)
+				self.customizationModel:SetModel(model)
 				self.attributesModel:SetModel(model)
 			end
+
+			self.descriptionModel.Entity:SetSkin(value);	
+			self.customizationModel.Entity:SetSkin(value);	
+			self.attributesModel.Entity:SetSkin(value);	
+		end
+	end)
+
+	self:AddPayloadHook("skin", function(value)
+		curSkinValue = value;
+		local faction = ix.faction.indices[self.payload.faction];
+
+		if (faction) then
+			self.descriptionModel.Entity:SetSkin(value);	
+			self.customizationModel.Entity:SetSkin(value);	
+			self.attributesModel.Entity:SetSkin(value);	
 		end
 	end)
 
@@ -318,6 +383,8 @@ function PANEL:GetContainerPanel(name)
 		return self.descriptionPanel
 	elseif (name == "attributes") then
 		return self.attributesPanel
+	elseif(name == "customization") then
+		return self.customPanel
 	end
 
 	return self.descriptionPanel
@@ -416,6 +483,7 @@ function PANEL:Populate()
 			if (IsValid(panel)) then
 				-- add label for entry
 				local label = container:Add("DLabel")
+
 				label:SetFont("ixMenuButtonLabelFont")
 				label:SetText(L(k):upper())
 				label:SizeToContents()
@@ -445,6 +513,7 @@ function PANEL:Populate()
 		end
 
 		self.progress:AddSegment("@description")
+		self.progress:AddSegment("@Customization")
 
 		if (#self.attributesPanel:GetChildren() > 1) then
 			self.progress:AddSegment("@skills")
