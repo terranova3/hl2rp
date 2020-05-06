@@ -99,32 +99,32 @@ function PLUGIN:HUDPaintForeground()
 			end;
 		end;	   
 
---[[ 	    for k,ent in pairs (ents.FindByClass("cw_item")) do	
-		    if LocalPlayer():Alive() and (Clockwork.entity:HasFetchedItemData(ent)) then			
-		        local Table = ent:GetItemTable();
-		        local itemCategory =  Table("category");	
+ 	    for k,ent in pairs (ents.FindByClass("ix_item")) do	
+		    if LocalPlayer():Alive() then			
+				local item = ent:GetItemTable();
+				
+		        local itemCategory = item.category
 		        local Position = ( ent:GetPos() + Vector( 0,0,0 ) ):ToScreen();
 		        local distance = ent:GetPos():Distance(LocalPlayer():GetPos()); 
 				
-		        if (ent:GetPos():Distance(LocalPlayer():GetPos()) <= maximumDistance) then				
+		        if (ent:GetPos():Distance(LocalPlayer():GetPos()) <= self.maximumDistance) then				
 	                if (itemCategory == "Weapons") then	
-		                draw.DrawText( "<:: !ATT: "..Table("name"), self.font, Position.x, Position.y, Color(255, 0, 10, 255), 1 );
+		                draw.DrawText( "<:: !ATT: "..item.name, self.font, Position.x, Position.y, Color(255, 0, 10, 255), 1 );
 		                draw.DrawText( "<:: Distance: " .. math.floor(distance), self.font, Position.x, Position.y + 10, Color(255, 0, 10, 255), 1 );		
 	                elseif (itemCategory == "Ammunition") then
-		                draw.DrawText( "<:: !POT: "..Table("name"), "HUDFont", Position.x, Position.y, Color(10, 80, 255, 255), 1 );
+		                draw.DrawText( "<:: !POT: "..item.name, "HUDFont", Position.x, Position.y, Color(10, 80, 255, 255), 1 );
 		                draw.DrawText( "<:: Distance: " .. math.floor(distance), self.font, Position.x, Position.y + 10, Color(10, 80, 255, 255), 1 );					
 	                elseif (itemCategory == "Medical") then
-		                draw.DrawText( "<:: "..Table("name"), "HUDFont", Position.x, Position.y, Color(0, 255, 10, 255), 1 );
+		                draw.DrawText( "<:: "..item.name, "HUDFont", Position.x, Position.y, Color(0, 255, 10, 255), 1 );
                         draw.DrawText( "<:: Distance: " .. math.floor(distance), self.font, Position.x, Position.y + 10, Color(0, 255, 10, 255), 1 );
 	                end;
 				end;
 			end;
-		end; ]]
+		end;
     end;	
 end;
 
 netstream.Hook("RecalculateHUDObjectives", function(status)
-	print(status);
 	socioStatus = status;
 end)
 

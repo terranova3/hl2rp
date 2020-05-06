@@ -84,7 +84,6 @@ end;
 -- Called just after a player spawns.
 function PLUGIN:PlayerSpawn(client)
 	if (client:IsCombine()) then
-		print("RecalculateHudObjectives:"..client:GetName())
 		netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
 	end;
 end;
