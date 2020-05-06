@@ -13,7 +13,7 @@ ix.command.Add("CharSetCPID", {
 		ix.type.number
 	},
     OnRun = function(self, client, target, text)
-        if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel)) then
+        if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
                 client:Notify(string.format("You have set the cp id of %s to %s.", target:GetName(), text));
                 target:SetData("cpID", text);

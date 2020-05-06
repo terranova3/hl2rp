@@ -11,7 +11,8 @@ cpSystem.config.commandsAccess = {
 	["set_cp_rank"] = 2,
 	["set_cp_tagline"] = 2,
 	["get_cp_access_level"] = 0,
-	["view_data"] = 0
+	["view_data"] = 0,
+	["edit_viewobjectives"] = 2
 }
 
 -- [[ Rank Setup ]] --

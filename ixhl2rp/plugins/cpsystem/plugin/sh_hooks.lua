@@ -15,3 +15,15 @@ end
 function Schema:CanPlayerEditData(client, target)
 	return client:IsCombine() and (!target:IsCombine() and target:Team() != FACTION_ADMIN)
 end
+
+function Schema:CanPlayerEditObjectives(client)
+	if (!client:IsCombine() or !client:GetCharacter()) then
+		return false
+	end
+
+	if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= cpSystem.config.commandsAccess["edit_viewobjectives"]) then
+		return true;
+	else
+		return false;
+	end;
+end

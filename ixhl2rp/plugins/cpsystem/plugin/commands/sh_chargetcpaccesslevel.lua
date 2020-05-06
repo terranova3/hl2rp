@@ -12,7 +12,7 @@ ix.command.Add("CharGetCPAccessLevel", {
 		ix.type.character
 	},
     OnRun = function(self, client, target)
-        if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel)) then
+        if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
                 if(PLUGIN:RankExists(target:GetData("cpRank"))) then
                     client:Notify(string.format("The access level of %s is %s.", target:GetName(), PLUGIN:GetAccessLevel(target)));
