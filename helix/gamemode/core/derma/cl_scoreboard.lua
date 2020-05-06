@@ -137,19 +137,22 @@ function PANEL:Rebuild()
 	local classes = {};
 
 	for k, v in pairs(player.GetAll()) do
-		local customclass = v:GetCharacter():GetData("customclass");
-		local class = ix.class.list[v:GetCharacter():GetClass()].name
+		-- Checking if they are initialized, not just in char creation/load
+		if(v:GetCharacter()) then
+			local customclass = v:GetCharacter():GetData("customclass");
+			local class = ix.class.list[v:GetCharacter():GetClass()].name
 
-		if(customclass) then
-			class = customclass;
-		end;
-		
-		if (class) then
-			if (!availableClasses[class]) then
-				availableClasses[class] = {};
+			if(customclass) then
+				class = customclass;
 			end;
-				
-			availableClasses[class][#availableClasses[class] + 1] = v;
+			
+			if (class) then
+				if (!availableClasses[class]) then
+					availableClasses[class] = {};
+				end;
+					
+				availableClasses[class][#availableClasses[class] + 1] = v;
+			end;
 		end;
 	end;
 	
