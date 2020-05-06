@@ -13,7 +13,7 @@ ix.command.Add("CharSetCPTagline", {
 		ix.type.string
 	},
     OnRun = function(self, client, target, text)
-        if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel) then
+        if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel)) then
             if(PLUGIN:IsMetropolice(target)) then
                 if(PLUGIN:TaglineExists(text)) then
                     client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));

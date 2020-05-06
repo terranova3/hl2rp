@@ -238,30 +238,12 @@ function PANEL:PerformLayout()
 	DFrame.PerformLayout(self);
 end;
 
-function PANEL:CommitChanges()
-	if (IsValid(self.target)) then
-		local text = string.Trim(self.textEntry:GetValue():sub(1, 1000))
-
-		-- only update if there's something different so we can preserve the last editor if nothing changed
-		if (self.oldText != text) then
-			netstream.Start("ViewDataUpdate", self.target, text)
-			Schema:AddCombineDisplayMessage("@cViewDataUpdate")
-		end
-	else
-		Schema:AddCombineDisplayMessage("@cViewDataExpired", Color(255, 0, 0, 255))
-	end
-end
-
 function PANEL:Close()
 	if (self.bClosing) then
 		return
 	end
 
 	self.bClosing = true
-
-	if (self:GetCommitOnClose()) then
-		self:CommitChanges()
-	end
 
 	self:SetMouseInputEnabled(false)
 	self:SetKeyboardInputEnabled(false)

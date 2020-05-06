@@ -13,7 +13,7 @@ ix.command.Add("CharSetCPRank", {
 		ix.type.string
 	},
     OnRun = function(self, client, target, text)
-        if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel) then
+        if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel)) then
             if(PLUGIN:IsMetropolice(target)) then
                 if(PLUGIN:RankExists(text)) then
                     client:Notify(string.format("You have set the cp rank of %s to %s.", target:GetName(), text));

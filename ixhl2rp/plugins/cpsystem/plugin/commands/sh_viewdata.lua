@@ -9,7 +9,7 @@ ix.command.Add("ViewData", {
 		ix.type.character
 	},
 	OnRun = function(self, client, target)
-		if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel) then
+		if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel)) then
 			local targetClient = target:GetPlayer()
 
 			if (!hook.Run("CanPlayerViewData", client, targetClient)) then
