@@ -4,3 +4,8 @@
 --]]
 
 local PLUGIN = PLUGIN
+
+netstream.Hook("ViewData", function(target, cid, data)
+	Schema:AddCombineDisplayMessage("@cViewData")
+	vgui.Create("ixViewData"):Populate(target, cid, data)
+end)

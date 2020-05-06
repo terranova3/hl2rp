@@ -47,7 +47,7 @@ if (CLIENT) then
 				local w, h = ScrW(), ScrH()
 				local name = hook.Run("GetCharacterName", entity) or entity:GetName()
 				local description = ix.util.WrapText(entity:GetCharacter():GetDescription(), w * 0.75, "ixDescFont")
-				local teamColor = team.GetColor(entity:Team())
+				local teamColor = ix.class.list[entity:GetCharacter():GetClass()].color;
 				local alpha = 255
 
 				surface.SetDrawColor(teamColor.r, teamColor.g, teamColor.b, alpha)
