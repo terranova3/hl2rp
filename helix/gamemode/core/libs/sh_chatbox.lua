@@ -412,7 +412,9 @@ do
 
 				icon = Material(hook.Run("GetPlayerIcon", speaker) or icon)
 
-				chat.AddText(icon, Color(255, 50, 50), "[OOC] ", speaker, color_white, ": "..text)
+				local chatColor = ix.class.list[speaker:GetCharacter():GetClass()].color;
+
+				chat.AddText(icon, Color(255, 50, 50), "[OOC] ", chatColor, speaker:Name()..": ", color_white, text)
 			end,
 			prefix = {"//", "/OOC"},
 			description = "@cmdOOC",

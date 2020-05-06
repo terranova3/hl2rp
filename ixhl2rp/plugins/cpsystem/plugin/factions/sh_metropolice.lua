@@ -50,6 +50,7 @@ function FACTION:OnCharacterCreated(client, character)
 
 	for _ in pairs(cpSystem.config.taglines) do count = count + 1 end
 
+	character:SetData("customclass", "Citizen");
 	character:SetData("cpCitizenName", character:GetName());
 	character:SetData("cpCitizenDesc", cpSystem.config.cpDefaultDescription)
 	character:SetData("cpRank", cpSystem.config.cpDefaultRank);
