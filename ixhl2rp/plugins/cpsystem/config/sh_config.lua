@@ -3,20 +3,7 @@
 	Configuration file
 --]]
 
--- [[ Config settings ]] --
-cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
-cpSystem.config.cpDefaultRank = "D";
-cpSystem.config.commandsAccess = {
-	["set_cp_id"] = 2,
-	["set_cp_rank"] = 2,
-	["set_cp_tagline"] = 2,
-	["get_cp_access_level"] = 0,
-	["view_data"] = 0,
-	["edit_viewobjectives"] = 2
-}
-
 -- [[ Rank Setup ]] --
-
 -- Rank Access < id | class name | abbreviation > --
 Schema.ranks.access.Add(2, "Universal Union", "UU");
 Schema.ranks.access.Add(1, "Civil Protection", "CPF");
@@ -29,7 +16,18 @@ Schema.ranks.Add("Z", 0);
 Schema.ranks.Add("G", 0);
 Schema.ranks.Add("D", 0);
 
--- [[ CP Taglines ]] --
+-- [[ Config settings ]] --
+cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
+cpSystem.config.cpDefaultRank = "D";
+cpSystem.config.commandsAccess = {
+	["set_cp_id"] = 2,
+	["set_cp_rank"] = 2,
+	["set_cp_tagline"] = 2,
+	["get_cp_access_level"] = 0,
+	["view_data"] = 0,
+	["edit_viewobjectives"] = 2,
+	["set_sociostatus"] = 0
+}
 cpSystem.config.taglines = {
 	"APEX",
 	"BLADE",

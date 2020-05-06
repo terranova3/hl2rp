@@ -3,6 +3,22 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
+PLUGIN.biosignalLocations = {};
+PLUGIN.requestLocations = {};
+PLUGIN.cameraData = PLUGIN.cameraData or {};
+PLUGIN.hudObjectives = PLUGIN.hudObjectives or {};
+PLUGIN.socioStatus = PLUGIN.socioStatus or "GREEN";
+PLUGIN.debug_paintBenchmark = PLUGIN.debug_paintBenchmark or 0;
+PLUGIN.font = "HUDFont";
+PLUGIN.maximumDistance = 300;
+PLUGIN.sociostatusColors = {
+	GREEN = Color(0, 255, 0),
+	BLUE = Color(0, 128, 255),
+	YELLOW = Color(255, 255, 0),
+	RED = Color(255, 0, 0),
+	BLACK = Color(128, 128, 128)
+};
+
 -- Includes all the metropolice pack files.
 do
     local directory = "models/dpfilms/metropolice/";

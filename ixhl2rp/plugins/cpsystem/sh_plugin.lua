@@ -8,7 +8,7 @@ cpSystem.config = cpSystem.config or {}
 cpSystem.stored = cpSystem.stored or {}
 
 PLUGIN.name = "Civil Protection System";
-PLUGIN.description = "tbd";
+PLUGIN.description = "Full overhaul to Civil Protection, adding commands to handle naming and ranks. Implements off-duty units, bodygroups and derma changes to various menus.";
 PLUGIN.author = "Adolphus";
 PLUGIN.maxLength = 512;
 PLUGIN.newPath = PLUGIN.folder .. "/plugin";

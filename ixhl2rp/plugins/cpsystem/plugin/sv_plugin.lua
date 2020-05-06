@@ -27,6 +27,7 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
                 character:SetDescription(cpData.cpDesc);
                 character:SetClass(CLASS_MPU);
                 character:SetData("customclass", "Civil Protection");
+                netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
             else 
                 client:Notify(string.format("That uniform is biolocked to %s. You cannot access its mainframe.", lockedName));
             end;
@@ -54,8 +55,8 @@ function PLUGIN:GetAccessLevel(character)
     if(PLUGIN:IsMetropolice(character)) then
         local cpData = PLUGIN:GetCPDataAsTable(character);
 
-        if(PLUGIN:RankExists(cpData.rank)) then
-            return Schema.ranks.Get(cpData.rank).access;
+        if(PLUGIN:RankExists(cpData.cpRank)) then
+            return Schema.ranks.Get(cpData.cpRank).access;
         end;
     end;
 

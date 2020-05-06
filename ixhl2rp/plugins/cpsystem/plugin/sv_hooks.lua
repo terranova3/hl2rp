@@ -81,6 +81,14 @@ function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
 	end;
 end;
 
+-- Called just after a player spawns.
+function PLUGIN:PlayerSpawn(client)
+	if (client:IsCombine()) then
+		print("RecalculateHudObjectives:"..client:GetName())
+		netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
+	end;
+end;
+
 netstream.Hook("ViewDataUpdate", function(client, target, text, combinePoints)
 	if (IsValid(target) and client:GetCharacter() and target:GetCharacter()) then
 		local data = {
