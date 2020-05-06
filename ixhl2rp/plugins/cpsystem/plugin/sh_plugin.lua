@@ -13,7 +13,7 @@ do
 	end;
 
 	-- TODO Don't hardcode this
-	ix.anim.SetModelClass(cpSystem.config.cpDefaultModel, "metrocop");
+	ix.anim.SetModelClass("models/newcca/cca_unit.mdl", "metrocop");
 end;
 
 function PLUGIN:IncludeDirectory(name)

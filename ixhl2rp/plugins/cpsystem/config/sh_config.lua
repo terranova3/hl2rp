@@ -5,7 +5,6 @@
 
 -- [[ Config settings ]] --
 cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
-cpSystem.config.cpDefaultModel = "models/newcca/cca_unit.mdl";
 cpSystem.config.cpDefaultRank = "D";
 
 -- [[ Rank Setup ]] --
