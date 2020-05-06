@@ -6,6 +6,13 @@
 -- [[ Config settings ]] --
 cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
 cpSystem.config.cpDefaultRank = "D";
+cpSystem.config.commandsAccess = {
+	["set_cp_id"] = 2,
+	["set_cp_rank"] = 2,
+	["set_cp_tagline"] = 2,
+	["get_cp_access_level"] = 0,
+	["view_data"] = 0
+}
 
 -- [[ Rank Setup ]] --
 

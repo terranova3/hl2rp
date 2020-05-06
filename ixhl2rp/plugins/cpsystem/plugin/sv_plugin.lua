@@ -50,6 +50,18 @@ function PLUGIN:SetRank(character, text)
     end;
 end;
 
+function PLUGIN:GetAccessLevel(character)
+    if(PLUGIN:IsMetropolice(character)) then
+        local cpData = PLUGIN:GetCPDataAsTable(character);
+
+        if(PLUGIN:RankExists(cpData.rank)) then
+            return Schema.ranks.Get(cpData.rank).access;
+        end;
+    end;
+
+    return 0;
+end;
+
 -- Returns if rank exists from the rank table.
 function PLUGIN:RankExists(rank)
     local rankTable = Schema.ranks.Get(rank);

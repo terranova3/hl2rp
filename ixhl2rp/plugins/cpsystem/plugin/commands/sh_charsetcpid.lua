@@ -7,18 +7,22 @@ local PLUGIN = PLUGIN
 
 ix.command.Add("CharSetCPID", {
     description = "Sets the id of a civil protection unit.",
-	adminOnly = true, -- TODO: Access based on rank, not admin.
+    accessLevel = cpSystem.config.commandsAccess["set_cp_id"],
 	arguments = {
 		ix.type.character,
 		ix.type.number
 	},
     OnRun = function(self, client, target, text)
-        if(PLUGIN:IsMetropolice(target)) then
-            client:Notify(string.format("You have set the cp id of %s to %s.", target:GetName(), text));
-            target:SetData("cpID", text);
-            PLUGIN:UpdateName(target);
+        if(PLUGIN:GetAccessLevel(client:GetCharacter() >= self.accessLevel) then
+            if(PLUGIN:IsMetropolice(target)) then
+                client:Notify(string.format("You have set the cp id of %s to %s.", target:GetName(), text));
+                target:SetData("cpID", text);
+                PLUGIN:UpdateName(target);
+            else
+                client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
+            end;
         else
-            client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
+            client:Notify(string.format("This command requires an access level of %s. Your access level is %s.", self.accessLevel, PLUGIN:GetAccessLevel(client:GetCharacter())));
         end;
 	end;
 })
