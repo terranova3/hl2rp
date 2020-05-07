@@ -33,7 +33,7 @@ function Schema.ranks.access.Get(id)
 end
 
 function Schema.ranks.access.GetSize()
-	local count = 0;
+	local count = 1;
 
 	for i = 0, #Schema.ranks.access.stored do
 		count = count + 1;
