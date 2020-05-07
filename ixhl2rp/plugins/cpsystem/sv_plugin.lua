@@ -37,6 +37,18 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
     end;
 end;
 
+function PLUGIN:IsWearingUniform(character)
+	for _, v in pairs(character:GetInventory():GetItems()) do
+		if(v.base == "base_cp_uniform") then
+			if(v:GetData("equip") == true) then 
+				return true;
+			end;
+		end;
+	end;
+
+	return false;
+end;
+
 -- Called when a characters rank has been changed
 function PLUGIN:SetRank(character, text)
     if(PLUGIN:IsMetropolice(character)) then

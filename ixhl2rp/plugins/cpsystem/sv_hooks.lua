@@ -89,9 +89,20 @@ function PLUGIN:PlayerSpawn(client)
 end;
 
 function PLUGIN:CanPlayerEquipItem(client, item)
-	PrintTable(item)
+	local character = client:GetCharacter();
+
+	if(item.base == "base_cp_gasmask" or item.name == "Civil Protection Trenchcoat") then
+		if(character:IsUndercover()) then
+			if(!PLUGIN:IsWearingUniform(character)) then
+				client:Notify(string.format("You cant equip %s without a uniform on!", item.name))
+				return false;
+			end;
+		end;
+	end;
+
 	return true;
 end
+
 netstream.Hook("ViewDataUpdate", function(client, target, text, combinePoints)
 	if (IsValid(target) and client:GetCharacter() and target:GetCharacter()) then
 		local data = {

@@ -34,13 +34,4 @@ ix.util.IncludeDirectory(PLUGIN, "config");
 ix.util.IncludeDirectory(PLUGIN, "commands")
 ix.util.IncludeDirectory(PLUGIN, "meta")
 
-do
-    local directory = "models/dpfilms/metropolice/";
-	local files, folders = file.Find(directory .. "*.mdl", "GAME");
-
-	for _, obj in pairs(files) do
-        ix.anim.SetModelClass(directory .. obj, "metrocop");
-	end;
-
-	ix.anim.SetModelClass("models/newcca/cca_unit.mdl", "metrocop");
-end;
+ix.anim.SetModelClass("models/newcca/cca_unit.mdl", "metrocop");

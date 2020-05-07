@@ -52,6 +52,15 @@ end
 function ITEM:OnUnequipped()
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
+
+	for _, v in pairs(self.player:GetCharacter():GetInventory():GetItems()) do
+		if(v.base == "base_cp_gasmask" or v.name == "Civil Protection Trenchcoat") then
+			if(v:GetData("equip") == true) then 
+				v:RemoveOutfit(self.player);
+			end;
+		end;
+	end;
+
 	PLUGIN:AdjustPlayer("Unequipped", self:GetData("name"), self.player);
 end
 
