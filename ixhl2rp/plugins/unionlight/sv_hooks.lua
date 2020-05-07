@@ -5,25 +5,15 @@
 
 local PLUGIN = PLUGIN;
 
--- Called when a player initially spawns.
-function PLUGIN:PlayerSpawn(player)
-	timer.Simple( 1, function() 
-		for k, v in ipairs(ents.FindByClass("ix_campfire")) do
-			v:stopFire();
-			v:startFire();
-		end;
-	end);
-end;
-
--- Called when HELIX is loading all the data that has been saved.
+-- A function to load the union light.
 function PLUGIN:LoadData()
-	for _, v in ipairs(self:GetData() or {}) do
-		local entity = ents.Create("ix_campfire")
-
-		entity:SetPos(v.pos)
-		entity:SetAngles(v.angles)
-		entity:Spawn()
-
+	for k, v in pairs(self:GetData() or {}) do
+        local entity = ents.Create("ix_unionlight");
+        
+		entity:SetAngles(v.angles);
+		entity:SetPos(v.position);
+		entity:Spawn();
+		
 		if (!v.moveable) then
 			local physicsObject = entity:GetPhysicsObject();
 			
@@ -31,14 +21,14 @@ function PLUGIN:LoadData()
 				physicsObject:EnableMotion(false);
 			end;
 		end;
-	end
-end
+	end;
+end;
 
--- Called just after data should be saved.
+-- A function to save the union light.
 function PLUGIN:SaveData()
 	local data = {};
-	
-	for k, v in pairs( ents.FindByClass("ix_campfire") ) do
+
+	for k, v in pairs( ents.FindByClass("ix_unionlight") ) do
 		local physicsObject = v:GetPhysicsObject();
 		local moveable;
 		
@@ -52,6 +42,6 @@ function PLUGIN:SaveData()
 			moveable = moveable
 		};
 	end;
-
+	
 	self:SetData(data)
 end;
