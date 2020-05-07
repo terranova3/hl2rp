@@ -62,6 +62,13 @@ function ix.util.Include(fileName, realm)
 	end
 end
 
+function ix.util.IncludeDirectory(PLUGIN, name)
+	local directory = PLUGIN.folder .. "/" .. name .. "/";
+	for _, v in ipairs(file.Find(directory.."*.lua", "LUA")) do
+		ix.util.Include(directory..v)
+	end
+end;
+
 --- Includes multiple files in a directory.
 -- @realm shared
 -- @string directory Directory to include files from
