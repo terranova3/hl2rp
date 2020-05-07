@@ -3,30 +3,44 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-cpSystem = cpSystem or {}
-cpSystem.config = cpSystem.config or {}
-cpSystem.stored = cpSystem.stored or {}
-
 PLUGIN.name = "Civil Protection System";
 PLUGIN.description = "Full overhaul to Civil Protection, adding commands to handle naming and ranks. Implements off-duty units, bodygroups and derma changes to various menus.";
 PLUGIN.author = "Adolphus";
 PLUGIN.maxLength = 512;
-PLUGIN.newPath = PLUGIN.folder .. "/plugin";
+PLUGIN.biosignalLocations = {};
+PLUGIN.requestLocations = {};
+PLUGIN.cameraData = PLUGIN.cameraData or {};
+PLUGIN.hudObjectives = PLUGIN.hudObjectives or {};
+PLUGIN.socioStatus = PLUGIN.socioStatus or "GREEN";
+PLUGIN.debug_paintBenchmark = PLUGIN.debug_paintBenchmark or 0;
+PLUGIN.font = "HUDFont";
+PLUGIN.maximumDistance = 300;
+PLUGIN.sociostatusColors = {
+	GREEN = Color(0, 255, 0),
+	BLUE = Color(0, 128, 255),
+	YELLOW = Color(255, 255, 0),
+	RED = Color(255, 0, 0),
+	BLACK = Color(128, 128, 128)
+};
 
--- Including core files in a different location
-ix.util.Include("plugin/sh_plugin.lua");
-ix.lang.LoadFromDir(PLUGIN.newPath.."/languages")
-ix.util.IncludeDir(PLUGIN.newPath.."/libs", true)
-ix.attributes.LoadFromDir(PLUGIN.newPath.."/attributes")
-ix.faction.LoadFromDir(PLUGIN.newPath.."/factions")
-ix.class.LoadFromDir(PLUGIN.newPath.."/classes")
-ix.item.LoadFromDir(PLUGIN.newPath.."/items")
-ix.util.IncludeDir(PLUGIN.newPath.."/derma", true)
-ix.plugin.LoadEntities(PLUGIN.newPath.."/entities")
+cpSystem = cpSystem or {}
+cpSystem.config = cpSystem.config or {}
 
---Including directories that HELIX does not natively recognise.
-PLUGIN:IncludeDirectory("config");
-PLUGIN:IncludeDirectory("plugin");
-PLUGIN:IncludeDirectory("plugin/commands")
-PLUGIN:IncludeDirectory("plugin/meta")
+ix.util.Include("sv_plugin.lua")
+ix.util.Include("sv_hooks.lua")
+ix.util.Include("sh_hooks.lua")
+ix.util.Include("cl_hooks.lua")
+ix.util.IncludeDirectory(PLUGIN, "config");
+ix.util.IncludeDirectory(PLUGIN, "commands")
+ix.util.IncludeDirectory(PLUGIN, "meta")
 
+do
+    local directory = "models/dpfilms/metropolice/";
+	local files, folders = file.Find(directory .. "*.mdl", "GAME");
+
+	for _, obj in pairs(files) do
+        ix.anim.SetModelClass(directory .. obj, "metrocop");
+	end;
+
+	ix.anim.SetModelClass("models/newcca/cca_unit.mdl", "metrocop");
+end;

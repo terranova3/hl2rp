@@ -88,6 +88,10 @@ function PLUGIN:PlayerSpawn(client)
 	end;
 end;
 
+function PLUGIN:CanPlayerEquipItem(client, item)
+	PrintTable(item)
+	return true;
+end
 netstream.Hook("ViewDataUpdate", function(client, target, text, combinePoints)
 	if (IsValid(target) and client:GetCharacter() and target:GetCharacter()) then
 		local data = {

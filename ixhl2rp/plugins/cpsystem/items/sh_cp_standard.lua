@@ -10,4 +10,3 @@ ITEM.replacement = "models/newcca/cca_unit.mdl";
 ITEM.category = "Clothing";
 ITEM.description = "A complete uniform kit that includes a vulcanized rubber flak jacket, polyester metropolice slacks, kevlar vest, steel toed jackboots, rubber gloves and more.";
 ITEM.maxArmor = 100;
-

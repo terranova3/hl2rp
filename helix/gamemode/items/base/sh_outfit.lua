@@ -98,6 +98,7 @@ end
 -- makes another outfit depend on this outfit in terms of requiring this item to be equipped in order to equip the attachment
 -- also unequips the attachment if this item is dropped
 function ITEM:AddAttachment(id)
+	print("Test!: " .. id);
 	local attachments = self:GetData("outfitAttachments", {})
 	attachments[id] = true
 

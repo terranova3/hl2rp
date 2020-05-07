@@ -27,3 +27,12 @@ function Schema:CanPlayerEditObjectives(client)
 		return false;
 	end;
 end
+
+-- Returns if a character is a part of the MPF faction.
+function PLUGIN:IsMetropolice(character)
+    if(character:GetFaction() == FACTION_MPF) then
+        return true;
+    else
+        return false;
+    end;
+end;
