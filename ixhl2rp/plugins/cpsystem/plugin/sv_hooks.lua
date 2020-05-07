@@ -6,20 +6,6 @@
 local Schema = Schema;
 local PLUGIN = PLUGIN;
 
-function PLUGIN:SaveData()
-	local data = {}
-
-	for _, entity in ipairs(ents.FindByClass("ix_uniformgen")) do
-		data[#data + 1] = {
-			pos = entity:GetPos(),
-			angles = entity:GetAngles(),
-			model = entity:GetModel(),
-		}
-	end
-
-	self:SetData(data)
-end
-
 function PLUGIN:LoadData()
 	for _, v in ipairs(self:GetData() or {}) do
 		local entity = ents.Create("ix_uniformgen")
@@ -39,6 +25,20 @@ function PLUGIN:LoadData()
 			physObj:Sleep()
 		end
 	end
+end
+
+function PLUGIN:SaveData()
+	local data = {}
+
+	for _, entity in ipairs(ents.FindByClass("ix_uniformgen")) do
+		data[#data + 1] = {
+			pos = entity:GetPos(),
+			angles = entity:GetAngles(),
+			model = entity:GetModel(),
+		}
+	end
+
+	self:SetData(data)
 end
 
 function Schema:PlayerFootstep(client, position, foot, soundName, volume)

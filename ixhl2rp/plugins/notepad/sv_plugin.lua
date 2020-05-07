@@ -5,13 +5,13 @@
 
 local PLUGIN = PLUGIN;
 
-netstream.Hook("EditNotepad", function(player, data)
-	print("hello!")
-	if (IsValid( data[1] )) then
-		if (data[1]:GetClass() == "ix_notepad") then
-			if (player:GetPos():Distance( data[1]:GetPos() ) <= 192 and player:GetEyeTraceNoCursor().Entity == data[1]) then
-				if (string.len( data[2] ) > 0) then
-					data[1]:SetText( string.sub(data[2], 0, 500) );
+netstream.Hook("EditNotepad", function(client, entity, text)
+	if (IsValid(entity)) then
+		if (entity:GetClass() == "ix_notepad") then
+			if (client:GetPos():Distance( entity:GetPos() ) <= 192 and client:GetEyeTraceNoCursor().Entity == entity) then
+				if (string.len( text ) > 0) then
+					entity:SetText( string.sub(text, 0, 500) );
+					entity:SetCharacter(client:GetCharacter().id)
 				end;
 			end;
 		end;

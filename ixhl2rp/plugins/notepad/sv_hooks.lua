@@ -13,21 +13,23 @@ function PLUGIN:LoadData()
 		entity:SetAngles(v.angles)
 		entity:Spawn()
 
-		if (IsValid(entity)) then
-			entity:SetText(v.text);
-		end;
-
-		if (!v.moveable) then
-			local physicsObject = entity:GetPhysicsObject();
-			
-			if (IsValid(physicsObject)) then
-				physicsObject:EnableMotion(false);
-			end;
-		end;
-
 		entity:SetModel(v.model)
 		entity:SetSolid(SOLID_BBOX)
 		entity:PhysicsInit(SOLID_BBOX)
+
+		if (IsValid(entity)) then
+			entity:SetText(v.text);
+			entity:SetCharacter(v.character);
+		end;
+
+		local physObj = entity:GetPhysicsObject()
+
+		if (!v.moveable) then
+			if (IsValid(physObj)) then
+				physObj:EnableMotion(false)
+				physObj:Sleep()
+			end;
+		end;
 	end
 end
 
@@ -35,22 +37,21 @@ end
 function PLUGIN:SaveData()
 	local data = {};
 	
-	for k, v in pairs( ents.FindByClass("ix_notepad") ) do
-		local physicsObject = v:GetPhysicsObject();
+	for _, entity in pairs(ents.FindByClass("ix_notepad")) do
+		local physObj = entity:GetPhysicsObject();
 		local moveable;
 		
-		if (IsValid(physicsObject)) then
-			moveable = physicsObject:IsMoveable();
+		if (IsValid(physObj)) then
+			moveable = physObj:IsMoveable();
 		end;
 		
 		data[#data + 1] = {
-			key = v.key,
-			text = v.text,
 			pos = entity:GetPos(),
 			angles = entity:GetAngles(),
 			model = entity:GetModel(),
+			text = entity.text,
+			character = entity.character,
 			moveable = moveable,
-			uniqueID = v.uniqueID,
 		};
 	end;
 

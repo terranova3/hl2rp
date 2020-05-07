@@ -57,40 +57,26 @@ end;
 function ENT:SetText(text)
 	if (text) then
 		self.text = text;
-		self.uniqueID = util.CRC(text);
 		self:SetDTBool(0, true);
 	end;
 end;
 
+function ENT:SetCharacter(id)
+	if (id) then
+		self.character = id;
+	end;
+end;
+
 function ENT:OnOptionSelected(client, option)
-	if(self.text and option == "Read") then
-		if (!client.notepadIDs or !client.notepadIDs[self.uniqueID]) then
-			if (!client.notepadIDs) then
-				client.notepadIDs = {};
-			end;
-			
-			client.notepadIDs[self.uniqueID] = true;
-			netstream.Start(client, "ViewNotepad", {self, self.uniqueID, self.text});
-		else
-			netstream.Start(client, "ViewNotepad", {self, self.uniqueID});
-		end;
-	elseif ( arguments == "Edit" ) then
-		if (self.uniqueID == client:UniqueID()) then
-			if (!client.notepadIDs or !client.notepadIDs[self.uniqueID]) then
-				if (!client.notepadIDs) then
-					client.notepadIDs = {};
-				end;
-				
-				client.notepadIDs[entity.uniqueID] = true;
-				netstream.Start(client, "EditNotepad", {self, self.uniqueID, self.text});
-			else
-				netstream.Start(client, "EditNotepad", {self, self.uniqueID});
-			end;
+	if(option == "Read") then
+		netstream.Start(client, "ViewNotepad", self, self.text);
+	elseif (option == "Edit") then
+		if (self.character == client:GetCharacter().id) then
+			netstream.Start(client, "EditNotepad", self, self.text);
 		else
 			client:Notify("You do not own this notepad!");
 		end;
 	else
-		print(client:GetName())
-		netstream.Start(client, "EditNotepad", {self, self.uniqueID});
+		netstream.Start(client, "EditNotepad", self, self.text);
 	end;
 end

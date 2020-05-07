@@ -10,7 +10,7 @@ ITEM.functions.Use = {
 		if (trace.HitPos:Distance( client:GetShootPos() ) <= 192) then
 			local entity = ents.Create("ix_campfire");
 			
-			entity:SetModel(self.model);
+			--entity:SetModel(self.model);
 			entity:SetPos(trace.HitPos);
 			entity:Spawn();
 			

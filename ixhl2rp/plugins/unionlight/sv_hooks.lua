@@ -7,18 +7,22 @@ local PLUGIN = PLUGIN;
 
 -- A function to load the union light.
 function PLUGIN:LoadData()
-	for k, v in pairs(self:GetData() or {}) do
+	for _, v in ipairs(self:GetData() or {}) do
         local entity = ents.Create("ix_unionlight");
-        
-		entity:SetAngles(v.angles);
-		entity:SetPos(v.position);
-		entity:Spawn();
+		entity:SetPos(v.pos)
+		entity:SetAngles(v.angles)
+		entity:Spawn()
 		
-		if (!v.moveable) then
-			local physicsObject = entity:GetPhysicsObject();
-			
-			if ( IsValid(physicsObject) ) then
-				physicsObject:EnableMotion(false);
+		entity:SetModel(v.model)
+		entity:SetSolid(SOLID_BBOX)
+		entity:PhysicsInit(SOLID_BBOX)
+
+		local physObj = entity:GetPhysicsObject();
+
+		if (!v.moveable) then	
+			if ( IsValid(physObj) ) then
+				physObj:EnableMotion(false)
+				physObj:Sleep()
 			end;
 		end;
 	end;
@@ -28,18 +32,19 @@ end;
 function PLUGIN:SaveData()
 	local data = {};
 
-	for k, v in pairs( ents.FindByClass("ix_unionlight") ) do
-		local physicsObject = v:GetPhysicsObject();
+	for _, entity in ipairs(ents.FindByClass("ix_unionlight")) do
+		local physObj = entity:GetPhysicsObject();
 		local moveable;
 		
-		if ( IsValid(physicsObject) ) then
-			moveable = physicsObject:IsMoveable();
+		if (IsValid(physObj)) then
+			moveable = physObj:IsMoveable();
 		end;
 		
 		data[#data + 1] = {
-			angles = v:GetAngles(),
-			position = v:GetPos(),
-			moveable = moveable
+			pos = entity:GetPos(),
+			angles = entity:GetAngles(),
+			model = entity:GetModel(),
+			moveable = moveable,
 		};
 	end;
 	

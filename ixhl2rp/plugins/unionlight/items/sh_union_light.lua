@@ -7,11 +7,11 @@ ITEM.description = "A Union Light capable of illuminating large areas.";
 ITEM.functions.Place = {
 	OnRun = function(item)
 		local client = item.player
-		local trace = player:GetEyeTraceNoCursor();
+		local trace = client:GetEyeTraceNoCursor();
 		local entity = ents.Create("ix_unionlight");
 
 		if (trace.HitPos:Distance( client:GetShootPos() ) <= 192) then			
-			entity:SetModel(self.model);
+			entity:SetModel("models/props_combine/combine_light001a.mdl");
 			entity:SetPos(trace.HitPos);
 			entity:Spawn();
 			

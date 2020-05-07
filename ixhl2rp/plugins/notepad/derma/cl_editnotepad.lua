@@ -46,15 +46,13 @@ function PANEL:SetEntity(entity)
 end;
 
 -- A function to populate the panel.
-function PANEL:Populate(notepad)
-	--self.panelList:Clear();
-	
+function PANEL:Populate(notepad)	
 	local textEntry = vgui.Create("DTextEntry");
 	local button = vgui.Create("DButton");
 	
 	textEntry:SetMultiline(true);
 	textEntry:SetHeight(256);
-	textEntry:SetText(notepad);
+	textEntry:SetText(notepad or "");
 	
 	button:SetText("Okay");
 	
@@ -82,11 +80,10 @@ function PANEL:Populate(notepad)
 		gui.EnableScreenClicker(false);
 		
 		if (IsValid(self.entity)) then
-			netstream.Start( "EditNotepad", { self.entity, string.sub(textEntry:GetValue(), 0, 1000) } );
+			netstream.Start( "EditNotepad", self.entity, string.sub(textEntry:GetValue(), 0, 1000) );
 		end;
 	end;
 	
-
 	self.panelList:AddItem(textEntry);
 	self.panelList:AddItem(button);
 end;
