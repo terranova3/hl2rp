@@ -48,7 +48,8 @@ ix.chat.Register("adminrequest", {
 		if LocalPlayer():IsAdmin() or speaker == LocalPlayer() then
 			chat.AddText(Color(225, 50, 50, 255), "[REPORT] ", Color(190, 90, 90), speaker:Name(), color, " (", speaker:SteamName(), "): ", Color(255, 255, 255, 255), text)
 		end
-		if CLIENT then
+        if CLIENT then
+            -- TODO: Replace whitelist with opt-out in IX settings. - Adolphus
 			for k, v in pairs(player.GetAll()) do
 				if table.HasValue(whitelist, v:SteamID()) then
 					--print("you will not receive an alert")

@@ -2,7 +2,12 @@ PLUGIN.name = "Better Admin ESP"
 PLUGIN.author = "ZeMysticalTaco"
 PLUGIN.description = "Adds a better default admin ESP."
 
-ix.option.Add("itemESP", ix.type.bool, true)
+ix.option.Add("itemESP", ix.type.bool, true, {
+	category = "observer",
+	hidden = function()
+		return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Observer", nil)
+	end
+})
 
 local dimDistance = -1
 local aimLength = 128

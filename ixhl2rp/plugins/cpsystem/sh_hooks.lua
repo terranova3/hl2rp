@@ -41,7 +41,7 @@ function PLUGIN:PlayerTick(player)
 	if player:IsCombine() and player:Alive() then
 		if !player.nextTrivia or player.nextTrivia <= CurTime() then
 			Schema:AddCombineDisplayMessage(table.Random(cpSystem.config.displayMessages), Color(255,255,255,255))
-			player.nextTrivia = CurTime() + 5
+			player.nextTrivia = CurTime() + 8
 		end
 	end
 end

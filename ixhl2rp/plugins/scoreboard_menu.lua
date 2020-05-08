@@ -1,4 +1,4 @@
-PLUGIN.name = "Scoreboard menu"
+PLUGIN.name = "Scoreboard Admin Options"
 PLUGIN.author = "ZeMysticalTaco"
 PLUGIN.description = "Adds scoreboard options for admins."
 
@@ -70,39 +70,6 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 				Derma_StringRequest("Change Character Model", "What do you want to change this character's model to?", client:GetModel(), function(text)
 					ix.command.Send("CharSetModel", client:Name(), text)
 				end, nil, "Change", "Cancel")
-			end
-		end
-	}
-
-	options["Change Faction"] = {
-		function()
-			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
-			local menu = vgui.Create("DFrame")
-			menu:SetSize(ScrW() / 6, ScrH() / 3)
-			menu:MakePopup()
-			menu:Center()
-			menu:SetTitle("Change Player Faction")
-			local header = menu:Add("DLabel")
-			header:Dock(TOP)
-			header:SetText("Pick a faction to change them to.")
-			header:SetTextInset(3, 0)
-			header:SetFont("ixMediumFont")
-			header:SetTextColor(color_white)
-			header:SetExpensiveShadow(1, color_black)
-			header:SetTall(28)
-
-			header.Paint = function(this, w, h)
-				surface.SetDrawColor(ix.config.Get("color"))
-				surface.DrawRect(0, 0, w, h)
-			end
-
-			for k, v in pairs(ix.faction.indices) do
-				local button = vgui.Create("DButton", menu)
-				button:Dock(TOP)
-				button:SetText(L(v.name))
-				function button:DoClick()
-					ix.command.Send("PlyTransfer", client:Name(), v.uniqueID)
-				end
 			end
 		end
 	}
