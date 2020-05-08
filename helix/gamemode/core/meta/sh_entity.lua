@@ -35,6 +35,12 @@ function meta:IsDoor()
 	return (class and class:find("door") or false)
 end
 
+-- @realm shared
+-- Makes an entity flush to the ground, typically used for spawning entities.
+function meta:MakeFlushToGround(position, normal)
+	meta:SetPos(position + (meta:GetPos() - meta:NearestPoint(position - (normal * 512))));
+end;
+
 if (SERVER) then
 	--- Returns `true` if the given entity is a button or door and is locked.
 	-- @realm server
