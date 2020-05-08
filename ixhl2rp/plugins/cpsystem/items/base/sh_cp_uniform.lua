@@ -45,6 +45,30 @@ if (CLIENT) then
 end
 
 function ITEM:OnEquipped()
+	local bodygroups = {
+		"base_badge",
+		"base_bag",
+		"base_glasses",
+		"base_hands",
+		"base_headgear",
+		"base_headstrap",
+		"base_kevlar",
+		"base_legs",
+		"base_satchel",
+		"base_torso"
+	}
+
+	-- Unequips any incompatible bodygroups before wearing uniform.
+	for _, v in pairs(self.player:GetCharacter():GetInventory():GetItems()) do
+		for i = 1, #bodygroups do
+			if(bodygroups[i] == v.base) then
+				if(v:GetData("equip") == true) then
+					v:RemoveOutfit(self.player);
+				end;
+			end;
+		end;
+	end;
+
 	self.player:SetArmor(self:GetData("armor", self.maxArmor))
 	PLUGIN:AdjustPlayer("Equipped", self:GetData("name"), self.player);
 end
