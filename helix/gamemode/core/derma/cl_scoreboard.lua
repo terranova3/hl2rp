@@ -308,10 +308,12 @@ function PANEL:Init()
 		end)
 
 		-- Called when the spawn icon is clicked.
-		function self.spawnIcon.DoClick(spawnIcon)
-			local options = {};			
-				--Clockwork.plugin:Call("GetPlayerScoreboardOptions", info.player, options);
-				--Clockwork.kernel:AddMenuFromData(nil, options);
+		function self.spawnIcon.DoClick(spawnIcon)	
+			local client = self.player;
+			local menu = DermaMenu();
+
+			hook.Run("PopulateScoreboardPlayerMenu", client, menu);
+			menu:Open();
 		end;
 
 	SCOREBOARD_PANEL = nil;

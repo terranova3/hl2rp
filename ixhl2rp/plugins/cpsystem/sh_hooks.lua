@@ -36,3 +36,12 @@ function PLUGIN:IsMetropolice(character)
         return false;
     end;
 end;
+
+function PLUGIN:PlayerTick(player)
+	if player:IsCombine() and player:Alive() then
+		if !player.nextTrivia or player.nextTrivia <= CurTime() then
+			Schema:AddCombineDisplayMessage(table.Random(cpSystem.config.displayMessages), Color(255,255,255,255))
+			player.nextTrivia = CurTime() + 5
+		end
+	end
+end

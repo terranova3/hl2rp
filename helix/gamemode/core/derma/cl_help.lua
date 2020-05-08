@@ -328,7 +328,7 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 
 		container:Add("ixTNLogo")
 
-		for _, v in SortedPairsByMemberValue(ix.plugin.list, "name") do
+		for _, v in SortedPairsByMemberValue(ix.plugin.list, "author") do
 			-- name
 			local title = container:Add("DLabel")
 			title:SetFont("ixMediumLightFont")
