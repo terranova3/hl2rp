@@ -682,7 +682,11 @@ function GM:PlayerDisconnected(client)
 
 		hook.Run("OnCharacterDisconnect", client, character)
 			character:Save()
-		ix.chat.Send(nil, "disconnect", client:SteamName())
+		
+		-- TODO: Dont hardcode this.
+		if(client:IsAdmin()) then
+			ix.chat.Send(nil, "disconnect", client:SteamName())
+		end;
 	end
 
 	if (IsValid(client.ixRagdoll)) then
