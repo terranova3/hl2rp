@@ -3,7 +3,7 @@ local cLIST = ix.class.list;
 
 function CHAR:IsCombine()
 	local faction = self:GetPlayer():Team();
-	local isCombine = (faction == FACTION_OTA);
+	local isCombine = (faction == FACTION_OTA or faction == FACTION_SCN);
 
 	if(faction == FACTION_MPF and !self:IsUndercover()) then
 		isCombine = true;

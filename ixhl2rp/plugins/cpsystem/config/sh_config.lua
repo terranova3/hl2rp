@@ -144,6 +144,10 @@ ix.config.Add("Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming sche
 	category = "[TN] Civil Protection System"
 })
 
+ix.config.Add("Scanner Naming Scheme", "city.abbreviation:rank-id", "Naming scheme for scanners. values: city, abbreviation, rank, tagline, id, division", nil, {
+	category = "[TN] Civil Protection System"
+})
+
 ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands. Access level is tied to ranks in the server file config.", nil, {
 	data = {min = 0, max = Schema.ranks.access.GetSize()},
 	category = "[TN] Civil Protection System"

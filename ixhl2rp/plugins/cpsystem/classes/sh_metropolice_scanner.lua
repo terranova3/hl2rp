@@ -1,10 +1,7 @@
 CLASS.name = "Metropolice Scanner"
 CLASS.description = "A metropolice scanner, it utilises Combine technology."
-CLASS.faction = FACTION_MPF
-
-function CLASS:CanSwitchTo(client)
-	return Schema:IsCombineRank(client:Name(), "SCN") or Schema:IsCombineRank(client:Name(), "SHIELD")
-end
+CLASS.faction = FACTION_SCN
+CLASS.isDefault = true;
 
 function CLASS:OnSpawn(client)
 	if (IsValid(client.ixScanner) and !client.ixScanner.bPendingRemove) then
@@ -12,7 +9,7 @@ function CLASS:OnSpawn(client)
 		client.ixScanner.bPendingRemove = true
 		client.ixScanner:Remove()
 	else
-		Schema:CreateScanner(client, Schema:IsCombineRank(client:Name(), "SHIELD") and "npc_clawscanner" or nil)
+		Schema:CreateScanner(client)
 	end
 end
 
@@ -29,4 +26,4 @@ function CLASS:OnLeave(client)
 	end
 end
 
-CLASS_MPS = CLASS.index
+CLASS_SCN = CLASS.index

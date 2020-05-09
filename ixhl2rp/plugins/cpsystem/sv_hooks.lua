@@ -62,7 +62,12 @@ end
 function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
 	local faction = character:GetFaction()
 	
-	-- Updates player name if the city has been changed. --
+	if(faction == FACTION_SCN) then
+		print("this")
+		character:SetClass(CLASS_SCN);
+	end;
+
+ 	-- Updates player name if the city has been changed. --
 	if(faction == FACTION_MPF) then
 		if(character:GetName() == PLUGIN:GetCPName(character)) then
 			if(!string.find(character:GetName(), ix.config.Get("City Name"))) then 

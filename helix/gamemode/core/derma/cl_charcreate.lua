@@ -112,7 +112,13 @@ function PANEL:Init()
 			end
 
 			self.progress:IncrementProgress()
-			self:SetActiveSubpanel("customization")
+			local faction = ix.faction.indices[self.payload.faction].name
+
+			if(faction == "Scanner") then
+				self:SetActiveSubpanel("attributes")
+			else		
+				self:SetActiveSubpanel("customization")
+			end;
 		end
 	end
 
@@ -177,7 +183,14 @@ function PANEL:Init()
 	attributesBack:Dock(BOTTOM)
 	attributesBack.DoClick = function()
 		self.progress:DecrementProgress()
-		self:SetActiveSubpanel("customization")
+
+		local faction = ix.faction.indices[self.payload.faction].name
+
+		if(faction == "Scanner") then
+			self:SetActiveSubpanel("description")
+		else		
+			self:SetActiveSubpanel("customization")
+		end;
 	end
 
 	self.attributesModel = attributesModelList:Add("ixModelPanel")
@@ -215,6 +228,19 @@ function PANEL:Init()
 		if (faction) then
 			local model = faction:GetModels(LocalPlayer())[value]
 
+			local smallModel;
+			
+			if(faction.name == "Scanner") then
+				smallModel = true;
+			else
+				smallModel = false;
+			end;
+
+			self.factionModel.smallModel = smallModel;
+			self.descriptionModel.smallModel = smallModel;
+			self.customizationModel.smallModel = smallModel;
+			self.attributesModel.smallModel = smallModel;
+			
 			-- assuming bodygroups
 			if (istable(model)) then
 				self.factionModel:SetModel(model[1], model[2] or 0, model[3])

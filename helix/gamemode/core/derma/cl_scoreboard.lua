@@ -140,7 +140,7 @@ function PANEL:Rebuild()
 		-- Checking if they are initialized, not just in char creation/load
 		if(v:GetCharacter()) then
 			local customclass = v:GetCharacter():GetData("customclass");
-			local class = ix.class.list[v:GetCharacter():GetClass()].name
+			local class = ix.class.list[v:GetCharacter():GetClass()].name or "ERROR"
 
 			if(customclass) then
 				class = customclass;

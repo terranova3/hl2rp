@@ -3,11 +3,13 @@ DEFINE_BASECLASS("DModelPanel")
 
 local PANEL = {}
 AccessorFunc(PANEL, "follow", "Follow", FORCE_BOOL)
+AccessorFunc(PANEL, "smallModel", "SmallModel", FORCE_BOOL)
 local MODEL_ANGLE = Angle(0, 45, 0)
 
 function PANEL:Init()
 	self.brightness = 1
 	self.follow = true;
+	self.smallModel = false;
 	self:SetCursor("none")
 end
 
@@ -84,7 +86,11 @@ function PANEL:LayoutEntity()
 			entity:SetPoseParameter("move_yaw", 360 * LocalPlayer():GetPoseParameter("move_yaw") - 180)
 		end
 	end;
-	
+
+	if(self.smallModel == true) then 
+		self.Entity:SetLocalPos( Vector(5,0,50) )
+	end;
+
 	self.Entity:SetAngles(MODEL_ANGLE)
 	self:RunAnimation()
 end

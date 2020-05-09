@@ -430,6 +430,15 @@ do
 
 			return skinSelect
 		end,
+		ShouldDisplay = function(self, container, payload)
+			local faction = ix.faction.indices[payload.faction]
+			
+			if(faction.name == "Scanner") then 
+				return false;
+			end;
+
+			return true;
+		end,
 		alias = "Skin"
 	})
 	--- Sets this character's model. This sets the player's current model to the given one, and saves it to the character.

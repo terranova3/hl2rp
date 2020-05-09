@@ -109,7 +109,7 @@ function PLUGIN:UpdateName(character)
 end;
 
 -- Returns full civil protection name as a single string
-function PLUGIN:GetCPName(character)
+function PLUGIN:GetCPName(character, isScanner)
     local template = ix.config.Get("Naming Scheme");
     
 	replacements = {
