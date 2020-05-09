@@ -2,6 +2,18 @@ PLUGIN.name = "Admin chat"
 PLUGIN.author = "ZeMysticalTaco"
 PLUGIN.description = "Adds admin chat to HELIX."
 
+CAMI.RegisterPrivilege({
+	Name = "Helix - TERRANOVA",
+	MinAccess = "admin"
+})
+
+ix.option.Add("toggleAlert", ix.type.bool, false, {
+	category = "Admin Settings",
+	hidden = function()
+		return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - TERRANOVA", nil)
+	end
+})
+
 ix.chat.Register("adminchat", {
 	format = "whocares",
 	OnGetColor = function(self, speaker, text)
@@ -24,7 +36,14 @@ ix.chat.Register("adminchat", {
 	end,
 	OnChatAdd = function(self, speaker, text)
 		local color = team.GetColor(speaker:Team())
-		chat.AddText(Color(65, 129, 129), "@admin - ", Color(225,225,225), speaker:SteamName(), ": ", Color(200, 200, 200), text)
+		local icon = "icon16/star.png"
+
+		if (speaker:IsSuperAdmin()) then
+			icon = "icon16/shield.png"
+		end
+
+		icon = Material(icon)
+		chat.AddText(icon, Color(65, 129, 129), "@admin - ", Color(225,225,225), speaker:SteamName(), ": ", Color(200, 200, 200), text)
 	end,
 	prefix = "/a"
 })
@@ -49,17 +68,10 @@ ix.chat.Register("adminrequest", {
 			chat.AddText(Color(225, 50, 50, 255), "[REPORT] ", Color(190, 90, 90), speaker:Name(), color, " (", speaker:SteamName(), "): ", Color(255, 255, 255, 255), text)
 		end
         if CLIENT then
-            -- TODO: Replace whitelist with opt-out in IX settings. - Adolphus
-			for k, v in pairs(player.GetAll()) do
-				if table.HasValue(whitelist, v:SteamID()) then
-					--print("you will not receive an alert")
-					--print("you will receive an alert")
-					return
-				else
-					if not LocalPlayer().nextbellproc or LocalPlayer().nextbellproc <= CurTime() then
-						surface.PlaySound("hl1/fvox/bell.wav")
-						LocalPlayer().nextbellproc = CurTime() + 5
-					end
+			if(ix.option.Get("toggleAlert")) then
+				if not LocalPlayer().nextbellproc or LocalPlayer().nextbellproc <= CurTime() then
+					surface.PlaySound("hl1/fvox/bell.wav")
+					LocalPlayer().nextbellproc = CurTime() + 5
 				end
 			end
 		end

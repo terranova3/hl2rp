@@ -2,12 +2,18 @@ PLUGIN.name = "Better Admin ESP"
 PLUGIN.author = "ZeMysticalTaco"
 PLUGIN.description = "Adds a better default admin ESP."
 
-ix.option.Add("itemESP", ix.type.bool, true, {
-	category = "observer",
+CAMI.RegisterPrivilege({
+	Name = "Helix - Item ESP",
+	MinAccess = "admin"
+})
+
+ix.option.Add("itemESP", ix.type.bool, false, {
+	category = "Admin Settings",
 	hidden = function()
-		return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Observer", nil)
+		return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Item ESP", nil)
 	end
 })
+
 
 local dimDistance = -1
 local aimLength = 128

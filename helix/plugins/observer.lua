@@ -4,13 +4,13 @@ PLUGIN.author = "Chessnut"
 PLUGIN.description = "Adds on to the no-clip mode to prevent intrusion."
 
 CAMI.RegisterPrivilege({
-	Name = "Helix - Observer",
+	Name = "Helix - Admin",
 	MinAccess = "admin"
 })
 
 ix.option.Add("observerTeleportBack", ix.type.bool, true, {
 	bNetworked = true,
-	category = "observer",
+	category = "Admin Settings",
 	hidden = function()
 		return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Observer", nil)
 	end
@@ -18,7 +18,7 @@ ix.option.Add("observerTeleportBack", ix.type.bool, true, {
 
 if (CLIENT) then
 	ix.option.Add("observerESP", ix.type.bool, true, {
-		category = "observer",
+		category = "Admin Settings",
 		hidden = function()
 			return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Observer", nil)
 		end
