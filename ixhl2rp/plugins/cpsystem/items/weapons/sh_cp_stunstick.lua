@@ -10,6 +10,7 @@ ITEM.model = "models/dpfilms/metropolice/props/hd_stunbaton.mdl"
 ITEM.class = "ix_stunstick"
 ITEM.weaponCategory = "offhand"
 ITEM.flag = "V"
+ITEM.cpArmory = true;
 ITEM.width = 2
 ITEM.height = 1
 ITEM.iconCam = {

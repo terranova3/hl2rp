@@ -5,6 +5,7 @@ ITEM.class = "weapon_pistol"
 ITEM.weaponCategory = "sidearm"
 ITEM.classes = {CLASS_EMP, CLASS_EOW}
 ITEM.flag = "V"
+ITEM.cpArmory = true;
 ITEM.width = 2
 ITEM.height = 1
 ITEM.iconCam = {
