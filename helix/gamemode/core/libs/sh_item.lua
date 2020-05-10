@@ -224,6 +224,13 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 					return IsValid(item.entity)
 				end
 			}
+			-- NOTE: REMOVE ON LIVE --
+			ITEM.functions.debug = {
+				icon = "icon16/application_xp_terminal.png",
+				OnRun = function(item)
+					PrintTable(item);
+				end
+			} 
 
 			local oldBase = ITEM.base
 
