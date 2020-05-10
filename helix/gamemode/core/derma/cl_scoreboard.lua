@@ -264,11 +264,16 @@ function PANEL:Init()
 			skin = playerData.skin,
 			name = playerData.name
 		};
-		
-		info.text = playerData.player:GetCharacter():GetDescription(); 
-		
+
 		self.toolTip = info.toolTip;
 		self.player = info.player;
+
+		local localCharacter = LocalPlayer():GetCharacter();
+		local character = playerData.player:GetCharacter();
+
+		info.doesRecognize = hook.Run("IsCharacterRecognized", localCharacter, character:GetID()) or hook.Run("IsPlayerRecognized", self.player)
+		info.text = playerData.player:GetCharacter():GetDescription(); 
+		
 
 		self.nameLabel = vgui.Create("DLabel", self);
 		self.nameLabel:SetFont("ixGenericFont")
