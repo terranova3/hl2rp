@@ -21,13 +21,13 @@ ix.command.Add("ApartmentAdd", {
 
 		if (!IsValid(door) or !door:IsDoor()) then
 			return client:NotifyLocalized("dNotValid")
-		end
-
-		if(PLUGIN:GetApartmentSection(section)) then
-			PLUGIN:AddApartment(section, door)
-			ix.log.AddRaw(string.format("%s has created a new apartment in section %s, with category %s.", client:GetName(), section, category));
 		else
-			return client:NotifyLocalized(string.format("%s is not a valid section.", section));
-		end;
+			if(PLUGIN:GetApartmentSection(section)) then
+				PLUGIN:AddApartment(section, door)
+				ix.log.AddRaw(string.format("%s has created a new apartment in section %s.", client:GetName(), section));
+			else
+				return client:NotifyLocalized(string.format("%s is not a valid section.", section));
+			end;
+		end
 	end
 })

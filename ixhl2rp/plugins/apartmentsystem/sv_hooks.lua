@@ -6,13 +6,13 @@
 local PLUGIN = PLUGIN;
 
 function PLUGIN:SaveData()
-	self:SaveKeycardTerminals()
 	self:SaveApartmentData();
+	self:SaveKeycardTerminals()
 end
 
 function PLUGIN:LoadData()
-	self:LoadKeycardTerminals();
 	self:LoadApartmentData();
+	self:LoadKeycardTerminals();
 end;
 
 function PLUGIN:SaveKeycardTerminals()
@@ -56,10 +56,14 @@ end;
 
 function PLUGIN:LoadApartmentData()
 	for _, v in ipairs(self:GetData() or {}) do
-		PLUGIN:AddApartmentSection(v.category, v.name, v.prefix, v.count, v.apartments, true)
+		PLUGIN:AddApartmentSection(v.category, v.name, v.prefix, true)
 
-		for _, k in ipairs(v.apartments.doors) do
-			PLUGIN:SetupDoor(v, k);
+		for _, k in ipairs(v.apartments) do
+			for i = 1, #k.doorIDs do
+				k.doors[i] = ents.GetMapCreatedEntity(k.doorIDs[i])
+			end;
+
+			PLUGIN:AddApartment(k.section, k.doors, k.doorIDs, true)
 		end;
 	end
 end;
