@@ -32,8 +32,8 @@ function PLUGIN:HasAccess(character, door)
 end;
 
 -- Sets up the ix door display
-function PLUGIN:SetupDoor(section, door)
-	local doorName = string.format("%s - Apartment %s", section.prefix, section.count);
+function PLUGIN:SetupDoor(section, door, id)
+	local doorName = string.format("%s - Apartment %s", section.prefix, id or section.count);
 
 	door.apartmentID = self.indicies;
 	door:SetNetVar("visible", true)
@@ -56,8 +56,8 @@ function PLUGIN:AddApartment(section, door, ids, loading)
 			table.insert(doorIDs, door:GetDoorPartner():MapCreationID());
 		end
 	else
-		doors = ids;
 		doors = door;
+		doorIDs = ids;
 	end;
 
 	for _, v in pairs(doors) do
@@ -65,7 +65,8 @@ function PLUGIN:AddApartment(section, door, ids, loading)
 	end;
 	
 	local apartment = {
-		uniqueID = self.indicies,
+		uniqueID = self.indicies, -- This is the uniqueID used to access this object.
+		id = section.count, -- Tracks the actual id in the section table.
 		section = section.name,
 		doors = doors,
 		doorIDs = doorIDs,
@@ -95,14 +96,17 @@ end;
 -- Adds a new door to an already registered apartment.
 function PLUGIN:AddApartmentDoor(id, door)
 	local apartment = self:GetApartment(id);
+	local section = self:GetApartmentSection(apartment.section);
 
 	if(apartment) then
 		table.insert(apartment.doors, door);
 		table.insert(apartment.doorIDs, door:MapCreationID());
+		self:SetupDoor(section, door, apartment.id);
 
 		if (IsValid(door:GetDoorPartner())) then
 			table.insert(apartment.doors, door:GetDoorPartner());
 			table.insert(apartment.doorIDs, door:GetDoorPartner():MapCreationID());
+			self:SetupDoor(section, door:GetDoorPartner(), apartment.id);
 		end
 
 		PLUGIN:SaveApartmentData();
@@ -137,9 +141,11 @@ end;
 
 -- Returns apartment object if it exists.
 function PLUGIN:GetApartment(id)
-	for i = 1, #self.sections.apartments do
-		if(self.sections.apartments[i] and i == id) then
-			return self.sections.apartments[i];
+	for i = 1, #self.sections do
+		for _, v in pairs(self.sections[i].apartments) do
+			if(v.uniqueID == id) then
+				return v;
+			end;
 		end;
 	end;
 
