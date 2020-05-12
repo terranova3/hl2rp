@@ -9,3 +9,5 @@ PLUGIN.author = "Adolphus";
 PLUGIN.maxLength = 512;
 
 ix.util.Include("sv_hooks.lua");
+ix.util.IncludeDirectory(PLUGIN, "config");
+ix.util.IncludeDirectory(PLUGIN, "commands");

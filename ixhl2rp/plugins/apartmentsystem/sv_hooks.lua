@@ -7,10 +7,12 @@ local PLUGIN = PLUGIN;
 
 function PLUGIN:SaveData()
 	self:SaveKeycardTerminals()
+	self:SaveApartmentData();
 end
 
 function PLUGIN:LoadData()
-    self:LoadKeycardTerminals();
+	self:LoadKeycardTerminals();
+	self:LoadApartmentData();
 end;
 
 function PLUGIN:SaveKeycardTerminals()
@@ -48,3 +50,16 @@ function PLUGIN:LoadKeycardTerminals()
 	end
 end
 
+function PLUGIN:SaveApartmentData()
+	self:SetData(self.sections)
+end;
+
+function PLUGIN:LoadApartmentData()
+	for _, v in ipairs(self:GetData() or {}) do
+		PLUGIN:AddApartmentSection(v.category, v.name, v.prefix, v.count, v.apartments, true)
+
+		for _, k in ipairs(v.apartments.doors) do
+			PLUGIN:SetupDoor(v, k);
+		end;
+	end
+end;
