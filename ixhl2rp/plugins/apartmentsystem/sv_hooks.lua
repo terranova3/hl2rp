@@ -5,16 +5,19 @@
 
 local PLUGIN = PLUGIN;
 
+-- Called when data is saved, on server close or every 600s.
 function PLUGIN:SaveData()
 	self:SaveApartmentData();
 	self:SaveKeycardTerminals()
 end
 
+-- Called when data is loaded, on server initialize.
 function PLUGIN:LoadData()
 	self:LoadApartmentData();
 	self:LoadKeycardTerminals();
 end;
 
+-- Saves all the keycard terminal entities
 function PLUGIN:SaveKeycardTerminals()
 	local data = {}
 
@@ -34,6 +37,7 @@ function PLUGIN:SaveKeycardTerminals()
 	ix.data.Set("keycardTerminals", data)
 end
 
+-- Loads al lthe keycard terminal entities.
 function PLUGIN:LoadKeycardTerminals()
 	for _, v in ipairs(ix.data.Get("keycardTerminals") or {}) do
 		local door = ents.GetMapCreatedEntity(v[1])
@@ -50,10 +54,12 @@ function PLUGIN:LoadKeycardTerminals()
 	end
 end
 
+-- Stores the whole apartment section table
 function PLUGIN:SaveApartmentData()
 	self:SetData(self.sections)
 end;
 
+-- Loads the 'old' apartment section table and restores data that we want to persist.
 function PLUGIN:LoadApartmentData()
 	for _, v in ipairs(self:GetData() or {}) do
 		PLUGIN:AddApartmentSection(v.category, v.name, v.prefix, true)

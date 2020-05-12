@@ -5,9 +5,16 @@
 
 local PLUGIN = PLUGIN;
 
+-- uniqueID for apartments
+PLUGIN.indicies = PLUGIN.indicies or 0;
+
+-- LUA Autorefresh
 PLUGIN.sections = PLUGIN.sections or {}
+
+-- Don't want this to refresh, since its registered in the config file.
 PLUGIN.categories = {}
 
+-- Returns if a character's uniqueID is apart of the apartments ownership table.
 function PLUGIN:HasAccess(character, door)
 	if(!door.apartmentID) then return true; end;
 
@@ -24,15 +31,17 @@ function PLUGIN:HasAccess(character, door)
 	return false;
 end;
 
+-- Sets up the ix door display
 function PLUGIN:SetupDoor(section, door)
 	local doorName = string.format("%s - Apartment %s", section.prefix, section.count);
 
-	door.apartmentID = section.count;
+	door.apartmentID = self.indicies;
 	door:SetNetVar("visible", true)
 	door:SetNetVar("ownable", nil)
 	door:SetNetVar("name", doorName)
 end;
 
+-- Adds an apartment to a section table, includes doors.
 function PLUGIN:AddApartment(section, door, ids, loading)
 	local section = self:GetApartmentSection(section);
 	local doors = {}
@@ -56,13 +65,17 @@ function PLUGIN:AddApartment(section, door, ids, loading)
 	end;
 	
 	local apartment = {
+		uniqueID = self.indicies,
 		section = section.name,
 		doors = doors,
 		doorIDs = doorIDs,
 		owners = {}
 	}
 
+	-- Incrementing the uniqueID for the global table and local section table.
+	self.indicies = self.indicies + 1;
 	section.count = section.count + 1;
+
 	table.insert(section.apartments, apartment)
 
 	if(!loading) then 
@@ -70,14 +83,16 @@ function PLUGIN:AddApartment(section, door, ids, loading)
 	end;
 end;
 
+-- Adds a character's uniqueID to the owner table of an apartment.
 function PLUGIN:AddApartmentOwner(character, id)
-	local apartment = PLUGIN:GetApartment(id);
+	local apartment = self:GetApartment(id);
 
 	if(apartment) then
 		table.insert(apartment.owners, character:GetID());
 	end;
 end;
 
+-- Adds a new door to an already registered apartment.
 function PLUGIN:AddApartmentDoor(id, door)
 	local apartment = self:GetApartment(id);
 
@@ -89,11 +104,12 @@ function PLUGIN:AddApartmentDoor(id, door)
 			table.insert(apartment.doors, door:GetDoorPartner());
 			table.insert(apartment.doorIDs, door:GetDoorPartner():MapCreationID());
 		end
-		
+
 		PLUGIN:SaveApartmentData();
 	end;
 end;
 
+-- Adds a new section to hold apartments in.
 function PLUGIN:AddApartmentSection(category, name, prefix, loading)
 	local section = {
 		name = name,
@@ -110,6 +126,7 @@ function PLUGIN:AddApartmentSection(category, name, prefix, loading)
 	end;
 end;
 
+-- Adds a new category, used as a requirement for apartment section assignment.
 function PLUGIN:AddApartmentCategory(name, loyalty)
 	local category = {
 		name = name,
@@ -118,6 +135,7 @@ function PLUGIN:AddApartmentCategory(name, loyalty)
 	table.insert(self.categories, category);
 end;
 
+-- Returns apartment object if it exists.
 function PLUGIN:GetApartment(id)
 	for i = 1, #self.sections.apartments do
 		if(self.sections.apartments[i] and i == id) then
@@ -128,6 +146,7 @@ function PLUGIN:GetApartment(id)
 	return nil;
 end;
 
+-- Returns section object if it exists.
 function PLUGIN:GetApartmentSection(name)
 	for i = 1, #self.sections do
 		if(self.sections[i].name == name) then 
@@ -138,6 +157,7 @@ function PLUGIN:GetApartmentSection(name)
 	return nil;
 end;
 
+-- Returns category object if it exists.
 function PLUGIN:GetApartmentCategory(name)
 	for i = 1, #self.categories do
 		if(self.categories[i].name == name) then 
@@ -148,12 +168,32 @@ function PLUGIN:GetApartmentCategory(name)
 	return nil;
 end;
 
+-- Uses the door entity to get the door entity from the apartment.
 function PLUGIN:GetApartmentDoor(door)
 	for k, v in pairs(self.sections.apartments) do
-		if(v.door == door) then
-			return v.door;
+		for i = 1, #v.doors do
+			if(v.doors[i] == door) then
+				return v.door[i];
+			end;
 		end;
 	end;
 
 	return nil;
+end;
+
+-- Returns if a character's uniqueID is apart of the apartments ownership table.
+function PLUGIN:HasAccess(character, door)
+	if(!door.apartmentID) then return true; end;
+
+	local apartment = PLUGIN:GetApartment(door.apartmentID);
+
+	if(apartment) then
+		for _, v in pairs(apartment.owners) do
+			if(v == character:GetID()) then
+				return true;
+			end;	
+		end;
+	end;
+
+	return false;
 end;
