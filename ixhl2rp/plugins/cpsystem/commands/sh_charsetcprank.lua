@@ -16,6 +16,11 @@ ix.command.Add("CharSetCPRank", {
         if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
                 if(PLUGIN:RankExists(text)) then
+                    local notification = cpSystem.config.notification;
+                    notification.text = "You have been promoted to:";
+                    notification.additional = string.format("'Rank - %s'", Schema.ranks.Get(text).text)
+
+                    Notify:SendMessage(target:GetPlayer(), notification);
                     client:Notify(string.format("You have set the cp rank of %s to %s.", target:GetName(), text));
                     PLUGIN:SetRank(target, text);
                 else

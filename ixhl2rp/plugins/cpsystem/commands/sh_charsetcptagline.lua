@@ -16,6 +16,11 @@ ix.command.Add("CharSetCPTagline", {
         if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
                 if(PLUGIN:TaglineExists(text)) then
+                    local notification = cpSystem.config.notification;
+                    notification.text = "Your new tagline is:";
+                    notification.additional = string.format("'Tagline - %s'", text)
+
+                    Notify:SendMessage(target:GetPlayer(), notification);
                     client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
                     target:SetData("cpTagline", text);
                     PLUGIN:UpdateName(target);

@@ -15,6 +15,11 @@ ix.command.Add("CharSetCPID", {
     OnRun = function(self, client, target, text)
         if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
+                local notification = cpSystem.config.notification;
+                notification.text = "Your new id number is:";
+                notification.additional = string.format("'ID - %s'", text)
+
+                Notify:SendMessage(target:GetPlayer(), notification);
                 client:Notify(string.format("You have set the cp id of %s to %s.", target:GetName(), text));
                 target:SetData("cpID", text);
                 PLUGIN:UpdateName(target);

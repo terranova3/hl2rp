@@ -28,6 +28,12 @@ cpSystem.config.commandsAccess = {
 	["edit_viewobjectives"] = 2,
 	["set_sociostatus"] = 0
 }
+cpSystem.config.notification = {
+	faction = "MPF", 
+	title = "UNIT!", 
+	sound = "sound/terranova/ui/notification_mpf.mp3",
+	titleColor = Color(50, 100, 150)
+}
 cpSystem.config.taglines = {
 	"APEX",
 	"BLADE",
