@@ -31,14 +31,14 @@ net.Receive("ixArmoryBuy", function(length, client)
             })
 
             local log = string.format("%s has received %s from a cp armory. Reason: %s", client:GetName(), itemTable.name, data.reason or "No reason specified");
-            local dateTime = string.format("[%s] ", ix.date.GetFormatted());
+			local timeString = os.date("%H:%M:%S - %d/%m/%Y", os.time())
 
             ix.log.AddRaw(log);
 
             PLUGIN:AddArmoryLog({
                 log = string.format("%s has received %s.", client:GetName(), itemTable.name),
                 reason = data.reason,
-                time = dateTime
+                time = timeString
             });          
         end;
     end;

@@ -46,7 +46,7 @@ function PLUGIN:DrawDoorInfo(door, width, position, angles, scale, clientPositio
 	surface.SetFont("ix3D2DMediumFont")
 	local nameWidth, nameHeight = surface.GetTextSize(name)
 
-	derma.SkinFunc("DrawImportantBackground", -width * 0.5, -nameHeight * 0.5, width, nameHeight, ColorAlpha(color, alpha * 0.5))
+	--derma.SkinFunc("DrawImportantBackground", -width * 0.5, -nameHeight * 0.5, width, nameHeight, ColorAlpha(color, alpha * 0.5))
 
 	surface.SetTextColor(ColorAlpha(color_white, alpha))
 	surface.SetTextPos(-nameWidth * 0.5, -nameHeight * 0.5)
@@ -67,12 +67,13 @@ function PLUGIN:DrawDoorInfo(door, width, position, angles, scale, clientPositio
 	end
 
 	-- background blur
+	--[[
 	ix.util.PushBlur(function()
 		cam.Start3D2D(position, angles, scale)
 			surface.SetDrawColor(11, 11, 11, math.max(alpha - 100, 0))
 			surface.DrawRect(-width * 0.5, -nameHeight * 0.5, width, y + nameHeight * 0.5 + 4)
 		cam.End3D2D()
-	end)
+	end)--]]
 end
 
 function PLUGIN:PostDrawTranslucentRenderables(bDepth, bSkybox)

@@ -54,12 +54,9 @@ if SERVER then
 
 		if user:IsCombine() then
 			user:SetAction("Logging in...", 1, function()
-				netstream.Start(user, "OpenCPArmory", {})
 
-				net.Start("ixArmoryRequestLogs")
-					net.WriteTable(PLUGIN.armoryLog);
-				net.Broadcast();
-
+				PrintTable(PLUGIN.armoryLog);
+				netstream.Start(user, "OpenCPArmory", PLUGIN.armoryLog)
 				user:Freeze(false)
 			end)
 
@@ -79,7 +76,7 @@ else
 	function ENT:Draw()
 		self:DrawModel()
 		local ang = self:GetAngles()
-		local pos = self:GetPos() + ang:Up() * 47.88 + ang:Right() * 9.80 + ang:Forward() * -2.25
+		local pos = self:GetPos() + ang:Up() * 47.88 + ang:Right() * 9.80 + ang:Forward() * -2.15
 
 		ang:RotateAroundAxis(ang:Up(), 90);
 		ang:RotateAroundAxis(ang:Forward(), 42)

@@ -40,10 +40,6 @@ function PANEL:SetItem(itemTable)
 		if (!IsValid(ix.gui.checkout) and (this.nextClick or 0) < CurTime()) then
 			ix.gui.armory:BuyItem(itemTable.uniqueID)
 
-			if(ix.gui.armory.checkoutButton:IsEnabled() == false) then
-				ix.gui.armory.checkoutButton:SetEnabled(true);
-			end;
-
 			surface.PlaySound("buttons/button14.wav")
 			this.nextClick = CurTime() + 0.5
 		end
@@ -75,6 +71,23 @@ vgui.Register("ixArmoryItem", PANEL, "DPanel")
 
 local PANEL = {}
 
+function PANEL:Init(logs)
+	ix.gui.armory = self
+	self.stagePanels = {}
+	self.cart = {}
+	self.armoryLog = {};
+
+    self:SetSize(720, 480)
+    self:Center()
+    self:MakePopup()
+	self:SetTitle("");
+	self:ShowCloseButton( false )
+end
+
+function PANEL:Paint()
+	ix.util.DrawBlur(self, 15, nil, 200)
+end;
+
 -- Called each frame.
 function PANEL:Think()
 	local scrW = ScrW();
@@ -82,29 +95,18 @@ function PANEL:Think()
 
 	self:SetSize(720, 480);
 	self:SetPos( (scrW / 2) - (self:GetWide() / 2), (scrH / 2) - (self:GetTall() / 2) );
-end;
 
-function PANEL:Init()
-	ix.gui.armory = self
-	self.stagePanels = {}
-	self.cart = {}
-	self.armoryLog = {}
-
-	net.Receive("ixArmoryRequestLogs", function()
-		self.armoryLog = net.ReadTable();
-	end)
-	
-	self.Paint = function() 
-		ix.util.DrawBlur(self, 15, nil, 200)
+	if(self.cart[1]) then
+		ix.gui.armory.checkoutButton:SetEnabled(true);
+	else
+		ix.gui.armory.checkoutButton:SetEnabled(false);
 	end;
 
-    self:SetSize(720, 480)
-    self:Center()
-    self:MakePopup()
-	self:SetTitle("");
-	self:ShowCloseButton( false )
+	self.checkout:SetText(L("checkout", self:GetCartCount() or 0))
+end;
 
-    self.headerText = self:Add("DLabel")
+function PANEL:Populate()
+	self.headerText = self:Add("DLabel")
     self.headerText:SetContentAlignment(5)
     self.headerText:Dock(TOP)
     self.headerText:SetText("<:: Civil Protection Armory ::>")
@@ -148,11 +150,15 @@ function PANEL:Init()
 		self.viewLogs:Dock(LEFT)
 		self.viewLogs:SetText("View Logs")
 		self.viewLogs:SetSize(self:GetWide() / 3, self:GetTall())
-		
+		self.viewLogs:SetEnabled(false);
+
+		if(ix.gui.armory.armoryLog[1]) then
+			self.viewLogs:SetEnabled(true);
+		end;
+
 		self.checkout = self.bottomDock:Add("DButton")
 		self.checkout:Dock(FILL)
 		self.checkout:SetText("Submit")
-		self.checkout:SetEnabled(false);
 		ix.gui.armory.checkoutButton = self.checkout;
 		
 		self.exitButton = self.bottomDock:Add("DButton")
@@ -255,6 +261,9 @@ function PANEL:Init()
 
 			self.items:Clear();
 
+			-- We know theres atleast 1 object in the array, otherwise we wouldn't be here.
+			local i = 1;
+
 			for k, v in SortedPairs(self.cart) do
 				local itemTable = ix.item.list[self.cart[k].uniqueID];
 				local slot = self.items:Add("DPanel")
@@ -280,6 +289,24 @@ function PANEL:Init()
 				slot.name:SetTextColor(color_white)
 				slot.name:SizeToContents()
 				slot.name:Dock(LEFT)
+
+				slot.delete = slot:Add("DButton")
+				slot.delete:SetText("X");
+				slot.delete:SetSize(64, self:GetTall())
+				slot.delete:DockMargin(4, 4, 4, 4)
+				slot.delete:Dock(RIGHT)
+				slot.delete.id = i;
+
+				function slot.delete:DoClick()
+					table.remove(ix.gui.armory.cart, self.id);
+					slot:Remove();
+
+					if(!ix.gui.armory.cart[1]) then
+						ix.gui.armory:SetActivePanel("browse");
+					end;
+				end;
+
+				i=i+1;
 			end
 		end;
 
@@ -338,10 +365,6 @@ function PANEL:Init()
 
 			ix.gui.armory:Close();
 		end;
-	self:Populate();
-end
-
-function PANEL:Populate()
 	self:SetActivePanel("browse");
 end;
 
@@ -377,7 +400,6 @@ function PANEL:BuyItem(uid)
 	self.cart[count] = {
 		uniqueID = uid
 	}
-	self.checkout:SetText(L("checkout", self:GetCartCount()))
 end
 
 function PANEL:GetCartCount()
@@ -393,5 +415,7 @@ end
 vgui.Register("ixCPArmory", PANEL, "DFrame")
 
 netstream.Hook("OpenCPArmory", function(data)
-	vgui.Create("ixCPArmory")
+	local armory = vgui.Create("ixCPArmory");
+	armory.armoryLog = data;
+	armory:Populate();
 end)

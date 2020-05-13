@@ -46,7 +46,6 @@ function ENT:SetDoor(door)
 	table.insert(door.ixKeycardTerminal, self);
 	self.ixKeycardTerminal = door.ixKeycardTerminal;
 
-	PrintTable(door.ixKeycardTerminal)
 	if (IsValid(doorPartner)) then
 		self.doorPartner = doorPartner
 		self.doorPartner:DeleteOnRemove(self)
