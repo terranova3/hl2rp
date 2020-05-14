@@ -4,14 +4,8 @@ local PLUGIN = PLUGIN
 PLUGIN.spawner = PLUGIN.spawner or {}
 PLUGIN.items = PLUGIN.items or {}
 PLUGIN.spawner.positions = PLUGIN.spawner.positions or {}
-
-PLUGIN.items.common = {
-	"pistol"
-}
-
-PLUGIN.items.rare = {
-	"shotgun"
-}
+PLUGIN.items.common = PLUGIN.items.common or {}
+PLUGIN.items.rare = PLUGIN.items.rare or {}
 
 util.AddNetworkString("ixItemSpawnerManager")
 util.AddNetworkString("ixItemSpawnerDelete")
@@ -22,6 +16,16 @@ util.AddNetworkString("ixItemSpawnerChanges")
 
 function PLUGIN:LoadData()
 	PLUGIN.spawner.positions = self:GetData() or {}
+
+	for _, v in pairs(ix.item.list) do
+		if(v.rarity) then
+			if(v.rarity = "Rare") then
+				table.insert(self.items.rare, v.name)
+			elseif(v.rarity = "Common") then
+				table.insert(self.items.common, v.name)
+			end;
+		end;
+	end;
 end
 
 function PLUGIN:SaveData()
