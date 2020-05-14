@@ -1,0 +1,9 @@
+ITEM.name = "Bag"
+ITEM.description = "A handheld bag to hold items."
+ITEM.model = "models/props_c17/BriefCase001a.mdl"
+ITEM.category = "Storage"
+ITEM.price = 50
+ITEM.width = 2
+ITEM.height = 2
+ITEM.invWidth = 3
+ITEM.invHeight = 2

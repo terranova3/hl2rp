@@ -1,0 +1,9 @@
+ITEM.name = "Pouch"
+ITEM.description = "A pouch to hold items."
+ITEM.model = "models/props_junk/garbage_bag001a.mdl"
+ITEM.category = "Storage"
+ITEM.price = 30
+ITEM.width = 1
+ITEM.height = 1
+ITEM.invWidth = 2
+ITEM.invHeight = 1
