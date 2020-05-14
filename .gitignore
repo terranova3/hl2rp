@@ -435,3 +435,7 @@ base/entities/effects/tooltracer.lua
 base/entities/effects/dof_node.lua
 base/entities/effects/base.lua
 base/base.txt
+terrortown/gamemode/lang/italian.lua
+base/entities/entities/info_player_vigilante.lua
+base/entities/entities/info_player_fof.lua
+base/entities/entities/info_player_desperado.lua
