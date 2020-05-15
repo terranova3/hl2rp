@@ -66,13 +66,27 @@ function GM:LoadFonts(font, genericFont)
 		weight = 300,
 	})
 
+	surface.CreateFont("nutTitleFont", {
+		font = "Segoe UI",
+		size = ScreenScale(30),
+		extended = true,
+		weight = 300
+	})
+
+	surface.CreateFont("nutTitleSmall", {
+		font = "Segoe UI",
+		size = ScreenScale(12),
+		extended = true,
+		weight = 100
+	})
+
 	surface.CreateFont("ixMenuButtonFont", {
 		font = "Roboto Th",
 		size = ScreenScale(14),
 		extended = true,
 		weight = 100
 	})
-
+	
 	surface.CreateFont("ixMenuButtonFontSmall", {
 		font = "Roboto Th",
 		size = ScreenScale(10),
@@ -135,6 +149,13 @@ function GM:LoadFonts(font, genericFont)
 	surface.CreateFont("ixMediumFont", {
 		font = font,
 		size = 25,
+		extended = true,
+		weight = 1000
+	})
+
+	surface.CreateFont("ixFactionFont", {
+		font = font,
+		size = math.max(ScreenScale(8), 32),
 		extended = true,
 		weight = 1000
 	})

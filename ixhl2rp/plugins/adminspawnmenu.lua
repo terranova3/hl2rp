@@ -40,7 +40,7 @@ if (CLIENT) then
 		background:Center()
 		background:SetTitle("Admin Spawn Menu")
 		background:MakePopup()
-		background:ShowCloseButton(true)`
+		background:ShowCloseButton(true)
 
 		scroll = background:Add("DScrollPanel")
 		scroll:Dock(FILL)

@@ -78,13 +78,13 @@ local scannerFirstPerson = false
 function Schema:RenderScreenspaceEffects()
 	local colorModify = {}
 
-	--colorModify["$pp_colour_colour"] = 0.77
+	colorModify["$pp_colour_colour"] = 0.77
 
 
-	local modifier = LocalPlayer():Health();
-	if(modifier > 100) then modifier = 100; end;
+	--local modifier = LocalPlayer():Health();
+	--if(modifier > 100) then modifier = 100; end;
 	
-	colorModify["$pp_colour_colour"] = 0.0077 * modifier;
+	--colorModify["$pp_colour_colour"] = 0.0077 * modifier;
 
 
 
