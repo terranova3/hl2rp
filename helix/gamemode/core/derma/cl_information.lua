@@ -278,6 +278,8 @@ end
 
 vgui.Register("ixCharacterInfo", PANEL, "DScrollPanel")
 
+--[[ FRAMEWORK EDIT
+
 hook.Add("CreateMenuButtons", "ixCharInfo", function(tabTest)
 	local faction = ix.faction.indices[LocalPlayer():GetCharacter():GetFaction()]
 	local class = ix.class.list[LocalPlayer():GetCharacter():GetClass()]
@@ -302,3 +304,5 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabTest)
 		end
 	}
 end)
+
+]]-- 

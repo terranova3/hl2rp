@@ -703,7 +703,23 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 	tabs["inv"] = {
 		bDefault = true,
 		Create = function(info, container)
-			local canvas = container:Add("DTileLayout")
+			local inventoryPanel = container:Add("DPanel");
+			inventoryPanel.Paint = function() end;
+			inventoryPanel:SetSize(container:GetWide() / 3, container:GetTall());
+			inventoryPanel:Dock(LEFT)
+
+			local characterPanel = container:Add("DPanel")
+			characterPanel.Paint = function() end;
+			characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
+			characterPanel:Dock(FILL)	
+
+			container.characterPane = characterPanel:Add("ixCharacterPane")
+
+			local canvas = inventoryPanel:Add("DTileLayout")
+			canvas.Paint = function()
+				--surface.SetDrawColor(80, 80, 80, 50);	
+				--surface.DrawRect(0, 0, container:GetWide(), container:GetTall())
+			end;
 			local canvasLayout = canvas.PerformLayout
 			canvas.PerformLayout = nil -- we'll layout after we add the panels instead of each time one is added
 			canvas:SetBorder(0)
@@ -717,7 +733,7 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			panel:SetPos(0, 0)
 			panel:SetDraggable(false)
 			panel:SetSizable(false)
-			panel:SetTitle(nil)
+			panel:SetTitle("Inventory")
 			panel.bNoBackgroundBlur = true
 			panel.childPanels = {}
 
@@ -741,7 +757,10 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 
 			canvas.PerformLayout = canvasLayout
 			canvas:Layout()
-		end
+		end,
+		OnSelected = function(info, container)
+			container.characterPane:Update(LocalPlayer():GetCharacter())
+		end,
 	}
 end)
 
