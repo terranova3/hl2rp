@@ -29,26 +29,27 @@ function PANEL:Populate(name)
 	self.depressed = true;
 
 	local factionLabel = self:Add("DLabel")
+
 	self.factionMaterials = {
 		["Citizen"] = {
 			normal = "materials/terranova/ui/charcreate/citizen_normal.png",
-			depressed = "materials/terranova/ui/charcreate/citizen_normal.png"
+			depressed = "materials/terranova/ui/charcreate/citizen_depressed.png"
 		},
 		["Metropolice Force"] = {
 			normal = "materials/terranova/ui/charcreate/mpf_normal.png",
-			depressed = "materials/terranova/ui/charcreate/mpf_normal.png"
+			depressed = "materials/terranova/ui/charcreate/mpf_depressed.png"
 		},
 		["Overwatch Transhuman Arm"] = {
 			normal = "materials/terranova/ui/charcreate/overwatch_normal.png",
-			depressed = "materials/terranova/ui/charcreate/overwatch_normal.png"
+			depressed = "materials/terranova/ui/charcreate/overwatch_depressed.png"
 		},
 		["Administrator"] = {
 			normal = "materials/terranova/ui/charcreate/administrator_normal.png",
-			depressed = "materials/terranova/ui/charcreate/administrator_normal.png"
+			depressed = "materials/terranova/ui/charcreate/administrator_depressed.png"
 		},
 		["Scanner"] = {
 			normal = "materials/terranova/ui/charcreate/scanner_normal.png",
-			depressed = "materials/terranova/ui/charcreate/scanner_normal.png"
+			depressed = "materials/terranova/ui/charcreate/scanner_depressed.png"
 		},
 	}
 
@@ -72,10 +73,15 @@ function PANEL:Populate(name)
 	end;
 
 	self.mat = vgui.Create("Material", self)
-	self:Depress(true);
 	self.mat.AutoSize = false
 	self.mat:Dock(FILL);
 	self.mat:DockMargin(2, 0, 2, 0)
+
+	if(ix.gui.factionList:HasWhitelist(self.faction.name)) then
+		self:Depress(false);
+	else 
+		self:Depress(true);
+	end;
 
     self.alpha = 0
     self:SetAlpha(0)
@@ -192,6 +198,7 @@ function PANEL:Init()
 	self.main = self:GetParent();
 	self.factionArray = {}
 	self.factionButtons = {}
+	self.playerWhitelists = {}
 	self.currentFaction = 2;
 
 	self.Paint = function() end;
@@ -201,11 +208,29 @@ function PANEL:Init()
 		table.insert(self.factionArray, data);
 	end;
 
+	for _, v in SortedPairs(ix.faction.teams) do
+		if (ix.faction.HasWhitelist(v.index)) then
+			table.insert(self.playerWhitelists, v)
+		end;
+	end;
+
+	PrintTable(self.playerWhitelists)
+
 	self:SetSize(ScrW() * 0.8, ScrH() * 0.90)
 	self:Center();
 
 	self:Populate();
 end
+
+function PANEL:HasWhitelist(name)
+	for _, v in SortedPairs(self.playerWhitelists) do
+		if(v.name == name) then
+			return true;
+		end;
+	end;
+
+	return false;
+end;
 
 function PANEL:Populate()
 	self.moveLeft = self:Add("DButton")
@@ -295,6 +320,14 @@ function PANEL:ReorganiseArray(direction)
 		end;
 
 		self.factionButtons = newArray;
+	end;
+end;
+
+function PANEL:Think()
+	if(self:HasWhitelist(self:GetCurrentFaction().name)) then
+		self.finishButton:SetVisible(true);
+	else
+		self.finishButton:SetVisible(false);
 	end;
 end;
 
