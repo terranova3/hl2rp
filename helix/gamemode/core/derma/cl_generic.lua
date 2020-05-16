@@ -145,6 +145,11 @@ function PANEL:Paint(width, height)
 	end
 end
 
+function PANEL:PaintOver()
+	surface.SetDrawColor(0, 0, 0, 50);	
+	surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+end
+
 vgui.Register("ixSegmentedProgress", PANEL, "Panel")
 
 -- list of labelled information
