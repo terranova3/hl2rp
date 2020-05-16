@@ -216,7 +216,7 @@ function PANEL:Init()
 
 	PrintTable(self.playerWhitelists)
 
-	self:SetSize(ScrW() * 0.8, ScrH() * 0.90)
+	self:SetSize(ScrW() * 0.71, ScrH() * 0.8)
 	self:Center();
 
 	self:Populate();
@@ -362,18 +362,8 @@ function PANEL:Init()
 
 	-- faction selection subpanel
 	self.factionPanel = self:AddSubpanel("faction", true)
-	self.factionPanel.Paint = function(w, h)
-		surface.SetDrawColor(80, 80, 80, 50);	
-		surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
-	end;
+	self.factionPanel:Center();
 	self.factionPanel:SetTitle("")
-	self.factionPanel.OnSetActive = function()
-		-- if we only have one faction, we are always selecting that one so we can skip to the description section
-		if (#self.factionButtons == 1) then
-			self:SetActiveSubpanel("description", 0)
-		end
-	end
-	self.factionPanel:SetVisible(false);
 
 	local modelList = self.factionPanel:Add("Panel")
 	modelList.Paint = function(w, h)
@@ -384,7 +374,7 @@ function PANEL:Init()
 	modelList:SetSize(halfWidth + padding * 2, halfHeight)
 	modelList:SetVisible(false);
 
-	self.facList = self:Add("ixFactionPanel")
+	self.facList = self.factionPanel:Add("ixFactionPanel")
 	
 	self.facList.backButton = self.facList:Add("DButton")
 	self.facList.backButton:SetText("Back")
@@ -617,11 +607,14 @@ function PANEL:Init()
 
 	-- creation progress panel
 	self.progress = self:Add("ixSegmentedProgress")
-	self.progress:SetBarColor(ix.config.Get("color"))
+	self.progress:SetBarColor(ix.gui.factionList:GetCurrentFaction().color or ix.config.Get("color"))
 	self.progress:SetSize(parent:GetWide(), 0)
 	self.progress:SizeToContents()
 	self.progress:SetPos(0, parent:GetTall() - self.progress:GetTall())
-	self.progress:SetVisible(false);
+	self.progress.Think = function()
+		self.progress:SetBarColor(ix.gui.factionList:GetCurrentFaction().color or ix.config.Get("color"))
+	end;
+	--self.progress:SetVisible(false);
 
 	local curSkinValue = 1;
 	
