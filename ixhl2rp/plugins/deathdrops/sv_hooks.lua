@@ -6,21 +6,18 @@ blacklisted = {
     ["weapon_physcannon"] = true,
 }
 
-
-
 -- just a callback (taken from persistent_corpses)
 function PLUGIN:RemoveEquippableItem(client, item)
-		if (item.Unequip) then
-			item:Unequip(client)
-		elseif (item.RemoveOutfit) then
-			item:RemoveOutfit(client)
-		elseif (item.RemovePart) then
-			item:RemovePart(client)
-		end
-	end
+    if (item.Unequip) then
+        item:Unequip(client)
+    elseif (item.RemoveOutfit) then
+        item:RemoveOutfit(client)
+    elseif (item.RemovePart) then
+        item:RemovePart(client)
+    end
+end
 
 hook.Add("DoPlayerDeath", "hlwOnDeathDrop", function (ply)
-
     local character = ply:GetCharacter()
     local charInventory = character:GetInventory()
 
@@ -39,8 +36,6 @@ hook.Add("DoPlayerDeath", "hlwOnDeathDrop", function (ply)
         end
     end
 
-
-
     local inventory = ix.item.CreateInv(width, height, os.time())
 		inventory.noSave = true
 
@@ -56,3 +51,4 @@ hook.Add("DoPlayerDeath", "hlwOnDeathDrop", function (ply)
             end
         end
     end
+end)

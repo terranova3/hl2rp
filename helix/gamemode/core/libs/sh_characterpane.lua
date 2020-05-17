@@ -27,7 +27,7 @@ if(SERVER) then
             item.player = client
         end
 
-        elseif (!inventory:GetItemByID(item.id)) then
+        if (!inventory:GetItemByID(item.id)) then
             return
         end
 
@@ -37,10 +37,6 @@ if(SERVER) then
 
         if(action == "add" or action == "replace") then
             charpane.slots[item.outfitCategory] = item;
-
-            -- TODO
-            if(action == "replace") then 
-            end;
         elseif(action == "remove") then
             for k, v in pairs(charpane) do
                 if(k == item.outfitCategory) then
