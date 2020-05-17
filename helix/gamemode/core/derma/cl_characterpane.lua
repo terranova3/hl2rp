@@ -1,5 +1,13 @@
 local PANEL = {}
 
+local function CharPaneAction(action, itemID, data)
+	net.Start("ixCharPaneAction")
+		net.WriteString(action)
+		net.WriteUInt(itemID, 32)
+		net.WriteTable(data or {})
+	net.SendToServer()
+end
+
 function PANEL:Init()
 	self.parent = self:GetParent()
 	self.previewPanel = nil;
@@ -103,8 +111,9 @@ function PANEL:OnTransfer(oldX, oldY, x, y, oldInventory, noSend)
 			item:CanTransfer(inventory, inventory != inventory2 and inventory2 or nil) == false) then
 			return false
 		end
-	end
 
+		self.parent:AddToSlot(item.outfitCategory, item);
+	end
 
 	--self.parent.model:SetModel(LocalPlayer():GetModel(), nil, "00004")
 end;
@@ -123,27 +132,27 @@ function PANEL:Init()
 	self.model.follow = false;
 	self.inventory = {
 		slots = {
-			["Headgear"] = { 
+			["headgear"] = { 
 				x = 5, 
 				y = 100
 			},
-			["Headstrap"] = {
+			["headstrap"] = {
 				x = 291,
 				y = 100,
 			},
-			["Torso"] = {
+			["torso"] = {
 				x = 5,
 				y = 170,
 			},
-			["Kevlar"] = {
+			["kevlar"] = {
 				x = 5,
 				y = 240,
 			},
-			["Hands"] = {
+			["hands"] = {
 				x = 291,
 				y = 300,
 			},
-			["Legs"] = {
+			["legs"] = {
 				x = 291,
 				y = 370,
 			},
@@ -163,6 +172,16 @@ function PANEL:Init()
 		count = count+1;
 	end;
 end
+
+function PANEL:AddToSlot(category, item)
+	for k, v in pairs(self.inventory.slots) do
+		if(category == k) then
+			self.inventory.slots[k].item = item;
+		end;
+	end;
+
+	PrintTable(self.inventory)
+end;
 
 function PANEL:Paint()
 	derma.SkinFunc("PaintCategoryPanel", self, "", ix.config.Get("color") or color_white)
