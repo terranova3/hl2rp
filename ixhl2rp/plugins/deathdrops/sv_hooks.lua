@@ -58,12 +58,12 @@ hook.Add("DoPlayerDeath", "hlwOnDeathDrop", function (ply)
     end
 
     -- drop money on death
-    local percentage = ix.config.Get("dropPlayerRequisitionPercentage",0)
+    local percentage = ix.config.Get("dropPlayerTokensPercentage",0)
     local money = character:GetMoney()
     local value = math.ceil((percentage/100)*money) -- round up from the result of conversion to percentage
     character:SetMoney(money-value)
     ix.currency.Spawn(ply:GetPos(),value)
-    print(character:GetName() .. " has dropped " .. value .. " requsition from dying!")
+    print(character:GetName() .. " has dropped " .. value .. " tokens from dying!")
 end)
 
 
