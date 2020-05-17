@@ -193,6 +193,8 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		if (inventoryID) then
 			InventoryAction("drop", item.id, inventoryID, {})
 		end
+	elseif(inventoryPanel.equipment) then 
+		self:Move(gridX, gridY, inventoryPanel)
 	elseif (inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
 		local oldX, oldY = self.gridX, self.gridY
 
@@ -218,7 +220,12 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 	self.gridY = newY
 
 	self:SetParent(givenInventory)
-	self:SetPos(x, y)
+
+	if(!givenInventory.equipment) then
+		self:SetPos(x, y)
+	else
+		self:SetPos(0, 0)
+	end;
 
 	if (self.slots) then
 		for _, v in ipairs(self.slots) do
@@ -229,15 +236,17 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 	end
 
 	self.slots = {}
+	
+	if(!givenInventory.equipment) then
+		for currentX = 1, self.gridW do
+			for currentY = 1, self.gridH do
+				local slot = givenInventory.slots[self.gridX + currentX - 1][self.gridY + currentY - 1]
 
-	for currentX = 1, self.gridW do
-		for currentY = 1, self.gridH do
-			local slot = givenInventory.slots[self.gridX + currentX - 1][self.gridY + currentY - 1]
-
-			slot.item = self
-			self.slots[#self.slots + 1] = slot
+				slot.item = self
+				self.slots[#self.slots + 1] = slot
+			end
 		end
-	end
+	end;
 end
 
 function PANEL:PaintOver(width, height)
@@ -757,9 +766,6 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 
 			canvas.PerformLayout = canvasLayout
 			canvas:Layout()
-		end,
-		OnSelected = function(info, container)
-			container.characterPane:Update(LocalPlayer():GetCharacter())
 		end,
 	}
 end)

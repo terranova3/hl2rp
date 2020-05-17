@@ -7,9 +7,9 @@
 
 local PLUGIN = PLUGIN;
 
-ITEM.base = "base_torso"
-ITEM.name = "Rebel Outfit";
-ITEM.description = "Torso Base";
+ITEM.base = "base_headgear"
+ITEM.name = "Boonie Hat";
+ITEM.description = "Makes you look cool.";
 ITEM.bodyGroups = {
-	["torso"] = 8,
+	["headgear"] = 8,
 }

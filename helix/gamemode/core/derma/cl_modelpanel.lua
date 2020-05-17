@@ -35,7 +35,7 @@ function PANEL:SetModel(model, skin, bodygroups)
 	if (skin) then
 		entity:SetSkin(skin)
 	end
-
+	
 	if (isstring(bodygroups)) then
 		entity:SetBodyGroups(bodygroups)
 	end

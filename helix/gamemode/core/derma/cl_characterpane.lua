@@ -3,16 +3,18 @@ local PANEL = {}
 function PANEL:Init()
 	self.parent = self:GetParent()
 	self.previewPanel = nil;
+	self.equipment = true;
 	self.isEmpty = true;
+	self.iconSize = 64;
 
 	self.text = "N/A";
-	self:SetSize(64,64);
+	self:SetSize(self.iconSize, self.iconSize);
 	self:SetPos(0,0)
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
 end;
 
-function PANEL:SetSlot(text)
-	self.text = text;
+function PANEL:GetPadding()
+	return 0
 end;
 
 function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
@@ -20,11 +22,15 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 	local item = itemPanel:GetItemTable()
 
 	if (item) then
-		if (self.isEmpty) then
-			surface.SetDrawColor(0, 255, 0, 10)
+		if(item.outfitCategory == string.lower(self.category)) then
+			if (self.isEmpty) then
+				surface.SetDrawColor(0, 255, 0, 40)
+			else
+				surface.SetDrawColor(255, 255, 0, 40)
+			end
 		else
-			surface.SetDrawColor(255, 255, 0, 10)
-		end
+			surface.SetDrawColor(255, 0, 0, 40)
+		end;
 
 		surface.DrawRect(0, 0, 64, 64)
 	end
@@ -57,13 +63,11 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	end
 
 	if (bDropped) then
-		local inventory = ix.item.inventories[self.invID]
+		if (panel.OnDrop) then
+			local dropX = 0
+			local dropY = 0
 
-		if (inventory and panel.OnDrop) then
-			local dropX = math.ceil((x - 4 - (panel.gridW - 1) * 32) / self.iconSize)
-			local dropY = math.ceil((y - self:GetPadding(2) - (panel.gridH - 1) * 32) / self.iconSize)
-
-			panel:OnDrop(true, self, inventory, dropX, dropY)
+			panel:OnDrop(true, self, nil, dropX, dropY)
 		end
 
 		self.previewPanel = nil
@@ -74,37 +78,40 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	end
 end
 
+
+function PANEL:OnTransfer(oldX, oldY, x, y, oldInventory, noSend)
+	local inventories = ix.item.inventories
+	local inventory = inventories[oldInventory.invID]
+	local item
+
+	if (inventory) then
+		item = inventory:GetItemAt(oldX, oldY)
+
+		if (!item) then
+			return false
+		end
+
+		if(item.outfitCategory != string.lower(self.category)) then
+			return false, "notAllowed"
+		end
+
+		if (hook.Run("CanTransferItem", item, inventories[oldInventory.invID], inventories[self.invID]) == false) then
+			return false, "notAllowed"
+		end
+
+		if (item.CanTransfer and
+			item:CanTransfer(inventory, inventory != inventory2 and inventory2 or nil) == false) then
+			return false
+		end
+	end
+
+
+	--self.parent.model:SetModel(LocalPlayer():GetModel(), nil, "00004")
+end;
+
 vgui.Register("ixCharacterEquipmentSlot", PANEL, "DPanel")
 
 local PANEL = {}
-local slots = {}
-
-slots = {
-	["Headgear"] = { 
-		x = 5, 
-		y = 100
-	},
-	["Headstrap"] = {
-		x = 291,
-		y = 100,
-	},
-	["Torso"] = {
-		x = 5,
-		y = 170,
-	},
-	["Kevlar"] = {
-		x = 5,
-		y = 240,
-	},
-	["Hands"] = {
-		x = 291,
-		y = 300,
-	},
-	["Legs"] = {
-		x = 291,
-		y = 370,
-	},
-}
 
 function PANEL:Init()
 	self:SetSize(360, 525)
@@ -114,14 +121,46 @@ function PANEL:Init()
 	self.model:SetModel(LocalPlayer():GetModel())
 	self.model:SetFOV(50)
 	self.model.follow = false;
-	
-	self.slots = {}
+	self.inventory = {
+		slots = {
+			["Headgear"] = { 
+				x = 5, 
+				y = 100
+			},
+			["Headstrap"] = {
+				x = 291,
+				y = 100,
+			},
+			["Torso"] = {
+				x = 5,
+				y = 170,
+			},
+			["Kevlar"] = {
+				x = 5,
+				y = 240,
+			},
+			["Hands"] = {
+				x = 291,
+				y = 300,
+			},
+			["Legs"] = {
+				x = 291,
+				y = 370,
+			},
+		}
+	}
 
-	for k, v in pairs(slots) do
-		slot = self:Add("ixCharacterEquipmentSlot");
-		slot:SetSlot(k);
+	local count = 1;
+	for k, v in pairs(self.inventory.slots) do
+		self.inventory.slots[k].panel = self:Add("ixCharacterEquipmentSlot");
+
+		local slot = self.inventory.slots[k].panel
+		slot.category = k;
+		slot.text = k;
 		slot:SetPos(v.x, v.y);
-		table.insert(self.slots, slot);
+		slot.uniqueID = count;
+
+		count = count+1;
 	end;
 end
 
@@ -134,12 +173,5 @@ function PANEL:Paint()
 	surface.SetTextPos(4, 4)
 	surface.DrawText(LocalPlayer():GetName())
 end;
-function PANEL:Update(character)
-	if (!character) then
-		return
-	end
-
-	
-end
 
 vgui.Register("ixCharacterPane", PANEL, "DPanel")
