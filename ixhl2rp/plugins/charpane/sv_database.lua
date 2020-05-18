@@ -6,9 +6,7 @@
 local PLUGIN = PLUGIN;
 
 -- Called when a new character has been created.
-function PLUGIN:CharCreate(character, data)
-	local query;
-
+function PLUGIN:CharCreate(character, data, query)
 	-- Add a new MySQL row for the new character.
 	query:Callback(function(_, _, lastID)
 		local charPanelQuery = mysql:Insert("ix_charpanels")
@@ -21,7 +19,6 @@ function PLUGIN:CharCreate(character, data)
 			end)
 			charPanelQuery:Execute()
 	end)
-	query:Execute()
 end;
 
 -- Called when server is starting, if the database doesnt exist it will create.
@@ -39,7 +36,7 @@ function PLUGIN:DatabaseConnected()
 	query = mysql:Create("ix_items")
 		query:Create("item_id", "INT(11) UNSIGNED NOT NULL AUTO_INCREMENT")
 		query:Create("inventory_id", "INT(11) UNSIGNED NOT NULL")
-		query:Create("panel_id", "INT(11) UNSIGNED NOT NULL")
+		query:Create("panel_id", "INT(11) UNSIGNED DEFAULT NULL")
 		query:Create("unique_id", "VARCHAR(60) NOT NULL")
 		query:Create("character_id", "INT(11) UNSIGNED DEFAULT NULL")
 		query:Create("player_id", "VARCHAR(20) DEFAULT NULL")

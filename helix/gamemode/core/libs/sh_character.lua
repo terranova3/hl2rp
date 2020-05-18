@@ -83,7 +83,7 @@ if (SERVER) then
 							callback(lastID)
 						end
 
-						hook.Run("CharCreate", character, data)
+						hook.Run("CharCreate", character, data, query)
 					end)
 				invQuery:Execute()
 			end)
