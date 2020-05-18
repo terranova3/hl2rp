@@ -54,8 +54,6 @@ if SERVER then
 
 		if user:IsCombine() then
 			user:SetAction("Logging in...", 1, function()
-
-				PrintTable(PLUGIN.armoryLog);
 				netstream.Start(user, "OpenCPArmory", PLUGIN.armoryLog)
 				user:Freeze(false)
 			end)

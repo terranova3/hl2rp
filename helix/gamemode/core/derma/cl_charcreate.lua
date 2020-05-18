@@ -214,8 +214,6 @@ function PANEL:Init()
 		end;
 	end;
 
-	PrintTable(self.playerWhitelists)
-
 	self:SetSize(ScrW() * 0.71, ScrH() * 0.8)
 	self:Center();
 

@@ -1,9 +1,12 @@
 local PANEL = {}
 
 local function CharPaneAction(action, itemID, data)
+	local invID = LocalPlayer():GetCharacter():GetInventory():GetID();
+
 	net.Start("ixCharPaneAction")
 		net.WriteString(action)
 		net.WriteUInt(itemID, 32)
+		net.WriteUInt(invID, 32)
 		net.WriteTable(data or {})
 	net.SendToServer()
 end
@@ -111,8 +114,6 @@ function PANEL:OnTransfer(oldX, oldY, x, y, oldInventory, noSend)
 			item:CanTransfer(inventory, inventory != inventory2 and inventory2 or nil) == false) then
 			return false
 		end
-
-		self.parent:AddToSlot(item.outfitCategory, item);
 	end
 
 	--self.parent.model:SetModel(LocalPlayer():GetModel(), nil, "00004")
@@ -130,57 +131,47 @@ function PANEL:Init()
 	self.model:SetModel(LocalPlayer():GetModel())
 	self.model:SetFOV(50)
 	self.model.follow = false;
-	self.inventory = {
-		slots = {
-			["headgear"] = { 
-				x = 5, 
-				y = 100
-			},
-			["headstrap"] = {
-				x = 291,
-				y = 100,
-			},
-			["torso"] = {
-				x = 5,
-				y = 170,
-			},
-			["kevlar"] = {
-				x = 5,
-				y = 240,
-			},
-			["hands"] = {
-				x = 291,
-				y = 300,
-			},
-			["legs"] = {
-				x = 291,
-				y = 370,
-			},
-		}
+	self.slots = {
+		["headgear"] = { 
+			x = 5, 
+			y = 100
+		},
+		["headstrap"] = {
+			x = 291,
+			y = 100,
+		},
+		["torso"] = {
+			x = 5,
+			y = 170,
+		},
+		["kevlar"] = {
+			x = 5,
+			y = 240,
+		},
+		["hands"] = {
+			x = 291,
+			y = 300,
+		},
+		["legs"] = {
+			x = 291,
+			y = 370,
+		},
 	}
+	
+	self:Register();
+end
 
-	local count = 1;
-	for k, v in pairs(self.inventory.slots) do
-		self.inventory.slots[k].panel = self:Add("ixCharacterEquipmentSlot");
-
-		local slot = self.inventory.slots[k].panel
+function PANEL:Register()
+	for k, v in pairs(self.slots) do
+		local slot = self:Add("ixCharacterEquipmentSlot");
 		slot.category = k;
 		slot.text = k;
 		slot:SetPos(v.x, v.y);
-		slot.uniqueID = count;
 
-		count = count+1;
-	end;
-end
-
-function PANEL:AddToSlot(category, item)
-	for k, v in pairs(self.inventory.slots) do
-		if(category == k) then
-			self.inventory.slots[k].item = item;
+		if(self.slots.item) then 
+			--slot:AddItem();
 		end;
 	end;
-
-	PrintTable(self.inventory)
 end;
 
 function PANEL:Paint()
@@ -194,3 +185,7 @@ function PANEL:Paint()
 end;
 
 vgui.Register("ixCharacterPane", PANEL, "DPanel")
+
+net.Receive("ixInventoryMove", function()
+
+end)

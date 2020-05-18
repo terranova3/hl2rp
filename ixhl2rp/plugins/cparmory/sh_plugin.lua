@@ -26,6 +26,4 @@ end
 function PLUGIN:AddArmoryLog(data)	
 	local count = PLUGIN:GetArmoryCount() + 1;
 	PLUGIN.armoryLog[count] = data;
-
-	PrintTable(PLUGIN.armoryLog);
 end;

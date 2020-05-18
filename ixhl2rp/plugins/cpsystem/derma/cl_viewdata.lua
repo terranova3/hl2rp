@@ -158,9 +158,6 @@ function PANEL:Populate(target, cid, data)
 		self:Close(); self:Remove();
 
         if (IsValid(target)) then
-            if(self.dataPoints) then
-                PrintTable(self.dataPoints)
-            end;
             netstream.Start( "ViewDataUpdate", target, string.sub(textEntry:GetValue(), 0, 1024), self.dataPoints);
             Schema:AddCombineDisplayMessage("@cViewDataUpdate")
 		end;
