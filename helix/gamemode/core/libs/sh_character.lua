@@ -82,10 +82,13 @@ if (SERVER) then
 						if (callback) then
 							callback(lastID)
 						end
+
+						hook.Run("CharCreate", character, data)
 					end)
 				invQuery:Execute()
 			end)
 		query:Execute()
+
 	end
 
 	--- Loads all of a player's characters into memory.
