@@ -1,17 +1,5 @@
 local PANEL = {}
 
-local function CharPaneAction(action, itemID, data)
-	local invID = LocalPlayer():GetCharacter():GetInventory():GetID();
-
-	net.Start("ixCharPaneAction")
-		net.WriteString(action)
-		net.WriteUInt(itemID, 32)
-		net.WriteUInt(invID, 32)
-		net.WriteUInt(panelID, 32)
-		net.WriteTable(data or {})
-	net.SendToServer()
-end
-
 function PANEL:Init()
 	self.parent = self:GetParent()
 	self.previewPanel = nil;
@@ -115,6 +103,16 @@ function PANEL:OnTransfer(oldX, oldY, x, y, oldInventory, noSend)
 			item:CanTransfer(inventory, inventory != inventory2 and inventory2 or nil) == false) then
 			return false
 		end
+
+		local invID = LocalPlayer():GetCharacter():GetInventory():GetID();
+		local panelID = self.parent.panelID;
+
+		net.Start("ixCharPanelReceiveItem")
+			net.WriteUInt(item.id, 32)
+			net.WriteUInt(invID, 32)
+			net.WriteUInt(panelID, 32)
+			net.WriteTable({})
+		net.SendToServer()
 	end
 
 	--self.parent.model:SetModel(LocalPlayer():GetModel(), nil, "00004")
@@ -147,6 +145,7 @@ end
 
 function PANEL:SetCharPanel(charPanel, bFitParent)
 	self.panelID = charPanel:GetID()
+	print(self.panelID)
 	self:BuildSlots();
 end
 
@@ -174,7 +173,3 @@ function PANEL:Paint()
 end;
 
 vgui.Register("ixCharacterPane", PANEL, "DPanel")
-
-net.Receive("ixInventoryMove", function()
-
-end)

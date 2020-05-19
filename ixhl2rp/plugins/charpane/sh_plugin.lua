@@ -127,6 +127,50 @@ do
 		end)
 	else
 		util.AddNetworkString("ixCharPanelSync")
+		util.AddNetworkString("ixCharPanelReceiveItem")
+		util.AddNetworkString("ixCharPanelSet")
+
+		function ix.charPanel.HasIntegrity(client, item, invID, panelID)
+			local inventory = ix.item.inventories[invID or 0]
+			local charPanel = ix.charPanels[panelID or 0]
+
+			if (!client:GetCharacter()) then
+				return false
+			end
+
+			if (!inventory:OnCheckAccess(client) and !charPanel:OnCheckAccess(client)) then
+				return false
+			end
+
+			if (isnumber(item)) then
+				item = ix.item.instances[item]
+
+				if (!item) then
+					return false
+				end
+			end
+
+			if (!inventory:GetItemByID(item.id)) then
+				return false
+			end
+
+			return true
+		end
+
+		net.Receive("ixCharPanelReceiveItem", function(length, client)
+			local item = net.ReadUInt(32)
+			local invID = net.ReadUInt(32)
+			local panelID = net.ReadUInt(32)
+			local data = net.ReadTable()
+
+			if(ix.charPanel.HasIntegrity(client, item, invID, panelID)) then
+				local charPanel = ix.charPanels[panelID];
+				item = ix.item.instances[item]
+				charPanel:Add(item.id, {}, item.outfitCategory)
+			else
+				return
+			end
+		end)
 	end
 end
 

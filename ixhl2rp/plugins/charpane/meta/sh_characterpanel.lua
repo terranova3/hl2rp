@@ -2,7 +2,6 @@
 	© 2020 TERRANOVA do not share, re-distribute or modify
 	without permission of its author.
 --]]
-
 local META = ix.meta.charPanel or {}
 META.__index = META
 META.slots = META.slots or {}
@@ -126,6 +125,55 @@ function META:GetReceivers()
 end
 
 if (SERVER) then
+	function META:SendSlot(category, item)
+		local receivers = self:GetReceivers()
+		local sendData = item and item.data and !table.IsEmpty(item.data) and item.data or {}
+
+		net.Start("ixCharPanelSet")
+			net.WriteUInt(self:GetID(), 32)
+			net.WriteUInt(category, 6)
+			net.WriteString(item and item.uniqueID or "")
+			net.WriteUInt(item and item.id or 0, 32)
+			net.WriteUInt(self.owner or 0, 32)
+			net.WriteTable(sendData)
+		net.Send(receivers)
+	end
+
+	function META:Add(uniqueID, data, category)
+		local client = self.GetOwner and self:GetOwner() or nil
+		local item = isnumber(uniqueID) and ix.item.instances[uniqueID] or ix.item.list[uniqueID]
+
+		local targetCharPanel = self
+
+		if (!item) then
+			return false, "invalidItem"
+		end
+
+		if (isnumber(uniqueID)) then
+			local oldInvID = item.invID
+
+			if (category) then
+				targetCharPanel.slots[category] = item
+
+				item:Transfer(nil, nil, nil, item.player, nil, true)
+				item.panelID = targetCharPanel:GetID()
+
+				--targetCharPanel:SendSlot(category, item)
+
+				local query = mysql:Update("ix_items")
+					query:Update("panel_id", targetCharPanel:GetID())
+					query:Where("item_id", item.id)
+				query:Execute()
+
+				hook.Run("CharPanelItemAdded", client, ix.item.inventories[oldInvID], targetCharPanel, item)
+
+				return category, targetCharPanel:GetID()
+			else
+				return false, "noFit"
+			end
+		end
+	end
+
 	function META:Sync(receiver, fullUpdate)
 		local slots = {}
 
