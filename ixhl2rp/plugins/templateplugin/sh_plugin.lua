@@ -6,4 +6,3 @@
 PLUGIN.name = "Template";
 PLUGIN.description = "Needs a description.";
 PLUGIN.author = "Adolphus";
-PLUGIN.maxLength = 512;

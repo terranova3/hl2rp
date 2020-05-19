@@ -6,7 +6,6 @@
 PLUGIN.name = "Civil Protection System";
 PLUGIN.description = "Full overhaul to Civil Protection, adding commands to handle naming and ranks. Implements off-duty units, bodygroups and derma changes to various menus.";
 PLUGIN.author = "Adolphus";
-PLUGIN.maxLength = 512;
 PLUGIN.biosignalLocations = {};
 PLUGIN.requestLocations = {};
 PLUGIN.cameraData = PLUGIN.cameraData or {};

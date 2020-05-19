@@ -6,7 +6,6 @@
 PLUGIN.name = "Civil Protection Armory";
 PLUGIN.description = "Adds a civil protection armory with logging system to detect flow of items.";
 PLUGIN.author = "Adolphus";
-PLUGIN.maxLength = 512;
 PLUGIN.armoryLog = PLUGIN.armoryLog or {};
 
 ix.util.Include("sv_hooks.lua")

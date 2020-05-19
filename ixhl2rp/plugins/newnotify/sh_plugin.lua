@@ -6,7 +6,8 @@
 PLUGIN.name = "New Notify";
 PLUGIN.description = "Adds a new notify for the framework.";
 PLUGIN.author = "Adolphus";
-PLUGIN.maxLength = 512;
+
+-- Global table so we can access this plugin outside of itself.
 Notify = {}
 
 ix.util.Include("sv_hooks.lua")

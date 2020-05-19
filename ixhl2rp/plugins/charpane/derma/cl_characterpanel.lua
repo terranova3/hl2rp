@@ -7,6 +7,7 @@ local function CharPaneAction(action, itemID, data)
 		net.WriteString(action)
 		net.WriteUInt(itemID, 32)
 		net.WriteUInt(invID, 32)
+		net.WriteUInt(panelID, 32)
 		net.WriteTable(data or {})
 	net.SendToServer()
 end
@@ -131,48 +132,36 @@ function PANEL:Init()
 	self.model:SetModel(LocalPlayer():GetModel())
 	self.model:SetFOV(50)
 	self.model.follow = false;
-	self.slots = {
-		["headgear"] = { 
-			x = 5, 
-			y = 100
-		},
-		["headstrap"] = {
-			x = 291,
-			y = 100,
-		},
-		["torso"] = {
-			x = 5,
-			y = 170,
-		},
-		["kevlar"] = {
-			x = 5,
-			y = 240,
-		},
-		["hands"] = {
-			x = 291,
-			y = 300,
-		},
-		["legs"] = {
-			x = 291,
-			y = 370,
-		},
+	self.panels = {}
+	self.slotPlacements = {
+		["headgear"] = {x = 5, y = 100},
+		["headstrap"] = {x = 291, y = 100},
+		["torso"] = {x = 5, y = 170},
+		["kevlar"] = {x = 5, y = 240},
+		["hands"] = {x = 291, y = 300},
+		["legs"] = {x = 291, y = 370},
 	}
 	
-	self:Register();
+	ix.gui.charPanel = self;
 end
 
-function PANEL:Register()
-	for k, v in pairs(self.slots) do
+function PANEL:SetCharPanel(charPanel, bFitParent)
+	self.panelID = charPanel:GetID()
+	self:BuildSlots();
+end
+
+function PANEL:BuildSlots()
+	self.slots = self.slots or {}
+
+	for k, v in pairs(self.slotPlacements) do
 		local slot = self:Add("ixCharacterEquipmentSlot");
 		slot.category = k;
 		slot.text = k;
 		slot:SetPos(v.x, v.y);
 
-		if(self.slots.item) then 
-			--slot:AddItem();
-		end;
+		self.slots[k] = slot
 	end;
-end;
+end
 
 function PANEL:Paint()
 	derma.SkinFunc("PaintCategoryPanel", self, "", ix.config.Get("color") or color_white)

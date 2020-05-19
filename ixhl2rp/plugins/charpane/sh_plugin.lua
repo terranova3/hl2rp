@@ -6,7 +6,6 @@
 PLUGIN.name = "Character Panel";
 PLUGIN.description = "Adds dynamic bodygroup support with an inventory character pane.";
 PLUGIN.author = "Adolphus";
-PLUGIN.maxLength = 512;
 PLUGIN.slots = {
 	["citizen"] = {
 		["torso"] = 1,
@@ -29,15 +28,14 @@ PLUGIN.slots = {
 
 ix.util.IncludeDirectory(PLUGIN, "meta");
 ix.util.Include("sv_database.lua");
+
+--- Returns this character's associated `CharPanel` object.
+-- @function :GetCharPanel
 ix.char.RegisterVar("CharPanel", {
 	bNoNetworking = true,
 	bNoDisplay = true,
 	OnGet = function(character, index)
-		if (index and !isnumber(index)) then
-			return character.vars.charPanel or {}
-		end
-
-		return character.vars.charPanel and character.vars.charPanel[index or 1]
+		return character.vars.charPanel
 	end,
 	alias = "charPanel"
 })

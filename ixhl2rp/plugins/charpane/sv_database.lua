@@ -5,22 +5,6 @@
 
 local PLUGIN = PLUGIN;
 
--- Called when a new character has been created.
-function PLUGIN:CharCreate(character, data, query)
-	-- Add a new MySQL row for the new character.
-	query:Callback(function(_, _, lastID)
-		local charPanelQuery = mysql:Insert("ix_charpanels")
-			charPanelQuery:Insert("character_id", lastID)
-			charPanelQuery:Callback(function(_, _, panelLastID)
-				local charPanel = ix.charPanel.CreateCharPanel(panelLastID);
-
-				character.vars.charPanel = {charPanel}
-				charPanel:SetOwner(lastID)
-			end)
-			charPanelQuery:Execute()
-	end)
-end;
-
 -- Called when server is starting, if the database doesnt exist it will create.
 function PLUGIN:DatabaseConnected()
     local query
@@ -54,3 +38,29 @@ function PLUGIN:OnWipeTables()
     query = mysql:Drop("ix_charpanels")
 	query:Execute()
 end
+
+--- Loads all of a player's characters into memory.
+function PLUGIN:CharacterRestored(character)
+	local charPanelQuery = mysql:Select("ix_charpanels")
+		charPanelQuery:Select("panel_id")
+		charPanelQuery:Where("character_id", charID)
+		charPanelQuery:Callback(function(info)
+			if (istable(info) and #info > 0) then
+				ix.charPanel.RestoreCharPanel(info.panel_id, function(charPanel)
+					character.vars.charPanel = charPanel
+					charPanel:SetOwner(charID)
+				end, true)
+			else
+				local insertQuery = mysql:Insert("ix_charpanels")
+					insertQuery:Insert("character_id", charID)
+					insertQuery:Callback(function(_, status, lastID)
+						local charPanel = ix.charPanel.CreatePanel(invLastID);
+						charPanel:SetOwner(lastID)
+
+						character.vars.charPanel = charPanel
+					end)
+				insertQuery:Execute()
+			end
+		end)
+	charPanelQuery:Execute()
+end;

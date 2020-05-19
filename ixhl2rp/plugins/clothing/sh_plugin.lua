@@ -6,6 +6,5 @@
 PLUGIN.name = "Clothing";
 PLUGIN.description = "Stores all the clothing items that use bodygroups in TERRANOVA.";
 PLUGIN.author = "Adolphus";
-PLUGIN.maxLength = 512;
 
 

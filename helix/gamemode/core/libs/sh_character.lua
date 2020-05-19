@@ -74,6 +74,7 @@ if (SERVER) then
 						local inventory = ix.item.CreateInv(w, h, invLastID)
 
 						character.vars.inv = {inventory}
+
 						inventory:SetOwner(lastID)
 
 						ix.char.loaded[lastID] = character
@@ -82,8 +83,6 @@ if (SERVER) then
 						if (callback) then
 							callback(lastID)
 						end
-
-						hook.Run("CharCreate", character, data, query)
 					end)
 				invQuery:Execute()
 			end)
@@ -208,7 +207,6 @@ if (SERVER) then
 								end
 							end)
 						invQuery:Execute()
-
 						ix.char.loaded[charID] = character
 					else
 						ErrorNoHalt("[Helix] Attempt to load character with invalid ID '" .. tostring(id) .. "'!")
