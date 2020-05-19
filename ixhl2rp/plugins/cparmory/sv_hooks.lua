@@ -26,9 +26,9 @@ net.Receive("ixArmoryBuy", function(length, client)
         for k, v in ipairs(data.cart) do
             local itemTable = ix.item.list[data.cart[k].uniqueID]
 
-            inventory:Add(data.cart[k].uniqueID, 1, {
-                armoryid = char:GetName()
-            })
+            if(!inventory:Add(data.cart[k].uniqueID, 1, {armoryid = char:GetName()})) then
+                ix.item.Spawn(uniqueID, client)
+            end;
 
             local log = string.format("%s has received %s from a cp armory. Reason: %s", client:GetName(), itemTable.name, data.reason or "No reason specified");
 			local timeString = os.date("%H:%M:%S - %d/%m/%Y", os.time())
