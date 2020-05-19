@@ -9,7 +9,7 @@ local PLUGIN = PLUGIN;
 function PLUGIN:DatabaseConnected()
     local query
 
-	-- New table to hold character panel data.
+	-- New table to hold character panel data (relational)
 	query = mysql:Create("ix_charpanels")
 		query:Create("panel_id", "INT(11) UNSIGNED NOT NULL AUTO_INCREMENT")
 		query:Create("character_id", "INT(11) UNSIGNED NOT NULL")
