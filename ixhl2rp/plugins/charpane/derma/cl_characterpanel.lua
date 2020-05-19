@@ -141,7 +141,7 @@ function PANEL:Init()
 		["hands"] = {x = 291, y = 300},
 		["legs"] = {x = 291, y = 370},
 	}
-	
+
 	ix.gui.charPanel = self;
 end
 

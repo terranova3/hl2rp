@@ -3,102 +3,6 @@
 	without permission of its author.
 --]]
 
-ix.charPanel = ix.charPanel or {}
-ix.charPanels = ix.charPanels or {
-	[0] = {}
-}
-
-function ix.charPanel.CreatePanel(id)
-	local panel = setmetatable({id = id, slots = {}, vars = {}, receivers = {}}, ix.meta.charPanel)
-		ix.charPanels[id] = panel
-
-	return panel
-end
-
-function ix.charPanel.RestoreCharPanel(panelID, callback)
-	if (!isnumber(panelID) or panelID < 0) then
-		error("Attempt to restore inventory with an invalid ID!")
-	end
-
-	ix.charPanel.CreatePanel(panelID)
-
-	local query = mysql:Select("ix_items")
-		query:Select("item_id")
-		query:Select("inventory_id")
-		query:Select("panel_id")
-		query:Select("unique_id")
-		query:Select("data")
-		query:Select("character_id")
-		query:Select("player_id")
-		query:Where("panel_id", panelID)
-		query:Callback(function(result)
-			local badItemsUniqueID = {}
-
-			if (istable(result) and #result > 0) then
-				local invSlots = {}
-				local badItems = {}
-
-				for _, item in ipairs(result) do
-					local itemPanelID = tonumber(item.panel_id)
-
-					if (itemPanelID != panelID) then
-						badItemsUniqueID[#badItemsUniqueID + 1] = item.unique_id
-						badItems[#badItems + 1] = tonumber(item.item_id)
-
-						continue
-					end
-
-					local inventory = ix.charPanels[panelID]
-					local itemID = tonumber(item.item_id)
-					local data = util.JSONToTable(item.data or "[]")
-					local characterID, playerID = tonumber(item.character_id), tostring(item.player_id)
-
-					if (itemID) then
-						local item2 = ix.item.New(item.unique_id, itemID)
-
-						if (item2) then
-							invSlots[itemPanelID] = invSlots[itemPanelID] or {}
-							local slots = invSlots[itemPanelID]
-
-							item2.data = {}
-
-							if (data) then
-								item2.data = data
-							end
-
-							item2.invID = itemInvID
-							item2.characterID = characterID
-							item2.playerID = (playerID == "" or playerID == "NULL") and nil or playerID
-
-
-							if (item2.OnRestored) then
-								--item2:OnRestored(item2, itemInvID)
-							end
-						else
-							badItemsUniqueID[#badItemsUniqueID + 1] = item.unique_id
-							badItems[#badItems + 1] = itemID
-						end
-					end
-				end
-
-				for k, v in pairs(invSlots) do
-					ix.charPanels[k].slots = v
-				end
-
-				if (!table.IsEmpty(badItems)) then
-					local deleteQuery = mysql:Delete("ix_items")
-						deleteQuery:WhereIn("item_id", badItems)
-					deleteQuery:Execute()
-				end
-			end
-
-			if (callback) then
-				callback(ix.charPanels[panelID], badItemsUniqueID)
-			end
-		end)
-	query:Execute()
-end
-
 local META = ix.meta.charPanel or {}
 META.__index = META
 META.slots = META.slots or {}
@@ -222,7 +126,16 @@ function META:GetReceivers()
 end
 
 if (SERVER) then
+	function META:Sync(receiver, fullUpdate)
+		local slots = {}
 
+		net.Start("ixCharPanelSync")
+			net.WriteTable(slots)
+			net.WriteUInt(self:GetID(), 32)
+			net.WriteType((receiver == nil or fullUpdate) and self.owner or nil)
+			net.WriteTable(self.vars or {})
+		net.Send(receiver)
+	end
 end
 
 ix.meta.charPanel = META

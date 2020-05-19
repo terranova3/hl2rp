@@ -39,28 +39,32 @@ function PLUGIN:OnWipeTables()
 	query:Execute()
 end
 
---- Loads all of a player's characters into memory.
-function PLUGIN:CharacterRestored(character)
+function PLUGIN:PlayerLoadedCharacter(client, character, currentChar)
+	local charID = character:GetID();
+
 	local charPanelQuery = mysql:Select("ix_charpanels")
 		charPanelQuery:Select("panel_id")
 		charPanelQuery:Where("character_id", charID)
 		charPanelQuery:Callback(function(info)
 			if (istable(info) and #info > 0) then
-				ix.charPanel.RestoreCharPanel(info.panel_id, function(charPanel)
-					character.vars.charPanel = charPanel
-					charPanel:SetOwner(charID)
+				local row = info[1];
+
+				ix.charPanel.RestoreCharPanel(tonumber(row.panel_id), function(charPanel)
+					character:SetCharPanel(charPanel)
+					charPanel:SetOwner(lastID)
+					charPanel:Sync(client)
 				end, true)
 			else
 				local insertQuery = mysql:Insert("ix_charpanels")
 					insertQuery:Insert("character_id", charID)
 					insertQuery:Callback(function(_, status, lastID)
-						local charPanel = ix.charPanel.CreatePanel(invLastID);
-						charPanel:SetOwner(lastID)
-
-						character.vars.charPanel = charPanel
+						local charPanel = ix.charPanel.CreatePanel(lastID);
+						character:SetCharPanel(charPanel)
+						charPanel:SetOwner(lastID)		
+						charPanel:Sync(client)
 					end)
 				insertQuery:Execute()
 			end
 		end)
 	charPanelQuery:Execute()
-end;
+end

@@ -722,14 +722,12 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
 			characterPanel:Dock(FILL)	
 
-			local cPane = characterPanel:Add("ixCharacterPane")
+			local cPanel = characterPanel:Add("ixCharacterPane")
 
 			local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
-			print("this")
-			print(charPanel)
+
 			if (charPanel) then
-				print("CharPanel exists!")
-				cPane:SetCharPanel(charPanel)
+				cPanel:SetCharPanel(charPanel)
 			end
 
 			local canvas = inventoryPanel:Add("DTileLayout")
