@@ -211,10 +211,6 @@ function PANEL:Rebuild()
 				surface.SetTextPos(4, 4)
 				surface.DrawText(v.name)
 			end;
-
-			function characterForm:PanelSelect()
-				--print("Selected");
-			end;
 		end;
 	else
 		local label = vgui.Create("ixInfoText", self);

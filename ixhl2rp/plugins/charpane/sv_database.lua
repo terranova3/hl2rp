@@ -39,7 +39,8 @@ function PLUGIN:OnWipeTables()
 	query:Execute()
 end
 
-function PLUGIN:PlayerLoadedCharacter(client, character, currentChar)
+-- Called before player character setup.
+function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
 	local charID = character:GetID();
 
 	local charPanelQuery = mysql:Select("ix_charpanels")
@@ -52,7 +53,6 @@ function PLUGIN:PlayerLoadedCharacter(client, character, currentChar)
 				ix.charPanel.RestoreCharPanel(tonumber(row.panel_id), function(charPanel)
 					character:SetCharPanel(charPanel)
 					charPanel:SetOwner(lastID)
-					charPanel:Sync(client)
 				end, true)
 			else
 				local insertQuery = mysql:Insert("ix_charpanels")
@@ -61,7 +61,6 @@ function PLUGIN:PlayerLoadedCharacter(client, character, currentChar)
 						local charPanel = ix.charPanel.CreatePanel(lastID);
 						character:SetCharPanel(charPanel)
 						charPanel:SetOwner(lastID)		
-						charPanel:Sync(client)
 					end)
 				insertQuery:Execute()
 			end

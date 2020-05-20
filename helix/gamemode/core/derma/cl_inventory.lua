@@ -193,8 +193,6 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		if (inventoryID) then
 			InventoryAction("drop", item.id, inventoryID, {})
 		end
-	elseif(inventoryPanel.equipment) then 
-		self:Move(gridX, gridY, inventoryPanel)
 	elseif (inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
 		local oldX, oldY = self.gridX, self.gridY
 
@@ -724,11 +722,18 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 
 			local cPanel = characterPanel:Add("ixCharacterPane")
 
-			local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
+			netstream.Start("RequestShowCharacterPanel")
+			netstream.Hook("ShowCharacterPanel", function(show)
+				if(show) then 
+					local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
 
-			if (charPanel) then
-				cPanel:SetCharPanel(charPanel)
-			end
+					if (charPanel) then
+						cPanel:SetCharPanel(charPanel)
+					end
+		
+					ix.gui.charPanel = cPanel
+				end
+			end)
 
 			local canvas = inventoryPanel:Add("DTileLayout")
 			canvas.Paint = function()

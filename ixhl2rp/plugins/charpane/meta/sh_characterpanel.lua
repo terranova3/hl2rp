@@ -131,7 +131,7 @@ if (SERVER) then
 
 		net.Start("ixCharPanelSet")
 			net.WriteUInt(self:GetID(), 32)
-			net.WriteUInt(category, 6)
+			net.WriteString(category)
 			net.WriteString(item and item.uniqueID or "")
 			net.WriteUInt(item and item.id or 0, 32)
 			net.WriteUInt(self.owner or 0, 32)
@@ -154,18 +154,19 @@ if (SERVER) then
 
 			if (category) then
 				targetCharPanel.slots[category] = item
-
+				PrintTable(targetCharPanel)
 				item:Transfer(nil, nil, nil, item.player, nil, true)
 				item.panelID = targetCharPanel:GetID()
 
-				--targetCharPanel:SendSlot(category, item)
+				targetCharPanel:SendSlot(category, item)
 
 				local query = mysql:Update("ix_items")
 					query:Update("panel_id", targetCharPanel:GetID())
 					query:Where("item_id", item.id)
 				query:Execute()
 
-				hook.Run("CharPanelItemAdded", client, ix.item.inventories[oldInvID], targetCharPanel, item)
+
+				hook.Run("CharPanelItemEquipped", client, ix.item.inventories[oldInvID], targetCharPanel, item)
 
 				return category, targetCharPanel:GetID()
 			else

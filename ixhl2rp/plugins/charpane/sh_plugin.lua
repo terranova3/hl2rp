@@ -14,6 +14,7 @@ ix.charPanels = ix.charPanels or {
 
 do
 	ix.util.Include("sv_database.lua");
+	ix.util.Include("sv_hooks.lua");
 	ix.util.IncludeDirectory(PLUGIN, "meta");
 
 	function ix.charPanel.CreatePanel(id)
@@ -40,20 +41,14 @@ do
 			query:Select("character_id")
 			query:Select("player_id")
 			query:Where("panel_id", panelID)
-			query:Callback(function(result)
-				local badItemsUniqueID = {}
-
+			query:Callback(function(result)	
 				if (istable(result) and #result > 0) then
 					local invSlots = {}
-					local badItems = {}
 
 					for _, item in ipairs(result) do
 						local itemPanelID = tonumber(item.panel_id)
 
 						if (itemPanelID != panelID) then
-							badItemsUniqueID[#badItemsUniqueID + 1] = item.unique_id
-							badItems[#badItems + 1] = tonumber(item.item_id)
-
 							continue
 						end
 
@@ -83,21 +78,12 @@ do
 								if (item2.OnRestored) then
 									--item2:OnRestored(item2, itemInvID)
 								end
-							else
-								badItemsUniqueID[#badItemsUniqueID + 1] = item.unique_id
-								badItems[#badItems + 1] = itemID
 							end
 						end
 					end
 
 					for k, v in pairs(invSlots) do
 						ix.charPanels[k].slots = v
-					end
-
-					if (!table.IsEmpty(badItems)) then
-						local deleteQuery = mysql:Delete("ix_items")
-							deleteQuery:WhereIn("item_id", badItems)
-						deleteQuery:Execute()
 					end
 				end
 
@@ -123,6 +109,54 @@ do
 				charPanel.slots = {}
 				charPanel.vars = vars
 				character.vars.charPanel = charPanel
+			end
+		end)
+
+		net.Receive("ixCharPanelSet", function()
+			local panelID = net.ReadUInt(32)
+			local category = net.ReadString()
+			local uniqueID = net.ReadString()
+			local id = net.ReadUInt(32)
+			local owner = net.ReadUInt(32)
+			local data = net.ReadTable()
+
+			local character = owner != 0 and ix.char.loaded[owner] or LocalPlayer():GetCharacter()
+
+			if (character) then
+				local charPanel = ix.charPanels[panelID]
+
+				if (charPanel) then
+					local item = (uniqueID != "" and id != 0) and ix.item.New(uniqueID, id) or nil
+					item.panelID = panelID
+					item.invID = 0
+					item.data = {}
+
+					if (data) then
+						item.data = data
+					end
+
+					charPanel.slots[category] = item or {}
+
+					panelID = panelID == LocalPlayer():GetCharacter():GetCharPanel():GetID() and 1 or panelID
+
+					local panel = ix.gui.charPanel
+
+					if (IsValid(ix.gui.charPanel)) then
+						print("IsValid charPanel")
+						local icon = panel:AddIcon(
+							item, item:GetModel() or "models/props_junk/popcan01a.mdl", category, item:GetSkin()
+						)
+
+						if (IsValid(icon)) then
+							icon:SetHelixTooltip(function(tooltip)
+								ix.hud.PopulateItemTooltip(tooltip, item)
+							end)
+
+							icon.itemID = item.id
+							panel.panels[item.id] = icon
+						end
+					end
+				end
 			end
 		end)
 	else

@@ -7,7 +7,6 @@ local PLUGIN = PLUGIN;
 
 netstream.Hook("ViewNotepad", function(entity, title, text)
 	if (IsValid(entity)) then
-		print(text);
 		if (IsValid(PLUGIN.notepadPanel)) then
 			PLUGIN.notepadPanel:Close();
 			PLUGIN.notepadPanel:Remove();

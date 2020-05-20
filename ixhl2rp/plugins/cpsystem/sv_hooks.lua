@@ -63,7 +63,6 @@ function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
 	local faction = character:GetFaction()
 	
 	if(faction == FACTION_SCN) then
-		print("this")
 		character:SetClass(CLASS_SCN);
 	end;
 
