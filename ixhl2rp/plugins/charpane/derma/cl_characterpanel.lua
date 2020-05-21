@@ -1,3 +1,5 @@
+local RECEIVER_NAME = "ixInventoryItem"
+
 -- The queue for the rendered icons.
 ICON_RENDER_QUEUE = ICON_RENDER_QUEUE or {}
 
@@ -27,6 +29,49 @@ AccessorFunc(PANEL, "itemTable", "ItemTable")
 AccessorFunc(PANEL, "panelID", "PanelID")
 
 function PANEL:Init()
+	self:Droppable(RECEIVER_NAME)
+end
+
+function PANEL:OnMousePressed(code)
+	if (code == MOUSE_LEFT and self:IsDraggable()) then
+		self:MouseCapture(true)
+		self:DragMousePress(code)
+
+		self.clickX, self.clickY = input.GetCursorPos()
+	end
+end
+
+function PANEL:OnMouseReleased(code)
+	-- move the item into the world if we're dropping on something that doesn't handle inventory item drops
+	if (!dragndrop.m_ReceiverSlot or dragndrop.m_ReceiverSlot.Name != RECEIVER_NAME) then
+		self:OnDrop(dragndrop.IsDragging())
+	end
+
+	self:DragMouseRelease(code)
+	self:SetZPos(99)
+	self:MouseCapture(false)
+end
+
+function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
+	local item = self.itemTable
+
+	if (!item or !bDragging) then
+		return
+	end
+
+	local invID = 0
+
+	if (IsValid(inventoryPanel) and inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
+		invID = inventoryPanel.invID
+	end
+
+	net.Start("ixCharPanelTransfer")
+		net.WriteUInt(item.id, 32)
+		net.WriteUInt(invID, 32)
+		net.WriteUInt(self:GetPanelID(), 32)
+		net.WriteUInt(gridX or 0, 6)
+		net.WriteUInt(gridY or 0, 6)
+	net.SendToServer()
 end
 
 function PANEL:PaintOver(width, height)
@@ -127,6 +172,8 @@ function PANEL:AddIcon(item, model, category, skin)
 	panel:InvalidateLayout(true)
 	panel:SetModel(model, skin)
 	panel:SetPos(pos.x, pos.y)
+	panel.gridW = 1
+	panel.gridH = 1
 
 	local charPanel = ix.charPanels[self.panelID]
 
@@ -168,15 +215,6 @@ function PANEL:AddIcon(item, model, category, skin)
 	if(IsValid(slot)) then
 		slot.item = panel;
 	end;
-
-	--[[
-	for k, v in pairs(self.slots) do
-		print(self.slots[k])
-
-		if(self.slots[k].item) then
-			PrintTable(self.slots[k].item:GetItemTable())
-		end;
-	end--]]
 
 	return panel
 end;

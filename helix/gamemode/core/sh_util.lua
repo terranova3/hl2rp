@@ -67,7 +67,7 @@ function ix.util.IncludeDirectory(PLUGIN, name)
 	for _, v in ipairs(file.Find(directory.."*.lua", "LUA")) do
 		ix.util.Include(directory..v)
 	end
-end;
+end
 
 --- Includes multiple files in a directory.
 -- @realm shared

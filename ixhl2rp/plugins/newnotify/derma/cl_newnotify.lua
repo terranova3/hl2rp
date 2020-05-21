@@ -38,8 +38,6 @@ function PANEL:Populate(data)
     sound.PlayFile(data.sound, "", function(station, errCode, errStr)
     	if ( IsValid( station ) ) then
             station:Play()
-        else
-            print( "Error playing sound!", errCode, errStr )
         end
     end);
 

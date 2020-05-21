@@ -218,13 +218,8 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 	self.gridY = newY
 
 	self:SetParent(givenInventory)
-
-	if(!givenInventory.equipment) then
-		self:SetPos(x, y)
-	else
-		self:SetPos(0, 0)
-	end;
-
+	self:SetPos(x, y)
+	
 	if (self.slots) then
 		for _, v in ipairs(self.slots) do
 			if (IsValid(v) and v.item == self) then
@@ -235,16 +230,14 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 
 	self.slots = {}
 	
-	if(!givenInventory.equipment) then
-		for currentX = 1, self.gridW do
-			for currentY = 1, self.gridH do
-				local slot = givenInventory.slots[self.gridX + currentX - 1][self.gridY + currentY - 1]
+	for currentX = 1, self.gridW do
+		for currentY = 1, self.gridH do
+			local slot = givenInventory.slots[self.gridX + currentX - 1][self.gridY + currentY - 1]
 
-				slot.item = self
-				self.slots[#self.slots + 1] = slot
-			end
+			slot.item = self
+			self.slots[#self.slots + 1] = slot
 		end
-	end;
+	end
 end
 
 function PANEL:PaintOver(width, height)
@@ -676,7 +669,6 @@ end
 
 function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	local panel = panels[1]
-
 	if (!IsValid(panel)) then
 		self.previewPanel = nil
 		return
@@ -720,11 +712,10 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
 			characterPanel:Dock(FILL)	
 
-			local cPanel = characterPanel:Add("ixCharacterPane")
-
 			netstream.Start("RequestShowCharacterPanel")
 			netstream.Hook("ShowCharacterPanel", function(show)
 				if(show) then 
+					local cPanel = characterPanel:Add("ixCharacterPane")
 					local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
 
 					if (charPanel) then

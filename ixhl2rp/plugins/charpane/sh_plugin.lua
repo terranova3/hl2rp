@@ -25,9 +25,8 @@ do
 	end
 
 	function ix.charPanel.RestoreCharPanel(panelID, callback)
-		print("RestoreCharPanel" .. panelID)
 		if (!isnumber(panelID) or panelID < 0) then
-			error("Attempt to restore inventory with an invalid ID!")
+			error("Attempt to restore character panel with an invalid ID!")
 		end
 
 		ix.charPanel.CreatePanel(panelID)
@@ -100,7 +99,6 @@ do
 			local character = owner and ix.char.loaded[owner] or LocalPlayer():GetCharacter()
 
 			if (character) then
-				print("Synced!")
 				local charPanel = ix.charPanel.CreatePanel(id)
 				charPanel:SetOwner(character:GetID())
 				charPanel.slots = {}
@@ -171,12 +169,45 @@ do
 				end
 			end
 		end)
+
+		net.Receive("ixCharPanelRemove", function()
+			local id = net.ReadUInt(32)
+			local panelID = net.ReadUInt(32)
+
+			local charPanel = ix.charPanels[panelID]
+
+			if (!charPanel) then
+				return
+			end
+
+			charPanel:Remove(id)
+
+			panelID = panelID == LocalPlayer():GetCharacter():GetCharPanel():GetID() and 1 or panelID
+
+			local panel = ix.gui.charPanel
+
+			if (IsValid(panel)) then
+				local icon = panel.panels[id]
+
+				if (IsValid(icon)) then
+					for _, v in ipairs(icon.slots or {}) do
+						if (v.item == icon) then
+							v.item = nil
+						end
+					end
+
+					icon:Remove()
+				end
+			end
+		end)
 	else
 		util.AddNetworkString("ixCharPanelSync")
 		util.AddNetworkString("ixCharPanelReceiveItem")
 		util.AddNetworkString("ixCharPanelSet")
+		util.AddNetworkString("ixCharPanelTransfer")
+		util.AddNetworkString("ixCharPanelRemove")
 
-		function ix.charPanel.HasIntegrity(client, item, invID, panelID)
+		function ix.charPanel.HasIntegrity(client, item, invID, panelID, checkInventory)
 			local inventory = ix.item.inventories[invID or 0]
 			local charPanel = ix.charPanels[panelID or 0]
 
@@ -196,9 +227,11 @@ do
 				end
 			end
 
-			if (!inventory:GetItemByID(item.id)) then
-				return false
-			end
+			if(checkInventory) then 
+				if (!inventory:GetItemByID(item.id)) then
+					return false
+				end
+			end;
 
 			return true
 		end
@@ -209,10 +242,26 @@ do
 			local panelID = net.ReadUInt(32)
 			local data = net.ReadTable()
 
-			if(ix.charPanel.HasIntegrity(client, item, invID, panelID)) then
+			if(ix.charPanel.HasIntegrity(client, item, invID, panelID, true)) then
 				local charPanel = ix.charPanels[panelID];
 				item = ix.item.instances[item]
 				charPanel:Add(item.id, {}, item.outfitCategory)
+			else
+				return
+			end
+		end)
+
+		net.Receive("ixCharPanelTransfer", function(length, client)
+			local item = net.ReadUInt(32)
+			local invID = net.ReadUInt(32)
+			local panelID = net.ReadUInt(32)
+			local x, y = net.ReadUInt(6), net.ReadUInt(6)
+
+			if(ix.charPanel.HasIntegrity(client, item, invID, panelID, false)) then
+				local charPanel = ix.charPanels[panelID];
+				item = ix.item.instances[item]
+
+				charPanel:Transfer(item.id, invID, x, y)
 			else
 				return
 			end

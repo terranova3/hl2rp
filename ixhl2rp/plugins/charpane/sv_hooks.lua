@@ -20,6 +20,9 @@ end;
 -- Called when an item has been added to the character panel
 function PLUGIN:CharPanelItemEquipped(client, inventory, charPanel, item) end;
 
+-- Called when an item has been removed from the character panel
+function PLUGIN:CharPanelItemUnequipped(client, charPanel, item) end;
+
 -- Called when the client is checking if it has access to see the character panel
 function PLUGIN:CharPanelShouldShow(client)
 	return true;
