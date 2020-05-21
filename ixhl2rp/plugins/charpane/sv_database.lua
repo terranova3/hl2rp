@@ -49,10 +49,10 @@ function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
 		charPanelQuery:Callback(function(info)
 			if (istable(info) and #info > 0) then
 				local row = info[1];
-
+				print("restore")
 				ix.charPanel.RestoreCharPanel(tonumber(row.panel_id), function(charPanel)
 					character:SetCharPanel(charPanel)
-					charPanel:SetOwner(lastID)
+					charPanel:SetOwner(character:GetID())
 				end, true)
 			else
 				local insertQuery = mysql:Insert("ix_charpanels")
@@ -60,7 +60,7 @@ function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
 					insertQuery:Callback(function(_, status, lastID)
 						local charPanel = ix.charPanel.CreatePanel(lastID);
 						character:SetCharPanel(charPanel)
-						charPanel:SetOwner(lastID)		
+						charPanel:SetOwner(character:GetID())		
 					end)
 				insertQuery:Execute()
 			end

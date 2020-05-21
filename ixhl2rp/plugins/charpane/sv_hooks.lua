@@ -22,10 +22,10 @@ function PLUGIN:CharPanelItemEquipped(client, inventory, charPanel, item) end;
 
 -- Called when the client is checking if it has access to see the character panel
 function PLUGIN:CharPanelShouldShow(client)
-	return false;
+	return true;
 end;
 
 netstream.Hook("RequestShowCharacterPanel", function(client)
-	local show = hook.Run("CharPanelShouldShow", client) or true
+	local show = hook.Run("CharPanelShouldShow", client)
 	netstream.Start(client, "ShowCharacterPanel", show)
 end)

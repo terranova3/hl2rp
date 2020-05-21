@@ -154,7 +154,7 @@ if (SERVER) then
 
 			if (category) then
 				targetCharPanel.slots[category] = item
-				PrintTable(targetCharPanel)
+
 				item:Transfer(nil, nil, nil, item.player, nil, true)
 				item.panelID = targetCharPanel:GetID()
 
@@ -177,6 +177,16 @@ if (SERVER) then
 
 	function META:Sync(receiver, fullUpdate)
 		local slots = {}
+
+		for k, item in pairs(self.slots) do
+			if (istable(item)) then
+				slots[#slots + 1] = {item.uniqueID, item.id, item.outfitCategory, item.data}
+			end
+		end
+
+		print("Syncing")
+		PrintTable(slots)
+		print("Syncing")
 
 		net.Start("ixCharPanelSync")
 			net.WriteTable(slots)

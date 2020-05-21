@@ -43,52 +43,48 @@ do
 			query:Where("panel_id", panelID)
 			query:Callback(function(result)	
 				if (istable(result) and #result > 0) then
-					local invSlots = {}
+					local equippedSlots = {}
 
 					for _, item in ipairs(result) do
 						local itemPanelID = tonumber(item.panel_id)
 
-						if (itemPanelID != panelID) then
+						-- don't restore items with an invalid inventory id or type
+						if (!itemPanelID) then
 							continue
 						end
 
-						local inventory = ix.charPanels[panelID]
+						local charPanel = ix.charPanels[itemPanelID]
 						local itemID = tonumber(item.item_id)
 						local data = util.JSONToTable(item.data or "[]")
 						local characterID, playerID = tonumber(item.character_id), tostring(item.player_id)
 
 						if (itemID) then
-							local item2 = ix.item.New(item.unique_id, itemID)
+							local restoredItem = ix.item.New(item.unique_id, itemID)
 
-							if (item2) then
-								invSlots[itemPanelID] = invSlots[itemPanelID] or {}
-								local slots = invSlots[itemPanelID]
-
-								item2.data = {}
+							if (restoredItem) then
+								restoredItem.data = {}
 
 								if (data) then
-									item2.data = data
+									restoredItem.data = data
 								end
 
-								item2.invID = itemInvID
-								item2.characterID = characterID
-								item2.playerID = (playerID == "" or playerID == "NULL") and nil or playerID
+								restoredItem.invID = 0
+								restoredItem.panelID = panelID
+								restoredItem.characterID = characterID
+								restoredItem.playerID = (playerID == "" or playerID == "NULL") and nil or playerID
 
-
-								if (item2.OnRestored) then
-									--item2:OnRestored(item2, itemInvID)
-								end
+								equippedSlots[restoredItem.outfitCategory] = restoredItem;
 							end
 						end
 					end
 
-					for k, v in pairs(invSlots) do
-						ix.charPanels[k].slots = v
+					if(equippedSlots) then
+						ix.charPanels[panelID].slots = equippedSlots
 					end
 				end
 
 				if (callback) then
-					callback(ix.charPanels[panelID], badItemsUniqueID)
+					callback(ix.charPanels[panelID])
 				end
 			end)
 		query:Execute()
@@ -104,10 +100,26 @@ do
 			local character = owner and ix.char.loaded[owner] or LocalPlayer():GetCharacter()
 
 			if (character) then
+				print("Synced!")
 				local charPanel = ix.charPanel.CreatePanel(id)
 				charPanel:SetOwner(character:GetID())
 				charPanel.slots = {}
 				charPanel.vars = vars
+
+				-- v: uniqueID, id, category, data
+				for _, v in ipairs(slots) do
+					charPanel.slots[v[3]] = {}
+
+					local item = ix.item.New(v[1], v[2])
+
+					item.data = {}
+					if (v[4]) then
+						item.data = v[4]
+					end
+
+					charPanel.slots[v[3]] = item
+				end
+
 				character.vars.charPanel = charPanel
 			end
 		end)

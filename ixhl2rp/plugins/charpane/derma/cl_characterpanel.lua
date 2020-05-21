@@ -72,7 +72,29 @@ end
 
 function PANEL:SetCharPanel(charPanel, bFitParent)
 	self.panelID = charPanel:GetID()
+
 	self:BuildSlots();
+
+	for k, items in pairs(charPanel.slots) do
+		if (!items.id) then continue end
+
+		local item = ix.item.instances[items.id]
+
+		if (item and !IsValid(self.panels[item.id])) then
+			local icon = self:AddIcon(
+				item, item:GetModel() or "models/props_junk/popcan01a.mdl", item.outfitCategory, item:GetSkin()
+			)
+
+			if (IsValid(icon)) then
+				icon:SetHelixTooltip(function(tooltip)
+					ix.hud.PopulateItemTooltip(tooltip, item)
+				end)
+
+				icon.itemID = item.id
+				self.panels[item.id] = icon
+			end
+		end
+	end
 end
 
 function PANEL:GetIconPlacement(category)
@@ -95,6 +117,10 @@ end
 function PANEL:AddIcon(item, model, category, skin)
 	local panel = self:Add("ixCharPanelItemIcon")
 	local pos = self:GetIconPlacement(category);
+
+	if(!category) then
+		category = item.outfitCategory
+	end;
 
 	panel:SetSize(64, 64)
 	panel:SetZPos(999)
@@ -143,13 +169,14 @@ function PANEL:AddIcon(item, model, category, skin)
 		slot.item = panel;
 	end;
 
+	--[[
 	for k, v in pairs(self.slots) do
 		print(self.slots[k])
 
 		if(self.slots[k].item) then
 			PrintTable(self.slots[k].item:GetItemTable())
 		end;
-	end
+	end--]]
 
 	return panel
 end;
