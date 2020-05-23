@@ -74,7 +74,6 @@ if (SERVER) then
 						local inventory = ix.item.CreateInv(w, h, invLastID)
 
 						character.vars.inv = {inventory}
-
 						inventory:SetOwner(lastID)
 
 						ix.char.loaded[lastID] = character
@@ -87,7 +86,6 @@ if (SERVER) then
 				invQuery:Execute()
 			end)
 		query:Execute()
-
 	end
 
 	--- Loads all of a player's characters into memory.
@@ -207,6 +205,7 @@ if (SERVER) then
 								end
 							end)
 						invQuery:Execute()
+
 						ix.char.loaded[charID] = character
 					else
 						ErrorNoHalt("[Helix] Attempt to load character with invalid ID '" .. tostring(id) .. "'!")
@@ -334,11 +333,11 @@ do
 			local minLength = ix.config.Get("minNameLength", 4)
 			local maxLength = ix.config.Get("maxNameLength", 32)
 
-			if (#value < minLength) then
+			if (value:len() < minLength) then
 				return false, "nameMinLen", minLength
 			elseif (!value:find("%S")) then
 				return false, "invalid", "name"
-			elseif (#value:gsub("%s", "") > maxLength) then
+			elseif (value:gsub("%s", ""):len() > maxLength) then
 				return false, "nameMaxLen", maxLength
 			end
 
@@ -380,7 +379,7 @@ do
 			value = string.Trim((tostring(value):gsub("\r\n", ""):gsub("\n", "")))
 			local minLength = ix.config.Get("minDescriptionLength", 16)
 
-			if (#value < minLength) then
+			if (value:len() < minLength) then
 				return false, "descMinLen", minLength
 			elseif (!value:find("%s+") or !value:find("%S")) then
 				return false, "invalid", "description"
@@ -401,47 +400,6 @@ do
 		alias = "Desc"
 	})
 
-
-		--- Sets this character's physical description. This is automatically networked.
-	-- @realm server
-	-- @string description New description for this character
-	-- @function :SetDescription
-
-	--- Returns this character's physical description.
-	-- @realm shared
-	-- @treturn string This character's current description
-	-- @function :GetDescription
-	ix.char.RegisterVar("skin", {
-		field = "skin",
-		fieldType = ix.type.number,
-		default = 0,
-		index = 3,
-		category = "customization",
-		OnValidate = function(self, value, payload)
-			return value or 1;
-		end,
-		OnDisplay = function(self, container, payload)
-			local skinSelect = container:Add("ixAttributeBar")
-			skinSelect:Dock(TOP)
-			skinSelect:SetText(" ");
-			skinSelect.value = 1;
-			skinSelect.OnChanged = function()
-				payload:Set("skin", skinSelect.value);
-			end;
-
-			return skinSelect
-		end,
-		ShouldDisplay = function(self, container, payload)
-			local faction = ix.faction.indices[payload.faction]
-			
-			if(faction.name == "Scanner") then 
-				return false;
-			end;
-
-			return true;
-		end,
-		alias = "Skin"
-	})
 	--- Sets this character's model. This sets the player's current model to the given one, and saves it to the character.
 	-- It is automatically networked.
 	-- @realm server
@@ -456,8 +414,7 @@ do
 		field = "model",
 		fieldType = ix.type.string,
 		default = "models/error.mdl",
-		index = 4,
-		category = "customization",
+		index = 3,
 		OnSet = function(character, value)
 			local client = character:GetPlayer()
 
@@ -633,7 +590,7 @@ do
 		field = "attributes",
 		fieldType = ix.type.text,
 		default = {},
-		index = 5,
+		index = 4,
 		category = "attributes",
 		isLocal = true,
 		OnDisplay = function(self, container, payload)
@@ -1025,7 +982,7 @@ do
 			ix.char.Create(payload, function(id)
 				if (IsValid(client)) then
 					ix.char.loaded[id]:Sync(client)
-					
+
 					net.Start("ixCharacterAuthed")
 					net.WriteUInt(id, 32)
 					net.WriteUInt(#client.ixCharList, 6)

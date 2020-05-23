@@ -405,10 +405,6 @@ function GM:OnCharacterCreated(client, character)
 	if (faction and faction.OnCharacterCreated) then
 		faction:OnCharacterCreated(client, character)
 	end
-
-	if(character:GetSkin()) then
-		character:SetData("skin", character:GetSkin())
-	end;
 end
 
 function GM:GetDefaultCharacterName(client, faction)
