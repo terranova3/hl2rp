@@ -989,8 +989,6 @@ end
 vgui.Register("ixPluginCharMenuNew", PANEL, "ixCharMenuPanel")
 
 function PLUGIN:OnCharacterMenuCreated(panel)
-    print("Overriding")
-
     panel.newCharacterPanel = panel:Add("ixPluginCharMenuNew")
     panel.newCharacterPanel:SlideDown(0)
 end

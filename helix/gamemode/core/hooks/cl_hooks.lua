@@ -54,39 +54,13 @@ function GM:LoadFonts(font, genericFont)
 		weight = 300,
 	})
 
-	surface.CreateFont("ixMenuMediumFont", {
-		font = "Roboto",
-		size = math.max(ScreenScale(12)),
-		weight = 300,
-	})
-
-	surface.CreateFont("ixMenuBigFont", {
-		font = "Roboto",
-		size = math.max(ScreenScale(30)),
-		weight = 300,
-	})
-
-	surface.CreateFont("nutTitleFont", {
-		font = "Segoe UI",
-		size = ScreenScale(30),
-		extended = true,
-		weight = 300
-	})
-
-	surface.CreateFont("nutTitleSmall", {
-		font = "Segoe UI",
-		size = ScreenScale(12),
-		extended = true,
-		weight = 100
-	})
-
 	surface.CreateFont("ixMenuButtonFont", {
 		font = "Roboto Th",
 		size = ScreenScale(14),
 		extended = true,
 		weight = 100
 	})
-	
+
 	surface.CreateFont("ixMenuButtonFontSmall", {
 		font = "Roboto Th",
 		size = ScreenScale(10),
@@ -153,13 +127,6 @@ function GM:LoadFonts(font, genericFont)
 		weight = 1000
 	})
 
-	surface.CreateFont("ixFactionFont", {
-		font = font,
-		size = math.max(ScreenScale(8), 32),
-		extended = true,
-		weight = 1000
-	})
-
 	surface.CreateFont("ixNoticeFont", {
 		font = font,
 		size = math.max(ScreenScale(8), 18),
@@ -171,13 +138,6 @@ function GM:LoadFonts(font, genericFont)
 	surface.CreateFont("ixMediumLightFont", {
 		font = font,
 		size = 25,
-		extended = true,
-		weight = 200
-	})
-
-	surface.CreateFont("ixMediumLightFontSmaller", {
-		font = font,
-		size = 18,
 		extended = true,
 		weight = 200
 	})
@@ -628,14 +588,6 @@ function GM:HUDPaintBackground()
 
 	local weapon = client:GetActiveWeapon()
 
-	--[[ 
-
-		MuzToday at 1:09 PM
-		ammo still shows in the bottom right
-
-		To whom it may concern: This disables ammo drawing in the bottom right of the screen, didn't want to write a plugin just to
-		hook CanDrawAmmoHUD
-
 	if (IsValid(weapon) and hook.Run("CanDrawAmmoHUD", weapon) != false and weapon.DrawAmmo != false) then
 		local clip = weapon:Clip1()
 		local clipMax = weapon:GetMaxClip1()
@@ -667,8 +619,6 @@ function GM:HUDPaintBackground()
 			ix.util.DrawText((clip == -1 or clipMax == -1) and count or clip.."/"..count, x + 64, y + 32, nil, 1, 1, "ixBigFont")
 		end
 	end
-
-	--]]
 
 	if (client:GetLocalVar("restricted") and !client:GetLocalVar("restrictNoMsg")) then
 		ix.util.DrawText(L"restricted", scrW * 0.5, scrH * 0.33, nil, 1, 1, "ixBigFont")
@@ -768,7 +718,9 @@ end
 function GM:PopulateCharacterInfo(client, character, container)
 	-- description
 	local descriptionText = character:GetDescription()
-	descriptionText = descriptionText:len() > 128 and string.format("%s...", descriptionText:sub(1, 125)) or descriptionText
+	descriptionText = (descriptionText:utf8len() > 128 and
+		string.format("%s...", descriptionText:utf8sub(1, 125)) or
+		descriptionText)
 
 	if (descriptionText != "") then
 		local description = container:AddRow("description")
