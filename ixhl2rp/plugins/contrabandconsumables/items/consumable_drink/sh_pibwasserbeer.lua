@@ -4,7 +4,7 @@
 --]]
 
 ITEM.name = "PIßWASSER Pilsner";
-ITEM.model = "models/mark2580/gtav/barstuff/Beer_Pissh.mdl");
+ITEM.model = "models/mark2580/gtav/barstuff/Beer_Pissh.mdl";
 ITEM.width = 1;
 ITEM.height	= 2;
 ITEM.description = "A sweet blonde lager made in Germany. It tastes earthy and a bit sweet.";

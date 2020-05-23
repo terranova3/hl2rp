@@ -88,7 +88,7 @@ end
 function PANEL:Paint(width, height)
 	surface.SetDrawColor(0, 0, 0, 85)
 	surface.DrawRect(2, 2, width - 4, height - 4)
-
+	
 	self:ExtraPaint(width, height)
 end
 
@@ -266,9 +266,17 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 end
 
 function PANEL:PaintOver()
-	surface.SetTextColor(color_white)
-	surface.SetTextPos(5, 5)
-	surface.DrawText(self.text)
+	--surface.SetTextColor(color_white)
+	--surface.SetTextPos(5, 5)
+	--surface.DrawText(self.text)
+
+	local picture = string.format("materials/terranova/ui/charpane/slot_%s.png", self.category)
+
+	self.mat = vgui.Create("Material", self)
+    self.mat:SetPos(0, 0)
+    self.mat:SetSize(64, 64)
+    self.mat:SetMaterial(picture)
+	self.mat.AutoSize = false
 
 	local panel = self.previewPanel
 
