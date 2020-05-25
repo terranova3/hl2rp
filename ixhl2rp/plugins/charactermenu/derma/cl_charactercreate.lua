@@ -987,8 +987,3 @@ function PANEL:Paint(width, height)
 end
 
 vgui.Register("ixPluginCharMenuNew", PANEL, "ixCharMenuPanel")
-
-function PLUGIN:OnCharacterMenuCreated(panel)
-    panel.newCharacterPanel = panel:Add("ixPluginCharMenuNew")
-    panel.newCharacterPanel:SlideDown(0)
-end
