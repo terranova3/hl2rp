@@ -818,3 +818,5 @@ nutscript/plugins/vendor/sv_networking.lua
 nutscript/plugins/vignette.lua
 nutscript/plugins/wepselect.lua
 nutscript/README.md
+nutscript/.editorconfig
+nutscript/gamemode/config/sv_database.lua
