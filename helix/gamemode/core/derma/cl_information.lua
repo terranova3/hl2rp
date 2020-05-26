@@ -79,10 +79,9 @@ function PANEL:Init()
 		self.description:SetContentAlignment(5)
 		self.description:SetMouseInputEnabled(true)
 		self.description:SetCursor("hand")
-		self.description.backgroundColor = Color(0, 0, 0, 150)
 
 		self.description.Paint = function(this, width, height)
-			surface.SetDrawColor(this.backgroundColor)
+			surface.SetDrawColor(0, 0, 0, 150)
 			surface.DrawRect(0, 0, width, height)
 		end
 
@@ -229,9 +228,8 @@ function PANEL:Update(character)
 	if (self.name) then
 		self.name:SetText(character:GetName())
 
-		if (faction and class and class.color) then
-			self.name.backgroundColor = ColorAlpha(class.color or faction.color, 150) or Color(0, 0, 0, 150)
-			self.description.backgroundColor = ColorAlpha(class.color or faction.color, 150) or Color(0, 0, 0, 150)
+		if (faction) then
+			self.name.backgroundColor = ColorAlpha(faction.color, 150) or Color(0, 0, 0, 150)
 		end
 
 		self.name:SizeToContents()
@@ -278,17 +276,13 @@ end
 
 vgui.Register("ixCharacterInfo", PANEL, "DScrollPanel")
 
---[[ FRAMEWORK EDIT
-
-hook.Add("CreateMenuButtons", "ixCharInfo", function(tabTest)
-	local faction = ix.faction.indices[LocalPlayer():GetCharacter():GetFaction()]
-	local class = ix.class.list[LocalPlayer():GetCharacter():GetClass()]
-
-	tabTest["you"] = {
+hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
+	tabs["you"] = {
 		bHideBackground = true,
-		--buttonColor = class.color or faction.color,
+		buttonColor = team.GetColor(LocalPlayer():Team()),
 		Create = function(info, container)
 			container.infoPanel = container:Add("ixCharacterInfo")
+
 			container.OnMouseReleased = function(this, key)
 				if (key == MOUSE_RIGHT) then
 					this.infoPanel:OnSubpanelRightClick()
@@ -304,5 +298,3 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabTest)
 		end
 	}
 end)
-
-]]-- 

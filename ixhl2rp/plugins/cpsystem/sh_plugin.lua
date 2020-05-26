@@ -29,8 +29,8 @@ ix.util.Include("sv_plugin.lua")
 ix.util.Include("sv_hooks.lua")
 ix.util.Include("sh_hooks.lua")
 ix.util.Include("cl_hooks.lua")
-ix.util.IncludeDirectory(PLUGIN, "config");
-ix.util.IncludeDirectory(PLUGIN, "commands")
-ix.util.IncludeDirectory(PLUGIN, "meta")
+ix.util.IncludeDir(PLUGIN.folder .. "/config", true);
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
 
 ix.anim.SetModelClass("models/newcca/cca_unit.mdl", "metrocop");

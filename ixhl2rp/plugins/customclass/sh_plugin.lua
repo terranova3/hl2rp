@@ -7,6 +7,6 @@ PLUGIN.name = "Custom Class";
 PLUGIN.description = "Adds custom class functionality for the scoreboard.";
 PLUGIN.author = "Adolphus";
 
-ix.util.IncludeDirectory(PLUGIN, "commands")
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 
 

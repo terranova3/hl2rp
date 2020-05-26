@@ -75,7 +75,7 @@ end
 
 function PANEL:OnOpened()
 	self:SetAlpha(0)
-	
+
 	self:CreateAnimation(animationTime, {
 		target = {currentAlpha = 255},
 		easing = "outQuint",

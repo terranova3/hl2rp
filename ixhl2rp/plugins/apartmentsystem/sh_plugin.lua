@@ -8,5 +8,5 @@ PLUGIN.description = "Adds keycarded doors and apartment assignment.";
 PLUGIN.author = "Adolphus";
 
 ix.util.Include("sv_hooks.lua");
-ix.util.IncludeDirectory(PLUGIN, "config");
-ix.util.IncludeDirectory(PLUGIN, "commands");
+ix.util.IncludeDir(PLUGIN.folder .. "/config", true);
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true);

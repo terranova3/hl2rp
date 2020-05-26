@@ -147,15 +147,14 @@ function PANEL:Init()
 	local infoLabel = self:Add("DLabel")
 	infoLabel:SetTextColor(Color(255, 255, 255, 25))
 	infoLabel:SetFont("ixMenuMiniFont")
-	infoLabel:SetText(L("TERRANOVA ") .. ix.config.Get("Version"))
+	infoLabel:SetText(L("helix") .. " " .. GAMEMODE.Version)
 	infoLabel:SizeToContents()
 	infoLabel:SetPos(ScrW() - infoLabel:GetWide() - 4, ScrH() - infoLabel:GetTall() - 4)
 
 	local logoPanel = self:Add("Panel")
 	logoPanel:SetSize(ScrW(), ScrH() * 0.25)
-	logoPanel:SetPos(0, ScrH() * 0.0)
+	logoPanel:SetPos(0, ScrH() * 0.25)
 	logoPanel.Paint = function(panel, width, height)
-		---[[
 		local matrix = self.currentMatrix
 
 		-- don't scale the background because it fucks the blur
@@ -168,7 +167,17 @@ function PANEL:Init()
 		local _, screenY = panel:LocalToScreen(0, 0)
 		screenY = screenY + y
 
+		render.SetScissorRect(0, screenY, width, screenY + newHeight, true)
+		ix.util.DrawBlur(panel, 15, nil, 200)
 
+		-- background dim
+		surface.SetDrawColor(0, 0, 0, 100)
+		surface.DrawRect(0, y, width, newHeight)
+
+		-- border lines
+		surface.SetDrawColor(ix.config.Get("color") or color_white)
+		surface.DrawRect(0, y, width, 1)
+		surface.DrawRect(0, y + newHeight - 1, width, 1)
 
 		if (matrix) then
 			cam.PushModelMatrix(matrix)
@@ -178,7 +187,7 @@ function PANEL:Init()
 			v:PaintManual()
 		end
 
-		render.SetScissorRect(0, 0, 0, 0, false) ---]]
+		render.SetScissorRect(0, 0, 0, 0, false)
 	end
 
 	-- draw schema logo material instead of text if available
@@ -198,8 +207,8 @@ function PANEL:Init()
 
 		local titleLabel = logoPanel:Add("DLabel")
 		titleLabel:SetTextColor(color_white)
-		titleLabel:SetFont("nutTitleFont")
-		titleLabel:SetText(L"TERRA NOVA ")
+		titleLabel:SetFont("ixTitleFont")
+		titleLabel:SetText(L2("schemaName") or Schema.name or L"unknown")
 		titleLabel:SizeToContents()
 		titleLabel:SetPos(halfWidth - titleLabel:GetWide() * 0.5, halfPadding)
 		titleLabel:SetPaintedManually(true)
@@ -208,8 +217,8 @@ function PANEL:Init()
 		if (subtitle) then
 			local subtitleLabel = logoPanel:Add("DLabel")
 			subtitleLabel:SetTextColor(color_white)
-			subtitleLabel:SetFont("nutTitleSmall")
-			subtitleLabel:SetText("Half-Life 2 Roleplay")
+			subtitleLabel:SetFont("ixSubTitleFont")
+			subtitleLabel:SetText(subtitle)
 			subtitleLabel:SizeToContents()
 			subtitleLabel:SetPos(halfWidth - subtitleLabel:GetWide() * 0.5, 0)
 			subtitleLabel:MoveBelow(titleLabel)
@@ -243,7 +252,7 @@ function PANEL:Init()
 
 	-- load character button
 	self.loadButton = self.mainButtonList:Add("ixMenuButton")
-	self.loadButton:SetText("LOAD")
+	self.loadButton:SetText("load")
 	self.loadButton:SizeToContents()
 	self.loadButton.DoClick = function()
 		self:Dim()
@@ -252,6 +261,23 @@ function PANEL:Init()
 
 	if (!bHasCharacter) then
 		self.loadButton:SetDisabled(true)
+	end
+
+	-- community button
+	local extraURL = ix.config.Get("communityURL", "")
+	local extraText = ix.config.Get("communityText", "@community")
+
+	if (extraURL != "" and extraText != "") then
+		if (extraText:sub(1, 1) == "@") then
+			extraText = L(extraText:sub(2))
+		end
+
+		local extraButton = self.mainButtonList:Add("ixMenuButton")
+		extraButton:SetText(extraText, true)
+		extraButton:SizeToContents()
+		extraButton.DoClick = function()
+			gui.OpenURL(extraURL)
+		end
 	end
 
 	-- leave/return button
@@ -494,7 +520,7 @@ function PANEL:Paint(width, height)
 	if (!ix.option.Get("cheapBlur", false)) then
 		surface.SetDrawColor(0, 0, 0, 150)
 		surface.DrawTexturedRect(0, 0, width, height)
-		--ix.util.DrawBlur(self, Lerp((self.currentAlpha - 200) / 255, 0, 10))
+		ix.util.DrawBlur(self, Lerp((self.currentAlpha - 200) / 255, 0, 10))
 	end
 end
 

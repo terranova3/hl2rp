@@ -15,7 +15,7 @@ ix.charPanels = ix.charPanels or {
 do
 	ix.util.Include("sv_database.lua");
 	ix.util.Include("sv_hooks.lua");
-	ix.util.IncludeDirectory(PLUGIN, "meta");
+	ix.util.IncludeDir(PLUGIN.folder .. "/meta", true);
 
 	function ix.charPanel.CreatePanel(id)
 		local panel = setmetatable({id = id, slots = {}, vars = {}, receivers = {}}, ix.meta.charPanel)

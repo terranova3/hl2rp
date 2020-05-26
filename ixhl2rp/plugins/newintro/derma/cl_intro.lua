@@ -1,5 +1,4 @@
 local gradient = ix.util.GetMaterial("vgui/gradient-r.vtf")
-local glow = surface.GetTextureID("particle/Particle_Glow_04_Additive")
 
 local PANEL = {}
 
@@ -19,7 +18,7 @@ function PANEL:StartIntro()
 
 	self.name = self:Add("DLabel")
 	self.name:SetText("Terra Nova")
-	self.name:SetFont("ixIntroTitleFont")
+	self.name:SetFont("ixPluginIntroTitleFont")
 	self.name:SetTextColor(color_white)
 	self.name:SizeToContents()
 	self.name:Center()
@@ -39,7 +38,7 @@ function PANEL:StartIntro()
 
 	self.schema = self:Add("DLabel")
 	self.schema:SetText("Half-Life 2 Roleplay")
-	self.schema:SetFont("ixIntroSubtitleFont")
+	self.schema:SetFont("ixPluginIntroSubtitleFont")
 	self.schema:SizeToContents()
 	self.schema:Center()
 	self.schema:MoveBelow(self.name, 10)
@@ -48,8 +47,7 @@ function PANEL:StartIntro()
 
 	pcall(ix.option.Set, "showIntro", false)
 	
-	self.cover:MoveTo(self.name:GetWide(), 0, 7.5, 5, nil, function()
-		self.glow = true
+	self.cover:MoveTo(self.name:GetWide(), 0, 7.5, 2.5, nil, function()
 		self.delta = 0
 
 		self.schema:AlphaTo(255, 5, 1, function()
@@ -58,13 +56,17 @@ function PANEL:StartIntro()
 	end)
 end
 
+function PANEL:ShowRules()
+
+end;
+
 function PANEL:addContinue()
 	self.info = self:Add("DLabel")
 	self.info:Dock(BOTTOM)
 	self.info:SetTall(36)
 	self.info:DockMargin(0, 0, 0, 32)
 	self.info:SetText("Press Space to continue...")
-	self.info:SetFont("ixIntroSmallFont")
+	self.info:SetFont("ixPluginIntroSmallFont")
 	self.info:SetContentAlignment(2)
 	self.info:SetAlpha(0)
 	self.info:AlphaTo(255, 1, 0, function()
@@ -78,6 +80,7 @@ end
 function PANEL:Think()
 	if(IsValid(ix.gui.characterMenu) and !self.closing) then
 		ix.gui.characterMenu:SetAlpha(0)
+		ix.gui.characterMenu:SetVisible(false)
 	end
 
 	if(IsValid(LocalPlayer()) and !self.loaded) then
@@ -88,7 +91,9 @@ function PANEL:Think()
 	if (IsValid(self.info) and input.IsKeyDown(KEY_SPACE) and !self.closing) then
 		self.closing = true
 
+		ix.gui.characterMenu:SetVisible(true)
 		ix.gui.characterMenu:AlphaTo(255, 2.5, 0)
+		
 		self:AlphaTo(0, 2.5, 0, function()
 			self:Remove()
 		end)
@@ -109,16 +114,6 @@ end
 function PANEL:Paint(w, h)
 	surface.SetDrawColor(0, 0, 0)
 	surface.DrawRect(0, 0, w, h)
-
-	if (self.glow) then
-		self.delta = math.Approach(self.delta, 100, FrameTime() * 10)
-
-		local x, y = ScrW()*0.5 - 700, ScrH()*0.5 - 340
-
-		surface.SetDrawColor(self.delta, self.delta, self.delta, self.delta + math.sin(RealTime() * 0.7)*10)
-		surface.SetTexture(glow)
-		surface.DrawTexturedRect(x, y, 1400, 680)
-	end
 end
 
 vgui.Register("ixPluginIntro", PANEL, "EditablePanel")

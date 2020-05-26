@@ -171,26 +171,29 @@ local function DrawHelix(width, height, color) -- luacheck: ignore 211
 end
 
 hook.Add("CreateMenuButtons", "ixHelpMenu", function(tabs)
-	tabs["library"] = function(container)
+	tabs["help"] = function(container)
 		container:Add("ixHelpMenu")
 	end
 end)
 
-
-
 hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 	tabs["commands"] = function(container)
 		-- info text
-		local info = container:Add("ixInfoText")
+		local info = container:Add("DLabel")
+		info:SetFont("ixSmallFont")
 		info:SetText(L("helpCommands"))
 		info:SetContentAlignment(5)
-		info:SetInfoColor("blue");
+		info:SetTextColor(color_white)
+		info:SetExpensiveShadow(1, color_black)
 		info:Dock(TOP)
 		info:DockMargin(0, 0, 0, 8)
 		info:SizeToContents()
-		info:SetTall(32)
-		
-		container:Add("ixTNLogo")
+		info:SetTall(info:GetTall() + 16)
+
+		info.Paint = function(_, width, height)
+			surface.SetDrawColor(ColorAlpha(derma.GetColor("Info", info), 160))
+			surface.DrawRect(0, 0, width, height)
+		end
 
 		-- commands
 		for uniqueID, command in SortedPairs(ix.command.list) do
@@ -268,16 +271,22 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 
 	tabs["flags"] = function(container)
 		-- info text
-		local info = container:Add("ixInfoText")
+		local info = container:Add("DLabel")
+		info:SetFont("ixSmallFont")
 		info:SetText(L("helpFlags"))
 		info:SetContentAlignment(5)
-		info:SetInfoColor("blue");
+		info:SetTextColor(color_white)
+		info:SetExpensiveShadow(1, color_black)
 		info:Dock(TOP)
 		info:DockMargin(0, 0, 0, 8)
 		info:SizeToContents()
-		info:SetTall(32)
+		info:SetTall(info:GetTall() + 16)
 
-		container:Add("ixTNLogo")
+		info.Paint = function(_, width, height)
+			surface.SetDrawColor(ColorAlpha(derma.GetColor("Info", info), 160))
+			surface.DrawRect(0, 0, width, height)
+		end
+
 		-- flags
 		for k, v in SortedPairs(ix.flag.list) do
 			local background = ColorAlpha(
@@ -317,18 +326,7 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 	end
 
 	tabs["plugins"] = function(container)
-		local info = container:Add("ixInfoText")
-		info:SetText(L("This is the list of loaded plugins currently on the server."))
-		info:SetContentAlignment(5)
-		info:SetInfoColor("blue");
-		info:Dock(TOP)
-		info:DockMargin(0, 0, 0, 8)
-		info:SizeToContents()
-		info:SetTall(32)
-
-		container:Add("ixTNLogo")
-
-		for _, v in SortedPairsByMemberValue(ix.plugin.list, "author") do
+		for _, v in SortedPairsByMemberValue(ix.plugin.list, "name") do
 			-- name
 			local title = container:Add("DLabel")
 			title:SetFont("ixMediumLightFont")
@@ -369,34 +367,3 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 		end
 	end
 end)
-
--- logo
-local PANEL = {}
-
-function PANEL:Init()
-	self:SetTall(ScrH() * 0.1)
-	self:Dock(TOP)
-end
-
-function PANEL:Paint(width, height)
-
-
-	surface.SetMaterial( Material("materials/terra_nova.png") );
-	surface.DrawTexturedRect( width * 0.25, height * 0.22, 64, 64 );
-
-	--logo:SetImage("materials/terra_nova.png")
-
-	-- title
-	surface.SetFont("ixIntroSubtitleFont")
-	local text = L("terranova"):upper()
-	local textWidth, textHeight = surface.GetTextSize(text)
-
-	surface.SetTextColor(color_white)
-	surface.SetTextPos(width * 0.5 - textWidth * 0.5, height * 0.5 - textHeight * 0.5)
-	surface.DrawText(text)
-
-	surface.SetDrawColor(0, 0, 0, 50);
-	surface.DrawRect(0, 0, width, height)
-end
-
-vgui.Register("ixTNLogo", PANEL, "Panel")

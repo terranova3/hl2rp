@@ -1,514 +1,263 @@
-
-local gradient = surface.GetTextureID("vgui/gradient-d")
-local audioFadeInTime = 2
-local animationTime = 0.5
-local matrixZScale = Vector(1, 1, 0.0001)
-
--- character menu panel
-DEFINE_BASECLASS("ixSubpanelParent")
 local PANEL = {}
 
-function PANEL:Init()
-	self:SetSize(self:GetParent():GetSize())
-	self:SetPos(0, 0)
+local WHITE = Color(255, 255, 255, 150)
+local SELECTED = Color(255, 255, 255, 230)
 
-	self.childPanels = {}
-	self.subpanels = {}
-	self.activeSubpanel = ""
+PANEL.WHITE = WHITE
+PANEL.SELECTED = SELECTED
+PANEL.HOVERED = Color(255, 255, 255, 50)
+PANEL.ANIM_SPEED = 0.1
+PANEL.FADE_SPEED = 0.5
 
-	self.currentDimAmount = 0
-	self.currentY = 0
-	self.currentScale = 1
-	self.currentAlpha = 255
-	self.targetDimAmount = 255
-	self.targetScale = 0.9
-end
+SOUND_CHAR_HOVER = {"buttons/button15.wav", 35, 250}
+SOUND_CHAR_CLICK = {"buttons/button14.wav", 35, 255}
+SOUND_CHAR_WARNING = {"friends/friend_join.wav", 40, 255}
 
-function PANEL:Dim(length, callback)
-	length = length or animationTime
-	self.currentDimAmount = 0
+-- Called when the tabs for the character menu should be created.
+function PANEL:createTabs()
+	local load, create
 
-	self:CreateAnimation(length, {
-		target = {
-			currentDimAmount = self.targetDimAmount,
-			currentScale = self.targetScale,
-			OnComplete = callback
-		},
-		easing = "outCubic"
-	})
-
-	self:OnDim()
-end
-
-function PANEL:Undim(length, callback)
-	length = length or animationTime
-	self.currentDimAmount = self.targetDimAmount
-
-	self:CreateAnimation(length, {
-		target = {
-			currentDimAmount = 0,
-			currentScale = 1
-		},
-		easing = "outCubic",
-		OnComplete = callback
-	})
-
-	self:OnUndim()
-end
-
-function PANEL:OnDim()
-end
-
-function PANEL:OnUndim()
-end
-
-function PANEL:Paint(width, height)
-	local amount = self.currentDimAmount
-	local bShouldScale = self.currentScale != 1
-	local matrix
-
-	-- draw child panels with scaling if needed
-	if (bShouldScale) then
-		matrix = Matrix()
-		matrix:Scale(matrixZScale * self.currentScale)
-		matrix:Translate(Vector(
-			ScrW() * 0.5 - (ScrW() * self.currentScale * 0.5),
-			ScrH() * 0.5 - (ScrH() * self.currentScale * 0.5),
-			1
-		))
-
-		cam.PushModelMatrix(matrix)
-		self.currentMatrix = matrix
+	-- Only show the load tab if playable characters exist.
+	if (ix.characters and #ix.characters > 0) then
+		load = self:addTab("continue", self.createCharacterSelection)
 	end
 
-	BaseClass.Paint(self, width, height)
-
-	if (bShouldScale) then
-		cam.PopModelMatrix()
-		self.currentMatrix = nil
+	-- Only show the create tab if the local player can create characters.
+	if (hook.Run("CanPlayerCreateCharacter", LocalPlayer()) ~= false) then
+		create = self:addTab("create", self.createCharacterCreation)
 	end
 
-	if (amount > 0) then
-		local color = Color(0, 0, 0, amount)
-
-		surface.SetDrawColor(color)
-		surface.DrawRect(0, 0, width, height)
-	end
-end
-
-vgui.Register("ixCharMenuPanel", PANEL, "ixSubpanelParent")
-
--- character menu main button list
-PANEL = {}
-
-function PANEL:Init()
-	local parent = self:GetParent()
-	self:SetSize(parent:GetWide() * 0.25, parent:GetTall())
-
-	self:GetVBar():SetWide(0)
-	self:GetVBar():SetVisible(false)
-end
-
-function PANEL:Add(name)
-	local panel = vgui.Create(name, self)
-	panel:Dock(TOP)
-
-	return panel
-end
-
-function PANEL:SizeToContents()
-	self:GetCanvas():InvalidateLayout(true)
-
-	-- if the canvas has extra space, forcefully dock to the bottom so it doesn't anchor to the top
-	if (self:GetTall() > self:GetCanvas():GetTall()) then
-		self:GetCanvas():Dock(BOTTOM)
-	else
-		self:GetCanvas():Dock(NODOCK)
-	end
-end
-
-vgui.Register("ixCharMenuButtonList", PANEL, "DScrollPanel")
-
--- main character menu panel
-PANEL = {}
-
-AccessorFunc(PANEL, "bUsingCharacter", "UsingCharacter", FORCE_BOOL)
-
-function PANEL:Init()
-	local parent = self:GetParent()
-	local padding = self:GetPadding()
-	local halfWidth = ScrW() * 0.5
-	local halfPadding = padding * 0.5
-	local bHasCharacter = #ix.characters > 0
-
-	self.bUsingCharacter = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
-	self:DockPadding(padding, padding, padding, padding)
-
-	local infoLabel = self:Add("DLabel")
-	infoLabel:SetTextColor(Color(255, 255, 255, 25))
-	infoLabel:SetFont("ixMenuMiniFont")
-	infoLabel:SetText(L("TERRANOVA ") .. ix.config.Get("Version"))
-	infoLabel:SizeToContents()
-	infoLabel:SetPos(ScrW() - infoLabel:GetWide() - 4, ScrH() - infoLabel:GetTall() - 4)
-
-	local logoPanel = self:Add("Panel")
-	logoPanel:SetSize(ScrW(), ScrH() * 0.25)
-	logoPanel:SetPos(0, ScrH() * 0.0)
-	logoPanel.Paint = function(panel, width, height)
-		---[[
-		local matrix = self.currentMatrix
-
-		-- don't scale the background because it fucks the blur
-		if (matrix) then
-			cam.PopModelMatrix()
-		end
-
-		local newHeight = Lerp(1 - (self.currentDimAmount / 255), 0, height)
-		local y = height * 0.5 - newHeight * 0.5
-		local _, screenY = panel:LocalToScreen(0, 0)
-		screenY = screenY + y
-
-
-
-		if (matrix) then
-			cam.PushModelMatrix(matrix)
-		end
-
-		for _, v in ipairs(panel:GetChildren()) do
-			v:PaintManual()
-		end
-
-		render.SetScissorRect(0, 0, 0, 0, false) ---]]
+	-- By default, select the continue tab, or the create tab.
+	if (IsValid(load)) then
+		load:setSelected()
+	elseif (IsValid(create)) then
+		create:setSelected()
 	end
 
-	-- draw schema logo material instead of text if available
-	local logo = Schema.logo and ix.util.GetMaterial(Schema.logo)
-
-	if (logo and !logo:IsError()) then
-		local logoImage = logoPanel:Add("DImage")
-		logoImage:SetMaterial(logo)
-		logoImage:SetSize(halfWidth, halfWidth * logo:Height() / logo:Width())
-		logoImage:SetPos(halfWidth - logoImage:GetWide() * 0.5, halfPadding)
-		logoImage:SetPaintedManually(true)
-
-		logoPanel:SetTall(logoImage:GetTall() + padding)
-	else
-		local newHeight = padding
-		local subtitle = L2("schemaDesc") or Schema.description
-
-		local titleLabel = logoPanel:Add("DLabel")
-		titleLabel:SetTextColor(color_white)
-		titleLabel:SetFont("nutTitleFont")
-		titleLabel:SetText(L"TERRA NOVA ")
-		titleLabel:SizeToContents()
-		titleLabel:SetPos(halfWidth - titleLabel:GetWide() * 0.5, halfPadding)
-		titleLabel:SetPaintedManually(true)
-		newHeight = newHeight + titleLabel:GetTall()
-
-		if (subtitle) then
-			local subtitleLabel = logoPanel:Add("DLabel")
-			subtitleLabel:SetTextColor(color_white)
-			subtitleLabel:SetFont("nutTitleSmall")
-			subtitleLabel:SetText("Half-Life 2 Roleplay")
-			subtitleLabel:SizeToContents()
-			subtitleLabel:SetPos(halfWidth - subtitleLabel:GetWide() * 0.5, 0)
-			subtitleLabel:MoveBelow(titleLabel)
-			subtitleLabel:SetPaintedManually(true)
-			newHeight = newHeight + subtitleLabel:GetTall()
-		end
-
-		logoPanel:SetTall(newHeight)
-	end
-
-	-- button list
-	self.mainButtonList = self:Add("ixCharMenuButtonList")
-	self.mainButtonList:Dock(LEFT)
-
-	-- create character button
-	local createButton = self.mainButtonList:Add("ixMenuButton")
-	createButton:SetText("create")
-	createButton:SizeToContents()
-	createButton.DoClick = function()
-		local maximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
-		-- don't allow creation if we've hit the character limit
-		if (#ix.characters >= maximum) then
-			self:GetParent():ShowNotice(3, L("maxCharacters"))
-			return
-		end
-
-		self:Dim()
-		parent.newCharacterPanel:SetActiveSubpanel("faction", 0)
-		parent.newCharacterPanel:SlideUp()
-	end
-
-	-- load character button
-	self.loadButton = self.mainButtonList:Add("ixMenuButton")
-	self.loadButton:SetText("LOAD")
-	self.loadButton:SizeToContents()
-	self.loadButton.DoClick = function()
-		self:Dim()
-		parent.loadCharacterPanel:SlideUp()
-	end
-
-	if (!bHasCharacter) then
-		self.loadButton:SetDisabled(true)
-	end
-
-	-- leave/return button
-	self.returnButton = self.mainButtonList:Add("ixMenuButton")
-	self:UpdateReturnButton()
-	self.returnButton.DoClick = function()
-		if (self.bUsingCharacter) then
-			parent:Close()
-		else
-			RunConsoleCommand("disconnect")
-		end
-	end
-
-	self.mainButtonList:SizeToContents()
-end
-
-function PANEL:UpdateReturnButton(bValue)
-	if (bValue == nil) then
-		bValue = self.bUsingCharacter
-	end
-
-	self.returnButton:SetText(bValue and "return" or "leave")
-	self.returnButton:SizeToContents()
-end
-
-function PANEL:OnDim()
-	-- disable input on this panel since it will still be in the background while invisible - prone to stray clicks if the
-	-- panels overtop slide out of the way
-	self:SetMouseInputEnabled(false)
-	self:SetKeyboardInputEnabled(false)
-end
-
-function PANEL:OnUndim()
-	self:SetMouseInputEnabled(true)
-	self:SetKeyboardInputEnabled(true)
-
-	-- we may have just deleted a character so update the status of the return button
-	self.bUsingCharacter = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
-	self:UpdateReturnButton()
-end
-
-function PANEL:OnClose()
-	for _, v in pairs(self:GetChildren()) do
-		if (IsValid(v)) then
-			v:SetVisible(false)
-		end
-	end
-end
-
-function PANEL:PerformLayout(width, height)
-	local padding = self:GetPadding()
-
-	self.mainButtonList:SetPos(padding, height - self.mainButtonList:GetTall() - padding)
-end
-
-vgui.Register("ixCharMenuMain", PANEL, "ixCharMenuPanel")
-
--- container panel
-PANEL = {}
-
-function PANEL:Init()
-	if (IsValid(ix.gui.loading)) then
-		ix.gui.loading:Remove()
-	end
-
-	if (IsValid(ix.gui.characterMenu)) then
-		if (IsValid(ix.gui.characterMenu.channel)) then
-			ix.gui.characterMenu.channel:Stop()
-		end
-
-		ix.gui.characterMenu:Remove()
-	end
-
-	self:SetSize(ScrW(), ScrH())
-	self:SetPos(0, 0)
-
-	-- main menu panel
-	self.mainPanel = self:Add("ixCharMenuMain")
-
-	-- new character panel
-	self.newCharacterPanel = self:Add("ixPluginCharMenuNew")
-	self.newCharacterPanel:SlideDown(0)
-
-	-- load character panel
-	self.loadCharacterPanel = self:Add("ixCharMenuLoad")
-	self.loadCharacterPanel:SlideDown(0)
-
-	-- notice bar
-	self.notice = self:Add("ixNoticeBar")
-
-	-- finalization
-	self:MakePopup()
-	self.currentAlpha = 255
-	self.volume = 0
-
-	ix.gui.characterMenu = self
-
-	if (!IsValid(ix.gui.intro)) then
-		self:PlayMusic()
-	end
-end
-
-function PANEL:PlayMusic()
-	local path = "sound/" .. ix.config.Get("music")
-	local url = path:match("http[s]?://.+")
-	local play = url and sound.PlayURL or sound.PlayFile
-	path = url and url or path
-
-	play(path, "noplay", function(channel, error, message)
-		if (!IsValid(channel)) then
-			return
-		end
-
-		channel:SetVolume(self.volume or 0)
-		channel:Play()
-
-		self.channel = channel
-
-		self:CreateAnimation(audioFadeInTime, {
-			index = 10,
-			target = {volume = 1},
-
-			Think = function(animation, panel)
-				if (IsValid(panel.channel)) then
-					panel.channel:SetVolume(self.volume * 0.5)
-				end
+	-- If the player has a character (i.e. opened this menu from F1 menu), then
+	-- don't add a disconnect button. Just add a close button.
+	if (IsValid(LocalPlayer()) and LocalPlayer():GetCharacter()) then
+		self:addTab("return", function()
+			if (IsValid(self) and LocalPlayer():GetCharacter()) then
+				self:fadeOut()
 			end
-		})
-	end)
+		end, true)
+		return
+	end
+
+	-- Otherwise, add a disconnect button.
+	self:addTab("leave", function()
+		vgui.Create("ixCharacterConfirm")
+			:setTitle(L("disconnect"):upper().."?")
+			:setMessage(L("You will disconnect from the server."):upper())
+			:onConfirm(function() LocalPlayer():ConCommand("disconnect") end)
+	end, true)
 end
 
-function PANEL:ShowNotice(type, text)
-	self.notice:SetType(type)
-	self.notice:SetText(text)
-	self.notice:Show()
+function PANEL:createTitle()
+	self.title = self:Add("DLabel")
+	self.title:Dock(TOP)
+	self.title:DockMargin(48, 48, 0, 0)
+	self.title:SetContentAlignment(1)
+	self.title:SetTall(96)
+	self.title:SetFont("ixPluginCharTitleFont")
+	self.title:SetText("Terranova")
+	self.title:SetTextColor(WHITE)
+
+	self.desc = self:Add("DLabel")
+	self.desc:Dock(TOP)
+	self.desc:DockMargin(64, 0, 0, 0)
+	self.desc:SetTall(32)
+	self.desc:SetContentAlignment(7)
+	self.desc:SetText("Half-Life 2 Roleplay")
+	self.desc:SetFont("ixPluginCharDescFont")
+	self.desc:SetTextColor(WHITE)
 end
 
-function PANEL:HideNotice()
-	if (IsValid(self.notice) and !self.notice:GetHidden()) then
-		self.notice:Slide("up", 0.5, true)
+function PANEL:loadBackground()
+	-- Map scene integration.
+	local mapScene = ix.plugin.list.mapscene
+	if (not mapScene or table.Count(mapScene.scenes) == 0) then
+		self.blank = true
+	end
+
+	local url = ix.config.Get("backgroundURL")
+	if (url and url:find("%S")) then
+		self.background = self:Add("DHTML")
+		self.background:SetSize(ScrW(), ScrH())
+		if (url:find("http")) then
+			self.background:OpenURL(url)
+		else
+			self.background:SetHTML(url)
+		end
+		self.background.OnDocumentReady = function(background)
+			self.bgLoader:AlphaTo(0, 2, 1, function()
+				self.bgLoader:Remove()
+			end)
+		end
+		self.background:MoveToBack()
+		self.background:SetZPos(-999)
+
+		if (ix.config.get("charMenuBGInputDisabled")) then
+			self.background:SetMouseInputEnabled(false)
+			self.background:SetKeyboardInputEnabled(false)
+		end
+
+		self.bgLoader = self:Add("DPanel")
+		self.bgLoader:SetSize(ScrW(), ScrH())
+		self.bgLoader:SetZPos(-998)
+		self.bgLoader.Paint = function(loader, w, h)
+			surface.SetDrawColor(20, 20, 20)
+			surface.DrawRect(0, 0, w, h)
+		end
 	end
 end
 
-function PANEL:OnCharacterDeleted(character)
-	if (#ix.characters == 0) then
-		self.mainPanel.loadButton:SetDisabled(true)
-		self.mainPanel:Undim() -- undim since the load panel will slide down
-	else
-		self.mainPanel.loadButton:SetDisabled(false)
+local gradient = ix.util.GetMaterial("vgui/gradient-u")
+
+function PANEL:paintBackground(w, h)
+	if (IsValid(self.background)) then return end
+
+	if (self.blank) then
+		surface.SetDrawColor(30, 30, 30)
+		surface.DrawRect(0, 0, w, h)
 	end
 
-	self.loadCharacterPanel:OnCharacterDeleted(character)
-end
-
-function PANEL:OnCharacterLoadFailed(error)
-	self.loadCharacterPanel:SetMouseInputEnabled(true)
-	self.loadCharacterPanel:SlideUp()
-	self:ShowNotice(3, error)
+	surface.SetMaterial(gradient)
+	surface.SetDrawColor(0, 0, 0, 250)
+	surface.DrawTexturedRect(0, 0, w, h * 1.5)
 end
 
 function PANEL:IsClosing()
-	return self.bClosing
+	return false
 end
 
-function PANEL:Close(bFromMenu)
-	self.bClosing = true
-	self.bFromMenu = bFromMenu
+function PANEL:addTab(name, callback, justClick)
+	local button = self.tabs:Add("ixCharacterTabButton")
+	button:setText(L(name):upper())
 
-	local fadeOutTime = animationTime * 8
-
-	self:CreateAnimation(fadeOutTime, {
-		index = 1,
-		target = {currentAlpha = 0},
-
-		Think = function(animation, panel)
-			panel:SetAlpha(panel.currentAlpha)
-		end,
-
-		OnComplete = function(animation, panel)
-			panel:Remove()
+	if (justClick) then
+		if (isfunction(callback)) then
+			button.DoClick = function(button) callback(self) end
 		end
-	})
-
-	self:CreateAnimation(fadeOutTime - 0.1, {
-		index = 10,
-		target = {volume = 0},
-
-		Think = function(animation, panel)
-			if (IsValid(panel.channel)) then
-				panel.channel:SetVolume(self.volume * 0.5)
-			end
-		end,
-
-		OnComplete = function(animation, panel)
-			if (IsValid(panel.channel)) then
-				panel.channel:Stop()
-				panel.channel = nil
-			end
-		end
-	})
-
-	-- hide children if we're already dimmed
-	if (bFromMenu) then
-		for _, v in pairs(self:GetChildren()) do
-			if (IsValid(v)) then
-				v:SetVisible(false)
-			end
-		end
-	else
-		-- fade out the main panel quicker because it significantly blocks the screen
-		self.mainPanel.currentAlpha = 255
-
-		self.mainPanel:CreateAnimation(animationTime * 2, {
-			target = {currentAlpha = 0},
-			easing = "outQuint",
-
-			Think = function(animation, panel)
-				panel:SetAlpha(panel.currentAlpha)
-			end,
-
-			OnComplete = function(animation, panel)
-				panel:SetVisible(false)
-			end
-		})
+		return
 	end
 
-	-- relinquish mouse control
-	self:SetMouseInputEnabled(false)
-	self:SetKeyboardInputEnabled(false)
-	gui.EnableScreenClicker(false)
-end
-
-function PANEL:Paint(width, height)
-	surface.SetTexture(gradient)
-	surface.SetDrawColor(0, 0, 0, 255)
-	surface.DrawTexturedRect(0, 0, width, height)
-
-	if (!ix.option.Get("cheapBlur", false)) then
-		surface.SetDrawColor(0, 0, 0, 150)
-		surface.DrawTexturedRect(0, 0, width, height)
-		ix.util.DrawBlur(self, Lerp((self.currentAlpha - 200) / 255, 0, 10))
+	button.DoClick = function(button)
+		button:setSelected(true)
 	end
+	if (isfunction(callback)) then
+		button:onSelected(function()
+			callback(self)
+		end)
+	end
+
+	return button
 end
 
-function PANEL:PaintOver(width, height)
-	if (self.bClosing and self.bFromMenu) then
-		surface.SetDrawColor(color_black)
-		surface.DrawRect(0, 0, width, height)
-	end
+function PANEL:createCharacterSelection()
+	self.content:Clear()
+	self.content:InvalidateLayout(true)
+	self.content:Add("ixCharacterSelection")
 end
+
+function PANEL:createCharacterCreation()
+	self.content:Clear()
+	self.content:InvalidateLayout(true)
+	self.content:Add("ixCharacterCreation")
+end
+
+function PANEL:fadeOut()
+	self:AlphaTo(0, self.ANIM_SPEED, 0, function()
+		self:Remove()
+	end)
+end
+
+function PANEL:Init()
+	if (IsValid(ix.gui.characterMenu)) then
+		ix.gui.characterMenu:Remove()
+	end
+
+	ix.gui.characterMenu = self
+	self.currentAlpha = 255
+	self:Dock(FILL)
+	self:MakePopup()
+	self:SetAlpha(0)
+	self:AlphaTo(255, self.ANIM_SPEED * 2)
+
+	self:createTitle()
+
+	self.tabs = self:Add("DPanel")
+	self.tabs:Dock(TOP)
+	self.tabs:DockMargin(64, 32, 64, 0)
+	self.tabs:SetTall(48)
+	self.tabs:SetDrawBackground(false)
+	
+	self.content = self:Add("DPanel")
+	self.content:Dock(FILL)
+	self.content:DockMargin(64, 0, 64, 64)
+	self.content:SetDrawBackground(false)
+
+	self.music = self:Add("ixCharBGMusic")
+	self:loadBackground()
+	self:showContent()
+end
+
+function PANEL:showContent()
+	self.tabs:Clear()
+	self.content:Clear()
+	self:createTabs()
+end
+
+function PANEL:setFadeToBlack(fade)
+	local d = deferred.new()
+	if (fade) then
+		if (IsValid(self.fade)) then
+			self.fade:Remove()
+		end
+		local fade = vgui.Create("DPanel")
+		fade:SetSize(ScrW(), ScrH())
+		fade:SetSkin("Default")
+		fade:SetBackgroundColor(color_black)
+		fade:SetAlpha(0)
+		fade:AlphaTo(255, self.FADE_SPEED, 0, function() d:resolve() end)
+		fade:SetZPos(999)
+		fade:MakePopup()
+		self.fade = fade
+	elseif (IsValid(self.fade)) then
+		local fadePanel = self.fade
+		fadePanel:AlphaTo(0, self.FADE_SPEED, 0, function()
+			fadePanel:Remove()
+			d:resolve()
+		end)
+	end
+	return d
+end
+
+function PANEL:Paint(w, h)
+	ix.util.DrawBlur(self)
+	self:paintBackground(w, h)
+end
+
+function PANEL:hoverSound()
+	LocalPlayer():EmitSound(unpack(SOUND_CHAR_HOVER))
+end
+
+function PANEL:clickSound()
+	LocalPlayer():EmitSound(unpack(SOUND_CHAR_CLICK))
+end
+
+function PANEL:warningSound()
+	LocalPlayer():EmitSound(unpack(SOUND_CHAR_WARNING))
+end
+
+-- This is to appease the framework, we are handling this in this script, not helix itself.
+function PANEL:Close(client) end;
 
 vgui.Register("ixPluginCharMenu", PANEL, "EditablePanel")
 
 if (IsValid(ix.gui.characterMenu)) then
 	ix.gui.characterMenu:Remove()
-
-	--TODO: REMOVE ME
 	ix.gui.characterMenu = vgui.Create("ixPluginCharMenu")
 end
 

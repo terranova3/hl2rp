@@ -219,7 +219,7 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 
 	self:SetParent(givenInventory)
 	self:SetPos(x, y)
-	
+
 	if (self.slots) then
 		for _, v in ipairs(self.slots) do
 			if (IsValid(v) and v.item == self) then
@@ -229,7 +229,7 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 	end
 
 	self.slots = {}
-	
+
 	for currentX = 1, self.gridW do
 		for currentY = 1, self.gridH do
 			local slot = givenInventory.slots[self.gridX + currentX - 1][self.gridY + currentY - 1]
@@ -669,6 +669,7 @@ end
 
 function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	local panel = panels[1]
+
 	if (!IsValid(panel)) then
 		self.previewPanel = nil
 		return
@@ -702,35 +703,7 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 	tabs["inv"] = {
 		bDefault = true,
 		Create = function(info, container)
-			local inventoryPanel = container:Add("DPanel");
-			inventoryPanel.Paint = function() end;
-			inventoryPanel:SetSize(container:GetWide() / 3, container:GetTall());
-			inventoryPanel:Dock(LEFT)
-
-			local characterPanel = container:Add("DPanel")
-			characterPanel.Paint = function() end;
-			characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
-			characterPanel:Dock(FILL)	
-
-			netstream.Start("RequestShowCharacterPanel")
-			netstream.Hook("ShowCharacterPanel", function(show)
-				if(show) then 
-					local cPanel = characterPanel:Add("ixCharacterPane")
-					local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
-
-					if (charPanel) then
-						cPanel:SetCharPanel(charPanel)
-					end
-		
-					ix.gui.charPanel = cPanel
-				end
-			end)
-
-			local canvas = inventoryPanel:Add("DTileLayout")
-			canvas.Paint = function()
-				--surface.SetDrawColor(80, 80, 80, 50);	
-				--surface.DrawRect(0, 0, container:GetWide(), container:GetTall())
-			end;
+			local canvas = container:Add("DTileLayout")
 			local canvasLayout = canvas.PerformLayout
 			canvas.PerformLayout = nil -- we'll layout after we add the panels instead of each time one is added
 			canvas:SetBorder(0)
@@ -744,7 +717,7 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			panel:SetPos(0, 0)
 			panel:SetDraggable(false)
 			panel:SetSizable(false)
-			panel:SetTitle("Inventory")
+			panel:SetTitle(nil)
 			panel.bNoBackgroundBlur = true
 			panel.childPanels = {}
 
@@ -768,7 +741,7 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 
 			canvas.PerformLayout = canvasLayout
 			canvas:Layout()
-		end,
+		end
 	}
 end)
 

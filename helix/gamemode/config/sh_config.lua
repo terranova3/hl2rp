@@ -187,6 +187,3 @@ ix.config.Add("day", 1, "The starting day of the schema.", nil, {
 	data = {min = 1, max = 31},
 	category = "date"
 })
-ix.config.Add("Version", "1.0", "Version number displayed on the character screen", nil, {
-	category = "[TN] Settings"
-})

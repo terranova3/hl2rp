@@ -8,3 +8,8 @@ PLUGIN.description = "Changes the character menu and adds skin and facial hair f
 PLUGIN.author = "Adolphus";
 
 ix.util.Include("sh_hooks.lua")
+ix.util.IncludeDir(PLUGIN.folder .. "/derma/steps", true)
+
+if(SERVER) then 
+	resource.AddFile("resource/fonts/CommonSans.ttf")
+end
