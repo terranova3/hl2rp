@@ -158,14 +158,38 @@ function PANEL:LoadRecipes(category, search)
 end
 
 vgui.Register("ixCrafting", PANEL, "EditablePanel")
---[[
+
 hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
 	if (hook.Run("BuildCraftingMenu") != false) then
-	
 		tabs["inv"] = {
 			bDefault = true,
 			Create = function(info, container)
-				local canvas = container:Add("DTileLayout")
+				local inventoryPanel = container:Add("DPanel");
+				inventoryPanel.Paint = function() end;
+				inventoryPanel:SetSize(container:GetWide() / 3, container:GetTall());
+				inventoryPanel:Dock(LEFT)
+	
+				local characterPanel = container:Add("DPanel")
+				characterPanel.Paint = function() end;
+				characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
+				characterPanel:Dock(FILL)	
+	
+				netstream.Start("RequestShowCharacterPanel")
+				netstream.Hook("ShowCharacterPanel", function(show)
+					if(show) then 
+						local cPanel = characterPanel:Add("ixCharacterPane")
+						local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
+	
+						if (charPanel) then
+							cPanel:SetCharPanel(charPanel)
+						end
+	
+						ix.gui.charPanel = cPanel
+					end
+				end)
+	
+				local canvas = inventoryPanel:Add("DTileLayout")
+
 				local canvasLayout = canvas.PerformLayout
 				canvas.PerformLayout = nil -- we'll layout after we add the panels instead of each time one is added
 				canvas:SetBorder(0)
@@ -214,7 +238,7 @@ hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
 		}	
 	end
 end)
---]]
+
 net.Receive("ixCraftRefresh", function()
 	local craftPanel = ix.gui.crafting
 
