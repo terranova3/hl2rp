@@ -250,6 +250,7 @@ function PANEL:SendPayload()
 
 	self.payload:Prepare()
 
+	PrintTable(self.payload)
 	net.Start("ixCharacterCreate")
 		net.WriteTable(self.payload)
 	net.SendToServer()

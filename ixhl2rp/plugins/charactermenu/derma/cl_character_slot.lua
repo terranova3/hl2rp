@@ -12,7 +12,9 @@ function PANEL:confirmDelete()
 	vgui.Create("ixCharacterConfirm")
 		:setMessage(L("Deleting a character cannot be undone."))
 		:onConfirm(function()
-			PLUGIN:deleteCharacter(id)
+			net.Start("ixCharacterDelete")
+				net.WriteUInt(id, 32)
+			net.SendToServer()
 		end)
 end
 

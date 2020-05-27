@@ -251,8 +251,13 @@ function PANEL:warningSound()
 	LocalPlayer():EmitSound(unpack(SOUND_CHAR_WARNING))
 end
 
--- This is to appease the framework, we are handling this in this script, not helix itself.
+-- Called by the framework and here to avoid a possible nil error when called, unused.
 function PANEL:Close(client) end;
+
+-- This hook is called by the framework, we will redirect it to a different hook.
+function PANEL:OnCharacterDeleted(character)
+	hook.Run("CharacterListUpdated", ix.characters)
+end;
 
 vgui.Register("ixPluginCharMenu", PANEL, "EditablePanel")
 

@@ -12,22 +12,22 @@ function PANEL:Init()
 end
 
 -- Called when this step is made visible.
-function PANEL:onDisplay()
+function PANEL:Display()
 end
 
 -- Requests for the next step to be shown, or to finish character creation
 -- if this is the final step.
-function PANEL:next()
-	ix.gui.charCreate:nextStep()
+function PANEL:Forward()
+	ix.gui.charCreate:NextStep()
 end
 
 -- Requests for the previous step to be shown.
-function PANEL:previous()
-	ix.gui.charCreate:previousStep()
+function PANEL:Backwards()
+	ix.gui.charCreate:PreviousStep()
 end
 
 -- Runs the character validation given the name of a character variable.
-function PANEL:validateCharVar(name)
+function PANEL:ValidateCharVar(name)
 	local charVar = ix.char.vars[name]
 	assert(charVar, "invalid character variable "..tostring(name))
 
@@ -43,29 +43,29 @@ end
 
 -- Returns whether or not the input for this form is valid. You should override
 -- this if you need custom validation.
-function PANEL:validate()
+function PANEL:Validate()
 	return true
 end
 
 -- Sets the value of a character variable corresponding to key for the character
 -- that is going to be created.
-function PANEL:setContext(key, value)
-	ix.gui.charCreate.context[key] = value
+function PANEL:SetPayload(key, value)
+	ix.gui.charCreate:SetPayload(key, value)
 end
 
 -- Removes any set character variables for the character that is going to be
 -- created.
-function PANEL:clearContext()
-	ix.gui.charCreate.context = {}
+function PANEL:ResetPayload()
+	ix.gui.charCreate:ResetPayload();
 end
 
 -- Returns the set character variable corresponding to key. If it does not
 -- exist, then default (which is nil if not set) is returned.
-function PANEL:getContext(key, default)
+function PANEL:GetPayload(key, default)
 	if (key == nil) then
-		return ix.gui.charCreate.context
+		return ix.gui.charCreate.payload
 	end
-	local value = ix.gui.charCreate.context[key]
+	local value = ix.gui.charCreate.payload[key]
 	if (value == nil) then
 		return default
 	end
@@ -73,27 +73,23 @@ function PANEL:getContext(key, default)
 end
 
 -- Returns the model panel to the left of the step view.
-function PANEL:getModelPanel()
+function PANEL:GetModelPanel()
 	return ix.gui.charCreate.model
 end
 
 -- Requests that the model panel for the character is updated.
-function PANEL:updateModelPanel()
-	ix.gui.charCreate:updateModel()
+function PANEL:UpdateModelPanel()
+	ix.gui.charCreate:UpdateModel()
 end
 
 -- Return true if this step should be skipped, false otherwise. This should
 -- not have any side effects. Side effects go in onSkip.
-function PANEL:shouldSkip()
+function PANEL:ShouldSkip()
 	return false
 end
 
--- Called if this step has been skipped over.
-function PANEL:onSkip()
-end
-
 -- Helper function to add a label that is docked at the top of the step.
-function PANEL:addLabel(text)
+function PANEL:AddLabel(text)
 	local label = self:Add("DLabel")
 	label:SetFont("ixPluginCharButtonFont")
 	label:SetText(L(text):upper())
@@ -102,7 +98,10 @@ function PANEL:addLabel(text)
 	return label
 end
 
-function PANEL:onHide()
-end
+-- Called if this step has been skipped over.
+function PANEL:OnSkip() end
+
+-- Called if this step has been hidden.
+function PANEL:OnHide() end
 
 vgui.Register("ixCharacterCreateStep", PANEL, "DScrollPanel")

@@ -3,20 +3,20 @@ local PANEL = {}
 local HIGHLIGHT = Color(255, 255, 255, 50)
 
 function PANEL:Init()
-	self.nameLabel = self:addLabel("name")
+	self.nameLabel = self:AddLabel("name")
 	self.nameLabel:SetZPos(0)
 
-	self.name = self:addTextEntry("name")
+	self.name = self:AddTextEntry("name")
 	self.name:SetTall(48)
 	self.name.onTabPressed = function()
 		self.desc:RequestFocus()
 	end
 	self.name:SetZPos(1)
 
-	self.descLabel = self:addLabel("description")
+	self.descLabel = self:AddLabel("description")
 	self.descLabel:SetZPos(2)
 
-	self.desc = self:addTextEntry("desc")
+	self.desc = self:AddTextEntry("description")
 	self.desc:SetTall(self.name:GetTall() * 3)
 	self.desc.onTabPressed = function()
 		self.name:RequestFocus()
@@ -25,16 +25,16 @@ function PANEL:Init()
 	self.desc:SetZPos(3)
 end
 
-function PANEL:addTextEntry(contextName)
+function PANEL:AddTextEntry(payloadName)
 	local entry = self:Add("DTextEntry")
 	entry:Dock(TOP)
 	entry:SetFont("ixPluginCharButtonFont")
-	entry.Paint = self.paintTextEntry
+	entry.Paint = self.PaintTextEntry
 	entry:DockMargin(0, 4, 0, 16)
 	entry.OnValueChange = function(_, value)
-		self:setContext(contextName, string.Trim(value))
+		self:SetPayload(payloadName, string.Trim(value))
 	end
-	entry.contextName = contextName
+	entry.payloadName = payloadName
 	entry.OnKeyCodeTyped = function(name, keyCode)
 		if (keyCode == KEY_TAB) then
 			entry:onTabPressed()
@@ -45,42 +45,40 @@ function PANEL:addTextEntry(contextName)
 	return entry
 end
 
-function PANEL:onDisplay()
-	local faction = self:getContext("faction")
-	assert(faction, "faction not set before showing name input")
-	local default, override =
-		hook.Run("GetDefaultCharName", LocalPlayer(), faction)
+function PANEL:Display()
+	local faction = self:GetPayload("faction")
+	local default, override = hook.Run("GetDefaultCharName", LocalPlayer(), faction)
 
 	if (override) then
 		self.nameLabel:SetVisible(false)
 		self.name:SetVisible(false)
 	else
-		if (default and not self:getContext("name")) then
-			self:setContext("name", default)
+		if (default and not self:GetPayload("name")) then
+			self:SetPayload("name", default)
 		end
 		self.nameLabel:SetVisible(true)
 		self.name:SetVisible(true)
-		self.name:SetText(self:getContext("name", ""))
+		self.name:SetText(self:GetPayload("name", ""))
 	end
 
-	self.desc:SetText(self:getContext("desc", ""))
+	self.desc:SetText(self:GetPayload("description", ""))
 
 	-- Requesting focus same frame causes issues with docking.
 	self.name:RequestFocus()
 end
 
-function PANEL:validate()
+function PANEL:Validate()
 	if (self.name:IsVisible()) then
-		local res = {self:validateCharVar("name")}
+		local res = {self:ValidateCharVar("name")}
 		if (res[1] == false) then
 			return unpack(res)
 		end
 	end
-	return self:validateCharVar("description")
+	return self:ValidateCharVar("description")
 end
 
 -- self refers to the text entry
-function PANEL:paintTextEntry(w, h)
+function PANEL:PaintTextEntry(w, h)
 	ix.util.DrawBlur(self)
 	surface.SetDrawColor(0, 0, 0, 100)
 	surface.DrawRect(0, 0, w, h)

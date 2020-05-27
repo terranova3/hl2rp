@@ -1,8 +1,7 @@
 local PANEL = {}
 
 function PANEL:Init()
-	
-	self.title = self:addLabel("Select a model")
+	self.title = self:AddLabel("Select a model")
 
 	self.models = self:Add("DIconLayout")
 	self.models:Dock(FILL)
@@ -14,15 +13,18 @@ function PANEL:Init()
 	self.models:StretchToParent(0, 0, 0, 0)
 end
 
-function PANEL:onDisplay()
+function PANEL:Display()
 	local oldChildren = self.models:GetChildren()
 	self.models:InvalidateLayout(true)
 
-	local faction = ix.faction.indices[self:getContext("faction")]
+	local faction = ix.faction.indices[self:GetPayload("faction")]
 	if (not faction) then return end
 
-	local function paintIcon(icon, w, h)
-		self:paintIcon(icon, w, h)
+	self.title:SetTextColor(faction.color)
+	self.title:SetText(faction.selectModelText or "Select a model")
+
+	local function PaintIcon(icon, w, h)
+		self:PaintIcon(icon, w, h)
 	end
 
 	for k, v in SortedPairs(faction.models) do
@@ -30,7 +32,7 @@ function PANEL:onDisplay()
 		icon:SetSize(64, 128)
 		icon:InvalidateLayout(true)
 		icon.DoClick = function(icon)
-			self:onModelSelected(icon)
+			self:OnModelSelected(icon)
 		end
 		icon.PaintOver = paintIcon
 
@@ -47,8 +49,8 @@ function PANEL:onDisplay()
 		end
 		icon.index = k
 
-		if (self:getContext("model") == k) then
-			self:onModelSelected(icon, true)
+		if (self:GetPayload("model") == k) then
+			self:OnModelSelected(icon, true)
 		end
 	end
 
@@ -59,8 +61,8 @@ function PANEL:onDisplay()
 	end
 end
 
-function PANEL:paintIcon(icon, w, h)
-	if (self:getContext("model") ~= icon.index) then return end
+function PANEL:PaintIcon(icon, w, h)
+	if (self:GetPayload("model") ~= icon.index) then return end
 	local color = ix.config.Get("color", color_white)
 
 	surface.SetDrawColor(color.r, color.g, color.b, 200)
@@ -72,21 +74,21 @@ function PANEL:paintIcon(icon, w, h)
 	end
 end
 
-function PANEL:onModelSelected(icon, noSound)
-	self:setContext("model", icon.index or 1)
+function PANEL:OnModelSelected(icon, noSound)
+	self:SetPayload("model", icon.index or 1)
 	if (not noSound) then
 		ix.gui.characterMenu:clickSound()
 	end
-	self:updateModelPanel()
+	self:UpdateModelPanel()
 end
 
-function PANEL:shouldSkip()
-	local faction = ix.faction.indices[self:getContext("faction")]
+function PANEL:ShouldSkip()
+	local faction = ix.faction.indices[self:GetPayload("faction")]
 	return faction and #faction.models == 1 or false
 end
 
-function PANEL:onSkip()
-	self:setContext("model", 1)
+function PANEL:OnSkip()
+	self:SetPayload("model", 1)
 end
 
 vgui.Register("ixCharacterModel", PANEL, "ixCharacterCreateStep")

@@ -1,7 +1,7 @@
 local PANEL = {}
 
 function PANEL:Init()
-	self.title = self:addLabel("Select a faction")
+	self.title = self:AddLabel("Select a faction")
 
 	self.faction = self:Add("DComboBox")
 	self.faction:SetFont("ixPluginCharButtonFont")
@@ -15,11 +15,11 @@ function PANEL:Init()
 	end
 	self.faction:SetTextColor(color_white)
 	self.faction.OnSelect = function(faction, index, value, id)
-		self:onFactionSelected(ix.faction.teams[id])
+		self:OnFactionSelected(ix.faction.teams[id])
 	end
 
-	self.desc = self:addLabel("desc")
-	self.desc:DockMargin(0, 8, 0, 0)
+	self.desc = self:AddLabel("desc")
+	self.desc:DockMargin(8, 8, 0, 0)
 	self.desc:SetFont("ixPluginCharSubTitleFont")
 	self.desc:SetWrap(true)
 	self.desc:SetAutoStretchVertical(true)
@@ -35,28 +35,31 @@ function PANEL:Init()
 	end
 end
 
-function PANEL:onDisplay()
+function PANEL:Display()
 	self.skipFirstSelect = true
+
 	local _, id = self.faction:GetSelected()
 	local faction = ix.faction.teams[id]
 	if (faction) then
-		self:onFactionSelected(faction)
+		self:OnFactionSelected(faction)
 	end
 end
 
-function PANEL:onFactionSelected(faction)
-	if (self:getContext("faction") == faction.index) then
+function PANEL:OnFactionSelected(faction)
+	if (self:GetPayload("faction") == faction.index) then
 		return
 	end
 
-	self.desc:SetText(L(faction.desc or "noDesc"))
+	local models = ix.faction.indices[faction.index]:GetModels(LocalPlayer())
 
-	self:clearContext()
-	self:setContext("faction", faction.index)
-	self:setContext("model", 1)
+	self.desc:SetText(L(faction.description or "noDesc"))
+
+	self:ResetPayload()
+	self:SetPayload("faction", faction.index)
+	self:SetPayload("model", math.random(1, #models))
 
 	-- Set the model for the preview.
-	self:updateModelPanel()
+	self:UpdateModelPanel()
 
 	-- Don't make the click sound when the faction is pre-selected.
 	if (self.skipFirstSelect) then
@@ -66,15 +69,15 @@ function PANEL:onFactionSelected(faction)
 	ix.gui.characterMenu:clickSound()
 end
 
-function PANEL:shouldSkip()
+function PANEL:ShouldSkip()
 	return #self.faction.Choices == 1
 end
 
-function PANEL:onSkip()
+function PANEL:OnSkip()
 	local _, id = self.faction:GetSelected()
 	local faction = ix.faction.teams[id]
-	self:setContext("faction", faction and faction.index or nil)
-	self:setContext("model", self:getContext("model", 1))
+	self:SetPayload("faction", faction and faction.index or nil)
+	self:SetPayload("model", self:GetPayload("model", 1))
 end
 
 vgui.Register("ixCharacterFaction", PANEL, "ixCharacterCreateStep")
