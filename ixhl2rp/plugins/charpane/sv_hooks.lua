@@ -18,10 +18,40 @@ function PLUGIN:CharacterLoaded(character)
 end;
 
 -- Called when an item has been added to the character panel
-function PLUGIN:CharPanelItemEquipped(client, inventory, charPanel, item) end;
+function PLUGIN:CharPanelItemEquipped(client, item)
+	if(!item.outfitCategory) then return false end;
+	local bodygroup = 0
+
+	for _, v in pairs(item.bodyGroups) do 
+		bodygroup = v;
+	end
+
+	PLUGIN:UpdateBodygroup(client, item.outfitCategory, bodygroup)
+end;
 
 -- Called when an item has been removed from the character panel
-function PLUGIN:CharPanelItemUnequipped(client, charPanel, item) end;
+function PLUGIN:CharPanelItemUnequipped(client, item) 
+	if(!item.outfitCategory) then return false end;
+
+	PLUGIN:UpdateBodygroup(client, item.outfitCategory, 0)
+end;
+
+function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)
+	local character = client:GetCharacter()
+	local index = client:FindBodygroupByName(outfitCategory)
+	local groups =character:GetData("groups", {})
+
+	groups[index] = bodygroup
+
+	character:SetData("groups", groups)
+	client:SetBodygroup(index, bodygroup)
+
+	print("Sending message")
+	net.Start("ixCharPanelUpdateModel")
+		net.WriteUInt(index, 4)
+		net.WriteUInt(bodygroup, 4)
+	net.Send(client)
+end
 
 -- Called when the client is checking if it has access to see the character panel
 function PLUGIN:CharPanelShouldShow(client)
@@ -31,4 +61,13 @@ end;
 netstream.Hook("RequestShowCharacterPanel", function(client)
 	local show = hook.Run("CharPanelShouldShow", client)
 	netstream.Start(client, "ShowCharacterPanel", show)
+end)
+
+netstream.Hook("UpdateCharacterModel", function(client)
+	local bodygroups = client:GetCharacter():GetData("groups", nil)
+	
+	PrintTable(bodygroups)
+	net.Start("ixCharPanelLoadModel")
+		net.WriteTable(bodygroups)
+	net.Send(client)
 end)

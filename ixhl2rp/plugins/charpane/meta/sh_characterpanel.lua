@@ -152,7 +152,7 @@ if (SERVER) then
 				query:Execute()
 
 
-				hook.Run("CharPanelItemEquipped", client, ix.item.inventories[oldInvID], targetCharPanel, item)
+				hook.Run("CharPanelItemEquipped", client, item)
 
 				return category, targetCharPanel:GetID()
 			else
@@ -172,9 +172,12 @@ if (SERVER) then
 		end
 
 		if (charPanel) then
+
 			charPanel:Remove(item.id)
 			item.panelID = world
 
+			hook.Run("CharPanelItemUnequipped", client, item)
+			
 			if(invID == world) then
 				item.invID = world
 
@@ -315,8 +318,6 @@ if (SERVER) then
 						return false, "noFit"
 					end
 				end
-
-				hook.Run("CharPanelItemUnequipped", item, curInv, inventory)
 			end
 		else
 			return false, "invalidInventory"

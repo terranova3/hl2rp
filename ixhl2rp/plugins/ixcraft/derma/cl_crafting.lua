@@ -185,6 +185,8 @@ hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
 						end
 	
 						ix.gui.charPanel = cPanel
+
+						netstream.Start("UpdateCharacterModel")
 					end
 				end)
 	

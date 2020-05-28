@@ -61,7 +61,11 @@ function PANEL:Init()
 	self.cancel = self.buttons:Add("ixCharButton")
 	self.cancel:SetText(L("cancel"):upper())
 	self.cancel:SizeToContentsX()
-	self.cancel.DoClick = function(cancel) self:Reset() end
+	self.cancel.DoClick = function(cancel) 
+		if (IsValid(ix.gui.characterMenu)) then
+			ix.gui.characterMenu:showContent()
+		end
+	end
 	self.cancel.x = (ScrW() - self.cancel:GetWide()) * 0.5 - 64
 	self.cancel.y = (self.buttons:GetTall() - self.cancel:GetTall()) * 0.5
 
@@ -247,10 +251,10 @@ function PANEL:Reset()
 
 	if (IsValid(self.steps[self.curStep])) then
 		self.steps[self.curStep]:SetVisible(false)
-		self.steps[self.curStep]:onHide()
+		self.steps[self.curStep]:OnHide()
 	end
 
-	self:nextStep()
+	self:NextStep()
 end
 
 -- Adds a step to the list of steps to be shown in the character creation menu.

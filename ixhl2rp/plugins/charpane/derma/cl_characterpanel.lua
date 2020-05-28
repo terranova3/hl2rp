@@ -98,12 +98,14 @@ local PANEL = {}
 
 function PANEL:Init()
 	self:SetSize(360, 525)
-	
 	self.model = self:Add("ixModelPanel")
 	self.model:Dock(FILL)
 	self.model:SetModel(LocalPlayer():GetModel())
 	self.model:SetFOV(50)
-	self.model.follow = false;
+
+	-- Don't display until we have the bodygroups loaded.
+	self.model:SetVisible(false)
+
 	self.panels = {}
 	self.slotPlacements = {
 		["headgear"] = {x = 5, y = 100},
@@ -113,6 +115,23 @@ function PANEL:Init()
 		["hands"] = {x = 291, y = 300},
 		["legs"] = {x = 291, y = 370},
 	}
+
+	net.Receive("ixCharPanelLoadModel", function()
+		local bodygroups = net.ReadTable()
+
+		for k, v in pairs(bodygroups) do
+			self.model.Entity:SetBodygroup(k, v)
+		end
+
+		self.model:SetVisible(true)
+	end)
+
+	net.Receive("ixCharPanelUpdateModel", function()
+		local index = net.ReadUInt(4)
+		local bodygroup = net.ReadUInt(4)
+
+		self.model.Entity:SetBodygroup(index, bodygroup)
+	end)
 end
 
 function PANEL:SetCharPanel(charPanel, bFitParent)
