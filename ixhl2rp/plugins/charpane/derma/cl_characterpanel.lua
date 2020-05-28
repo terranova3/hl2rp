@@ -127,8 +127,8 @@ function PANEL:Init()
 	end)
 
 	net.Receive("ixCharPanelUpdateModel", function()
-		local index = net.ReadUInt(4)
-		local bodygroup = net.ReadUInt(4)
+		local index = net.ReadUInt(8)
+		local bodygroup = net.ReadUInt(8)
 
 		self.model.Entity:SetBodygroup(index, bodygroup)
 	end)

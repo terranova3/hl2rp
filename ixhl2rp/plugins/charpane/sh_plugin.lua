@@ -154,7 +154,6 @@ do
 					local panel = ix.gui.charPanel
 
 					if (IsValid(ix.gui.charPanel)) then
-						print("IsValid charPanel")
 						local icon = panel:AddIcon(
 							item, item:GetModel() or "models/props_junk/popcan01a.mdl", category, item:GetSkin()
 						)

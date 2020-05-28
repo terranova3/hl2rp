@@ -45,11 +45,10 @@ function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)
 
 	character:SetData("groups", groups)
 	client:SetBodygroup(index, bodygroup)
-
-	print("Sending message")
+	
 	net.Start("ixCharPanelUpdateModel")
-		net.WriteUInt(index, 4)
-		net.WriteUInt(bodygroup, 4)
+		net.WriteUInt(index, 8)
+		net.WriteUInt(bodygroup, 8)
 	net.Send(client)
 end
 
@@ -65,8 +64,7 @@ end)
 
 netstream.Hook("UpdateCharacterModel", function(client)
 	local bodygroups = client:GetCharacter():GetData("groups", nil)
-	
-	PrintTable(bodygroups)
+
 	net.Start("ixCharPanelLoadModel")
 		net.WriteTable(bodygroups)
 	net.Send(client)

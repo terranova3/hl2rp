@@ -396,7 +396,6 @@ function PANEL:SendPayload()
 
 	self.payload:Prepare()
 
-	PrintTable(self.payload)
 	net.Start("ixCharacterCreate")
 		net.WriteTable(self.payload)
 	net.SendToServer()
@@ -459,8 +458,6 @@ function PANEL:VerifyProgression(name)
 				local result = {v:OnValidate(value, self.payload, LocalPlayer())}
 
 				if (result[1] == false) then
-					print(result[2])
-
 					self:ShowError(L(unpack(result, 2)))
 					return false
 				end
