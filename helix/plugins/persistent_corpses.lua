@@ -117,9 +117,14 @@ if (SERVER) then
 			return
 		end
 
+		local bodygroups = client:GetCharacter():GetData("groups", {})
 		local entity = IsValid(client.ixRagdoll) and client.ixRagdoll or client:CreateServerRagdoll()
 		local decayTime = ix.config.Get("corpseDecayTime", 60)
 		local uniqueID = "ixCorpseDecay" .. entity:EntIndex()
+
+		for k, v in pairs(bodygroups) do
+			entity:SetBodygroup(k, v)
+		end 
 
 		entity:RemoveCallOnRemove("fixer")
 		entity:CallOnRemove("ixPersistentCorpse", function(ragdoll)
