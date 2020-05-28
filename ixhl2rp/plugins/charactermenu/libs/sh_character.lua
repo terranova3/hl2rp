@@ -13,13 +13,13 @@ do
 		index = 2,
 		category = "customization",
 		OnValidate = function(self, value, payload)
-			return value or 1;
+			return value or 0;
 		end,
 		OnDisplay = function(self, container, payload)
 			local skinSelect = container:Add("ixAttributeBar")
 			skinSelect:Dock(TOP)
 			skinSelect:SetText(" ");
-			skinSelect.value = 1;
+			skinSelect.value = 0;
 			skinSelect.OnChanged = function()
 				payload:Set("skin", skinSelect.value);
 			end;

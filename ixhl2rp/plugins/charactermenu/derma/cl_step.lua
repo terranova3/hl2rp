@@ -98,6 +98,16 @@ function PANEL:AddLabel(text)
 	return label
 end
 
+-- Helper function to add a label that is docked at the top of the step.
+function PANEL:SubLabel(text)
+	local label = self:Add("DLabel")
+	label:SetFont("ixPluginCharButtonSubFont")
+	label:SetText(L(text):upper())
+	label:SizeToContents()
+	label:Dock(TOP)
+	return label
+end
+
 -- Called if this step has been skipped over.
 function PANEL:OnSkip() end
 

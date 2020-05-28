@@ -65,7 +65,8 @@ end)
 netstream.Hook("UpdateCharacterModel", function(client)
 	local bodygroups = client:GetCharacter():GetData("groups", nil)
 
+	-- We send the message regardless if bodygroups is valid, because we need to tell the client to show their model.
 	net.Start("ixCharPanelLoadModel")
-		net.WriteTable(bodygroups)
+		net.WriteTable(bodygroups or {})
 	net.Send(client)
 end)

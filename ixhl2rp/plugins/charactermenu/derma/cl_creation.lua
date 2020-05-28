@@ -3,6 +3,7 @@ local PLUGIN = PLUGIN;
 local steps = {
 	"ixCharacterFaction",
 	"ixCharacterModel",
+	"ixCharacterCustomisation",
 	"ixCharacterBiography"
 }
 
