@@ -4,6 +4,7 @@ local steps = {
 	"ixCharacterFaction",
 	"ixCharacterModel",
 	"ixCharacterCustomisation",
+	"ixCharacterTraits",
 	"ixCharacterBiography"
 }
 

@@ -3,7 +3,9 @@ local PANEL = {}
 local HIGHLIGHT = Color(255, 255, 255, 50)
 
 function PANEL:Init()
-	self.nameLabel = self:AddLabel("name")
+	self.nameLabel = self:AddLabel("Who are you?")
+
+	self.nameLabel = self:SubLabel("name")
 	self.nameLabel:SetZPos(0)
 
 	self.name = self:AddTextEntry("name")
@@ -13,7 +15,7 @@ function PANEL:Init()
 	end
 	self.name:SetZPos(1)
 
-	self.descLabel = self:AddLabel("description")
+	self.descLabel = self:SubLabel("description")
 	self.descLabel:SetZPos(2)
 
 	self.desc = self:AddTextEntry("description")
