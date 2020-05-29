@@ -54,6 +54,20 @@ function ix.traits.FindByName(trait)
 	return uniqueID
 end
 
+function ix.traits.Get(uniqueID)
+	return ix.traits.stored[uniqueID] or nil;
+end
+
+function ix.traits.CallHook(hook, client, character)
+	for _, v in pairs(character:GetTraits()) do
+		local trait = ix.traits.Get(v);
+
+		if(IsValid(trait) and trait.hooks[hook]) then
+			trait.hooks[hook](client, character);
+		end
+	end
+end
+
 hook.Add("DoPluginIncludes", "ixTraits", function(path, pluginTable)
 	if (!PLUGIN.paths) then
 		PLUGIN.paths = {}

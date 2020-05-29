@@ -13,6 +13,7 @@ TRAIT.uniqueID = "undefined"
 TRAIT.category = "undefined"
 TRAIT.icon = "undefined"
 TRAIT.opposite = "undefined"
+TRAIT.hooks = {}
 
 function TRAIT:GetName()
 	return self.name
@@ -24,6 +25,10 @@ end
 
 function TRAIT:GetIcon()
 	return self.icon
+end
+
+function TRAIT:AddHook(name, func)
+	self.hooks[name] = func
 end
 
 ix.meta.trait = TRAIT
