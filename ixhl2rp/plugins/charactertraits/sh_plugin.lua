@@ -10,4 +10,19 @@ PLUGIN.description = "Adds an all encompassing way to describe your character.";
 PLUGIN.author = "Adolphus";
 
 ix.util.Include("meta/sh_trait.lua")
-ix.util.Include("sv_database.lua")
+ix.util.Include("sv_hooks.lua")
+
+PLUGIN.categories = {
+	"physical",
+	"intelligence",
+	"mentality",
+	"philosophy"
+}
+
+function PLUGIN:OnLoaded()
+	for _, path in ipairs(self.paths or {}) do
+		for _, v in pairs(self.categories) do
+			ix.traits.LoadFromDir(path.."/traits/" .. v)
+		end
+	end
+end

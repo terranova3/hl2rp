@@ -9,6 +9,7 @@ function PANEL:Init()
 	self:Dock(FILL)
 	self:SetDrawBackground(false)
 	self:SetVisible(false)
+	self.stagePanels = {}
 end
 
 -- Called when this step is made visible.
@@ -108,10 +109,40 @@ function PANEL:SubLabel(text)
 	return label
 end
 
+-- Helper function to add stages for a step.
+function PANEL:AddStagePanel(name)
+	local id = #self.stagePanels + 1;
+
+	local panel = self:Add("DPanel");
+	panel:InvalidateParent(true)
+	panel:Dock(FILL)
+	panel:SetVisible(false);
+	panel.OnSetActive = function() end
+	panel.Paint = function() end
+
+	self.stagePanels[id] = {}
+	self.stagePanels[id].panel = panel;
+	self.stagePanels[id].subpanelName = name;
+
+	return panel;
+end;
+
+-- Sets the active panel of the step.
+function PANEL:SetActivePanel(name)
+	for i = 1, #self.stagePanels do
+		if(self.stagePanels[i].subpanelName == name) then
+			self.stagePanels[i].panel:SetVisible(true);
+			self.stagePanels[i].panel:OnSetActive();
+		else
+			self.stagePanels[i].panel:SetVisible(false);
+		end;
+	end;
+end;
+
 -- Called if this step has been skipped over.
 function PANEL:OnSkip() end
 
 -- Called if this step has been hidden.
 function PANEL:OnHide() end
 
-vgui.Register("ixCharacterCreateStep", PANEL, "DScrollPanel")
+vgui.Register("ixCharacterCreateStep", PANEL, "DPanel")

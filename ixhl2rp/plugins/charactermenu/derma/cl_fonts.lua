@@ -46,6 +46,12 @@ surface.CreateFont("ixPluginCharSubTitleFont", {
     size = ScreenScale(6),
     additive = true
 })
+surface.CreateFont("ixPluginCharTraitFont", {
+    font = font,
+    weight = 200,
+    size = ScreenScale(5),
+    additive = true
+})
 surface.CreateFont("ixPluginCharButtonFont", {
     font = font,
     weight = 200,

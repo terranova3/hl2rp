@@ -6,7 +6,7 @@
 ix.meta = ix.meta or {}
 
 local TRAIT = ix.meta.trait or {}
-TRAIT.__index = RECIPE
+TRAIT.__index = TRAIT
 TRAIT.name = "undefined"
 TRAIT.description = "undefined"
 TRAIT.uniqueID = "undefined"

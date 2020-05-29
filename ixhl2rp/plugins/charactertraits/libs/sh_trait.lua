@@ -33,7 +33,7 @@ function ix.traits.GetCategories()
 			categories[category] = {}
 		end
 
-		table.insert(categories[category], k)
+		table.insert(categories[category], v)
 	end
 
 	return categories
@@ -58,7 +58,9 @@ function ix.traits.Get(uniqueID)
 	return ix.traits.stored[uniqueID] or nil;
 end
 
-function ix.traits.CallHook(hook, client, character)
+function ix.traits.CallHook(hook, client)
+	local character = client:GetCharacter();
+	
 	for _, v in pairs(character:GetTraits()) do
 		local trait = ix.traits.Get(v);
 
