@@ -1,7 +1,8 @@
 local PANEL = {}
 
 function PANEL:Init()
-	self.title = self:AddLabel("Select a model")
+	self.title = self:AddLabel("Customise your character")
+	self.subtitle = self:SubLabel("Select a model")
 
 	self.models = self:Add("DIconLayout")
 	self.models:Dock(FILL)
@@ -20,8 +21,8 @@ function PANEL:Display()
 	local faction = ix.faction.indices[self:GetPayload("faction")]
 	if (not faction) then return end
 
-	self.title:SetTextColor(faction.color)
-	self.title:SetText(faction.selectModelText or "Select a model")
+	self.subtitle:SetTextColor(faction.color)
+	self.subtitle:SetText(faction.selectModelText or "Select a model")
 
 	local function PaintIcon(icon, w, h)
 		self:PaintIcon(icon, w, h)
