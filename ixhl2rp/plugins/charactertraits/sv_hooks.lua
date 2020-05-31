@@ -7,5 +7,5 @@ local PLUGIN = PLUGIN;
 
 -- Calls the OnCharacterCreated hook of any traits the player has.
 function PLUGIN:OnCharacterCreated(client, character) 
-	ix.traits.CallHook("OnCharacterCreated", client); 
+	ix.traits.CallHook("OnCharacterCreated", character); 
 end;

@@ -8,3 +8,4 @@ TRAIT.opposite = "Educated";
 TRAIT.description = "Years at some university or academy was unattainable.";
 TRAIT.category = "Intelligence";
 TRAIT.icon = "materials/terranova/ui/traits/uneducated.png";
+TRAIT.negative = true;

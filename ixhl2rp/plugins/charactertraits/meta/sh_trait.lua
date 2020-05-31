@@ -13,6 +13,7 @@ TRAIT.uniqueID = "undefined"
 TRAIT.category = "undefined"
 TRAIT.icon = "undefined"
 TRAIT.opposite = "undefined"
+TRAIT.negative = false
 TRAIT.hooks = {}
 
 function TRAIT:GetName()

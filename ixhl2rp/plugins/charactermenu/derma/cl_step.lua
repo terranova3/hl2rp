@@ -73,6 +73,22 @@ function PANEL:GetPayload(key, default)
 	return value
 end
 
+function PANEL:GetPayloadSize(key)
+	local payload = self:GetPayload(key)
+
+	if(istable(payload)) then
+		local count = 0
+
+		for _, v in pairs(payload) do
+			count = count + 1
+		end
+
+		return count
+	end
+
+	return 1
+end
+
 -- Returns the model panel to the left of the step view.
 function PANEL:GetModelPanel()
 	return ix.gui.charCreate.model

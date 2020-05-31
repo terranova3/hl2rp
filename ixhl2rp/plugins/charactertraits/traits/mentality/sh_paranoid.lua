@@ -8,3 +8,4 @@ TRAIT.opposite = "Trusting";
 TRAIT.description = "How do I know you arent trying to hurt me?";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/paranoid.png";
+TRAIT.negative = true;

@@ -8,3 +8,4 @@ TRAIT.opposite = "Honest";
 TRAIT.description = "I didn't take from the cookie jar. He did.";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/deceitful.png";
+TRAIT.negative = true;

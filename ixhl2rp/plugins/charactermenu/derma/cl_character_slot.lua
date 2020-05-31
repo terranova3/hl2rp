@@ -38,7 +38,7 @@ function PANEL:Init()
 	self.name:Dock(TOP)
 	self.name:DockMargin(0, 16, 0, 0)
 	self.name:SetContentAlignment(5)
-	self.name:SetFont("ixPluginCharSmallButtonFont")
+	self.name:SetFont("ixPluginCharPanelTitleFont")
 	self.name:SetTextColor(ix.gui.characterMenu.WHITE)
 	self.name:SizeToContentsY()
 

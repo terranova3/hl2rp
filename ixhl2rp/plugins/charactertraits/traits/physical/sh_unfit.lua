@@ -8,3 +8,4 @@ TRAIT.opposite = "Athlete";
 TRAIT.description = "Never had the makings of a varisty athlete.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/unfit.png";
+TRAIT.negative = true;

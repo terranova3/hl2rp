@@ -8,3 +8,4 @@ TRAIT.opposite = "Thick Skinned";
 TRAIT.description = "Quick to break down.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/thin_weaked.png";
+TRAIT.negative = true;

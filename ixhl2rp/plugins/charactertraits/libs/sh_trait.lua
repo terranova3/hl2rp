@@ -23,22 +23,6 @@ function ix.traits.LoadFromDir(directory)
 	end
 end
 
-function ix.traits.GetCategories()
-	local categories = {}
-
-	for k, v in pairs(ix.traits.stored) do
-		local category = v.category or "Default"
-
-		if (!categories[category]) then
-			categories[category] = {}
-		end
-
-		table.insert(categories[category], v)
-	end
-
-	return categories
-end
-
 function ix.traits.FindByName(trait)
 	trait = trait:lower()
 	local uniqueID
@@ -58,10 +42,28 @@ function ix.traits.Get(uniqueID)
 	return ix.traits.stored[uniqueID] or nil;
 end
 
-function ix.traits.CallHook(hook, client)
-	local character = client:GetCharacter();
+function ix.traits.NameToUniqueID(name)
+	return string.gsub(name, " ", "_"):lower();
+end
+
+function ix.traits.GetColor(uniqueID)
+	local trait = ix.traits.stored[uniqueID]
+
+	if(trait) then
+		if(trait.negative) then
+			return Color(255, 100, 100)
+		elseif(!trait.negative) then
+			return Color(64, 185, 85)
+		end
+	end
+
+	return Color(255, 255, 255)
+end
+
+function ix.traits.CallHook(hook, character)
+	local client = character:GetPlayer();
 	
-	for _, v in pairs(character:GetTraits()) do
+	for _, v in pairs(character:GetData("traits", {})) do
 		local trait = ix.traits.Get(v);
 
 		if(IsValid(trait) and trait.hooks[hook]) then

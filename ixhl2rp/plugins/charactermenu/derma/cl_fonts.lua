@@ -70,9 +70,37 @@ surface.CreateFont("ixPluginCharSmallButtonFont", {
     size = ScreenScale(11),
     additive = true
 })
+surface.CreateFont("ixPluginCharPanelTitleFont", {
+    font = font,
+    weight = 200,
+    size = ScreenScale(9),
+    additive = true
+})
 surface.CreateFont("ixPluginCharComboBoxFont", {
     font = font,
     weight = 200,
     size = ScreenScale(7),
     additive = true
+})
+
+surface.CreateFont("ixPluginTooltipFont", {
+    font = font,
+    size = ScreenScale(8),
+    extended = true,
+    weight = 500
+})
+
+surface.CreateFont("ixPluginTooltipDescFont", {
+    font = font,
+    size = ScreenScale(6),
+    extended = true,
+    weight = 500
+})
+
+surface.CreateFont("ixPluginTooltipSmallFont", {
+    font = font,
+    size = ScreenScale(5),
+    italic = true,
+    extended = true,
+    weight = 500
 })

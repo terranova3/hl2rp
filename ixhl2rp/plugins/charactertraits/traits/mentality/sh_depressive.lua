@@ -8,3 +8,4 @@ TRAIT.opposite = "Gleeful";
 TRAIT.description = "Ground down by the inevitability of the universe.";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/depressive.png";
+TRAIT.negative = true;

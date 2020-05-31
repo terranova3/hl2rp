@@ -38,7 +38,7 @@ end
 function PANEL:createCharacterSlots()
 	self.scroll:Clear()
 	if (#ix.characters == 0) then
-		return ix.gui.character:showContent()
+		return ix.gui.characterMenu:showContent()
 	end
 	for _, id in ipairs(ix.characters) do
 		local character = ix.char.loaded[id]

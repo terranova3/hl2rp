@@ -14,7 +14,3 @@ function character:HasTrait(uniqueid)
 
     return false;
 end
-
-function character:GetTraits()
-    return self:GetData("traits", {});
-end;
