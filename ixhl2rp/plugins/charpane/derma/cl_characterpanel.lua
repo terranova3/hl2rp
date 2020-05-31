@@ -98,9 +98,11 @@ local PANEL = {}
 
 function PANEL:Init()
 	self:SetSize(360, 525)
+
+	local character = LocalPlayer():GetCharacter()
 	self.model = self:Add("ixModelPanel")
 	self.model:Dock(FILL)
-	self.model:SetModel(LocalPlayer():GetModel())
+	self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
 	self.model:SetFOV(50)
 
 	-- Don't display until we have the bodygroups loaded.
