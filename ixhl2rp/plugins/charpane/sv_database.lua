@@ -39,6 +39,13 @@ function PLUGIN:OnWipeTables()
 	query:Execute()
 end
 
+-- Called when a character has been deleted by a player.
+function PLUGIN:CharacterDeleted(client, id, isCurrentChar)
+	local query = mysql:Delete("ix_charpanels")
+		query:Where("character_id", id)
+	query:Execute()
+end
+
 -- Called before player character setup.
 function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
 	local charID = character:GetID();
