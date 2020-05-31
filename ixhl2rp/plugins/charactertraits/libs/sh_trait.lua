@@ -7,7 +7,12 @@ local PLUGIN = PLUGIN;
 
 ix.traits = ix.traits or {}
 ix.traits.stored = ix.traits.stored or {}
-ix.traits.indices = 0;
+ix.traits.categories = {
+	["Physical"] = Color(223, 154, 72, 5),
+	["Philosophy"] = Color(142, 68, 173, 5),
+	["Mentality"] = Color(22, 160, 133, 5),
+	["Intelligence"] = Color(41, 128, 185, 5)
+}
 
 function ix.traits.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
@@ -17,7 +22,6 @@ function ix.traits.LoadFromDir(directory)
 
 		ix.util.Include(directory.."/"..v, "shared")
 		ix.traits.stored[niceName] = TRAIT
-		ix.traits.indices = ix.traits.indices + 1;
 
 		TRAIT = nil
 	end
@@ -46,18 +50,14 @@ function ix.traits.NameToUniqueID(name)
 	return string.gsub(name, " ", "_"):lower();
 end
 
-function ix.traits.GetColor(uniqueID)
+function ix.traits.GetAlpha(uniqueID)
 	local trait = ix.traits.stored[uniqueID]
-
-	if(trait) then
-		if(trait.negative) then
-			return Color(255, 100, 100)
-		elseif(!trait.negative) then
-			return Color(64, 185, 85)
-		end
+	
+	if(trait.negative) then
+		return 5
+	else
+		return 10
 	end
-
-	return Color(255, 255, 255)
 end
 
 function ix.traits.CallHook(hook, character)

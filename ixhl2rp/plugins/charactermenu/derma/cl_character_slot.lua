@@ -104,7 +104,7 @@ function PANEL:setCharacter(character)
 	local entity = self.model.Entity
 	if (IsValid(entity)) then
 		-- Match the skin and bodygroups.
-		entity:SetSkin(character:GetData("skin", 0))
+		entity:SetSkin(character:GetData("skin") or character:GetSkin())
 		for k, v in pairs(character:GetData("groups", {})) do
 			entity:SetBodygroup(k, v)
 		end

@@ -23,25 +23,31 @@ function PANEL:Display()
 	self.traitPanels = {}
 	self.selectedtraitPanel = nil;
 
-	if(!self.loaded) then
-		for i = 1, 5 do
-			self.trait = self.traitLayout:Add("DButton") 
-			self.trait:SetSize(128, 64)
-			self.trait:SetText("+")
-			self.trait:SetFont("ixPluginCharTraitFont")
-			self.trait.DoClick = function()
-				parent.selectedtraitPanel = i;
-				parent.selectPanel:Add("ixCharacterTraitSelection")
-				parent:SetActivePanel("select")
-				self.subLabel:SetText("We use your trait information to tailor roleplay experiences for you.")
-			end;
-			table.insert(self.traitPanels, self.trait)
-		end
-
-		self.loaded = true
+	for i = 1, 5 do
+		self.trait = self.traitLayout:Add("DButton") 
+		self.trait:SetSize(128, 64)
+		self.trait:SetText("+")
+		self.trait:SetFont("ixPluginCharTraitFont")
+		self.trait.DoClick = function()
+			parent.selectedtraitPanel = i;
+			ix.gui.selector = parent.selectPanel:Add("ixCharacterTraitSelection")
+			parent:SetActivePanel("select")
+			self.subLabel:SetText("We use your trait information to tailor roleplay experiences for you.")
+		end;
+		table.insert(self.traitPanels, self.trait)
 	end
 
 	self:SetActivePanel("main");
+end
+
+function PANEL:OnHide()
+	for k, v in pairs(self.traitPanels) do
+		v:Remove();
+	end
+
+	if(ix.gui.selector) then
+		ix.gui.selector:Remove()
+	end
 end
 
 function PANEL:GetTraitPanel()
@@ -63,8 +69,8 @@ function PANEL:Init()
 	self.scroll:DockMargin(0, 10, 0, 0)
 
 	for k, v in pairs(selectableTraits) do	
-		self.categoryLabel = self.scroll:Add("DLabel")
-		self.categoryLabel:SetFont("ixPluginCharButtonSubFont")
+		self.categoryLabel = self.scroll:Add("ixInfoText")
+		self.categoryLabel:SetInfoCategory(k)
 		self.categoryLabel:SetText(k)
 		self.categoryLabel:SizeToContents()
 		self.categoryLabel:Dock(TOP)
@@ -87,12 +93,12 @@ function PANEL:Init()
 			self.trait:SetText(value.name)
 			self.trait:SetFont("ixPluginCharTraitFont")
 			self.trait.PaintOver = function(_, width, height)
-				surface.SetDrawColor(ColorAlpha(ix.traits.GetColor(value.uniqueID), 3))
+				surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], ix.traits.GetAlpha(value.uniqueID)))
 				surface.DrawRect(0, 0, width, height)
 			end
 			self.trait:SetHelixTooltip(function(tooltip)
 				tooltip.PaintOver = function(_, width, height)
-					surface.SetDrawColor(ColorAlpha(ix.traits.GetColor(value.uniqueID), 11))
+					surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
 					surface.DrawRect(0, 0, width, height)
 				end
 
@@ -102,7 +108,7 @@ function PANEL:Init()
 				title:SetFont("ixPluginTooltipFont")
 				title:SetMaxWidth(math.max(title:GetMaxWidth(), ScrW() * 0.5))
 				title.Paint = function(_, width, height)
-					surface.SetDrawColor(ColorAlpha(ix.traits.GetColor(value.uniqueID), 11))
+					surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
 					surface.DrawRect(0, 0, width, height)
 				end
 
@@ -132,7 +138,7 @@ function PANEL:Init()
 				panel:SetText(panel.trait.name or "+");
 				panel:SetHelixTooltip(function(tooltip)
 					tooltip.PaintOver = function(_, width, height)
-						surface.SetDrawColor(ColorAlpha(ix.traits.GetColor(value.uniqueID), 11))
+						surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
 						surface.DrawRect(0, 0, width, height)
 					end
 
@@ -143,7 +149,7 @@ function PANEL:Init()
 					title:SetFont("ixPluginTooltipFont")
 					title:SetMaxWidth(math.max(title:GetMaxWidth(), ScrW() * 0.5))
 					title.Paint = function(_, width, height)
-						surface.SetDrawColor(ColorAlpha(ix.traits.GetColor(value.uniqueID), 11))
+						surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
 						surface.DrawRect(0, 0, width, height)
 					end
 
@@ -158,7 +164,7 @@ function PANEL:Init()
 					exclusive:SetFont("ixPluginTooltipSmallFont")
 				end)
 				panel.PaintOver = function(_, width, height)
-					surface.SetDrawColor(ColorAlpha(ix.traits.GetColor(value.uniqueID), 3))
+					surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 3))
 					surface.DrawRect(0, 0, width, height)
 				end
 

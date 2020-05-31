@@ -37,4 +37,14 @@ do
 		end,
 		alias = "Skin"
 	})
+
+	ix.char.RegisterVar("traits", {
+		field = "traits",
+		fieldType = ix.type.text,
+		bNoDisplay = true,
+		OnValidate = function(self, value, payload)
+			return value or {}
+		end,
+		alias = "Traits"
+	})
 end

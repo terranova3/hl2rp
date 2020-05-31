@@ -33,6 +33,7 @@ function PANEL:Display()
 		icon:SetSize(64, 128)
 		icon:InvalidateLayout(true)
 		icon.DoClick = function(icon)
+			self:SetPayload("skin", i)
 			self:GetModelPanel().Entity:SetSkin(i)
 		end
 		icon.PaintOver = paintIcon
@@ -62,7 +63,6 @@ end
 
 function PANEL:OnSkip()
 	self:SetPayload("skin", 0)
-	self:SetPayload("facialhair", 0)
 end
 
 vgui.Register("ixCharacterCustomisation", PANEL, "ixCharacterCreateStep")
