@@ -24,6 +24,14 @@ function META:GetOwner()
 	end
 end
 
+function META:HasEquipped()
+	for _, v in pairs(self.slots) do
+		return true
+	end
+
+	return false
+end
+
 function META:SetOwner(owner, fullUpdate)
 	if (type(owner) == "Player" and owner:GetNetVar("char")) then
 		owner = owner:GetNetVar("char")

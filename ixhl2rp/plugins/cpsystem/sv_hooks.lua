@@ -94,14 +94,14 @@ end;
 
 function PLUGIN:CanPlayerEquipItem(client, item)
 	local character = client:GetCharacter();
+	local charPanel = character:GetCharPanel();
 
-	if(item.base == "base_cp_gasmask" or item.name == "Civil Protection Trenchcoat") then
-		if(character:IsUndercover()) then
-			if(!PLUGIN:IsWearingUniform(character)) then
-				client:Notify(string.format("You cant equip %s without a uniform on!", item.name))
-				return false;
-			end;
-		end;
+	PrintTable(charPanel)
+	if(item.base == "base_cp_uniform") then
+		if(charPanel:HasEquipped()) then
+			client:Notify("You can't equip a uniform with items in your character panel!")
+			return false;
+		end
 	end;
 
 	return true;
