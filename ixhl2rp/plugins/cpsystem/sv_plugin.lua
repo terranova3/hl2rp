@@ -35,6 +35,10 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
 
         PLUGIN:UpdateName(character);
     end;
+
+    net.Start("ixCharPanelSyncModel")
+        net.WriteString(client:GetModel(), 16)
+    net.Send(client)
 end;
 
 function PLUGIN:IsWearingUniform(character)

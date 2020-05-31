@@ -134,6 +134,11 @@ function PANEL:Init()
 
 		self.model.Entity:SetBodygroup(index, bodygroup)
 	end)
+
+	net.Receive("ixCharPanelSyncModel", function()
+		local model = net.ReadString(16)
+		self.model:SetModel(model, character:GetData("skin", 0))
+	end)
 end
 
 function PANEL:SetCharPanel(charPanel, bFitParent)

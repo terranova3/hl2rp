@@ -93,10 +93,8 @@ function PLUGIN:PlayerSpawn(client)
 end;
 
 function PLUGIN:CanPlayerEquipItem(client, item)
-	local character = client:GetCharacter();
-	local charPanel = character:GetCharPanel();
+	local charPanel = client:GetCharacter():GetCharPanel();
 
-	PrintTable(charPanel)
 	if(item.base == "base_cp_uniform") then
 		if(charPanel:HasEquipped()) then
 			client:Notify("You can't equip a uniform with items in your character panel!")
