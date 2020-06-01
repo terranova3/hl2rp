@@ -26,3 +26,11 @@ function PLUGIN:RenderScreenspaceEffects()
 		DrawColorModify(colorModify);
 	end;
 end;
+
+function PLUGIN:ShouldDisableLegs()
+	local faction = LocalPlayer():GetCharacter():GetFaction()
+
+	if(faction == FACTION_VORT or faction == FACTION_VORTSLAVE) then
+		return true
+	end
+end

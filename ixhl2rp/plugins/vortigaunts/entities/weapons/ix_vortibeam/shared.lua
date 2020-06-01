@@ -42,11 +42,6 @@ SWEP.Secondary.ClipSize = -1;
 SWEP.Secondary.Delay = 0;
 SWEP.Secondary.Ammo	= "";
 
-SWEP.NoIronSightFovChange = true;
-SWEP.NoIronSightAttack = true;
-SWEP.LoweredAngles = Angle(60, 60, 60);
-SWEP.IronSightPos = Vector(0, 0, 0);
-SWEP.IronSightAng = Vector(0, 0, 0);
 SWEP.IsAlwaysRaised = true;
 
 -- Called when the SWEP is deployed.
