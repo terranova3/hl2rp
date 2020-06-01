@@ -104,6 +104,8 @@ function PANEL:Init()
 	self.model:Dock(FILL)
 	self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
 	self.model:SetFOV(50)
+	self.model.alpha = 255
+	self.model:SetAlpha(255)
 
 	-- Don't display until we have the bodygroups loaded.
 	self.model:SetVisible(false)
@@ -139,6 +141,22 @@ function PANEL:Init()
 		local model = net.ReadString(16)
 		self.model:SetModel(model, character:GetData("skin", 0))
 	end)
+end
+
+-- Fixes model panel not fading out when the gui menu is closed.
+function PANEL:Think()
+	if(IsValid(ix.gui.menu) and ix.gui.menu.bClosing) then
+		self.model:CreateAnimation(0.25, {
+			target = {alpha = 0},
+			easing = "outQuint",
+			Think = function(animation, panel)
+				self.model:SetAlpha(panel.alpha)
+			end,
+			OnComplete = function(animation, panel)
+				self.model:Remove()
+			end
+		})
+	end
 end
 
 function PANEL:SetCharPanel(charPanel, bFitParent)
