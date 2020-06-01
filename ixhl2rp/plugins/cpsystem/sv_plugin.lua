@@ -19,13 +19,15 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
         if(event == "Unequipped") then
             character:SetData("cpDesc", character:GetDescription())
             character:SetDescription(cpData.cpCitizenDesc);
-            character:SetClass(CLASS_MPUH);  
+            character:SetClass(CLASS_MPUH); 
+            client:SetSkin(character:GetData("skin"))
             character:SetData( "customclass", "Citizen" );	
         elseif(event == "Equipped") then
             if(PLUGIN:GetCPTagline(character) == lockedName) then
                 character:SetData("cpCitizenDesc", character:GetDescription())
                 character:SetDescription(cpData.cpDesc);
                 character:SetClass(CLASS_MPU);
+                client:SetSkin(0)
                 character:SetData("customclass", "Civil Protection");
                 netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
             else 
