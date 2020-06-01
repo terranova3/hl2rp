@@ -146,16 +146,9 @@ end
 -- Fixes model panel not fading out when the gui menu is closed.
 function PANEL:Think()
 	if(IsValid(ix.gui.menu) and ix.gui.menu.bClosing) then
-		self.model:CreateAnimation(0.25, {
-			target = {alpha = 0},
-			easing = "outQuint",
-			Think = function(animation, panel)
-				self.model:SetAlpha(panel.alpha)
-			end,
-			OnComplete = function(animation, panel)
-				self.model:Remove()
-			end
-		})
+		if(self.model) then
+			self.model:Remove()
+		end
 	end
 end
 
