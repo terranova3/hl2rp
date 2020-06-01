@@ -1,5 +1,5 @@
 
-RECIPE.name = "Convert: Scrap Metal"
+RECIPE.name = "Scrap Metal"
 RECIPE.description = "Break down Reclaimed Metal into Scrap Metal."
 RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
 RECIPE.category = "Convert"

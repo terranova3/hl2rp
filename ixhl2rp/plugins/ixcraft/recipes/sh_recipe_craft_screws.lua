@@ -1,5 +1,5 @@
 
-RECIPE.name = "Crafting: Screws"
+RECIPE.name = "Screws"
 RECIPE.description = "Craft a handful of screws with metal pieces."
 RECIPE.model = "models/props_c17/FurnitureTable003a.mdl"
 RECIPE.category = "Crafting"

@@ -1,5 +1,5 @@
 
-RECIPE.name = "Convert: Wooden Pieces Advanced"
+RECIPE.name = "Wooden Pieces Advanced"
 RECIPE.description = "Break down a plank with a saw for parts."
 RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
 RECIPE.category = "Convert"

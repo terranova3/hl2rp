@@ -1,5 +1,5 @@
 
-RECIPE.name = "Convert: Plastic Jar"
+RECIPE.name = "Plastic Jar"
 RECIPE.description = "Break down an empty plastic jar."
 RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
 RECIPE.category = "Convert"

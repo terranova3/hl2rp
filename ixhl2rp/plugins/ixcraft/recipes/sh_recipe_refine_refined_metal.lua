@@ -1,5 +1,5 @@
 
-RECIPE.name = "Refine: Refined Metal"
+RECIPE.name = "Refined Metal"
 RECIPE.description = "Process Reclaimed metal into Refined metal."
 RECIPE.model = "models/props_c17/oildrum001.mdl"
 RECIPE.category = "Refine"

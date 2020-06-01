@@ -1,5 +1,5 @@
 
-RECIPE.name = "Convert: Reinforced cloth"
+RECIPE.name = "Reinforced cloth"
 RECIPE.description = "Strip all the cloth from reinforced cloth."
 RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
 RECIPE.category = "Convert"

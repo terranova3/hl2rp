@@ -1,5 +1,5 @@
 
-RECIPE.name = "Convert: Paint Can"
+RECIPE.name = "Paint Can"
 RECIPE.description = "Break down a paint can."
 RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
 RECIPE.category = "Convert"

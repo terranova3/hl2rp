@@ -1,5 +1,5 @@
 
-RECIPE.name = "Refine: Charcoal"
+RECIPE.name = "Charcoal"
 RECIPE.description = "Burn wood down into carbon charcoal."
 RECIPE.model = "models/props_c17/oildrum001.mdl"
 RECIPE.category = "Refine"

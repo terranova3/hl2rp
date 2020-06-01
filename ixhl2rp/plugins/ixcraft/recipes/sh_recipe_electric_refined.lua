@@ -1,5 +1,5 @@
 
-RECIPE.name = "Electrical: Refined Eletronics"
+RECIPE.name = "Refined Eletronics"
 RECIPE.description = "Solder scrap eletronics into a refined set."
 RECIPE.model = "models/props_lab/reciever01d.mdl"
 RECIPE.category = "Electrical"

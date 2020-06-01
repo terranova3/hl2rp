@@ -1,5 +1,5 @@
 
-RECIPE.name = "Convert: Empty Ammo Box"
+RECIPE.name = "Empty Ammo Box"
 RECIPE.description = "Scrap an empty ammo box."
 RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
 RECIPE.category = "Convert"

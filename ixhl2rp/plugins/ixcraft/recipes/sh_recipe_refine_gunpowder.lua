@@ -1,5 +1,5 @@
 
-RECIPE.name = "Refine: Gunpowder"
+RECIPE.name = "Gunpowder"
 RECIPE.description = "Mix Nitre and charocal to make gunpowder."
 RECIPE.model = "models/props_c17/oildrum001.mdl"
 RECIPE.category = "Refine"

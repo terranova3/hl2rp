@@ -267,7 +267,7 @@ function PANEL:Paint()
 	derma.SkinFunc("PaintCategoryPanel", self, "", ix.config.Get("color") or color_white)
 	surface.SetDrawColor(0, 0, 0, 50);	
 
-	surface.SetFont("ixMediumLightFontSmaller")
+	surface.SetFont("ixPluginTooltipFont")
 	surface.SetTextColor(Color(255,255,255,255))
 	surface.SetTextPos(4, 4)
 	surface.DrawText(LocalPlayer():GetName())

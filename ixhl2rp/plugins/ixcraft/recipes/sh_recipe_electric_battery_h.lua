@@ -1,5 +1,5 @@
 
-RECIPE.name = "Electrical: Battery_h"
+RECIPE.name = "Battery_h"
 RECIPE.description = "Build an electrical battery."
 RECIPE.model = "models/props_lab/reciever01d.mdl"
 RECIPE.category = "Electrical"

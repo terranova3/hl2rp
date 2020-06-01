@@ -1,5 +1,5 @@
 
-RECIPE.name = "Convert: Empty Milk Carton"
+RECIPE.name = "Empty Milk Carton"
 RECIPE.description = "Break down a milk carton."
 RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
 RECIPE.category = "Convert"
