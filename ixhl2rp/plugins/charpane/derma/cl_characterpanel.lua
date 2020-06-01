@@ -139,6 +139,9 @@ function PANEL:Init()
 
 	net.Receive("ixCharPanelSyncModel", function()
 		local model = net.ReadString(16)
+
+		if(!self.model) then return false end
+		
 		self.model:SetModel(model, character:GetData("skin", 0))
 	end)
 end

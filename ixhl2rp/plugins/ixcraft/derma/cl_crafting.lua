@@ -173,9 +173,13 @@ hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
 				characterPanel.Paint = function() end;
 				characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
 				characterPanel:Dock(FILL)	
-	
+
 				netstream.Start("RequestShowCharacterPanel")
 				netstream.Hook("ShowCharacterPanel", function(show)
+					if(IsValid(ix.gui.charPanel)) then
+						ix.gui.charPanel:Remove()
+					end
+					
 					if(show) then 
 						local cPanel = characterPanel:Add("ixCharacterPane")
 						local charPanel = LocalPlayer():GetCharacter():GetCharPanel()

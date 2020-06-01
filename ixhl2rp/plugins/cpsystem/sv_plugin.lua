@@ -9,6 +9,7 @@ local PLUGIN = PLUGIN;
 function PLUGIN:AdjustPlayer(event, lockedName, client)
     local character = client:GetCharacter();
     local cpData = PLUGIN:GetCPDataAsTable(character);
+    local charPanel = character:GetCharPanel()
 
     -- If the uniform isn't biolocked, allow the player to access it.
     if(lockedName == nil) then 
@@ -36,11 +37,8 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
         end;
 
         PLUGIN:UpdateName(character);
+        charPanel:Update(client)
     end;
-
-    net.Start("ixCharPanelSyncModel")
-        net.WriteString(client:GetModel(), 16)
-    net.Send(client)
 end;
 
 function PLUGIN:IsWearingUniform(character)

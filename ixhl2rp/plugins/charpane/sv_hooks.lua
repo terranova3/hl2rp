@@ -39,7 +39,7 @@ end;
 function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)
 	local character = client:GetCharacter()
 	local index = client:FindBodygroupByName(outfitCategory)
-	local groups =character:GetData("groups", {})
+	local groups = character:GetData("groups", {})
 
 	groups[index] = bodygroup
 
@@ -52,13 +52,11 @@ function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)
 	net.Send(client)
 end
 
--- Called when the client is checking if it has access to see the character panel
-function PLUGIN:CharPanelShouldShow(client)
-	return true;
-end;
 
 netstream.Hook("RequestShowCharacterPanel", function(client)
-	local show = hook.Run("CharPanelShouldShow", client)
+	local show = true
+	show = hook.Run("CharPanelShouldShow", client)
+
 	netstream.Start(client, "ShowCharacterPanel", show)
 end)
 

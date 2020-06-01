@@ -348,6 +348,17 @@ if (SERVER) then
 			net.WriteTable(self.vars or {})
 		net.Send(receiver)
 	end
+
+	function META:Update(client)
+		print(client, "yes")
+		local show = true
+		show = hook.Run("CharPanelShouldShow", client)
+		netstream.Start(client, "ShowCharacterPanel", show)
+	
+		net.Start("ixCharPanelSyncModel")
+			net.WriteString(client:GetModel(), 16)
+		net.Send(client)
+	end
 end
 
 ix.meta.charPanel = META

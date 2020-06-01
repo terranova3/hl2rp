@@ -105,6 +105,14 @@ function PLUGIN:CanPlayerEquipItem(client, item)
 	return true;
 end
 
+-- Called when the client is checking if it has access to see the character panel
+function PLUGIN:CharPanelShouldShow(client)
+	if (client:IsCombine()) then
+		print("This!")
+		return false
+	end
+end;
+
 netstream.Hook("ViewDataUpdate", function(client, target, text, combinePoints)
 	if (IsValid(target) and client:GetCharacter() and target:GetCharacter()) then
 		local data = {
