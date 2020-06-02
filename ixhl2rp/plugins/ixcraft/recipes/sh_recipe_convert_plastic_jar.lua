@@ -1,7 +1,7 @@
 
 RECIPE.name = "Plastic Jar"
 RECIPE.description = "Break down an empty plastic jar."
-RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
+RECIPE.model = "models/props_lab/jar01b.mdl"
 RECIPE.category = "Convert"
 RECIPE.requirements = {
 	["empty_jar"] = 1

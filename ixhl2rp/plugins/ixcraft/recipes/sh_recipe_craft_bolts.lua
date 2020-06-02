@@ -1,7 +1,7 @@
 
 RECIPE.name = "Bolts"
 RECIPE.description = "Craft a handful of bolts with metal pieces."
-RECIPE.model = "models/props_c17/FurnitureTable003a.mdl"
+RECIPE.model = "models/props_lab/box01a.mdl"
 RECIPE.category = "Crafting"
 RECIPE.requirements = {
 	["reclaimed_metal"] = 1
@@ -12,7 +12,8 @@ RECIPE.results = {
 RECIPE.tools = {
 	"blow_torch"
 }
-RECIPE:PostHook("OnCanCraft", function(client)
+
+RECIPE:PostHook("OnCanCraft", function(recipeTable, client)
 	for _, v in pairs(ents.FindByClass("ix_station_workbench")) do
 		if (client:GetPos():DistToSqr(v:GetPos()) < 100 * 100) then
 			return true

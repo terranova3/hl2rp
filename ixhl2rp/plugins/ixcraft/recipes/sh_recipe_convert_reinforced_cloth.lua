@@ -1,7 +1,7 @@
 
 RECIPE.name = "Reinforced cloth"
 RECIPE.description = "Strip all the cloth from reinforced cloth."
-RECIPE.model = "models/props_c17/oildrum001_explosive.mdl"
+RECIPE.model = "models/gibs/scanner_gib02.mdl"
 RECIPE.category = "Convert"
 RECIPE.requirements = {
 	["reinforced_cloth"] = 1

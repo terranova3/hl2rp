@@ -1,7 +1,7 @@
 
 RECIPE.name = "Gunpowder"
 RECIPE.description = "Mix Nitre and charocal to make gunpowder."
-RECIPE.model = "models/props_c17/oildrum001.mdl"
+RECIPE.model = "models/props_junk/metal_paintcan001a.mdl"
 RECIPE.category = "Refine"
 RECIPE.requirements = {
 	["niter"] = 2,
@@ -11,7 +11,7 @@ RECIPE.results = {
 	["gunpowder"] = 1
 }
 
-RECIPE:PostHook("OnCanCraft", function(client)
+RECIPE:PostHook("OnCanCraft", function(recipeTable, client)
 	for _, v in pairs(ents.FindByClass("ix_station_furnace")) do
 		if (client:GetPos():DistToSqr(v:GetPos()) < 100 * 100) then
 			return true

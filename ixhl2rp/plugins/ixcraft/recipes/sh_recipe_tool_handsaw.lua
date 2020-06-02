@@ -1,18 +1,19 @@
 
-RECIPE.name = "Screws"
-RECIPE.description = "Craft a handful of screws with metal pieces."
-RECIPE.model = "models/props_lab/box01a.mdl"
-RECIPE.category = "Crafting"
+RECIPE.name = "Tools: Handsaw"
+RECIPE.description = "A saw, perfect for cutting wood."
+RECIPE.model = "models/props_c17/grinderclamp01a.mdl"
+RECIPE.category = "Tools"
 RECIPE.requirements = {
-	["reclaimed_metal"] = 2
+	["refined_metal"] = 1,
+	["chunk_of_plastic"] = 2,
+	["bolts"] = 1
 }
 RECIPE.results = {
-	["screws"] = 1
+	["hand_saw"] = 1
 }
 RECIPE.tools = {
-	"pliers"
+	"blow_torch"
 }
-
 RECIPE:PostHook("OnCanCraft", function(recipeTable, client)
 	for _, v in pairs(ents.FindByClass("ix_station_workbench")) do
 		if (client:GetPos():DistToSqr(v:GetPos()) < 100 * 100) then

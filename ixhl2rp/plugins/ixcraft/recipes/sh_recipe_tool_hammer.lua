@@ -1,16 +1,15 @@
 
-RECIPE.name = "Screws"
-RECIPE.description = "Craft a handful of screws with metal pieces."
-RECIPE.model = "models/props_lab/box01a.mdl"
-RECIPE.category = "Crafting"
+RECIPE.name = "Hammer"
+RECIPE.description = "A hammer to smash away your problems."
+RECIPE.model = "models/props_interiors/pot02a.mdl"
+RECIPE.category = "Electrical"
 RECIPE.requirements = {
-	["reclaimed_metal"] = 2
+	["reclaimed_metal"] = 2,
+	["screws"] = 1,
+	["wood_piece"] = 2
 }
 RECIPE.results = {
-	["screws"] = 1
-}
-RECIPE.tools = {
-	"pliers"
+	["hammer"] = 1
 }
 
 RECIPE:PostHook("OnCanCraft", function(recipeTable, client)
