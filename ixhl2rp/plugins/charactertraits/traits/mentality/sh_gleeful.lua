@@ -8,3 +8,4 @@ TRAIT.opposite = "Depressive";
 TRAIT.description = "Cheery despite possible extinction.";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/gleeful.png";
+TRAIT.positive = true

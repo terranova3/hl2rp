@@ -8,3 +8,4 @@ TRAIT.opposite = "Cruel";
 TRAIT.description = "Treat others how you want to be treated.";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/kind.png";
+TRAIT.positive = true

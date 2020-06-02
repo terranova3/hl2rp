@@ -4,7 +4,8 @@
 --]]
 
 TRAIT.name = "Thick Skinned";
-TRAIT.opposite = "Thin Weaked";
+TRAIT.opposite = "Thin Skinned";
 TRAIT.description = "Undeterred by back pain.";
 TRAIT.category = "Physical";
-TRAIT.icon = "materials/terranova/ui/traits/thick_skinned.png";
+TRAIT.icon = "materials/terranova/ui/traits/thickskinned.png";
+TRAIT.positive = true

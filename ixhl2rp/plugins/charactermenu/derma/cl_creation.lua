@@ -17,7 +17,7 @@ function PANEL:Init()
 	local canCreate, reason = self:CanCreateCharacter()
 
 	if (not canCreate) then
-		return self:showMessage(reason)
+		return self:ShowMessage(reason)
 	end
 
 	ix.gui.charCreate = self

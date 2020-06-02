@@ -43,7 +43,7 @@ do
 		fieldType = ix.type.text,
 		bNoDisplay = true,
 		OnValidate = function(self, value, payload)
-			return value or {}
+			return true
 		end,
 		alias = "Traits"
 	})

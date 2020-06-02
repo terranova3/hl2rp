@@ -7,12 +7,6 @@ local PLUGIN = PLUGIN;
 
 ix.traits = ix.traits or {}
 ix.traits.stored = ix.traits.stored or {}
-ix.traits.categories = {
-	["Physical"] = Color(223, 154, 72, 5),
-	["Philosophy"] = Color(142, 68, 173, 5),
-	["Mentality"] = Color(22, 160, 133, 5),
-	["Intelligence"] = Color(41, 128, 185, 5)
-}
 
 function ix.traits.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
@@ -22,6 +16,7 @@ function ix.traits.LoadFromDir(directory)
 
 		ix.util.Include(directory.."/"..v, "shared")
 		ix.traits.stored[niceName] = TRAIT
+		ix.traits.stored[niceName]:Register()
 
 		TRAIT = nil
 	end

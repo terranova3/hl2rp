@@ -7,4 +7,5 @@ TRAIT.name = "Eagle Eye";
 TRAIT.opposite = "Four Eyes";
 TRAIT.description = "Did you guys see that?";
 TRAIT.category = "Physical";
-TRAIT.icon = "materials/terranova/ui/traits/eagle_eye.png";
+TRAIT.icon = "materials/terranova/ui/traits/eagleeye.png";
+TRAIT.positive = true

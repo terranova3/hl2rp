@@ -3,9 +3,9 @@
     without permission of its author.
 --]]
 
-TRAIT.name = "Thin Weaked";
+TRAIT.name = "Thin Skinned";
 TRAIT.opposite = "Thick Skinned";
 TRAIT.description = "Quick to break down.";
 TRAIT.category = "Physical";
-TRAIT.icon = "materials/terranova/ui/traits/thin_weaked.png";
+TRAIT.icon = "materials/terranova/ui/traits/thinskinned.png";
 TRAIT.negative = true;

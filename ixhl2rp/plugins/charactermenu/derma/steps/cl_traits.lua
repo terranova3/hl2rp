@@ -25,16 +25,22 @@ function PANEL:Display()
 
 	for i = 1, 5 do
 		self.trait = self.traitLayout:Add("DButton") 
-		self.trait:SetSize(128, 64)
-		self.trait:SetText("+")
+		self.trait:SetSize(64, 64)
 		self.trait:SetFont("ixPluginCharTraitFont")
+		self.trait:SetText("+")
 		self.trait.DoClick = function()
 			parent.selectedtraitPanel = i;
 			ix.gui.selector = parent.selectPanel:Add("ixCharacterTraitSelection")
 			parent:SetActivePanel("select")
 			self.subLabel:SetText("We use your trait information to tailor roleplay experiences for you.")
 		end;
-		table.insert(self.traitPanels, self.trait)
+
+		self.icon = self.trait:Add("Material")
+		self.icon:SetSize(32, 32)
+		self.icon:SetPos(16, 16)
+		self.icon.AutoSize = false
+
+		table.insert(self.traitPanels, {panel = self.trait, icon = self.icon})
 	end
 
 	self:SetActivePanel("main");
@@ -42,7 +48,7 @@ end
 
 function PANEL:OnHide()
 	for k, v in pairs(self.traitPanels) do
-		v:Remove();
+		v.panel:Remove();
 	end
 
 	if(ix.gui.selector) then
@@ -51,7 +57,11 @@ function PANEL:OnHide()
 end
 
 function PANEL:GetTraitPanel()
-	return self.traitPanels[self.selectedtraitPanel]
+	return self.traitPanels[self.selectedtraitPanel].panel
+end
+
+function PANEL:GetTraitPanelIcon()
+	return self.traitPanels[self.selectedtraitPanel].icon
 end
 
 vgui.Register("ixCharacterTraits", PANEL, "ixCharacterCreateStep")
@@ -60,6 +70,7 @@ local PANEL = {}
 
 function PANEL:Init()
 	self:Dock(FILL)
+
 	self.Paint = function() end
 
 	local selectableTraits = self:GetSelectableTraits(ix.gui.traitSelection.selectedtraitPanel);
@@ -70,7 +81,6 @@ function PANEL:Init()
 
 	for k, v in pairs(selectableTraits) do	
 		self.categoryLabel = self.scroll:Add("ixInfoText")
-		self.categoryLabel:SetInfoCategory(k)
 		self.categoryLabel:SetText(k)
 		self.categoryLabel:SizeToContents()
 		self.categoryLabel:Dock(TOP)
@@ -86,32 +96,23 @@ function PANEL:Init()
 		self.selectTraitsLayout:StretchToParent(0, 0, 0, 0)
 		self.selectTraitsLayout:InvalidateLayout(true)
 
-		for key, value in pairs(selectableTraits[k]) do 
+		for key, value in pairs(selectableTraits[k]) do
 			self.trait = self.selectTraitsLayout:Add("DButton")
-			self.trait:SetSize(128, 64)
+			self.trait:SetSize(216, 64)
 			self.trait:InvalidateLayout(true)
-			self.trait:SetText(value.name)
+			self.trait:SetText("")
 			self.trait:SetFont("ixPluginCharTraitFont")
-			self.trait.PaintOver = function(_, width, height)
-				surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], ix.traits.GetAlpha(value.uniqueID)))
-				surface.DrawRect(0, 0, width, height)
+			self.trait.PaintOver = function() 
+				ix.util.DrawText(value.name, 48, 24, color_white, 0, 0, "ixPluginTooltipDescFont")
 			end
+
+			self.icon = self.trait:Add("Material")
+			self.icon:SetSize(32, 32)
+			self.icon:SetPos(8, 16)
+			self.icon:SetMaterial(value.icon)
+			self.icon.AutoSize = false
+		
 			self.trait:SetHelixTooltip(function(tooltip)
-				tooltip.PaintOver = function(_, width, height)
-					surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
-					surface.DrawRect(0, 0, width, height)
-				end
-
-				local title = tooltip:AddRow("name")
-				title:SetText(value.name)
-				title:SizeToContents()
-				title:SetFont("ixPluginTooltipFont")
-				title:SetMaxWidth(math.max(title:GetMaxWidth(), ScrW() * 0.5))
-				title.Paint = function(_, width, height)
-					surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
-					surface.DrawRect(0, 0, width, height)
-				end
-
 				local description = tooltip:AddRow("description")
 				description:SetText(value.description)
 				description:SetFont("ixPluginTooltipDescFont")
@@ -125,6 +126,7 @@ function PANEL:Init()
 			self.trait.DoClick = function()
 				local newTraits = ix.gui.traitSelection:GetPayload("traits") or {}
 				local panel = ix.gui.traitSelection:GetTraitPanel()
+				local panelIcon = ix.gui.traitSelection:GetTraitPanelIcon()
 
 				if(panel.trait) then
 					newTraits[panel.arrIndex] = value.uniqueID
@@ -135,23 +137,14 @@ function PANEL:Init()
 				panel.arrIndex = ix.gui.traitSelection:GetPayloadSize("traits")
 				panel.trait = value
 
-				panel:SetText(panel.trait.name or "+");
+				panelIcon:SetMaterial(value.icon)
+				panel:SetText("")
 				panel:SetHelixTooltip(function(tooltip)
-					tooltip.PaintOver = function(_, width, height)
-						surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
-						surface.DrawRect(0, 0, width, height)
-					end
-
 					local title = tooltip:AddRow("name")
-					title:SetImportant()
 					title:SetText(value.name)
 					title:SizeToContents()
 					title:SetFont("ixPluginTooltipFont")
 					title:SetMaxWidth(math.max(title:GetMaxWidth(), ScrW() * 0.5))
-					title.Paint = function(_, width, height)
-						surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 11))
-						surface.DrawRect(0, 0, width, height)
-					end
 
 					local description = tooltip:AddRow("description")
 					description:SetText(value.description)
@@ -163,10 +156,6 @@ function PANEL:Init()
 					exclusive:SizeToContents()
 					exclusive:SetFont("ixPluginTooltipSmallFont")
 				end)
-				panel.PaintOver = function(_, width, height)
-					surface.SetDrawColor(ColorAlpha(ix.traits.categories[value.category], 3))
-					surface.DrawRect(0, 0, width, height)
-				end
 
 				ix.gui.traitSelection:SetPayload("traits", newTraits)
 				ix.gui.traitSelection:SetActivePanel("main")
@@ -198,8 +187,8 @@ function PANEL:GetSelectableTraits(index)
 	local categories = {}
 	local opposite = ""
  
-	if(ix.gui.traitSelection.traitPanels[index].trait) then
-		opposite = ix.gui.traitSelection.traitPanels[index].trait.opposite
+	if(ix.gui.traitSelection.traitPanels[index].panel.trait) then
+		opposite = ix.gui.traitSelection.traitPanels[index].panel.trait.opposite
 	end
 
 	if(payload) then 
@@ -217,39 +206,29 @@ function PANEL:GetSelectableTraits(index)
 		end
 	end
 
-	for k, v in pairs(traits) do
-		if(!v.negative) then 
-			local category = v.category or "Default"
+	for k, v in SortedPairsByMemberValue(traits, "order") do
+		local category = "General"
 
-			if (!categories[category]) then
-				categories[category] = {}
-			end
-
-			table.insert(categories[category], v)
+		if(v.category == "Philosophy") then
+			category = v.category
 		end
-	end
 
-	for k, v in pairs(traits) do
-		if(v.negative) then 
-			local category = v.category or "Default"
-
-			if (!categories[category]) then
-				categories[category] = {}
-			end
-
-			table.insert(categories[category], v)
+		if (!categories[category]) then
+			categories[category] = {}
 		end
+
+		table.insert(categories[category], v)
 	end
 
 	return categories
 end
 
 function PANEL:Validate()
-	if(self:GetPayloadSize("traits") < 5) then
-		return false, "You must select 5 traits!"
-	end
+	local res = {self:ValidateCharVar("traits")}
 
-	return false
+	if (res[1] == false) then
+		return unpack(res)
+	end
 end
 
 vgui.Register("ixCharacterTraitSelection", PANEL, "DPanel")

@@ -8,3 +8,4 @@ TRAIT.opposite = "Uneducated";
 TRAIT.description = "A degree, a certificate, possibly a doctorate.";
 TRAIT.category = "Intelligence";
 TRAIT.icon = "materials/terranova/ui/traits/educated.png";
+TRAIT.positive = true

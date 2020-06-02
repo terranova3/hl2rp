@@ -8,3 +8,4 @@ TRAIT.opposite = "Sickly";
 TRAIT.description = "My engines run clean. I feel good.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/healthy.png";
+TRAIT.positive = true

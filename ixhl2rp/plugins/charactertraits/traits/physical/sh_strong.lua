@@ -8,3 +8,4 @@ TRAIT.opposite = "Weak";
 TRAIT.description = "It'll move, get out of my way.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/strong.png";
+TRAIT.positive = true

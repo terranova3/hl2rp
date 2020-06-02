@@ -4,7 +4,8 @@
 --]]
 
 TRAIT.name = "Brave";
-TRAIT.opposite = "Coward";
+TRAIT.opposite = "Cowardly";
 TRAIT.description = "Fear is the ultimate foe.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/brave.png";
+TRAIT.positive = true

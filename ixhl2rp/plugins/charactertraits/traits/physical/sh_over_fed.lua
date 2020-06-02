@@ -7,4 +7,5 @@ TRAIT.name = "Over Fed";
 TRAIT.opposite = "Malnourished";
 TRAIT.description = "One more wouldn't hurt.";
 TRAIT.category = "Physical";
-TRAIT.icon = "materials/terranova/ui/traits/over_fed.png";
+TRAIT.icon = "materials/terranova/ui/traits/overfed.png";
+TRAIT.negative = true

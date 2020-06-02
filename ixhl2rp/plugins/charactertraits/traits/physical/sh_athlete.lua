@@ -8,3 +8,4 @@ TRAIT.opposite = "Unfit";
 TRAIT.description = "Harder, better, faster, stronger.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/athlete.png";
+TRAIT.positive = true

@@ -32,11 +32,11 @@ function PANEL:ValidateCharVar(name)
 	local charVar = ix.char.vars[name]
 	assert(charVar, "invalid character variable "..tostring(name))
 
-	if (isfunction(charVar.onValidate)) then
-		return charVar.onValidate(
-			self:getContext(name),
-			self:getContext(),
-			LocalPlayer()
+	if (isfunction(charVar.OnValidate)) then
+		return charVar.OnValidate(
+			self,
+			self:GetPayload(name),
+			self:GetPayload()
 		)
 	end
 	return true

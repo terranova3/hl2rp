@@ -8,3 +8,4 @@ TRAIT.opposite = "Cynical";
 TRAIT.description = "Things will work out in the end";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/optimistic.png";
+TRAIT.positive = true

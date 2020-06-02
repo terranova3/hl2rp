@@ -3,9 +3,9 @@
     without permission of its author.
 --]]
 
-TRAIT.name = "Coward";
+TRAIT.name = "Cowardly";
 TRAIT.opposite = "Brave";
 TRAIT.description = "Live to fight another day.";
 TRAIT.category = "Physical";
-TRAIT.icon = "materials/terranova/ui/traits/coward.png";
+TRAIT.icon = "materials/terranova/ui/traits/cowardly.png";
 TRAIT.negative = true;

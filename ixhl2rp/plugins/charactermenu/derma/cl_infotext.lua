@@ -4,7 +4,7 @@ local PANEL = {};
 function PANEL:Init()
 	self:SetPos(4, 4);
 	self:SetSize(self:GetWide() - 8, 24);
-	self:SetBackgroundColor(Color(187, 0, 0, 255));
+	self:SetBackgroundColor(Color(100,100,100,5));
 	
 	self.label = vgui.Create("DLabel", self);
 	self.label:SetText("");
@@ -43,9 +43,5 @@ function PANEL:SetText(text)
 	self.label:SizeToContents();
 end;
 
--- A function to set the panel's info color.
-function PANEL:SetInfoCategory(category)
-	self:SetBackgroundColor(ix.traits.categories[category] or Color(255,255,255,5));
-end;
 	
 vgui.Register("ixInfoText", PANEL, "DPanel");
