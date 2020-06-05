@@ -107,9 +107,6 @@ function PANEL:Init()
 	self.model.alpha = 255
 	self.model:SetAlpha(255)
 
-	-- Don't display until we have the bodygroups loaded.
-	self.model:SetVisible(false)
-
 	self.panels = {}
 	self.slotPlacements = {
 		["headgear"] = {x = 5, y = 100},
@@ -121,13 +118,17 @@ function PANEL:Init()
 	}
 
 	net.Receive("ixCharPanelLoadModel", function()
+		local model = net.ReadString(16)
 		local bodygroups = net.ReadTable()
+		
+		self.model:SetModel(model, character:GetData("skin", 0))
 
-		for k, v in pairs(bodygroups) do
-			self.model.Entity:SetBodygroup(k, v)
+		if(bodygroups) then 
+			for k, v in pairs(bodygroups) do
+				self.model.Entity:SetBodygroup(k, v)
+			end
 		end
 
-		self.model:SetVisible(true)
 	end)
 
 	net.Receive("ixCharPanelUpdateModel", function()
@@ -135,14 +136,6 @@ function PANEL:Init()
 		local bodygroup = net.ReadUInt(8)
 
 		self.model.Entity:SetBodygroup(index, bodygroup)
-	end)
-
-	net.Receive("ixCharPanelSyncModel", function()
-		local model = net.ReadString(16)
-
-		if(!self.model) then return false end
-		
-		self.model:SetModel(model, character:GetData("skin", 0))
 	end)
 end
 

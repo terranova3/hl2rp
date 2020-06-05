@@ -32,6 +32,16 @@ function META:HasEquipped()
 	return false
 end
 
+function META:GetItems()
+	local items = {}
+
+	for k, v in pairs(self.slots) do
+		table.insert(items, v)
+	end
+
+	return items or {}
+end
+
 function META:SetOwner(owner, fullUpdate)
 	if (type(owner) == "Player" and owner:GetNetVar("char")) then
 		owner = owner:GetNetVar("char")
@@ -347,16 +357,6 @@ if (SERVER) then
 			net.WriteType((receiver == nil or fullUpdate) and self.owner or nil)
 			net.WriteTable(self.vars or {})
 		net.Send(receiver)
-	end
-
-	function META:Update(client)
-		local show = true
-		show = hook.Run("CharPanelShouldShow", client)
-		netstream.Start(client, "ShowCharacterPanel", show)
-	
-		net.Start("ixCharPanelSyncModel")
-			net.WriteString(client:GetModel(), 16)
-		net.Send(client)
 	end
 end
 

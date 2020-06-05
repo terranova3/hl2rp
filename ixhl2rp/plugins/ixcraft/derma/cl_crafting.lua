@@ -174,7 +174,7 @@ hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
 				characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
 				characterPanel:Dock(FILL)	
 
-				netstream.Start("RequestShowCharacterPanel")
+				netstream.Start("CharacterPanelUpdate")
 				netstream.Hook("ShowCharacterPanel", function(show)
 					if(IsValid(ix.gui.charPanel)) then
 						ix.gui.charPanel:Remove()
@@ -189,8 +189,6 @@ hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
 						end
 	
 						ix.gui.charPanel = cPanel
-
-						netstream.Start("UpdateCharacterModel")
 					end
 				end)
 	

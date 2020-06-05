@@ -8,7 +8,7 @@ local PLUGIN = PLUGIN;
 
 -- Called when the plugin is initialized.
 -- In a large database this can be expensive, don't reload cache on lua autorefresh.
-function PLUGIN:PluginLoaded()
+function PLUGIN:InitializedPlugins()
 	if(cpSystem.cache == nil) then
 		cpSystem.cache = {}
 		cpSystem.cache.taglines = {}
@@ -25,7 +25,7 @@ function PLUGIN:PluginLoaded()
 					if(data.cpTagline and data.cpID) then
 						table.insert(cpSystem.cache.taglines, {
 							tagline = data.cpTagline, 
-							id = data.cpID		
+							id = tonumber(data.cpID)
 						})
 					end
 				end 
@@ -136,6 +136,7 @@ end
 
 -- Called when the client is checking if it has access to see the character panel
 function PLUGIN:CharPanelShouldShow(client)
+	print(client)
 	if (client:IsCombine()) then
 		return false
 	end
@@ -152,4 +153,8 @@ netstream.Hook("ViewDataUpdate", function(client, target, text, combinePoints)
 		target:GetCharacter():SetData("combineData", data)
 		Schema:AddCombineDisplayMessage("@cViewDataFiller", nil, client)
 	end
+end)
+
+netstream.Hook("RequestTaglineCache", function(client)
+	netstream.Start(client, "ReceiveTaglineCache", cpSystem.cache.taglines)
 end)

@@ -91,6 +91,33 @@ do
 		query:Execute()
 	end
 
+
+	function ix.charPanel.CharPanelShow(client)
+		if(hook.Run("CharPanelShouldShow", client) != nil) then 
+			return hook.Run("CharPanelShouldShow", client)
+		else
+			return true
+		end
+	end	
+
+	function ix.charPanel.CharacterPanelUpdate(client)
+		local bodygroups = client:GetCharacter():GetData("groups", nil)
+		local show = ix.charPanel.CharPanelShow(client)
+	
+		netstream.Start(client, "ShowCharacterPanel", show)
+	
+		if(show) then
+			net.Start("ixCharPanelLoadModel")
+				net.WriteString(client:GetModel(), 16)
+				net.WriteTable(bodygroups or {})
+			net.Send(client)
+		end
+	end
+
+	netstream.Hook("CharacterPanelUpdate", function(client)
+		ix.charPanel.CharacterPanelUpdate(client)
+	end)
+
 	if (CLIENT) then
 		net.Receive("ixCharPanelSync", function()
 			local slots = net.ReadTable()

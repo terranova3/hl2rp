@@ -52,19 +52,8 @@ function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)
 	net.Send(client)
 end
 
+function PLUGIN:Think()
+	local items = Entity(1):GetCharacter():GetCharPanel():GetItems()
 
-netstream.Hook("RequestShowCharacterPanel", function(client)
-	local show = true
-	show = hook.Run("CharPanelShouldShow", client)
-
-	netstream.Start(client, "ShowCharacterPanel", show)
-end)
-
-netstream.Hook("UpdateCharacterModel", function(client)
-	local bodygroups = client:GetCharacter():GetData("groups", nil)
-
-	-- We send the message regardless if bodygroups is valid, because we need to tell the client to show their model.
-	net.Start("ixCharPanelLoadModel")
-		net.WriteTable(bodygroups or {})
-	net.Send(client)
-end)
+	PrintTable(items)
+end

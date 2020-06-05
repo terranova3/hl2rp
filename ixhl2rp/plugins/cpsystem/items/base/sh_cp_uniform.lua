@@ -8,7 +8,7 @@ local PLUGIN = PLUGIN;
 ITEM.base = "base_outfit"
 ITEM.name = "Uniform";
 ITEM.model = "models/vj_props/duffle_bag.mdl";
-ITEM.replacements = "models/newcca/cca_unit.mdl";
+ITEM.replacements = "models/Police.mdl";
 ITEM.category = "Clothing";
 ITEM.description = "A suitcase full of clothes.";
 ITEM.width = 2
@@ -52,14 +52,6 @@ end
 function ITEM:OnUnequipped()
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
-
-	for _, v in pairs(self.player:GetCharacter():GetInventory():GetItems()) do
-		if(v.base == "base_cp_gasmask" or v.name == "Civil Protection Trenchcoat") then
-			if(v:GetData("equip") == true) then 
-				v:RemoveOutfit(self.player);
-			end;
-		end;
-	end;
 
 	PLUGIN:AdjustPlayer("Unequipped", self:GetData("name"), self.player);
 end
