@@ -43,7 +43,27 @@ do
 		fieldType = ix.type.text,
 		bNoDisplay = true,
 		OnValidate = function(self, value, payload)
-			return true
+			local traits = payload.traits
+			local philosophy = false
+
+			if(!traits[1]) then 
+				return false, "You must select at least one trait."
+			end
+
+			for k, v in pairs(traits) do
+				local trait = ix.traits.Get(v)
+
+				if(trait.category == "Philosophy") then 
+					philosophy = true
+					break
+				end
+			end
+
+			if(!philosophy) then 
+				return false, "You must select at least one philosophy trait!"
+			end
+
+			return value or {}
 		end,
 		alias = "Traits"
 	})

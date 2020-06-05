@@ -39,15 +39,15 @@ else
 end
 
 function PLUGIN:OnCharacterCreated(client, character)
-	if(character:GetFaction() != FACTION_CITIZEN) then return false end
-	
-	local inventory = character:GetInventory()
-	local TimeString = os.date( "%H:%M:%S - %d/%m/%Y", os.time() )
+	if(character:GetFaction() == FACTION_CITIZEN) then
+		local inventory = character:GetInventory()
+		local TimeString = os.date( "%H:%M:%S - %d/%m/%Y", os.time() )
 
-	inventory:Add("suitcase", 1)
-	inventory:Add("transfer_papers", 1, {
-		citizen_name = character:GetName(),
-		unique = math.random(0000000,999999999),
-		issue_date = tostring(TimeString)
-	})
+		inventory:Add("suitcase", 1)
+		inventory:Add("transfer_papers", 1, {
+			citizen_name = character:GetName(),
+			unique = math.random(0000000,999999999),
+			issue_date = tostring(TimeString)
+		})
+	end
 end

@@ -350,7 +350,6 @@ if (SERVER) then
 	end
 
 	function META:Update(client)
-		print(client, "yes")
 		local show = true
 		show = hook.Run("CharPanelShouldShow", client)
 		netstream.Start(client, "ShowCharacterPanel", show)
