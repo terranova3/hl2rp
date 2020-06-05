@@ -108,7 +108,6 @@ end
 -- Called when the client is checking if it has access to see the character panel
 function PLUGIN:CharPanelShouldShow(client)
 	if (client:IsCombine()) then
-		print("This!")
 		return false
 	end
 end;

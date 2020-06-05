@@ -6,16 +6,17 @@
 local Schema = Schema;
 local PLUGIN = PLUGIN;
 
--- called when the client wants to view the combine data for the given target
+-- Called when the client wants to view the combine data for the given target
 function Schema:CanPlayerViewData(client, target)
 	return client:IsCombine() and (!target:IsCombine() and target:Team() != FACTION_ADMIN)
 end
 
--- called when the client wants to edit the combine data for the given target
+-- Called when the client wants to edit the combine data for the given target
 function Schema:CanPlayerEditData(client, target)
 	return client:IsCombine() and (!target:IsCombine() and target:Team() != FACTION_ADMIN)
 end
 
+-- Called when a client has run the command to edit combine objectives.
 function Schema:CanPlayerEditObjectives(client)
 	if (!client:IsCombine() or !client:GetCharacter()) then
 		return false
