@@ -51,9 +51,3 @@ function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)
 		net.WriteUInt(bodygroup, 8)
 	net.Send(client)
 end
-
-function PLUGIN:Think()
-	local items = Entity(1):GetCharacter():GetCharPanel():GetItems()
-
-	PrintTable(items)
-end

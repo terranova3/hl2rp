@@ -100,7 +100,7 @@ do
 		end
 	end	
 
-	function ix.charPanel.CharacterPanelUpdate(client)
+	function ix.charPanel.Update(client)
 		local bodygroups = client:GetCharacter():GetData("groups", nil)
 		local show = ix.charPanel.CharPanelShow(client)
 	
@@ -115,7 +115,7 @@ do
 	end
 
 	netstream.Hook("CharacterPanelUpdate", function(client)
-		ix.charPanel.CharacterPanelUpdate(client)
+		ix.charPanel.Update(client)
 	end)
 
 	if (CLIENT) then
@@ -236,7 +236,6 @@ do
 		util.AddNetworkString("ixCharPanelRemove")
 		util.AddNetworkString("ixCharPanelUpdateModel")
 		util.AddNetworkString("ixCharPanelLoadModel")
-		util.AddNetworkString("ixCharPanelSyncModel")
 
 		function ix.charPanel.HasIntegrity(client, item, invID, panelID, checkInventory)
 			local inventory = ix.item.inventories[invID or 0]

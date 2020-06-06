@@ -7,7 +7,6 @@ local PLUGIN = PLUGIN;
 
 do  
 	ix.char.RegisterVar("skin", {
-		field = "skin",
 		fieldType = ix.type.number,
 		default = 0,
 		index = 2,
@@ -39,14 +38,13 @@ do
 	})
 
 	ix.char.RegisterVar("traits", {
-		field = "traits",
 		fieldType = ix.type.text,
 		bNoDisplay = true,
 		OnValidate = function(self, value, payload)
 			local traits = payload.traits
 			local philosophy = false
 
-			if(!traits[1]) then 
+			if(!traits) then 
 				return false, "You must select at least one trait."
 			end
 
@@ -66,5 +64,46 @@ do
 			return value or {}
 		end,
 		alias = "Traits"
+	})
+
+	
+	ix.char.RegisterVar("cpid", {
+		OnValidate = function(self, value, payload)
+			local id = payload.cpid
+			local faction = ix.faction.indices[payload.faction]
+
+			if(faction == "Metropolice Force") then
+				if(!id) then
+					return false, "You don't have a valid cp id!"
+				end
+			end
+
+			return value or 0
+		end,
+		alias = "Cpid"
+	})
+
+	ix.char.RegisterVar("tagline", {
+		OnValidate = function(self, value, payload)
+			local tagline = payload.tagline
+			local faction = ix.faction.indices[payload.faction]
+			local valid = false
+			
+			if(faction == "Metropolice Force") then
+				for k, v in pairs(cpSystem.config.taglines) do
+					if(tagline == v) then
+						valid = true
+						break
+					end
+				end
+
+				if(!valid) then 
+					return false, "You don't have a valid cp tagline!"
+				end
+			end
+
+			return value or ""
+		end,
+		alias = "Tagline"
 	})
 end

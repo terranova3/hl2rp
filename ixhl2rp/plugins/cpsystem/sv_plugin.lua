@@ -39,7 +39,7 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
         PLUGIN:UpdateName(character);
     end;
 
-    ix.charPanel.CharacterPanelUpdate(client)
+    ix.charPanel.Update(client)
 end;
 
 function PLUGIN:IsWearingUniform(character)

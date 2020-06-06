@@ -46,19 +46,16 @@ FACTION.models = {
 }
 
 function FACTION:OnCharacterCreated(client, character)
-	local count = 0
 	local inventory = character:GetInventory()
-	local id = Schema:ZeroNumber(math.random(1, 99999), 5)
-
-	for _ in pairs(cpSystem.config.taglines) do count = count + 1 end
+	local cid = Schema:ZeroNumber(math.random(1, 99999), 5)
 
 	character:SetData("customclass", "Citizen");
 	character:SetData("cpCitizenName", character:GetName());
 	character:SetData("cpCitizenDesc", cpSystem.config.cpDefaultDescription)
 	character:SetData("cpRank", cpSystem.config.cpDefaultRank);
-	character:SetData("cpTagline", cpSystem.config.taglines[math.random(1, count)]);
-	character:SetData("cpID", Schema:ZeroNumber(math.random(1, 9), 1));
-	character:SetData("cid", id);
+	character:SetData("cpTagline", character:GetTagline());
+	character:SetData("cpID", character:GetCpid());
+	character:SetData("cid", cid);
 
 	inventory:Add("cp_stunstick", 1)
 	inventory:Add("cp_standard", 1, {

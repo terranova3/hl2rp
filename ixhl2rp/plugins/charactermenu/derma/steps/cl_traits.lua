@@ -1,7 +1,9 @@
 local PANEL = {}
 
 function PANEL:Init()
-	self.loaded = false;
+	local parent = self;
+
+	self.traitPanels = {}
 	self.titleLabel = self:AddLabel("Select traits")
 	self.subLabel = self:SubLabel("You may select up to five traits that suit your character.")
 
@@ -11,17 +13,6 @@ function PANEL:Init()
 	self.traitLayout:DockMargin(0, 10, 0, 0)
 	self.traitLayout:SetSpaceY( 5 )
 	self.traitLayout:SetSpaceX( 5 )
-
-	self.selectPanel = self:AddStagePanel("select")
-
-	ix.gui.traitSelection = self
-end
-
-function PANEL:Display()
-	local parent = self;
-
-	self.traitPanels = {}
-	self.selectedtraitPanel = nil;
 
 	for i = 1, 5 do
 		self.trait = self.traitLayout:Add("DButton") 
@@ -43,14 +34,16 @@ function PANEL:Display()
 		table.insert(self.traitPanels, {panel = self.trait, icon = self.icon})
 	end
 
+	self.selectPanel = self:AddStagePanel("select")
+
+	ix.gui.traitSelection = self
+end
+
+function PANEL:Display()
 	self:SetActivePanel("main");
 end
 
 function PANEL:OnHide()
-	for k, v in pairs(self.traitPanels) do
-		v.panel:Remove();
-	end
-
 	if(ix.gui.selector) then
 		ix.gui.selector:Remove()
 	end

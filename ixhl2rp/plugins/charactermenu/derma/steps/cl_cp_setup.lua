@@ -12,6 +12,7 @@ function PANEL:Init()
 	self.taglineDropBox:DockMargin(0, 10, 0, 0)
 	self.taglineDropBox.OnSelect = function( self, index, value )
 		parent.selectedTagline = value;
+		parent:SetPayload("tagline", value)
 		parent:RebuildIDs()
 	end
 
@@ -20,6 +21,7 @@ function PANEL:Init()
 	self.idDropBox:Dock(TOP)
 	self.idDropBox:DockMargin(0, 10, 0, 0)
 	self.idDropBox.OnSelect = function( self, index, value )
+		parent:SetPayload("cpid", value)
 	end
 
 	netstream.Start("RequestTaglineCache")
