@@ -3,11 +3,11 @@
 	without permission of its author.
 --]]
 
-ix.entity = {}
+ix.entity = ix.entity or {}
 
 if(SERVER) then
     -- A function to make an entity flush with the ground after it has been spawned.
-	function ix.entity.MakeFlushToGround(entity, position, normal)
+	function ix.entity.MakeFlushToSurface(entity, position, normal)
 		entity:SetPos(position + (entity:GetPos() - entity:NearestPoint(position - (normal * 512))));
     end;
 
