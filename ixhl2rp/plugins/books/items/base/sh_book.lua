@@ -8,6 +8,7 @@ ITEM.model = "models/props_lab/clipboard.mdl"
 ITEM.description = "This books description has not been setup. This is likely an error, please report this as a bug."
 ITEM.category = "Literature"
 ITEM.functions.Read = {
+	icon = "icon16/book_open.png",
 	OnRun = function(item)
 		netstream.Start(item.player, "ViewBook", item.id);
 		return false
