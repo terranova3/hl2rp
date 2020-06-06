@@ -15,30 +15,23 @@
 	without permission of its author.
 --]]
 
-
 local PLUGIN = PLUGIN
 
-netstream.Hook("ViewBook", function(data)
-	local entity = data;
-	
-	if (IsValid(entity)) then
+netstream.Hook("ViewBook", function(id)
+	if (id) then
+		local itemTable = ix.item.instances[id]
 
-		local id = entity:GetID();
+		if(IsValid(ix.gui.menu)) then
+			ix.gui.menu:Remove()
+		end
 
-		if (id != 0) then
-			local itemTable = ix.item.instances[id];
-			
-			if (itemTable and itemTable.bookInformation) then
-				if (IsValid(PLUGIN.bookPanel)) then
-					PLUGIN.bookPanel:Close();
-					PLUGIN.bookPanel:Remove();
-				end;
-				
-				PLUGIN.bookPanel = vgui.Create("ixViewBook");
-				PLUGIN.bookPanel:SetEntity(entity);
-				PLUGIN.bookPanel:Populate(itemTable);
-				PLUGIN.bookPanel:MakePopup();
-			end;
-		end;
-	end;
-end);
+		if (IsValid(PLUGIN.bookPanel)) then
+			PLUGIN.bookPanel:Close()
+			PLUGIN.bookPanel:Remove()
+		end
+		
+		PLUGIN.bookPanel = vgui.Create("ixViewBook")
+		PLUGIN.bookPanel:Populate(itemTable)
+		PLUGIN.bookPanel:MakePopup()
+	end
+end)
