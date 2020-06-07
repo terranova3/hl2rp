@@ -3,7 +3,7 @@ local PANEL = {}
 function PANEL:Init()
 	local parent = self
 
-	self.label = self:AddLabel("Civil Protection Setup")
+	self.label = self:AddLabel("Unit Setup")
 	self.sublabel = self:SubLabel("Customize your tagline and id number.")
 
 	self.taglineDropBox = self:Add("DComboBox")
@@ -25,7 +25,7 @@ function PANEL:Init()
 	end
 
 	netstream.Start("RequestTaglineCache")
-	self:Register("CP Setup")
+	self:Register("Unit Setup")
 end
 
 function PANEL:Display()
@@ -45,7 +45,7 @@ end
 function PANEL:ShouldSkip()
 	local faction = ix.faction.indices[self:GetPayload("faction")]
 
-	if(faction.name != "Metropolice Force") then
+	if(faction.name != "Civil Protection") then
 		return true
 	end
 end

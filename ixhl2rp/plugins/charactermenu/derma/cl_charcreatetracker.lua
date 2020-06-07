@@ -66,8 +66,11 @@ function PANEL:Build(noAnim)
         -- Change our old strings to the new displaced ones.
         timer.Simple(0.25, function()
             for i = 1, 5 do
-                self.panels[i]:AlphaTo(255, 0.25)
-                self.panels[i]:SetText(strings[i])
+                -- Check if they are still valid, as they may be removed or invalid during the timer.
+                if(self.panels) then
+                    self.panels[i]:AlphaTo(255, 0.25)
+                    self.panels[i]:SetText(strings[i])
+                end
             end
         end)
     else
@@ -120,9 +123,21 @@ function PANEL:GetPayload(key, default)
 end
 
 function PANEL:Validate(name)
-    if(name == "Model") then
+    if(name == "Faction") then
+        local count = 0
+
+        for id, faction in SortedPairsByMemberValue(ix.faction.teams, "name") do
+            if (not ix.faction.HasWhitelist(faction.index)) then continue end
+    
+            count = count + 1
+        end
+
+        if(count < 2) then
+            return false
+        end
+    elseif(name == "Model") then
         local faction = ix.faction.indices[self:GetPayload("faction")]
-        
+
         if(#faction.models == 1) then
             return false
         end
@@ -135,7 +150,7 @@ function PANEL:Validate(name)
     elseif(name == "CP Setup") then
         local faction = ix.faction.indices[self:GetPayload("faction")].name
         
-        if(faction != "Metropolice Force") then
+        if(faction != "Civil Protection") then
             return false
         end
     end
