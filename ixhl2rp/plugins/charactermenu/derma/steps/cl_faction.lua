@@ -57,7 +57,7 @@ function PANEL:OnFactionSelected(faction)
 
 	self.desc:SetText(L(faction.description or "noDesc"))
 	self.desc:SetTextColor(faction.color)
-	
+
 	self:ResetPayload()
 	self:SetPayload("faction", faction.index)
 	self:SetPayload("model", math.random(1, #models))
@@ -65,11 +65,17 @@ function PANEL:OnFactionSelected(faction)
 	-- Set the model for the preview.
 	self:UpdateModelPanel()
 
+	-- Update the tracker for the new faction.
+	if(IsValid(ix.gui.charCreateTracker)) then
+		ix.gui.charCreateTracker:Build(true)
+	end
+
 	-- Don't make the click sound when the faction is pre-selected.
 	if (self.skipFirstSelect) then
 		self.skipFirstSelect = false
 		return
 	end
+
 	ix.gui.characterMenu:clickSound()
 end
 

@@ -120,7 +120,13 @@ function PANEL:GetPayload(key, default)
 end
 
 function PANEL:Validate(name)
-    if(name == "Customization") then
+    if(name == "Model") then
+        local faction = ix.faction.indices[self:GetPayload("faction")]
+        
+        if(#faction.models == 1) then
+            return false
+        end
+    elseif(name == "Customization") then
         local skins = ix.gui.charCreate.model.Entity:SkinCount()
 
         if(skins < 2) then
