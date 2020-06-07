@@ -60,9 +60,21 @@ function PANEL:Build()
         table.insert(strings, data[i] or "")
     end
 
+    self:PlayAnimations()
+
     -- Change our old strings to the new displaced ones.
-    for i = 1, 5 do
-        self.panels[i]:SetText(strings[i])
+    timer.Simple(0.25, function()
+        for i = 1, 5 do
+            self.panels[i]:AlphaTo(255, 0.25)
+            self.panels[i]:SetText(strings[i])
+        end
+    end)
+end
+
+function PANEL:PlayAnimations()
+    for k, v in pairs(self.panels) do
+        v:SetAlpha(255)
+        v:AlphaTo(0, 0.25)
     end
 end
 
