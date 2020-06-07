@@ -4,7 +4,8 @@
 --]]
 
 local PLUGIN = PLUGIN;
-local font = "Common Sans"
+local font = "Futura Std Medium"
+local fontTight = "Futura Std Condensed"
 
 
 surface.CreateFont("ixPluginIntroTitleFont", {
@@ -31,13 +32,19 @@ surface.CreateFont("ixPluginIntroSmallFont", {
 surface.CreateFont("ixPluginCharTitleFont", {
     font = font,
     weight = 200,
-    size = ScreenScale(35),
+    size = ScreenScale(25),
     additive = true
 })
 surface.CreateFont("ixPluginCharDescFont", {
     font = font,
     weight = 200,
     size = ScreenScale(12),
+    additive = true
+})
+surface.CreateFont("ixPluginCharDescMiniFont", {
+    font = font,
+    weight = 200,
+    size = ScreenScale(6),
     additive = true
 })
 surface.CreateFont("ixPluginCharSubTitleFont", {

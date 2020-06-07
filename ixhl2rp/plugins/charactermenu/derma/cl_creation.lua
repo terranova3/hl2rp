@@ -46,6 +46,7 @@ function PANEL:Init()
 	self.buttons = self:Add("DPanel")
 	self.buttons:Dock(BOTTOM)
 	self.buttons:SetTall(48)
+	self.buttons:DockMargin(0, 32, 0, 0)
 	self.buttons:SetDrawBackground(false)
 
 	self.prev = self.buttons:Add("ixCharButton")
@@ -53,7 +54,6 @@ function PANEL:Init()
 	self.prev:Dock(LEFT)
 	self.prev:SetWide(96)
 	self.prev.DoClick = function(prev) self:PreviousStep() end
-	self.prev:SetAlpha(0)
 
 	self.next = self.buttons:Add("ixCharButton")
 	self.next:SetText(L("next"):upper())
@@ -75,6 +75,7 @@ function PANEL:Init()
 	self.steps = {}
 	self.curStep = 0
 
+	self:ShowCancelButton()
 	self:ResetPayload(true)
 
 	for k, v in pairs(steps) do
@@ -299,10 +300,22 @@ function PANEL:NextStep()
 
 	-- Transition the view to the next step's view.
 	self:OnStepChanged(curStep, nextStep)
+	self:ShowCancelButton()
+
+	-- Updates the index of the charactermenu, moving it to the right.
+	if(ix.gui.characterMenu.charCreateTracker) then
+		ix.gui.characterMenu.charCreateTracker:MoveRight()
+	end
 end
 
 -- Moves to the previous available step if one exists.
 function PANEL:PreviousStep()
+	if(!IsValid(self:GetPreviousStep())) then
+		if (IsValid(ix.gui.characterMenu)) then
+			ix.gui.characterMenu:showContent()
+		end
+	end
+
 	local curStep = self.steps[self.curStep]
 	local newStep = self.curStep - 1
 	local prevStep = self.steps[newStep]
@@ -313,8 +326,15 @@ function PANEL:PreviousStep()
 	end
 
 	if (not IsValid(prevStep)) then return end
+
 	self.curStep = newStep
 	self:OnStepChanged(curStep, prevStep)
+	self:ShowCancelButton()
+
+	-- Updates the index of the charactermenu, moving it to the left.
+	if(ix.gui.characterMenu.charCreateTracker) then
+		ix.gui.characterMenu.charCreateTracker:MoveLeft()
+	end
 end
 
 -- Returns the panel for the step shown prior to this step.
@@ -338,12 +358,6 @@ function PANEL:OnStepChanged(oldStep, newStep)
 	local nextStepText = L(shouldFinish and "finish" or "next"):upper()
 	local shouldSwitchNextText = nextStepText ~= self.next:GetText()
 
-	-- Change visibility for prev/next if they should not be shown.
-	if (IsValid(self:GetPreviousStep())) then
-		self.prev:AlphaTo(255, ANIM_SPEED)
-	else
-		self.prev:AlphaTo(0, ANIM_SPEED)
-	end
 	if (shouldSwitchNextText) then
 		self.next:AlphaTo(0, ANIM_SPEED)
 	end
@@ -372,6 +386,14 @@ function PANEL:OnStepChanged(oldStep, newStep)
 		end)
 	else
 		ShowNewStep()
+	end
+end
+
+function PANEL:ShowCancelButton()
+	if(!IsValid(self:GetPreviousStep())) then
+		self.cancel:SetVisible(false)
+	elseif(IsValid(self:GetPreviousStep())) then
+		self.cancel:SetVisible(true)
 	end
 end
 

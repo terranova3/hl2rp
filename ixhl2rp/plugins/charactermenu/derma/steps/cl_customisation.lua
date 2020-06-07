@@ -14,6 +14,7 @@ function PANEL:Init()
 	self.skins:StretchToParent(0, 0, 0, 0)
 
 	--self.facialhair = self:SubLabel("Facial hair")
+	self:Register("Customization")
 end
 
 function PANEL:Display()
@@ -53,8 +54,7 @@ function PANEL:ShouldSkip()
 	local model = faction.models[self:GetPayload("model")]
 	local skins = self:GetModelPanel().Entity:SkinCount()
 
-	if(string.find(model, "/female") and skins < 2) then
-		-- todo: ix.gui.charCreate:ShowMessage("Skipped customisation. There are no skins for this model.")
+	if(skins < 2) then
 		return true
 	end
 

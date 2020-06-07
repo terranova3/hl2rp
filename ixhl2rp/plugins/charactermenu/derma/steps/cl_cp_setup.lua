@@ -25,6 +25,7 @@ function PANEL:Init()
 	end
 
 	netstream.Start("RequestTaglineCache")
+	self:Register("CP Setup")
 end
 
 function PANEL:Display()

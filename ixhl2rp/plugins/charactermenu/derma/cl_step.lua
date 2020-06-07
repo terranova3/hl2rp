@@ -125,6 +125,11 @@ function PANEL:SubLabel(text)
 	return label
 end
 
+-- Helper function to register a name variable onto the panel.
+function PANEL:Register(name)
+	self.stepName = name
+end
+
 -- Helper function to add stages for a step.
 function PANEL:AddStagePanel(name)
 	local id = #self.stagePanels + 1;

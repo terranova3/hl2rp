@@ -25,6 +25,8 @@ function PANEL:Init()
 	end
 	self.desc:SetMultiline(true)
 	self.desc:SetZPos(3)
+
+	self:Register("Biography")
 end
 
 function PANEL:AddTextEntry(payloadName)

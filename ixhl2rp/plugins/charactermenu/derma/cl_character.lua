@@ -61,7 +61,7 @@ function PANEL:createTitle()
 	self.title:SetContentAlignment(1)
 	self.title:SetTall(96)
 	self.title:SetFont("ixPluginCharTitleFont")
-	self.title:SetText("Terranova")
+	self.title:SetText("TERRANOVA")
 	self.title:SetTextColor(WHITE)
 
 	self.desc = self:Add("DLabel")
@@ -113,18 +113,17 @@ function PANEL:loadBackground()
 	end
 end
 
-local gradient = ix.util.GetMaterial("vgui/gradient-u")
+local bg = ix.util.GetMaterial("materials/terranova/ui/charcreate/charcreate_bg.png")
 
 function PANEL:paintBackground(w, h)
 	if (IsValid(self.background)) then return end
 
-	if (self.blank) then
-		surface.SetDrawColor(30, 30, 30)
-		surface.DrawRect(0, 0, w, h)
-	end
+	surface.SetDrawColor(0, 0, 0)
+	surface.DrawRect(0, 0, w, h)
 
-	surface.SetMaterial(gradient)
-	surface.SetDrawColor(0, 0, 0, 250)
+
+	surface.SetMaterial(bg)
+	surface.SetDrawColor(255, 255, 255, 125)
 	surface.DrawTexturedRect(0, 0, w, h * 1.5)
 end
 
@@ -156,15 +155,34 @@ function PANEL:addTab(name, callback, justClick)
 end
 
 function PANEL:createCharacterSelection()
+	if(self.charCreateTracker) then
+		self.charCreateTracker:Remove()
+		self.charCreateTracker = nil
+	end
+
 	self.content:Clear()
 	self.content:InvalidateLayout(true)
 	self.content:Add("ixCharacterSelection")
 end
 
 function PANEL:createCharacterCreation()
+	self.title:Remove()
+	self.desc:Remove()
+	self.tabs:Remove()
+
 	self.content:Clear()
 	self.content:InvalidateLayout(true)
 	self.content:Add("ixCharacterCreation")
+	self:AddCharCreateTracker()
+end
+
+function PANEL:AddCharCreateTracker()
+	if(self.charCreateTracker) then
+		self.charCreateTracker:Remove()
+	end
+
+	self.charCreateTracker = self:Add("ixCharCreateTracker")
+	self.charCreateTracker:Build()
 end
 
 function PANEL:fadeOut()
@@ -185,6 +203,27 @@ function PANEL:Init()
 	self:SetAlpha(0)
 	self:AlphaTo(255, self.ANIM_SPEED * 2)
 
+	self.content = self:Add("DPanel")
+	self.content:Dock(FILL)
+	-- Bottom was 64
+	self.content:DockMargin(64, 0, 64, 16)
+	self.content:SetDrawBackground(false)
+
+	self.music = self:Add("ixCharBGMusic")
+	--self:loadBackground()
+
+	self:showContent()
+end
+
+function PANEL:showContent()
+	self:RebuildTabs()
+
+	self.tabs:Clear()
+	self.content:Clear()
+	self:createTabs()
+end
+
+function PANEL:RebuildTabs()
 	self:createTitle()
 
 	self.tabs = self:Add("DPanel")
@@ -192,21 +231,6 @@ function PANEL:Init()
 	self.tabs:DockMargin(64, 32, 64, 0)
 	self.tabs:SetTall(48)
 	self.tabs:SetDrawBackground(false)
-	
-	self.content = self:Add("DPanel")
-	self.content:Dock(FILL)
-	self.content:DockMargin(64, 0, 64, 64)
-	self.content:SetDrawBackground(false)
-
-	self.music = self:Add("ixCharBGMusic")
-	self:loadBackground()
-	self:showContent()
-end
-
-function PANEL:showContent()
-	self.tabs:Clear()
-	self.content:Clear()
-	self:createTabs()
 end
 
 function PANEL:setFadeToBlack(fade)

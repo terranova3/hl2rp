@@ -37,6 +37,7 @@ function PANEL:Init()
 	self.selectPanel = self:AddStagePanel("select")
 
 	ix.gui.traitSelection = self
+	self:Register("Traits")
 end
 
 function PANEL:Display()

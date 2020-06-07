@@ -1,12 +1,21 @@
 local PANEL = {}
 
-function PANEL:Init()
-	self.title = self:AddLabel("Select a faction")
+local factionMaterials = {
+    ["CITIZEN"] = "materials/terranova/ui/citizen_background.png",
+    ["METROPOLICE FORCE"] = "materials/terranova/ui/mpf_background.png",
+}
 
+function PANEL:Init()
+	self.mat = vgui.Create("Material", self)
+    self.mat:SetPos(0, 0)
+    self.mat:SetSize(512, 256)
+    self.mat:SetMaterial("materials/terranova/ui/mpf_background.png")
+	self.mat.AutoSize = false
+	
 	self.faction = self:Add("DComboBox")
 	self.faction:SetFont("ixPluginCharButtonFont")
 	self.faction:Dock(TOP)
-	self.faction:DockMargin(0, 4, 0, 0)
+	self.faction:DockMargin(0, 260, 0, 0)
 	self.faction:SetTall(40)
 	self.faction.Paint = function(faction, w, h)
 		ix.util.DrawBlur(faction)
@@ -16,6 +25,10 @@ function PANEL:Init()
 	self.faction:SetTextColor(color_white)
 	self.faction.OnSelect = function(faction, index, value, id)
 		self:OnFactionSelected(ix.faction.teams[id])
+
+		local faction = ix.faction.indices[self:GetPayload("faction")]
+
+		self.mat:SetMaterial(factionMaterials[faction.name:upper()] or factionMaterials[1])
 	end
 
 	self.desc = self:AddLabel("desc")
@@ -33,6 +46,8 @@ function PANEL:Init()
 		self.faction:AddChoice(L(faction.name), id, first)
 		first = false
 	end
+
+	self:Register("Faction")
 end
 
 function PANEL:Display()

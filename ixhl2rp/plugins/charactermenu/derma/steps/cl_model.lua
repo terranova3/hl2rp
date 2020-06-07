@@ -12,6 +12,8 @@ function PANEL:Init()
 	self.models:SetStretchWidth(true)
 	self.models:SetStretchHeight(true)
 	self.models:StretchToParent(0, 0, 0, 0)
+
+	self:Register("Model")
 end
 
 function PANEL:Display()
@@ -81,6 +83,7 @@ function PANEL:OnModelSelected(icon, noSound)
 		ix.gui.characterMenu:clickSound()
 	end
 	self:UpdateModelPanel()
+	ix.gui.charCreateTracker:Build()
 end
 
 function PANEL:ShouldSkip()
