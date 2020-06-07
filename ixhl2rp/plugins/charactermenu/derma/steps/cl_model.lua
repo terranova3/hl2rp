@@ -83,7 +83,9 @@ function PANEL:OnModelSelected(icon, noSound)
 		ix.gui.characterMenu:clickSound()
 	end
 	self:UpdateModelPanel()
-	ix.gui.charCreateTracker:Build()
+
+	-- Rebuild with no animation (true)
+	ix.gui.charCreateTracker:Build(true)
 end
 
 function PANEL:ShouldSkip()

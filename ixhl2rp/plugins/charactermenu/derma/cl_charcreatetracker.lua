@@ -44,7 +44,7 @@ function PANEL:Init()
 end
 
 -- Called whenever the panel needs to rethink to accomodate a character create change.
-function PANEL:Build()
+function PANEL:Build(noAnim)
     local data = {}
     local strings = {}
 
@@ -60,15 +60,21 @@ function PANEL:Build()
         table.insert(strings, data[i] or "")
     end
 
-    self:PlayAnimations()
+    if(!noAnim) then
+        self:PlayAnimations()
 
-    -- Change our old strings to the new displaced ones.
-    timer.Simple(0.25, function()
+        -- Change our old strings to the new displaced ones.
+        timer.Simple(0.25, function()
+            for i = 1, 5 do
+                self.panels[i]:AlphaTo(255, 0.25)
+                self.panels[i]:SetText(strings[i])
+            end
+        end)
+    else
         for i = 1, 5 do
-            self.panels[i]:AlphaTo(255, 0.25)
             self.panels[i]:SetText(strings[i])
         end
-    end)
+    end
 end
 
 function PANEL:PlayAnimations()
