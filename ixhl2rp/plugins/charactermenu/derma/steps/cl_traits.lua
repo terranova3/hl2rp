@@ -58,6 +58,16 @@ function PANEL:GetTraitPanelIcon()
 	return self.traitPanels[self.selectedtraitPanel].icon
 end
 
+function PANEL:Validate()
+	local res = {self:ValidateCharVar("traits")}
+
+	if (res[1] == false) then
+		return unpack(res)
+	end
+	
+	return self:ValidateCharVar("traits")
+end
+
 vgui.Register("ixCharacterTraits", PANEL, "ixCharacterCreateStep")
 
 local PANEL = {}
@@ -205,14 +215,6 @@ function PANEL:GetSelectableTraits(index)
 	end
 
 	return categories
-end
-
-function PANEL:Validate()
-	local res = {self:ValidateCharVar("traits")}
-
-	if (res[1] == false) then
-		return unpack(res)
-	end
 end
 
 vgui.Register("ixCharacterTraitSelection", PANEL, "DPanel")
