@@ -7,6 +7,23 @@ local PLUGIN = PLUGIN;
 local font = "Futura Std Medium"
 local fontTight = "Futura Std Condensed"
 
+-- Character Background
+
+surface.CreateFont("ixPluginCharBackgroundTitleFont", {
+    font = fontTight,
+    weight = 200,
+    size = ScreenScale(16),
+    additive = true,
+})
+
+surface.CreateFont("ixPluginCharBackgroundFont", {
+    font = fontTight,
+    weight = 200,
+    size = ScreenScale(8),
+    additive = true
+})
+
+-- Other
 
 surface.CreateFont("ixPluginIntroTitleFont", {
     font = font,

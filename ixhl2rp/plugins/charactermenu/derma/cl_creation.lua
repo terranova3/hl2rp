@@ -4,9 +4,9 @@ local steps = {
 	"ixCharacterFaction",
 	"ixCharacterModel",
 	"ixCharacterCustomisation",
-	"ixCharacterTraits",
+	"ixCharacterBiography",
 	"ixCharacterCPSetup",
-	"ixCharacterBiography"
+	"ixCharacterTraits"
 }
 
 function PANEL:Init()
@@ -277,8 +277,10 @@ end
 function PANEL:NextStep()
 	local lastStep = self.curStep
 	local curStep = self.steps[lastStep]
+
 	if (IsValid(curStep)) then
 		local res = {curStep:Validate()}
+		
 		if (res[1] == false) then return self:ShowError(unpack(res, 2)) end
 	end
 
