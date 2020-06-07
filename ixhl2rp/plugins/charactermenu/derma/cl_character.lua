@@ -31,6 +31,7 @@ function PANEL:createTabs()
 	if (IsValid(load)) then
 		load:setSelected()
 	elseif (IsValid(create)) then
+		self:AddCharCreateTracker()
 		create:setSelected()
 	end
 
@@ -173,7 +174,9 @@ function PANEL:createCharacterCreation()
 	self.content:Clear()
 	self.content:InvalidateLayout(true)
 	self.content:Add("ixCharacterCreation")
+	
 	self:AddCharCreateTracker()
+	self.charCreateTracker:Build()
 end
 
 function PANEL:AddCharCreateTracker()
@@ -182,7 +185,6 @@ function PANEL:AddCharCreateTracker()
 	end
 
 	self.charCreateTracker = self:Add("ixCharCreateTracker")
-	self.charCreateTracker:Build()
 end
 
 function PANEL:fadeOut()

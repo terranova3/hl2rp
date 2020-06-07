@@ -72,7 +72,7 @@ do
 			local id = payload.cpid
 			local faction = ix.faction.indices[payload.faction]
 
-			if(faction == "Metropolice Force") then
+			if(faction == "Civil Protection") then
 				if(!id) then
 					return false, "You don't have a valid cp id!"
 				end
@@ -89,7 +89,7 @@ do
 			local faction = ix.faction.indices[payload.faction]
 			local valid = false
 			
-			if(faction == "Metropolice Force") then
+			if(faction == "Civil Protection") then
 				for k, v in pairs(cpSystem.config.taglines) do
 					if(tagline == v) then
 						valid = true

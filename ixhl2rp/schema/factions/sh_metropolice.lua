@@ -1,5 +1,5 @@
 
-FACTION.name = "Metropolice Force"
+FACTION.name = "Civil Protection"
 FACTION.description = "A metropolice unit working as Civil Protection."
 FACTION.color = Color(50, 100, 150)
 FACTION.pay = 10
