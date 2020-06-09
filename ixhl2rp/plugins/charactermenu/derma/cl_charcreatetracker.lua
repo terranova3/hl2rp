@@ -147,7 +147,7 @@ function PANEL:Validate(name)
         if(skins < 2) then
             return false
         end
-    elseif(name == "CP Setup") then
+    elseif(name == "Unit Setup") then
         local faction = ix.faction.indices[self:GetPayload("faction")].name
         
         if(faction != "Civil Protection") then

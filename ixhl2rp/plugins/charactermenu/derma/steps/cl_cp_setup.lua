@@ -74,7 +74,7 @@ function PANEL:GetTaglines()
 		end
 	end
 
-	for k, v in pairs(cpSystem.cache.taglines) do
+	for k, v in pairs(cpSystem.cache.taglines or {}) do
 		data[v.tagline].id[v.id] = true
 	end
 
