@@ -38,7 +38,7 @@ end;
 
 function ENT:OnOptionSelected(client, option)
 	if(option == "Assign: Standard Uniform") then
-		client:RequestString("Enter the tagline of a unit to create this biolocked uniform for.", string.format("An example of a tagline would be %s.", PLUGIN:GetCPTagline(client:GetCharacter())), function(text)
+		client:RequestString("Enter the tagline of a unit to create this biolocked uniform for.", string.format("An example of a tagline would be %s.", cpSystem.GetCPTagline(client:GetCharacter())), function(text)
 			local inventory = client:GetCharacter():GetInventory()
 			
 			inventory:Add("cp_standard", 1, {

@@ -59,7 +59,7 @@ function FACTION:OnCharacterCreated(client, character)
 
 	inventory:Add("cp_stunstick", 1)
 	inventory:Add("cp_standard", 1, {
-		name = PLUGIN:GetCPTagline(character),
+		name = cpSystem.GetCPTagline(character),
 	})
 	inventory:Add("cid", 1, {
 		name = character:GetName(),

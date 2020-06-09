@@ -8,12 +8,12 @@ local PLUGIN = PLUGIN;
 -- Called when a player's uniform status has been changed
 function PLUGIN:AdjustPlayer(event, lockedName, client)
     local character = client:GetCharacter();
-    local cpData = PLUGIN:GetCPDataAsTable(character);
+    local cpData = cpSystem.GetCPDataAsTable(character);
     local charPanel = character:GetCharPanel()
 
     -- If the uniform isn't biolocked, allow the player to access it.
     if(lockedName == nil) then 
-        lockedName = PLUGIN:GetCPTagline(character);
+        lockedName = cpSystem.GetCPTagline(character);
     end;
     
     if(PLUGIN:IsMetropolice(character)) then 
@@ -24,7 +24,7 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
             client:SetSkin(character:GetData("skin"))
             character:SetData( "customclass", "Citizen" );	
         elseif(event == "Equipped") then
-            if(PLUGIN:GetCPTagline(character) == lockedName) then
+            if(cpSystem.GetCPTagline(character) == lockedName) then
                 character:SetData("cpCitizenDesc", character:GetDescription())
                 character:SetDescription(cpData.cpDesc);
                 character:SetClass(CLASS_MPU);
@@ -71,7 +71,7 @@ end;
 function PLUGIN:GetAccessLevel(character)
     local access = 0
     if(PLUGIN:IsMetropolice(character)) then
-        local cpData = PLUGIN:GetCPDataAsTable(character);
+        local cpData = cpSystem.GetCPDataAsTable(character);
 
         if(PLUGIN:RankExists(cpData.cpRank)) then
             access = Schema.ranks.Get(cpData.cpRank).access;
@@ -109,59 +109,11 @@ end;
 
 -- Called when a character has had data changed that requires their name to be updated
 function PLUGIN:UpdateName(character)
-    local cpData = PLUGIN:GetCPDataAsTable(character);
+    local cpData = cpSystem.GetCPDataAsTable(character);
 
     if(!character:IsUndercover()) then
-        character:SetName(PLUGIN:GetCPName(character));
+        character:SetName(cpSystem.GetCPName(character));
     elseif(character:IsUndercover() and character:GetName() != cpData.cpCitizenName) then
         character:SetName(cpData.cpCitizenName);
     end;
-end;
-
--- Returns full civil protection name as a single string
-function PLUGIN:GetCPName(character, isScanner)
-    local template = ix.config.Get("Naming Scheme");
-    
-	replacements = {
-		["city"] = ix.config.Get("City Name"),
-        ["abbreviation"] = ix.config.Get("Abbreviation"),
-        ["division"] = character:GetData("cpDivision"),
-		["rank"] = character:GetData("cpRank"),
-		["tagline"] = character:GetData("cpTagline"),
-		["id"] = character:GetData("cpID")
-    }
-
-    local name = string.gsub(template, "%a+", 
-	function(str)
-		return replacements[str];
-    end)
-    
-    return name;
-end;
-
--- Returns tagline and id together as a single string
--- TODO: If name template isn't tagline and ID together then this will be incorrect.
-function PLUGIN:GetCPTagline(character)
-    local cpData = PLUGIN:GetCPDataAsTable(character);
-
-    return string.match(PLUGIN:GetCPName(character), cpData.cpTagline..'.-$');
-end;
-
--- Returns all of the plugin's character data as a single table
-function PLUGIN:GetCPDataAsTable(character)
-    local data = {}
-
-    if(PLUGIN:IsMetropolice(character)) then 
-        data.cpID = character:GetData("cpID");
-        data.cpTagline = character:GetData("cpTagline");
-        data.cpRank = character:GetData("cpRank");
-        data.cpAccessLevel = character:GetData("cpAccessLevel");	
-	    data.cpDesc = character:GetData("cpDesc");
-	    data.cpModel = character:GetData("cpModel");
-        data.cpDesc = character:GetData("cpDesc");
-        data.cpCitizenName = character:GetData("cpCitizenName");
-	    data.cpCitizenDesc = character:GetData("cpCitizenDesc");					
-    end;
-    
-    return data;
 end;

@@ -97,9 +97,9 @@ function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
 
  	-- Updates player name if the city has been changed. --
 	if(faction == FACTION_MPF) then
-		if(character:GetName() == PLUGIN:GetCPName(character)) then
+		if(character:GetName() == cpSystem.GetCPName(character)) then
 			if(!string.find(character:GetName(), ix.config.Get("City Name"))) then 
-				character:SetName(PLUGIN:GetCPName(character));
+				character:SetName(cpSystem.GetCPName(character));
 			end;
 		end;
 	end;
