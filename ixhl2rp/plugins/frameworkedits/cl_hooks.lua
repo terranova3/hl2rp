@@ -9,3 +9,11 @@ local PLUGIN = PLUGIN;
 function PLUGIN:CanDrawAmmoHUD(weapon)
     return false;
 end;
+
+function PLUGIN:LoadedMenuButtons(buttons)
+	for k, v in pairs(buttons) do
+		if(v.name == "you") then
+			v:Remove()
+		end
+	end
+end

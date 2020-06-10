@@ -191,15 +191,6 @@ function Schema:PopulateHelpMenu(tabs)
 		end
 
 		if (#classes < 1) then
-			local info = container:Add("ixInfoText")
-			info:SetText(L("You do not have access to any voice lines!"))
-			info:SetContentAlignment(5)
-			info:SetInfoColor("red");
-			info:Dock(TOP)
-			info:DockMargin(0, 0, 0, 8)
-			info:SizeToContents()
-			info:SetTall(32)
-
 			return
 		end
 

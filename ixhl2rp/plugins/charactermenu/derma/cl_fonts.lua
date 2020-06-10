@@ -128,3 +128,27 @@ surface.CreateFont("ixPluginTooltipSmallFont", {
     extended = true,
     weight = 500
 })
+
+
+font = "Futura Std Light"
+
+surface.CreateFont("ixPluginMenuButtonFont", {
+    font = font,
+    size = ScreenScale(14),
+    extended = true,
+    weight = 25
+})
+
+surface.CreateFont("ixPluginMenuButtonFontSmall", {
+    font = font,
+    size = ScreenScale(10),
+    extended = true,
+    weight = 100
+})
+
+surface.CreateFont("ixPluginMenuButtonFontThick", {
+    font = font,
+    size = ScreenScale(14),
+    extended = true,
+    weight = 300
+})
