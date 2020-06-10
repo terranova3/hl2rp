@@ -19,6 +19,7 @@ function PLUGIN:Tick()
 			
 			if (IsValid(ix.infoMenu.panel)) then
 				ix.infoMenu.panel:Remove();
+				CloseDermaMenus()
 			end;
 		end
 	end

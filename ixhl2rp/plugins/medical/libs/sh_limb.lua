@@ -129,16 +129,16 @@ if (SERVER) then
 		return 0;
 	end;
 else
-	ix.limb.bodyTexture = Material("clockwork/limbs/body.png");
+	ix.limb.bodyTexture = Material("terranova/ui/medical/body.png");
 	ix.limb.stored = ix.limb.stored or {};
 	ix.limb.hitGroups = {
-		[HITGROUP_RIGHTARM] = Material("clockwork/limbs/rarm.png"),
-		[HITGROUP_RIGHTLEG] = Material("clockwork/limbs/rleg.png"),
-		[HITGROUP_LEFTARM] = Material("clockwork/limbs/larm.png"),
-		[HITGROUP_LEFTLEG] = Material("clockwork/limbs/lleg.png"),
-		[HITGROUP_STOMACH] = Material("clockwork/limbs/stomach.png"),
-		[HITGROUP_CHEST] = Material("clockwork/limbs/chest.png"),
-		[HITGROUP_HEAD] = Material("clockwork/limbs/head.png")
+		[HITGROUP_RIGHTARM] = Material("terranova/ui/medical/rarm.png"),
+		[HITGROUP_RIGHTLEG] = Material("terranova/ui/medical/rleg.png"),
+		[HITGROUP_LEFTARM] = Material("terranova/ui/medical/larm.png"),
+		[HITGROUP_LEFTLEG] = Material("terranova/ui/medical/lleg.png"),
+		[HITGROUP_STOMACH] = Material("terranova/ui/medical/stomach.png"),
+		[HITGROUP_CHEST] = Material("terranova/ui/medical/chest.png"),
+		[HITGROUP_HEAD] = Material("terranova/ui/medical/head.png")
 	};
 	ix.limb.names = {
 		[HITGROUP_RIGHTARM] = "Right Arm",

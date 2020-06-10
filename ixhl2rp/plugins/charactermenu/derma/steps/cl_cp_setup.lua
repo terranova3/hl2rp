@@ -65,7 +65,7 @@ end
 function PANEL:GetTaglines()
 	local data = {}
 
-	for k, v in pairs(ix.util.Copy(cpSystem.config.taglines)) do
+	for k, v in pairs(ix.util.NewInstance(cpSystem.config.taglines)) do
 		data[v] = {}
 		data[v].id = {}
 

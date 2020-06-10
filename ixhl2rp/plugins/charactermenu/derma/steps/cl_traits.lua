@@ -176,7 +176,7 @@ end
 
 function PANEL:GetSelectableTraits(index)
 	local payload = ix.gui.traitSelection:GetPayload("traits")
-	local traits = ix.util.Copy(ix.traits.stored)
+	local traits = ix.util.NewInstance(ix.traits.stored)
 
 	local categories = {}
 	local opposite = ""
