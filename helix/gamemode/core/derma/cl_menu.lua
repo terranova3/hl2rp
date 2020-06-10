@@ -342,6 +342,8 @@ function PANEL:PopulateTabs()
 
 	self.buttons:MoveToFront()
 	self.guard:MoveToBefore(self.buttons)
+
+	hook.Run("LoadedMenuButtons", self.tabs.buttons)
 end
 
 function PANEL:AddManuallyPaintedChild(panel)
