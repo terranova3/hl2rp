@@ -25,13 +25,13 @@ ix.config.Add("color", Color(75, 119, 190, 255), "The main color theme for the f
 		hook.Run("ColorSchemeChanged", newValue)
 	end
 end, {category = "appearance"})
-ix.config.Add("font", "Roboto Th", "The font used to display titles.", function(oldValue, newValue)
+ix.config.Add("font", "Futura Std Medium", "The font used to display titles.", function(oldValue, newValue)
 	if (CLIENT) then
 		hook.Run("LoadFonts", newValue, ix.config.Get("genericFont"))
 	end
 end, {category = "appearance"})
 
-ix.config.Add("genericFont", "Roboto", "The font used to display generic texts.", function(oldValue, newValue)
+ix.config.Add("genericFont", "Futura Std Light", "The font used to display generic texts.", function(oldValue, newValue)
 	if (CLIENT) then
 		hook.Run("LoadFonts", ix.config.Get("font"), newValue)
 	end
