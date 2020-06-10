@@ -16,7 +16,7 @@
 --]]
 
 local PLUGIN = PLUGIN;
-
+--cwDatastream:Start(player, "ReceiveLimbDamage", player:GetCharacterData("LimbData"));
 PLUGIN.HitGroupBonesCache = {
     {"ValveBiped.Bip01_R_UpperArm", HITGROUP_RIGHTARM},
     {"ValveBiped.Bip01_R_Forearm", HITGROUP_RIGHTARM},

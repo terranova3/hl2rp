@@ -5,17 +5,6 @@
 
 local PLUGIN = PLUGIN;
 
-function PLUGIN:PostPlayerLoadout(client)
-	local character = client:GetCharacter()
-	if (character:GetFaction() == FACTION_VORT) then
-		client:Give("ix_vortibeam")
-		client:Give("ix_nightvision");
-		client:Give("ix_vortheal");	
-	elseif(character:GetFaction() == FACTION_VORTSLAVE) then
-		client:Give("ix_broom");
-	end;
-end
-
 function PLUGIN:PlayerFootstep(client, position, foot, soundName, volume)
 	local factionTable = ix.faction.Get(client:Team());
 	local character = client:GetCharacter();
