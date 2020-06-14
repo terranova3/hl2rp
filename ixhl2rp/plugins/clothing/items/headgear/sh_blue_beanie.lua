@@ -7,9 +7,9 @@
 
 local PLUGIN = PLUGIN;
 
-ITEM.base = "base_headgear"
-ITEM.name = "Boonie Hat";
-ITEM.description = "Makes you look cool.";
+ITEM.name = "Blue Beanie";
+ITEM.model = "models/fty/items/bluebeanie.mdl"
+ITEM.description = "[PH] Needs description.";
 ITEM.bodyGroups = {
-	["headgear"] = 4,
+	["headgear"] = 1,
 }

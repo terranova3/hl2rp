@@ -5,6 +5,7 @@
 
 ITEM.base = "base_torso";
 ITEM.name = "Cyan Long-Sleeved Shirt";
+ITEM.model = "models/fty/items/refugeetop4.mdl"
 ITEM.description = "An open-style cyan long sleeved shirt. A tag of white fabric that reads CWU-Approved hangs on the inside of the collar.";
 ITEM.bodyGroups = {
 	["torso"] = 9

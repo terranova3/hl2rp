@@ -5,6 +5,7 @@
 
 ITEM.base = "base_torso";
 ITEM.name = "Olive Green, Winter Coat";
+ITEM.model = "models/fty/items/wintercoat.mdl"
 ITEM.description = "An olive green winter coat that looks as warm as it feels. A tag of white fabric that reads CWU-Approved hangs on the inside of the collar.";
 ITEM.bodyGroups = {
 	["torso"] = 12

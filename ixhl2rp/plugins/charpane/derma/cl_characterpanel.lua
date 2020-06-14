@@ -361,5 +361,5 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 		self.previewY = y
 	end
 end
---self.parent.model:SetModel(LocalPlayer():GetModel(), nil, "00004")
+
 vgui.Register("ixCharacterEquipmentSlot", PANEL, "DPanel")
