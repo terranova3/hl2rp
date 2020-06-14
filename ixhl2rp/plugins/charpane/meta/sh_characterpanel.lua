@@ -264,6 +264,7 @@ if (SERVER) then
 						if (!inventory.noSave) then
 							local query = mysql:Update("ix_items")
 								query:Update("inventory_id", targetInv:GetID())
+								query:Update("panel_id", 0)
 								query:Update("x", x)
 								query:Update("y", y)
 								query:Where("item_id", item.id)
