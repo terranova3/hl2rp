@@ -1,4 +1,5 @@
 local RECEIVER_NAME = "ixInventoryItem"
+local gradient = surface.GetTextureID("vgui/gradient-d")
 
 -- The queue for the rendered icons.
 ICON_RENDER_QUEUE = ICON_RENDER_QUEUE or {}
@@ -275,7 +276,7 @@ function PANEL:Paint()
 	surface.SetFont("ixPluginTooltipFont")
 	surface.SetTextColor(Color(255,255,255,255))
 	surface.SetTextPos(4, 4)
-	surface.DrawText(LocalPlayer():GetName())
+	surface.DrawText("Character")
 end;
 
 vgui.Register("ixCharacterPane", PANEL, "DPanel")
@@ -332,7 +333,7 @@ function PANEL:Think()
 	end
 end
 
-function PANEL:PaintOver()
+function PANEL:PaintOver(width, height)
 	local panel = self.previewPanel
 
 	if (IsValid(panel)) then
@@ -342,6 +343,10 @@ function PANEL:PaintOver()
 			self:PaintDragPreview(width, height, self.previewX, self.previewY, itemPanel)
 		end
 	end
+
+	surface.SetDrawColor(230, 230, 230, 16)
+	surface.SetTexture(gradient)
+	surface.DrawTexturedRect(0, 0, width, height)
 
 	self.previewPanel = nil
 end;
