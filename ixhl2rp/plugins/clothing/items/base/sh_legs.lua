@@ -15,7 +15,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),
-	ang = Angle(89.083892822266, 89.995094299316, 0),
+	ang = Angle(89.083892822266, -89.995094299316, 0),
 	fov = 8.8235294117647
 }
 
