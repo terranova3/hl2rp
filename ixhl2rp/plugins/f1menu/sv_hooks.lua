@@ -4,7 +4,3 @@
 --]]
 
 local PLUGIN = PLUGIN;
-
-function PLUGIN:ShowHelp(client)
-    netstream.Start(client, "InfoToggle", true)
-end;

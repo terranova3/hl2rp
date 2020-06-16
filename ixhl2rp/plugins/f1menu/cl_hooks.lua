@@ -11,19 +11,19 @@ function PLUGIN:ShouldHideBars()
 	end
 end
 
--- Called each tick.
-function PLUGIN:Tick()
-	if (IsValid(LocalPlayer()) and LocalPlayer():GetCharacter()) then
-		if (ix.infoMenu.open and !input.IsKeyDown(KEY_F1)) then
-			ix.infoMenu.open = false;
-			
-			if (IsValid(ix.infoMenu.panel)) then
-				ix.infoMenu.panel:Remove();
-				CloseDermaMenus()
-			end;
+function PLUGIN:ShowHelp() return false end
+
+function PLUGIN:PlayerBindPress(client, bind, pressed)
+	if (bind:lower():find("gm_showhelp") and pressed) then
+
+		if (LocalPlayer():GetCharacter()) then
+            ix.infoMenu.Display()
 		end
+
+		return true
 	end
-end;
+end
+
 
 -- Called when the info menu is created.
 function PLUGIN:SetInfoMenuData(character, faction)

@@ -17,13 +17,29 @@ function ix.infoMenu.GetData()
     hook.Run("SetInfoMenuData", character, faction)
 end
 
+function ix.infoMenu.Display()
+    ix.infoMenu.stored = {}     
+    ix.infoMenu.GetData()
+
+    ix.infoMenu.open = true
+    ix.infoMenu.panel = vgui.Create("ixInfoMenu")
+end
+
+function ix.infoMenu.Remove()
+    ix.infoMenu.panel:Remove()
+    CloseDermaMenus()
+    ix.infoMenu.panel = nil
+    ix.infoMenu.open = false
+end 
+
 local PANEL = {}
 
 DEFINE_BASECLASS("DFrame")
 
 function PANEL:Init(logs)
     self.startTime = SysTime()
-
+    self.noAnchor = CurTime() + 0.4
+	self.anchorMode = true
     self.minimumWidth = 512
 
     self:SetAlpha(0)
@@ -161,6 +177,8 @@ function PANEL:BuildMenuPanel()
 
     self.menu:Center()
     self.menuX, self.menuY = self.menu:GetPos()
+
+    self.initialized = true
 end
 
 function PANEL:Paint(w, h)
@@ -206,6 +224,14 @@ function PANEL:AddBar(index, color, priority)
 	return panel
 end
 
+function PANEL:OnKeyCodePressed(key)
+	self.noAnchor = CurTime() + 0.5
+
+	if (key == KEY_F1) then
+		ix.infoMenu.Remove()
+	end
+end
+
 function PANEL:Think()
 	local curTime = CurTime()
 
@@ -221,7 +247,23 @@ function PANEL:Think()
 		v:SetVisible(true)
 		v:SetValue(realValue)
 		v:SetText(isstring(barText) and barText or "")
+    end
+
+    
+	local bTabDown = input.IsKeyDown(KEY_F1)
+
+	if (bTabDown and (self.noAnchor or CurTime() + 0.4) < CurTime() and self.anchorMode) then
+		self.anchorMode = false
+		surface.PlaySound("buttons/lightswitch2.wav")
 	end
+
+	if ((!self.anchorMode and !bTabDown) or gui.IsGameUIVisible()) then
+		ix.infoMenu.Remove()
+    end
+
+    if(self.initialized and !self.menu.IsVisible) then
+		ix.infoMenu.Remove()
+    end
 end
 
 -- sort bars by priority
@@ -232,20 +274,3 @@ function PANEL:Sort()
 end
 
 vgui.Register("ixInfoMenu", PANEL, "DFrame")
-
-netstream.Hook("InfoToggle", function(data)
-	if (IsValid(LocalPlayer()) and LocalPlayer():GetCharacter()) then
-        if(!ix.infoMenu.open) then
-            -- Reset any previous data and load any custom strings we want to add to the info menu.
-            ix.infoMenu.stored = {}     
-            ix.infoMenu.GetData()
-
-            ix.infoMenu.open = true
-            ix.infoMenu.panel = vgui.Create("ixInfoMenu")
-        else
-            ix.infoMenu.panel:Remove()
-            ix.infoMenu.panel = nil
-            ix.infoMenu.open = false
-        end
-	end;
-end);
