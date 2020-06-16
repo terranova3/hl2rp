@@ -8,5 +8,5 @@ ITEM.name = "Rebel Legs - 3";
 ITEM.model = "models/fty/items/blackrebelpants.mdl"
 ITEM.description = "[PH] needs description"
 ITEM.bodyGroups = {
-	["legs"] = 11
+	["legs"] = 12
 }
