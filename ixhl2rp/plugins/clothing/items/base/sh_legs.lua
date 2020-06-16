@@ -18,12 +18,3 @@ ITEM.iconCam = {
 	ang = Angle(89.083892822266, -89.995094299316, 0),
 	fov = 8.8235294117647
 }
-
-if (CLIENT) then
-	function ITEM:PopulateTooltip(tooltip)
-		local panel = tooltip:AddRowAfter("name", "slot")
-		panel:SetBackgroundColor(derma.GetColor("Info", tooltip))
-		panel:SetText("Slot: " .. self.outfitCategory or "")
-		panel:SizeToContents()
-	end
-end
