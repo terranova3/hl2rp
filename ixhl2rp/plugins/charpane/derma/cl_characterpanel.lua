@@ -143,6 +143,12 @@ function PANEL:Init()
 
 		self.model.Entity:SetBodygroup(index, bodygroup)
 	end)
+
+	self:Receiver("ixInventoryItem", self.ReceiveDrop)
+end
+
+function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
+	return 
 end
 
 -- Fixes model panel not fading out when the gui menu is closed.
