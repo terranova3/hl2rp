@@ -3,7 +3,7 @@ local PANEL = {}
 function PANEL:Init()
 	local entity = ix.gui.vendor.entity
 
-	self:SetSize(320, 480)
+	self:SetSize(480, 480)
 	self:MoveLeftOf(ix.gui.vendor, 8)
 	self:MakePopup()
 	self:CenterVertical()
@@ -129,6 +129,7 @@ function PANEL:Init()
 	self.items:AddColumn(L"mode").Header:SetTextColor(color_black)
 	self.items:AddColumn(L"price").Header:SetTextColor(color_black)
 	self.items:AddColumn(L"stock").Header:SetTextColor(color_black)
+	self.items:AddColumn(L"Category").Header:SetTextColor(color_black)
 	self.items:SetMultiSelect(false)
 	self.items.OnRowRightClick = function(this, index, line)
 		if (IsValid(menu)) then
@@ -228,7 +229,8 @@ function PANEL:Init()
 			v.GetName and v:GetName() or L(v.name),
 			mode and L(VENDOR_TEXT[mode]) or L"none",
 			entity:GetPrice(k),
-			max and current.."/"..max or "-"
+			max and current.."/"..max or "-",
+			L(v.category) or L"none"
 		)
 
 		panel.item = k
