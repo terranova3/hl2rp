@@ -4,7 +4,11 @@ function PANEL:Init()
 	local parent = self
 
 	self.label = self:AddLabel("Unit Setup")
-	self.sublabel = self:SubLabel("Customize your tagline and id number.")
+	self.sublabel = self:SubLabel("Customize your description, tagline and id number.")
+
+	self.desc = self:AddTextEntry("cpdesc")
+	self.desc:SetTall(128)
+	self.desc:SetMultiline(true)
 
 	self.taglineDropBox = self:Add("DComboBox")
 	self.taglineDropBox:SetFont("ixPluginCharTraitFont")
@@ -26,6 +30,33 @@ function PANEL:Init()
 
 	netstream.Start("RequestTaglineCache")
 	self:Register("Unit Setup")
+end
+
+function PANEL:AddTextEntry(payloadName)
+	local entry = self:Add("DTextEntry")
+	entry:Dock(TOP)
+	entry:SetFont("ixPluginCharButtonFont")
+	entry.Paint = self.PaintTextEntry
+	entry:DockMargin(0, 4, 0, 16)
+	entry.OnValueChange = function(_, value)
+		self:SetPayload(payloadName, string.Trim(value))
+	end
+	entry.payloadName = payloadName
+	entry.OnKeyCodeTyped = function(name, keyCode)
+		if (keyCode == KEY_TAB) then
+			entry:onTabPressed()
+			return true
+		end
+	end
+	entry:SetUpdateOnType(true)
+	return entry
+end
+
+function PANEL:PaintTextEntry(w, h)
+	ix.util.DrawBlur(self)
+	surface.SetDrawColor(0, 0, 0, 100)
+	surface.DrawRect(0, 0, w, h)
+	self:DrawTextEntryText(color_white, HIGHLIGHT, HIGHLIGHT)
 end
 
 function PANEL:Display()
@@ -65,7 +96,7 @@ end
 function PANEL:GetTaglines()
 	local data = {}
 
-	for k, v in pairs(ix.util.NewInstance(cpSystem.config.taglines)) do
+	for k, v in pairs(cpSystem.config.taglines) do
 		data[v] = {}
 		data[v].id = {}
 

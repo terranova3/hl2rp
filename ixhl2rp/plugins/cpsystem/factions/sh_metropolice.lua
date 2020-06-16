@@ -51,8 +51,9 @@ function FACTION:OnCharacterCreated(client, character)
 
 	character:SetData("customclass", "Citizen");
 	character:SetData("cpCitizenName", character:GetName());
-	character:SetData("cpCitizenDesc", cpSystem.config.cpDefaultDescription)
+	character:SetData("cpCitizenDesc", character:GetDescription())
 	character:SetData("cpRank", cpSystem.config.cpDefaultRank);
+	character:SetData("cpDesc", character:GetCpdesc())
 	character:SetData("cpTagline", character:GetTagline());
 	character:SetData("cpID", character:GetCpid());
 	character:SetData("cid", cid);

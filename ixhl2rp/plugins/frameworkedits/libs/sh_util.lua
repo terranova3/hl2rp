@@ -10,6 +10,6 @@ function ix.util.NewInstance(obj, seen)
     local s = seen or {}
     local res = setmetatable({}, getmetatable(obj))
     s[obj] = res
-    for k, v in pairs(obj) do res[ix.util.NewInstance(k, s)] = ix.NewInstance.Copy(v, s) end
+    for k, v in pairs(obj) do res[ix.util.NewInstance(k, s)] = ix.util.NewInstance(v, s) end
     return res
 end

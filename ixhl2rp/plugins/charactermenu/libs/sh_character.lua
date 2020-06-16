@@ -106,4 +106,26 @@ do
 		end,
 		alias = "Tagline"
 	})
+
+	ix.char.RegisterVar("cpdesc", {
+		default = "",
+		OnValidate = function(self, value, payload)
+			local faction = ix.faction.indices[payload.faction]
+			
+			if(faction == "Civil Protection") then
+				value = string.Trim((tostring(value):gsub("\r\n", ""):gsub("\n", "")))
+				local minLength = ix.config.Get("minDescriptionLength", 16)
+
+				if (value:utf8len() < minLength) then
+					return false, "descMinLen", minLength
+				elseif (!value:find("%s+") or !value:find("%S")) then
+					return false, "invalid", "description"
+				end
+			end
+
+			return value or ""
+		end,
+		alias = "Cpdesc"
+	})
+
 end
