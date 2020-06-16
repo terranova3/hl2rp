@@ -142,6 +142,7 @@ function PANEL:Init()
 		local bodygroup = net.ReadUInt(8)
 
 		self.model.Entity:SetBodygroup(index, bodygroup)
+		Legs.LegEnt:SetBodygroup(index, bodygroup)
 	end)
 
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
@@ -310,7 +311,11 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 
 	if (item) then
 		if(item.outfitCategory == string.lower(self.category)) then
-			surface.SetDrawColor(0, 255, 0, 40)
+			if(self.isEmpty) then
+				surface.SetDrawColor(0, 255, 0, 40)
+			else
+				surface.SetDrawColor(255, 255, 0, 10)
+			end
 		else
 			surface.SetDrawColor(255, 0, 0, 40)
 		end;

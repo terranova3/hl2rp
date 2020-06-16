@@ -30,7 +30,7 @@ if (CLIENT) then
 		category = "legs"
 	})
 
-	local Legs = {}
+	Legs = {}
 	Legs.LegEnt = nil
 
 	function Legs:CheckDrawVehicle()
