@@ -72,6 +72,10 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		net.WriteUInt(gridX or 0, 6)
 		net.WriteUInt(gridY or 0, 6)
 	net.SendToServer()
+
+	if(ix.gui.charpane.slots[item.outfitCategory]) then
+		ix.gui.charpane.slots[item.outfitCategory].isEmpty = true
+	end
 end
 
 function PANEL:PaintOver(width, height)
@@ -97,6 +101,8 @@ vgui.Register("ixCharPanelItemIcon", PANEL, "SpawnIcon")
 local PANEL = {}
 
 function PANEL:Init()
+	ix.gui.charpane = self
+
 	self:SetSize(360, 525)
 
 	local character = LocalPlayer():GetCharacter()
@@ -171,6 +177,8 @@ function PANEL:SetCharPanel(charPanel, bFitParent)
 				icon.itemID = item.id
 				self.panels[item.id] = icon
 			end
+
+			self.slots[item.outfitCategory].isEmpty = false
 		end
 	end
 end
@@ -189,6 +197,7 @@ function PANEL:BuildSlots()
 		slot:SetPos(v.x, v.y);
 
 		self.slots[k] = slot
+		slot:Populate()
 	end;
 end
 
@@ -279,17 +288,23 @@ function PANEL:Init()
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
 end;
 
+function PANEL:Populate()
+	local picture = string.format("materials/terranova/ui/charpane/slot_%s.png", self.category)
+
+	self.mat = vgui.Create("Material", self)
+	self.mat:SetPos(0, 0)
+	self.mat:SetSize(64, 64)
+	self.mat:SetMaterial(picture)
+	self.mat.AutoSize = false
+end
+
 function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 	local iconSize = 64
 	local item = itemPanel:GetItemTable()
 
 	if (item) then
 		if(item.outfitCategory == string.lower(self.category)) then
-			if (self.isEmpty) then
-				surface.SetDrawColor(0, 255, 0, 40)
-			else
-				surface.SetDrawColor(255, 255, 0, 40)
-			end
+			surface.SetDrawColor(0, 255, 0, 40)
 		else
 			surface.SetDrawColor(255, 0, 0, 40)
 		end;
@@ -298,19 +313,15 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 	end
 end
 
+function PANEL:Think()
+	if(self.isEmpty) then
+		self.mat:SetVisible(true)
+	else
+		self.mat:SetVisible(false)
+	end
+end
+
 function PANEL:PaintOver()
-	--surface.SetTextColor(color_white)
-	--surface.SetTextPos(5, 5)
-	--surface.DrawText(self.text)
-
-	local picture = string.format("materials/terranova/ui/charpane/slot_%s.png", self.category)
-
-	self.mat = vgui.Create("Material", self)
-    self.mat:SetPos(0, 0)
-    self.mat:SetSize(64, 64)
-    self.mat:SetMaterial(picture)
-	self.mat.AutoSize = false
-
 	local panel = self.previewPanel
 
 	if (IsValid(panel)) then
@@ -352,6 +363,8 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 				net.WriteUInt(panelID, 32)
 				net.WriteTable({})
 			net.SendToServer()
+
+			self.isEmpty = false
 		end
 
 		self.previewPanel = nil
