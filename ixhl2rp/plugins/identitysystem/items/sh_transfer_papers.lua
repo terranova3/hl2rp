@@ -1,5 +1,5 @@
-ITEM.name = "Transfer Card"
-ITEM.model = Model("models/dorado/tarjeta3.mdl")
+ITEM.name = "Transfer Papers"
+ITEM.model = "models/props_lab/clipboard.mdl"
 ITEM.description = "A piece of paper, indicating your new transfer status."
 
 function ITEM:GetDescription()

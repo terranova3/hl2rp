@@ -22,7 +22,10 @@ net.Receive("ixArmoryBuy", function(length, client)
 
     if(client:Team() == FACTION_MPF) then
         local inventory = char:GetInventory()
-        
+
+        client:EmitSound("buttons/button14.wav", 100, 25)
+        client:ForceSequence("harassfront1")
+
         for k, v in ipairs(data.cart) do
             local itemTable = ix.item.list[data.cart[k].uniqueID]
 
