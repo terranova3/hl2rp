@@ -3,10 +3,11 @@ Schema.ranks.stored = {}
 Schema.ranks.access = {}
 Schema.ranks.access.stored = {}
 
-function Schema.ranks.Add(text, access)
+function Schema.ranks.Add(text, access, armband)
 	Schema.ranks.stored[string.lower(text)] = {
 		text = text,
-		access = access
+		access = access,
+		armband = armband or 0
 	}
 end
 

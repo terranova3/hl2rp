@@ -71,6 +71,8 @@ function PANEL:Display()
 	for k, v in pairs(self.taglines) do 
 		self.taglineDropBox:AddChoice(k)
 	end
+
+	self.desc:SetText(self:GetPayload("cpdesc", ""))
 end
 
 function PANEL:ShouldSkip()

@@ -28,7 +28,7 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
                 character:SetData("cpCitizenDesc", character:GetDescription())
                 character:SetDescription(cpData.cpDesc);
                 character:SetClass(CLASS_MPU);
-                client:SetSkin(0)
+                client:SetSkin(self:GetArmbandSkin(character))
                 character:SetData("customclass", "Civil Protection");
                 netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
             else 
@@ -53,6 +53,15 @@ function PLUGIN:IsWearingUniform(character)
 	return false;
 end;
 
+function PLUGIN:GetArmbandSkin(character)
+    local rank = character:GetData("cpRank")
+
+    -- This is the skin offset for certs
+    local offset = 0
+
+    return Schema.ranks.Get(rank).armband + offset
+end
+
 -- Called when a characters rank has been changed
 function PLUGIN:SetRank(character, text)
     if(PLUGIN:IsMetropolice(character)) then
@@ -63,7 +72,7 @@ function PLUGIN:SetRank(character, text)
             character:SetData("cpAccessLevel", rank.access)
         end;
 
-        PLUGIN:UpdateName(character);
+        PLUGIN:UpdateCharacter(character);
     end;
 end;
 
@@ -106,12 +115,13 @@ function PLUGIN:TaglineExists(tagline)
     return false;
 end;
 
--- Called when a character has had data changed that requires their name to be updated
-function PLUGIN:UpdateName(character)
+-- Called when a character has had data changed
+function PLUGIN:UpdateCharacter(character)
     local cpData = cpSystem.GetCPDataAsTable(character);
 
     if(!character:IsUndercover()) then
         character:SetName(cpSystem.GetCPName(character));
+        character:GetPlayer():SetSkin(self:GetArmbandSkin(character))
     elseif(character:IsUndercover() and character:GetName() != cpData.cpCitizenName) then
         character:SetName(cpData.cpCitizenName);
     end;

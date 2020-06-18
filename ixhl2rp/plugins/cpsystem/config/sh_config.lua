@@ -10,15 +10,17 @@ Schema.ranks.access.Add(1, "Civil Protection", "CPF");
 Schema.ranks.access.Add(0, "Civil Protection", "CPF");
 
 -- Rank <rank tag | rank access level> --
-Schema.ranks.Add("A", 2);
-Schema.ranks.Add("E", 1);
-Schema.ranks.Add("Z", 0);
-Schema.ranks.Add("G", 0);
-Schema.ranks.Add("D", 0);
+Schema.ranks.Add("CMD", 2);
+Schema.ranks.Add("ADJ", 2);
+Schema.ranks.Add("i1", 2, 5);
+Schema.ranks.Add("i2", 1, 4);
+Schema.ranks.Add("i3", 0, 3);
+Schema.ranks.Add("i4", 0, 2);
+Schema.ranks.Add("i5", 0, 1);
 
 -- [[ Config settings ]] --
 cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
-cpSystem.config.cpDefaultRank = "D";
+cpSystem.config.cpDefaultRank = "i5";
 cpSystem.config.commandsAccess = {
 	["set_cp_id"] = 2,
 	["set_cp_rank"] = 0,
