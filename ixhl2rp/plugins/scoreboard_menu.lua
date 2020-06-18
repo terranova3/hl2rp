@@ -4,6 +4,43 @@ PLUGIN.description = "Adds scoreboard options for admins."
 
 hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 	local options = {}
+
+	options["Give Whitelist"] = {
+		function()
+			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
+			local menu = vgui.Create("DFrame")
+			menu:SetSize(ScrW() / 6, ScrH() / 3)
+			menu:MakePopup()
+			menu:Center()
+			menu:SetTitle("Player Whitelist Menu")
+
+			local panel = menu:Add("DScrollPanel")
+			panel:Dock(FILL)
+
+			for k, v in SortedPairs(ix.faction.indices) do
+				local button = vgui.Create("DButton", panel)
+				button:Dock(TOP)
+				button:SetSize(20,30)
+				button:SetText(L(v.name))
+
+				function button:DoClick()
+					ix.command.Send("PlyWhitelist", client:Name(), v.name)
+					button:Remove()
+				end
+
+				function button.Paint(w, h)
+					local factionColor = v.color
+					factionColor.a = 50
+
+					derma.SkinFunc("PaintCategoryPanel", button, "", factionColor)
+
+					surface.SetTextColor(Color(255,255,255,255))
+					surface.SetTextPos(4, 4)
+				end
+			end
+		end
+	}
+
 	options["Set Name"] = {
 		function()
 			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
@@ -74,54 +111,54 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 		end
 	}
 
-		options["Give Item"] = {
-		function()
-			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
-			local menu = vgui.Create("DFrame")
-			menu:SetSize(ScrW() / 6, ScrH() / 3)
-			menu:MakePopup()
-			menu:Center()
-			menu:SetTitle("Character Item Menu")
-			local panel = menu:Add("DScrollPanel")
-			panel:Dock(FILL)
-			local header = panel:Add("DLabel")
-			header:Dock(TOP)
-			header:SetText("Use the box to search for an item.")
-			header:SetTextInset(3, 0)
-			header:SetFont("ixMediumFont")
-			header:SetTextColor(color_white)
-			header:SetExpensiveShadow(1, color_black)
-			header:SetTall(25)
+	options["Give Item"] = {
+	function()
+		if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
+		local menu = vgui.Create("DFrame")
+		menu:SetSize(ScrW() / 6, ScrH() / 3)
+		menu:MakePopup()
+		menu:Center()
+		menu:SetTitle("Character Item Menu")
+		local panel = menu:Add("DScrollPanel")
+		panel:Dock(FILL)
+		local header = panel:Add("DLabel")
+		header:Dock(TOP)
+		header:SetText("Use the box to search for an item.")
+		header:SetTextInset(3, 0)
+		header:SetFont("ixMediumFont")
+		header:SetTextColor(color_white)
+		header:SetExpensiveShadow(1, color_black)
+		header:SetTall(25)
 
-			header.Paint = function(this, w, h)
-				surface.SetDrawColor(ix.config.Get("color"))
-				surface.DrawRect(0, 0, w, h)
+		header.Paint = function(this, w, h)
+			surface.SetDrawColor(ix.config.Get("color"))
+			surface.DrawRect(0, 0, w, h)
+		end
+		local entry = menu:Add("DTextEntry")
+		entry:Dock(TOP)
+		for k, v in SortedPairs(ix.item.list) do
+			local button = vgui.Create("DButton", panel)
+			button:Dock(TOP)
+			button:SetSize(20,30)
+			button:SetText(L(v.name))
+			function button:DoClick()
+				ix.command.Send("CharGiveItem", client:Name(), v.uniqueID, 1)
 			end
-			local entry = menu:Add("DTextEntry")
-			entry:Dock(TOP)
-			for k, v in SortedPairs(ix.item.list) do
-				local button = vgui.Create("DButton", panel)
-				button:Dock(TOP)
-				button:SetSize(20,30)
-				button:SetText(L(v.name))
-				function button:DoClick()
-					ix.command.Send("CharGiveItem", client:Name(), v.uniqueID, 1)
-				end
-				function button.Paint()
-					surface.SetDrawColor(Color(200,200,200,255))
-				end
-				function button:Think()
-					if string.len(entry:GetText()) < 1 then self:Show() return end
-					if not string.find(v.name, entry:GetText()) then
-						panel:SetVerticalScrollbarEnabled(true)
-						panel:ScrollToChild(self)
-					else
-						panel:SetVerticalScrollbarEnabled(true)
-						--panel:ScrollToChild()
-					end
+			function button.Paint()
+				surface.SetDrawColor(Color(200,200,200,255))
+			end
+			function button:Think()
+				if string.len(entry:GetText()) < 1 then self:Show() return end
+				if not string.find(v.name, entry:GetText()) then
+					panel:SetVerticalScrollbarEnabled(true)
+					panel:ScrollToChild(self)
+				else
+					panel:SetVerticalScrollbarEnabled(true)
+					--panel:ScrollToChild()
 				end
 			end
 		end
+	end
 	}
 	if(client:Team() == FACTION_MPF) then 
 		options["CP - Set Rank"] = {
