@@ -39,7 +39,7 @@ else
 end
 
 function PLUGIN:OnCharacterCreated(client, character)
-	if(character:GetFaction() == FACTION_CITIZEN or character:GetFaction() == FACTION_MPF) then
+	if(character:GetFaction() == FACTION_CITIZEN) then
 		local inventory = character:GetInventory()
 		local TimeString = os.date( "%H:%M:%S - %d/%m/%Y", os.time() )
 

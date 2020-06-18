@@ -48,6 +48,7 @@ FACTION.models = {
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 	local cid = Schema:ZeroNumber(math.random(1, 99999), 5)
+	local TimeString = os.date( "%H:%M:%S - %d/%m/%Y", os.time() )
 
 	character:SetData("customclass", "Citizen");
 	character:SetData("cpCitizenName", character:GetName());
@@ -59,13 +60,14 @@ function FACTION:OnCharacterCreated(client, character)
 	character:SetData("cpID", character:GetCpid());
 	character:SetData("cid", cid);
 
-	inventory:Add("cp_stunstick", 1)
 	inventory:Add("cp_standard", 1, {
 		name = cpSystem.GetCPTagline(character),
 	})
 	inventory:Add("cid", 1, {
-		name = character:GetName(),
-		id = id
+		citizen_name = character:GetName(),
+		cid = cid,
+		issue_date = tostring(TimeString),
+		cca = true
 	})
 end;
 
