@@ -109,6 +109,7 @@ function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
 		if (!string.find(character:GetName(), ix.config.Get("City Name"))) then
 			character:SetClass(CLASS_MPUH);  
 		else
+			client:SetSkin(self:GetArmbandSkin(character))
 			character:SetClass(CLASS_MPU); 		
 		end;
 	end;
