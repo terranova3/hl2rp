@@ -31,8 +31,11 @@ function PANEL:Init()
 		end)
 	else
 		ix.menuMusicIsLocal = true
-		ix.menuMusic = CreateSound(LocalPlayer(), source)
-		ix.menuMusic:PlayEx(VOLUME, 100)
+		
+		if(LocalPlayer()) then
+			ix.menuMusic = CreateSound(LocalPlayer(), source)
+			ix.menuMusic:PlayEx(VOLUME, 100)
+		end
 	end
 end
 
