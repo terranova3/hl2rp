@@ -251,15 +251,10 @@ end
 function PANEL:ExtraPaint(width, height)
 end
 
-local gradient = surface.GetTextureID("vgui/gradient-d")
 
 function PANEL:Paint(width, height)
 	surface.SetDrawColor(0, 0, 0, 85)
 	surface.DrawRect(2, 2, width - 4, height - 4)
-
-	surface.SetDrawColor(230, 230, 230, 16)
-	surface.SetTexture(gradient)
-	surface.DrawTexturedRect(0, 0, width, height)
 
 	self:ExtraPaint(width, height)
 end

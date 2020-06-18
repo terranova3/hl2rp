@@ -35,7 +35,7 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
                 client:Notify(string.format("That uniform is biolocked to %s. You cannot access its mainframe.", lockedName));
             end;
         end;
-        PLUGIN:UpdateName(character);
+        PLUGIN:UpdateCharacter(character);
     end;
     
     ix.charPanel.Update(client)
