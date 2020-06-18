@@ -1,6 +1,7 @@
 CLASS.name = "Overwatch Soldier"
 CLASS.faction = FACTION_OTA
 CLASS.isDefault = true
+CLASS.color = Color(150, 50, 50, 255)
 
 function CLASS:OnSet(client)
 	local character = client:GetCharacter()

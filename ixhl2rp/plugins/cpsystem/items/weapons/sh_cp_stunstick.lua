@@ -25,7 +25,6 @@ ITEM.pacData = {
 				["children"] = {
 				},
 				["self"] = {
-					-- x, y, z
 					["Angles"] = Angle(0, 95, 0),
 					["Position"] = Vector(8.5, -4, 0),
 					["UniqueID"] = "4249811628",

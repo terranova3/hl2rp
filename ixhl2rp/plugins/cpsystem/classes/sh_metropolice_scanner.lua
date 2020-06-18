@@ -2,6 +2,7 @@ CLASS.name = "Metropolice Scanner"
 CLASS.description = "A metropolice scanner, it utilises Combine technology."
 CLASS.faction = FACTION_SCN
 CLASS.isDefault = true;
+CLASS.color = Color(50, 100, 150)
 
 function CLASS:OnSpawn(client)
 	if (IsValid(client.ixScanner) and !client.ixScanner.bPendingRemove) then
