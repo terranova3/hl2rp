@@ -2,7 +2,9 @@ PLUGIN.name = "Identity System"
 PLUGIN.author = "ZeMysticalTaco"
 PLUGIN.description = "A comprehensive identity system to allow for deeper espionage roleplay."
 
-ix.util.Include("cl_panels.lua")
+ix.util.Include("sv_plugin.lua")
+ix.util.Include("sv_hooks.lua")
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 
 local PLUGIN = PLUGIN
 
@@ -11,11 +13,38 @@ if CLIENT then
 		vgui.Create("ixCIDCreater")
 	end)
 
-	netstream.Hook("LoyaltyOpen", function(data)
-		local ui = vgui.Create("ixLoyalty")
-		ui.ent = data[1]
+	netstream.Hook("OpenRecordMenu", function(data)
+		vgui.Create("ixRecordPanel")
+		--ix.gui.cidview:SetItem(ix.item.instances[data[1]])
+
+		if(IsValid(ix.gui.menu)) then
+			ix.gui.menu:Remove()
+		end
+	end)
+
+	netstream.Hook("ViewData", function(target, cid, data)
+		Schema:AddCombineDisplayMessage("@cViewData")
+		vgui.Create("ixRecordPanel"):Build(target, cid, data)
 	end)
 else
+	netstream.Hook("IDAddRecord", function(ply, data)
+		local item = ix.item.instances[data[4]]
+		local before_data = item:GetData("record", {})
+		local inbetween_data = {{data[1], data[2], data[3], data[5]}}
+		table.Add(before_data, inbetween_data)
+		item:SetData("record", before_data)
+		item:SetData("points", item:GetData("points", 0) + data[5])
+		ix.log.AddRaw(ply:Name() .. " has added a record to ID " .. item:GetID())
+	end)
+
+	netstream.Hook("IDRemoveRecord", function(ply, data)
+		local item = ix.item.instances[data[4]]
+		local before_data = item:GetData("record", {})
+		before_data[data[5]] = nil
+		item:SetData("record", before_data)
+		ix.log.AddRaw(ply:Name() .. " has removed a record from ID " .. item:GetID())
+	end)
+
 	netstream.Hook("SubmitNewCID", function(ply, data)
 		if ply:IsCombine() then
 			local char = ply:GetCharacter()

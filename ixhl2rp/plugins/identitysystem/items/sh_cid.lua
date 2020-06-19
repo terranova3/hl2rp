@@ -42,6 +42,7 @@ end
 
 ITEM.functions.ViewRecord = {
 	name = "View Record",
+	icon = "icon16/book_edit.png",
 	OnRun = function(item)
 		local client = item.player
 		local char = client:GetChar()

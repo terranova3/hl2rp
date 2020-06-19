@@ -160,11 +160,6 @@ function PLUGIN:HUDPaintTopScreen()
 	end;
 end;
 
-netstream.Hook("ViewData", function(target, cid, data)
-	Schema:AddCombineDisplayMessage("@cViewData")
-	vgui.Create("ixViewData"):Populate(target, cid, data)
-end)
-
 netstream.Hook("ReceiveTaglineCache", function(cache)
 	cpSystem.cache = {}
 	cpSystem.cache.taglines = cache
