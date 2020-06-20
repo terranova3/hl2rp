@@ -5,7 +5,6 @@
 
 local PLUGIN = PLUGIN;
 
-ITEM.base = "base_outfit"
 ITEM.name = "Torso";
 ITEM.model = "models/props_junk/cardboard_box004a.mdl";
 ITEM.outfitCategory = "torso";
