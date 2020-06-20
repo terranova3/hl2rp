@@ -2,7 +2,6 @@ PLUGIN.name = "Identity System"
 PLUGIN.author = "ZeMysticalTaco"
 PLUGIN.description = "A comprehensive identity system to allow for deeper espionage roleplay."
 
-ix.util.Include("sv_plugin.lua")
 ix.util.Include("sv_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 

@@ -23,8 +23,6 @@ function PANEL:Build(target, cid, data)
 	local title = target:GetName();
 	local checkboxes = {"Wanted for Questioning", "Survey Closely", "Elevated Citizen Status"}
 
-	self.checkboxPanels = {}
-
 	if string.len(tostring(CID)) > 0 then
 		title = title .. ", #" .. cid;
 	else
@@ -33,7 +31,8 @@ function PANEL:Build(target, cid, data)
 
     self.target = target;
     self.dataName = self.target:GetName();
-    self.dataPoints = data.points or {};
+	self.dataPoints = data.points or {};
+	self.checked = data.checked or {}
     self.dataCID = cid;
     
     self:SetTitle( title );
@@ -45,14 +44,36 @@ function PANEL:Build(target, cid, data)
 
 	self.sidePanelTitleLabel = self.sidePanel:Add(self:AddLabel(true, "Identification Record"))
 	self.sidePanelLabel = self.sidePanel:Add(self:AddLabel(false, "Citizen Name: John Doe\nCitizen ID: 11111\nIssue Date: 10/28/18\nIssuing Officer: N/A"))
-    self.sidePanelNoteLabel = self.sidePanel:Add(self:AddLabel(true, "Notes"))
-    self.sidePanelNoteLabel:DockMargin(0, 8, 0, 0)
+	self.sidePanelLabel:DockMargin(0,0,0,8)
+	
+	local i = 1
 
 	for k, v in ipairs(checkboxes) do 
 		local checkBox = self.sidePanel:Add("DCheckBoxLabel")
+		checkBox:SetFont("ixSmallFont")
 		checkBox:SetText(v)
-		
+		checkBox:Dock(TOP)
+		checkBox:DockMargin(16, 4, 0, 0)
+		checkBox.arrIndex = i
+		checkBox.OnChange = function(checked)
+			if checked then
+				self.checked[checkBox.arrIndex] = true
+			else
+				self.checked[checkBox.arrIndex] = false
+			end
+		end
+
+		if(self.checked[checkBox.arrIndex]) then
+			checkBox:SetChecked(self.checked[checkBox.arrIndex])
+		else
+			self.checked[checkBox.arrIndex] = false
+		end
+
+		i=i+1
 	end
+	
+	self.sidePanelNoteLabel = self.sidePanel:Add(self:AddLabel(true, "Notes"))
+    self.sidePanelNoteLabel:DockMargin(0, 8, 0, 0)
 
     self.sidePanelNote = self.sidePanel:Add("DTextEntry")
     self.sidePanelNote:SetMultiline(true)
@@ -65,6 +86,7 @@ function PANEL:Build(target, cid, data)
     end
     
 	self.addRecordButton = self:Add("DButton")
+	self.addRecordButton:SetFont("ixSmallFont")
 	self.addRecordButton:SetText("Add Record")
 	self.addRecordButton:Dock(BOTTOM)
 
@@ -80,6 +102,7 @@ function PANEL:Build(target, cid, data)
 	end
 
 	self.deleteRecordButton = self:Add("DButton");
+	self.deleteRecordButton:SetFont("ixSmallFont")
 	self.deleteRecordButton:SetText("Delete Selected");
 	self.deleteRecordButton:Dock(BOTTOM);
 	self.deleteRecordButton.DoClick = function()
@@ -99,12 +122,12 @@ function PANEL:Build(target, cid, data)
 
 	self.listView = self:Add("DListView")
 	self.listView:Dock(FILL)
+	--self.listView:SetTextColor(255, 255, 255, 255)
 	self.listView:SetMultiSelect(false);
 	self.listView:AddColumn("Record Reason");
 	self.listView:AddColumn("Issuing Officer");
 	self.listView:AddColumn("Point Type");
 	self.listView:AddColumn("Amount");
-	self.listView.Paint = function() end
 
 	self:RebuildRecords()
 	self:RebuildSidePanel()
@@ -189,7 +212,14 @@ end
 
 function PANEL:OnRemove()
 	if (IsValid(self.target)) then
-		netstream.Start( "ViewDataUpdate", self.target, string.sub(self.sidePanelNote:GetValue(), 0, 1024), self.dataPoints);
+		local data = {
+			target = self.target,
+			text = string.sub(self.sidePanelNote:GetValue(), 0, 1024),
+			dataPoints = self.dataPoints,
+			checked = self.checked
+		}
+
+		netstream.Start("ViewDataUpdate", data);
 		Schema:AddCombineDisplayMessage("@cViewDataUpdate")
 	end;
 
