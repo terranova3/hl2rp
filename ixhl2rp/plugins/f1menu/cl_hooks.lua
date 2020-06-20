@@ -24,7 +24,6 @@ function PLUGIN:PlayerBindPress(client, bind, pressed)
 	end
 end
 
-
 -- Called when the info menu is created.
 function PLUGIN:SetInfoMenuData(character, faction)
 	if(faction.name == "Citizen") then
@@ -38,5 +37,12 @@ function PLUGIN:SetInfoMenuData(character, faction)
 
 		ix.infoMenu.Add("Tagline: " .. cpSystem.GetCPTagline(character))
 		ix.infoMenu.Add("Rank: " .. cpData.cpRank)
+
+		if(cpData.spec) then
+			ix.infoMenu.Add("Specialization: " .. cpData.spec)
+		end
+
+		print(cpSystem.GetCertsAsString(character))
+		ix.infoMenu.Add("Certs: " .. cpSystem.GetCertsAsString(character) or "N/A")
 	end
 end

@@ -21,15 +21,15 @@ function PLUGIN:AdjustPlayer(event, lockedName, client)
             character:SetData("cpDesc", character:GetDescription())
             character:SetDescription(cpData.cpCitizenDesc);
             character:SetClass(CLASS_MPUH); 
-            client:SetSkin(character:GetData("skin"))
+            client:SetBodygroup(1, 0)
             character:SetData( "customclass", "Citizen" );	
         elseif(event == "Equipped") then
             if(cpSystem.GetCPTagline(character) == lockedName) then
                 character:SetData("cpCitizenDesc", character:GetDescription())
                 character:SetDescription(cpData.cpDesc);
                 character:SetClass(CLASS_MPU);
-                client:SetSkin(self:GetArmbandSkin(character))
                 character:SetData("customclass", "Civil Protection");
+                client:SetBodygroup(1, self:GetArmband(character))
                 netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
             else 
                 client:Notify(string.format("That uniform is biolocked to %s. You cannot access its mainframe.", lockedName));
@@ -53,11 +53,14 @@ function PLUGIN:IsWearingUniform(character)
 	return false;
 end;
 
-function PLUGIN:GetArmbandSkin(character)
+function PLUGIN:GetArmband(character)
     local rank = character:GetData("cpRank")
-
-    -- This is the skin offset for certs
+    local spec = character:GetData("spec")
     local offset = 0
+
+    if(spec and ix.certs.Get(spec)) then
+        offset = ix.certs.Get(spec).offset
+    end
 
     return Schema.ranks.Get(rank).armband + offset
 end
@@ -121,7 +124,7 @@ function PLUGIN:UpdateCharacter(character)
 
     if(!character:IsUndercover()) then
         character:SetName(cpSystem.GetCPName(character));
-        character:GetPlayer():SetSkin(self:GetArmbandSkin(character))
+        character:GetPlayer():SetBodygroup(1, self:GetArmband(character))
     elseif(character:IsUndercover() and character:GetName() != cpData.cpCitizenName) then
         character:SetName(cpData.cpCitizenName);
     end;

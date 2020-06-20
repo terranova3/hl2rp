@@ -9,9 +9,9 @@ Schema.ranks.access.Add(2, "Universal Union", "UU");
 Schema.ranks.access.Add(1, "Civil Protection", "CPF");
 Schema.ranks.access.Add(0, "Civil Protection", "CPF");
 
--- Rank <rank tag | rank access level> --
-Schema.ranks.Add("CMD", 2);
-Schema.ranks.Add("ADJ", 2);
+-- Rank <rank tag | rank access level | armband bodygroup> --
+Schema.ranks.Add("AdJ", 2);
+Schema.ranks.Add("ChF", 2);
 Schema.ranks.Add("i1", 2, 5);
 Schema.ranks.Add("i2", 1, 4);
 Schema.ranks.Add("i3", 0, 3);
@@ -23,11 +23,15 @@ cpSystem.config.cpDefaultDescription = "This is the default description for CPs,
 cpSystem.config.cpDefaultRank = "i5";
 cpSystem.config.commandsAccess = {
 	["set_cp_id"] = 2,
-	["set_cp_rank"] = 0,
+	["set_cp_rank"] = 2,
+	["set_cp_spec"] = 2,
 	["set_cp_tagline"] = 2,
+	["add_cp_cert"] = 2,
+	["remove_cp_cert"] = 2,
+	["remove_cp_spec"] = 2,
+	["edit_viewobjectives"] = 2,
 	["get_cp_access_level"] = 0,
 	["view_data"] = 0,
-	["edit_viewobjectives"] = 2,
 	["set_sociostatus"] = 0
 }
 cpSystem.config.notification = {

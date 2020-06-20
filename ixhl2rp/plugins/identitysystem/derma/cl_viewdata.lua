@@ -21,6 +21,9 @@ end;
 
 function PANEL:Build(target, cid, data)
 	local title = target:GetName();
+	local checkboxes = {"Wanted for Questioning", "Survey Closely", "Elevated Citizen Status"}
+
+	self.checkboxPanels = {}
 
 	if string.len(tostring(CID)) > 0 then
 		title = title .. ", #" .. cid;
@@ -44,6 +47,12 @@ function PANEL:Build(target, cid, data)
 	self.sidePanelLabel = self.sidePanel:Add(self:AddLabel(false, "Citizen Name: John Doe\nCitizen ID: 11111\nIssue Date: 10/28/18\nIssuing Officer: N/A"))
     self.sidePanelNoteLabel = self.sidePanel:Add(self:AddLabel(true, "Notes"))
     self.sidePanelNoteLabel:DockMargin(0, 8, 0, 0)
+
+	for k, v in ipairs(checkboxes) do 
+		local checkBox = self.sidePanel:Add("DCheckBoxLabel")
+		checkBox:SetText(v)
+		
+	end
 
     self.sidePanelNote = self.sidePanel:Add("DTextEntry")
     self.sidePanelNote:SetMultiline(true)

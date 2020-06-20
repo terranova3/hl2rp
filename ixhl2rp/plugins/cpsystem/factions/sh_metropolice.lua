@@ -56,9 +56,9 @@ function FACTION:OnCharacterCreated(client, character)
 	character:SetData("cpRank", cpSystem.config.cpDefaultRank);
 	character:SetData("cpDesc", character:GetCpdesc())
 	character:SetData("cpTagline", character:GetTagline());
-	character:SetData("cpIntention", 5)
 	character:SetData("cpID", character:GetCpid());
 	character:SetData("cid", cid);
+	character:SetData("certs", {})
 
 	inventory:Add("cp_standard", 1, {
 		name = cpSystem.GetCPTagline(character),

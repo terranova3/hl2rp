@@ -33,3 +33,9 @@ ix.util.IncludeDir(PLUGIN.folder .. "/config", true);
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
 ix.anim.SetModelClass("models/ma/hla/terranovapolice.mdl", "metrocop");
+
+function PLUGIN:OnLoaded()
+	for _, path in ipairs(self.paths or {}) do
+		ix.certs.LoadFromDir(path.."/certs")
+	end
+end

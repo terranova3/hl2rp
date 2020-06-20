@@ -52,7 +52,7 @@ function cpSystem.GetCPDataAsTable(character)
     local data = {}
 
     if(PLUGIN:IsMetropolice(character)) then 
-        data.cpID = character:GetData("cpID");
+		data.cpID = character:GetData("cpID");
         data.cpTagline = character:GetData("cpTagline");
         data.cpRank = character:GetData("cpRank");
         data.cpAccessLevel = character:GetData("cpAccessLevel");	
@@ -60,7 +60,8 @@ function cpSystem.GetCPDataAsTable(character)
 	    data.cpModel = character:GetData("cpModel");
         data.cpDesc = character:GetData("cpDesc");
         data.cpCitizenName = character:GetData("cpCitizenName");
-	    data.cpCitizenDesc = character:GetData("cpCitizenDesc");					
+		data.cpCitizenDesc = character:GetData("cpCitizenDesc");
+		data.spec = character:GetData("spec")
     end;
     
     return data;
@@ -86,6 +87,16 @@ function cpSystem.GetCPName(character, isScanner)
     
     return name;
 end;
+
+function cpSystem.GetCertsAsString(character)
+	local certs = ""
+
+	for k, v in pairs(character:GetData("certs", {})) do
+		certs = certs .. " " ..  v
+	end
+
+	return certs
+end
 
 -- Returns tagline and id together as a single string
 function cpSystem.GetCPTagline(character)
