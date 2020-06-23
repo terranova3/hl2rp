@@ -88,16 +88,6 @@ function cpSystem.GetCPName(character, isScanner)
     return name;
 end;
 
-function cpSystem.GetCertsAsString(character)
-	local certs = ""
-
-	for k, v in pairs(character:GetData("certs", {})) do
-		certs = certs .. " " ..  v
-	end
-
-	return certs
-end
-
 -- Returns tagline and id together as a single string
 function cpSystem.GetCPTagline(character)
     local cpData = cpSystem.GetCPDataAsTable(character);

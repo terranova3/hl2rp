@@ -80,10 +80,10 @@ function PANEL:Populate()
             num = entryAmount:GetValue()
         };
 
-        table.insert(ix.gui.viewdata.dataPoints, newData);
+        table.insert(ix.gui.viewdata.citizenPanel.dataPoints, newData);
         
-        ix.gui.viewdata:RebuildRecords();
-        ix.gui.viewdata:RebuildSidePanel();
+        ix.gui.viewdata.citizenPanel:RebuildRecords();
+        ix.gui.viewdata.citizenPanel:RebuildSidePanel();
 	end;
 end;
 

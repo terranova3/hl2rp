@@ -42,7 +42,6 @@ function PLUGIN:SetInfoMenuData(character, faction)
 			ix.infoMenu.Add("Specialization: " .. cpData.spec)
 		end
 
-		print(cpSystem.GetCertsAsString(character))
-		ix.infoMenu.Add("Certs: " .. cpSystem.GetCertsAsString(character) or "N/A")
+		ix.infoMenu.Add("Certs: " .. ix.certs.GetCertsAsString(character) or "N/A")
 	end
 end

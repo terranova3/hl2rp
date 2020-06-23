@@ -59,7 +59,7 @@ function PLUGIN:GetArmband(character)
     local offset = 0
 
     if(spec and ix.certs.Get(spec)) then
-        offset = ix.certs.Get(spec).offset
+        offset = ix.certs.Get(spec).offset or 0
     end
 
     return Schema.ranks.Get(rank).armband + offset

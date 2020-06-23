@@ -21,9 +21,9 @@ if CLIENT then
 		end
 	end)
 
-	netstream.Hook("ViewData", function(target, cid, data)
+	netstream.Hook("ViewData", function(target, cid, data, cpData)
 		Schema:AddCombineDisplayMessage("@cViewData")
-		vgui.Create("ixRecordPanel"):Build(target, cid, data)
+		vgui.Create("ixRecordPanel"):Build(target, cid, data, cpData)
 	end)
 else
 	netstream.Hook("IDAddRecord", function(ply, data)
