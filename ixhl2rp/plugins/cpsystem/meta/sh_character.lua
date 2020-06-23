@@ -38,7 +38,7 @@ function CHAR:UpdateCPStatus()
 
     if(!self:IsUndercover()) then
         self:SetName(self:GetCPName());
-        --character:GetPlayer():SetBodygroup(1, self:GetArmband(character))
+		self:SetupRankBodygroups()
     elseif(self:IsUndercover() and self:GetName() != cpData.cpCitizenName) then
         self:SetName(cpData.cpCitizenName);
     end;

@@ -17,6 +17,11 @@ RANK.isDefault = true
 -- The faction that this rank is tied to
 RANK.faction = FACTION_MPF
 
+-- Applied to the character when they are this rank
+RANK.bodygroups = {
+    [2] = 1,
+}
+
 -- Permissions the rank has access to.
 RANK.permissions = {
     "Promote",

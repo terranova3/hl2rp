@@ -30,10 +30,22 @@ function CHAR:GetRank()
 	return ix.ranks.Get(self:GetData("rank")) or nil
 end
 
+function CHAR:GetRankBodygroups()
+	return ix.ranks.Get(self:GetData("rank")).bodygroups or nil
+end
+
 function CHAR:HasOverride()
 	if(self:GetPlayer():IsAdmin()) then
 		return true
 	end
 
 	return false
+end
+
+function CHAR:SetupRankBodygroups()
+	if(hook.Run("SetupRankBodygroups", self)) then
+		for k, v in pairs(self:GetRankBodygroups()) do
+			self:GetPlayer():SetBodygroup(k, v)
+		end
+	end
 end

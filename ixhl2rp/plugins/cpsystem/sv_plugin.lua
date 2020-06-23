@@ -19,7 +19,6 @@ function PLUGIN:AdjustPlayer(event, client)
         elseif(event == "Equipped") then
             character:SetDescription(cpData.cpDesc);
             character:SetClass(CLASS_MPU);
-            -- client:SetBodygroup(1, self:GetArmband(character))
             character:SetData("customclass", "Civil Protection");
             netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
         end;
@@ -29,19 +28,6 @@ function PLUGIN:AdjustPlayer(event, client)
     
     ix.charPanel.Update(client)
 end;
-
---[[ todo
-function PLUGIN:GetArmband(character)
-    local rank = character:GetData("rank")
-    local spec = character:GetData("spec")
-    local offset = 0
-
-    if(spec and ix.certs.Get(spec)) then
-        offset = ix.certs.Get(spec).offset or 0
-    end
-
-    return Schema.ranks.Get(rank).armband + offset
-end--]]
 
 -- Returns if a tagline exists from the tagline config table.
 function PLUGIN:TaglineExists(tagline)

@@ -109,7 +109,6 @@ function PLUGIN:PlayerLoadedCharacter(client, character)
 		if (!string.find(character:GetName(), ix.config.Get("City Name"))) then
 			character:SetClass(CLASS_MPUH);  
 		else
-			--client:SetBodygroup(1, self:GetArmband(character))
 			character:SetClass(CLASS_MPU); 		
 		end;
 	end;
@@ -151,6 +150,19 @@ function PLUGIN:OnCharacterRankChanged(character, target, rank)
 		Notify:SendMessage(target:GetPlayer(), notification);
 		character:UpdateCPStatus()
 	end;
+end
+
+-- Called when we need to setup bodygroups for a rank
+function PLUGIN:SetupRankBodygroups(character)
+	if(character:IsMetropolice() and !character:IsUndercover()) then
+		for k, v in pairs(character:GetRankBodygroups()) do
+			character:GetPlayer():SetBodygroup(k, v)
+		end
+
+		return false
+	else
+		return true
+	end
 end
 
 netstream.Hook("RequestTaglineCache", function(client)

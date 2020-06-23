@@ -16,6 +16,11 @@ RANK.order = 3
 -- The faction that this rank is tied to
 RANK.faction = FACTION_MPF
 
+-- Applied to the character when they are this rank
+RANK.bodygroups = {
+    [2] = 5,
+}
+
 -- Permissions the rank has access to.
 RANK.permissions = {
     "Promote",
