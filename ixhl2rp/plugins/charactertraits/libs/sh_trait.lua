@@ -45,16 +45,6 @@ function ix.traits.NameToUniqueID(name)
 	return string.gsub(name, " ", "_"):lower();
 end
 
-function ix.traits.GetAlpha(uniqueID)
-	local trait = ix.traits.stored[uniqueID]
-	
-	if(trait.negative) then
-		return 5
-	else
-		return 10
-	end
-end
-
 function ix.traits.CallHook(hook, character)
 	local client = character:GetPlayer();
 	

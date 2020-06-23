@@ -88,7 +88,7 @@ function Schema:PlayerFootstep(client, position, foot, soundName, volume)
 	return true;
 end
 
-function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
+function PLUGIN:PlayerLoadedCharacter(client, character)
 	local faction = character:GetFaction()
 	
 	if(faction == FACTION_SCN) then
@@ -97,9 +97,9 @@ function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
 
  	-- Updates player name if the city has been changed. --
 	if(faction == FACTION_MPF) then
-		if(character:GetName() == cpSystem.GetCPName(character)) then
+		if(character:GetName() == character:GetCPName()) then
 			if(!string.find(character:GetName(), ix.config.Get("City Name"))) then 
-				character:SetName(cpSystem.GetCPName(character));
+				character:SetName(character:GetCPName());
 			end;
 		end;
 	end;
@@ -109,7 +109,7 @@ function PLUGIN:PlayerLoadedCharacter(client, character, oldCharacter)
 		if (!string.find(character:GetName(), ix.config.Get("City Name"))) then
 			character:SetClass(CLASS_MPUH);  
 		else
-			client:SetBodygroup(1, self:GetArmband(character))
+			--client:SetBodygroup(1, self:GetArmband(character))
 			character:SetClass(CLASS_MPU); 		
 		end;
 	end;
@@ -141,6 +141,17 @@ function PLUGIN:CharPanelShouldShow(client)
 		return false
 	end
 end;
+
+function PLUGIN:OnCharacterRankChanged(character, target, rank)
+	if(target:IsMetropolice()) then
+		local notification = cpSystem.config.notification;
+		notification.text = "Your rank has been changed to:";
+		notification.additional = string.format("'Rank - %s'", rank.displayName)
+
+		Notify:SendMessage(target:GetPlayer(), notification);
+		character:UpdateCPStatus()
+	end;
+end
 
 netstream.Hook("RequestTaglineCache", function(client)
 	netstream.Start(client, "ReceiveTaglineCache", cpSystem.cache.taglines)

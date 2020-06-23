@@ -8,3 +8,5 @@ PLUGIN.description = "Adds global features for factions such as ranks, certifica
 PLUGIN.author = "Adolphus";
 
 ix.util.Include("sh_hooks.lua")
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)

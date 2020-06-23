@@ -7,7 +7,7 @@ local PLUGIN = PLUGIN
 
 ix.command.Add("CharSetCPTagline", {
     description = "Sets the tagline of a civil protection unit.",
-    accessLevel = cpSystem.config.commandsAccess["set_cp_tagline"],
+    permission = "Set CP Tagline",
 	arguments = {
 		ix.type.character,
 		ix.type.string

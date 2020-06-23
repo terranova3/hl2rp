@@ -33,15 +33,17 @@ function PLUGIN:SetInfoMenuData(character, faction)
 	ix.infoMenu.Add("Tokens: " .. ix.currency.Get(character:GetMoney()))
 
 	if(faction.name == "Civil Protection") then
-		local cpData = cpSystem.GetCPDataAsTable(character)
+		local cpData = character:GetCPInfo()
 
-		ix.infoMenu.Add("Tagline: " .. cpSystem.GetCPTagline(character))
-		ix.infoMenu.Add("Rank: " .. cpData.cpRank)
+		ix.infoMenu.Add("Tagline: " .. character:GetCPTagline())
+		ix.infoMenu.Add("Rank: " .. cpData.rank)
 
 		if(cpData.spec) then
 			ix.infoMenu.Add("Specialization: " .. cpData.spec)
 		end
 
-		ix.infoMenu.Add("Certs: " .. ix.certs.GetCertsAsString(character) or "N/A")
+		if(cpData.certs) then
+			ix.infoMenu.Add("Certs: " .. ix.certs.GetCertsAsString(character) or "N/A")
+		end
 	end
 end

@@ -25,3 +25,15 @@ function CHAR:HasSpec(uniqueID)
 
 	return false
 end
+
+function CHAR:GetRank()
+	return ix.ranks.Get(self:GetData("rank")) or nil
+end
+
+function CHAR:HasOverride()
+	if(self:GetPlayer():IsAdmin()) then
+		return true
+	end
+
+	return false
+end

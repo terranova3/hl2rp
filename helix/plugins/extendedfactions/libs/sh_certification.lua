@@ -54,10 +54,6 @@ function ix.certs.GetCertsAsString(character)
 	return certs
 end
 
-hook.Add("DoPluginIncludes", "ixCerts", function(path, pluginTable)
-	if (!PLUGIN.paths) then
-		PLUGIN.paths = {}
-	end
-
-	table.insert(PLUGIN.paths, path)
+hook.Add("DoPluginIncludes", "ixRankIncludes", function(path)
+	ix.certs.LoadFromDir(path.."/certs")
 end)

@@ -5,9 +5,9 @@
 
 local PLUGIN = PLUGIN
 
-ix.command.Add("CharSetCPSpec", {
-    description = "Adds a certification specialization to a civil protection unit.",
-    accessLevel = cpSystem.config.commandsAccess["set_cp_spec"],
+ix.command.Add("CharRemoveCert", {
+    description = "Removes a certification to a civil protection unit.",
+    permission = "Remove cert",
 	arguments = {
 		ix.type.character,
 		ix.type.string
@@ -16,7 +16,7 @@ ix.command.Add("CharSetCPSpec", {
         if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
                 if(ix.certs.Get(text)) then
-                    if(!target:HasSpec(text)) then
+                    if(target:HasCert(text)) then
                         local certs = target:GetData("certs", {})
 
                         for k, v in pairs(certs) do 
@@ -26,13 +26,9 @@ ix.command.Add("CharSetCPSpec", {
                         end
 
                         target:SetData("certs", certs)
-                        target:SetData("spec", text)
-
-                        PLUGIN:UpdateCharacter(target)
-
-                        client:Notify(string.format("You have set the specialization of %s to %s.", target:GetName(), text));
+                        client:Notify(string.format("You have removed the certification %s from %s.", text, target:GetName()));
                     else
-                        client:Notify("That character already has that specialization.");
+                        client:Notify("That character doesnt have that certification.");
                     end
                 else
                     client:Notify(string.format("The certification '%s' does not exist.", text));

@@ -3,37 +3,8 @@
 	Configuration file
 --]]
 
--- [[ Rank Setup ]] --
--- Rank Access < id | class name | abbreviation > --
-Schema.ranks.access.Add(2, "Universal Union", "UU");
-Schema.ranks.access.Add(1, "Civil Protection", "CPF");
-Schema.ranks.access.Add(0, "Civil Protection", "CPF");
-
--- Rank <rank tag | rank access level | armband bodygroup> --
-Schema.ranks.Add("AdJ", 2);
-Schema.ranks.Add("ChF", 2);
-Schema.ranks.Add("i1", 2, 5);
-Schema.ranks.Add("i2", 1, 4);
-Schema.ranks.Add("i3", 0, 3);
-Schema.ranks.Add("i4", 0, 2);
-Schema.ranks.Add("i5", 0, 1);
-
 -- [[ Config settings ]] --
 cpSystem.config.cpDefaultDescription = "This is the default description for CPs, set it in the config file.";
-cpSystem.config.cpDefaultRank = "i5";
-cpSystem.config.commandsAccess = {
-	["set_cp_id"] = 2,
-	["set_cp_rank"] = 2,
-	["set_cp_spec"] = 2,
-	["set_cp_tagline"] = 2,
-	["add_cp_cert"] = 2,
-	["remove_cp_cert"] = 2,
-	["remove_cp_spec"] = 2,
-	["edit_viewobjectives"] = 2,
-	["get_cp_access_level"] = 0,
-	["view_data"] = 0,
-	["set_sociostatus"] = 0
-}
 cpSystem.config.notification = {
 	faction = "MPF", 
 	title = "UNIT!", 
@@ -157,10 +128,5 @@ ix.config.Add("Naming Scheme", "city.abbreviation:rank.tagline-id", "Naming sche
 })
 
 ix.config.Add("Scanner Naming Scheme", "city.abbreviation:rank-id", "Naming scheme for scanners. values: city, abbreviation, rank, tagline, id, division", nil, {
-	category = "[TN] Civil Protection System"
-})
-
-ix.config.Add("Dispatch Access Level", 1, "The access level that can access dispatch commands. Access level is tied to ranks in the server file config.", nil, {
-	data = {min = 0, max = Schema.ranks.access.GetSize()},
 	category = "[TN] Civil Protection System"
 })

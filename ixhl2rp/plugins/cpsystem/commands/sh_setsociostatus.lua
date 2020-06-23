@@ -6,7 +6,7 @@
 local PLUGIN = PLUGIN
 
 ix.command.Add("SetSociostatus", {
-    accessLevel = cpSystem.config.commandsAccess["set_sociostatus"],
+    permission = "Set sociostatus",
 	arguments = {
 		ix.type.string
 	},

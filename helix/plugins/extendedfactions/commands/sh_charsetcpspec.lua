@@ -5,9 +5,9 @@
 
 local PLUGIN = PLUGIN
 
-ix.command.Add("CharAddCPCert", {
-    description = "Adds a certification to a civil protection unit.",
-    accessLevel = cpSystem.config.commandsAccess["add_cp_cert"],
+ix.command.Add("CharSetSpec", {
+    description = "Adds a certification specialization to a civil protection unit.",
+    permission = "Set spec",
 	arguments = {
 		ix.type.character,
 		ix.type.string
@@ -16,14 +16,23 @@ ix.command.Add("CharAddCPCert", {
         if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
                 if(ix.certs.Get(text)) then
-                    if(!target:HasCert(text)) then
-                        local certs = target:GetData("certs") or {}
-                        table.insert(certs, text)
+                    if(!target:HasSpec(text)) then
+                        local certs = target:GetData("certs", {})
+
+                        for k, v in pairs(certs) do 
+                            if(v == text) then
+                                certs[k] = nil
+                            end 
+                        end
 
                         target:SetData("certs", certs)
-                        client:Notify(string.format("You have added the certification %s to %s.", text, target:GetName()));
+                        target:SetData("spec", text)
+
+                        PLUGIN:UpdateCharacter(target)
+
+                        client:Notify(string.format("You have set the specialization of %s to %s.", target:GetName(), text));
                     else
-                        client:Notify("That character already has that certification.");
+                        client:Notify("That character already has that specialization.");
                     end
                 else
                     client:Notify(string.format("The certification '%s' does not exist.", text));

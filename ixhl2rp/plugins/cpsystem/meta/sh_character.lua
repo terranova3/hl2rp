@@ -22,3 +22,68 @@ function CHAR:IsUndercover()
 		return false;
 	end;
 end;
+
+-- Returns if a character is a part of the MPF faction.
+function CHAR:IsMetropolice()
+    if(self:GetFaction() == FACTION_MPF) then
+        return true;
+    else
+        return false;
+    end;
+end;
+
+-- Called when a character has had data changed
+function CHAR:UpdateCPStatus()
+    local cpData = self:GetCPInfo()
+
+    if(!self:IsUndercover()) then
+        self:SetName(self:GetCPName());
+        --character:GetPlayer():SetBodygroup(1, self:GetArmband(character))
+    elseif(self:IsUndercover() and self:GetName() != cpData.cpCitizenName) then
+        self:SetName(cpData.cpCitizenName);
+    end;
+end;
+
+-- Returns all of the plugin's character data as a single table
+function CHAR:GetCPInfo()
+    local data = {}
+
+    if(self:IsMetropolice()) then 
+		data.cpID = self:GetData("cpID");
+        data.cpTagline = self:GetData("cpTagline");
+	    data.cpDesc = self:GetData("cpDesc");
+        data.cpCitizenName = self:GetData("cpCitizenName");
+		data.cpCitizenDesc = self:GetData("cpCitizenDesc");
+		data.rank = self:GetData("rank");
+		data.spec = self:GetData("spec")
+		data.certs = self:GetData("certs")
+    end;
+    
+    return data;
+end;
+
+-- Returns full civil protection name as a single string
+function CHAR:GetCPName()
+    local template = ix.config.Get("Naming Scheme");
+    
+	replacements = {
+		["city"] = ix.config.Get("City Name"),
+        ["abbreviation"] = ix.config.Get("Abbreviation"),
+        ["division"] = self:GetData("cpDivision"),
+		["rank"] = self:GetData("rank"),
+		["tagline"] = self:GetData("cpTagline"),
+		["id"] = self:GetData("cpID")
+    }
+
+    local name = string.gsub(template, "%a+", 
+	function(str)
+		return replacements[str];
+    end)
+    
+    return name;
+end;
+
+-- Returns tagline and id together as a single string
+function CHAR:GetCPTagline()
+    return string.match(self:GetCPName(), self:GetData("cpTagline")..'.-$');
+end;

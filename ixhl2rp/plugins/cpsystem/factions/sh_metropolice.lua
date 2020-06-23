@@ -53,15 +53,13 @@ function FACTION:OnCharacterCreated(client, character)
 	character:SetData("customclass", "Citizen");
 	character:SetData("cpCitizenName", character:GetName());
 	character:SetData("cpCitizenDesc", character:GetDescription())
-	character:SetData("cpRank", cpSystem.config.cpDefaultRank);
 	character:SetData("cpDesc", character:GetCpdesc())
 	character:SetData("cpTagline", character:GetTagline());
 	character:SetData("cpID", character:GetCpid());
 	character:SetData("cid", cid);
-	character:SetData("certs", {})
 
 	inventory:Add("cp_standard", 1, {
-		name = cpSystem.GetCPTagline(character),
+		name = character:GetCPTagline(),
 	})
 	inventory:Add("cid", 1, {
 		citizen_name = character:GetName(),

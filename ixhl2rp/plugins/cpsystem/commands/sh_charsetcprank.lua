@@ -4,7 +4,7 @@
 --]]
 
 local PLUGIN = PLUGIN
-
+--[[
 ix.command.Add("CharSetCPRank", {
     description = "Sets the rank of a civil protection unit.",
     accessLevel = cpSystem.config.commandsAccess["set_cp_rank"],
@@ -33,4 +33,4 @@ ix.command.Add("CharSetCPRank", {
             client:Notify(string.format("This command requires an access level of %s. Your access level is %s.", self.accessLevel, PLUGIN:GetAccessLevel(client:GetCharacter())));
         end;
 	end;
-})
+})--]]

@@ -5,20 +5,20 @@
 
 local PLUGIN = PLUGIN
 
-ix.command.Add("CharGetCPAccessLevel", {
-    description = "Gets the access level of a civil protection unit.",
-    accessLevel = cpSystem.config.commandsAccess["get_cp_access_level"],
+ix.command.Add("CharRemoveSpec", {
+    description = "Removes a certification specialization from a civil protection unit.",
+    permission = "Remove spec",
 	arguments = {
 		ix.type.character
 	},
     OnRun = function(self, client, target)
         if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
             if(PLUGIN:IsMetropolice(target)) then
-                if(PLUGIN:RankExists(target:GetData("cpRank"))) then
-                    client:Notify(string.format("The access level of %s is %s.", target:GetName(), PLUGIN:GetAccessLevel(target)));
-                else
-                    client:Notify(string.format("The access level of %s could not be found. This is because they do not have a valid rank, possibly because their name has been manually changed.", target:GetName() ));
-                end;
+                target:SetData("spec", nil)
+
+                PLUGIN:UpdateCharacter(target)
+
+                client:Notify(string.format("You have removed the certification specialization from %s.", target:GetName()));
             else
                 client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
             end;

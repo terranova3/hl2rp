@@ -7,7 +7,7 @@ local PLUGIN = PLUGIN
 
 ix.command.Add("CharSetCPID", {
     description = "Sets the id of a civil protection unit.",
-    accessLevel = cpSystem.config.commandsAccess["set_cp_id"],
+    permission = "Set CP ID",
 	arguments = {
 		ix.type.character,
 		ix.type.number
