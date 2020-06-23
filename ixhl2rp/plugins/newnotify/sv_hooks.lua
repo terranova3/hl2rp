@@ -5,7 +5,7 @@
 
 util.AddNetworkString("PlayerNotify");
 
-function Notify:SendMessage(client, data)
+function ix.notify.SendMessage(client, data)
     net.Start("PlayerNotify");
         net.WriteTable(data);
     net.Send(client)

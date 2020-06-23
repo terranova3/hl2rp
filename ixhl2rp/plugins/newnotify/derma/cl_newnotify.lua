@@ -15,6 +15,15 @@ local factionMaterials = {
 
 -- Called when the panel is initialized.
 function PANEL:Init()
+    if(ix.gui.newnotify) then
+        self.animtime = 0.1
+        ix.gui.newnotify:Close()
+        ix.gui.newnotify = nil
+    end
+
+    self.animtime = 2
+    ix.gui.newnotify = self
+
     self:SetDeleteOnClose(false);
     self:SetTitle("");
     self:Center()
@@ -99,8 +108,7 @@ function PANEL:Populate(data)
 end;
 
 function PANEL:Close()
-    local animTime = 2
-    self:CreateAnimation(animTime, {
+    self:CreateAnimation(self.animTime, {
         target = {alpha = 0},
         easing = "outQuint",
 
