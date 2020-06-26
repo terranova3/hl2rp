@@ -11,7 +11,7 @@ RANK.displayName = "Adjutant"
 RANK.description = "todo"
 
 -- Used for promotion/demotion in the hierarchy.
-RANK.order = 2
+RANK.order = 1
 
 -- The faction that this rank is tied to
 RANK.faction = FACTION_MPF

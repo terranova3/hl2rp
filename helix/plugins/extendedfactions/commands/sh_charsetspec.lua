@@ -5,9 +5,9 @@
 
 local PLUGIN = PLUGIN
 
-ix.command.Add("CharAddCert", {
-    description = "Adds a certification to a player.",
-    permission = "Add cert",
+ix.command.Add("CharSetSpec", {
+    description = "Adds a certification specialization to a character.",
+    permission = "Set spec",
 	arguments = {
 		ix.type.character,
 		ix.type.string
@@ -16,18 +16,19 @@ ix.command.Add("CharAddCert", {
         local character = client:GetCharacter()
         local cert = ix.certs.Get(text)
         local canChangeCert, error = ix.certs.CanChangeCert(character, target, cert)
+        local certs = target:GetData("certs", {})
 
         if(!cert) then
-            if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Add cert")) then
+            if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then
                 if(canChangeCert) then
-                    if(!target:HasCert(cert.uniqueID) and !target:HasSpec(cert.uniqueID)) then
-                        local certs = target:GetData("certs", {})
-                        table.insert(certs, cert.uniqueID)
-
-                        target:SetData("certs", certs)
-                    else
-                        client:Notify(string.format("Your target already has the %s certification.", cert.name))
+                    for k, v in pairs(certs) do 
+                        if(v == text) then
+                            certs[k] = nil
+                        end 
                     end
+
+                    target:SetData("certs", certs)
+                    target:SetData("spec", text)
                 else
                     client:Notify(error)
                 end

@@ -15,33 +15,27 @@ function ix.certs.LoadFromDir(directory)
 		CERT = setmetatable({uniqueID = niceName}, ix.meta.cert)
 
 		ix.util.Include(directory.."/"..v, "shared")
-		ix.certs.stored[niceName] = CERT
+
+		if(!ix.certs.stored[CERT.faction]) then
+			ix.certs.stored[CERT.faction] = {}
+		end
+
+		table.insert(ix.certs.stored[CERT.faction], CERT)
 
 		CERT = nil
 	end
 end
 
-function ix.certs.FindByName(cert)
-	cert = cert:lower()
-	local uniqueID
-
-	for k, v in pairs(ix.certs.stored) do
-		if (cert:find(v.name:lower())) then
-			uniqueID = k
-
-			break
+function ix.certs.Get(uniqueID)
+	for _, faction in pairs(ix.certs.stored) do
+		for _, v in pairs(faction) do
+			if(v.uniqueID == uniqueID) then
+				return v
+			end
 		end
 	end
 
-	return uniqueID
-end
-
-function ix.certs.Get(uniqueID)
-	return ix.certs.stored[uniqueID] or nil;
-end
-
-function ix.certs.NameToUniqueID(name)
-	return string.gsub(name, " ", "_"):lower();
+	return nil
 end
 
 function ix.certs.GetCertsAsString(character)
@@ -52,6 +46,30 @@ function ix.certs.GetCertsAsString(character)
 	end
 
 	return certs
+end
+
+function ix.certs.CanAddCert(character, target, cert)
+
+end
+
+-- Checks if a client can demote their target.
+function ix.ranks.CanChangeCert(character, target, cert)
+	local rank = target:GetRank()
+	local faction = target:GetFaction()
+
+	if(character:HasOverride() or target:GetFaction() == character:GetFaction()) then
+		if(character:GetRank().order >= target:GetRank().order or character:HasOverride()) then
+			if(cert.faction == target:GetFaction()) then
+				return true
+			else
+				return false, "That certification cannot be obtained by the target's faction."
+			end
+		else
+			return false, "That target is a higher rank than you!"
+		end
+	else
+		return false, "You aren't the same faction as the target!"
+	end
 end
 
 hook.Add("DoPluginIncludes", "ixRankIncludes", function(path)

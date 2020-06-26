@@ -4,14 +4,14 @@
 --]]
 
 -- Name that could be used in the name of the player.
-RANK.name = "CmD";
+RANK.name = "ChF";
 
 -- Name and description for user interface.
-RANK.displayName = "Commander"
+RANK.displayName = "Chief"
 RANK.description = "todo"
 
 -- Used for promotion/demotion in the hierarchy.
-RANK.order = 1
+RANK.order = 2
 
 -- The faction that this rank is tied to
 RANK.faction = FACTION_MPF

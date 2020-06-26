@@ -11,8 +11,8 @@ CERT.__index = CERT
 CERT.name = "undefined"
 CERT.description = "undefined"
 CERT.uniqueID = "undefined"
-CERT.faction = "undefined"
 CERT.icon = "undefined"
+CERT.faction = nil
 CERT.offset = 0
 
 function CERT:GetName()

@@ -26,6 +26,18 @@ function CHAR:HasSpec(uniqueID)
 	return false
 end
 
+function CHAR:GetCerts()
+	local data = {}
+
+	for k, v in pairs(self:GetData("certs")) do
+		local cert = ix.certs.Get(v)
+
+		table.insert(data, cert)
+	end
+
+	return data
+end
+
 function CHAR:GetRank()
 	return ix.ranks.Get(self:GetData("rank")) or nil
 end
