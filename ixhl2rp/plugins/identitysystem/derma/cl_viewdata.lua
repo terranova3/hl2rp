@@ -31,6 +31,9 @@ function PANEL:Build(target, cid, data, cpData)
 	self.citizenPanel:Build(target, cid, data, cpData)
 
 	self.unitPanel = self:AddStagePanel("unitPanel", "ixUnitData")
+	self.unitPanel:Build(target, cid, data, cpData)
+	
+
 	self.gmPanel = self:AddStagePanel("gmPanel")
 
 	-- Populating the top dock with the buttons for moving between stages.

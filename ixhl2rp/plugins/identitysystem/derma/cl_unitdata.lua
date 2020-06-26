@@ -1,20 +1,32 @@
 local PANEL = {}
 
 function PANEL:Build(target, cid, data, cpData)
-    self.target = target;
-    self.dataName = cpData.cpCitizenName or self.target:GetName()
-	self.dataPoints = data.dataPoints or {};
-	self.checked = data.checked or {}
-    self.dataCID = cid;
-    
+    self.cpData = cpData
+
     self.sidePanel = self:Add("DPanel")
     self.sidePanel:Dock(LEFT)
     self.sidePanel:SetSize(300, h)
 
-	self.sidePanelTitleLabel = self.sidePanel:Add(self:AddLabel(true, "Identification Record"))
-	self.sidePanelLabel = self.sidePanel:Add(self:AddLabel(false, "Citizen Name: John Doe\nCitizen ID: 11111\nIssue Date: 10/28/18\nIssuing Officer: N/A"))
-	self.sidePanelLabel:DockMargin(0,0,0,8)
+	self.sidePanelTitleLabel = self.sidePanel:Add(self:AddLabel(true, "Unit Career File"))
+	self.sidePanelLabel = self.sidePanel:Add(self:AddLabel(false, "Unit Rank: John Doe\nUnit Tagline: 11111\nSpecialization: N/A"))
+    self.sidePanelLabel:DockMargin(0,0,0,8)
+    
+    self:RebuildSidePanel();
 end
+
+function PANEL:RebuildSidePanel()
+    local sidePanelText = (
+        "Unit Rank: " .. self.cpData.rankObject.displayName ..
+        "\nUnit Tagline " .. self.cpData.fullTagline
+    )
+
+    if(self.cpData.spec != nil) then
+        sidePanelText = sidePanelText .. "\nSpecialization: " .. self.cpData.spec
+    end
+
+	self.sidePanelLabel:SetText(sidePanelText)
+	self.sidePanelLabel:SizeToContents()
+end;
 
 function PANEL:AddLabel(title, text)
     local label = self:Add("DLabel")

@@ -18,7 +18,7 @@ ix.command.Add("CharSetSpec", {
         local canChangeCert, error = ix.certs.CanChangeCert(character, target, cert)
         local certs = target:GetData("certs", {})
 
-        if(!cert) then
+        if(cert) then
             if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then
                 if(canChangeCert) then
                     for k, v in pairs(certs) do 
@@ -29,6 +29,8 @@ ix.command.Add("CharSetSpec", {
 
                     target:SetData("certs", certs)
                     target:SetData("spec", text)
+
+                    client:Notify(string.format("You have given %s the %s specialization.", target:GetName(), cert.name))
                 else
                     client:Notify(error)
                 end

@@ -17,8 +17,8 @@ ix.command.Add("CharRemoveCert", {
         local cert = ix.certs.Get(text)
         local canChangeCert, error = ix.certs.CanChangeCert(character, target, cert)
 
-        if(!cert) then
-            if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then)
+        if(cert) then
+            if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then
                 if(canChangeCert) then
                     if(target:HasCert(cert.uniqueID)) then
                         local certs = target:GetData("certs", {})
@@ -30,6 +30,7 @@ ix.command.Add("CharRemoveCert", {
                         end
 
                         target:SetData("certs", certs)
+                        client:Notify(string.format("You have removed the %s certification from %s", cert.name, target:GetName()))
                     else
                         client:Notify(string.format("Your target already has the %s certification.", cert.name))
                     end

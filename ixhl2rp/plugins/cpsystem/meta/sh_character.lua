@@ -45,7 +45,7 @@ function CHAR:UpdateCPStatus()
 end;
 
 -- Returns all of the plugin's character data as a single table
-function CHAR:GetCPInfo()
+function CHAR:GetCPInfo(fullData)
     local data = {}
 
     if(self:IsMetropolice()) then 
@@ -57,7 +57,13 @@ function CHAR:GetCPInfo()
 		data.rank = self:GetData("rank");
 		data.spec = self:GetData("spec")
 		data.certs = self:GetData("certs")
-    end;
+	end;
+	
+	-- Sometimes this whole table is netstreamed, seperate less essential (but expensive) data if we dont need it.
+	if(fullData) then
+		data.rankObject = self:GetRank()
+		data.fullTagline = self:GetCPTagline()
+	end 
     
     return data;
 end;

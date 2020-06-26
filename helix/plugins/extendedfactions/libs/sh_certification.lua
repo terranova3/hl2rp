@@ -48,18 +48,14 @@ function ix.certs.GetCertsAsString(character)
 	return certs
 end
 
-function ix.certs.CanAddCert(character, target, cert)
-
-end
-
 -- Checks if a client can demote their target.
-function ix.ranks.CanChangeCert(character, target, cert)
+function ix.certs.CanChangeCert(character, target, cert)
 	local rank = target:GetRank()
 	local faction = target:GetFaction()
 
 	if(character:HasOverride() or target:GetFaction() == character:GetFaction()) then
 		if(character:GetRank().order >= target:GetRank().order or character:HasOverride()) then
-			if(cert.faction == target:GetFaction()) then
+			if(!cert or cert.faction == target:GetFaction()) then
 				return true
 			else
 				return false, "That certification cannot be obtained by the target's faction."
@@ -72,6 +68,6 @@ function ix.ranks.CanChangeCert(character, target, cert)
 	end
 end
 
-hook.Add("DoPluginIncludes", "ixRankIncludes", function(path)
+hook.Add("DoPluginIncludes", "ixCertIncludes", function(path)
 	ix.certs.LoadFromDir(path.."/certs")
 end)

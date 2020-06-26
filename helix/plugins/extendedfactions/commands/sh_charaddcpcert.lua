@@ -17,7 +17,7 @@ ix.command.Add("CharAddCert", {
         local cert = ix.certs.Get(text)
         local canChangeCert, error = ix.certs.CanChangeCert(character, target, cert)
 
-        if(!cert) then
+        if(cert) then
             if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Add cert")) then
                 if(canChangeCert) then
                     if(!target:HasCert(cert.uniqueID) and !target:HasSpec(cert.uniqueID)) then
@@ -25,6 +25,8 @@ ix.command.Add("CharAddCert", {
                         table.insert(certs, cert.uniqueID)
 
                         target:SetData("certs", certs)
+                        
+                        client:Notify(string.format("You have given %s the %s certification.", target:GetName(), cert.name))
                     else
                         client:Notify(string.format("Your target already has the %s certification.", cert.name))
                     end

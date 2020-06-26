@@ -10,7 +10,7 @@ ix.command.Add("ViewData", {
 	},
 	OnRun = function(self, client, target)
 		local targetClient = target:GetPlayer()
-		local cpData = target:GetCPInfo()
+		local cpData = target:GetCPInfo(true)
 
 		--if (!hook.Run("CanPlayerViewData", client, targetClient)) then
 		--	return "@cantViewData"

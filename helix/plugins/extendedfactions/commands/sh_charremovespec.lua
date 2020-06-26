@@ -13,19 +13,20 @@ ix.command.Add("CharRemoveSpec", {
 	},
     OnRun = function(self, client, target)
         local character = client:GetCharacter()
-        local cert = ix.certs.Get(text)
         local canChangeCert, error = ix.certs.CanChangeCert(character, target, cert)
 
-        if(!cert) then
+        if(character:GetData("spec")) then
             if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then
                 if(canChangeCert) then
                     target:SetData("spec", nil)
+
+                    client:Notify(string.format("You have removed %s's specialization.", target:GetName()))
                 else
                     client:Notify(error)
                 end
             end
         else
-            client:Notify(string.format("The certification '%s' doesn't exist.", text))
+            client:Notify(string.format("%s doesnt have a specialization.", target:GetName()))
         end
 	end;
 })
