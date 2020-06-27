@@ -32,8 +32,7 @@ function ix.item.PerformDragCombine(client, item, item2, invID)
     end
 
     if (item.dragged) then
-        print("here")
-        item.dragged(item, item2)
+        item.dragged(item2)
     end
 end
 

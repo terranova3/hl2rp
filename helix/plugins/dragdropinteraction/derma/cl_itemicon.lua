@@ -201,7 +201,6 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 			InventoryAction("drop", item.id, inventoryID, {})
 		end
 	elseif (inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
-		print("empty")
 		local oldX, oldY = self.gridX, self.gridY
 
 		if (oldX != gridX or oldY != gridY or self.inventoryID != inventoryPanel.invID) then
@@ -211,8 +210,6 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		local item2 = inventory:GetItemAt(gridX, gridY)
 
 		if(item2) then
-			print("not empty", gridX, gridY)
-
 			DragCombine(item.id, item2.id, self.inventoryID)
 		end
 	end
