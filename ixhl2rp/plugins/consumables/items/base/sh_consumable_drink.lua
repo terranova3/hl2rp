@@ -11,6 +11,7 @@ ITEM.description = "Drink Consumable base";
 ITEM.category = "Drinks";
 ITEM.capacity = 500
 ITEM.functions.Drink = {
+    icon = "icon16/drink.png",
 	OnRun = function(itemTable)
         local client = itemTable.player
         
@@ -29,13 +30,23 @@ ITEM.functions.Drink = {
         end
 	end
 }
-ITEM.dragged = function(item)
-    if(item.capacity and self:HasLiquid()) then
-        local space, spaceLeft = item:GetSpace()
+ITEM.functions.Sip = ITEM.functions.Drink
 
-        if(space and spaceLeft < self:GetData("currentAmount")) then
-            item:SetData("currentAmount", item:GetData("currentAmount") + spaceLeft)
-            self:SetData("currentAmount", self:GetData("currentAmount") - spaceLeft)
+ITEM.dragged = function(item, item2)
+    if(item2.capacity and item:HasLiquid()) then
+        local space, spaceLeft = item2:GetSpace()
+
+        if(space) then
+            item2:SetData("currentAmount", item2:GetData("currentAmount") + spaceLeft)
+
+            local newAmount = item:GetData("currentAmount") - spaceLeft
+
+            -- We cant have a negative amount.
+            if(newAmount <= 0) then
+                newAmount = 0
+            end
+
+            item:SetData("currentAmount", newAmount)
         end
     end
 end
@@ -43,6 +54,20 @@ end
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)
     self:SetData("currentAmount", self.capacity)
+end
+
+if (CLIENT) then
+    function ITEM:PaintOver(item, w, h)
+        local amount = item:GetData("currentAmount", 0)
+
+		if (amount) then
+			surface.SetDrawColor(0, 0, 0, 100)
+            surface.DrawRect(w - 14, h - 14, 8, 8)
+            
+            surface.SetDrawColor(25, 197, 255, 125)
+            surface.DrawRect(w - 14, h - 14, 8, (amount / item.capacity) * 8)
+		end
+	end
 end
 
 function ITEM:HasLiquid()
@@ -56,7 +81,7 @@ end
 function ITEM:PopulateTooltip(tooltip)
 	local data = tooltip:AddRow("data")
 	data:SetBackgroundColor(derma.GetColor("Success", tooltip))
-	data:SetText("It's still sealed.\n" .. "Capacity: " .. self.capacity .." mL\nCurrent Amount: " .. self:GetData("currentAmount") or self.capacity .. " mL")
+	data:SetText("Capacity: " .. self.capacity .." mL\nCurrent Amount: " .. self:GetData("currentAmount", self.capacity) .. " mL")
 	data:SetFont("BudgetLabel")
 	data:SetExpensiveShadow(0.5)
 	data:SizeToContents()

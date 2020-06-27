@@ -5,3 +5,4 @@
 
 ITEM.name = "Coffee Mug";
 ITEM.description = "yes";
+ITEM.capacity = 150

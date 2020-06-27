@@ -24,6 +24,20 @@ function ITEM:GetSpace()
     return false, 0
 end
 
+if (CLIENT) then
+    function ITEM:PaintOver(item, w, h)
+        local amount = item:GetData("currentAmount", 0)
+
+		if (amount) then
+			surface.SetDrawColor(0, 0, 0, 100)
+            surface.DrawRect(w - 14, h - 14, 8, 8)
+            
+            surface.SetDrawColor(25, 197, 255, 125)
+            surface.DrawRect(w - 14, h - 14, 8, (amount / item.capacity) * 8)
+		end
+	end
+end
+
 function ITEM:PopulateTooltip(tooltip)
     local data = tooltip:AddRow("data")
 
