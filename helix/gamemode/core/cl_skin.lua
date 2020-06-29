@@ -506,6 +506,38 @@ function SKIN:PaintInfoBar(panel, width, height, color)
 	surface.DrawTexturedRect(0, 0, width, height)
 end
 
+-- Called when a list view is painted.
+function SKIN:PaintListView(panel)
+	if (panel.m_bBackground) then
+		surface.SetDrawColor(50, 50, 50, 0);
+		panel:DrawFilledRect();
+	end;
+end;
+	
+-- Called when a list view line is painted.
+function SKIN:PaintListViewLine(panel)
+	local color = nil;
+	
+	if (panel:IsSelected()) then
+		color = Color(100, 170, 220, 80);
+	elseif (panel.Hovered) then
+		color = Color(170, 170, 170, 80);
+	elseif (panel.m_bAlt) then
+		color = Color(140, 140, 140, 80);
+	else
+		color = Color(130, 130, 130, 80);
+	end;
+
+	surface.SetDrawColor(color.r, color.g, color.b, color.a);
+	surface.DrawRect(0, 0, panel:GetWide(), panel:GetTall());
+end;
+
+-- Called when a list view label is schemed.
+function SKIN:SchemeListViewLabel(panel)
+	panel:SetTextInset(3);
+	panel:SetTextColor(Color(255, 255, 255, 255));
+end;
+
 do
 	-- check if sounds exist, otherwise fall back to default UI sounds
 	local bWhoosh = file.Exists("sound/helix/ui/whoosh1.wav", "GAME")
