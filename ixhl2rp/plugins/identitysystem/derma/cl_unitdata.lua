@@ -119,8 +119,14 @@ function PANEL:HandleCommandClick(action)
             self.popoutPanel:SetInfoText("This is the list of certifications avaliable")
 
             local certs = ix.util.NewInstance(ix.certs.stored[FACTION_MPF])
+            local charCerts = character:GetData("certs", {})
 
-            for _, uniqueID in pairs(character:GetData("certs", {})) do
+            -- We want to exclude the specialization from being added as a certification.
+            if(character:GetData("spec") != nil) then
+                table.insert(charCerts, character:GetData("spec"))
+            end
+
+            for _, uniqueID in pairs(charCerts) do
                 for key, cert in pairs(certs) do
                     if(uniqueID == cert.uniqueID) then
                         certs[key] = nil
