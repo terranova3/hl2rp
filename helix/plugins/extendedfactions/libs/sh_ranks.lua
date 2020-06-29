@@ -11,7 +11,7 @@ ix.ranks.stored = {}
 -- Loads all the ranks from the plugins and assigns meta and puts them in storage.
 function ix.ranks.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
-		local niceName = v:sub(4, -5)
+		local niceName = (v:sub(4, -5)):lower()
 		
 		RANK = setmetatable({uniqueID = niceName}, ix.meta.rank)
 
@@ -30,7 +30,7 @@ end
 function ix.ranks.Get(uniqueID)
 	for _, faction in pairs(ix.ranks.stored) do
 		for _, v in pairs(faction) do
-			if(v.uniqueID == uniqueID) then
+			if(v.uniqueID == uniqueID:lower()) then
 				return v
 			end
 		end
@@ -59,7 +59,7 @@ end
 
 -- Checks if a rank has a permission.
 function ix.ranks.HasPermission(uniqueID, perm)
-	local rank = ix.ranks.Get(uniqueID)
+	local rank = ix.ranks.Get(uniqueID:lower())
 
 	if(rank) then
 		for k, v in pairs(rank.permissions) do 
@@ -67,6 +67,14 @@ function ix.ranks.HasPermission(uniqueID, perm)
 				return true
 			end
 		end
+	end
+
+	return false
+end
+
+function ix.ranks.CanModify(client, target)
+	if(character:GetRank().order >= target:GetRank().order) then
+		return true
 	end
 
 	return false

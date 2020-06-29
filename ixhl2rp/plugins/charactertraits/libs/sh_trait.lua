@@ -5,8 +5,8 @@
 
 local PLUGIN = PLUGIN;
 
-ix.traits = ix.traits or {}
-ix.traits.stored = ix.traits.stored or {}
+ix.traits = {}
+ix.traits.stored = {}
 
 function ix.traits.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do

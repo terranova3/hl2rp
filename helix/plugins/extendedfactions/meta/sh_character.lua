@@ -4,6 +4,14 @@ function CHAR:GetClassName()
 	return ix.class.list[self:GetClass()].name;
 end;
 
+function CHAR:GetSpec()
+	if(self:GetData("spec") != nil) then
+		return ix.certs.Get(self:GetData("spec"))
+	end
+
+	return nil
+end
+
 function CHAR:HasCert(uniqueID)
 	if(self:HasSpec(uniqueID)) then
 		return true

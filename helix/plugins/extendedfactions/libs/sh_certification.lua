@@ -5,8 +5,8 @@
 
 local PLUGIN = PLUGIN;
 
-ix.certs = ix.certs or {}
-ix.certs.stored = ix.certs.stored or {}
+ix.certs = {}
+ix.certs.stored = {}
 
 function ix.certs.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
@@ -53,6 +53,7 @@ function ix.certs.CanChangeCert(character, target, cert)
 	local rank = target:GetRank()
 	local faction = target:GetFaction()
 
+	print(target:GetRank(), character:GetRank())
 	if(character:HasOverride() or target:GetFaction() == character:GetFaction()) then
 		if(character:GetRank().order >= target:GetRank().order or character:HasOverride()) then
 			if(!cert or cert.faction == target:GetFaction()) then

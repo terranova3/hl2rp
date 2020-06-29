@@ -22,4 +22,8 @@ function RANK:GetName()
 	return self.name
 end
 
+function RANK:GetDisplayName()
+	return self.name
+end
+
 ix.meta.rank = RANK
