@@ -57,13 +57,8 @@ function CHAR:GetCPInfo(fullData)
 		data.rank = self:GetData("rank");
 		data.spec = self:GetData("spec")
 		data.certs = self:GetData("certs")
-	end;
-	
-	-- Sometimes this whole table is netstreamed, seperate less essential (but expensive) data if we dont need it.
-	if(fullData) then
-		data.rankObject = self:GetRank()
 		data.fullTagline = self:GetCPTagline()
-	end 
+	end;
     
     return data;
 end;
@@ -76,7 +71,7 @@ function CHAR:GetCPName()
 		["city"] = ix.config.Get("City Name"),
         ["abbreviation"] = ix.config.Get("Abbreviation"),
         ["division"] = self:GetData("cpDivision"),
-		["rank"] = self:GetData("rank"),
+		["rank"] = ix.ranks.Get(self:GetData("rank")).name,
 		["tagline"] = self:GetData("cpTagline"),
 		["id"] = self:GetData("cpID")
     }

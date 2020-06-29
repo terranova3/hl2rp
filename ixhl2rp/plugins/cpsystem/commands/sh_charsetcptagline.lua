@@ -13,17 +13,15 @@ ix.command.Add("CharSetCPTagline", {
 		ix.type.string
 	},
     OnRun = function(self, client, target, text)
-        if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
-            if(PLUGIN:IsMetropolice(target)) then
+        local character = client:GetCharacter()
+        
+        if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Set CP Tagline")) then
+            if(target:IsMetropolice()) then
                 if(PLUGIN:TaglineExists(text)) then
-                    local notification = cpSystem.config.notification;
-                    notification.text = "Your new tagline is:";
-                    notification.additional = string.format("'Tagline - %s'", text)
-
-                    Notify:SendMessage(target:GetPlayer(), notification);
                     client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
+
                     target:SetData("cpTagline", text);
-                    PLUGIN:UpdateName(target);
+                    target:UpdateCPStatus()
                 else
                     client:Notify(string.format("The tagline '%s' does not exist.", text));
                 end;
@@ -31,7 +29,7 @@ ix.command.Add("CharSetCPTagline", {
                 client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
             end;
         else
-            client:Notify(string.format("This command requires an access level of %s. Your access level is %s.", self.accessLevel, PLUGIN:GetAccessLevel(client:GetCharacter())));
+            client:Notify("This command requires the 'Set CP Tagline' permission, which you do not have.");
         end;
 	end;
 })

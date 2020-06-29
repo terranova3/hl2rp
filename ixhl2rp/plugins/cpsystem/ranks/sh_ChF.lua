@@ -18,7 +18,7 @@ RANK.faction = FACTION_MPF
 
 -- Applied to the character when they are this rank
 RANK.bodygroups = {
-    [2] = 0,
+    [2] = 6,
 }
 
 -- Permissions the rank has access to.
@@ -26,6 +26,12 @@ RANK.permissions = {
     "Promote",
     "Demote",
     "Access Viewdata",
-    "Dispatch"
+    "Dispatch",
+    "Add cert",
+    "Set spec",
+    "Remove spec",
+    "Remove cert",
+    "Set CP ID",
+    "Set CP Tagline",
+    "Change wage"
 }
-

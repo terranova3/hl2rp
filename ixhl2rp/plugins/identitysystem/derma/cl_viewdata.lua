@@ -20,7 +20,7 @@ end;
 
 function PANEL:Build(target, cid, data, cpData)
 	self.headerLabel:SetText("Viewing " .. target:GetName() .. "'s record")
-	self:AlphaTo(255, 0.5)
+	self:SetVisible(true)
 
 	self.topDock = self:Add("DPanel")
 	self.topDock:Dock(TOP)

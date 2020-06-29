@@ -13,21 +13,31 @@ ix.command.Add("CharSetCPID", {
 		ix.type.number
 	},
     OnRun = function(self, client, target, text)
-        if(PLUGIN:GetAccessLevel(client:GetCharacter()) >= self.accessLevel) then
-            if(PLUGIN:IsMetropolice(target)) then
-                local notification = cpSystem.config.notification;
-                notification.text = "Your new id number is:";
-                notification.additional = string.format("'ID - %s'", text)
+        local character = client:GetCharacter()
+        local correctInput = false
 
-                Notify:SendMessage(target:GetPlayer(), notification);
-                client:Notify(string.format("You have set the cp id of %s to %s.", target:GetName(), text));
-                target:SetData("cpID", text);
-                PLUGIN:UpdateName(target);
+        for i = 1, 9 do
+            if(text == i) then
+                correctInput = true
+                break
+            end
+        end
+
+        if(correctInput) then
+            if(character:HasOverride() or (ix.ranks.HasPermission(character:GetRank().uniqueID, "Set CP ID"))) then
+                if(target:IsMetropolice()) then
+                    client:Notify(string.format("You have set the cp id of %s to %s.", target:GetName(), text));
+
+                    target:SetData("cpID", text);
+                    target:UpdateCPStatus()
+                else
+                    client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
+                end;
             else
-                client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
+                client:Notify("This command requires the 'Set CP ID' permission, which you do not have.");
             end;
         else
-            client:Notify(string.format("This command requires an access level of %s. Your access level is %s.", self.accessLevel, PLUGIN:GetAccessLevel(client:GetCharacter())));
-        end;
+            client:Notify("Incorrect input. Enter a number from 1 to 9.")
+        end
 	end;
 })
