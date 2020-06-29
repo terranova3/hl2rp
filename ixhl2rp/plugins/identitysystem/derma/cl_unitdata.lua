@@ -4,8 +4,9 @@ local gradient = surface.GetTextureID("vgui/gradient-d")
 function PANEL:Build(target, cid, data, cpData)
     ix.gui.unitData = self
 
-    self.target = target
-    self.character = target:GetCharacter()
+    self.target = target:GetCharacter()
+    self.character = LocalPlayer():GetCharacter()
+
     self.commands = {}
 
     self.sidePanel = self:Add("DPanel")
@@ -46,12 +47,12 @@ end
 
 function PANEL:RebuildSidePanel()
     local sidePanelText = (
-        "Unit Rank: " .. self.character:GetRank():GetDisplayName() ..
-        "\nUnit Tagline: " .. self.character:GetCPTagline()
+        "Unit Rank: " .. self.target:GetRank():GetDisplayName() ..
+        "\nUnit Tagline: " .. self.target:GetCPTagline()
     )
 
-    if(self.character:GetSpec() != nil) then
-        sidePanelText = sidePanelText .. "\nSpecialization: " .. self.character:GetSpec():GetName()
+    if(self.target:GetSpec() != nil) then
+        sidePanelText = sidePanelText .. "\nSpecialization: " .. self.target:GetSpec():GetName()
     end
 
 	self.sidePanelLabel:SetText(sidePanelText)
@@ -60,7 +61,7 @@ end;
 
 function PANEL:AddCommandButton(text, perm, requiresData)
     local button = self.buttonLayout:Add("DButton")
-    local hasPermission = ix.ranks.HasPermission(self.character:GetData("rank"), perm)
+    local hasPermission = self.character:HasOverride() or ix.ranks.HasPermission(self.character:GetData("rank"), perm)
     local parent = self
 
     if(requiresData) then
@@ -101,7 +102,7 @@ end
 
 function PANEL:HandleCommandClick(action)
     local requiresData = false
-    local character = self.target:GetCharacter()
+    local character = self.target
 
     for k, v in pairs(self.commands) do
         if(action == v) then
