@@ -119,8 +119,16 @@ function PANEL:Paint()
 	surface.SetDrawColor(30, 30, 30, 150)
 	surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
 
-	surface.SetDrawColor(ix.config.Get("color"))
+	surface.SetDrawColor(Color(100, 170, 220, 80))
 	surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
+end
+
+function PANEL:SetVisible(visible)
+	if(visible) then
+		self:AlphaTo(255, 0.5)
+	else
+		self:AlphaTo(0, 0.5)
+	end
 end
 
 vgui.Register("ixStagePanel", PANEL, "DFrame")
