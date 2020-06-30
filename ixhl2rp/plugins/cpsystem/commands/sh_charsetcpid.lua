@@ -28,6 +28,11 @@ ix.command.Add("CharSetCPID", {
                 if(target:IsMetropolice()) then
                     client:Notify(string.format("You have set the cp id of %s to %s.", target:GetName(), text));
 
+                    -- Remove only if the input is different from the current ID.
+                    if(text != target:GetData("cpID")) then 
+                        PLUGIN:RemoveFromCache(target:GetPlayer(), target)
+                    end
+
                     target:SetData("cpID", text);
                     target:UpdateCPStatus()
                 else

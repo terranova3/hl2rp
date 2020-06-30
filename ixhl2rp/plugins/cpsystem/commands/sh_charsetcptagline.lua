@@ -20,6 +20,11 @@ ix.command.Add("CharSetCPTagline", {
                 if(PLUGIN:TaglineExists(text)) then
                     client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
 
+                    -- Remove only if the input is different from the current tagline.
+                    if(text != target:GetData("cpTagline")) then
+                        PLUGIN:RemoveFromCache(target:GetPlayer(), target)
+                    end
+
                     target:SetData("cpTagline", text);
                     target:UpdateCPStatus()
                 else

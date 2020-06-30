@@ -6,9 +6,26 @@
 local Schema = Schema;
 local PLUGIN = PLUGIN;
 
--- Called when the plugin is initialized.
--- In a large database this can be expensive, don't reload cache on lua autorefresh.
-function PLUGIN:InitializedPlugins()
+function PLUGIN:LoadData()
+	for _, v in ipairs(self:GetData() or {}) do
+		local entity = ents.Create("ix_uniformgen")
+		entity:SetPos(v.pos)
+		entity:SetAngles(v.angles)
+		entity:Spawn()
+
+		entity:SetModel(v.model)
+		entity:SetSkin(v.skin or 0)
+		entity:SetSolid(SOLID_BBOX)
+		entity:PhysicsInit(SOLID_BBOX)
+
+		local physObj = entity:GetPhysicsObject()
+
+		if (IsValid(physObj)) then
+			physObj:EnableMotion(false)
+			physObj:Sleep()
+		end
+	end
+
 	if(cpSystem.cache == nil) then
 		cpSystem.cache = {}
 		cpSystem.cache.taglines = {}
@@ -35,27 +52,6 @@ function PLUGIN:InitializedPlugins()
 	end
 end
 
-function PLUGIN:LoadData()
-	for _, v in ipairs(self:GetData() or {}) do
-		local entity = ents.Create("ix_uniformgen")
-		entity:SetPos(v.pos)
-		entity:SetAngles(v.angles)
-		entity:Spawn()
-
-		entity:SetModel(v.model)
-		entity:SetSkin(v.skin or 0)
-		entity:SetSolid(SOLID_BBOX)
-		entity:PhysicsInit(SOLID_BBOX)
-
-		local physObj = entity:GetPhysicsObject()
-
-		if (IsValid(physObj)) then
-			physObj:EnableMotion(false)
-			physObj:Sleep()
-		end
-	end
-end
-
 function PLUGIN:SaveData()
 	local data = {}
 
@@ -68,6 +64,34 @@ function PLUGIN:SaveData()
 	end
 
 	self:SetData(data)
+end
+
+-- Add to the cache that was built on server launch since it doesn't auto refresh the server query for performance reasons.
+function PLUGIN:OnCharacterCreated(client, character)
+	if(character:IsMetropolice()) then
+		table.insert(cpSystem.cache.taglines, {
+			tagline = character:GetData("tagline"),
+			id = tonumber(character:GetData("cpID"))
+		})	
+	end
+end
+
+-- Remove from the cache when a character is deleted.
+function PLUGIN:PreCharacterDeleted(client, character)
+	self:RemoveFromCache(client, character)
+end
+
+function PLUGIN:RemoveFromCache(client, character)
+	if(character:IsMetropolice()) then
+		local tagline = character:GetData("tagline")
+		local id = character:GetData("cpID")
+
+		for k, v in pairs(cpSystem.cache.taglines) do
+			if(v.tagline == tagline and v.id == id) then
+				cpSystem.cache.taglines[k] = nil
+			end
+		end
+	end
 end
 
 function Schema:PlayerFootstep(client, position, foot, soundName, volume)
