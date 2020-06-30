@@ -17,19 +17,23 @@ ix.command.Add("CharSetCPTagline", {
         
         if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Set CP Tagline")) then
             if(target:IsMetropolice()) then
-                if(PLUGIN:TaglineExists(text)) then
-                    client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
+                if(text != target:GetData("cpTagline")) then
+                    if(PLUGIN:TaglineExists(text)) then
+                        client:Notify(string.format("You have set the tagline of %s to %s.", target:GetName(), text));
 
-                    -- Remove only if the input is different from the current tagline.
-                    if(text != target:GetData("cpTagline")) then
-                        PLUGIN:RemoveFromCache(target:GetPlayer(), target)
-                    end
+                        PLUGIN:RemoveFromCache(target)
 
-                    target:SetData("cpTagline", text);
-                    target:UpdateCPStatus()
+                        target:SetData("cpTagline", text);
+                        target:UpdateCPStatus()
+
+                        PLUGIN:AddToCache(target)
+                        PLUGIN:SendCache()
+                    else
+                        client:Notify(string.format("The tagline '%s' does not exist.", text));
+                    end;
                 else
-                    client:Notify(string.format("The tagline '%s' does not exist.", text));
-                end;
+                    client:Notify("That character already has that tagline!")
+                end
             else
                 client:Notify(string.format("That character is not a part of the '%s' faction.", target:GetFaction()));
             end;

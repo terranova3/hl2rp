@@ -68,22 +68,19 @@ end
 
 -- Add to the cache that was built on server launch since it doesn't auto refresh the server query for performance reasons.
 function PLUGIN:OnCharacterCreated(client, character)
-	if(character:IsMetropolice()) then
-		table.insert(cpSystem.cache.taglines, {
-			tagline = character:GetData("tagline"),
-			id = tonumber(character:GetData("cpID"))
-		})	
-	end
+	self:AddToCache(character)
+	self:SendCache()
 end
 
 -- Remove from the cache when a character is deleted.
-function PLUGIN:PreCharacterDeleted(client, character)
-	self:RemoveFromCache(client, character)
+function PLUGIN:PreCharacterDeleted(character)
+	self:RemoveFromCache(character)
+	self:SendCache()
 end
 
-function PLUGIN:RemoveFromCache(client, character)
+function PLUGIN:RemoveFromCache(character)
 	if(character:IsMetropolice()) then
-		local tagline = character:GetData("tagline")
+		local tagline = character:GetData("cpTagline")
 		local id = character:GetData("cpID")
 
 		for k, v in pairs(cpSystem.cache.taglines) do
@@ -92,6 +89,25 @@ function PLUGIN:RemoveFromCache(client, character)
 			end
 		end
 	end
+end
+
+function PLUGIN:AddToCache(character)
+	if(character:IsMetropolice()) then
+		table.insert(cpSystem.cache.taglines, {
+			tagline = character:GetData("cpTagline"),
+			id = tonumber(character:GetData("cpID"))
+		})
+	end
+end
+
+-- Rebuild for all clients
+function PLUGIN:SendCache()
+	for _, v in ipairs(player.GetAll()) do
+		netstream.Start(v, "ReceiveTaglineCache", cpSystem.cache.taglines)
+	end
+
+	print("Rebuilding cache!")
+	PrintTable(cpSystem.cache.taglines)
 end
 
 function Schema:PlayerFootstep(client, position, foot, soundName, volume)
@@ -190,5 +206,11 @@ function PLUGIN:SetupRankBodygroups(character)
 end
 
 netstream.Hook("RequestTaglineCache", function(client)
+	if((client.ixNextRequestTaglineCache or 0) > RealTime()) then
+		return
+	end
+
 	netstream.Start(client, "ReceiveTaglineCache", cpSystem.cache.taglines)
+
+	client.ixNextRequestTaglineCache = RealTime() + 2.0
 end)
