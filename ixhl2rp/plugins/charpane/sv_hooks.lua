@@ -17,23 +17,43 @@ function PLUGIN:CharacterLoaded(character)
 	charPanel:Sync(client)
 end;
 
+function PLUGIN:PlayerLoadedCharacter(client, curChar, prevChar)
+	local charPanel = curChar:GetCharPanel();
+
+	for _, v in pairs(charPanel:GetItems()) do
+		if (v.pacData) then
+			print("yes")
+			client:AddPart(v.uniqueID, v)
+		end
+	end
+end
+
 -- Called when an item has been added to the character panel
 function PLUGIN:CharPanelItemEquipped(client, item)
 	if(!item.outfitCategory) then return false end;
-	local bodygroup = 0
 
-	for _, v in pairs(item.bodyGroups) do 
-		bodygroup = v;
+	if(item.bodyGroups) then
+		local bodygroup = 0
+
+		for _, v in pairs(item.bodyGroups) do 
+			bodygroup = v;
+		end
+
+		PLUGIN:UpdateBodygroup(client, item.outfitCategory, bodygroup)
+	elseif(item.pacData) then
+		client:AddPart(item.uniqueID, item)
 	end
-
-	PLUGIN:UpdateBodygroup(client, item.outfitCategory, bodygroup)
 end;
 
 -- Called when an item has been removed from the character panel
 function PLUGIN:CharPanelItemUnequipped(client, item) 
 	if(!item.outfitCategory) then return false end;
 
-	PLUGIN:UpdateBodygroup(client, item.outfitCategory, 0)
+	if(item.bodyGroups) then
+		PLUGIN:UpdateBodygroup(client, item.outfitCategory, 0)
+	elseif(item.pacData) then
+		client:RemovePart(item.uniqueID)
+	end
 end;
 
 function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)

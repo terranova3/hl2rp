@@ -8,10 +8,34 @@ ITEM.category = "Medals";
 ITEM.description = "TODO";
 ITEM.model = "models/pins/devotedserviceawardsilveronbronze.mdl"
 ITEM.width = 1
-ITEM.outfitCategory = "medal";
+ITEM.outfitCategory = "pin";
 ITEM.height = 1
 ITEM.iconCam = {
 	pos = Vector(0.40000000596046, 0, 222.22222900391),
 	ang = Angle(89.900001525879, 180, 0),
 	fov = 0.58823529411765
+}
+ITEM.pacData = {
+	[1] = {
+		["children"] = {
+			[1] = {
+				["children"] = {
+				},
+				["self"] = {
+					["Angles"] = Angle(0, 95, 0),
+					["Position"] = Vector(8.5, -4, 0),
+					["UniqueID"] = "4249811628",
+					["Size"] = 1,
+					["Bone"] = "pelvis",
+					["Model"] = "models/dpfilms/metropolice/props/hd_stunbaton.mdl",
+					["ClassName"] = "model",
+				},
+			},
+		},
+		["self"] = {
+			["ClassName"] = "group",
+			["UniqueID"] = "907159817",
+			["EditorExpand"] = true,
+		},
+	},
 }
