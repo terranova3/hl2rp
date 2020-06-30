@@ -1,14 +1,11 @@
 local PANEL = {}
+local HIGHLIGHT = Color(255, 255, 255, 50)
 
 function PANEL:Init()
 	local parent = self
 
 	self.label = self:AddLabel("Unit Setup")
-	self.sublabel = self:SubLabel("Customize your description, tagline and id number.")
-
-	self.desc = self:AddTextEntry("cpdesc")
-	self.desc:SetTall(128)
-	self.desc:SetMultiline(true)
+	self.sublabel = self:SubLabel("Build your tagline")
 
 	self.taglineDropBox = self:Add("DComboBox")
 	self.taglineDropBox:SetFont("ixPluginCharTraitFont")
@@ -27,6 +24,13 @@ function PANEL:Init()
 	self.idDropBox.OnSelect = function( self, index, value )
 		parent:SetPayload("cpid", value)
 	end
+
+	self.sublabel = self:SubLabel("Describe your unit")
+	self.sublabel:DockMargin(0,20,0,0)
+	
+	self.desc = self:AddTextEntry("cpdesc")
+	self.desc:SetTall(128)
+	self.desc:SetMultiline(true)
 
 	netstream.Start("RequestTaglineCache")
 	self:Register("Unit Setup")
@@ -83,7 +87,6 @@ function PANEL:ShouldSkip()
 	end
 end
 
-
 function PANEL:RebuildIDs()
 	self.idDropBox:Clear()
 	
@@ -91,6 +94,25 @@ function PANEL:RebuildIDs()
 		if(v == false) then
 			self.idDropBox:AddChoice(k)
 		end
+	end
+end
+
+function PANEL:Validate()
+	if(self:GetPayload("tagline") == nil) then
+		return false, "You must select a tagline."
+	end
+
+	if(self:GetPayload("cpid") == nil) then
+		return false, "You must select an ID."
+	end
+
+	local minLength = ix.config.Get("minDescriptionLength", 16)
+	self:SetPayload("cpdesc", string.Trim((tostring(self:GetPayload("cpdesc")):gsub("\r\n", ""):gsub("\n", ""))))
+
+	if (self:GetPayload("cpdesc"):len() < minLength) then
+		return false, "descMinLen", minLength
+	elseif (!self:GetPayload("cpdesc"):find("%s+") or !self:GetPayload("cpdesc"):find("%S")) then
+		return false, "invalid", "description"
 	end
 end
 

@@ -100,6 +100,12 @@ surface.CreateFont("ixPluginCharPanelTitleFont", {
     size = ScreenScale(9),
     additive = true
 })
+surface.CreateFont("ixPluginCharPanelSubTitleFont", {
+    font = font,
+    weight = 200,
+    size = ScreenScale(5),
+    additive = true
+})
 surface.CreateFont("ixPluginCharComboBoxFont", {
     font = font,
     weight = 200,

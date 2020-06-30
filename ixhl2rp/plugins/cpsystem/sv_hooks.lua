@@ -73,7 +73,7 @@ function PLUGIN:OnCharacterCreated(client, character)
 end
 
 -- Remove from the cache when a character is deleted.
-function PLUGIN:PreCharacterDeleted(character)
+function PLUGIN:PreCharacterDeleted(client, character)
 	self:RemoveFromCache(character)
 	self:SendCache()
 end

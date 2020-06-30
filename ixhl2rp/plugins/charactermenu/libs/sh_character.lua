@@ -116,14 +116,14 @@ do
 				value = string.Trim((tostring(value):gsub("\r\n", ""):gsub("\n", "")))
 				local minLength = ix.config.Get("minDescriptionLength", 16)
 
-				if (value:utf8len() < minLength) then
+				if (value:len() < minLength) then
 					return false, "descMinLen", minLength
 				elseif (!value:find("%s+") or !value:find("%S")) then
 					return false, "invalid", "description"
 				end
 			end
 
-			return value or ""
+			return value
 		end,
 		alias = "Cpdesc"
 	})
