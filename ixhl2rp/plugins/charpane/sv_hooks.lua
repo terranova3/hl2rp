@@ -5,6 +5,38 @@
 
 local PLUGIN = PLUGIN;
 
+-- Called when a player enters observer
+function PLUGIN:OnPlayerObserve(client, state)
+	if(state) then
+		local curParts = client:GetParts()
+
+		-- Hide any PACs when going observer.
+		if (curParts) then
+			client:ResetParts()
+		end
+
+		print("observing")
+	else
+		-- Reload the pacs when exiting out of observer.
+		local charPanel = client:GetCharacter():GetCharPanel();
+		local inv = client:GetCharacter():GetInventory()
+
+		for _, v in pairs(charPanel:GetItems()) do
+			if (v.pacData) then
+				client:AddPart(v.uniqueID, v)
+			end
+		end
+
+		for _, v in pairs(inv:GetItems()) do
+			if (v:GetData("equip") == true and v.pacData) then
+				client:AddPart(v.uniqueID, v)
+			end
+		end
+
+		print("finishing observe")
+	end
+end
+
 -- Called during character setup
 function PLUGIN:CharacterLoaded(character)
 	local client = character:GetPlayer()
@@ -22,7 +54,6 @@ function PLUGIN:PlayerLoadedCharacter(client, curChar, prevChar)
 
 	for _, v in pairs(charPanel:GetItems()) do
 		if (v.pacData) then
-			print("yes")
 			client:AddPart(v.uniqueID, v)
 		end
 	end
