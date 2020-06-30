@@ -107,6 +107,7 @@ function PANEL:Init()
 	self:SetSize(360, 525)
 
 	local character = LocalPlayer():GetCharacter()
+
 	self.model = self:Add("ixModelPanel")
 	self.model:Dock(FILL)
 	self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
@@ -122,6 +123,7 @@ function PANEL:Init()
 		["kevlar"] = {x = 5, y = 240},
 		["hands"] = {x = 291, y = 300},
 		["legs"] = {x = 291, y = 370},
+		["pin"] = {x = 5, y = 370, condition = character:IsMetropolice()},
 	}
 
 	net.Receive("ixCharPanelLoadModel", function()
@@ -199,13 +201,15 @@ function PANEL:BuildSlots()
 	self.slots = self.slots or {}
 
 	for k, v in pairs(self.slotPlacements) do
-		local slot = self:Add("ixCharacterEquipmentSlot");
-		slot.category = k;
-		slot.text = k;
-		slot:SetPos(v.x, v.y);
+		if(v.condition or v.condition == nil) then
+			local slot = self:Add("ixCharacterEquipmentSlot");
+			slot.category = k;
+			slot.text = k;
+			slot:SetPos(v.x, v.y);
 
-		self.slots[k] = slot
-		slot:Populate()
+			self.slots[k] = slot
+			slot:Populate()
+		end
 	end;
 end
 
