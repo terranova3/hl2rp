@@ -41,6 +41,15 @@ function PANEL:Init()
 	self.name:SetFont("ixPluginCharPanelTitleFont")
 	self.name:SetTextColor(ix.gui.characterMenu.WHITE)
 	self.name:SizeToContentsY()
+	
+	self.subname = self:Add("DLabel")
+	self.subname:Dock(TOP)
+	self.subname:SetText("")
+	self.subname:DockMargin(0, 4, 0, 0)
+	self.subname:SetContentAlignment(5)
+	self.subname:SetFont("ixPluginCharPanelSubTitleFont")
+	self.subname:SetTextColor(ix.gui.characterMenu.WHITE)
+	self.subname:SizeToContentsY()
 
 	self.model = self:Add("ixModelPanel")
 	self.model:Dock(FILL)
@@ -100,6 +109,13 @@ function PANEL:setCharacter(character)
 	self.model:SetModel(character:GetModel())
 	self.faction:SetBackgroundColor(team.GetColor(character:GetFaction()))
 	self:setBanned(character:GetData("banned"))
+
+	self.subname:SetVisible(false)
+
+	if(self.character:IsMetropolice() and self.character:IsUndercover()) then
+		self.subname:SetVisible(true)
+		self.subname:SetText(string.format("(%s)", self.character:GetCPName()))
+	end
 
 	local entity = self.model.Entity
 	if (IsValid(entity)) then
