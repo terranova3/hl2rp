@@ -163,16 +163,16 @@ hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
 	if (hook.Run("BuildCraftingMenu") != false) then
 		tabs["inv"] = {
 			bDefault = true,
-			Create = function(info, container)
-				local inventoryPanel = container:Add("DPanel");
-				inventoryPanel.Paint = function() end;
-				inventoryPanel:SetSize(container:GetWide() / 3, container:GetTall());
-				inventoryPanel:Dock(LEFT)
-	
+			Create = function(info, container)				
 				local characterPanel = container:Add("DPanel")
 				characterPanel.Paint = function() end;
-				characterPanel:SetSize(container:GetWide() / 2, container:GetTall());
-				characterPanel:Dock(FILL)	
+				characterPanel:SetSize(400, container:GetTall());
+				characterPanel:Dock(LEFT)	
+
+				local inventoryPanel = container:Add("DPanel");
+				inventoryPanel.Paint = function() end;
+				inventoryPanel:SetSize(container:GetWide(), container:GetTall());
+				inventoryPanel:Dock(FILL)
 
 				netstream.Start("CharacterPanelUpdate")
 				netstream.Hook("ShowCharacterPanel", function(show)

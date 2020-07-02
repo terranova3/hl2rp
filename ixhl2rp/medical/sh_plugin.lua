@@ -4,7 +4,7 @@
 --]]
 
 PLUGIN.name = "Medical";
-PLUGIN.description = "Needs a description.";
+PLUGIN.description = "Implements limb-based damage and healing.";
 PLUGIN.author = "Adolphus";
 
-ix.util.IncludeDir(PLUGIN.folder .. "/config", true);
+ix.util.Include("sv_hooks.lua");
