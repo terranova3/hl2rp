@@ -10,58 +10,44 @@ function ix.limb.TakeDamage(client, group, info)
     local damageType = info:GetDamageType()
 
     if(group > 0 and damage > 0) then
-
         -- Armor will halve the damage.
         if(client:Armor() - damage > 0) then
             damage = damage / 2
         end
 
-        self:SetHealth(character, group, damage)
+        ix.limb.SetHealth(character, group, damage)
 
-        local health = self:GetHealth(character, group)
+        local health = ix.limb.GetHealth(character, group)
 
         -- Different damage types can cause different types of wounds
         if(damageType) then
-            local limbHitgroup = self.GetHitgroup(group)
+            local limbHitgroup = ix.limb.GetHitgroup(group)
             local canBleed = ix.limb.config.createBleed[damageType] or false
             local canFracture = ix.limb.config.createFracture[damageType] or false
 
-            if(canBleed and damage => limbHitgroup.bleedThreshold) then
-                self.SetBleeding(character, group, true)
+            if(canBleed and damage >= limbHitgroup.bleedThreshold) then
+                ix.limb.SetBleeding(character, group, true)
             end
 
-            if(canFracture and damage => limbHitgroup.fractureThreshold) then
-                self.SetFracture(character, group, true)
+            if(canFracture and damage >= limbHitgroup.fractureThreshold) then
+                ix.limb.SetFracture(character, group, true)
             end
         end
 
         -- Called for any plugins that might need to use it
-        hook.run("LimbTakeDamage", client, group, damage, health, info)
+        hook.Run("LimbTakeDamage", client, group, damage, health, info)
     end
-end
-
--- A function to return the characters health of a particular limb
-function ix.limb:GetHealth(character, group, fraction)
-    local limbs = character:GetLimbs()
-
-    if(limbs[group]) then
-        if(fraction) then
-            return limbs[group].health / 100
-        else
-            return limbs[group].health
-        end
-    end
-
-    return 0
 end
 
 -- A function to subtract or add to a limb's health
-function ix.limb:SetHealth(character, group, damage)
+function ix.limb.SetHealth(character, group, damage)
     local limbs = character:GetLimbs()
     local limb = limbs[group]
+    print("Setting hp")
 
-	if (limb) then
-        limb.health = math.Clamp((limb.health or 0) + math.ceil(damage), 0, self.GetHitgroup(group)[1])
+    if (limb) then
+        print(limb.health, damage)
+        limb.health = math.Clamp((limb.health or 0) + math.ceil(damage), 0, ix.limb.GetHitgroup(group).maxHealth)
 		character:SetLimbs(limbs)
 	end
 end
@@ -76,7 +62,7 @@ function ix.limb.SetBleeding(character, group, bleeding)
         character:SetLimbs(limbs)
 
         if(bleeding == false) then
-            self.SetBleedDamage(character, group, 0)
+            ix.limb.SetBleedDamage(character, group, 0)
         end
     end
 end
@@ -103,24 +89,58 @@ function ix.limb.SetFracture(character, group, fracture)
     end
 end
 
--- A function to return whether a limb is bleeding or not.
-function ix.limb.HasBleed(character, group)
-    local limbs = character:GetLimbs()
-
-    if(limbs and limbs[group]) then
-        return limbs[group].bleeding
-    end
-
-    return false
+function ix.limb.CreateBloodEffects(pos, decals, entity, fScale)
+	if (!entity.limbNextBlood or CurTime() >= entity.limbNextBlood) then
+		local effectData = EffectData()
+			effectData:SetOrigin(pos)
+			effectData:SetEntity(entity)
+			effectData:SetStart(pos)
+			effectData:SetScale(fScale or 0.5)
+		util.Effect("BloodImpact", effectData, true, true)
+		
+		for i = 1, decals do
+			local trace = {}
+				trace.start = pos
+				trace.endpos = trace.start
+				trace.filter = entity
+			trace = util.TraceLine(trace)
+			
+			util.Decal("Blood", trace.HitPos + trace.HitNormal, trace.HitPos - trace.HitNormal)
+		end
+		
+		entity.limbNextBlood = CurTime() + 0.5
+	end
 end
 
--- A function to return whether a limb is fractured or not.
-function ix.limb.HasFracture(character, group)
-    local limbs = character:GetLimbs()
+-- A function to get scale damage.
+function ix.limb.GetScaleDamage(group)
+    local limb = ix.limb.GetHitgroup(group)
 
-    if(limbs and limbs[group]) then
-        return limbs[group].fracture
-    end
+	if (limb) then
+		return limb.scale
+	end
+	
+	return 0
+end
 
-    return false
+function ix.limb.BleedTick()
+end
+
+function ix.limb.FractureTick()
+end
+
+-- A function to reset a player's limb data.
+function ix.limb.ResetLimbData(character)
+    local limbs = {}	
+    
+	for i = 1, #ix.limb.hitgroup do
+		limbs[i] = {
+			health = 0, 
+			bleeding = false, 
+			fracture = false,
+			bleedDamage = 0
+		}
+	end
+	
+	character:SetLimbs(limbs)
 end

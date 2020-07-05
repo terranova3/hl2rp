@@ -9,6 +9,7 @@ ITEM.width	= 1;
 ITEM.height	= 1;
 ITEM.description = "Food Consumable base";
 ITEM.category = "Food";
+
 ITEM.functions.Eat = {
 	OnRun = function(itemTable)
         local client = itemTable.player

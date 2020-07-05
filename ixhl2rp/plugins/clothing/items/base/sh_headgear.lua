@@ -12,3 +12,4 @@ ITEM.category = "Clothing";
 ITEM.description = "Headgear Base";
 ITEM.width = 1;
 ITEM.height = 1;
+ITEM.backgroundColor = Color(54, 76, 88, 130)

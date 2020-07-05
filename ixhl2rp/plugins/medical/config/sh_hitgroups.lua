@@ -4,11 +4,19 @@
 --]]
 
 ix.limb.AddHitGroup(HITGROUP_HEAD, ix.limb.HitGroupData({
-    25,
-    "Head",
+	"Head",
+	25,
     20,
     5,
     1
+}))
+
+ix.limb.AddHitGroup(HITGROUP_CHEST, ix.limb.HitGroupData({
+    "Chest",
+    100,
+	25,
+	5,
+	1
 }))
 
 ix.limb.AddHitGroup(HITGROUP_STOMACH, ix.limb.HitGroupData({

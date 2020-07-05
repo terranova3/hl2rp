@@ -14,8 +14,6 @@ function PLUGIN:OnPlayerObserve(client, state)
 		if (curParts) then
 			client:ResetParts()
 		end
-
-		print("observing")
 	else
 		-- Reload the pacs when exiting out of observer.
 		local charPanel = client:GetCharacter():GetCharPanel();
@@ -32,8 +30,6 @@ function PLUGIN:OnPlayerObserve(client, state)
 				client:AddPart(v.uniqueID, v)
 			end
 		end
-
-		print("finishing observe")
 	end
 end
 

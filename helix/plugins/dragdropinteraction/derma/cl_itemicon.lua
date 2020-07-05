@@ -264,9 +264,20 @@ end
 function PANEL:ExtraPaint(width, height)
 end
 
-
 function PANEL:Paint(width, height)
+	local background = Color(74, 74, 74, 130)
+
 	surface.SetDrawColor(0, 0, 0, 85)
+	surface.DrawRect(2, 2, width - 4, height - 4)
+
+	surface.SetDrawColor(Color(100, 100, 100, 60))
+	surface.DrawOutlinedRect(0, 0, width, height)
+
+	if(self.itemTable.backgroundColor) then
+		background = self.itemTable.backgroundColor
+	end
+
+	surface.SetDrawColor(background)
 	surface.DrawRect(2, 2, width - 4, height - 4)
 
 	self:ExtraPaint(width, height)

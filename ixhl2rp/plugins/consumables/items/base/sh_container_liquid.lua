@@ -29,11 +29,14 @@ if (CLIENT) then
         local amount = item:GetData("currentAmount", 0)
 
 		if (amount) then
-			surface.SetDrawColor(0, 0, 0, 100)
-            surface.DrawRect(w - 14, h - 14, 8, 8)
-            
-            surface.SetDrawColor(25, 197, 255, 125)
-            surface.DrawRect(w - 14, h - 14, 8, (amount / item.capacity) * 8)
+            if(!self.useLabel) then
+                self.useLabel = self:Add("DLabel")
+                self.useLabel:SetPos(w - 60, h - 20)
+                self.useLabel:SetColor(Color(25, 197, 255, 125))
+                self.useLabel:SetExpensiveShadow(3)       
+            end
+
+            self.useLabel:SetText(item:GetData("currentAmount", 0) .. " mL")   
 		end
 	end
 end

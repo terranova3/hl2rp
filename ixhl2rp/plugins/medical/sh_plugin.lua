@@ -8,3 +8,5 @@ PLUGIN.description = "Needs a description.";
 PLUGIN.author = "Adolphus";
 
 ix.util.IncludeDir(PLUGIN.folder .. "/config", true);
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true);
+ix.util.Include("sv_hooks.lua")

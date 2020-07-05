@@ -1,0 +1,125 @@
+local PANEL = {}
+local tickmat = Material("eft/tickmat.png")
+local damagepanel = Material("eft/damagepanel.png")
+local brokenmat = Material("eft/fracture.png")
+local bleedingmat = Material("eft/bleeding.png")
+local framemat = Material("eft/framemat.png")
+local butmat = "eft/butmat.png"
+local body  = "eft/body.png"
+
+function PANEL:Init()
+    self:SetSize(505, 699)
+
+    self.body = vgui.Create( "Material", self )
+    self.body:SetMaterial(body)
+    self.body:SetSize(405, 699) 
+    self.body:SetPos( 0, 0 )
+
+    self.body.AutoSize = false
+end
+
+local limbs = { -- # I like micro-ops.
+    [1] = "eft/head.png",
+    [6] = "eft/left_leg.png",
+    [4] = "eft/left_arm.png",
+    [7] = "eft/right_leg.png",
+    [5] = "eft/right_arm.png",
+    [2] = "eft/chest.png"
+}
+
+local inst = { -- # I like micro-ops.
+    [1] = {300, 56},
+    [2] = {204, 148},
+    [3] = {0, 0},
+    [4] = {374, 288},
+    [5] = {34, 233},
+    [6] = {334, 429},
+    [7] = {56, 426}
+}
+
+function PANEL:Paint()
+	derma.SkinFunc("PaintCategoryPanel", self, "", ix.config.Get("color") or color_white)
+	surface.SetDrawColor(0, 0, 0, 50);	
+
+	surface.SetFont("ixPluginTooltipFont")
+	surface.SetTextColor(Color(255,255,255,255))
+	surface.SetTextPos(4, 4)
+	surface.DrawText("Medical")
+end;
+
+function PANEL:PaintOver(intW, intH)
+    for k = 1, #inst do
+        if (k == 3) then continue end
+        self:DrawDamagedLimb(k)
+        self:DrawDamagePanel(k, inst[k][1], inst[k][2])
+    end
+end
+
+function PANEL:Think()
+    self:MoveToFront()
+end
+
+function PANEL:DrawDamagedLimb(intLimbID)
+    limbname = intLimbID
+
+    if (ix.limb.GetHealthPercentage(LocalPlayer(), limbname, true)) < 100 then
+        local icon = limbs[intLimbID]
+        surface.SetMaterial(Material(icon))
+        surface.SetDrawColor(hook.Run("GetLimbAlp"))
+        surface.DrawTexturedRect(0, 0, 405, 699) -- # 505, 699
+        icon = nil
+    end	
+end
+
+local defaultFont = font
+local font = "ixSmallFont"
+local defColor = Color(255, 255, 255, 255)
+
+function PANEL:DrawDamagePanel(intLimbID, dpW, dpH)
+    local character = LocalPlayer():GetCharacter()
+    local dlimbname = intLimbID
+    local maxHealth = ix.limb.GetHitgroup(dlimbname).maxHealth
+    local dlimbname1 = ix.limb.GetName(intLimbID)
+    local tick = math.Clamp(ix.limb.GetHealthFlip(character, dlimbname), 1, maxHealth) / maxHealth
+    local isFractured = ix.limb.HasFracture(character, intLimbID)
+    local isBleeding = ix.limb.HasBleed(character, intLimbID)
+
+    surface.SetMaterial(tickmat)
+    surface.SetDrawColor(color_white)
+    surface.DrawTexturedRect(dpW + 2, dpH + 22, 121 * tick, 10)
+
+    surface.SetMaterial(damagepanel)
+    surface.SetDrawColor(color_white)
+    surface.DrawTexturedRect(dpW, dpH, 126, 33)
+
+    draw.SimpleText(dlimbname1, font, dpW + 10, dpH + 10, defColor, TEXT_ALIGN_CENTER + 2, TEXT_ALIGN_CENTER)
+    draw.SimpleText(ix.limb.GetHealthFlip(character, dlimbname).." / "..maxHealth, defaultFont, dpW + 60, dpH + 26, defColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+    if isFractured then
+        surface.SetMaterial(brokenmat)
+        surface.SetDrawColor(color_white)
+        surface.DrawTexturedRect(dpW, dpH + 35, 24, 24)
+        
+        dpW = dpW + 27
+    end
+
+    if isBleeding then
+        surface.SetMaterial(bleedingmat)
+        surface.SetDrawColor(color_white)
+        surface.DrawTexturedRect(dpW, dpH + 35, 24, 24)
+        
+        dpW = dpW + 27
+    end
+end
+
+hook.Add("GetLimbAlp", "LimbAlpha", function()
+    local limbperc = ix.limb.GetHealthPercentage(LocalPlayer(), limbname, true)
+    local limbalp = 255
+    if (limbperc) then
+        limbalp = limbalp - (255 * (limbperc / 100))
+    end
+
+    return Color(255,255,255,limbalp)
+end)
+
+vgui.Register("ixLimbPanel", PANEL, "DPanel")
