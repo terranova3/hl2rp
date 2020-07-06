@@ -53,7 +53,7 @@ if (CLIENT) then
                 self.useLabel:SetExpensiveShadow(2)       
             end
 
-            self.useLabel:SetText(item:GetData("currentUses") .. "/" .. item.uses)   
+            self.useLabel:SetText(item:GetData("currentUses", item.uses) .. "/" .. item.uses)   
 		end
 	end
 end
