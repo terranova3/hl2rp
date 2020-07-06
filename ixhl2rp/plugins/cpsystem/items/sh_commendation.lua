@@ -5,7 +5,7 @@
 
 ITEM.name = "Civil Protection Commendation";
 ITEM.category = "Medals";
-ITEM.description = "TODO";
+ITEM.description = "An achievement weighed down both by the precious metals it was forged from and the unforeseen burden the recipient may carry along with it. A dull gold plated coin with a silver dove in the center. A medal of devout cause. It goes well on your lapel. ";
 ITEM.model = "models/pins/devotedserviceawardsilveronbronze.mdl"
 ITEM.width = 1
 ITEM.outfitCategory = "pin";

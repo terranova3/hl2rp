@@ -8,7 +8,7 @@ RANK.name = "i1";
 
 -- Name and description for user interface.
 RANK.displayName = "Intention 1"
-RANK.description = "todo"
+RANK.description = "A leader carrying nearly identical authority to the Chief, handpicked and tasked directly from the Chief. A step beyond exceptional."
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 3

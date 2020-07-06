@@ -8,7 +8,7 @@ RANK.name = "i3";
 
 -- Name and description for user interface.
 RANK.displayName = "Intention 3"
-RANK.description = "TODO"
+RANK.description = "An average joe, on MCP standards. Capable and developed, the model protection unit. Now is the time to shine."
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 5

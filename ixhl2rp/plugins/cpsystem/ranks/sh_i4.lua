@@ -8,7 +8,7 @@ RANK.name = "i4";
 
 -- Name and description for user interface.
 RANK.displayName = "Intention 4"
-RANK.description = "TODO"
+RANK.description = "A substantial chunk of the CPF, often the standard grunt to carry out operations they've been tasked with. No longer experiencing the potential leniency one might've found as an i5."
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 6

@@ -8,7 +8,7 @@ RANK.name = "i2";
 
 -- Name and description for user interface.
 RANK.displayName = "Intention 2"
-RANK.description = "todo"
+RANK.description = "Veterans of the MCP accumulating the skills necessary to become masters of their specialisations. True aces to have in the force, a position to showcase expertise."
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 4

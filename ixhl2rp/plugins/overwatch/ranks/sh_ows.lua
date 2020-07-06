@@ -8,7 +8,7 @@ RANK.name = "OWS";
 
 -- Name and description for user interface.
 RANK.displayName = "Overwatch Soldier"
-RANK.description = "TODO"
+RANK.description = "For when the protection units don't cut it. Quality insurance that the job will go on without a hitch. Cutting edge full body protection without a known weakness.
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 2

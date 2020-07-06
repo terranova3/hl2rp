@@ -8,7 +8,7 @@ RANK.name = "AdJ";
 
 -- Name and description for user interface.
 RANK.displayName = "Adjutant"
-RANK.description = "todo"
+RANK.description = "Commissioned Officers vetted through their years of service and dedication. Landing themselves in the luxuries of a logistics position for the MCP. Easily mistaken as bureaucrats while pulling the strings. "
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 1

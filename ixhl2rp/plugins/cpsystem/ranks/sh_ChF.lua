@@ -8,7 +8,7 @@ RANK.name = "ChF";
 
 -- Name and description for user interface.
 RANK.displayName = "Chief"
-RANK.description = "todo"
+RANK.description = "The powerhouse and sole leader of the MCP ground forces. The embodiment of authority within the city."
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 2
