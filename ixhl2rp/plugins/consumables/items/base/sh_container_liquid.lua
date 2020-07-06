@@ -14,6 +14,7 @@ ITEM.capacity = 500
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)
     self:SetData("currentAmount", 0)
+    self:SetData("currentLiquid", nil)
 end
 
 function ITEM:GetSpace()
@@ -22,6 +23,16 @@ function ITEM:GetSpace()
     end
 
     return false, 0
+end
+
+function ITEM:GetLiquid()
+    local currentLiquid = self:GetData("currentLiquid")
+
+    if(currentLiquid) then
+        return true, currentLiquid
+    end
+
+    return false, nil
 end
 
 if (CLIENT) then
@@ -33,12 +44,15 @@ if (CLIENT) then
                 self.useLabel = self:Add("DLabel")
                 self.useLabel:SetPos(w - 60, h - 20)
                 self.useLabel:SetColor(Color(25, 197, 255, 125))
-                self.useLabel:SetExpensiveShadow(3)       
+                self.useLabel:SetExpensiveShadow(2)
             end
 
             self.useLabel:SetText(item:GetData("currentAmount", 0) .. " mL")   
-		end
-	end
+        end
+        
+        surface.SetDrawColor(25,25,25,20)
+		surface.DrawRect(0,h-20, self:GetWide(), 2)
+    end
 end
 
 function ITEM:PopulateTooltip(tooltip)

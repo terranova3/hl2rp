@@ -67,7 +67,7 @@ end
 function ITEM:PopulateTooltip(tooltip)
 	local data = tooltip:AddRow("data")
 	data:SetBackgroundColor(Color(190, 62, 39, 120))
-	data:SetText("Uses Left: " .. self:GetData("currentCharge", self.uses))
+	data:SetText("Uses Left: " .. self:GetData("currentCharge", self.charge))
 	data:SetFont("BudgetLabel")
 	data:SetExpensiveShadow(0.5)
 	data:SizeToContents()

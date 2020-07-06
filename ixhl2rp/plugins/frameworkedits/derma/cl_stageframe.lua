@@ -7,6 +7,41 @@ local PANEL = {}
 
 function PANEL:Init()
     self.stagePanels = {}
+    self.drawHeader = true
+    
+    self:SetTitle("");
+    self:ShowCloseButton( false )
+end
+
+function PANEL:DrawHeader()
+    self.header = self:Add("DPanel")
+    self.header:SetSize((ScrW() * 0.5) - 10, 32)
+    self.header:SetPos(5, 4)  
+    self.header.Paint = function() 
+        derma.SkinFunc("DrawImportantBackground", 0, 0, self:GetWide(), self:GetTall(), Color(100, 170, 220, 80))
+    end
+
+    self.headerLabel = self.header:Add("DLabel")
+    self.headerLabel:SetText("This is a test title")
+    self.headerLabel:SetFont("ixMediumFont")
+    self.headerLabel:SetExpensiveShadow(3)
+    self.headerLabel:Dock(FILL)
+
+    self.exitButton = self.header:Add("DButton")
+    self.exitButton:SetText("X")
+    self.exitButton:SetWide(32)
+    self.exitButton:Dock(RIGHT)
+    self.exitButton:SetFont("ixSmallFont")
+    self.exitButton.Paint = function()
+    end
+    self.exitButton.DoClick = function()
+        self:Remove()
+    end
+
+    self.fakeSpacer = self:Add("DPanel")
+    self.fakeSpacer:Dock(TOP)
+    self.fakeSpacer:SetTall(10)
+    self.fakeSpacer.Paint = function() end
 end
 
 function PANEL:AddStagePanel(name, dType)
@@ -14,8 +49,7 @@ function PANEL:AddStagePanel(name, dType)
 
 	local panel = self:Add(dType or "DPanel");
 	panel:Dock(FILL);
-    panel:SetVisible(false);
-    panel:DockMargin(4,4,4,4)
+	panel:SetVisible(false);
 	panel.OnSetActive = function() end
 
 	self.stagePanels[id] = {}
@@ -100,4 +134,4 @@ function PANEL:SetVisible(visible)
 	end
 end
 
-vgui.Register("ixStagePanel", PANEL, "DPanel")
+vgui.Register("ixStageFrame", PANEL, "DFrame")

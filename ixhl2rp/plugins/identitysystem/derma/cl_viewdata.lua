@@ -6,7 +6,8 @@ function PANEL:Init()
     self:SetBackgroundBlur(true);
 	self:Center()
     self:MakePopup()
-    self:SetAlpha(0)
+	self:SetAlpha(0)
+	self:DrawHeader()
 end
 
 -- Called each frame.
@@ -58,4 +59,4 @@ function PANEL:OnRemove()
 	ix.gui.viewdata = nil
 end
 
-vgui.Register("ixRecordPanel", PANEL, "ixStagePanel")
+vgui.Register("ixRecordPanel", PANEL, "ixStageFrame")
