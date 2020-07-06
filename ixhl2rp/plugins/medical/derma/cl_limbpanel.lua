@@ -1,11 +1,8 @@
 local PANEL = {}
-local tickmat = Material("eft/tickmat.png")
-local damagepanel = Material("eft/damagepanel.png")
-local brokenmat = Material("eft/fracture.png")
-local bleedingmat = Material("eft/bleeding.png")
-local framemat = Material("eft/framemat.png")
-local butmat = "eft/butmat.png"
-local body  = "eft/body.png"
+local tickmat = Material("terranova/ui/medical/tickmat.png")
+local damagepanel = Material("terranova/ui/medical/damagepanel.png")
+local brokenmat = Material("terranova/ui/medical/fracture.png")
+local bleedingmat = Material("terranova/ui/medical/bleeding.png")
 
 function PANEL:Init()
     self:SetSize(505, 699)
@@ -19,12 +16,12 @@ function PANEL:Init()
 end
 
 local limbs = { -- # I like micro-ops.
-    [1] = "eft/head.png",
-    [6] = "eft/left_leg.png",
-    [4] = "eft/left_arm.png",
-    [7] = "eft/right_leg.png",
-    [5] = "eft/right_arm.png",
-    [2] = "eft/chest.png"
+    [1] = "terranova/ui/medical/head.png",
+    [6] = "terranova/ui/medical/left_leg.png",
+    [4] = "terranova/ui/medical/left_arm.png",
+    [7] = "terranova/ui/medical/right_leg.png",
+    [5] = "terranova/ui/medical/right_arm.png",
+    [2] = "terranova/ui/medical/chest.png"
 }
 
 local inst = { -- # I like micro-ops.
