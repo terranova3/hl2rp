@@ -9,7 +9,7 @@ local PLUGIN = PLUGIN;
 
 ITEM.name = "Antique Hat";
 ITEM.model = "models/fty/items/antiquehat.mdl"
-ITEM.description = "[PH] Needs description.";
+ITEM.description = "A tight fitting war relic made from wool.";
 ITEM.bodyGroups = {
 	["headgear"] = 3,
 }

@@ -9,7 +9,7 @@ local PLUGIN = PLUGIN;
 
 ITEM.name = "Blue Beanie";
 ITEM.model = "models/fty/items/bluebeanie.mdl"
-ITEM.description = "[PH] Needs description.";
+ITEM.description = "A blue cloth beanie.";
 ITEM.bodyGroups = {
 	["headgear"] = 1,
 }

@@ -9,7 +9,7 @@ local PLUGIN = PLUGIN;
 
 ITEM.name = "Flat Cap";
 ITEM.model = "models/fty/items/flatcap.mdl"
-ITEM.description = "[PH] Needs description.";
+ITEM.description = "Sleak and comfortable for any head.";
 ITEM.bodyGroups = {
 	["headgear"] = 6,
 }
