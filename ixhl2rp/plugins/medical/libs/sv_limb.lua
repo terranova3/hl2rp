@@ -43,10 +43,8 @@ end
 function ix.limb.SetHealth(character, group, damage)
     local limbs = character:GetLimbs()
     local limb = limbs[group]
-    print("Setting hp")
-
+    
     if (limb) then
-        print(limb.health, damage)
         limb.health = math.Clamp((limb.health or 0) + math.ceil(damage), 0, ix.limb.GetHitgroup(group).maxHealth)
 		character:SetLimbs(limbs)
 	end

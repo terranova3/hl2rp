@@ -27,6 +27,23 @@ function ix.limb.HasFracture(character, group)
     return false
 end
 
+function CHAR:GetInjuredLimbs()
+    local data = ix.limb.hitgroup
+    local injuredLimbs = {}
+
+    for k, v in pairs(self:GetLimbs()) do
+        if(v.health > 0) then
+            v.name = data[k].name
+            v.hitgroup = k
+            v.maxHealth = data[k].maxHealth
+
+            table.insert(injuredLimbs, v)
+        end
+    end
+
+    return injuredLimbs
+end
+
 function CHAR:GetFractures()
     local fractures = {}
 
