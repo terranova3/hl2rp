@@ -1,70 +1,65 @@
 local PANEL = {}
 
-local FADE_TIME = 5
-local VOLUME = ix.config.Get("musicvolume", 0.25)
-
 function PANEL:Init()
-	if (ix.menuMusic) then
-		ix.menuMusic:Stop()
-		ix.menuMusic = nil
-		timer.Remove("ixMusicFader")
+	if (ix.gui.music) then
+		ix.gui.music:Stop()
+		ix.gui.music = nil
 	end
 
-	self:SetVisible(false)
+	self.volume = 0
 
-	ix.menuMusicIsLocal = false
-	timer.Remove("ixMusicFader")
+	local path = "sound/" .. ix.config.Get("music")
+	local url = path:match("http[s]?://.+")
+	local play = url and sound.PlayURL or sound.PlayFile
+	path = url and url or path
 
-	local source = ix.config.Get("music", "")
-	if (not source:find("%S")) then return end
-
-	if (source:find("http")) then
-		sound.PlayURL(source, "noplay", function(music, errorID, fault)
-			if (music) then
-				music:SetVolume(VOLUME)
-				ix.menuMusic = music
-				ix.menuMusic:Play()
-			else
-				MsgC(Color(255, 50, 50), errorID.." ")
-				MsgC(color_white, fault.."\n")
-			end
-		end)
-	else
-		ix.menuMusicIsLocal = true
-		
-		if(LocalPlayer()) then
-			ix.menuMusic = CreateSound(LocalPlayer(), source)
-			ix.menuMusic:PlayEx(VOLUME, 100)
+	play(path, "noplay", function(channel, error, message)
+		if (!IsValid(channel)) then
+			return
 		end
-	end
+
+		channel:SetVolume(self.volume or 0)
+		channel:Play()
+
+		ix.gui.music = channel
+
+		self:CreateAnimation(2, {
+			index = 10,
+			target = {volume = 1},
+
+			Think = function(animation, panel)
+				if (IsValid(ix.gui.music)) then
+					ix.gui.music:SetVolume(self.volume * 0.5)
+				end
+			end
+		})
+	end)
 end
 
-function PANEL:OnRemove()
-	local music = ix.menuMusic
-	if (not music) then return end
+-- We don't want the panel to be seen, because we're only using it to play music.
+function PANEL:Paint() end
 
-	local fraction = 1
-	local start, finish = RealTime(), RealTime() + FADE_TIME
+function PANEL:Destroy()
+	print("OnRemove")
 
-	timer.Create("ixMusicFader", 0.1, 0, function()
-		if (ix.menuMusic) then
-			fraction = 1 - math.TimeFraction(start, finish, RealTime())
-			if (music.ChangeVolume) then
-				music:ChangeVolume(fraction * VOLUME, 0.1)
-			elseif (music.SetVolume) then
-				music:SetVolume(fraction * VOLUME)
+	self:CreateAnimation(1, {
+		index = 10,
+		target = {volume = 0},
+
+		Think = function(animation, panel)
+			if (IsValid(ix.gui.music)) then
+				ix.gui.music:SetVolume(self.volume * 0.5)
 			end
+		end,
 
-			if (fraction <= 0) then
-				music:Stop()
-				ix.menuMusic = nil
-
-				timer.Remove("ixMusicFader")
+		OnComplete = function(animation, panel)
+			if (IsValid(ix.gui.music)) then
+				ix.gui.music:Stop()
+				ix.gui.music = nil
+				self:Remove()
 			end
-		else
-			timer.Remove("ixMusicFader")
 		end
-	end)
+	})
 end
 
 vgui.Register("ixCharBGMusic", PANEL, "DPanel")

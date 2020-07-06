@@ -190,12 +190,17 @@ end
 function PANEL:fadeOut()
 	self:AlphaTo(0, self.ANIM_SPEED, 0, function()
 		self:Remove()
+		self.music:Destroy()
 	end)
 end
 
 function PANEL:Init()
 	if (IsValid(ix.gui.characterMenu)) then
 		ix.gui.characterMenu:Remove()
+	end
+
+	if (IsValid(ix.gui.loading)) then
+		ix.gui.loading:Remove()
 	end
 
 	ix.gui.characterMenu = self
@@ -211,8 +216,10 @@ function PANEL:Init()
 	self.content:DockMargin(64, 0, 64, 16)
 	self.content:SetDrawBackground(false)
 
-	self.music = self:Add("ixCharBGMusic")
-	--self:loadBackground()
+	-- We don't want this to be attached because we want a fade out when the panel is
+	-- removed, but the music takes longer to fade out than the panel.
+
+	self.music = vgui.Create("ixCharBGMusic")
 
 	self:showContent()
 end
@@ -236,6 +243,8 @@ function PANEL:RebuildTabs()
 end
 
 function PANEL:setFadeToBlack(fade)
+	self.music:Destroy()
+	
 	local d = deferred.new()
 	if (fade) then
 		if (IsValid(self.fade)) then
@@ -285,13 +294,4 @@ function PANEL:OnCharacterDeleted(character)
 	hook.Run("CharacterListUpdated", ix.characters)
 end;
 
-vgui.Register("ixPluginCharMenu", PANEL, "EditablePanel")
-
-if (IsValid(ix.gui.characterMenu)) then
-	ix.gui.characterMenu:Remove()
-	ix.gui.characterMenu = vgui.Create("ixPluginCharMenu")
-end
-
-function PLUGIN:OnCharacterMenuCreated(panel)
-    panel = vgui.Create("ixPluginCharMenu")
-end
+vgui.Register("ixCharMenu", PANEL, "EditablePanel")
