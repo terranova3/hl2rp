@@ -30,7 +30,7 @@ ix.limb.AddHitGroup(HITGROUP_STOMACH, ix.limb.HitGroupData({
 ix.limb.AddHitGroup(HITGROUP_LEFTLEG, ix.limb.HitGroupData({
     "Left Leg",
     30,
-	3,
+	10,
 	10,
 	1
 }))
@@ -38,7 +38,7 @@ ix.limb.AddHitGroup(HITGROUP_LEFTLEG, ix.limb.HitGroupData({
 ix.limb.AddHitGroup(HITGROUP_LEFTARM, ix.limb.HitGroupData({
     "Left Arm",
     30,
-	3,
+	10,
 	10,
 	1
 }))
@@ -46,7 +46,7 @@ ix.limb.AddHitGroup(HITGROUP_LEFTARM, ix.limb.HitGroupData({
 ix.limb.AddHitGroup(HITGROUP_RIGHTLEG, ix.limb.HitGroupData({
     "Right Leg",
     30,
-	3,
+	10,
 	10,
 	1
 }))
@@ -54,7 +54,7 @@ ix.limb.AddHitGroup(HITGROUP_RIGHTLEG, ix.limb.HitGroupData({
 ix.limb.AddHitGroup(HITGROUP_RIGHTARM, ix.limb.HitGroupData({
     "Right Arm",
     30,
-	3,
+	10,
 	10,
 	1
 }))
