@@ -4,7 +4,7 @@
 --]]
 
 -- Called when we are being hit and need to be scaling limb damage based on various modifiers
-function ix.limb.TakeDamage(client, group, info)
+function ix.limb.TakeDamage(client, group, info, diff)
     local character = client:GetCharacter()
     local damage = info:GetDamage()
     local damageType = info:GetDamageType()
@@ -15,7 +15,7 @@ function ix.limb.TakeDamage(client, group, info)
             damage = damage / 2
         end
 
-        ix.limb.SetHealth(character, group, damage)
+        ix.limb.SetHealth(character, group, damage * (diff or 1))
 
         local health = ix.limb.GetHealth(character, group)
 

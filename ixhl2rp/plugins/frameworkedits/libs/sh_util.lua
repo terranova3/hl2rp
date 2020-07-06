@@ -13,3 +13,13 @@ function ix.util.NewInstance(obj, seen)
     for k, v in pairs(obj) do res[ix.util.NewInstance(k, s)] = ix.util.NewInstance(v, s) end
     return res
 end
+
+function ix.util.Chance(chance)
+    local rand = math.random(0, 100)
+
+    if(rand <= chance) then
+        return true
+    end
+
+    return false
+end

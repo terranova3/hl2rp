@@ -48,8 +48,7 @@ function PLUGIN:EntityTakeDamage(target, info)
 			end
 
 			if (info:IsFallDamage()) then
-				ix.limb.TakeDamage(target, HITGROUP_RIGHTLEG, info)
-				ix.limb.TakeDamage(target, HITGROUP_LEFTLEG, info)
+				self:CalculateFallDamage(target, HITGROUP, info)
 			elseif (info:IsExplosionDamage()) then
 				if (math.random(1,3) == 1) then
 					ix.limb.TakeDamage(target, HITGROUP_HEAD, info)
@@ -92,6 +91,14 @@ function PLUGIN:EntityTakeDamage(target, info)
 			end
 		end
 	end
+end
+
+function PLUGIN:CalculateFallDamage(target, hitgroup, info)
+	local dmgShareRight = (math.random(0, 100))
+	local dmgShareLeft = (100 - dmgShareRight)
+
+	ix.limb.TakeDamage(target, HITGROUP_RIGHTLEG, info, dmgShareRight / 100)
+	ix.limb.TakeDamage(target, HITGROUP_LEFTLEG, info, dmgShareLeft / 100)
 end
 
 local legBroken = { 
