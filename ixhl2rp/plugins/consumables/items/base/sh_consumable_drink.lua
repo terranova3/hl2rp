@@ -10,44 +10,79 @@ ITEM.height	= 1;
 ITEM.description = "Drink Consumable base";
 ITEM.category = "Drinks";
 ITEM.capacity = 500
-
 ITEM.functions.Drink = {
     icon = "icon16/drink.png",
 	OnRun = function(itemTable)
         local client = itemTable.player
-        
-        -- TODO
-        -- Add a drunk effect
-        if(itemTable.alcoholPercentage) then
+        local hasLiquid, liquid = itemTable:GetLiquid()
+        local modifier = liquid / itemTable.capacity
 
+        if(hasLiquid) then
+            itemTable:SetData("currentAmount", 0)
+            itemTable.drinkEffects(itemTable, modifier)
+        else
+            client:Notify(string.format("%s is empty.", itemTable.name))
         end
 
-        if(itemTable.restoreStamina) then
-            client:RestoreStamina(itemTable.restoreStamina)
-        end
-
-        if(itemTable.restoreHealth) then
-            client:SetHealth(math.Clamp(client:Health() + itemTable.restoreHealth, 0, client:GetMaxHealth()))
-        end
+        return false
 	end
 }
-ITEM.functions.Sip = ITEM.functions.Drink
+ITEM.functions.Sip = {
+    icon = "icon16/drink.png",
+	OnRun = function(itemTable)
+        local client = itemTable.player
+        local hasLiquid, liquid = itemTable:GetLiquid()
+        local modifier = liquid / itemTable.capacity
 
+        if(modifier > 0.1) then
+            modifier = 0.1
+        end
+
+        if(hasLiquid) then
+            local newAmount = itemTable:GetData("currentAmount") - (itemTable.capacity * modifier)
+
+            itemTable:SetData("currentAmount", math.Clamp(newAmount, 0, 9999))
+            itemTable.drinkEffects(itemTable, modifier)
+        else
+            client:Notify(string.format("%s is empty.", itemTable.name))
+        end
+
+        return false
+	end
+}
+ITEM.drinkEffects = function(itemTable, modifier)
+    local client = itemTable.player
+    
+    if(itemTable.alcoholPercentage) then end
+
+    if(itemTable.restoreStamina) then
+        client:RestoreStamina(itemTable.restoreStamina * modifier)
+    end
+
+    if(itemTable.restoreHealth) then
+        client:SetHealth(math.Clamp(client:Health() + (itemTable.restoreHealth * modifier), 0, client:GetMaxHealth()))
+    end
+end
 ITEM.dragged = function(item, item2)
-    if(item2.capacity and item:HasLiquid()) then
-        local space, spaceLeft = item2:GetSpace()
+    local client = item:GetOwner()
 
-        if(space) then
-            item2:SetData("currentAmount", item2:GetData("currentAmount") + spaceLeft)
+    if(item2.capacity and item:GetLiquid()) then
+        local hasSpace, spaceLeft = item2:GetSpace()
+        local hasLiquid, liquid = item2:GetLiquid()
 
-            local newAmount = item:GetData("currentAmount") - spaceLeft
+        if(hasSpace) then
+            if(!hasLiquid) then 
+                item2:SetData("currentAmount", item2:GetData("currentAmount") + spaceLeft)
+                item2:SetData("currentLiquid", item.uniqueID)
 
-            -- We cant have a negative amount.
-            if(newAmount <= 0) then
-                newAmount = 0
+                local newAmount = item:GetData("currentAmount") - spaceLeft
+
+                item:SetData("currentAmount", math.Clamp(newAmount, 0, 9999))
+            else
+                client:Notify(string.format("%s currently is holding a different liquid! You cannot mix different liquids."))
             end
-
-            item:SetData("currentAmount", newAmount)
+        else
+            client:Notify(string.format("%s has reached its maximum capacity.", item2.name))
         end
     end
 end
@@ -74,12 +109,12 @@ if (CLIENT) then
 	end
 end
 
-function ITEM:HasLiquid()
+function ITEM:GetLiquid()
     if(self:GetData("currentAmount") > 0) then
-        return true
+        return true, self:GetData("currentAmount")
     end
 
-    return false
+    return false, nil
 end
 
 function ITEM:PopulateTooltip(tooltip)
