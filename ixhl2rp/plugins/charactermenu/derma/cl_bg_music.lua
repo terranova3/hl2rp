@@ -40,8 +40,6 @@ end
 function PANEL:Paint() end
 
 function PANEL:Destroy()
-	print("OnRemove")
-
 	self:CreateAnimation(1, {
 		index = 10,
 		target = {volume = 0},

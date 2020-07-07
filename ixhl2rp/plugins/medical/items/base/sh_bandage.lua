@@ -3,25 +3,25 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Splint"
-ITEM.model = Model("models/carlsmei/escapefromtarkov/medical/alusplint.mdl")
-ITEM.description = "An orange, multi-use brace able to set fractures and breaks."
+ITEM.name = "Bandage base"
+ITEM.model = Model("models/carlsmei/escapefromtarkov/medical/bandage_med.mdl")
+ITEM.backgroundColor = Color(62, 40, 26, 130)
+ITEM.description = "A sealed gauze package manufactured in Russia able to temporarily patch certain trauma."
 ITEM.category = "Medical"
 ITEM.price = 18
-ITEM.uses = 5
-ITEM.backgroundColor = Color(62, 40, 26, 130)
+ITEM.uses = 2
 ITEM.functions.Apply = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
         local character = client:GetCharacter()
-        local hasFracture, fractures = character:GetFractures()
+        local hasBleed, bleeds = character:GetBleeds()
 
-        if(hasFracture) then
-            local rand = math.random(1, #fractures)
+        if(hasBleed) then
+            local rand = math.random(1, #bleeds)
 
-            ix.limb.SetFracture(character, fractures[rand].hitgroup, false) 
+            ix.limb.SetBleed(character, bleeds[rand].hitgroup, false) 
 
-            client:Notify(string.format("You have fixed your %s.", fractures[rand].name))
+            client:Notify(string.format("You have bandaged your %s.", bleeds[rand].name))
 
             if(itemTable:GetData("currentUses") > 1) then
                 itemTable:SetData("currentUses", itemTable:GetData("currentUses") - 1)
@@ -29,7 +29,7 @@ ITEM.functions.Apply = {
                 return false
             end
         else
-            client:Notify("You don't have a fracture on one of your limbs!")
+            client:Notify("You don't have a bleed on one of your limbs!")
 
             return false
         end
@@ -50,7 +50,7 @@ if (CLIENT) then
                 self.useLabel = self:Add("DLabel")
                 self.useLabel:SetPos(w - 20, h - 20)
                 self.useLabel:SetColor(Color(190, 62, 39, 255))
-                self.useLabel:SetExpensiveShadow(1)       
+                self.useLabel:SetExpensiveShadow(2)       
             end
 
             self.useLabel:SetText(item:GetData("currentUses", item.uses) .. "/" .. item.uses)   

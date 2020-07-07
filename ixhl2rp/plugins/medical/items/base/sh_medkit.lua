@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Red Medkit"
+ITEM.name = "Medkit base"
 ITEM.model = Model("models/carlsmei/escapefromtarkov/medical/salewa.mdl")
 ITEM.backgroundColor = Color(62, 40, 26, 130)
 ITEM.description = "Contains pre-combine medicine and various other tools and medical equipment."
