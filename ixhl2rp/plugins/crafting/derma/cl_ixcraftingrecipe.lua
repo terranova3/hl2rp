@@ -10,10 +10,7 @@ local color_red = Color(150, 50, 50)
 local PANEL = {}
 
 function PANEL:Init()
-	self:Dock(TOP)
-	self:SetTall(64)
-
-	self:SetText("")
+	self:SetText("")	
 end
 
 function PANEL:SetRecipe(recipeTable)
@@ -35,7 +32,7 @@ function PANEL:SetRecipe(recipeTable)
 	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
 	self.name:SetText(recipeTable.GetName and recipeTable:GetName() or L(recipeTable.name))
 
-	self:SetBackgroundColor(recipeTable:OnCanCraft(LocalPlayer()) and color_green or color_red)
+	--self:SetBackgroundColor(recipeTable:OnCanCraft(LocalPlayer()) and color_green or color_red)
 end
 
 function PANEL:DoClick()
@@ -52,4 +49,4 @@ function PANEL:PaintBackground(width, height)
 	derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ColorAlpha(self.backgroundColor, alpha))
 end
 
-vgui.Register("ixCraftingRecipe", PANEL, "ixMenuButton")
+vgui.Register("ixCraftingRecipe", PANEL, "DButton")

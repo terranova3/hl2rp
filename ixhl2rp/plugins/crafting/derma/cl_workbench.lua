@@ -25,7 +25,7 @@ function PANEL:DrawHeader()
     end
 
     self.headerLabel = self.header:Add("DLabel")
-    self.headerLabel:SetText("Station")
+    self.headerLabel:SetText("Workbench")
     self.headerLabel:SetFont("ixMediumFont")
     self.headerLabel:SetExpensiveShadow(3)
     self.headerLabel:Dock(FILL)
@@ -72,7 +72,8 @@ function PANEL:Populate()
 	self.topDock.Paint = function() end
 
 	self:BuildInventory()
-	self:BuildRecipes()
+	self:BuildMaterials()
+	self:BuildCrafting()
 	self:BuildCraftPanel()
 end
 
@@ -111,64 +112,146 @@ function PANEL:BuildInventory()
 	self.leftDock:SetActivePanel("inventory");
 end
 
-function PANEL:BuildRecipes()
-	self.leftDock.recipes = self.leftDock:AddStagePanel("recipes")
+function PANEL:BuildMaterials()
+	self.leftDock.materials = self.leftDock:AddStagePanel("materials")
 
-	self.recipeButton = self.topDock:Add(self.leftDock:AddStageButton("Recipes", "recipes"))
-	self.recipeButton:SetSize(150, self:GetTall())
+	self.materialsButton = self.topDock:Add(self.leftDock:AddStageButton("Materials", "materials"))
+	self.materialsButton:SetSize(150, self:GetTall())
 
-	self.categoryPanels = {}
+	self.materialCategoryPanels = {}
 
-	self.scroll = self.leftDock.recipes:Add("DScrollPanel")
-	self.scroll:Dock(FILL)
+	self.materialScroll = self.leftDock.materials:Add("DScrollPanel")
+	self.materialScroll:Dock(FILL)
+
+	local include = {
+		"Convert",
+		"Refine"
+	}
 
 	for k, v in pairs(PLUGIN.craft.recipes) do
 		if (v:OnCanSee(LocalPlayer()) == false) then
 			continue
 		end
 
-		if (!self.categoryPanels[v.category]) then
+		local build = false
+
+		for _, inclusion in pairs(include) do
+			if(v.category == inclusion) then
+				build = true
+				break
+			end
+		end
+
+		if (!self.materialCategoryPanels[v.category] and build) then
+			self.materialCategoryPanels[v.category] = {}
+		end
+	end
+
+	for k, v in SortedPairs(self.materialCategoryPanels) do
+		local categoryLabel = self.materialScroll:Add("ixInfoText")
+		categoryLabel:MakeBold()
+		categoryLabel:SetText(k)
+		categoryLabel:SizeToContents()
+		categoryLabel:Dock(TOP)
+
+		local layout = self.materialScroll:Add("DIconLayout")
+		layout:Dock(TOP)
+		layout:SetSpaceX(4)
+		layout:SetSpaceY(4)
+		layout:SetDrawBackground(false)
+		layout:SetStretchWidth(true)
+		layout:SetStretchHeight(true)
+		layout:DockMargin(0, 10, 0, 10)
+		layout:StretchToParent(0, 0, 0, 0)
+		layout:InvalidateLayout(true)
+
+		v.layout = layout
+		self:LoadRecipes(k, self.materialCategoryPanels, self.materialScroll)
+	end
+end
+
+function PANEL:BuildCrafting()
+	self.leftDock.crafting = self.leftDock:AddStagePanel("crafting")
+
+	self.craftingButton = self.topDock:Add(self.leftDock:AddStageButton("Crafting", "crafting"))
+	self.craftingButton:SetSize(150, self:GetTall())
+
+	self.categoryPanels = {}
+
+	self.scroll = self.leftDock.crafting:Add("DScrollPanel")
+	self.scroll:Dock(FILL)
+
+	local exclude = {
+		"Convert",
+		"Refine"
+	}
+
+	for k, v in pairs(PLUGIN.craft.recipes) do
+		if (v:OnCanSee(LocalPlayer()) == false) then
+			continue
+		end
+
+		local build = true
+
+		for _, exclusion in pairs(exclude) do
+			if(v.category == exclusion) then
+				build = false
+				break
+			end
+		end
+
+		if (!self.categoryPanels[v.category] and build) then
 			self.categoryPanels[v.category] = {}
 		end
 	end
 
 	for k, v in SortedPairs(self.categoryPanels) do
-		panel = self.scroll:Add("ixCategoryPanel")
-		panel:SetText(k)
-		panel:Dock(TOP)
-		panel:DockMargin(4, 8, 4, 4)
+		local categoryLabel = self.scroll:Add("ixInfoText")
+		categoryLabel:MakeBold()
+		categoryLabel:SetText(k)
+		categoryLabel:SizeToContents()
+		categoryLabel:Dock(TOP)
 
-		v.panel = panel
-		self:LoadRecipes(k)
+		local layout = self.scroll:Add("DIconLayout")
+		layout:Dock(TOP)
+		layout:SetSpaceX(4)
+		layout:SetSpaceY(4)
+		layout:SetDrawBackground(false)
+		layout:SetStretchWidth(true)
+		layout:SetStretchHeight(true)
+		layout:DockMargin(0, 10, 0, 10)
+		layout:StretchToParent(0, 0, 0, 0)
+		layout:InvalidateLayout(true)
+
+		v.layout = layout
+		self:LoadRecipes(k, self.categoryPanels, self.scroll)
 	end
 end
 
-function PANEL:LoadRecipes(category, search)
+function PANEL:LoadRecipes(category, panels, scroll)
 	local recipes = PLUGIN.craft.recipes
 
-	self.scroll:InvalidateLayout(true)
+	scroll:InvalidateLayout(true)
 
-	PrintTable(self.categoryPanels)
-	print(category)
 	for uniqueID, recipeTable in SortedPairsByMemberValue(recipes, "name") do
 		if (recipeTable:OnCanSee(LocalPlayer()) == false) then
 			continue
 		end
 
 		if (recipeTable.category == category) then
-			if (search and search != "" and !L(recipeTable.name):lower():find(search, 1, true)) then
-				continue
-			end
+			panels[category].layout:InvalidateLayout(true)
 
-			local recipeButton = self.categoryPanels[category].panel:Add("ixCraftingRecipe")
+			local recipeButton = panels[category].layout:Add("ixCraftingRecipe")
 			recipeButton:SetRecipe(recipeTable)
+			recipeButton:SetSize(64, 64)
 			recipeButton:SetHelixTooltip(function(tooltip)
 				PLUGIN:PopulateRecipeTooltip(tooltip, recipeTable)
 			end)
 		end
-
-		self.categoryPanels[category].panel:SizeToContents()
 	end
+
+	panels[category].layout:Layout()
+	panels[category].layout:InvalidateLayout()
 end
 
 function PANEL:BuildCraftPanel()

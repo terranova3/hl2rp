@@ -43,5 +43,8 @@ function PANEL:SetText(text)
 	self.label:SizeToContents();
 end;
 
+function PANEL:MakeBold()
+	self:SetBackgroundColor(Color(100,100,100,25));
+end
 	
 vgui.Register("ixInfoText", PANEL, "DPanel");
