@@ -31,6 +31,7 @@ function PANEL:Init()
 	self:createCharacterSlots()
 	hook.Add("CharacterListUpdated", self, function()
 		self:createCharacterSlots()
+		ix.gui.characterMenu:showContent()
 	end)
 end
 

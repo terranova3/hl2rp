@@ -3,6 +3,7 @@ local tickmat = Material("terranova/ui/medical/tickmat.png")
 local damagepanel = Material("terranova/ui/medical/damagepanel.png")
 local brokenmat = Material("terranova/ui/medical/fracture.png")
 local bleedingmat = Material("terranova/ui/medical/bleeding.png")
+local body = "terranova/ui/medical/body.png"
 
 function PANEL:Init()
     self:SetSize(505, 699)

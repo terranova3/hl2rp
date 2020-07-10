@@ -22,8 +22,11 @@ function PANEL:createTabs()
 		load = self:addTab("continue", self.createCharacterSelection)
 	end
 
+	local maxChars = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
+	local charCount = #ix.characters
+
 	-- Only show the create tab if the local player can create characters.
-	if (hook.Run("CanPlayerCreateCharacter", LocalPlayer()) ~= false) then
+	if (charCount < maxChars) then
 		create = self:addTab("create", self.createCharacterCreation)
 	end
 
@@ -174,9 +177,6 @@ function PANEL:createCharacterCreation()
 	self.content:Clear()
 	self.content:InvalidateLayout(true)
 	self.content:Add("ixCharacterCreation")
-	
-	self:AddCharCreateTracker()
-	self.charCreateTracker:Build()
 end
 
 function PANEL:AddCharCreateTracker()
@@ -225,11 +225,16 @@ function PANEL:Init()
 end
 
 function PANEL:showContent()
-	self:RebuildTabs()
+	if(IsValid(self.tabs)) then
+		self.title:Remove()
+		self.desc:Remove()
+		self.tabs:Remove()
+		
+		self.content:Clear()
+		self.content:InvalidateLayout(true)
+	end
 
-	self.tabs:Clear()
-	self.content:Clear()
-	self:createTabs()
+	self:RebuildTabs()
 end
 
 function PANEL:RebuildTabs()
@@ -240,6 +245,8 @@ function PANEL:RebuildTabs()
 	self.tabs:DockMargin(64, 32, 64, 0)
 	self.tabs:SetTall(48)
 	self.tabs:SetDrawBackground(false)
+
+	self:createTabs()
 end
 
 function PANEL:setFadeToBlack(fade)

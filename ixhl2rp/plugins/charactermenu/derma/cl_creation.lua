@@ -18,7 +18,20 @@ function PANEL:Init()
 	local canCreate, reason = self:CanCreateCharacter()
 
 	if (not canCreate) then
-		return self:ShowMessage(reason)
+		self.back = self:Add("DButton")
+		self.back:SetFont("ixPluginCharButtonFont")
+		self.back:SetTextColor(ix.gui.characterMenu.WHITE)
+		self.back:Center()
+		self.back:SetSize(700, 64)
+		self.back:SetContentAlignment(5)
+		self.back:SetText(reason)
+		self.back.DoClick = function(cancel) 
+			if (IsValid(ix.gui.characterMenu)) then
+				ix.gui.characterMenu:showContent()
+			end
+		end
+
+		return false
 	end
 
 	ix.gui.charCreate = self
@@ -138,6 +151,9 @@ function PANEL:Init()
 		self:ShowMessage()
 		self:ShowError("Server did not authenticate your charcreate!")
 	end)
+
+	ix.gui.characterMenu:AddCharCreateTracker()
+	ix.gui.characterMenu.charCreateTracker:Build()
 end
 
 -- Returns true if the local player can create a character, otherwise
