@@ -107,7 +107,7 @@ function PANEL:BuildInventory()
 		panel:SetInventory(inventory)
 	end
 
-	ix.gui.craftingInv = panel
+	ix.gui.inv1 = panel
 
 	self.leftDock:SetActivePanel("inventory");
 end
@@ -274,6 +274,7 @@ end
 
 function PANEL:OnRemove()
 	ix.gui.workbenchPanel = nil
+	ix.gui.inv1 = nil
 end
 
 function PANEL:Paint()

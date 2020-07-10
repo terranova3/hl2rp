@@ -67,6 +67,10 @@ function PANEL:Populate()
     self.rightContainer:SetWide(128)
     self.rightContainer.Paint = function() end
 
+    self.limbs = self.rightContainer:Add("ixLimbPicture")
+    self.limbs:SetScale(0.35)
+    self.limbs:SetPos(-40, -20)
+
     self.header = self:Add(self:AddLabel(8, "Character and roleplay info", true, true))
 
     local format = "%A, %B %d, %Y. %H:%M:%S"

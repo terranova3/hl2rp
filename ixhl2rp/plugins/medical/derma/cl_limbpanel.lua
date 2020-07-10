@@ -1,22 +1,6 @@
 local PANEL = {}
-local tickmat = Material("terranova/ui/medical/tickmat.png")
-local damagepanel = Material("terranova/ui/medical/damagepanel.png")
-local brokenmat = Material("terranova/ui/medical/fracture.png")
-local bleedingmat = Material("terranova/ui/medical/bleeding.png")
 local body = "terranova/ui/medical/body.png"
-
-function PANEL:Init()
-    self:SetSize(505, 699)
-
-    self.body = vgui.Create( "Material", self )
-    self.body:SetMaterial(body)
-    self.body:SetSize(405, 699) 
-    self.body:SetPos( 0, 0 )
-
-    self.body.AutoSize = false
-end
-
-local limbs = { -- # I like micro-ops.
+local limbs = {
     [1] = "terranova/ui/medical/head.png",
     [6] = "terranova/ui/medical/left_leg.png",
     [4] = "terranova/ui/medical/left_arm.png",
@@ -24,6 +8,62 @@ local limbs = { -- # I like micro-ops.
     [5] = "terranova/ui/medical/right_arm.png",
     [2] = "terranova/ui/medical/chest.png"
 }
+
+function PANEL:Init()
+    self.scale = 1
+
+    self:SetSize(405, 699)
+    self:SetMaterial(body)
+    self.AutoSize = false
+end
+
+function PANEL:SetScale(scale)
+    self.scale = scale
+
+    self:SetSize(405 * self.scale, 699 * self.scale)
+end
+
+function PANEL:PaintOver(intW, intH)
+    for id = 1, #limbs do
+        if (id == 3) then continue end
+        self:DrawDamagedLimb(id)
+    end
+end
+
+function PANEL:DrawDamagedLimb(intLimbID)
+    limbname = intLimbID
+
+    if (ix.limb.GetHealthPercentage(LocalPlayer(), limbname, true)) < 100 then
+        local icon = limbs[intLimbID]
+        surface.SetMaterial(Material(icon))
+        surface.SetDrawColor(hook.Run("GetLimbAlp"))
+        surface.DrawTexturedRect(0, 0, 405 * self.scale, 699 * self.scale) -- # 505, 699
+        icon = nil
+    end	
+end
+
+hook.Add("GetLimbAlp", "LimbAlpha", function()
+    local limbperc = ix.limb.GetHealthPercentage(LocalPlayer(), limbname, true)
+    local limbalp = 255
+    if (limbperc) then
+        limbalp = limbalp - (255 * (limbperc / 100))
+    end
+
+    return Color(255,255,255,limbalp)
+end)
+
+vgui.Register("ixLimbPicture", PANEL, "Material")
+
+local PANEL = {}
+local tickmat = Material("terranova/ui/medical/tickmat.png")
+local damagepanel = Material("terranova/ui/medical/damagepanel.png")
+local brokenmat = Material("terranova/ui/medical/fracture.png")
+local bleedingmat = Material("terranova/ui/medical/bleeding.png")
+
+function PANEL:Init()
+    self:SetSize(505, 699)
+    self.body = vgui.Create( "ixLimbPicture", self )
+end
 
 local inst = { -- # I like micro-ops.
     [1] = {300, 56},
@@ -48,25 +88,12 @@ end;
 function PANEL:PaintOver(intW, intH)
     for k = 1, #inst do
         if (k == 3) then continue end
-        self:DrawDamagedLimb(k)
         self:DrawDamagePanel(k, inst[k][1], inst[k][2])
     end
 end
 
 function PANEL:Think()
     self:MoveToFront()
-end
-
-function PANEL:DrawDamagedLimb(intLimbID)
-    limbname = intLimbID
-
-    if (ix.limb.GetHealthPercentage(LocalPlayer(), limbname, true)) < 100 then
-        local icon = limbs[intLimbID]
-        surface.SetMaterial(Material(icon))
-        surface.SetDrawColor(hook.Run("GetLimbAlp"))
-        surface.DrawTexturedRect(0, 0, 405, 699) -- # 505, 699
-        icon = nil
-    end	
 end
 
 local defaultFont = font
@@ -109,15 +136,5 @@ function PANEL:DrawDamagePanel(intLimbID, dpW, dpH)
         dpW = dpW + 27
     end
 end
-
-hook.Add("GetLimbAlp", "LimbAlpha", function()
-    local limbperc = ix.limb.GetHealthPercentage(LocalPlayer(), limbname, true)
-    local limbalp = 255
-    if (limbperc) then
-        limbalp = limbalp - (255 * (limbperc / 100))
-    end
-
-    return Color(255,255,255,limbalp)
-end)
 
 vgui.Register("ixLimbPanel", PANEL, "DPanel")
