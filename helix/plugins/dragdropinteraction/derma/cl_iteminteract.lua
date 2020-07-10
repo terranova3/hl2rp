@@ -15,8 +15,6 @@ local function InventoryAction(action, itemID, invID, data)
 end
 
 function PLUGIN:CreateItemInteractionMenu(icon, menu, itemTable, inventory)
-    print("Here")
-
     local interact = vgui.Create("ixItemInteract")
     interact:Build(itemTable, inventory)
 
@@ -86,11 +84,8 @@ end
 function PLUGIN:Move()
     if(input.WasMousePressed(MOUSE_RIGHT) or input.WasMousePressed(MOUSE_LEFT)) then
         if(IsValid(ix.gui.itemInteract)) then
-            local interact = ix.gui.itemInteract
-
-            -- Don't want to get any clicks on the actual panel.
-            if(!interact:IsHovered() and !interact:IsChildHovered()) then
-                interact:Destroy()
+            if(!ix.gui.itemInteract:IsHovered() and !ix.gui.itemInteract:IsChildHovered()) then
+                ix.gui.itemInteract:Destroy()
             end
         end
     end
@@ -110,6 +105,8 @@ function PANEL:AddOption(k, v)
         ix.util.DrawText(L(v.name or k), 24, 4, color_white, 0, 0, "ixSmallFont")
     end
     option.DoClick = function()
+        local send = true
+
         if (v.OnClick) then
             send = v.OnClick(self.itemTable)
         end
