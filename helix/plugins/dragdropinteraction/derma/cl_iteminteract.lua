@@ -92,6 +92,17 @@ function PLUGIN:Move()
 end
 
 function PANEL:AddOption(k, v)
+    local textColor = color_white
+    local tooltip = nil
+
+    if(self.itemTable.suppressed) then
+        local isSuppressed, func, tip = self.itemTable.suppressed(self.itemTable)
+
+        if(isSuppressed and v.name == func) then 
+            textColor = Color(90, 90, 90, 150)
+            tooltip = tip
+        end
+    end
     local option = self:Add("DButton")
     option:SetText("")
     option:Dock(TOP)
@@ -102,7 +113,7 @@ function PANEL:AddOption(k, v)
             surface.DrawRect(0, 0, option:GetWide(), option:GetTall())
         end
     
-        ix.util.DrawText(L(v.name or k), 24, 4, color_white, 0, 0, "ixSmallFont")
+        ix.util.DrawText(L(v.name or k), 24, 4, textColor, 0, 0, "ixSmallFont")
     end
     option.DoClick = function()
         local send = true
@@ -120,6 +131,21 @@ function PANEL:AddOption(k, v)
         end
 
         self:Destroy()
+    end
+
+    if(tooltip != nil) then
+        option:SetHelixTooltip(function(panel)
+            local title = panel:AddRow("name")
+            title:SetText(v.name or k)
+            title:SizeToContents()
+            title:SetFont("ixPluginTooltipFont")
+            title:SetMaxWidth(math.max(title:GetMaxWidth(), ScrW() * 0.5))
+
+            local description = panel:AddRow("description")
+            description:SetText(tooltip)
+            description:SetFont("ixPluginTooltipDescFont")
+            description:SizeToContents()
+        end)
     end
 
     if(#self.options < 1) then

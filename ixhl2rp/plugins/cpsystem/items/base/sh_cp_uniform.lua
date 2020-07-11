@@ -20,6 +20,15 @@ ITEM.iconCam = {
 }
 ITEM.maxArmor = 100;
 ITEM.access = "Z";
+ITEM.suppressed = function(itemTable)
+	local charPanel = itemTable.player:GetCharacter():GetCharPanel()
+
+	if(charPanel:HasEquipped()) then
+		return true, "Equip", "You can't equip a uniform with items in your character panel!"
+	end
+
+	return false
+end
 
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)

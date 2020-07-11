@@ -673,28 +673,6 @@ ix.command.Add("BecomeClass", {
 	end
 })
 
-ix.command.Add("CharDesc", {
-	description = "@cmdCharDesc",
-	arguments = bit.bor(ix.type.text, ix.type.optional),
-	OnRun = function(self, client, description)
-		if (!description:find("%S")) then
-			return client:RequestString("@cmdCharDescTitle", "@cmdCharDescDescription", function(text)
-				ix.command.Run(client, "CharDesc", {text})
-			end, client:GetCharacter():GetDescription())
-		end
-
-		local info = ix.char.vars.description
-		local result, fault, count = info:OnValidate(description)
-
-		if (result == false) then
-			return "@" .. fault, count
-		end
-
-		client:GetCharacter():SetDescription(description)
-		return "@descChanged"
-	end
-})
-
 ix.command.Add("PlyTransfer", {
 	description = "@cmdPlyTransfer",
 	adminOnly = true,
