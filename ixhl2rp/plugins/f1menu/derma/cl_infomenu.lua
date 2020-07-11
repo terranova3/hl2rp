@@ -26,8 +26,10 @@ function ix.infoMenu.Display()
 end
 
 function ix.infoMenu.Remove()
-    ix.infoMenu.panel:Remove()
-    CloseDermaMenus()
+    if(IsValid(ix.infoMenu.panel)) then
+        ix.infoMenu.panel:Remove()
+    end
+
     ix.infoMenu.panel = nil
     ix.infoMenu.open = false
 end 
@@ -40,21 +42,19 @@ function PANEL:Init(logs)
     self.startTime = SysTime()
     self.noAnchor = CurTime() + 0.4
 	self.anchorMode = true
-    self.minimumWidth = 512
 
     self:SetAlpha(0)
-    self:SetSize(self.minimumWidth, 64)
+    self:SetSize(564, 64)
     self:ShowCloseButton(false)
     self:MakePopup()
 	self:SetTitle("");
 
     self:Populate()
     self:BuildMenuPanel()
+    self:SetPos((ScrW() * 0.5) - self:GetWide() * 0.5, (ScrH() * 0.25))
 
     self:InvalidateLayout(true)
     self:SizeToChildren(false, true)
-
-    self:SetPos(self.menuX, (self.menuY - self:GetTall()))
 
     self:AlphaTo(255, 0.5)
 end
@@ -64,12 +64,12 @@ function PANEL:Populate()
 
     self.rightContainer = self:Add("DPanel")
     self.rightContainer:Dock(RIGHT)
-    self.rightContainer:SetWide(128)
+    self.rightContainer:SetWide(180)
     self.rightContainer.Paint = function() end
 
     self.limbs = self.rightContainer:Add("ixLimbPicture")
-    self.limbs:SetScale(0.35)
-    self.limbs:SetPos(-40, -20)
+    self.limbs:SetScale(0.5)
+    self.limbs:SetPos(-60, 0)
 
     self.header = self:Add(self:AddLabel(8, "Character and roleplay info", true, true))
 
@@ -93,8 +93,17 @@ function PANEL:Populate()
     self.infoBox = self:Add("DPanel")
     self.infoBox:Dock(TOP)
     self.infoBox:DockPadding(5, 5, 5, 5)
+    self.infoBox.Paint = function()
+        surface.SetDrawColor(25, 25, 25, 225)
+        surface.DrawRect(0, 0, self.infoBox:GetWide(), self.infoBox:GetTall())
+    
+        surface.SetDrawColor(90, 90, 90, 255)
+        surface.DrawOutlinedRect(0, 0, self.infoBox:GetWide(), self.infoBox:GetTall())
+    end
 
-    self.name = self.infoBox:Add(self:AddLabel(4, LocalPlayer():GetName(), true))
+    local name = LocalPlayer():GetName()
+
+    self.name = self.infoBox:Add(self:AddLabel(4, name, true))
     self.faction = self.infoBox:Add(self:AddLabel(8, faction.name, true))
 
     for k, v in pairs(ix.infoMenu.stored) do
@@ -106,79 +115,16 @@ function PANEL:Populate()
 end
 
 function PANEL:BuildMenuPanel()
-    local options = {};
-		
-    for k, v in pairs(ix.quickmenu.categories) do
-        options[k] = {};
-        
-        for k2, v2 in pairs(v) do
-            local info = v2.GetInfo();
-            
-            if (type(info) == "table") then
-                options[k][k2] = info;
-                options[k][k2].isArgTable = true;
-            end;
-        end;
-    end;
-    
+    self.menu = self:Add("ixInteractMenu")
+    self.menu:Dock(TOP)
+    self.menu:DockMargin(0, 4, 0, 0)
+
     for k, v in pairs(ix.quickmenu.stored) do
-        local info = v.GetInfo();
-        
-        if (type(info) == "table") then
-            options[k] = info;
-            options[k].isArgTable = true;
-        end;
-    end;
+        self.menu:AddOption(k, v)
+        PrintTable(v)
+    end
 
-    self.menu = ix.util.AddMenuFromData(nil, options, function(menuPanel, option, arguments)
-        if (arguments.name) then
-            option = arguments.name;
-        end;
-        
-        if (arguments.options) then
-            local subMenu = menuPanel:AddSubMenu(option);
-            
-            for k, v in pairs(arguments.options) do
-                local name = v;
-                
-                if (type(v) == "table") then
-                    name = v[1];
-                end;
-                
-                subMenu:AddOption(name, function()
-                    if (arguments.Callback) then
-                        if (type(v) == "table") then
-                            arguments.Callback(v[2]);
-                        else
-                            arguments.Callback(v);
-                        end;
-                    end;
-                end);
-            end;
-            
-            if (IsValid(subMenu)) then
-                if (arguments.toolTip) then
-                    subMenu:SetToolTip(arguments.toolTip);
-                end;
-            end;
-        else
-            menuPanel:AddOption(option, function()
-                if (arguments.Callback) then
-                    arguments.Callback();
-                end;
-            end);
-            
-            menuPanel.Items = menuPanel:GetChildren();
-            local panel = menuPanel.Items[#menuPanel.Items];
-            
-            if (IsValid(panel) and arguments.toolTip) then
-                --panel:SetToolTip(arguments.toolTip);
-            end;
-        end;
-    end, self.minimumWidth);
-
-    self.menu:Center()
-    self.menuX, self.menuY = self.menu:GetPos()
+    self.menu:Build()
 
     self.initialized = true
 end
@@ -237,6 +183,11 @@ end
 function PANEL:Think()
 	local curTime = CurTime()
 
+    -- If the selector no longer exists, exit.
+    if(!IsValid(self.menu)) then
+        ix.infoMenu.Remove()
+    end
+
 	for _, v in ipairs(self.bars) do
         local info = ix.bar.list[v:GetID()]
 		local realValue, barText = info.GetValue()
@@ -250,13 +201,12 @@ function PANEL:Think()
 		v:SetValue(realValue)
 		v:SetText(isstring(barText) and barText or "")
     end
-
-    
+ 
 	local bTabDown = input.IsKeyDown(KEY_F1)
 
 	if (bTabDown and (self.noAnchor or CurTime() + 0.4) < CurTime() and self.anchorMode) then
 		self.anchorMode = false
-		surface.PlaySound("buttons/lightswitch2.wav")
+		--surface.PlaySound("buttons/lightswitch2.wav")
 	end
 
 	if ((!self.anchorMode and !bTabDown) or gui.IsGameUIVisible()) then

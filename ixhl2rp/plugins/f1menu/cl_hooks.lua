@@ -36,14 +36,10 @@ function PLUGIN:SetInfoMenuData(character, faction)
 		local cpData = character:GetCPInfo()
 
 		ix.infoMenu.Add("Tagline: " .. character:GetCPTagline())
-		ix.infoMenu.Add("Rank: " .. cpData.rank)
+		ix.infoMenu.Add("Rank: " .. character:GetRank().displayName)
 
 		if(cpData.spec) then
-			ix.infoMenu.Add("Specialization: " .. cpData.spec)
-		end
-
-		if(cpData.certs) then
-			ix.infoMenu.Add("Certs: " .. ix.certs.GetCertsAsString(character) or "N/A")
+			ix.infoMenu.Add("Specialization: " .. character:GetSpec().name)
 		end
 	end
 end

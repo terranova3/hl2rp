@@ -19,77 +19,29 @@
 local ix = ix;
 
 ix.quickmenu = {}
-ix.quickmenu.stored = ix.quickmenu.stored or {};
-ix.quickmenu.categories = ix.quickmenu.categories or {};
+ix.quickmenu.stored = {};
 
 -- A function to add a quick menu callback.
-function ix.quickmenu:AddCallback(name, category, GetInfo, OnCreateMenu)
-	if (category) then
-		if (!self.categories[category]) then
-			self.categories[category] = {};
-		end;
-		
-		self.categories[category][name] = {
-			OnCreateMenu = OnCreateMenu,
-			GetInfo = GetInfo,
-			name = name
-		};
-	else
-		self.stored[name] = {
-			OnCreateMenu = OnCreateMenu,
-			GetInfo = GetInfo,
-			name = name
-		};
-	end;
-	
-	return name;
+function ix.quickmenu:AddCallback(name, icon, callback)
+	self.stored[#ix.quickmenu.stored+1] = {
+		callback = callback,
+		name = name,
+		icon = icon
+	};
 end;
 
--- A function to add a command quick menu callback.
-function ix.quickmenu:AddCommand(name, category, command, options)
-	return self:AddCallback(name, category, function()
-		local commandTable = ix.command.FindByID(command);
-		
-		if (commandTable) then
-			return {
-				toolTip = commandTable.tip,
-				Callback = function(option)
-					--Clockwork.kernel:RunCommand(command, option);
-				end,
-				options = options
-			};
-		else
-			return false;
-		end;
-	end);
-end;
-
-ix.quickmenu:AddCallback("Fall Over", nil, function()
-	local commandTable = ix.command.FindByID("CharFallOver");
-	
-	if (commandTable) then
-		return {
-			toolTip = commandTable.tip,
-			Callback = function(option)
-				--Clockwork.kernel:RunCommand("CharFallOver");
-			end
-		};
-	else
-		return false;
-	end;
+ix.quickmenu:AddCallback("Edit Physical Description", "icon16/book_edit.png", function()
+	ix.command.Send("CharPhysDesc")
 end);
 
-ix.quickmenu:AddCallback("Description", nil, function()
-	local commandTable = ix.command.FindByID("CharPhysDesc");
-	
-	if (commandTable) then
-		return {
-			toolTip = commandTable.tip,
-			Callback = function(option)
-				--Clockwork.kernel:RunCommand("CharPhysDesc");
-			end
-		};
-	else
-		return false;
-	end;
+ix.quickmenu:AddCallback("Drop Tokens", "icon16/money_delete.png", function()
+	local description = string.format("How many tokens do you want to drop? You have %s.", LocalPlayer():GetCharacter():GetMoney())
+
+	Derma_StringRequest("Drop Tokens", description, 20, function(text)
+		ix.command.Send("DropMoney", text)
+	end, nil, "Drop", "Cancel")
+end);
+
+ix.quickmenu:AddCallback("Fall Over", "icon16/user.png", function()
+	ix.command.Send("CharFallOver")
 end);

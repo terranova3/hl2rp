@@ -9,3 +9,4 @@ PLUGIN.author = "Adolphus";
 
 ix.util.Include("sv_hooks.lua")
 ix.util.Include("cl_hooks.lua")
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
