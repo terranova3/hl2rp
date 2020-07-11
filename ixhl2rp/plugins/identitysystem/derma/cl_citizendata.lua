@@ -2,10 +2,14 @@ local PANEL = {}
 
 function PANEL:Build(target, cid, data, cpData)
     self.target = target;
-    self.dataName = cpData.cpCitizenName or self.target:GetName()
+    self.dataName = self.target:GetName()
 	self.dataPoints = data.dataPoints or {};
 	self.checked = data.checked or {}
-    self.dataCID = cid;
+	self.dataCID = cid;
+	
+	if(cpData and cpData.cpCitizenName) then
+		self.dataName = cpData.cpCitizenName
+	end
 
 	local checkboxes = {"Wanted for Questioning", "Survey Closely", "Elevated Citizen Status"}
     
@@ -135,7 +139,7 @@ function PANEL:RebuildSidePanel()
 
 	self.sidePanelLabel:SetText(
 		"Citizen Name: " .. self.dataName .. "\n" ..
-		"Citizen ID: " .. self.dataCID .. "\n" ..
+		"Citizen ID: #" .. self.dataCID .. "\n" ..
 		"Total Points: " .. totalPoints
 	)
 	

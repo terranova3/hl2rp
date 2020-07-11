@@ -46,9 +46,10 @@ end;
 
 -- Returns all of the plugin's character data as a single table
 function CHAR:GetCPInfo(fullData)
-    local data = {}
+    local data = nil
 
-    if(self:IsMetropolice()) then 
+	if(self:IsMetropolice()) then
+		data = {}
 		data.cpID = self:GetData("cpID");
         data.cpTagline = self:GetData("cpTagline");
 	    data.cpDesc = self:GetData("cpDesc");

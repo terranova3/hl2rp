@@ -31,22 +31,16 @@ function PANEL:Build(target, cid, data, cpData)
 	self.citizenPanel = self:AddStagePanel("citizenPanel", "ixCitizenData")
 	self.citizenPanel:Build(target, cid, data, cpData)
 
-	self.unitPanel = self:AddStagePanel("unitPanel", "ixUnitData")
-	self.unitPanel:Build(target, cid, data, cpData)
-	
-
-	self.gmPanel = self:AddStagePanel("gmPanel")
-
-	-- Populating the top dock with the buttons for moving between stages.
 	self.citizenButton = self.topDock:Add(self:AddStageButton("Citizen Record", "citizenPanel"))
 	self.citizenButton:SetSize(150, self:GetTall())
 
-	self.unitButton = self.topDock:Add(self:AddStageButton("Unit Record", "unitPanel"))
-	self.unitButton:SetSize(150, self:GetTall())
+	if(cpData) then
+		self.unitPanel = self:AddStagePanel("unitPanel", "ixUnitData")
+		self.unitPanel:Build(target, cid, data, cpData)
 
-	self.gmButton = self.topDock:Add(self:AddStageButton("GM", "gmPanel"))
-	self.gmButton:Dock(RIGHT)
-	self.gmButton:SetSize(64, self:GetTall())
+		self.unitButton = self.topDock:Add(self:AddStageButton("Unit Record", "unitPanel"))
+		self.unitButton:SetSize(150, self:GetTall())
+	end
 
 	self:SetActivePanel("citizenPanel");
 end

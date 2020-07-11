@@ -131,6 +131,7 @@ function PANEL:Init()
 	self.slotPlacements = {
 		["headgear"] = {x = 5, y = 100},
 		["headstrap"] = {x = 291, y = 100},
+		["glasses"] = {x = 291, y = 170},
 		["torso"] = {x = 5, y = 170},
 		["kevlar"] = {x = 5, y = 240},
 		["hands"] = {x = 291, y = 300},
@@ -360,12 +361,16 @@ function PANEL:PaintOver(width, height)
 		end
 	end
 
-	surface.SetDrawColor(230, 230, 230, 16)
-	surface.SetTexture(gradient)
-	surface.DrawTexturedRect(0, 0, width, height)
-
 	self.previewPanel = nil
 end;
+
+function PANEL:Paint(w, h)
+	surface.SetDrawColor(25, 25, 25, 225)
+	surface.DrawRect(0, 0, w, h)
+
+    surface.SetDrawColor(90, 90, 90, 125)
+    surface.DrawOutlinedRect(0, 0, w, h)
+end
 
 function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	local panel = panels[1]

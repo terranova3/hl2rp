@@ -121,7 +121,6 @@ function PANEL:BuildMenuPanel()
 
     for k, v in pairs(ix.quickmenu.stored) do
         self.menu:AddOption(k, v)
-        PrintTable(v)
     end
 
     self.menu:Build()

@@ -8,7 +8,7 @@ function PANEL:Init()
 	
 	self.label = vgui.Create("DLabel", self);
 	self.label:SetText("");
-	self.label:SetFont("ixPluginCharButtonSubFont")
+	self.label:SetFont("ixSmallFont")
 	self.label:SetTextColor(Color(255, 255, 255, 255));
 	--self.label:SetExpensiveShadow(1, Color(0, 0, 0, 150));
 end;
@@ -42,6 +42,8 @@ function PANEL:SetText(text)
 	self.label:SetText(text);
 	self.label:SizeToContents();
 end;
+
+function PANEL:SetInfoColor(color) end
 
 function PANEL:MakeBold()
 	self:SetBackgroundColor(Color(100,100,100,25));
