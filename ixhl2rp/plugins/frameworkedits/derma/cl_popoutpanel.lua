@@ -55,8 +55,6 @@ function PANEL:Populate()
     self.infoLabel:Dock(TOP)
     self.infoLabel:DockMargin(0, 0, 0, 4)
     self.infoLabel:SetInfoColor("blue")
-
-    ix.gui.viewdata:SetVisible(false)
 end
 
 function PANEL:SetInfoText(text, color)
@@ -65,14 +63,6 @@ function PANEL:SetInfoText(text, color)
     if(color) then
         self.infoLabel:SetInfoColor(color)
     end
-end
-
-function PANEL:OnRemove()
-    if(ix.gui.unitData) then
-        ix.gui.unitData:RebuildSidePanel()
-    end
-    
-    ix.gui.viewdata:SetVisible(true)
 end
 
 function PANEL:AddBigButton(text)

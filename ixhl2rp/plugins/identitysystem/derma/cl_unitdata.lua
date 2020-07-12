@@ -116,6 +116,16 @@ function PANEL:HandleCommandClick(action)
         self.popoutPanel = vgui.Create("ixPopoutPanel")
         self.popoutPanel:SetHeaderText(action)
 
+        ix.gui.viewdata:SetVisible(false)
+
+        self.popoutPanel.OnRemove = function()
+            if(ix.gui.unitData) then
+                ix.gui.unitData:RebuildSidePanel()
+            end
+        
+            ix.gui.viewdata:SetVisible(true)
+        end
+
         if(action == "Add cert") then
             self.popoutPanel:SetInfoText("This is the list of certifications avaliable")
 

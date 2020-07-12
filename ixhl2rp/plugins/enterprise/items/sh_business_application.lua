@@ -7,22 +7,40 @@ ITEM.name = "Business Application"
 ITEM.description = "Contains a compact form with various questions and answers, for creating a business. Has a small union Ministry of Workforce logo at the top right."
 ITEM.model = "models/props_office/paperfolder01.mdl"
 ITEM.category = "Miscellaneous";
-ITEM.functions.Edit = {
+ITEM.functions.View = {
     icon = "icon16/book_edit.png",
 	OnRun = function(itemTable)
         local client = itemTable.player
 		
-		netstream.Start(client, "EditApplication", itemTable)
+		if(itemTable:GetData("businessCharID")) then
+			netstream.Start(client, "EditApplication", itemTable, true)
+		else
+			netstream.Start(client, "EditApplication", itemTable, false)
+		end
 		
         return false
 	end
 }
 
-if(CLIENT) then
-	do
-		netstream.Hook("EditApplication", itemTable, function()
-			ix.gui.businessApplication = vgui.Create("ixBusinessApplication")
-			ix.gui.businessApplication:Build(itemTable)
-		end)
+function ITEM:PopulateTooltip(tooltip)
+	local data = tooltip:AddRow("data")
+	local permitString = ""
+	local permits = self:GetData("businessPermits", {})
+
+	for i = 1, #permits do
+		if(i == 1 or i == #permits) then
+			permitString = permitString .. permits[i]
+		else 
+			permitString = permitString .. ", " .. permits[i]
+		end
 	end
+
+	data:SetText("Business owner: " .. self:GetData("businessOwner", "N/A") .. 
+		"\nBusiness name: " .. self:GetData("businessName", "N/A") .. 
+		"\nBusiness description: " .. self:GetData("businessDescription", "N/A") ..
+		"\nBusiness permits: " .. permitString or "N/A"
+	)
+
+	data:SetExpensiveShadow(0.5)
+	data:SizeToContents()
 end

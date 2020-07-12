@@ -29,20 +29,19 @@ do
     
     timer.Create("ixDoorInfo", 0.1, 0, function()
         local client = LocalPlayer()
+        local time = SysTime()
 
+        if (!IsValid(client)) then
+            return
+        end
+
+        local character = client:GetCharacter()
+
+        if (!character) then
+            return
+        end
+        
         if(client:GetData("propertyEdit")) then
-            local time = SysTime()
-
-            if (!IsValid(client)) then
-                return
-            end
-
-            local character = client:GetCharacter()
-
-            if (!character) then
-                return
-            end
-
             lastTrace.start = client:GetShootPos()
             lastTrace.endpos = lastTrace.start + client:GetAimVector(client) * 160
             lastTrace.filter = client
