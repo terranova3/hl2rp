@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 2;
 ITEM.description = "Generic shiraz red wine made of dark-skinned grapes from France. It tastes bitter and has a unique flavour.";
 ITEM.category = "Contraband Drinks";
+ITEM.permit = "consumables";
+ITEM.price 45;
 ITEM.restoreStamina = 25;
