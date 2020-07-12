@@ -9,4 +9,6 @@ ITEM.width = 2;
 ITEM.height	= 2;
 ITEM.description = "Packaged nutrition supplements in a cereal form. Tastes like sawdust.";
 ITEM.category = "Civil-Approved Food";
+ITEM.permit = "consumables";
+ITEM.price = 4;
 ITEM.restoreHealth = 5;

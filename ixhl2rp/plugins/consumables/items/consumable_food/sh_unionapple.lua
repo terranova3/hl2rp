@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "A plastic feeling, apple shaped ball, that tastes like chemicals. As you get to the core, it's apparent there's no seeds. These aren't grown normally.";
 ITEM.category = "Civil-Approved Food";
+ITEM.permit = "consumables";
+ITEM.price = 4;
 ITEM.restoreHealth = 5;

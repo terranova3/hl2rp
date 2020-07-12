@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "Whatever used to be chocolate can't come close to whatever this brown stuff is. It tastes of synthetic palm oil, and then an aftertaste of something chemical-like.";
 ITEM.category = "Civil-Approved Food";
+ITEM.permit = "consumables";
+ITEM.price = 7;
 ITEM.restoreHealth = 5;

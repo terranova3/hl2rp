@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "What is that taste? It's water... but also not.";
 ITEM.category = "Civil-Approved Drinks";
+ITEM.permit = "consumables";
+ITEM.price = 2;
 ITEM.restoreStamina = 10;
