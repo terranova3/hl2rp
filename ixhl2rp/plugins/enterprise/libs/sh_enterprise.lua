@@ -8,7 +8,7 @@ ix.enterprise.stored = ix.enterprise.stored or {}
 
 function ix.enterprise.New(character, name, description)
     enterprise = setmetatable({
-        owner = character:GetID(),
+        owner = character,
         name = name,
     }, ix.meta.enterprise)
 
@@ -17,13 +17,15 @@ function ix.enterprise.New(character, name, description)
     local query = mysql:Insert("ix_enterprises")
     query:Insert("owner_id", enterprise.owner)
     query:Insert("name", enterprise.name)
-    query:Insert("data", enterprise.data)
+    query:Insert("data", util.TableToJSON(enterprise.data or {}))
     query:Callback(function(_, status, lastID)
         enterprise.id = lastID
     end)
     query:Execute()
 
     table.insert(ix.enterprise.stored, enterprise)
+
+    PrintTable(ix.enterprise.stored)
     enterprise = nil
 end
 

@@ -6,18 +6,18 @@
 ix.meta = ix.meta or {}
 
 local ENTERPRISE = ix.meta.trait or {}
-ENTERPRISE.__index = TRAIT
+ENTERPRISE.__index = ENTERPRISE
 ENTERPRISE.id = 0
 ENTERPRISE.owner = 0
 ENTERPRISE.name = "undefined"
 ENTERPRISE.data = {}
 
 function ENTERPRISE:SetData(key, value)
-    self.data[key] = value
+    ENTERPRISE.data[key] = value
 end
 
 function ENTERPRISE:GetData(key, default)
-    return self.data[key] or default
+    return ENTERPRISE.data[key] or default
 end
 
-ix.meta.enterprise = TRAIT
+ix.meta.enterprise = ENTERPRISE

@@ -13,9 +13,23 @@ ITEM.functions.View = {
         local client = itemTable.player
 		
 		if(itemTable:GetData("businessCharID")) then
-			netstream.Start(client, "EditApplication", itemTable, true)
+			netstream.Start(client, "EditApplication", {itemTable, true})
 		else
-			netstream.Start(client, "EditApplication", itemTable, false)
+			netstream.Start(client, "EditApplication", {itemTable, false})
+		end
+		
+        return false
+	end
+}
+ITEM.functions.Approve = {
+    icon = "icon16/book.png",
+	OnRun = function(itemTable)
+        local client = itemTable.player
+		
+		if(itemTable:GetData("businessOwner") and itemTable:GetData("businessName") and itemTable:GetData("businessDescription")) then
+			ix.enterprise.New(itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), itemTable:GetData("businessDescription"))
+		else
+			client:Notify("That application is missing important data. Cannot approve until it has been filled out!")
 		end
 		
         return false
@@ -28,7 +42,7 @@ function ITEM:PopulateTooltip(tooltip)
 	local permits = self:GetData("businessPermits", {})
 
 	for i = 1, #permits do
-		if(i == 1 or i == #permits) then
+		if(i == 1) then
 			permitString = permitString .. permits[i]
 		else 
 			permitString = permitString .. ", " .. permits[i]
