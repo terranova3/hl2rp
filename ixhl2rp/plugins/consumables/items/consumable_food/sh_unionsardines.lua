@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A can of fishy, oil flavoured chewy, aquatic shaped things. The 'fish' are so mangled in the can, you can't really tell if they were once real fish. Probably not.";
 ITEM.category = "Civil-Approved Food";
+ITEM.permit = "consumables";
+ITEM.price = 7;
 ITEM.restoreHealth = 5;

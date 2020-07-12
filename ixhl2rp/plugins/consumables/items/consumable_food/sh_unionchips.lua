@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "A bag of bland, crunchy flakes that resemble something edible. They taste of oil and light seasoning, used to clearly mask the taste of chemicals within the chips.";
 ITEM.category = "Civil-Approved Food";
+ITEM.permit = "consumables";
+ITEM.price = 3;
 ITEM.restoreHealth = 5;

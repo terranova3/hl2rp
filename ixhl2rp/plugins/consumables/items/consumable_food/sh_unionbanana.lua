@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A banana where the skin tastes the same as everything else inside. It tastes faintly of actual bananas, but an overpowering taste of chemicals is evident. You can't really enjoy it.";
 ITEM.category = "Civil-Approved Food";
+ITEM.permit = "consumables";
+ITEM.price = 4;
 ITEM.restoreHealth = 5;
