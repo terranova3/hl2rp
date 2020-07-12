@@ -24,8 +24,7 @@ function ix.enterprise.New(character, name, description)
     query:Execute()
 
     table.insert(ix.enterprise.stored, enterprise)
-
-    PrintTable(ix.enterprise.stored)
+    
     enterprise = nil
 end
 

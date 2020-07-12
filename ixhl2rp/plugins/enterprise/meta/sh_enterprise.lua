@@ -11,6 +11,7 @@ ENTERPRISE.id = 0
 ENTERPRISE.owner = 0
 ENTERPRISE.name = "undefined"
 ENTERPRISE.data = {}
+ENTERPRISE.characters = {}
 
 function ENTERPRISE:SetData(key, value)
     ENTERPRISE.data[key] = value

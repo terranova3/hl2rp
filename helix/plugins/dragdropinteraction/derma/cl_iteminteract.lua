@@ -98,7 +98,7 @@ function PANEL:AddOption(k, v)
     if(self.itemTable.suppressed) then
         local isSuppressed, func, tip = self.itemTable.suppressed(self.itemTable)
 
-        if(isSuppressed and v.name == func) then 
+        if(isSuppressed and (v.name or k) == func) then 
             textColor = Color(90, 90, 90, 150)
             tooltip = tip
         end

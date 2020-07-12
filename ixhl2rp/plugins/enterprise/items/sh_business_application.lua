@@ -26,6 +26,11 @@ ITEM.functions.Approve = {
 	OnRun = function(itemTable)
         local client = itemTable.player
 		
+		if(!client:GetCharacter():CanApproveApplication()) then
+			client:Notify("You can't approve business applications!")
+			return false 
+		end
+
 		if(itemTable:GetData("businessOwner") and itemTable:GetData("businessName") and itemTable:GetData("businessDescription")) then
 			ix.enterprise.New(itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), itemTable:GetData("businessDescription"))
 		else
@@ -35,6 +40,13 @@ ITEM.functions.Approve = {
         return false
 	end
 }
+ITEM.suppressed = function(itemTable)
+	if(!itemTable.player:GetCharacter():CanApproveApplication()) then
+		return true, "Approve", "You can't approve business applications!"
+	end
+
+	return false
+end
 
 function ITEM:PopulateTooltip(tooltip)
 	local data = tooltip:AddRow("data")

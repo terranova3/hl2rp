@@ -57,14 +57,26 @@ function PANEL:Init()
 
 		self.popoutPanel:SetInfoText("This is the list of permits avaliable")
 
-		local permits = {"test", "test2", "test3"}
+		for _, v in pairs(ix.permits.GetAll()) do
+			local hasPermit = false
 
-		for k, v in pairs(permits) do
-			local button = self.popoutPanel:AddBigButton(v)
+			for _, value in pairs(self.appPermits) do
+				if(v.name == value.permit.name) then
+					hasPermit = true
+					break
+				end
+			end
+
+			local button = self.popoutPanel:AddBigButton(v.name, "materials/" .. v.icon)
 			button:DockMargin(0,0,0,2)
 			button.DoClick = function()
 				button:Remove()
 				PLUGIN.businessApplication:AddPermit(v)
+			end
+
+			if(hasPermit) then
+				button:SetEnabled(false)
+				button.Paint = function() end
 			end
 		end
 	end
@@ -125,8 +137,10 @@ function PANEL:Build(itemTable, editMode)
 	self.name:SetValue(self.item:GetData("businessName", ""))
 	self.desc:SetValue(self.item:GetData("businessDescription", ""))
 
-	for k, v in pairs(self.item:GetData("businessPermits")) do
-		self:AddPermit(v)
+	for k, v in pairs(self.item:GetData("businessPermits", {})) do
+		local permit = ix.permits.Get(v)
+
+		self:AddPermit(permit)
 	end
 
 	if(!editMode) then
@@ -144,7 +158,7 @@ function PANEL:Save()
 	local permits = {}
 
 	for k, v in pairs(self.appPermits) do
-		table.insert(permits, v.text)
+		table.insert(permits, v.permit.name)
 	end
 
     local data = {
@@ -179,7 +193,7 @@ function PANEL:AddLabel(text, colored, title)
 	return label
 end
 
-function PANEL:AddPermit(text)
+function PANEL:AddPermit(permit)
 	local button = self.scroll:Add("DButton")
     button:Dock(TOP)
     button:SetTall(64)
@@ -187,13 +201,13 @@ function PANEL:AddPermit(text)
     button:SetText("")
     button:SetFont("ixPluginCharTraitFont")
     button.PaintOver = function() 
-        ix.util.DrawText(text, 48, 24, color_white, 0, 0, "ixPluginTooltipDescFont")
+        ix.util.DrawText(permit.name, 48, 24, color_white, 0, 0, "ixPluginTooltipDescFont")
     end
 
     local icon = button:Add("Material")
     icon:SetSize(32, 32)
     icon:SetPos(8, 16)
-    icon:SetMaterial("materials/terranova/ui/traits/honest.png")
+    icon:SetMaterial(permit.icon or "materials/terranova/ui/traits/honest.png")
 	icon.AutoSize = false
 	
 	local delete = button:Add("DButton")
@@ -203,7 +217,7 @@ function PANEL:AddPermit(text)
 	delete:SetSize(32, 32)
 	delete.DoClick = function()
 		for k, v in pairs(self.appPermits) do
-			if(v.text == text) then
+			if(v.name == permit.name) then
 				self.appPermits[k].panel:Remove()
 				self.appPermits[k] = nil
 			end
@@ -211,7 +225,7 @@ function PANEL:AddPermit(text)
 	end
 
 	table.insert(self.appPermits, {
-		text = text,
+		permit = permit,
 		panel = button
 	})
 
