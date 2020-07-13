@@ -120,7 +120,9 @@ function PANEL:BuildMenuPanel()
     self.menu:DockMargin(0, 4, 0, 0)
 
     for k, v in pairs(ix.quickmenu.stored) do
-        self.menu:AddOption(k, v)
+        if(v.shouldShow) then
+            self.menu:AddOption(k, v)
+        end
     end
 
     self.menu:Build()
