@@ -6,5 +6,5 @@
 local CHAR = ix.meta.character
 
 function CHAR:CanApproveApplication()
-	return false
+	return true
 end

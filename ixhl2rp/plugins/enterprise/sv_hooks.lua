@@ -3,7 +3,12 @@
 	without permission of its author.
 --]]
 
-netstream.Hook("BusinessApplicationUpdate", function(client, data)
+util.AddNetworkString("ixBusinessApplicationUpdate")
+util.AddNetworkString("ixBusinessApplicationEdit")
+
+net.Receive("ixBusinessApplicationUpdate", function(length, client)
+    local data = net.ReadTable()
+
     if (!IsValid(client) or !client:GetCharacter()) then
         return
     end

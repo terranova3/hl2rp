@@ -6,13 +6,15 @@
 ix.enterprise = ix.enterprise or {}
 ix.enterprise.stored = ix.enterprise.stored or {}
 
-function ix.enterprise.New(character, name, description)
+function ix.enterprise.New(character, name, data)
     enterprise = setmetatable({
         owner = character,
         name = name,
     }, ix.meta.enterprise)
 
-    enterprise:SetData("description", description)
+    for k, v in pairs(data) do
+        enterprise:SetData(k, v)
+    end
 
     local query = mysql:Insert("ix_enterprises")
     query:Insert("owner_id", enterprise.owner)
@@ -24,8 +26,42 @@ function ix.enterprise.New(character, name, description)
     query:Execute()
 
     table.insert(ix.enterprise.stored, enterprise)
+    ix.enterprise.AddCharacter(enterprise.owner, enterprise.id)
     
     enterprise = nil
+end
+
+function ix.enterprise.AddCharacter(charID, id)
+    local enterprise = ix.enterprise.stored[id]
+    local character = ix.char.loaded[id]
+
+    if(!enterprise) then
+        return
+    end    
+
+    local query = mysql:Select("ix_characters")
+    query:Select("id")
+    query:Select("name")
+    query:Select("data")
+    query:Where("id", charID)
+    query:Limit(1)
+    query:Callback(function(result)
+        if (istable(result) and #result > 0) then
+            local characterID = tonumber(result[1].id)
+            local data = util.JSONToTable(result[1].data or "[]")
+            local name = result[1].name
+
+            data["enterprise"] = id
+
+            local updateQuery = mysql:Update("ix_characters")
+                updateQuery:Update("data", util.TableToJSON(data))
+                updateQuery:Where("id", characterID)
+            updateQuery:Execute()
+
+            enterprise:AddCharacter(characterID)
+        end
+    end)
+    query:Execute()
 end
 
 function ix.enterprise.Load()

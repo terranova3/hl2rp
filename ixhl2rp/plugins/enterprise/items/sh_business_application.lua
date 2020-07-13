@@ -10,13 +10,17 @@ ITEM.category = "Miscellaneous";
 ITEM.functions.View = {
     icon = "icon16/book_edit.png",
 	OnRun = function(itemTable)
-        local client = itemTable.player
+		local client = itemTable.player
+		local editMode = false
 		
 		if(itemTable:GetData("businessCharID")) then
-			netstream.Start(client, "EditApplication", {itemTable, true})
-		else
-			netstream.Start(client, "EditApplication", {itemTable, false})
+			editMode = false
 		end
+		
+		net.Start("ixBusinessApplicationEdit")
+			net.WriteTable(itemTable)
+			net.WriteBool(editMode)
+		net.Send(client)
 		
         return false
 	end
@@ -31,8 +35,13 @@ ITEM.functions.Approve = {
 			return false 
 		end
 
-		if(itemTable:GetData("businessOwner") and itemTable:GetData("businessName") and itemTable:GetData("businessDescription")) then
-			ix.enterprise.New(itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), itemTable:GetData("businessDescription"))
+		local data = {
+			["description"] = itemTable:GetData("businessDescription"),
+			["permits"] = itemTable:GetData("businessPermits"),		
+		}
+
+		if(itemTable:GetData("businessOwner") and itemTable:GetData("businessName")) then
+			ix.enterprise.New(itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), data)
 		else
 			client:Notify("That application is missing important data. Cannot approve until it has been filled out!")
 		end

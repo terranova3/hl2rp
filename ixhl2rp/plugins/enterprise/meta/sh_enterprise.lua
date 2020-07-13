@@ -13,12 +13,16 @@ ENTERPRISE.name = "undefined"
 ENTERPRISE.data = {}
 ENTERPRISE.characters = {}
 
+function ENTERPRISE:AddCharacter(id)
+    table.insert(self.characters, id)
+end
+
 function ENTERPRISE:SetData(key, value)
-    ENTERPRISE.data[key] = value
+    self.data[key] = value
 end
 
 function ENTERPRISE:GetData(key, default)
-    return ENTERPRISE.data[key] or default
+    return self.data[key] or default
 end
 
 ix.meta.enterprise = ENTERPRISE

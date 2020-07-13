@@ -5,7 +5,10 @@
 
 local PLUGIN = PLUGIN
 
-netstream.Hook("EditApplication", function(data)
+net.Receive("ixBusinessApplicationEdit", function()
+	local itemTable = net.ReadTable()
+	local editMode = net.ReadBool()
+
 	if(IsValid(ix.gui.menu)) then
 		ix.gui.menu:Remove()
 	end
@@ -16,6 +19,5 @@ netstream.Hook("EditApplication", function(data)
 	end
 
 	PLUGIN.businessApplication = vgui.Create("ixBusinessApplication")
-	PLUGIN.businessApplication:Build(data[1], data[2])
+	PLUGIN.businessApplication:Build(itemTable, editMode)
 end)
-

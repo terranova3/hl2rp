@@ -168,7 +168,9 @@ function PANEL:Save()
 		permits = permits
     }
 
-    netstream.Start("BusinessApplicationUpdate", data);
+	net.Start("ixBusinessApplicationUpdate")
+		net.WriteTable(data)
+	net.SendToServer()
 end
 
 function PANEL:AddLabel(text, colored, title)
