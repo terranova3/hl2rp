@@ -130,8 +130,8 @@ function PANEL:Init()
 	self.panels = {}
 	self.slotPlacements = {
 		["headgear"] = {x = 5, y = 100},
-		["headstrap"] = {x = 291, y = 100},
-		["glasses"] = {x = 291, y = 170},
+		["headstrap"] = {x = 291, y = 170},
+		["glasses"] = {x = 291, y = 100},
 		["torso"] = {x = 5, y = 170},
 		["kevlar"] = {x = 5, y = 240},
 		["hands"] = {x = 291, y = 300},
