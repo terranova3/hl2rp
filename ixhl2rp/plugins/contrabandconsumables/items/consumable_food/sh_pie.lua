@@ -7,7 +7,7 @@ ITEM.name = "Pie";
 ITEM.model = "models/griim/foodpack/pie.mdl";
 ITEM.width = 2;
 ITEM.height = 1;
-ITEM.description = "The closest thing to authentic cooking you can get.";
+ITEM.description = "Crusted delight with something sweet.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
 ITEM.price 15;
