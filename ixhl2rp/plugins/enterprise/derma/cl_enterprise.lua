@@ -33,7 +33,6 @@ end
 net.Receive("ixEnterpriseReceiveInformation", function()
 	local enterprise = net.ReadTable()
 
-	print("Received")
 	if(ix.gui.enterprise) then
 		ix.gui.enterprise.enterprise = setmetatable(enterprise, ix.meta.enterprise)
 		ix.gui.enterprise:Rebuild()
@@ -67,6 +66,8 @@ function PANEL:BuildMembers()
 
 	self.membersScroll = self.members:Add("DScrollPanel")
 	self.membersScroll:Dock(FILL)
+
+	PrintTable(self.enterprise)
 end
 
 function PANEL:BuildProperty()

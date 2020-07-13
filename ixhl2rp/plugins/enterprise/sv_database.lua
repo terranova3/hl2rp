@@ -16,6 +16,12 @@ function PLUGIN:DatabaseConnected()
 		query:PrimaryKey("enterprise_id")
 	query:Execute()
 
+	self:LoadEnterprises()
+end;
+
+function PLUGIN:LoadEnterprises()
+	local query
+
 	query = mysql:Select("ix_enterprises")
 		query:Select("enterprise_id")
 		query:Select("owner_id")
@@ -25,15 +31,41 @@ function PLUGIN:DatabaseConnected()
 			if (istable(result) and #result > 0) then
 				for k, v in ipairs(result) do
 					local data = {}
+					local members = {}
 					
+					-- Loading all of the miscellaneous enterprise data and putting it in a table.
 					for k, v in pairs(util.JSONToTable(v.data or "[]")) do
 						data[k] = v
 					end
 
+					-- Loading all of the characters that are in this enterprise and placing it into a members table
+					local membersQuery = mysql:Select("ix_characters")
+					membersQuery:Select("id")
+					membersQuery:Select("name")
+					membersQuery:Select("model")
+					membersQuery:Select("enterprise")
+					membersQuery:Where("enterprise", tonumber(v.enterprise_id))
+					membersQuery:Callback(function(results)
+						if(istable(results) and #results > 0) then
+							for _, member in ipairs(results) do
+								local character = {
+									id = member.id,
+									name = member.name,
+									model = member.model
+								}
+								
+								table.insert(members, character)
+							end
+						end				
+					end)				
+					membersQuery:Execute()
+
+					-- Giving the enterprise the metatable methods.
 					enterprise = setmetatable({
 						owner = tonumber(v.owner_id),
 						name = v.name,
-						data = data
+						data = data,
+						members = members
 					}, ix.meta.enterprise)
 
 					ix.enterprise.stored[tonumber(v.enterprise_id)] = enterprise
@@ -43,9 +75,8 @@ function PLUGIN:DatabaseConnected()
 			end
     	end)
 	query:Execute()
-
 	PrintTable(ix.enterprise.stored)
-end;
+end
 
 -- Called when all tables are being wiped.
 function PLUGIN:OnWipeTables()

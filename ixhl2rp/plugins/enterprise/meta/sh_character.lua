@@ -9,23 +9,13 @@ function CHAR:CanApproveApplication()
 	return true
 end
 
-function CHAR:GetEnterprise()
-	print("Data:" .. self:GetData("enterprise", "Doesnt have"))
-
-	if(self:GetData("enterprise") != nil) then
-		return self:GetData("enterprise")
-	end
-
-	return false
-end
-
 function CHAR:LeaveEnterprise()
-	if(!self:GetData("enterprise")) then
+	if(!self:GetEnterprise()) then
 		return
 	end
 
 	net.Start("ixCharacterEnterpriseLeave")
 		net.WriteInt(self:GetID(), 16)
-		net.WriteInt(self:GetData("enterprise"), 16)
+		net.WriteInt(self:GetEnterprise(), 16)
 	net.SendToServer()
 end

@@ -11,7 +11,7 @@ ENTERPRISE.id = 0
 ENTERPRISE.owner = 0
 ENTERPRISE.name = "undefined"
 ENTERPRISE.data = {}
-ENTERPRISE.characters = {}
+ENTERPRISE.members = {}
 
 function ENTERPRISE:GetName()
     return self.name
@@ -21,8 +21,8 @@ function ENTERPRISE:GetData(key, default)
     return self.data[key] or default
 end
 
-function ENTERPRISE:AddCharacter(id)
-    table.insert(self.characters, id)
+function ENTERPRISE:GetMembers()
+    return self.members
 end
 
 ix.meta.enterprise = ENTERPRISE

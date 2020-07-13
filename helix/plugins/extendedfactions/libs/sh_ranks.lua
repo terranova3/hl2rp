@@ -156,7 +156,7 @@ end
 
 -- Returns the list of ranks in a faction
 function ix.ranks.GetFactionRanks(faction)
-	if(ix.ranks.stored[faction][1]) then
+	if(ix.ranks.stored[faction] and ix.ranks.stored[faction][1]) then
 		return ix.ranks.stored[faction]
 	end
 
