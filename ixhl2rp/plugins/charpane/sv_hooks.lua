@@ -33,24 +33,12 @@ function PLUGIN:OnPlayerObserve(client, state)
 	end
 end
 
--- Called during character setup
-function PLUGIN:CharacterLoaded(character)
-	local client = character:GetPlayer()
+function PLUGIN:CharPanelLoaded(character)
 	local charPanel = character:GetCharPanel();
-
-	-- Makes the client a receiver for the charPanel sync.
-	charPanel:AddReceiver(client)
-	
-	-- Send all the data to the client
-	charPanel:Sync(client)
-end;
-
-function PLUGIN:PlayerLoadedCharacter(client, curChar, prevChar)
-	local charPanel = curChar:GetCharPanel();
 
 	for _, v in pairs(charPanel:GetItems()) do
 		if (v.pacData) then
-			client:AddPart(v.uniqueID, v)
+			character:GetPlayer():AddPart(v.uniqueID, v)
 		end
 	end
 end
