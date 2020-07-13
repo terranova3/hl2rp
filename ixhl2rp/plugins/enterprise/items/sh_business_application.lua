@@ -18,7 +18,7 @@ ITEM.functions.View = {
 		end
 		
 		net.Start("ixBusinessApplicationEdit")
-			net.WriteTable(itemTable)
+			net.WriteInt(itemTable.id, 16)
 			net.WriteBool(editMode)
 		net.Send(client)
 		

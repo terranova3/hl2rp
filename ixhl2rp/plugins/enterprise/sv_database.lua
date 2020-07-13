@@ -15,6 +15,36 @@ function PLUGIN:DatabaseConnected()
 		query:Create("data", "TEXT DEFAULT NULL")
 		query:PrimaryKey("enterprise_id")
 	query:Execute()
+
+	query = mysql:Select("ix_enterprises")
+		query:Select("enterprise_id")
+		query:Select("owner_id")
+		query:Select("name")
+		query:Select("data")
+    	query:Callback(function(result)
+			if (istable(result) and #result > 0) then
+				for k, v in ipairs(result) do
+					local data = {}
+					
+					for k, v in pairs(util.JSONToTable(v.data or "[]")) do
+						data[k] = v
+					end
+
+					enterprise = setmetatable({
+						owner = tonumber(v.owner_id),
+						name = v.name,
+						data = data
+					}, ix.meta.enterprise)
+
+					ix.enterprise.stored[tonumber(v.enterprise_id)] = enterprise
+
+					enterprise = nil
+				end
+			end
+    	end)
+	query:Execute()
+
+	PrintTable(ix.enterprise.stored)
 end;
 
 -- Called when all tables are being wiped.

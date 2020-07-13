@@ -10,11 +10,8 @@ function ix.enterprise.New(character, name, data)
     enterprise = setmetatable({
         owner = character,
         name = name,
+        data = data
     }, ix.meta.enterprise)
-
-    for k, v in pairs(data) do
-        enterprise:SetData(k, v)
-    end
 
     local query = mysql:Insert("ix_enterprises")
     query:Insert("owner_id", enterprise.owner)
@@ -25,7 +22,7 @@ function ix.enterprise.New(character, name, data)
     end)
     query:Execute()
 
-    table.insert(ix.enterprise.stored, enterprise)
+    ix.enterprise.stored[enterprise.id] = enterprise
     ix.enterprise.AddCharacter(enterprise.owner, enterprise.id)
     
     enterprise = nil
@@ -67,17 +64,6 @@ function ix.enterprise.AddCharacter(charID, id)
         character:SetData("enterprise", id)
         enterprise:AddCharacter(charID)
     end
-end
-
-function ix.enterprise.Load()
-	local query = mysql:Select("ix_enterprises")
-    query:Callback(function(info)
-        if (istable(info) and #info > 0) then
-            
-
-        end
-    end)
-    query:Execute()
 end
 
 function ix.enterprise.Delete(name)

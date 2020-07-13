@@ -5,7 +5,7 @@
 
 ix.meta = ix.meta or {}
 
-local ENTERPRISE = ix.meta.trait or {}
+local ENTERPRISE = ix.meta.enterprise or {}
 ENTERPRISE.__index = ENTERPRISE
 ENTERPRISE.id = 0
 ENTERPRISE.owner = 0
@@ -13,16 +13,16 @@ ENTERPRISE.name = "undefined"
 ENTERPRISE.data = {}
 ENTERPRISE.characters = {}
 
-function ENTERPRISE:AddCharacter(id)
-    table.insert(self.characters, id)
-end
-
-function ENTERPRISE:SetData(key, value)
-    self.data[key] = value
+function ENTERPRISE:GetName()
+    return self.name
 end
 
 function ENTERPRISE:GetData(key, default)
     return self.data[key] or default
+end
+
+function ENTERPRISE:AddCharacter(id)
+    table.insert(self.characters, id)
 end
 
 ix.meta.enterprise = ENTERPRISE

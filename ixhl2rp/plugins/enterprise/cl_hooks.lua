@@ -6,7 +6,7 @@
 local PLUGIN = PLUGIN
 
 net.Receive("ixBusinessApplicationEdit", function()
-	local itemTable = net.ReadTable()
+	local id = net.ReadInt(16)
 	local editMode = net.ReadBool()
 
 	if(IsValid(ix.gui.menu)) then
@@ -19,5 +19,5 @@ net.Receive("ixBusinessApplicationEdit", function()
 	end
 
 	PLUGIN.businessApplication = vgui.Create("ixBusinessApplication")
-	PLUGIN.businessApplication:Build(itemTable, editMode)
+	PLUGIN.businessApplication:Build(id, editMode)
 end)

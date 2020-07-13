@@ -82,6 +82,27 @@ function PANEL:AddStageButton(text, stage)
     return nil
 end
 
+function PANEL:AddLabel(text, colored, title)
+    local label = self:Add("DLabel")
+    local font = "ixInfoPanelFont"
+
+    if(title) then
+        font = "ixInfoPanelTitleFont"
+    end
+
+    if(colored) then
+        label:SetTextColor(ix.config.Get("color"))
+    end
+
+	label:SetFont(font)
+	label:SetText(text)
+	label:SizeToContents()
+    label:Dock(TOP)
+	label:DockMargin(4, 4, 4, 4)
+	
+	return label
+end
+
 function PANEL:Paint()
     ix.util.DrawBlur(self, 10)
 

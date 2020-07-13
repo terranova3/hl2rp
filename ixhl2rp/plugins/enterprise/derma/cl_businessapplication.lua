@@ -130,9 +130,10 @@ function PANEL:Think()
 	self:SetPos( (scrW / 2) - (self:GetWide() / 2), (scrH / 2) - (self:GetTall() / 2) );
 end;
 
-function PANEL:Build(itemTable, editMode)
-	self.itemTable = itemTable
-	self.item = ix.item.instances[itemTable.id]
+function PANEL:Build(id, editMode)
+	self.id = id
+	print(id)
+	self.item = ix.item.instances[id]
 
 	self.name:SetValue(self.item:GetData("businessName", ""))
 	self.desc:SetValue(self.item:GetData("businessDescription", ""))
@@ -162,7 +163,7 @@ function PANEL:Save()
 	end
 
     local data = {
-		id = self.itemTable.id,
+		id = self.id,
         name = string.sub(self.name:GetValue(), 0, 32),
 		description = string.sub(self.desc:GetValue(), 0, 128),
 		permits = permits
