@@ -25,6 +25,7 @@ function ix.enterprise.New(character, name, data)
     ix.enterprise.stored[enterprise.id] = enterprise
     ix.enterprise.AddCharacter(enterprise.owner, enterprise.id)
     
+    PrintTable(ix.enterprise.stored[enterprise.id])
     enterprise = nil
 end
 
@@ -38,31 +39,39 @@ function ix.enterprise.AddCharacter(charID, id)
 
     if(!character) then
         local query = mysql:Select("ix_characters")
-        query:Select("id")
-        query:Select("name")
-        query:Select("data")
-        query:Where("id", charID)
-        query:Limit(1)
-        query:Callback(function(result)
-            if (istable(result) and #result > 0) then
-                local characterID = tonumber(result[1].id)
-                local data = util.JSONToTable(result[1].data or "[]")
-                local name = result[1].name
-
-                data["enterprise"] = id
-
-                local updateQuery = mysql:Update("ix_characters")
-                    updateQuery:Update("data", util.TableToJSON(data))
-                    updateQuery:Where("id", characterID)
-                updateQuery:Execute()
-
-                enterprise:AddCharacter(characterID)
-            end
-        end)
+            query:Update("enterprise", id)
+            query:Where("id", charID)
+            query:Limit(1)
         query:Execute()
+
+        local query = mysql:Select("ix_characters")
+            query:Select("id")
+            query:Select("name")
+            query:Select("model")
+            query:Where("id", charID)
+            query:Callback(function(results)
+                if(istable(results) and #results > 0) then
+                    local member = {
+                        id = member.id,
+                        name = member.name,
+                        model = member.model
+                    }
+
+                    table.insert(enterprise.members, member)
+                end
+            end)
+        query:Execute()
+
     else
-        character:SetData("enterprise", id)
-        enterprise:AddCharacter(charID)
+        character:SetEnterprise(id)
+        
+        local member = {
+            id = character:GetID(),
+            name = character:GetName(),
+            model = character:GetModel()
+        }
+
+        table.insert(enterprise.members, member)
     end
 end
 
