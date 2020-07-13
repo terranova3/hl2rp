@@ -65,7 +65,7 @@ function PANEL:SetInfoText(text, color)
     end
 end
 
-function PANEL:AddBigButton(text)
+function PANEL:AddBigButton(text, permitIcon)
     local button = self.scroll:Add("DButton")
     button:Dock(TOP)
     button:SetTall(64)
@@ -79,7 +79,7 @@ function PANEL:AddBigButton(text)
     local icon = button:Add("Material")
     icon:SetSize(32, 32)
     icon:SetPos(8, 16)
-    icon:SetMaterial("materials/terranova/ui/traits/honest.png")
+    icon:SetMaterial(permitIcon or "materials/terranova/ui/traits/honest.png")
     icon.AutoSize = false
 
     return button

@@ -22,13 +22,22 @@ ix.quickmenu = {}
 ix.quickmenu.stored = {};
 
 -- A function to add a quick menu callback.
-function ix.quickmenu:AddCallback(name, icon, callback)
+function ix.quickmenu:AddCallback(name, icon, callback, shouldShow)
 	self.stored[#ix.quickmenu.stored+1] = {
+		shouldShow = shouldShow,
 		callback = callback,
 		name = name,
 		icon = icon
 	};
 end;
+
+function ix.quickmenu.IsAdmin()
+	if(LocalPlayer() and LocalPlayer():GetCharacter() and LocalPlayer():IsAdmin()) then
+		return true
+	end
+
+	return false
+end
 
 ix.quickmenu:AddCallback("Edit Physical Description", "icon16/book_edit.png", function()
 	ix.command.Send("CharPhysDesc")
@@ -45,3 +54,7 @@ end);
 ix.quickmenu:AddCallback("Fall Over", "icon16/user.png", function()
 	ix.command.Send("CharFallOver")
 end);
+
+ix.quickmenu:AddCallback("Spawn Items", "icon16/script.png", function()
+	ix.command.Send("adminspawnmenu")
+end, ix.quickmenu.IsAdmin);
