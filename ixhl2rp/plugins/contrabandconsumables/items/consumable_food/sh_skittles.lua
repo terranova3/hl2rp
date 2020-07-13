@@ -10,5 +10,5 @@ ITEM.height = 1;
 ITEM.description = "A packet of expired but still delicious chocolate bits.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
-ITEM.price 8;
+ITEM.price = 8;
 ITEM.restoreHealth = 5;

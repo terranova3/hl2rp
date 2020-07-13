@@ -10,5 +10,5 @@ ITEM.height = 1;
 ITEM.description = "An aluminium can filled with diced tomato. You could eat these from the can, if you're desperate enough.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
-ITEM.price 8;
+ITEM.price = 8;
 ITEM.restoreHealth = 5;

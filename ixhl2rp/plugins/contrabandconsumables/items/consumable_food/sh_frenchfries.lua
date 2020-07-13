@@ -10,5 +10,5 @@ ITEM.height	= 1;
 ITEM.description = "A packet of expired processed french fries.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
-ITEM.price 4;
+ITEM.price = 4;
 ITEM.restoreHealth = 5;

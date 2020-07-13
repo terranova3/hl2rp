@@ -10,5 +10,5 @@ ITEM.height	= 1;
 ITEM.description = "Dried grapes that taste more saturated and less citric then its counterpart. They're chewy and keep you full.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
-ITEM.price 3;
+ITEM.price = 3;
 ITEM.restoreHealth = 5;

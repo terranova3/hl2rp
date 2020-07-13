@@ -10,5 +10,5 @@ ITEM.height = 1;
 ITEM.description = "A packet of mind numbing expired cheese-bits.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
-ITEM.price 2;
+ITEM.price = 2;
 ITEM.restoreHealth = 5;

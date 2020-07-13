@@ -10,5 +10,5 @@ ITEM.height = 1;
 ITEM.description = "Crusted delight with something sweet.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
-ITEM.price 15;
+ITEM.price = 15;
 ITEM.restoreHealth = 10;
