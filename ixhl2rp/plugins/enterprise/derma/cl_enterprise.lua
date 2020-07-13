@@ -27,7 +27,10 @@ function PANEL:Rebuild()
 
     local button = self:Add("DButton")
     button:Dock(LEFT)
-    button:SetText("Leave enterprise")
+	button:SetText("Leave enterprise")
+	button.DoClick = function()
+		LocalPlayer():GetCharacter():LeaveEnterprise()
+	end
 end;
 
 -- Called when the panel is painted.
@@ -64,14 +67,16 @@ end
 vgui.Register("ixEnterprise", PANEL, "EditablePanel")
 
 hook.Add("CreateMenuButtons", "ixEnterprise", function(tabs)
-	tabs["enterprise"] = {
-		Create = function(info, container)
-			local panel = container:Add("ixEnterprise")	
-		end,
-		OnSelected = function(info, container)
-			if(ix.gui.enterprise) then
-				ix.gui.enterprise:Rebuild()
+	if(LocalPlayer():GetCharacter():GetEnterprise()) then
+		tabs["enterprise"] = {
+			Create = function(info, container)
+				local panel = container:Add("ixEnterprise")	
+			end,
+			OnSelected = function(info, container)
+				if(ix.gui.enterprise) then
+					ix.gui.enterprise:Rebuild()
+				end
 			end
-		end
-	}
+		}
+	end
 end)

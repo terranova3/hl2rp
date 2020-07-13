@@ -3,6 +3,10 @@
 	without permission of its author.
 --]]
 
+-- Character functions
+util.AddNetworkString("ixCharacterEnterpriseLeave")
+
+-- Application item derma data transfer
 util.AddNetworkString("ixBusinessApplicationUpdate")
 util.AddNetworkString("ixBusinessApplicationEdit")
 
@@ -26,4 +30,21 @@ net.Receive("ixBusinessApplicationUpdate", function(length, client)
     item:SetData("businessName", data.name)
     item:SetData("businessDescription", data.description)
     item:SetData("businessPermits", data.permits)
+end)
+
+net.Receive("ixCharacterEnterpriseLeave", function(length, client)
+    local charID = net.ReadInt(16)
+    local enterpriseID = net.ReadInt(16)
+    local character = client:GetCharacter()
+
+    -- Data validation. These values cannot change unless clientside scripts are manipulated.
+    if(!character or character:GetID() != charID) then
+        return
+    end
+
+    if(character:GetData("enterprise") != enterpriseID) then
+        return
+    end
+
+    character:SetData("enterprise", nil)
 end)

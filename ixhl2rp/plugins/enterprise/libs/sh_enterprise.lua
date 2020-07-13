@@ -33,35 +33,40 @@ end
 
 function ix.enterprise.AddCharacter(charID, id)
     local enterprise = ix.enterprise.stored[id]
-    local character = ix.char.loaded[id]
+    local character = ix.char.loaded[charID]
 
     if(!enterprise) then
         return
     end    
 
-    local query = mysql:Select("ix_characters")
-    query:Select("id")
-    query:Select("name")
-    query:Select("data")
-    query:Where("id", charID)
-    query:Limit(1)
-    query:Callback(function(result)
-        if (istable(result) and #result > 0) then
-            local characterID = tonumber(result[1].id)
-            local data = util.JSONToTable(result[1].data or "[]")
-            local name = result[1].name
+    if(!character) then
+        local query = mysql:Select("ix_characters")
+        query:Select("id")
+        query:Select("name")
+        query:Select("data")
+        query:Where("id", charID)
+        query:Limit(1)
+        query:Callback(function(result)
+            if (istable(result) and #result > 0) then
+                local characterID = tonumber(result[1].id)
+                local data = util.JSONToTable(result[1].data or "[]")
+                local name = result[1].name
 
-            data["enterprise"] = id
+                data["enterprise"] = id
 
-            local updateQuery = mysql:Update("ix_characters")
-                updateQuery:Update("data", util.TableToJSON(data))
-                updateQuery:Where("id", characterID)
-            updateQuery:Execute()
+                local updateQuery = mysql:Update("ix_characters")
+                    updateQuery:Update("data", util.TableToJSON(data))
+                    updateQuery:Where("id", characterID)
+                updateQuery:Execute()
 
-            enterprise:AddCharacter(characterID)
-        end
-    end)
-    query:Execute()
+                enterprise:AddCharacter(characterID)
+            end
+        end)
+        query:Execute()
+    else
+        character:SetData("enterprise", id)
+        enterprise:AddCharacter(charID)
+    end
 end
 
 function ix.enterprise.Load()
