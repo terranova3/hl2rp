@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "A childs fruit bar for a typical lunchbox. Still tastes pretty good.";
 ITEM.category = "Contraband Food";
+ITEM.permit = "consumables";
+ITEM.price 5;
 ITEM.restoreHealth = 5;

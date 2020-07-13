@@ -9,4 +9,6 @@ ITEM.width = 2;
 ITEM.height = 1;
 ITEM.description = "The closest thing to authentic cooking you can get.";
 ITEM.category = "Contraband Food";
+ITEM.permit = "consumables";
+ITEM.price 15;
 ITEM.restoreHealth = 10;

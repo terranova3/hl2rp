@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "A childs juice box. Tastes like a long-gone fruit of some variety.";
 ITEM.category = "Contraband Drinks";
+ITEM.permit = "consumables";
+ITEM.price = 6;
 ITEM.restoreStamina = 10;

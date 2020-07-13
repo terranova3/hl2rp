@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "An aluminium can filled with a mix of black, red and normal beans, sitting in a chilli sauce. A little bit hot, but they'll keep you full.";
 ITEM.category = "Contraband Food";
+ITEM.permit = "consumables";
+ITEM.price 8;
 ITEM.restoreHealth = 5;

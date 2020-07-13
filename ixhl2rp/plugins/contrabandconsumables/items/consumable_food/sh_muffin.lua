@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A delicious, still moist muffin in a tin, with chocolate chips throughout it.";
 ITEM.category = "Contraband Food";
+ITEM.permit = "consumables";
+ITEM.price 10;
 ITEM.restoreHealth = 5;

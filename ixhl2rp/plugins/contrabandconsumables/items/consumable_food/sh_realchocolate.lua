@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "Although its long since melted inside its aluminium packaging, it's still real chocolate. It smells of cocoa, palm oil, and tastes amazing.";
 ITEM.category = "Contraband Food";
+ITEM.permit = "consumables";
+ITEM.price 8;
 ITEM.restoreHealth = 10;

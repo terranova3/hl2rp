@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height = 2;
 ITEM.description = "A bag of unseperated, lightly salted peanuts.";
 ITEM.category = "Contraband Food";
+ITEM.permit = "consumables";
+ITEM.price 3;
 ITEM.restoreHealth = 10;

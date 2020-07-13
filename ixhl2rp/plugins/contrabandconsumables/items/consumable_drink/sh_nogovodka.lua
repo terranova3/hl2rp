@@ -9,4 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 2;
 ITEM.description = "Maybe the universe is trying to tell me something.";
 ITEM.category = "Contraband Drinks";
+ITEM.permit = "consumables";
+ITEM.price 35;
 ITEM.restoreStamina = 25;
