@@ -10,5 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "American-branded malt whiskey with an all-around good taste, given the amount of alcohol content. Better than Breen's piss.";
 ITEM.category = "Contraband Drinks";
 ITEM.permit = "consumables";
-ITEM.price 35;
+ITEM.price = 35;
 ITEM.restoreStamina = 25;

@@ -10,5 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "A sweet blonde lager made in Germany. It tastes earthy and a bit sweet.";
 ITEM.category = "Contraband Drinks";
 ITEM.permit = "consumables";
-ITEM.price 10;
+ITEM.price = 10;
 ITEM.restoreStamina = 20;

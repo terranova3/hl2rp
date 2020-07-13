@@ -10,5 +10,5 @@ ITEM.height = 2;
 ITEM.description = "A crisp, rather weak merlot wine. It's probably a typical cabernet sauvignon. This probably didn't come from Bordeaux though.";
 ITEM.category = "Contraband Drinks";
 ITEM.permit = "consumables";
-ITEM.price 35;
+ITEM.price = 35;
 ITEM.restoreStamina = 25;
