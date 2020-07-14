@@ -74,6 +74,8 @@ function PANEL:BuildMembers()
 
 		for k, v in ipairs(self.enterprise.members) do
 			local slot = self.membersScroll:Add("DPanel")
+			local rank = self.enterprise:GetRanks()[v.rank]
+
 			slot:SetTall(72)
 			slot:Dock(TOP)
 			slot:DockMargin(5, 5, 5, 0)
@@ -97,7 +99,7 @@ function PANEL:BuildMembers()
 			slot.rank:SetPos(64, 32)
 			slot.rank:SetFont("ixSmallFont")
 			slot.rank:SetExpensiveShadow(1, Color(0, 0, 0, 200))
-			slot.rank:SetText("Owner")
+			slot.rank:SetText(rank.name)
 			slot.rank:SetTextColor(Color(225,225,225,255))
 			slot.rank:SizeToContents()
 
@@ -148,6 +150,51 @@ function PANEL:BuildManage()
 
 	self.manageScroll = self.manage:Add("DScrollPanel")
 	self.manageScroll:Dock(FILL)
+
+	self.ranks = self.manageScroll:Add("DPanel")
+	self.ranks:Dock(TOP)
+
+	self.descLabel = self.ranks:Add(self:AddLabel("Ranks", true, true))
+	self.descLabel:SetContentAlignment(5)
+	self.descLabel.Paint = function()
+		local width, height = self:GetSize();
+		local color = self:GetBackgroundColor();
+
+		derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, color)
+	end
+
+	for k, v in ipairs(self.enterprise:GetRanks()) do
+		self.ranks:Add(self:AddLabel(v.name))
+	end
+
+	self.ranks:InvalidateLayout(true)
+	self.ranks:SizeToChildren(false, true)
+end
+
+function PANEL:AddTextEntry(payloadName)
+	local entry = self:Add("DTextEntry")
+	entry:Dock(TOP)
+	entry:SetFont("ixPluginCharButtonFont")
+	entry.Paint = self.PaintTextEntry
+	entry:DockMargin(0, 4, 0, 16)
+	entry.OnValueChange = function(_, value)
+	end
+	entry.payloadName = payloadName
+	entry.OnKeyCodeTyped = function(name, keyCode)
+		if (keyCode == KEY_TAB) then
+			entry:onTabPressed()
+			return true
+		end
+	end
+	entry:SetUpdateOnType(true)
+	return entry
+end
+
+-- self refers to the text entry
+function PANEL:PaintTextEntry(w, h)
+	surface.SetDrawColor(0, 0, 0, 100)
+	surface.DrawRect(0, 0, w, h)
+	self:DrawTextEntryText(color_white, HIGHLIGHT, HIGHLIGHT)
 end
 
 vgui.Register("ixEnterprise", PANEL, "ixStagePanel")

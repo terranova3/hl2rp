@@ -67,7 +67,7 @@ function ix.enterprise.AddCharacter(charID, id)
     end    
 
     if(enterprise:GetOwner() == charID) then
-        rank = enterprise:GetRanks()[1]
+        rank = 1
     else
         rank = enterprise:GetDefaultRank()
     end

@@ -6,6 +6,8 @@
 -- Enterprise UI information transfer
 util.AddNetworkString("ixEnterpriseRequestInformation")
 util.AddNetworkString("ixEnterpriseReceiveInformation")
+util.AddNetworkString("ixEnterprisePerformAction")
+util.AddNetworkString("ixEnterpriseReceiveActionResponse")
 
 -- Character functions
 util.AddNetworkString("ixCharacterEnterpriseLeave")
@@ -55,7 +57,16 @@ net.Receive("ixCharacterEnterpriseLeave", function(length, client)
             ix.enterprise.Delete(enterpriseID)
         end
     end
-    
+
+    -- SetEnterprise will update this, but it doesn't do it instantly, and the data must be done instantly. 
+    -- So therefore we do it before the operation updates automatically.
+    local query = mysql:Select("ix_characters")
+        query:Update("enterprise", nil)
+        query:Update("enterpriserank", nil)
+        query:Where("id", charID)
+        query:Limit(1)
+    query:Execute()
+
     character:SetEnterprise(nil)
     character:SetEnterpriseRank(nil)
 end)

@@ -39,10 +39,16 @@ ITEM.functions.Accept = {
     icon = "icon16/book.png",
 	OnRun = function(itemTable)
         local client = itemTable.player
+        local character = client:GetCharacter()
+        local enterprise = ix.enterprise.stored[itemTable:GetData("businessID")]
 		
-		if(client:GetCharacter():GetEnterprise()) then
+		if(character:GetEnterprise()) then
 			client:Notify("You're already a part of an enterprise!")
-			return false 
+            return false
+        end
+
+        if(enterprise) then
+            ix.enterprise.AddCharacter(character:GetID(), itemTable:GetData("businessID"))
 		end
 		
         return false
