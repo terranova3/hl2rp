@@ -22,7 +22,6 @@ net.Receive("ixEnterpriseRequestInformation", function(length, client)
         return
     end
 
-    PrintTable(enterprise)
     net.Start("ixEnterpriseReceiveInformation")
         net.WriteTable(enterprise)
     net.Send(client)
@@ -32,17 +31,32 @@ net.Receive("ixCharacterEnterpriseLeave", function(length, client)
     local charID = net.ReadInt(16)
     local enterpriseID = net.ReadInt(16)
     local character = client:GetCharacter()
+    local enterprise = ix.enterprise.stored[enterpriseID]
 
     -- Data validation. These values cannot change unless clientside scripts are manipulated.
     if(!character or character:GetID() != charID) then
         return
     end
 
-    if(character:GetData("enterprise") != enterpriseID) then
+    if(character:GetEnterprise() != enterpriseID) then
         return
     end
 
-    character:SetData("enterprise", nil)
+    if(!enterprise) then
+        return
+    end
+
+    if(enterprise.owner == charID) then
+        if(#enterprise.members > 1) then
+            client:Notify("You can't leave an enterprise as the owner if there are still members in the enterprise.")
+
+            return
+        else
+            ix.enterprise.Delete(enterpriseID)
+        end
+    end
+    
+    character:SetEnterprise(nil)
 end)
 
 net.Receive("ixBusinessApplicationUpdate", function(length, client)

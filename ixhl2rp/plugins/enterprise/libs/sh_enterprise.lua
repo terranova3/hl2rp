@@ -19,18 +19,17 @@ function ix.enterprise.New(character, name, data)
     query:Insert("data", util.TableToJSON(enterprise.data or {}))
     query:Callback(function(_, status, lastID)
         enterprise.id = lastID
+        ix.enterprise.stored[enterprise.id] = enterprise
+        ix.enterprise.AddCharacter(tonumber(enterprise.owner), tonumber(enterprise.id))
+        
+        enterprise = nil
     end)
     query:Execute()
-
-    ix.enterprise.stored[enterprise.id] = enterprise
-    ix.enterprise.AddCharacter(enterprise.owner, enterprise.id)
-    
-    PrintTable(ix.enterprise.stored[enterprise.id])
-    enterprise = nil
 end
 
 function ix.enterprise.AddCharacter(charID, id)
     local enterprise = ix.enterprise.stored[id]
+    local members = enterprise.members or {}
     local character = ix.char.loaded[charID]
 
     if(!enterprise) then
@@ -38,6 +37,7 @@ function ix.enterprise.AddCharacter(charID, id)
     end    
 
     if(!character) then
+        print("went here 33")
         local query = mysql:Select("ix_characters")
             query:Update("enterprise", id)
             query:Where("id", charID)
@@ -57,28 +57,36 @@ function ix.enterprise.AddCharacter(charID, id)
                         model = member.model
                     }
 
-                    table.insert(enterprise.members, member)
+                    table.insert(members, member) 
+
+                    enterprise.members = members
                 end
             end)
         query:Execute()
-
     else
+        print("went here", id)
         character:SetEnterprise(id)
-        
+
         local member = {
             id = character:GetID(),
             name = character:GetName(),
             model = character:GetModel()
         }
 
-        table.insert(enterprise.members, member)
+        table.insert(members, member) 
+
+        enterprise.members = members
+      
+        PrintTable(enterprise)
     end
 end
 
-function ix.enterprise.Delete(name)
+function ix.enterprise.Delete(id)
     local query = mysql:Delete("ix_enterprises")
-    query:Where("character_id", id)
+    query:Where("enterprise_id", id)
     query:Execute()
+
+    ix.enterprise.stored[id] = nil
 end
 
 function ix.enterprise.Get(name)
