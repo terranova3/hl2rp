@@ -6,7 +6,7 @@
 local character = ix.meta.character
 
 function character:GetClassName()
-    return ix.class.list[self:GetClass()].name
+    return ix.class.list[self:GetClass()].name or "Error"
 end
 
 function character:GetClassColor()
