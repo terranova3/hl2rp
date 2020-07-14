@@ -57,6 +57,7 @@ net.Receive("ixCharacterEnterpriseLeave", function(length, client)
     end
     
     character:SetEnterprise(nil)
+    character:SetEnterpriseRank(nil)
 end)
 
 net.Receive("ixBusinessApplicationUpdate", function(length, client)

@@ -14,6 +14,22 @@ function ix.enterprise.New(client, character, name, data)
     query:Callback(function(results)
         if(istable(results) and #results > 0) then
             if(results[1].enterprise == nil) then
+                data["ranks"] = {
+                    [1] = {
+                        name = "Owner",
+                        isOwner = true,
+                        isDefault = false
+                    },
+                    [2] = {
+                        name = "Manager",
+                        isDefault = false
+                    },
+                    [3] = {
+                        name = "Member",
+                        isDefault = true
+                    }
+                }
+
                 enterprise = setmetatable({
                     owner = character,
                     name = name,
@@ -40,20 +56,27 @@ function ix.enterprise.New(client, character, name, data)
     query:Execute()
 end
 
-
 function ix.enterprise.AddCharacter(charID, id)
     local enterprise = ix.enterprise.stored[id]
     local members = enterprise.members or {}
     local character = ix.char.loaded[charID]
+    local rank
 
     if(!enterprise) then
         return
     end    
 
+    if(enterprise:GetOwner() == charID) then
+        rank = enterprise:GetRanks()[1]
+    else
+        rank = enterprise:GetDefaultRank()
+    end
+
     -- SetEnterprise will update this, but it doesn't do it instantly, and the data must be done instantly. 
     -- So therefore we do it before the operation updates automatically.
     local query = mysql:Select("ix_characters")
         query:Update("enterprise", id)
+        query:Update("enterpriserank", rank)
         query:Where("id", charID)
         query:Limit(1)
     query:Execute()
@@ -63,13 +86,15 @@ function ix.enterprise.AddCharacter(charID, id)
             query:Select("id")
             query:Select("name")
             query:Select("model")
+            query:Select("enterpriserank")
             query:Where("id", charID)
             query:Callback(function(results)
                 if(istable(results) and #results > 0) then
                     local member = {
                         id = member.id,
                         name = member.name,
-                        model = member.model
+                        model = member.model,
+                        rank = member.enterpriserank
                     }
 
                     table.insert(members, member) 
@@ -80,11 +105,13 @@ function ix.enterprise.AddCharacter(charID, id)
         query:Execute()
     else
         character:SetEnterprise(id)
+        character:SetEnterpriseRank(rank)
 
         local member = {
             id = character:GetID(),
             name = character:GetName(),
-            model = character:GetModel()
+            model = character:GetModel(),
+            rank = character:GetEnterpriseRank()
         }
 
         table.insert(members, member) 
