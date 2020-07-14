@@ -49,6 +49,8 @@ ITEM.functions.Accept = {
 
         if(enterprise) then
             ix.enterprise.AddCharacter(character:GetID(), itemTable:GetData("businessID"))
+        else
+            client:Notify("This enterprise invitation is invalid because it no longer exists.")
 		end
 		
         return false
