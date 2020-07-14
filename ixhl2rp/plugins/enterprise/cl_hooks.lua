@@ -21,3 +21,17 @@ net.Receive("ixBusinessApplicationEdit", function()
 	PLUGIN.businessApplication = vgui.Create("ixBusinessApplication")
 	PLUGIN.businessApplication:Build(id, editMode)
 end)
+
+function PLUGIN:BuildBusinessMenu(panel)
+	local bHasItems = false
+
+	for k, _ in pairs(ix.item.list) do
+		if (hook.Run("CanPlayerUseBusiness", LocalPlayer(), k) != false) then
+			bHasItems = true
+
+			break
+		end
+	end
+
+	return bHasItems
+end

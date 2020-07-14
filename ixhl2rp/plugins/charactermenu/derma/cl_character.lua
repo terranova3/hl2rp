@@ -250,7 +250,9 @@ function PANEL:RebuildTabs()
 end
 
 function PANEL:setFadeToBlack(fade)
-	self.music:Destroy()
+	if(IsValid(self.music)) then
+		self.music:Destroy()
+	end
 	
 	local d = deferred.new()
 	if (fade) then

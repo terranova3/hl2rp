@@ -166,20 +166,6 @@ function Schema:UpdateCharacterInfo(panel)
 	end
 end
 
-function Schema:BuildBusinessMenu(panel)
-	local bHasItems = false
-
-	for k, _ in pairs(ix.item.list) do
-		if (hook.Run("CanPlayerUseBusiness", LocalPlayer(), k) != false) then
-			bHasItems = true
-
-			break
-		end
-	end
-
-	return bHasItems
-end
-
 function Schema:PopulateHelpMenu(tabs)
 	tabs["voices"] = function(container)
 		local classes = {}

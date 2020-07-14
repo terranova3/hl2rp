@@ -50,14 +50,15 @@ function ix.enterprise.AddCharacter(charID, id)
         return
     end    
 
-    if(!character) then
-        print("went here 33")
-        local query = mysql:Select("ix_characters")
-            query:Update("enterprise", id)
-            query:Where("id", charID)
-            query:Limit(1)
-        query:Execute()
+    -- SetEnterprise will update this, but it doesn't do it instantly, and the data must be done instantly. 
+    -- So therefore we do it before the operation updates automatically.
+    local query = mysql:Select("ix_characters")
+        query:Update("enterprise", id)
+        query:Where("id", charID)
+        query:Limit(1)
+    query:Execute()
 
+    if(!character) then
         local query = mysql:Select("ix_characters")
             query:Select("id")
             query:Select("name")
@@ -78,7 +79,6 @@ function ix.enterprise.AddCharacter(charID, id)
             end)
         query:Execute()
     else
-        print("went here", id)
         character:SetEnterprise(id)
 
         local member = {
