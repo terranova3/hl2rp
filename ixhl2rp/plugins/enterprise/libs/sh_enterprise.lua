@@ -6,26 +6,40 @@
 ix.enterprise = ix.enterprise or {}
 ix.enterprise.stored = ix.enterprise.stored or {}
 
-function ix.enterprise.New(character, name, data)
-    enterprise = setmetatable({
-        owner = character,
-        name = name,
-        data = data
-    }, ix.meta.enterprise)
-
-    local query = mysql:Insert("ix_enterprises")
-    query:Insert("owner_id", enterprise.owner)
-    query:Insert("name", enterprise.name)
-    query:Insert("data", util.TableToJSON(enterprise.data or {}))
-    query:Callback(function(_, status, lastID)
-        enterprise.id = lastID
-        ix.enterprise.stored[enterprise.id] = enterprise
-        ix.enterprise.AddCharacter(tonumber(enterprise.owner), tonumber(enterprise.id))
-        
-        enterprise = nil
+function ix.enterprise.New(client, character, name, data)
+    local query = mysql:Select("ix_characters")
+    query:Select("id", id)
+    query:Select("enterprise", id)
+    query:Where("id", character)
+    query:Callback(function(results)
+        if(istable(results) and #results > 0) then
+            if(results[1].enterprise == nil) then
+                enterprise = setmetatable({
+                    owner = character,
+                    name = name,
+                    data = data
+                }, ix.meta.enterprise)
+            
+                local query = mysql:Insert("ix_enterprises")
+                query:Insert("owner_id", enterprise.owner)
+                query:Insert("name", enterprise.name)
+                query:Insert("data", util.TableToJSON(enterprise.data or {}))
+                query:Callback(function(_, status, lastID)
+                    enterprise.id = lastID
+                    ix.enterprise.stored[enterprise.id] = enterprise
+                    ix.enterprise.AddCharacter(tonumber(enterprise.owner), tonumber(enterprise.id))
+                    
+                    enterprise = nil
+                end)
+                query:Execute()
+            else
+                client:Notify("That character can't create an enterprise since it's already a part of another one!")
+            end
+        end
     end)
     query:Execute()
 end
+
 
 function ix.enterprise.AddCharacter(charID, id)
     local enterprise = ix.enterprise.stored[id]

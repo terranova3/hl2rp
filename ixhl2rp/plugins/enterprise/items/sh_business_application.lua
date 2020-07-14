@@ -41,7 +41,7 @@ ITEM.functions.Approve = {
 		}
 
 		if(itemTable:GetData("businessOwner") and itemTable:GetData("businessName")) then
-			ix.enterprise.New(itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), data)
+			ix.enterprise.New(itemTable.player, itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), data)
 		else
 			client:Notify("That application is missing important data. Cannot approve until it has been filled out!")
 		end
