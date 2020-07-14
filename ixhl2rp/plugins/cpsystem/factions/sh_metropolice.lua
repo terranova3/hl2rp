@@ -50,7 +50,7 @@ function FACTION:OnCharacterCreated(client, character)
 	local cid = Schema:ZeroNumber(math.random(1, 99999), 5)
 	local TimeString = os.date( "%H:%M:%S - %d/%m/%Y", os.time() )
 
-	character:SetData("customclass", "Citizen");
+	character:SetCustomClass("Citizen");
 	character:SetData("cpCitizenName", character:GetName());
 	character:SetData("cpCitizenDesc", character:GetDescription())
 	character:SetData("cpDesc", character:GetCpdesc())
