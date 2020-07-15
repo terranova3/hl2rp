@@ -10,5 +10,5 @@ function character:GetClassName()
 end
 
 function character:GetClassColor()
-    return ix.class.list[self:GetClass()].color
+    return ix.class.list[self:GetClass()].color or team.GetColor(character:GetPlayer():Team())
 end 
