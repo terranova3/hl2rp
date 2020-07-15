@@ -143,21 +143,25 @@ function PANEL:Init()
 		local model = net.ReadString(16)
 		local bodygroups = net.ReadTable()
 		
-		self.model:SetModel(model, character:GetData("skin", 0))
+		if(IsValid(self.model)) then
+			self.model:SetModel(model, character:GetData("skin", 0))
 
-		if(bodygroups) then 
-			for k, v in pairs(bodygroups) do
-				self.model.Entity:SetBodygroup(k, v)
+			if(bodygroups) then 
+				for k, v in pairs(bodygroups) do
+					self.model.Entity:SetBodygroup(k, v)
+				end
 			end
 		end
-
 	end)
 
 	net.Receive("ixCharPanelUpdateModel", function()
 		local index = net.ReadUInt(8)
 		local bodygroup = net.ReadUInt(8)
 
-		self.model.Entity:SetBodygroup(index, bodygroup)
+		if(IsValid(self.model) and self.model.Entity) then
+			self.model.Entity:SetBodygroup(index, bodygroup)
+		end
+
 		Legs.LegEnt:SetBodygroup(index, bodygroup)
 	end)
 
