@@ -14,12 +14,3 @@ function PLUGIN:PlayerFootstep(client, position, foot, soundName, volume)
 		return true;
 	end
 end
-
--- Called when the client is checking if it has access to see the character panel
-function PLUGIN:CharPanelShouldShow(client)
-	local faction = client:GetCharacter():GetFaction()
-
-	if(faction == FACTION_VORT or faction == FACTION_VORTSLAVE) then
-		return false
-	end
-end;

@@ -174,13 +174,6 @@ function PLUGIN:CanPlayerEquipItem(client, item)
 	return true;
 end
 
--- Called when the client is checking if it has access to see the character panel
-function PLUGIN:CharPanelShouldShow(client)
-	if (client:IsCombine()) then
-		return false
-	end
-end;
-
 function PLUGIN:OnCharacterRankChanged(character, target, rank)
 	if(target:IsMetropolice()) then
 		local notification = cpSystem.config.notification;

@@ -23,6 +23,16 @@ function PLUGIN:GetPlayerDeathSound(client)
 	end
 end
 
+-- Called when the client is checking if it has access to see the character panel
+function PLUGIN:CharPanelShouldShow(client)
+	local faction = client:GetCharacter():GetFaction()
+
+	if(faction == FACTION_VORT or faction == FACTION_VORTSLAVE) then
+		return false
+	end
+end;
+
+
 if CLIENT then
 	randomVortWords = {"ahglah", "ahhhr", "alla", "allu", "baah", "beh", "bim", "buu", "chaa", "chackt", "churr", "dan", "darr", "dee", "eeya", "ge", "ga", "gaharra",
 "gaka", "galih", "gallalam", "gerr", "gog", "gram", "gu", "gunn", "gurrah", "ha", "hallam", "harra", "hen", "hi", "jah", "jurr", "kallah", "keh", "kih",
