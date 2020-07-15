@@ -39,25 +39,49 @@ spawnmenu.AddCreationTab("Helix Spawn Menu", function()
 	return ctrl
 end, "icon16/box.png", 1000)
 
+
+function GetMaterial(model)
+	model = model:gsub("\\", "/")
+
+	local path = "materials/spawnicons/" .. model:sub(1, #model - 4) .. ".png"
+	local material = Material(path, "smooth")
+
+	-- we don't have a cached spawnicon texture, so we need to forcefully generate one
+	if (material:IsError()) then
+		local renderer = vgui.Create("ModelImage")
+		renderer:SetVisible(false)
+		renderer:SetModel(model)
+		renderer:RebuildSpawnIcon()
+
+		-- this is the only way to get a callback for generated spawn icons, it's bad but it's only done once
+		hook.Add("SpawniconGenerated", "terranova", function(lastModel, filePath, modelsLeft)
+			filePath = filePath:gsub("\\", "/"):lower()
+
+			if (filePath == path) then
+				hook.Remove("SpawniconGenerated", "terranova")
+
+				material = Material(filePath, "smooth")
+				renderer:Remove()
+			end
+		end)
+	end
+
+	return path
+end
+
 spawnmenu.AddContentType("helix-item", function(container, itemData)
 	if (not itemData.name) then return end
 
 	local icon = vgui.Create("ContentIcon", container)
 	icon:SetContentType("helix-item")
 	icon:SetName(itemData.name)
+	icon:SetMaterial(GetMaterial(itemData:GetModel()))
 
 	icon.DoClick = function()
-		LocalPlayer():ConCommand("ix dropitem " .. itemData.uniqueID)
-	end
-
-	icon.OpenMenu = function(icon)
-		local menu = DermaMenu()
-
-		menu:AddOption("Add to inventory", function()
-			LocalPlayer():ConCommand("ix chargiveitem \"" .. LocalPlayer():GetName() .."\" " .. itemData.uniqueID)
-		end):SetImage("icon16/cart_put.png")
-
-		menu:Open()
+		net.Start("adminSpawnItem")
+			net.WriteString(itemData.name)
+		net.SendToServer()
+		surface.PlaySound("buttons/button14.wav")
 	end
 
 	if (IsValid(container)) then
