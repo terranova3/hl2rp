@@ -71,13 +71,18 @@ ITEM.dragged = function(item, item2)
         local hasLiquid, liquid = item2:GetLiquid()
 
         if(hasSpace) then
-            if(!hasLiquid) then 
-                item2:SetData("currentAmount", item2:GetData("currentAmount") + spaceLeft)
+            if(!hasLiquid) then
+                local amountToGive
+                
+                if(spaceLeft >= item:GetData("currentAmount", 0)) then
+                    amountToGive = item:GetData("currentAmount", 0)
+                else
+                    amountToGive = item:GetData("currentAmount", 0) - spaceLeft
+                end
+
+                item2:SetData("currentAmount", item2:GetData("currentAmount") + amountToGive)
                 item2:SetData("currentLiquid", item.uniqueID)
-
-                local newAmount = item:GetData("currentAmount") - spaceLeft
-
-                item:SetData("currentAmount", math.Clamp(newAmount, 0, 9999))
+                item:SetData("currentAmount", math.Clamp(item:GetData("currentAmount") - amountToGive, 0, 9999))
             else
                 client:Notify(string.format("%s currently is holding a different liquid! You cannot mix different liquids."))
             end
