@@ -67,6 +67,8 @@ net.Receive("ixCharacterEnterpriseLeave", function(length, client)
         query:Limit(1)
     query:Execute()
 
+    enterprise.members[charID] = nil
+    
     character:SetEnterprise(nil)
     character:SetEnterpriseRank(nil)
 end)
