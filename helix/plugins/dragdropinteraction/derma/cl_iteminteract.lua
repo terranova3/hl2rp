@@ -161,11 +161,13 @@ function PANEL:AddOption(k, v)
         option:DockMargin(6, 0, 6, 0)
     end
 
-    self.icon = option:Add("Material")
-    self.icon:SetSize(12, 12)   
-    self.icon:SetPos(4, 6)
-    self.icon:SetMaterial(v.icon)
-    self.icon.AutoSize = false
+    if(!v.icon) then
+        self.icon = option:Add("Material")
+        self.icon:SetSize(12, 12)   
+        self.icon:SetPos(4, 6)
+        self.icon:SetMaterial(v.icon)
+        self.icon.AutoSize = false
+    end
 
     table.insert(self.options, option)
 end
