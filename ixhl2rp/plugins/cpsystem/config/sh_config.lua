@@ -33,6 +33,7 @@ cpSystem.config.taglines = {
 	"SAVAGE",
 	"SPEAR",
 	"STAB",
+	"SWIFT",
 	"STAR",
 	"STINGER",
 	"STORM",
