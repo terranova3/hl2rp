@@ -4,22 +4,37 @@ FACTION.description = "A human Administrator advised by the Universal Union."
 FACTION.color = Color(255, 200, 100, 255)
 FACTION.pay = 50
 FACTION.models = {
-	"models/humans/group17/female_01.mdl",
-	"models/humans/group17/female_02.mdl",
-	"models/humans/group17/female_03.mdl",
-	"models/humans/group17/female_04.mdl",
-	"models/humans/group17/female_06.mdl",
-	"models/humans/group17/female_07.mdl",
-	"models/humans/group17/male_01.mdl",
-	"models/humans/group17/male_02.mdl",
-	"models/humans/group17/male_03.mdl",
-	"models/humans/group17/male_04.mdl",
-	"models/humans/group17/male_05.mdl",
-	"models/humans/group17/male_06.mdl",
-	"models/humans/group17/male_07.mdl",
-	"models/humans/group17/male_08.mdl",
-	"models/humans/group17/male_09.mdl"
+	"models/ug/new/citizens/female_01.mdl",
+	"models/ug/new/citizens/female_02.mdl",
+	"models/ug/new/citizens/female_03.mdl",
+	"models/ug/new/citizens/female_04.mdl",
+	"models/ug/new/citizens/female_05.mdl",
+	"models/ug/new/citizens/female_06.mdl",
+	"models/ug/new/citizens/female_07.mdl",
+	"models/ug/new/citizens/female_08.mdl",
+	"models/ug/new/citizens/female_10.mdl",
+	"models/ug/new/citizens/female_11.mdl",
+	"models/ug/new/citizens/female_17.mdl",
+	"models/ug/new/citizens/female_19.mdl",
+	"models/ug/new/citizens/female_21.mdl",
+	"models/ug/new/citizens/female_22.mdl",
+	"models/ug/new/citizens/female_23.mdl",
+	"models/ug/new/citizens/female_24.mdl",
+	"models/ug/new/citizens/male_01.mdl",
+	"models/ug/new/citizens/male_02.mdl",
+	"models/ug/new/citizens/male_03.mdl",
+	"models/ug/new/citizens/male_04.mdl",
+	"models/ug/new/citizens/male_05.mdl",
+	"models/ug/new/citizens/male_06.mdl",
+	"models/ug/new/citizens/male_07.mdl",
+	"models/ug/new/citizens/male_08.mdl",
+	"models/ug/new/citizens/male_09.mdl",
+	"models/ug/new/citizens/male_10.mdl",
+	"models/ug/new/citizens/male_11.mdl",
+	"models/ug/new/citizens/male_12.mdl",
+	"models/ug/new/citizens/male_13.mdl"
 }
+
 FACTION.isDefault = false
 FACTION.isGloballyRecognized = true
 
