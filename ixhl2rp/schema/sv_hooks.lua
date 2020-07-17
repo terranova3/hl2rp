@@ -54,7 +54,7 @@ function Schema:PlayerUse(client, entity)
 end
 
 function Schema:PlayerUseDoor(client, door)
-	if (client:IsCombine()) then
+	if (client:IsCombine() or client:GetCharacter():GetFaction() == FACTION_ADMIN) then
 		if (!door:HasSpawnFlags(256) and !door:HasSpawnFlags(1024)) then
 			door:Fire("open")
 		end
