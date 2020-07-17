@@ -10,5 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "Comically branded but decently tasting, strong rum.";
 ITEM.category = "Contraband Drinks";
 ITEM.permit = "consumables";
-ITEM.price 35;
+ITEM.price = 35;
 ITEM.restoreStamina = 25;

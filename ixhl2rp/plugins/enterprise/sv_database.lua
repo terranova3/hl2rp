@@ -44,6 +44,7 @@ function PLUGIN:LoadEnterprises()
 					membersQuery:Select("name")
 					membersQuery:Select("model")
 					membersQuery:Select("enterprise")
+					membersQuery:Select("enterpriserank")
 					membersQuery:Where("enterprise", tonumber(v.enterprise_id))
 					membersQuery:Callback(function(results)
 						if(istable(results) and #results > 0) then
@@ -51,7 +52,8 @@ function PLUGIN:LoadEnterprises()
 								local character = {
 									id = member.id,
 									name = member.name,
-									model = member.model
+									model = member.model,
+									rank = member.enterpriserank
 								}
 								
 								table.insert(members, character)

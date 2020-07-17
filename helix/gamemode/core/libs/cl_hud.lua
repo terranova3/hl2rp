@@ -93,10 +93,12 @@ function ix.hud.PopulateItemTooltip(tooltip, item)
 end
 
 function ix.hud.PopulatePlayerTooltip(tooltip, client)
+	local character = client:GetCharacter()
+
 	local name = tooltip:AddRow("name")
 	name:SetImportant()
 	name:SetText(client:SteamName())
-	name:SetBackgroundColor(team.GetColor(client:Team()))
+	name:SetBackgroundColor(character:GetClassColor())
 	name:SizeToContents()
 
 	local nameHeight = name:GetTall()

@@ -40,13 +40,11 @@ ITEM.functions.Approve = {
 			["permits"] = itemTable:GetData("businessPermits"),		
 		}
 
-		if(itemTable:GetData("businessOwner") and itemTable:GetData("businessName")) then
-			ix.enterprise.New(itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), data)
+		if(itemTable:GetData("businessOwner", "") != "" and itemTable:GetData("businessName", "") != "") then
+			ix.enterprise.New(itemTable.player, itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), data)
 		else
 			client:Notify("That application is missing important data. Cannot approve until it has been filled out!")
 		end
-		
-        return false
 	end
 }
 ITEM.suppressed = function(itemTable)
@@ -58,24 +56,26 @@ ITEM.suppressed = function(itemTable)
 end
 
 function ITEM:PopulateTooltip(tooltip)
-	local data = tooltip:AddRow("data")
-	local permitString = ""
-	local permits = self:GetData("businessPermits", {})
+	if(self:GetData("businessOwner")) then
+		local data = tooltip:AddRow("data")
+		local permitString = ""
+		local permits = self:GetData("businessPermits", {})
 
-	for i = 1, #permits do
-		if(i == 1) then
-			permitString = permitString .. permits[i]
-		else 
-			permitString = permitString .. ", " .. permits[i]
+		for i = 1, #permits do
+			if(i == 1) then
+				permitString = permitString .. permits[i]
+			else 
+				permitString = permitString .. ", " .. permits[i]
+			end
 		end
+
+		data:SetText("Business owner: " .. self:GetData("businessOwner", "N/A") .. 
+			"\nBusiness name: " .. self:GetData("businessName", "N/A") .. 
+			"\nBusiness description: " .. self:GetData("businessDescription", "N/A") ..
+			"\nBusiness permits: " .. permitString or "N/A"
+		)
+
+		data:SetExpensiveShadow(0.5)
+		data:SizeToContents()
 	end
-
-	data:SetText("Business owner: " .. self:GetData("businessOwner", "N/A") .. 
-		"\nBusiness name: " .. self:GetData("businessName", "N/A") .. 
-		"\nBusiness description: " .. self:GetData("businessDescription", "N/A") ..
-		"\nBusiness permits: " .. permitString or "N/A"
-	)
-
-	data:SetExpensiveShadow(0.5)
-	data:SizeToContents()
 end

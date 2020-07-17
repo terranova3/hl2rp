@@ -9,7 +9,17 @@ ix.char.RegisterVar("enterprise", {
     field = "enterprise",
     fieldType = ix.type.number,
     isLocal = true,
-    bNoDisplay = true
+    bNoDisplay = true,
+    alias = "Enterprise"
 })
+
+ix.char.RegisterVar("enterpriserank", {
+    field = "enterpriserank",
+    fieldType = ix.type.number,
+    isLocal = true,
+    bNoDisplay = true,
+    alias = "EnterpriseRank"
+})
+
 
 end

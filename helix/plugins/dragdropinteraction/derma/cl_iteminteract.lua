@@ -95,11 +95,18 @@ function PANEL:AddOption(k, v)
     local textColor = color_white
     local tooltip = nil
 
+    surface.SetFont("ixSmallFont")
+    local textWidth, _ = surface.GetTextSize((v.name or k))
+    
+    if(self:GetWide() < (textWidth + 48)) then
+        self:SetWide(self:GetWide() + ((textWidth + 48) - self:GetWide()))
+    end
+
     if(self.itemTable.suppressed) then
-        local isSuppressed, func, tip = self.itemTable.suppressed(self.itemTable)
+        local isSuppressed, func, tip = self.itemTable.suppressed(self.itemTable, (v.name or k))
 
         if(isSuppressed and (v.name or k) == func) then 
-            textColor = Color(90, 90, 90, 150)
+            textColor = Color(120, 120, 120, 180)
             tooltip = tip
         end
     end
@@ -157,7 +164,7 @@ function PANEL:AddOption(k, v)
     self.icon = option:Add("Material")
     self.icon:SetSize(12, 12)   
     self.icon:SetPos(4, 6)
-    self.icon:SetMaterial(v.icon)
+    self.icon:SetMaterial(v.icon or "icon16/brick.png")
     self.icon.AutoSize = false
 
     table.insert(self.options, option)

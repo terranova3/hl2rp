@@ -130,7 +130,9 @@ function PANEL:GetTaglines()
 	end
 
 	for k, v in pairs(cpSystem.cache.taglines or {}) do
-		data[v.tagline].id[v.id] = true
+		if(v.tagline and v.id) then
+			data[v.tagline].id[v.id] = true
+		end	
 	end
 
 	return data

@@ -143,24 +143,51 @@ function PANEL:Init()
 		local model = net.ReadString(16)
 		local bodygroups = net.ReadTable()
 		
-		self.model:SetModel(model, character:GetData("skin", 0))
+		if(IsValid(self.model)) then
+			self.model:SetModel(model, character:GetData("skin", 0))
 
-		if(bodygroups) then 
-			for k, v in pairs(bodygroups) do
-				self.model.Entity:SetBodygroup(k, v)
+			if(bodygroups) then 
+				for k, v in pairs(bodygroups) do
+					self.model.Entity:SetBodygroup(k, v)
+				end
 			end
 		end
-
 	end)
 
 	net.Receive("ixCharPanelUpdateModel", function()
 		local index = net.ReadUInt(8)
 		local bodygroup = net.ReadUInt(8)
 
-		self.model.Entity:SetBodygroup(index, bodygroup)
+		if(IsValid(self.model) and self.model.Entity) then
+			self.model.Entity:SetBodygroup(index, bodygroup)
+		end
+
 		Legs.LegEnt:SetBodygroup(index, bodygroup)
 	end)
 
+	netstream.Start("CharacterPanelUpdate")
+	netstream.Hook("ShowCharacterPanel", function(show)
+		local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
+
+		if(!show) then
+			if(IsValid(ix.gui.charPanel)) then
+				ix.gui.charPanel:Remove()
+			end
+
+			return
+		end
+
+		if(!IsValid(ix.gui.charPanel) and IsValid(ix.gui.containerCharPanel)) then
+			local cPanel = ix.gui.containerCharPanel:Add("ixCharacterPane")
+
+			ix.gui.charPanel = cPanel
+		end
+
+		if (charPanel) then
+			ix.gui.charPanel:SetCharPanel(charPanel)
+		end
+	end)
+	
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
 end
 

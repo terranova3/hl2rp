@@ -7,9 +7,9 @@
 
 local PLUGIN = PLUGIN;
 
-ITEM.name = "Antique Hat";
+ITEM.name = "Pre-War Officer's Cap";
 ITEM.model = "models/fty/items/antiquehat.mdl"
-ITEM.description = "A tight fitting war relic made from wool.";
+ITEM.description = "An old, presumably Soviet-era officer's cap, with two intersecting rifles depcting a military status. Definitely not CWU Approved.";
 ITEM.bodyGroups = {
 	["headgear"] = 3,
 }

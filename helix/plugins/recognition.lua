@@ -43,7 +43,9 @@ do
 			local faction = ix.faction.indices[other:GetFaction()]
 
 			if (faction and faction.isGloballyRecognized) then
-				return true
+				if(!character:IsUndercover()) then
+					return true
+				end
 			end
 		end
 

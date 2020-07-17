@@ -7,28 +7,28 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			characterPanel:SetSize(400, container:GetTall());
 			characterPanel:Dock(LEFT)	
 
+			ix.gui.containerCharPanel = characterPanel
+
 			local inventoryPanel = container:Add("DPanel");
 			inventoryPanel.Paint = function() end;
 			inventoryPanel:SetSize(container:GetWide(), container:GetTall());
 			inventoryPanel:Dock(FILL)
 
-			netstream.Start("CharacterPanelUpdate")
-			netstream.Hook("ShowCharacterPanel", function(show)
-				if(IsValid(ix.gui.charPanel)) then
-					ix.gui.charPanel:Remove()
-				end
+			local show = true
+
+			if(hook.Run("CharPanelShouldShow", LocalPlayer()) != nil) then 
+				show = (hook.Run("CharPanelShouldShow", LocalPlayer()))
+			end
+
+			if(IsValid(ix.gui.charPanel)) then
+				ix.gui.charPanel:Remove()
+			end
 				
-				if(show) then 
-					local cPanel = characterPanel:Add("ixCharacterPane")
-					local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
+			if(show) then 
+				local cPanel = characterPanel:Add("ixCharacterPane")
 
-					if (charPanel) then
-						cPanel:SetCharPanel(charPanel)
-					end
-
-					ix.gui.charPanel = cPanel
-				end
-			end)
+				ix.gui.charPanel = cPanel
+			end
 
 			local canvas = inventoryPanel:Add("DTileLayout")
 

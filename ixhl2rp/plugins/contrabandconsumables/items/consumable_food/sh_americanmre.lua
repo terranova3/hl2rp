@@ -10,5 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "An American mealkit, and boy, they know how to eat.";
 ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
-ITEM.price 30;
+ITEM.price = 30;
 ITEM.restoreHealth = 10;

@@ -5,6 +5,9 @@
 
 local PLUGIN = PLUGIN
 
+util.AddNetworkString("ixPropertyAddSync")
+util.AddNetworkString("ixPropertyAddDerma")
+
 function PLUGIN:KeyPress(client, key)
 	if (key == IN_RELOAD) then
 		local data = {}
@@ -14,7 +17,27 @@ function PLUGIN:KeyPress(client, key)
 		local entity = util.TraceLine(data).Entity
 
 		if (IsValid(entity) and entity:IsDoor()) then
-			print("Works!")
+			client.selectedDoors = client.selectedDoors or {}
+			local add = true
+
+			for k, v in pairs(client.selectedDoors) do
+				if(v == entity) then
+					table.RemoveByValue(client.selectedDoors, entity)
+					add = false
+
+					break
+				end
+			end
+
+			if(add) then
+				table.insert(client.selectedDoors, entity)
+			end
+
+			PrintTable(client.selectedDoors)
+
+			net.Start("ixPropertyAddSync")
+				net.WriteTable(client.selectedDoors)
+			net.Send(client)
 		end
 	end
 end
