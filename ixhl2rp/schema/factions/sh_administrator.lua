@@ -35,6 +35,13 @@ FACTION.models = {
 	"models/ug/new/citizens/male_13.mdl"
 }
 
+function FACTION:OnCharacterCreated(client, character)
+	local inventory = character:GetInventory()
+
+	inventory:Add("torso_brown_suit", 1)
+	inventory:Add("dress_pants", 1)
+end
+
 FACTION.isDefault = false
 FACTION.isGloballyRecognized = true
 
