@@ -209,38 +209,64 @@ function Schema:PlayerStaminaGained(client)
 	client:AddCombineDisplayMessage("@cStaminaGained", Color(0, 255, 0, 255))
 end
 
-function Schema:GetPlayerPainSound(client)
-	if (client:IsCombine()) then
-		local sound = "NPC_MetroPolice.Pain"
-
-		if (Schema:IsCombineRank(client:Name(), "SCN")) then
-			sound = "NPC_CScanner.Pain"
-		elseif (Schema:IsCombineRank(client:Name(), "SHIELD")) then
-			sound = "NPC_SScanner.Pain"
-		end
-
-		return sound
-	end
-end
-
+local HLACOMDEAD = {
+    "HLAComVoice/painandsuffering/die_01.wav",
+    "HLAComVoice/painandsuffering/die_02.wav",
+    "HLAComVoice/painandsuffering/die_03.wav",
+    "HLAComVoice/painandsuffering/die_04.wav",
+    "HLAComVoice/painandsuffering/die_05.wav",
+    "HLAComVoice/painandsuffering/die_06.wav",
+    "HLAComVoice/painandsuffering/die_07.wav",
+    "HLAComVoice/painandsuffering/die_08.wav",
+    "HLAComVoice/painandsuffering/die_09.wav",
+    "HLAComVoice/painandsuffering/die_10.wav"
+}
+ 
+local HLACOMPAIN = {
+    "HLAComVoice/painandsuffering/pain_01.wav",
+    "HLAComVoice/painandsuffering/pain_02.wav",
+    "HLAComVoice/painandsuffering/pain_03.wav",
+    "HLAComVoice/painandsuffering/pain_04.wav",
+    "HLAComVoice/painandsuffering/pain_05.wav",
+    "HLAComVoice/painandsuffering/pain_06.wav",
+    "HLAComVoice/painandsuffering/pain_07.wav",
+    "HLAComVoice/painandsuffering/pain_08.wav",
+    "HLAComVoice/painandsuffering/pain_09.wav",
+    "HLAComVoice/painandsuffering/pain_10.wav"
+}
+ 
 function Schema:GetPlayerDeathSound(client)
-	if (client:IsCombine()) then
-		local sound = "NPC_MetroPolice.Die"
-
-		if (Schema:IsCombineRank(client:Name(), "SCN")) then
-			sound = "NPC_CScanner.Die"
-		elseif (Schema:IsCombineRank(client:Name(), "SHIELD")) then
-			sound = "NPC_SScanner.Die"
-		end
-
-		for k, v in ipairs(player.GetAll()) do
-			if (v:IsCombine()) then
-				v:EmitSound(sound)
-			end
-		end
-
-		return sound
-	end
+    if (client:IsCombine()) then
+        local sound = HLACOMDEAD[math.random(1, #HLACOMDEAD)]
+ 
+        if (Schema:IsCombineRank(client:Name(), "SCN")) then
+            sound = "NPC_CScanner.Die"
+        elseif (Schema:IsCombineRank(client:Name(), "SHIELD")) then
+            sound = "NPC_SScanner.Die"
+        end
+ 
+        for k, v in ipairs(player.GetAll()) do
+            if (v:IsCombine()) then
+                v:EmitSound(sound)
+            end
+        end
+ 
+        return sound
+    end
+end
+ 
+function Schema:GetPlayerPainSound(client)
+    if (client:IsCombine()) then
+        local sound = HLACOMPAIN[math.random(1, #HLACOMPAIN)]
+ 
+        if (Schema:IsCombineRank(client:Name(), "SCN")) then
+            sound = "NPC_CScanner.Pain"
+        elseif (Schema:IsCombineRank(client:Name(), "SHIELD")) then
+            sound = "NPC_SScanner.Pain"
+        end
+ 
+        return sound
+    end
 end
 
 function Schema:OnNPCKilled(npc, attacker, inflictor)
