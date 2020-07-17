@@ -70,7 +70,6 @@ function PANEL:Init()
 	self.desc:SetTall(128)
 	self.desc:SetMultiline(true)
 
-	netstream.Start("RequestTaglineCache")
 	self:Register("Unit Setup")
 end
 

@@ -68,8 +68,10 @@ end
 
 -- Add to the cache that was built on server launch since it doesn't auto refresh the server query for performance reasons.
 function PLUGIN:OnCharacterCreated(client, character)
-	self:AddToCache(character)
-	self:SendCache()
+	if(character:IsMetropolice()) then
+		self:AddToCache(character)
+		self:SendCache()
+	end
 end
 
 -- Remove from the cache when a character is deleted.

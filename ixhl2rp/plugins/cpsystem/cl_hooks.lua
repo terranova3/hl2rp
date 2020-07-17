@@ -160,6 +160,7 @@ function PLUGIN:HUDPaintTopScreen()
 	end;
 end;
 
+netstream.Start("RequestTaglineCache")
 netstream.Hook("ReceiveTaglineCache", function(cache)
 	cpSystem.cache = {}
 	cpSystem.cache.taglines = cache
