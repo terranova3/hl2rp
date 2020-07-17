@@ -37,17 +37,13 @@ if (CLIENT) then
 		panel:SetText("Armor: " .. (self:GetData("equip") and LocalPlayer():Armor() or self:GetData("armor", self.maxArmor)))
 		panel:SizeToContents()
 
-		local panelID = tooltip:AddRowAfter("name", "armor")
-		local panelText = ""
+		if(self:GetData("name")) then
+			local panelID = tooltip:AddRowAfter("name", "armor")
 		
-		panelID:SetBackgroundColor(derma.GetColor("Info", tooltip))
-
-		if(self:GetData("name") != nil) then
-			panelText = string.format("This uniform is assigned to: %s", self:GetData("name"));
+			panelID:SetBackgroundColor(derma.GetColor("Info", tooltip))
+			panelID:SetText(string.format("This uniform is assigned to: %s", self:GetData("name")))
+			panelID:SizeToContents()
 		end;
-
-		panelID:SetText(panelText)
-		panelID:SizeToContents()
 	end
 end
 
