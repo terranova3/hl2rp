@@ -40,7 +40,7 @@ ITEM.functions.Approve = {
 			["permits"] = itemTable:GetData("businessPermits"),		
 		}
 
-		if(itemTable:GetData("businessOwner", "") != "" and itemTable:GetData("businessName", "") != "") then
+		if(itemTable:GetData("businessOwner") and itemTable:GetData("businessName")) then
 			ix.enterprise.New(itemTable.player, itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), data)
 		else
 			client:Notify("That application is missing important data. Cannot approve until it has been filled out!")
@@ -48,6 +48,10 @@ ITEM.functions.Approve = {
 	end
 }
 ITEM.suppressed = function(itemTable)
+	if(!itemTable:GetData("businessOwner") or !itemTable:GetData("businessName")) then
+		return true, "Approve", "This application has not been filled out!"
+	end
+
 	if(!itemTable.player:GetCharacter():CanApproveApplication()) then
 		return true, "Approve", "You can't approve business applications!"
 	end

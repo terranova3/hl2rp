@@ -193,7 +193,7 @@ function PANEL:Rebuild()
 			characterForm:AddItem(panelList);
 			characterForm:SetPadding(4); 
 			characterForm.Header:SetSize( 30, 30 )
-			
+
 			function characterForm:Paint(w, h)
 				derma.SkinFunc("PaintCategoryPanel", self, "", v.players[1]:GetCharacter():GetClassColor())
 				surface.SetDrawColor(0, 0, 0, 50);	
