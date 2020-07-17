@@ -210,29 +210,29 @@ function Schema:PlayerStaminaGained(client)
 end
 
 local HLACOMDEAD = {
-    "HLAComVoice/painandsuffering/die_01.wav",
-    "HLAComVoice/painandsuffering/die_02.wav",
-    "HLAComVoice/painandsuffering/die_03.wav",
-    "HLAComVoice/painandsuffering/die_04.wav",
-    "HLAComVoice/painandsuffering/die_05.wav",
-    "HLAComVoice/painandsuffering/die_06.wav",
-    "HLAComVoice/painandsuffering/die_07.wav",
-    "HLAComVoice/painandsuffering/die_08.wav",
-    "HLAComVoice/painandsuffering/die_09.wav",
-    "HLAComVoice/painandsuffering/die_10.wav"
+    "HLAComVoice/die_01.wav",
+    "HLAComVoice/die_02.wav",
+    "HLAComVoice/die_03.wav",
+    "HLAComVoice/die_04.wav",
+    "HLAComVoice/die_05.wav",
+    "HLAComVoice/die_06.wav",
+    "HLAComVoice/die_07.wav",
+    "HLAComVoice/die_08.wav",
+    "HLAComVoice/die_09.wav",
+    "HLAComVoice/die_10.wav"
 }
  
 local HLACOMPAIN = {
-    "HLAComVoice/painandsuffering/pain_01.wav",
-    "HLAComVoice/painandsuffering/pain_02.wav",
-    "HLAComVoice/painandsuffering/pain_03.wav",
-    "HLAComVoice/painandsuffering/pain_04.wav",
-    "HLAComVoice/painandsuffering/pain_05.wav",
-    "HLAComVoice/painandsuffering/pain_06.wav",
-    "HLAComVoice/painandsuffering/pain_07.wav",
-    "HLAComVoice/painandsuffering/pain_08.wav",
-    "HLAComVoice/painandsuffering/pain_09.wav",
-    "HLAComVoice/painandsuffering/pain_10.wav"
+    "HLAComVoice/pain_01.wav",
+    "HLAComVoice/pain_02.wav",
+    "HLAComVoice/pain_03.wav",
+    "HLAComVoice/pain_04.wav",
+    "HLAComVoice/pain_05.wav",
+    "HLAComVoice/pain_06.wav",
+    "HLAComVoice/pain_07.wav",
+    "HLAComVoice/pain_08.wav",
+    "HLAComVoice/pain_09.wav",
+    "HLAComVoice/pain_10.wav"
 }
  
 function Schema:GetPlayerDeathSound(client)
@@ -372,29 +372,29 @@ function Schema:PlayerSpray(client)
 end
 
 local VOCODEROFF = {
-    "HLAComVoice/beepboops/combine_radio_off_01.wav",
-    "HLAComVoice/beepboops/combine_radio_off_02.wav",
-    "HLAComVoice/beepboops/combine_radio_off_04.wav",
-    "HLAComVoice/beepboops/combine_radio_off_05.wav",
-    "HLAComVoice/beepboops/combine_radio_off_06.wav",
-    "HLAComVoice/beepboops/combine_radio_off_07.wav",
-    "HLAComVoice/beepboops/combine_radio_off_08.wav",
-    "HLAComVoice/beepboops/combine_radio_off_09.wav",
-    "HLAComVoice/beepboops/combine_radio_off_10.wav",
-    "HLAComVoice/beepboops/combine_radio_off_11.wav",
-    "HLAComVoice/beepboops/combine_radio_off_12.wav"
+    "HLAComVoice/combine_radio_off_01.wav",
+    "HLAComVoice/combine_radio_off_02.wav",
+    "HLAComVoice/combine_radio_off_04.wav",
+    "HLAComVoice/combine_radio_off_05.wav",
+    "HLAComVoice/combine_radio_off_06.wav",
+    "HLAComVoice/combine_radio_off_07.wav",
+    "HLAComVoice/combine_radio_off_08.wav",
+    "HLAComVoice/combine_radio_off_09.wav",
+    "HLAComVoice/combine_radio_off_10.wav",
+    "HLAComVoice/combine_radio_off_11.wav",
+    "HLAComVoice/combine_radio_off_12.wav"
 }
  
 local VOCODERON = {
-    "HLAComVoice/beepboops/combine_radio_on_01.wav",
-    "HLAComVoice/beepboops/combine_radio_on_02.wav",
-    "HLAComVoice/beepboops/combine_radio_on_03.wav",
-    "HLAComVoice/beepboops/combine_radio_on_04.wav",
-    "HLAComVoice/beepboops/combine_radio_on_05.wav",
-    "HLAComVoice/beepboops/combine_radio_on_06.wav",
-    "HLAComVoice/beepboops/combine_radio_on_07.wav",
-    "HLAComVoice/beepboops/combine_radio_on_08.wav",
-    "HLAComVoice/beepboops/combine_radio_on_09.wav"
+    "HLAComVoice/combine_radio_on_01.wav",
+    "HLAComVoice/combine_radio_on_02.wav",
+    "HLAComVoice/combine_radio_on_03.wav",
+    "HLAComVoice/combine_radio_on_04.wav",
+    "HLAComVoice/combine_radio_on_05.wav",
+    "HLAComVoice/combine_radio_on_06.wav",
+    "HLAComVoice/combine_radio_on_07.wav",
+    "HLAComVoice/combine_radio_on_08.wav",
+    "HLAComVoice/combine_radio_on_09.wav"
 }
  
 netstream.Hook("PlayerChatTextChanged", function(client, key)
