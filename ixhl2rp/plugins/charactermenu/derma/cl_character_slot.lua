@@ -62,7 +62,7 @@ function PANEL:Init()
 
 			draw.SimpleText(
 				L("banned"):upper(),
-				"ixCharSubTitleFont",
+				"ixPluginCharPanelSubTitleFont",
 				centerX,
 				centerY,
 				color_white, 1, 1
