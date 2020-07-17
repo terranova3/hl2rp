@@ -5,19 +5,16 @@
 
 local PLUGIN = PLUGIN
 
+net.Receive("ixPropertyAddSync", function()
+    local doors = net.ReadTable()
+
+    LocalPlayer().selectedDoors = doors
+end)
+
 function PLUGIN:PreDrawHalos()
-    local client = LocalPlayer()
-    local entList = {}
+    if(!LocalPlayer():GetData("propertyEdit") or LocalPlayer().selectedDoors == nil) then return end
 
-    for k, v in pairs(ents.GetAll()) do
-        if(v:GetClass():find("door")) then
-            table.insert(entList, v)
-        end
-    end
-
-    if(client:GetData("propertyEdit")) then
-        halo.Add(entList, Color( 0, 0, 255 ), 5, 5, 2)
-    end 
+    halo.Add(LocalPlayer().selectedDoors, Color( 0, 0, 255 ), 5, 5, 2)
 end
 
 do
@@ -71,19 +68,31 @@ do
             elseif (IsValid(panel) and panel:GetEntity():IsDoor()) then
                 panel:Remove()
             end
+        else
+            if (IsValid(ix.gui.doorTooltip)) then
+                ix.gui.doorTooltip:Remove()
+            end
         end
     end)
 end
 
 local PANEL = {}
 
-function PANEL:Init()
+function PANEL:Init() 
     self:SetSize(512,64)
-    self:SetPos((ScrW() * 0.5) - self:GetWide() * 0.5, (ScrH() * 0.75) - self:GetTall() * 0.5)
+    self:SetPos((ScrW() * 0.5) - self:GetWide() * 0.5, 4)
 
     local label = self:Add("DLabel")
-    label:SetText("Press R to edit this property.")
+    label:SetText("Property Management")
     label:SetFont("ixMediumFont")
+    label:SetContentAlignment(5)
+    label:Dock(TOP)
+    label:SetTall(16)
+
+    local label = self:Add("DLabel")
+    label:SetText("Press R to add this door to the property.")
+    label:SetFont("ixMediumFont")
+    label:SetContentAlignment(5)
     label:Dock(FILL)
 end
 
