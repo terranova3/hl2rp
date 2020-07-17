@@ -275,45 +275,6 @@ function Schema:OnNPCKilled(npc, attacker, inflictor)
 	end
 end
 
-function Schema:PlayerMessageSend(speaker, chatType, text, anonymous, receivers, rawText)
-	if (chatType == "ic" or chatType == "w" or chatType == "y") then
-		local class = self.voices.GetClass(speaker)
-
-		for k, v in ipairs(class) do
-			local info = self.voices.Get(v, rawText)
-
-			if (info) then
-				local volume = 80
-
-				if (chatType == "w") then
-					volume = 60
-				elseif (chatType == "y") then
-					volume = 150
-				end
-
-				if (info.sound) then
-					if (info.global) then
-						netstream.Start(nil, "PlaySound", info.sound)
-					else
-						speaker.bTypingBeep = nil
-						ix.util.EmitQueuedSounds(speaker, {info.sound, VOCODEROFF[math.random(1, #VOCODEROFF)]}, nil, nil, volume)
-					end
-				end
-
-				if (speaker:IsCombine()) then
-					return string.format("<:: %s ::>", info.text)
-				else
-					return info.text
-				end
-			end
-		end
-
-		if (speaker:IsCombine()) then
-			return string.format("<:: %s ::>", text)
-		end
-	end
-end
-
 function Schema:CanPlayerJoinClass(client, class, info)
 	if (client:IsRestricted()) then
 		client:Notify("You cannot change classes when you are restrained!")
@@ -397,6 +358,45 @@ local VOCODERON = {
     "HLAComVoice/combine_radio_on_09.wav"
 }
  
+function Schema:PlayerMessageSend(speaker, chatType, text, anonymous, receivers, rawText)
+	if (chatType == "ic" or chatType == "w" or chatType == "y") then
+		local class = self.voices.GetClass(speaker)
+
+		for k, v in ipairs(class) do
+			local info = self.voices.Get(v, rawText)
+
+			if (info) then
+				local volume = 80
+
+				if (chatType == "w") then
+					volume = 60
+				elseif (chatType == "y") then
+					volume = 150
+				end
+
+				if (info.sound) then
+					if (info.global) then
+						netstream.Start(nil, "PlaySound", info.sound)
+					else
+						speaker.bTypingBeep = nil
+						ix.util.EmitQueuedSounds(speaker, {info.sound, VOCODEROFF[math.random(1, #VOCODEROFF)]}, nil, nil, volume)
+					end
+				end
+
+				if (speaker:IsCombine()) then
+					return string.format("<:: %s ::>", info.text)
+				else
+					return info.text
+				end
+			end
+		end
+
+		if (speaker:IsCombine()) then
+			return string.format("<:: %s ::>", text)
+		end
+	end
+end
+
 netstream.Hook("PlayerChatTextChanged", function(client, key)
     if (client:IsCombine() and !client.bTypingBeep
     and (key == "y" or key == "w" or key == "r" or key == "t")) then
