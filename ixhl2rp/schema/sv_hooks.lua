@@ -345,19 +345,45 @@ function Schema:PlayerSpray(client)
 	return true
 end
 
+local VOCODEROFF = {
+    "HLAComVoice/beepboops/combine_radio_off_01.wav",
+    "HLAComVoice/beepboops/combine_radio_off_02.wav",
+    "HLAComVoice/beepboops/combine_radio_off_04.wav",
+    "HLAComVoice/beepboops/combine_radio_off_05.wav",
+    "HLAComVoice/beepboops/combine_radio_off_06.wav",
+    "HLAComVoice/beepboops/combine_radio_off_07.wav",
+    "HLAComVoice/beepboops/combine_radio_off_08.wav",
+    "HLAComVoice/beepboops/combine_radio_off_09.wav",
+    "HLAComVoice/beepboops/combine_radio_off_10.wav",
+    "HLAComVoice/beepboops/combine_radio_off_11.wav",
+    "HLAComVoice/beepboops/combine_radio_off_12.wav"
+}
+ 
+local VOCODERON = {
+    "HLAComVoice/beepboops/combine_radio_on_01.wav",
+    "HLAComVoice/beepboops/combine_radio_on_02.wav",
+    "HLAComVoice/beepboops/combine_radio_on_03.wav",
+    "HLAComVoice/beepboops/combine_radio_on_04.wav",
+    "HLAComVoice/beepboops/combine_radio_on_05.wav",
+    "HLAComVoice/beepboops/combine_radio_on_06.wav",
+    "HLAComVoice/beepboops/combine_radio_on_07.wav",
+    "HLAComVoice/beepboops/combine_radio_on_08.wav",
+    "HLAComVoice/beepboops/combine_radio_on_09.wav"
+}
+ 
 netstream.Hook("PlayerChatTextChanged", function(client, key)
-	if (client:IsCombine() and !client.bTypingBeep
-	and (key == "y" or key == "w" or key == "r" or key == "t")) then
-		client:EmitSound("NPC_MetroPolice.Radio.On")
-		client.bTypingBeep = true
-	end
+    if (client:IsCombine() and !client.bTypingBeep
+    and (key == "y" or key == "w" or key == "r" or key == "t")) then
+        client:EmitSound(VOCODERON[math.random(1, #VOCODERON)])
+        client.bTypingBeep = true
+    end
 end)
-
+ 
 netstream.Hook("PlayerFinishChat", function(client)
-	if (client:IsCombine() and client.bTypingBeep) then
-		client:EmitSound("NPC_MetroPolice.Radio.Off")
-		client.bTypingBeep = nil
-	end
+    if (client:IsCombine() and client.bTypingBeep) then
+        client:EmitSound(VOCODEROFF[math.random(1, #VOCODEROFF)])
+        client.bTypingBeep = nil
+    end
 end)
 
 netstream.Hook("ViewDataUpdate", function(client, target, text)
