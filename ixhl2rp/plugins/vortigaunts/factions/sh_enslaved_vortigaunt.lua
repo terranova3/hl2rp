@@ -19,4 +19,4 @@ function FACTION:OnTransferred(client)
 	character:SetModel(self.models[1])
 end
 
-FACTION_VORTSLAVE = FACTION.index
+FACTION_ENSLAVED_VORT = FACTION.index

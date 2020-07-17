@@ -27,7 +27,7 @@ end
 function PLUGIN:CharPanelShouldShow(client)
 	local faction = client:GetCharacter():GetFaction()
 
-	if(faction == FACTION_VORT or faction == FACTION_VORTSLAVE) then
+	if(faction == FACTION_VORT or faction == FACTION_ENSLAVED_VORT) then
 		return false
 	end
 end;

@@ -5,7 +5,7 @@
 
 CLASS.name = "Enslaved Vortigaunt"
 CLASS.color = Color(0, 255, 200, 255)
-CLASS.faction = FACTION_VORTSLAVE
+CLASS.faction = FACTION_ENSLAVED_VORT
 
 function CLASS:CanSwitchTo(client)
 	return false
