@@ -32,6 +32,10 @@ function PANEL:Init()
 		
 		parent:SetPayload("voicetype", value)
 	end
+	self.voiceType.Paint = function()
+        surface.SetDrawColor(255,255,255,5)
+        surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+    end
 
 	self.taglineDropBox = self:Add("DComboBox")
 	self.taglineDropBox:SetFont("ixPluginCharTraitFont")
@@ -42,6 +46,10 @@ function PANEL:Init()
 		parent:SetPayload("tagline", value)
 		parent:RebuildIDs()
 	end
+	self.taglineDropBox.Paint = function()
+        surface.SetDrawColor(255,255,255,5)
+        surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+    end
 
 	self.idDropBox = self:Add("DComboBox")
 	self.idDropBox:SetFont("ixPluginCharTraitFont")
@@ -50,7 +58,11 @@ function PANEL:Init()
 	self.idDropBox.OnSelect = function( self, index, value )
 		parent:SetPayload("cpid", value)
 	end
-
+	self.idDropBox.Paint = function()
+        surface.SetDrawColor(255,255,255,5)
+        surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+	end
+	
 	self.sublabel = self:SubLabel("Describe your unit")
 	self.sublabel:DockMargin(0,20,0,0)
 	
@@ -93,7 +105,7 @@ function PANEL:Display()
 	self.taglines = self.taglines or self:GetTaglines()
 
 	self.voiceType:Clear()
-	self.voiceType:SetValue( "Taglines" )
+	self.voiceType:SetValue( "Voice Type" )
 
 	self.taglineDropBox:Clear()
 	self.taglineDropBox:SetValue( "Taglines" )
