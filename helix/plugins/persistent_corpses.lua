@@ -119,6 +119,11 @@ if (SERVER) then
 
 		local bodygroups = client:GetCharacter():GetData("groups", {})
 		local entity = IsValid(client.ixRagdoll) and client.ixRagdoll or client:CreateServerRagdoll()
+
+		if(string.find(client:GetModel(), "terranova") and string.find(client:GetModel(),"police")) then
+			entity:SetModel(string.Replace(entity:GetModel(), ".mdl", "dead.mdl"))
+		end
+
 		local decayTime = ix.config.Get("corpseDecayTime", 60)
 		local uniqueID = "ixCorpseDecay" .. entity:EntIndex()
 
