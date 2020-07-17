@@ -891,3 +891,6 @@ Schema.voices.Add("CombineHLA", "", "Get in the van.", "CombineHLAComVoice/Grunt
 Schema.voices.Add("CombineHLA", "", "Behind you!", "CombineHLAComVoice/Grunt/Choreo/Grunt2/30_00517.wav")
 Schema.voices.Add("CombineHLA", "", "Probable anti-citizen. Get a scan.", "CombineHLAComVoice/Grunt/Choreo/Grunt2/30_00524.wav")
 
+Schema.voices.AddClass("CombineHLA", function(client)
+	return (client:IsCombine() and client:GetCharacter():GetVoiceType() == "HLA")
+end)
