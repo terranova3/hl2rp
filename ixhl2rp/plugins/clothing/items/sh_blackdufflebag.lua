@@ -3,7 +3,6 @@
 	without permission of its author.
 --]]
 
-ITEM.base = "base_bag";
 ITEM.name = "Black Duffle Bag";
 ITEM.model = "models/vj_props/duffle_bag.mdl"
 ITEM.description = "A black duffle bag with a long strap that allows the carrier to let the bag rest at their side."

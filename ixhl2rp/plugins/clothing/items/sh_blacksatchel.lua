@@ -3,7 +3,6 @@
 	without permission of its author.
 --]]
 
-ITEM.base = "base_satchel";
 ITEM.name = "Black Satchel";
 ITEM.model = "models/fty/items/satchel.mdl"
 ITEM.price = "20"
