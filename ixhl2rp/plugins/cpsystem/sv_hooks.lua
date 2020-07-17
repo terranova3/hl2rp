@@ -6,6 +6,9 @@
 local Schema = Schema;
 local PLUGIN = PLUGIN;
 
+util.AddNetworkString("ixCpSystemRequestTaglines")
+util.AddNetworkString("ixCpSystemReceiveTaglines")
+
 function PLUGIN:LoadData()
 	for _, v in ipairs(self:GetData() or {}) do
 		local entity = ents.Create("ix_uniformgen")
@@ -26,30 +29,27 @@ function PLUGIN:LoadData()
 		end
 	end
 
-	if(cpSystem.cache == nil) then
-		cpSystem.cache = {}
-		cpSystem.cache.taglines = {}
+	print("Loading taglines...")
 
-		local query = mysql:Select("ix_characters")
-		query:Select("faction")
-		query:Select("data")
-		query:WhereLike("faction", "metropolice")
-		query:Callback(function(result)
-			if (istable(result) and #result > 0) then
-				for k, v in pairs(result) do 
-					local data = util.JSONToTable(v.data or "[]")
+	local query = mysql:Select("ix_characters")
+	query:Select("faction")
+	query:Select("data")
+	query:WhereLike("faction", "metropolice")
+	query:Callback(function(result)
+		if (istable(result) and #result > 0) then
+			for k, v in pairs(result) do 
+				local data = util.JSONToTable(v.data or "[]")
 
-					if(data.cpTagline and data.cpID) then
-						table.insert(cpSystem.cache.taglines, {
-							tagline = data.cpTagline, 
-							id = tonumber(data.cpID)
-						})
-					end
-				end 
-			end
-		end)
-		query:Execute()
-	end
+				if(data.cpTagline and data.cpID) then
+					table.insert(cpSystem.cache.taglines, {
+						tagline = data.cpTagline, 
+						id = tonumber(data.cpID)
+					})
+				end
+			end 
+		end
+	end)
+	query:Execute()
 end
 
 function PLUGIN:SaveData()
@@ -200,12 +200,9 @@ function PLUGIN:SetupRankBodygroups(character)
 	end
 end
 
-netstream.Hook("RequestTaglineCache", function(client)
-	if((client.ixNextRequestTaglineCache or 0) > RealTime()) then
-		return
-	end
 
-	netstream.Start(client, "ReceiveTaglineCache", cpSystem.cache.taglines)
-
-	client.ixNextRequestTaglineCache = RealTime() + 2.0
+net.Receive("ixCpSystemRequestTaglines", function(length, client)
+	net.Start("ixCpSystemReceiveTaglines")
+		net.WriteTable(cpSystem.cache.taglines or {})
+	net.Send(client)
 end)

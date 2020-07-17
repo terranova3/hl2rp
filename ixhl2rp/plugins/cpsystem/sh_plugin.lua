@@ -23,7 +23,8 @@ PLUGIN.sociostatusColors = {
 };
 cpSystem = cpSystem or {}
 cpSystem.config = cpSystem.config or {}
-cpSystem.cache = cpSystem.cache or nil
+cpSystem.cache = cpSystem.cache or {}
+cpSystem.cache.taglines = cpSystem.cache.taglines or {}
 
 ix.util.Include("sv_plugin.lua")
 ix.util.Include("sv_hooks.lua")

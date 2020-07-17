@@ -101,7 +101,8 @@ function PANEL:PaintTextEntry(w, h)
 end
 
 function PANEL:Display()
-	self.taglines = self.taglines or self:GetTaglines()
+	net.Start("ixCpSystemRequestTaglines")
+	net.SendToServer()
 
 	self.voiceType:Clear()
 	self.voiceType:SetValue( "Voice Type" )
@@ -116,11 +117,23 @@ function PANEL:Display()
 		self.voiceType:AddChoice(v)
 	end
 
-	for k, v in pairs(self.taglines) do 
-		self.taglineDropBox:AddChoice(k)
-	end
-
 	self.desc:SetText(self:GetPayload("cpdesc", ""))
+
+	net.Receive("ixCpSystemReceiveTaglines", function()
+		local cache = net.ReadTable()
+	
+		cpSystem.cache.taglines = {}
+		cpSystem.cache.taglines = cache
+	
+		PrintTable(cache)
+	
+		self.taglines = self.taglines or self:GetTaglines()
+		self.sublabel:SetText("Customise your unit")
+	
+		for k, v in pairs(self.taglines) do 
+			self.taglineDropBox:AddChoice(k)
+		end
+	end)
 end
 
 function PANEL:ShouldSkip()
