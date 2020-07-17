@@ -26,6 +26,13 @@ RANK.permissions = {
     "Promote",
     "Demote",
     "Access Viewdata",
-    "Dispatch"
+    "Dispatch",
+    "Add cert",
+    "Set spec",
+    "Remove spec",
+    "Remove cert",
+    "Set CP ID",
+    "Set CP Tagline",
+    "Change wage"
 }
 
