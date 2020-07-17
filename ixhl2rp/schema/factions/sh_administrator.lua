@@ -38,8 +38,6 @@ FACTION.models = {
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 
-	character:SetCustomClass("Minister")
-	
 	inventory:Add("torso_brown_suit", 1)
 	inventory:Add("dress_pants", 1)
 end
