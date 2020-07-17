@@ -1,5 +1,15 @@
 local PANEL = {}
 local HIGHLIGHT = Color(255, 255, 255, 50)
+local exampleSounds = {
+	[1] = {
+		"npc/metropolice/vo/affirmative.wav",
+		"npc/combine_soldier/vo/overwatch.wav"
+	},
+	[2] = {
+		"HLAComVoice/Grunt/orderresponse_positive_06.wav",
+		"HLAComVoice/Grunt/calloutentity_overwatch_01.wav"
+	}
+}
 
 function PANEL:Init()
 	local parent = self
@@ -12,6 +22,14 @@ function PANEL:Init()
 	self.voiceType:Dock(TOP)
 	self.voiceType:DockMargin(0, 10, 0, 0)
 	self.voiceType.OnSelect = function( self, index, value )
+		local index = 1
+
+		if(value == "HLA") then
+			index = 2
+		end
+
+		surface.PlaySound(exampleSounds[index][math.random(1, 2)])
+		
 		parent:SetPayload("voicetype", value)
 	end
 
