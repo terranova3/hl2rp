@@ -49,10 +49,16 @@ end
 
 function PANEL:Display()
 	local faction = self:GetPayload("faction")
-	local default, override = hook.Run("GetDefaultCharName", LocalPlayer(), faction)
+	local info = ix.faction.indices[faction]
+	local default, override
+
+	if (info and info.GetDefaultName) then
+		default, override = info:GetDefaultName(LocalPlayer())
+	end
 
 	if (override) then
-		self.nameLabel:SetVisible(false)
+		self.nameLabel:SetText(default)
+		self.nameLabel:DockMargin(0, 0, 0, 10)
 		self.name:SetVisible(false)
 	else
 		if (default and not self:GetPayload("name")) then
