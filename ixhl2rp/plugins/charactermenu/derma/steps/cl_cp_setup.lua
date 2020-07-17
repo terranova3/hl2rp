@@ -5,7 +5,15 @@ function PANEL:Init()
 	local parent = self
 
 	self.label = self:AddLabel("Unit Setup")
-	self.sublabel = self:SubLabel("Build your tagline")
+	self.sublabel = self:SubLabel("Customise your unit")
+
+	self.voiceType = self:Add("DComboBox")
+	self.voiceType:SetFont("ixPluginCharTraitFont")
+	self.voiceType:Dock(TOP)
+	self.voiceType:DockMargin(0, 10, 0, 0)
+	self.voiceType.OnSelect = function( self, index, value )
+		parent:SetPayload("voicetype", value)
+	end
 
 	self.taglineDropBox = self:Add("DComboBox")
 	self.taglineDropBox:SetFont("ixPluginCharTraitFont")
@@ -66,11 +74,18 @@ end
 function PANEL:Display()
 	self.taglines = self.taglines or self:GetTaglines()
 
+	self.voiceType:Clear()
+	self.voiceType:SetValue( "Taglines" )
+
 	self.taglineDropBox:Clear()
 	self.taglineDropBox:SetValue( "Taglines" )
 
 	self.idDropBox:Clear()
 	self.idDropBox:SetValue( "IDs" )
+
+	for k, v in pairs(cpSystem.config.voiceTypes) do
+		self.voiceType:AddChoice(v)
+	end
 
 	for k, v in pairs(self.taglines) do 
 		self.taglineDropBox:AddChoice(k)

@@ -397,8 +397,12 @@ Schema.voices.Add("Dispatch", "UNIDENTIFIED", "Attention, please: Unidentified p
 Schema.voices.Add("Dispatch", "UNREST PROCEDURE", "Attention, community: Unrest procedure code is now in effect. INNOCULATE, SHIELD, PACIFY. Code: PRESSURE, SWORD, STERILIZE.", "npc/overwatch/cityvoice/f_unrestprocedure1_spkr.wav")
 Schema.voices.Add("Dispatch", "UNREST STRUCTURE", "Alert, community ground-protection units, local unrest structure detected. ASSEMBLE, ADMINISTER, PACIFY.", "npc/overwatch/cityvoice/f_localunrest_spkr.wav")
 
-Schema.voices.AddClass("Combine", function(client)
-	return client:IsCombine()
+Schema.voices.AddClass("CombineLegacy", function(client)
+	return (client:IsCombine() and client:GetCharacter():GetVoiceType() == "Legacy")
+end)
+
+Schema.voices.AddClass("CombineHLA", function(client)
+	return (client:IsCombine() and client:GetCharacter():GetVoiceType() == "HLA")
 end)
 
 Schema.voices.AddClass("Dispatch", function(client)

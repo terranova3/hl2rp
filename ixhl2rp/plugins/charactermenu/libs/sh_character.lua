@@ -66,7 +66,6 @@ do
 		alias = "Traits"
 	})
 
-	
 	ix.char.RegisterVar("cpid", {
 		OnValidate = function(self, value, payload)
 			local id = payload.cpid
@@ -81,6 +80,22 @@ do
 			return value or 0
 		end,
 		alias = "Cpid"
+	})
+
+	ix.char.RegisterVar("voicetype", {
+		OnValidate = function(self, value, payload)
+			local id = payload.voicetype
+			local faction = ix.faction.indices[payload.faction]
+
+			if(faction == "Civil Protection") then
+				if(!id) then
+					return false, "You don't have a valid voice type!"
+				end
+			end
+
+			return value or "Legacy"
+		end,
+		alias = "VoiceType"
 	})
 
 	ix.char.RegisterVar("tagline", {
