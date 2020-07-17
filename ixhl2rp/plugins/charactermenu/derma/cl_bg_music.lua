@@ -18,21 +18,10 @@ function PANEL:Init()
 			return
 		end
 
-		channel:SetVolume(self.volume or 0)
+		channel:SetVolume(0.25)
 		channel:Play()
 
 		ix.gui.music = channel
-
-		self:CreateAnimation(2, {
-			index = 10,
-			target = {volume = 1},
-
-			Think = function(animation, panel)
-				if (IsValid(ix.gui.music)) then
-					ix.gui.music:SetVolume(self.volume * 0.5)
-				end
-			end
-		})
 	end)
 end
 
