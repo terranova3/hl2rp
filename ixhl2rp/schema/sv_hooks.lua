@@ -296,7 +296,7 @@ function Schema:PlayerMessageSend(speaker, chatType, text, anonymous, receivers,
 						netstream.Start(nil, "PlaySound", info.sound)
 					else
 						speaker.bTypingBeep = nil
-						ix.util.EmitQueuedSounds(speaker, {info.sound, "NPC_MetroPolice.Radio.Off"}, nil, nil, volume)
+						ix.util.EmitQueuedSounds(speaker, {info.sound, VOCODEROFF[math.random(1, #VOCODEROFF)]}, nil, nil, volume)
 					end
 				end
 
