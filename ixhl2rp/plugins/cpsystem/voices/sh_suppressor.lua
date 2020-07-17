@@ -727,5 +727,5 @@ Schema.voices.Add("Suppressor", "CHATTER16", "**Indistinct Radio Chatter**", "HL
 
 
 Schema.voices.AddClass("Suppressor", function(client)
-    return (client:IsSuppressor() and client:GetCharacter():GetVoiceType() == "Suppressor")
+    return (client:IsCombine() and client:GetCharacter():GetVoiceType() == "Suppressor")
 end)
