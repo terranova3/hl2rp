@@ -52,55 +52,20 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 		end
 	}
 
-	options["Set Health"] = {
-		
+	options["Set Custom Class"] = {
 		function()
 			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
 			if (IsValid(client) and LocalPlayer():IsAdmin()) then
-				Derma_StringRequest("Change Character Health", "What do you want to change their health to?", client:Health(), function(text)
-					ix.command.Send("PlySetHP", client:Name(), text, "true") --Need to put ix.type.bools in quotes????
-				end, nil, "Set", "Cancel")
+				Derma_StringRequest("Change Character Class", "What do you want to change this character's name to?", client:GetCharacter():GetCustomClass(), function(text)
+					ix.command.Send("CharSetCustomClass", client:Name(), text)
+				end, nil, "Change", "Cancel")
 			end
 		end
 	}
 
-	options["Set Armor"] = {
-		
-		function()
-			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
-			if (IsValid(client) and LocalPlayer():IsAdmin()) then
-				Derma_StringRequest("Change Character Armor", "What do you want to change their armor to?", client:Armor(), function(text)
-					ix.command.Send("PlySetArmor", client:Name(), text, "true")
-				end, nil, "Set", "Cancel")
-			end
-		end
-	}
 
-	options["Kick Player"] = {
-		
-		function()
-			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
-			if (IsValid(client) and LocalPlayer():IsAdmin()) then
-				Derma_StringRequest("Kick Player", "Why do you want to kick them?", "", function(text)
-					ix.command.Send("PlyKick", client:Name(), text)
-				end, nil, "Kick", "Cancel")
-			end
-		end
-	}
 
-	options["Ban Player"] = {
-		function()
-			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
-			if (IsValid(client) and LocalPlayer():IsAdmin()) then
-				Derma_StringRequest("Ban Reason", "Why do you want to ban them?", "", function(text)
-					--ix.command.Send("PlyBan", client:Name(), text)
-					Derma_StringRequest("Ban Length","For how long do you want to ban them? 0 is permanent.","",function(text2) ix.command.Send("PlyBan", client:Name(), text2, text) end, nil)
-				end, nil, "Ban", "Cancel")
-			end
-		end
-	}
-
-		options["Change Model"] = {
+	options["Change Model"] = {
 		function()
 			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
 			if (IsValid(client) and LocalPlayer():IsAdmin()) then
@@ -160,28 +125,7 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 		end
 	end
 	}
-	if(client:Team() == FACTION_MPF) then 
-		options["CP - Set ID"] = {
-			function()
-				if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
-				if (IsValid(client) and LocalPlayer():IsAdmin()) then
-					Derma_StringRequest("Set CP ID", "What do you want to change this character's id to?", client:GetCharacter():GetData("cpID") or "", function(text)
-						ix.command.Send("CharSetCPID", client:Name(), text)
-					end, nil, "Change", "Cancel")
-				end
-			end
-		}
-		options["CP - Set Tagline"] = {
-			function()
-				if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
-				if (IsValid(client) and LocalPlayer():IsAdmin()) then
-					Derma_StringRequest("Set CP Tagline", "What do you want to change this character's tagline to?", client:GetCharacter():GetData("cpTagline") or "", function(text)
-						ix.command.Send("CharSetCPTagline", client:Name(), text)
-					end, nil, "Change", "Cancel")
-				end
-			end
-		}
-	end;
+	
 	for k, v in pairs(options) do
 		menu:AddOption(k,v[1])
 	end
