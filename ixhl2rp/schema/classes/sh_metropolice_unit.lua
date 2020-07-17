@@ -1,6 +1,7 @@
 CLASS.name = "Metropolice Unit"
 CLASS.faction = FACTION_MPF
 CLASS.color = Color(50, 100, 150)
+CLASS.order = 2
 
 function CLASS:CanSwitchTo(client)
 	local name = client:Name()

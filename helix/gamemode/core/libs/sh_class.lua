@@ -41,6 +41,7 @@ function ix.class.LoadFromDir(directory)
 
 		-- Set up a global table so the file has access to the class table.
 		CLASS = {index = index, uniqueID = niceName}
+			CLASS.order = 10
 			CLASS.name = "Unknown"
 			CLASS.description = "No description available."
 			CLASS.limit = 0

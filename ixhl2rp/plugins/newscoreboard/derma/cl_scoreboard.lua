@@ -141,29 +141,30 @@ function PANEL:Rebuild()
 
 		if(character) then
 			local class = character:GetCustomClass() or character:GetClassName() or "ERROR"
+			local priority = ix.class.list[character:GetClass()].order or 10
 
 			if (!availableClasses[class]) then
-				availableClasses[class] = {};
+				availableClasses[class] = {
+					players = {},
+					priority = priority
+				};
 			end;
 				
-			availableClasses[class][#availableClasses[class] + 1] = v;
+			table.insert(availableClasses[class].players, v)
 		end;
 	end;
-	
-	for k, v in pairs(availableClasses) do
-		if (#v > 0) then
-			classes[#classes + 1] = {name = k, players = v};
 
+	for k, v in pairs(availableClasses) do
+		if (#v.players > 0) then
+			classes[#classes + 1] = {name = k, priority = v.priority, players = v.players};
 		end;
 	end;
 	
 	table.sort(classes, function(a, b)
-		return a.name < b.name;
+		return a.priority < b.priority;
 	end);
 
 	if (table.Count(classes) > 0) then
-		self.panelList:AddItem(label);
-
 		for k, v in pairs(classes) do
 			local characterForm = vgui.Create("DForm", self);
 			local panelList = vgui.Create("DPanelList", self);
@@ -202,11 +203,6 @@ function PANEL:Rebuild()
 				surface.DrawText(v.name)
 			end;
 		end;
-	else
-		local label = vgui.Create("ixInfoText", self);
-			label:SetText("There are no players to display.");
-			label:SetInfoColor("orange");
-		self.panelList:AddItem(label);
 	end;
 	
 	self.panelList:InvalidateLayout(true);
