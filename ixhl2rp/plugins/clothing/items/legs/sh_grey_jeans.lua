@@ -5,7 +5,7 @@
 
 ITEM.base = "base_legs";
 ITEM.name = "Grey Jeans";
-ITEM.model = "models/fty/items/lightgreypants.mdl"
+ITEM.price = "15"
 ITEM.description = "Comfortable, grey coloured stretch-fit jeans. A tag on the inside of the rear of the of the pants reads 'CWU-Approved'."
 ITEM.bodyGroups = {
 	["legs"] = 1
