@@ -185,14 +185,23 @@ function PANEL:Rebuild()
 			end;
 			
 			self.panelList:AddItem(characterForm);
+			--self.panelList:SetPos(0, -10)
 			
 			panelList:SetAutoSize(true);
 			panelList:SetSpacing(2);
 			
 			characterForm:SetName("");
-			characterForm:AddItem(panelList);
-			characterForm:SetPadding(4); 
-			characterForm.Header:SetSize( 30, 30 )
+			characterForm:AddItem(panelList)
+			characterForm:SetPadding(4);
+			characterForm.Think = function()
+				if(!self:GetExpanded()) then
+					characterForm.Header:SetSize(30, 30)
+				else
+					characterForm.Header:SetSize(20, 20)
+				end
+			end
+
+			--characterForm.Header:SetSize( 30, 30 )
 
 			function characterForm:Paint(w, h)
 				derma.SkinFunc("PaintCategoryPanel", self, "", v.players[1]:GetCharacter():GetClassColor())

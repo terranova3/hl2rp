@@ -95,7 +95,7 @@ function SWEP:DrawWorldModel()
 		
 		if (attachment and attachment.Pos) then
 			cam.Start3D( EyePos(), EyeAngles() );
-				render.SetMaterial(STUNSTICK_GLOW_MATERIAL2);
+				render.SetMaterial(self.ThirdPersonGlowSprite);
 				render.DrawSprite( attachment.Pos, 32 + scale, 32 + scale, Color(0, 132, 237, 255 ) );
 			cam.End3D();
 		end;
