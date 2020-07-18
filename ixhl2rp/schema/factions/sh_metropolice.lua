@@ -5,7 +5,21 @@ FACTION.color = Color(50, 100, 150)
 FACTION.pay = 10
 FACTION.isDefault = false
 FACTION.isGloballyRecognized = true
-FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPolice.RunFootstepRight"}
+FACTION.runSounds = {
+	[0] = {
+		"HLAComVoice/footsteps/metrocop/foley_step_01.wav",
+		"HLAComVoice/footsteps/metrocop/foley_step_03.wav",
+		"HLAComVoice/footsteps/metrocop/foley_step_05.wav",
+		"HLAComVoice/footsteps/metrocop/foley_step_07.wav",
+		"HLAComVoice/footsteps/metrocop/foley_step_09.wav"
+	},
+	[1] = {
+		"HLAComVoice/footsteps/metrocop/foley_step_02.wav",
+		"HLAComVoice/footsteps/metrocop/foley_step_04.wav",
+		"HLAComVoice/footsteps/metrocop/foley_step_06.wav",
+		"HLAComVoice/footsteps/metrocop/foley_step_08.wav"
+	},
+}
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
