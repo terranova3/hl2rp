@@ -51,7 +51,7 @@ ix.command.Add("SetSociostatus", {
                 client:Notify(string.format("You are not a part of the '%s' faction.", target:GetFaction()));
             end;
         else
-            client:Notify(string.format("This command requires an access level of %s. Your access level is %s.", self.accessLevel, PLUGIN:GetAccessLevel(client:GetCharacter())));
+            client:Notify("This command requires the Set sociostatus permission.");
         end;
 	end;
 })
