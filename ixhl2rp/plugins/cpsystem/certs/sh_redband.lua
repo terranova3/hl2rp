@@ -4,12 +4,12 @@
 --]]
 
 -- Interface display options, used for HUD and various other UI elements.
-CERT.name = "Specialty Ordnance Usage";
-CERT.description = "Deployment and maintenance of manhacks, turrets and defensive emplacements.";
+CERT.name = "Redband";
+CERT.description = "Operation and maintenance of high capacity mobile weaponry, high calibre mounted weaponry and lethal explosives.";
 CERT.icon = "icon16/emoticon_smile.png"
 
 -- This is used to define the start of the colour 'group' for the armband bodygroups.
-CERT.offset = 15
+CERT.offset = 20
 
 -- The 'faction object' of the faction that can obtain the certification
 CERT.faction = FACTION_MPF

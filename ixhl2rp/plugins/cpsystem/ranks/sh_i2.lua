@@ -23,9 +23,10 @@ RANK.bodygroups = {
 
 -- Permissions the rank has access to.
 RANK.permissions = {
-    "Promote",
-    "Demote",
     "Access Viewdata",
-    "Dispatch"
+	"Add cert",
+    "Set spec",
+    "Remove spec",
+    "Remove cert",
 }
 

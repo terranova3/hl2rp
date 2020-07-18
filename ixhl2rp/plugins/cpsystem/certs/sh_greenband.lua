@@ -4,8 +4,8 @@
 --]]
 
 -- Interface display options, used for HUD and various other UI elements.
-CERT.name = "Emergency Response Application Training";
-CERT.description = "Basic first-aid and triage.";
+CERT.name = "Greenband";
+CERT.description = "Responsible in the fields of evidence keeping, information gathering and other extra-persuasive techniques.";
 CERT.icon = "icon16/emoticon_smile.png"
 
 -- This is used to define the start of the colour 'group' for the armband bodygroups.
