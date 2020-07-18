@@ -166,27 +166,6 @@ function PANEL:Init()
 	end)
 
 	netstream.Start("CharacterPanelUpdate")
-	netstream.Hook("ShowCharacterPanel", function(show)
-		local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
-
-		if(!show) then
-			if(IsValid(ix.gui.charPanel)) then
-				ix.gui.charPanel:Remove()
-			end
-
-			return
-		end
-
-		if(!IsValid(ix.gui.charPanel) and IsValid(ix.gui.containerCharPanel)) then
-			local cPanel = ix.gui.containerCharPanel:Add("ixCharacterPane")
-
-			ix.gui.charPanel = cPanel
-		end
-
-		if (charPanel) then
-			ix.gui.charPanel:SetCharPanel(charPanel)
-		end
-	end)
 	
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
 end
@@ -438,5 +417,27 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 		self.previewY = y
 	end
 end
+
+netstream.Hook("ShowCharacterPanel", function(show)
+	local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
+
+	if(!show) then
+		if(IsValid(ix.gui.charPanel)) then
+			ix.gui.charPanel:Remove()
+		end
+
+		return
+	end
+
+	if(!IsValid(ix.gui.charPanel) and IsValid(ix.gui.containerCharPanel)) then
+		local cPanel = ix.gui.containerCharPanel:Add("ixCharacterPane")
+
+		ix.gui.charPanel = cPanel
+	end
+
+	if (charPanel) then
+		ix.gui.charPanel:SetCharPanel(charPanel)
+	end
+end)
 
 vgui.Register("ixCharacterEquipmentSlot", PANEL, "DPanel")

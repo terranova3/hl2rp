@@ -23,10 +23,10 @@ function PLUGIN:AdjustPlayer(event, client)
             netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
         end;
 
+        ix.charPanel.Update(client)
+
         character:UpdateCPStatus();
     end;
-    
-    ix.charPanel.Update(client)
 end;
 
 -- Returns if a tagline exists from the tagline config table.
