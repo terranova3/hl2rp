@@ -18,7 +18,7 @@ function PANEL:Init()
 	self.sublabel = self:SubLabel("Loading...")
 
 	self.container = self:Add("DPanel")
-	self.voiceType:DockMargin(0, 10, 0, 0)
+	self.container:DockMargin(0, 10, 0, 0)
 	self.container:Dock(TOP)
 	self.container.Paint = function()
 		ix.util.DrawBlur(self.container)
