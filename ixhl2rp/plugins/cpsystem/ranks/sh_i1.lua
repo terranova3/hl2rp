@@ -26,6 +26,7 @@ RANK.permissions = {
     "Promote",
     "Demote",
     "Access Viewdata",
+    "Set sociostatus",
     "Dispatch"
 }
 

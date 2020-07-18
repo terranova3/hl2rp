@@ -33,6 +33,7 @@ RANK.permissions = {
     "Remove cert",
     "Set CP ID",
     "Set CP Tagline",
+    "Set sociostatus",
     "Change wage"
 }
 
