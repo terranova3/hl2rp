@@ -30,5 +30,6 @@ RANK.permissions = {
     "Set spec",
     "Remove spec",
     "Remove cert",
+	"Set sociostatus",
 }
 
