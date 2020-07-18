@@ -6,15 +6,14 @@
 local PLUGIN = PLUGIN
 
 ix.command.Add("SetSociostatus", {
-    permission = "Set sociostatus",
 	arguments = {
 		ix.type.string
 	},
     OnRun = function(self, client, text)
         local character = client:GetCharacter();
 
-        if(PLUGIN:GetAccessLevel(character) >= self.accessLevel) then
-            if(PLUGIN:IsMetropolice(character)) then
+        if(ix.ranks.HasPermission(character:GetRank().uniqueID, "Set sociostatus")) then
+            if(character:IsMetropolice()) then
                 local tryingFor = string.upper(text);
 
                 if (not PLUGIN.sociostatusColors[tryingFor]) then
