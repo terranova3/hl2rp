@@ -4,7 +4,7 @@ end
 
 ITEM.name = "Backpack"
 ITEM.description = "A backpack to store items."
-ITEM.model = "models/props_c17/SuitCase001a.mdl"
+ITEM.model = "models/pack/civil/backpack2.mdl"
 ITEM.category = "Storage"
 ITEM.width = 2
 ITEM.height = 3
