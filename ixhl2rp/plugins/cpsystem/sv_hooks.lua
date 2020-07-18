@@ -124,7 +124,14 @@ function Schema:PlayerFootstep(client, position, foot, soundName, volume)
 	end;
 
 	if (factionTable.runSounds and client:IsRunning()) then
-		client:EmitSound(factionTable.runSounds[foot]);
+		if(istable(factionTable.runSounds[foot])) then
+			local rand = math.random(1, #factionTable.runSounds[foot])
+
+			client:EmitSound(factionTable.runSounds[foot][rand])
+		else
+			client:EmitSound(factionTable.runSounds[foot]);
+		end
+
 		return true;
 	end
 
