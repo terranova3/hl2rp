@@ -15,12 +15,21 @@ function PANEL:Init()
 	local parent = self
 
 	self.label = self:AddLabel("Unit Setup")
-	self.sublabel = self:SubLabel("Customise your unit")
+	self.sublabel = self:SubLabel("Loading...")
 
-	self.voiceType = self:Add("DComboBox")
+	self.container = self:Add("DPanel")
+	self.voiceType:DockMargin(0, 10, 0, 0)
+	self.container:Dock(TOP)
+	self.container.Paint = function()
+		ix.util.DrawBlur(self.container)
+		surface.SetDrawColor(0, 0, 0, 100)
+		surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+	end
+
+	self.voiceType = self.container:Add("DComboBox")
 	self.voiceType:SetFont("ixPluginCharTraitFont")
 	self.voiceType:Dock(TOP)
-	self.voiceType:DockMargin(0, 10, 0, 0)
+	self.voiceType:DockMargin(4, 10, 4, 0)
 	self.voiceType.OnSelect = function( self, index, value )
 		local index = 1
 
@@ -37,10 +46,10 @@ function PANEL:Init()
         surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
     end
 
-	self.taglineDropBox = self:Add("DComboBox")
+	self.taglineDropBox = self.container:Add("DComboBox")
 	self.taglineDropBox:SetFont("ixPluginCharTraitFont")
 	self.taglineDropBox:Dock(TOP)
-	self.taglineDropBox:DockMargin(0, 10, 0, 0)
+	self.taglineDropBox:DockMargin(4, 10, 4, 0)
 	self.taglineDropBox.OnSelect = function( self, index, value )
 		parent.selectedTagline = value;
 		parent:SetPayload("tagline", value)
@@ -49,12 +58,17 @@ function PANEL:Init()
 	self.taglineDropBox.Paint = function()
         surface.SetDrawColor(255,255,255,5)
         surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
-    end
+	end
+	self.taglineDropBox.Think = function()
+		if(IsValid(self.taglineDropBox.Menu)) then
+			self.taglineDropBox.Menu:SetMaxHeight(256)
+		end
+	end
 
-	self.idDropBox = self:Add("DComboBox")
+	self.idDropBox = self.container:Add("DComboBox")
 	self.idDropBox:SetFont("ixPluginCharTraitFont")
 	self.idDropBox:Dock(TOP)
-	self.idDropBox:DockMargin(0, 10, 0, 0)
+	self.idDropBox:DockMargin(4, 10, 4, 0)
 	self.idDropBox.OnSelect = function( self, index, value )
 		parent:SetPayload("cpid", value)
 	end
@@ -63,8 +77,11 @@ function PANEL:Init()
         surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
 	end
 	
-	self.sublabel = self:SubLabel("Describe your unit")
-	self.sublabel:DockMargin(0,20,0,0)
+	self.container:InvalidateLayout(true)
+	self.container:SizeToChildren(false, true)
+
+	self.descLabel = self:SubLabel("Describe your unit")
+	self.descLabel:DockMargin(0,20,0,0)
 	
 	self.desc = self:AddTextEntry("cpdesc")
 	self.desc:SetTall(128)
@@ -127,7 +144,7 @@ function PANEL:Display()
 		PrintTable(cache)
 	
 		self.taglines = self.taglines or self:GetTaglines()
-		self.sublabel:SetText("Customise your unit")
+		self.sublabel:SetText("CUSTOMISE YOUR UNIT")
 	
 		for k, v in pairs(self.taglines) do 
 			self.taglineDropBox:AddChoice(k)
