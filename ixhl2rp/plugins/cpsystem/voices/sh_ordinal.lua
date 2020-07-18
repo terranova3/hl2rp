@@ -758,5 +758,5 @@ Schema.voices.Add("Ordinal", "EXECUTING RESPONSE", "Executing full response.", "
 
 
 Schema.voices.AddClass("Ordinal", function(client)
-    return (client:IsCombine() and client:GetCharacter():GetVoiceType() == "Ordinal")
+    return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "Ordinal")
 end)

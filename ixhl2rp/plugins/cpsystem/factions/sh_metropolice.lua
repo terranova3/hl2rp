@@ -54,8 +54,9 @@ function FACTION:OnCharacterCreated(client, character)
 	character:SetData("cpCitizenName", character:GetName());
 	character:SetData("cpCitizenDesc", character:GetDescription())
 	character:SetData("cpDesc", character:GetCpdesc())
-	character:SetData("cpTagline", character:GetTagline());
-	character:SetData("cpID", character:GetCpid());
+	character:SetData("cpTagline", character:GetTagline() or "ERROR");
+	character:SetData("cpVoiceType", character:GetVoiceType() or "Legacy")
+	character:SetData("cpID", character:GetCpid() or 1);
 	character:SetData("cid", cid);
 
 	inventory:Add("cp_standard", 1, {

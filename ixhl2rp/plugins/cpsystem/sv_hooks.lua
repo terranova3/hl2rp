@@ -85,9 +85,11 @@ function PLUGIN:RemoveFromCache(character)
 		local tagline = character:GetData("cpTagline")
 		local id = character:GetData("cpID")
 
-		for k, v in pairs(cpSystem.cache.taglines) do
-			if(v.tagline == tagline and v.id == id) then
-				cpSystem.cache.taglines[k] = nil
+		if(id and tagline) then
+			for k, v in pairs(cpSystem.cache.taglines) do
+				if(v.tagline == tagline and v.id == id) then
+					cpSystem.cache.taglines[k] = nil
+				end
 			end
 		end
 	end

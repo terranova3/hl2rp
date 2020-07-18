@@ -935,5 +935,5 @@ Schema.voices.Add("CombineHLA", "PROBABLE ANTICITIZEN", "Probable anti-citizen. 
 
 
 Schema.voices.AddClass("CombineHLA", function(client)
-	return (client:IsCombine() and client:GetCharacter():GetVoiceType() == "HLA")
+	return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "HLA")
 end)

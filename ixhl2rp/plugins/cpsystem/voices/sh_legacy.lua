@@ -374,5 +374,5 @@ Schema.voices.Add("Combine", "YOU CAN GO", "Alright, you can go.", "npc/metropol
 Schema.voices.Add("Combine", "ZONE", "Zone!", "npc/metropolice/vo/zone.wav")
 
 Schema.voices.AddClass("CombineLegacy", function(client)
-	return (client:IsCombine() and client:GetCharacter():GetVoiceType() == "Legacy")
+	return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "Legacy")
 end)
