@@ -34,4 +34,8 @@ ix.util.IncludeDir(PLUGIN.folder .. "/config", true);
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
 ix.util.IncludeDir(PLUGIN.folder .. "/voices", true)
+
 ix.anim.SetModelClass("models/ma/hla/terranovapolice.mdl", "metrocop");
+ix.anim.SetModelClass("models/ma/hla/terranovapolicedead.mdl", "metrocop");
+ix.anim.SetModelClass("models/ma/hla/terranovafemalepolice.mdl", "metrocop");
+ix.anim.SetModelClass("models/ma/hla/terranovafemalepolicedead.mdl", "metrocop");
