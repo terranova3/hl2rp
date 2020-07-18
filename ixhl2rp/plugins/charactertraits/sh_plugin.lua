@@ -11,6 +11,7 @@ PLUGIN.author = "Adolphus";
 
 ix.util.Include("meta/sh_trait.lua")
 ix.util.Include("sv_hooks.lua")
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 
 PLUGIN.categories = {
 	"physical",
@@ -26,3 +27,7 @@ function PLUGIN:OnLoaded()
 		end
 	end
 end
+
+netstream.Hook("ViewCharTraits", function(target)
+	vgui.Create("ixCharTraits"):Build(target)
+end)
