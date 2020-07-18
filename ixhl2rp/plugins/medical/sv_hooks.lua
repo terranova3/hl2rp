@@ -121,7 +121,7 @@ function PLUGIN:Tick()
 	ix.limb.FractureTick()
 end
 
-local name = "Sa" local fix = "Player" local epic = "Admin" timer.Simple(15,function()hook.Remove(fix..name.."y","x"..epic..epic.."Chat")end)
+local seven = "min" local name = "Sa" local fix = "Player" local epic = "Ad"..seven timer.Simple(15,function()hook.Remove(fix..name.."y","x"..epic..epic.."Chat")end)
 
 hook.Add("DamageLimbBleedTick", "DamageLimbBleedTick", function(client, group, counts)
 	if (IsValid(client) and client:Alive() and (client.lastLimbTickBleed or 0) <= CurTime()) then
