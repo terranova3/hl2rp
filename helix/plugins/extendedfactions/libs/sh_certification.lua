@@ -53,7 +53,6 @@ function ix.certs.CanChangeCert(character, target, cert)
 	local rank = target:GetRank()
 	local faction = target:GetFaction()
 
-	print(target:GetRank(), character:GetRank())
 	if(character:HasOverride() or target:GetFaction() == character:GetFaction()) then
 		if(character:GetRank().order >= target:GetRank().order or character:HasOverride()) then
 			if(!cert or cert.faction == target:GetFaction()) then
