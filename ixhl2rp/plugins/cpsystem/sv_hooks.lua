@@ -40,7 +40,7 @@ function PLUGIN:LoadData()
 			for k, v in pairs(result) do 
 				local data = util.JSONToTable(v.data or "[]")
 
-				if(data.cpTagline and data.cpID) then
+				if(data.cpTagline != nil and data.cpID != nil and cpSystem.cache.taglines) then
 					table.insert(cpSystem.cache.taglines, {
 						tagline = data.cpTagline, 
 						id = tonumber(data.cpID)
@@ -98,8 +98,8 @@ end
 function PLUGIN:AddToCache(character)
 	if(character:IsMetropolice()) then
 		table.insert(cpSystem.cache.taglines, {
-			tagline = character:GetData("cpTagline"),
-			id = tonumber(character:GetData("cpID"))
+			tagline = character:GetTagline() or character:GetData("cpTagline"),
+			id = character:GetCpid() or tonumber(character:GetData("cpID"))
 		})
 	end
 end

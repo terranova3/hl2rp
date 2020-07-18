@@ -85,7 +85,6 @@ function PANEL:AddTextEntry(payloadName)
 	entry.payloadName = payloadName
 	entry.OnKeyCodeTyped = function(name, keyCode)
 		if (keyCode == KEY_TAB) then
-			entry:onTabPressed()
 			return true
 		end
 	end
