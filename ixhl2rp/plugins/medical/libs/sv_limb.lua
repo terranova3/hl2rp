@@ -25,11 +25,11 @@ function ix.limb.TakeDamage(client, group, info, diff)
             local canBleed = ix.limb.config.createBleed[damageType] or false
             local canFracture = ix.limb.config.createFracture[damageType] or false
 
-            if(canBleed and (damage * diff or 1) >= limbHitgroup.bleedThreshold) then
+            if(canBleed and (damage * (diff or 1)) >= limbHitgroup.bleedThreshold) then
                 ix.limb.SetBleeding(character, group, true)
             end
 
-            if(canFracture and (damage * diff or 1) >= limbHitgroup.fractureThreshold) then
+            if(canFracture and (damage * (diff or 1)) >= limbHitgroup.fractureThreshold) then
                 ix.limb.SetFracture(character, group, true)
             end
         end

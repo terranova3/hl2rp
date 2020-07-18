@@ -4,21 +4,6 @@
 --]]
 
 local PLUGIN = PLUGIN
-local HIGHLIGHT = Color(255, 255, 255, 50)
-
-net.Receive("ixPropertyAddDerma", function()
-    local doors = net.ReadTable()
-    local sections = net.ReadTable()
-
-    if(IsValid(ix.gui.propertyCreate)) then
-        ix.gui.propertyCreate:Remove()
-    end
-
-    ix.gui.propertyCreate = vgui.Create("ixPropertyCreate")
-    ix.gui.propertyCreate:Build(doors, sections)
-
-    LocalPlayer().selectedDoors = nil
-end)
 
 PANEL = {}
 
@@ -71,72 +56,9 @@ function PANEL:Think()
 	self:SetPos( (scrW / 2) - (self:GetWide() / 2), (scrH / 2) - (self:GetTall() / 2) );
 end;
 
-function PANEL:Build(doors, sections)
-    self.doors = doors
-    self.sections = sections
-
-    PrintTable(self.sections)
-    self:AddLabel("Select property type")
-
-    self.typeDropBox = self:AddComboBox("Property type")
-    self.typeDropBox.OnSelect = function( self, index, value )
-        self:GetParent():SetType(value)
-    end
-
-    for k, v in pairs(ix.property.types) do 
-        self.typeDropBox:AddChoice(v)
-    end
-
-    self.property = self:Add("DPanel")
-	self.property:Dock(FILL)
-    self.property:DockMargin(4,4,4,4)
-    
-    self.complete = self:Add("DButton")
-    self.complete:Dock(BOTTOM)
-    self.complete:DockMargin(4,4,4,4)
-    self.complete:SetText("Complete")
-    self.complete:SetFont("ixPluginCharTraitFont")
-    self.complete:SetTall(32)
-
+function PANEL:Build(target)
+    self.target = target
 	self:SetVisible(true)
-end
-
-function PANEL:SetType(propertyType)
-    local parent = self
-
-    self.type = propertyType
-    self.property:Clear()
-
-    self.property:Add(self:AddLabel(propertyType))
-
-    if(propertyType == "Residential") then
-        self.property:Add(self:AddLabel("Select section", false, true))
-
-        self.apartmentBlock = self.property:Add(self:AddComboBox("Select section"))
-        self.apartmentBlock.OnSelect = function( self, index, value )
-            self.apartmentBlock = value
-        end
-
-        for k, v in pairs(self.sections[propertyType]) do
-            self.apartmentBlock:AddChoice(v.name)
-        end
-    elseif(propertyType == "Business") then
-        self.property:Add(self:AddLabel("Business"))
-    end
-
-    self.property:Add(self:AddLabel("Rent", false, true))
-
-    self.rent = self.property:Add("DNumberWang");
-    self.rent:Dock(TOP)
-    self.rent:DockMargin(4,4,4,4)
-    self.rent:SetMinMax(1, 500);
-    self.rent:SetValue(35);
-    self.rent.Paint = function()
-        surface.SetDrawColor(255,255,255,5)
-        surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
-
-        ix.util.DrawText(self.rent:GetValue(), 0, 0, color_white, 0, 0, "ixPluginCharTraitFont")
-    end
 end
 
 function PANEL:OnRemove()
