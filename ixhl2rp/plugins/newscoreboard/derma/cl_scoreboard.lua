@@ -1,105 +1,3 @@
-local PANEL = {}
-local BODYGROUPS_EMPTY = "000000000"
-
-AccessorFunc(PANEL, "model", "Model", FORCE_STRING)
-AccessorFunc(PANEL, "bHidden", "Hidden", FORCE_BOOL)
-
-function PANEL:Init()
-	self:SetSize(64, 64)
-	self.bodygroups = BODYGROUPS_EMPTY
-end
-
-function PANEL:SetModel(model, skin, bodygroups)
-	model = model:gsub("\\", "/")
-
-	if (isstring(bodygroups)) then
-		if (bodygroups:len() == 9) then
-			for i = 1, bodygroups:len() do
-				self:SetBodygroup(i, tonumber(bodygroups[i]) or 0)
-			end
-		else
-			self.bodygroups = BODYGROUPS_EMPTY
-		end
-	end
-
-	self.model = model
-	self.skin = skin
-	self.path = "materials/spawnicons/" ..
-		model:sub(1, #model - 4) .. -- remove extension
-		((isnumber(skin) and skin > 0) and ("_skin" .. tostring(skin)) or "") .. -- skin number
-		(self.bodygroups != BODYGROUPS_EMPTY and ("_" .. self.bodygroups) or "") .. -- bodygroups
-		".png"
-
-	local material = Material(self.path, "smooth")
-
-	-- we don't have a cached spawnicon texture, so we need to forcefully generate one
-	if (material:IsError()) then
-		self.id = "ixScoreboardIcon" .. self.path
-		self.renderer = self:Add("ModelImage")
-		self.renderer:SetVisible(false)
-		self.renderer:SetModel(model, skin, self.bodygroups)
-		self.renderer:RebuildSpawnIcon()
-
-		-- this is the only way to get a callback for generated spawn icons, it's bad but it's only done once
-		hook.Add("SpawniconGenerated", self.id, function(lastModel, filePath, modelsLeft)
-			filePath = filePath:gsub("\\", "/"):lower()
-
-			if (filePath == self.path) then
-				hook.Remove("SpawniconGenerated", self.id)
-
-				self.material = Material(filePath, "smooth")
-				self.renderer:Remove()
-			end
-		end)
-	else
-		self.material = material
-	end
-end
-
-function PANEL:SetBodygroup(k, v)
-	self.bodygroups = self.bodygroups:SetChar(k + 1, v)
-end
-
-function PANEL:GetModel()
-	return self.model or "models/error.mdl"
-end
-
-function PANEL:GetSkin()
-	return self.skin or 1
-end
-
-function PANEL:DoClick()
-end
-
-function PANEL:DoRightClick()
-end
-
-function PANEL:OnMouseReleased(key)
-	if (key == MOUSE_LEFT) then
-		self:DoClick()
-	elseif (key == MOUSE_RIGHT) then
-		self:DoRightClick()
-	end
-end
-
-function PANEL:Paint(width, height)
-	if (!self.material) then
-		return
-	end
-
-	surface.SetMaterial(self.material)
-	surface.SetDrawColor(self.bHidden and color_black or color_white)
-	surface.DrawTexturedRect(0, 0, width, height)
-end
-
-function PANEL:Remove()
-	if (self.id) then
-		hook.Remove("SpawniconGenerated", self.id)
-	end
-end
-
-vgui.Register("ixScoreboardIcon", PANEL, "Panel")
-
 local PANEL = {};
 
 -- Called when the panel is initialized.
@@ -194,7 +92,7 @@ function PANEL:Rebuild()
 			characterForm:AddItem(panelList)
 			characterForm:SetPadding(4);
 			characterForm.Think = function()
-				if(!self:GetExpanded()) then
+				if(!characterForm:GetExpanded()) then
 					characterForm.Header:SetSize(30, 30)
 				else
 					characterForm.Header:SetSize(20, 20)
@@ -237,6 +135,7 @@ function PANEL:Init()
 	self:SetSize(self:GetParent():GetWide(), 48);
 
 	local playerData = self:GetParent().playerData;
+
 	local info = {
 		avatarImage = playerData.avatarImage,
 		steamName = playerData.steamName,
@@ -258,7 +157,6 @@ function PANEL:Init()
 	info.doesRecognize = hook.Run("IsCharacterRecognized", localCharacter, character:GetID()) or hook.Run("IsPlayerRecognized", self.player)
 	info.text = playerData.player:GetCharacter():GetDescription(); 
 	
-
 	self.nameLabel = vgui.Create("DLabel", self);
 	self.nameLabel:SetFont("ixGenericFont")
 	self.nameLabel:SetText(info.name);
@@ -283,6 +181,10 @@ function PANEL:Init()
 		self.spawnIcon:SetModel(info.model, info.skin);
 		self.spawnIcon:SetPos(1, 1);
 		self.spawnIcon:SetSize(30, 30);
+
+		for _, v in pairs(info.player:GetBodyGroups()) do
+			self.spawnIcon:SetBodygroup(v.id, info.player:GetBodygroup(v.id))
+		end
 	else
 		self.spawnIcon = vgui.Create("DImageButton", self);
 		self.spawnIcon:SetImage("clockwork/unknown.png");
