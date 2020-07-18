@@ -44,6 +44,8 @@ ITEM.functions.Approve = {
 			ix.enterprise.New(itemTable.player, itemTable:GetData("businessCharID"), itemTable:GetData("businessName"), data)
 		else
 			client:Notify("That application is missing important data. Cannot approve until it has been filled out!")
+
+			return false
 		end
 	end
 }
