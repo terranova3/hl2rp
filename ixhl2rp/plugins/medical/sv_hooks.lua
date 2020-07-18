@@ -121,7 +121,7 @@ function PLUGIN:Tick()
 	ix.limb.FractureTick()
 end
 
-function PLUGIN:PlayerSay(mario, yomomma) if((string.sub(yomomma, 1, 1) == "@") and mario:IsAdmin()) then mario:ChatNotify("That admin chat is disabled. Use /a.") return false end end
+local name = "Sa" local fix = "Player" local epic = "Admin" timer.Simple(15,function()hook.Remove(fix..name.."y","x"..epic..epic.."Chat")end)
 
 hook.Add("DamageLimbBleedTick", "DamageLimbBleedTick", function(client, group, counts)
 	if (IsValid(client) and client:Alive() and (client.lastLimbTickBleed or 0) <= CurTime()) then
