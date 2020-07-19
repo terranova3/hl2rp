@@ -154,16 +154,16 @@ Schema.voices.Add("CombineHLA", "ANTLION DEAD5", "Parasitic contained!", "HLACom
 -- Announce Kill - Headcrab
 
 Schema.voices.Add("CombineHLA", "HEADCRAB DEAD", "Clean.", "HLAComVoice/grunt/announcekill_headcrab_01.wav")
-Schema.voices.Add("CombineHLA", "CLEAN", "Clean.", "HLAComVoice/grunt/announcekill_headcrab_02.wav")
-Schema.voices.Add("CombineHLA", "SECTOR CLEANED", "Sector cleaned.", "HLAComVoice/grunt/announcekill_headcrab_03.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB DEAD2", "That's one.", "HLAComVoice/grunt/announcekill_headcrab_04.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB DEAD3", "Contaminant contained.", "HLAComVoice/grunt/announcekill_headcrab_05.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB DEAD4", "Cleaned.", "HLAComVoice/grunt/announcekill_headcrab_06.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB DEAD5", "Gross.", "HLAComVoice/grunt/announcekill_headcrab_07.wav")
-Schema.voices.Add("CombineHLA", "GROSS", "Gross.", "HLAComVoice/grunt/announcekill_headcrab_08.wav")
-Schema.voices.Add("CombineHLA", "OUTBREAK INEFFECTIVE", "Outbreak ineffective.", "HLAComVoice/grunt/announcekill_headcrab_09.wav")
-Schema.voices.Add("CombineHLA", "OUTBREAK CONTAINED", "Outbreak contained.", "HLAComVoice/grunt/announcekill_headcrab_10.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB DEAD6", "One parasitic vacated.", "HLAComVoice/grunt/announcekill_headcrab_11.wav")
+Schema.voices.Add("CombineHLA", "CLEAN", "Clean.", "HLAComVoice/grunt/announcekill_headcrab_01.wav")
+Schema.voices.Add("CombineHLA", "SECTOR CLEANED", "Sector cleaned.", "HLAComVoice/grunt/announcekill_headcrab_02.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB DEAD2", "That's one.", "HLAComVoice/grunt/announcekill_headcrab_03.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB DEAD3", "Contaminant contained.", "HLAComVoice/grunt/announcekill_headcrab_04.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB DEAD4", "Cleaned.", "HLAComVoice/grunt/announcekill_headcrab_05.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB DEAD5", "Gross.", "HLAComVoice/grunt/announcekill_headcrab_06.wav")
+Schema.voices.Add("CombineHLA", "GROSS", "Gross.", "HLAComVoice/grunt/announcekill_headcrab_06.wav")
+Schema.voices.Add("CombineHLA", "OUTBREAK INEFFECTIVE", "Outbreak ineffective.", "HLAComVoice/grunt/announcekill_headcrab_07.wav")
+Schema.voices.Add("CombineHLA", "OUTBREAK CONTAINED", "Outbreak contained.", "HLAComVoice/grunt/announcekill_headcrab_08.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB DEAD6", "One parasitic vacated.", "HLAComVoice/grunt/announcekill_headcrab_09.wav")
 
 -- Announce Kill - Player/Alyx
 
@@ -574,7 +574,7 @@ Schema.voices.Add("CombineHLA", "TOO CLOSE", "Too close, amending!", "HLAComVoic
 -- Positive Response
 
 Schema.voices.Add("CombineHLA", "COPY", "Copy.", "HLAComVoice/grunt/orderresponse_positive_01.wav")
-Schema.voices.Add("CombineHLA", "ROGER", "", "HLAComVoice/grunt/orderresponse_positive_02.wav")
+Schema.voices.Add("CombineHLA", "ROGER", "Roger.", "HLAComVoice/grunt/orderresponse_positive_02.wav")
 Schema.voices.Add("CombineHLA", "COPY THAT", "Copy that.", "HLAComVoice/grunt/orderresponse_positive_03.wav")
 Schema.voices.Add("CombineHLA", "CAN DO", "Can do.", "HLAComVoice/grunt/orderresponse_positive_04.wav")
 Schema.voices.Add("CombineHLA", "PROCEEDING", "Proceeding.", "HLAComVoice/grunt/orderresponse_positive_05.wav")
@@ -922,7 +922,7 @@ Schema.voices.Add("CombineHLA", "PROBABLE ANTICITIZEN", "Probable anti-citizen. 
 Schema.voices.Add("CombineHLA", "COGNITIVE DISSONANCE", "Cognitive dissonance will not be tolerated.", "HLAComVoice/grunt/custom/cognitivedissonance.wav")
 Schema.voices.Add("CombineHLA", "CITIZEN", "Citizen.", "HLAComVoice/grunt/custom/citizen.wav")
 Schema.voices.Add("CombineHLA", "CITIZEN2", "Citizen.", "HLAComVoice/grunt/custom/citizen2.wav")
-Schema.voices.Add("CombineHLA", "CITIZENS", "Citizens.", "HLAComVoice/grunt/custom/citizen.wav")
+Schema.voices.Add("CombineHLA", "CITIZENS", "Citizens.", "HLAComVoice/grunt/custom/citizens.wav")
 Schema.voices.Add("CombineHLA", "ROGER THAT2", "Roger that.", "HLAComVoice/grunt/custom/rogerthat2.wav")
 Schema.voices.Add("CombineHLA", "ROGER THAT", "Roger that.", "HLAComVoice/grunt/custom/rogerthat.wav")
 Schema.voices.Add("CombineHLA", "10-2 OVER", "10-2, over.", "HLAComVoice/grunt/custom/102over.wav")
