@@ -28,7 +28,7 @@ SWEP.HoldType = "fist";
 SWEP.AdminSpawnable = false;
 SWEP.Spawnable = false;
   
-SWEP.Primary.NeverRaised = true;
+SWEP.Primary.IsAlwaysRaised = true;
 SWEP.Primary.DefaultClip = 0;
 SWEP.Primary.Automatic = false;
 SWEP.Primary.ClipSize = -1;
@@ -42,12 +42,7 @@ SWEP.Secondary.ClipSize = -1;
 SWEP.Secondary.Delay = 0;
 SWEP.Secondary.Ammo	= "";
 
-SWEP.NoIronSightFovChange = true;
-SWEP.NoIronSightAttack = true;
-SWEP.LoweredAngles = Angle(60, 60, 60);
-SWEP.IronSightPos = Vector(0, 0, 0);
-SWEP.IronSightAng = Vector(0, 0, 0);
-SWEP.NeverRaised = true;
+SWEP.IsAlwaysRaised = true;
 
 -- Called when the SWEP is deployed.
 function SWEP:Deploy()
