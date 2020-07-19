@@ -13,8 +13,7 @@ cpSystem.config.notification = {
 }
 cpSystem.config.voiceTypes = {
 	"Legacy",
-	"HLA",
-	"RadioDispatch"
+	"HLA"
 }
 cpSystem.config.taglines = {
 	"APEX",
