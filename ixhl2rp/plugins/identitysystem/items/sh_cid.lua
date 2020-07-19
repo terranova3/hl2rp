@@ -45,11 +45,27 @@ ITEM.functions.ViewRecord = {
 	icon = "icon16/book_edit.png",
 	OnRun = function(item)
 		local client = item.player
-		local char = client:GetChar()
+		local target = nil
 
-		if client:IsCombine() then
-			netstream.Start(client, "OpenRecordMenu", {item.id})
+		for _, v in pairs(player.GetAll()) do
+			if(v:GetCharacter():GetData("cid", "") == item:GetData("cid", 00000)) then
+				target = v
+				break
+			end
 		end
+
+		if (target) then
+			if(!hook.Run("CanPlayerViewData", client, target)) then
+				client:Notify("@cantViewData")
+				return false
+			end
+		else
+			client:Notify("This character is not online or this is an invalid id.")		
+			return false
+		end
+
+		local character = target:GetCharacter()
+		netstream.Start(client, "ViewData", target, character:GetData("cid"), character:GetData("combineData", {}), character:GetCPInfo())
 
 		return false
 	end,
