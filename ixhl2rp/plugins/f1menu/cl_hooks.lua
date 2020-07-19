@@ -26,7 +26,7 @@ end
 
 -- Called when the info menu is created.
 function PLUGIN:SetInfoMenuData(character, faction)
-	if(faction.name == "Citizen" and character:GetData("cid") != nil) then
+	if(character:GetData("cid") != nil) then
 		ix.infoMenu.Add("Citizen ID: #" .. character:GetData("cid"))
 	end
 
