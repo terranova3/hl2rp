@@ -18,7 +18,7 @@
 local PLUGIN = PLUGIN
 
 netstream.Hook("ViewBook", function(id)
-	if (id) then
+	if (id and ix.item.instances[id]) then
 		local itemTable = ix.item.instances[id]
 
 		if(IsValid(ix.gui.menu)) then
