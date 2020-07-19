@@ -6,9 +6,10 @@
 CLASS.name = "Vortigaunt"
 CLASS.color = Color(0, 255, 0, 255);
 CLASS.faction = FACTION_VORT
+CLASS.isDefault = true
 
 function CLASS:CanSwitchTo(client)
 	return false
 end
 
-CLASS_VORT = CLASS.index
+CLASS_VORTd = CLASS.index

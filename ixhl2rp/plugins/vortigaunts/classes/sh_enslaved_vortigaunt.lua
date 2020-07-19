@@ -6,6 +6,7 @@
 CLASS.name = "Enslaved Vortigaunt"
 CLASS.color = Color(0, 255, 200, 255)
 CLASS.faction = FACTION_ENSLAVED_VORT
+CLASS.isDefault = true
 
 function CLASS:CanSwitchTo(client)
 	return false
