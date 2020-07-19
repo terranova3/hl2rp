@@ -65,7 +65,7 @@ end
 
 if (CLIENT) then
 	function SWEP:PreDrawViewModel(viewModel, weapon, client)
-		local hands = player_manager.TranslatePlayerHands(player_manager.TranslateToPlayerModelName(client:GetModel()))
+		local hands = ix.anim:GetHandsInfo(LocalPlayer():GetModel())
 
 		if (hands and hands.model) then
 			viewModel:SetModel(hands.model)
