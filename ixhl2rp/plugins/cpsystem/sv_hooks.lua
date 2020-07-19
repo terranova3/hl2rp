@@ -167,9 +167,11 @@ function PLUGIN:PlayerLoadedCharacter(client, character)
 	-- Adds player to the correct class --
 	if(faction == FACTION_MPF) then
 		if (!string.find(character:GetName(), ix.config.Get("City Name"))) then
-			character:SetClass(CLASS_MPUH);  
+			character:SetClass(CLASS_MPUH); 
+			character:SetCustomClass("Citizen");
 		else
-			character:SetClass(CLASS_MPU); 		
+			character:SetClass(CLASS_MPU); 	
+			character:SetCustomClass("Civil Protection");	
 		end;
 	end;
 end;
