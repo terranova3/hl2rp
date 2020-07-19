@@ -1,7 +1,11 @@
 local PANEL = {}
 
 function PANEL:Init()
-    ix.gui.viewdata = self
+	ix.gui.viewdata = self
+	
+	if(IsValid(ix.gui.menu)) then
+		ix.gui.menu:Remove()
+	end
 
     self:SetBackgroundBlur(true);
 	self:Center()
