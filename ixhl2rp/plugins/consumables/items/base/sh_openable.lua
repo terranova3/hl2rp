@@ -11,6 +11,7 @@ ITEM.description = "Openable item base";
 ITEM.category = "Consumables";
 ITEM.contains = {}
 ITEM.deleteOnOpen = true
+ITEM.playSound = true
 ITEM.functions.Open = {
 	OnRun = function(itemTable)
         local client = itemTable.player
@@ -18,13 +19,19 @@ ITEM.functions.Open = {
         if(itemTable.contains and itemTable.contains[1]) then
             for k, v in pairs(itemTable.contains) do
                 if(v.uniqueID and v.amount) then
-                    inv:Add(v.uniqueID, v.amount or 1, v.data)
+                    if (!character:GetInventory():Add(v.uniqueID, v.amount or 1, v.data)) then
+                        ix.item.Spawn(v, client)
+                    end
                 else
                     ErrorNoHalt(string.format("%s does not have a valid 'contains' array. Missing uniqueID and amount fields.", itemTable.name))
                 end
             end
         else
             client:Notify(string.format("%s does not contain anything!", itemTable.name))
+        end
+
+        if(itemTable.playSound) then
+            client:EmitSound("ambient/fire/mtov_flame2.wav", 75, math.random(160, 180), 0.35)
         end
 
         if(itemTable.deleteOnOpen == false) then 
