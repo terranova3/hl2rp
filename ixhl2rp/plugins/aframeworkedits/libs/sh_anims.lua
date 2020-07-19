@@ -34,6 +34,15 @@ function ix.anim:AddHEVHands(model)
 	});
 end;
 
+-- A function to make a model use the civil protection viewmodel hands.
+function ix.anim:AddCivilProtectionHands(model)
+	self:AddHandsModel(model, {
+		body = 0000000,
+		model = "models/dpfilms/weapons/v_arms_metropolice.mdl",
+		skin = 0
+	});
+end
+
 -- A function to make a model use the combine viewmodel hands.
 function ix.anim:AddCombineHands(model)
 	self:AddHandsModel(model, {

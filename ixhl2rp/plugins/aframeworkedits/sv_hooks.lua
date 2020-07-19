@@ -15,6 +15,10 @@ function PLUGIN:PlayerModelChanged(client, model)
 end;
 
 function PLUGIN:PlayerSetHandsModel(client, entity, model)
+	if(!model) then
+		model = client:GetModel()
+	end
+
     local simpleModel = player_manager.TranslateToPlayerModelName(model)
 	local info = ix.anim:GetHandsInfo(model) or player_manager.TranslatePlayerHands(simpleModel);
 

@@ -40,8 +40,8 @@ ix.anim.SetModelClass("models/ma/hla/terranovapolicedead.mdl", "metrocop");
 ix.anim.SetModelClass("models/ma/hla/terranovafemalepolice.mdl", "metrocop");
 ix.anim.SetModelClass("models/ma/hla/terranovafemalepolicedead.mdl", "metrocop");
 
-ix.anim:AddCombineHands("terranovapolice.mdl")
-ix.anim:AddCombineHands("terranovapolicedead.mdl")
-ix.anim:AddCombineHands("terranovafemalepolice.mdl")
-ix.anim:AddCombineHands("terranovafemalepolicedead.mdl")
+ix.anim:AddCivilProtectionHands("terranovapolice.mdl")
+ix.anim:AddCivilProtectionHands("terranovapolicedead.mdl")
+ix.anim:AddCivilProtectionHands("terranovafemalepolice.mdl")
+ix.anim:AddCivilProtectionHands("terranovafemalepolicedead.mdl")
 
