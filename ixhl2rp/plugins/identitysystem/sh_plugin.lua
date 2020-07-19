@@ -26,24 +26,6 @@ if CLIENT then
 		vgui.Create("ixRecordPanel"):Build(target, cid, data, cpData)
 	end)
 else
-	netstream.Hook("IDAddRecord", function(ply, data)
-		local item = ix.item.instances[data[4]]
-		local before_data = item:GetData("record", {})
-		local inbetween_data = {{data[1], data[2], data[3], data[5]}}
-		table.Add(before_data, inbetween_data)
-		item:SetData("record", before_data)
-		item:SetData("points", item:GetData("points", 0) + data[5])
-		ix.log.AddRaw(ply:Name() .. " has added a record to ID " .. item:GetID())
-	end)
-
-	netstream.Hook("IDRemoveRecord", function(ply, data)
-		local item = ix.item.instances[data[4]]
-		local before_data = item:GetData("record", {})
-		before_data[data[5]] = nil
-		item:SetData("record", before_data)
-		ix.log.AddRaw(ply:Name() .. " has removed a record from ID " .. item:GetID())
-	end)
-
 	netstream.Hook("SubmitNewCID", function(ply, data)
 		if ply:IsCombine() then
 			local char = ply:GetCharacter()
@@ -53,7 +35,7 @@ else
 
 			local data2 = {
 				["citizen_name"] = data[1],
-				["cid"] = math.random(10000, 99999),
+				["cid"] = data[2],
 				["issue_date"] = TimeString,
 				["officer"] = ply:Name()
 			}
@@ -74,6 +56,7 @@ function PLUGIN:OnCharacterCreated(client, character)
 		inventory:Add("suitcase", 1)
 		inventory:Add("transfer_papers", 1, {
 			citizen_name = character:GetName(),
+			cid = character:GetData("cid", "99999"),
 			unique = math.random(0000000,999999999),
 			issue_date = tostring(TimeString)
 		})
