@@ -6,6 +6,12 @@ function ITEM:GetDescription()
 	return self.description
 end
 
+-- Called when a new instance of this item has been made.
+function ITEM:OnInstanced(invID, x, y)
+	self:SetData("citizen_name", "Testing data")
+	self:SetData("cid", 99999)
+end
+
 function ITEM:PopulateTooltip(tooltip)
 	local data = tooltip:AddRow("data")
 	data:SetBackgroundColor(derma.GetColor("Success", tooltip))
