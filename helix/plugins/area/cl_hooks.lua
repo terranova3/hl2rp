@@ -177,7 +177,7 @@ function PLUGIN:EditReload()
 end
 
 function PLUGIN:ShouldDisplayArea(id)
-	if (ix.area.bEditing) then
+	if (ix.area.bEditing or LocalPlayer():GetMoveType() == MOVETYPE_NOCLIP) then
 		return false
 	end
 end
