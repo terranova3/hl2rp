@@ -166,7 +166,7 @@ if (SERVER) then
 else
 	local glowMaterial = ix.util.GetMaterial("sprites/glow04_noz")
 	local color_green = Color(0, 255, 0, 255)
-	local color_blue = Color(0, 100, 255, 255)
+	local color_yellow =  Color(255, 150, 0, a)
 	local color_red = Color(255, 50, 50, 255)
 
 	function ENT:Draw()
@@ -177,7 +177,7 @@ else
 		if (self:GetDisplayError()) then
 			color = color_red
 		elseif (self:GetLocked()) then
-			color = color_blue
+			color = color_yellow
 		end
 
 		local position = self:GetPos() + self:GetUp() * -8.7 + self:GetForward() * -3.85 + self:GetRight() * -6
