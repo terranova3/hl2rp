@@ -12,9 +12,9 @@ ix.command.Add("ViewData", {
 		local targetClient = target:GetPlayer()
 		local cpData = target:GetCPInfo()
 
-		if (!hook.Run("CanPlayerViewData", client, targetClient)) then
-			return "@cantViewData"
-		end
+		--if (!hook.Run("CanPlayerViewData", client, targetClient)) then
+		--	return "@cantViewData"
+		--end
 		
 		netstream.Start(client, "ViewData", targetClient, target:GetData("cid"), target:GetData("combineData", {}), cpData)
 	end;

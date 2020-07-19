@@ -1,8 +1,10 @@
 
 AddCSLuaFile()
 
+local PLUGIN = PLUGIN
+
 ENT.Type = "anim"
-ENT.PrintName = "Combine Lock"
+ENT.PrintName = "Union Lock"
 ENT.Category = "HL2 RP"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -69,13 +71,13 @@ if (SERVER) then
 		local normal = client:GetEyeTrace().HitNormal:Angle()
 		local position, angles = self:GetLockPosition(door, normal)
 
-		local entity = ents.Create("ix_combinelock")
+		local entity = ents.Create("ix_unionlock")
 		entity:SetPos(trace.HitPos)
 		entity:Spawn()
 		entity:Activate()
 		entity:SetDoor(door, position, angles)
 
-		Schema:SaveCombineLocks()
+		PLUGIN:SaveUnionLocks()
 		return entity
 	end
 
@@ -105,7 +107,7 @@ if (SERVER) then
 		end
 
 		if (!ix.shuttingDown) then
-			Schema:SaveCombineLocks()
+			PLUGIN:SaveUnionLocks()
 		end
 	end
 
@@ -149,7 +151,7 @@ if (SERVER) then
 			return
 		end
 
-		if (!client:IsCombine() and client:Team() != FACTION_ADMIN) then
+		if (!client:GetCharacter():GetInventory():HasItem("union_card"))) then
 			self:DisplayError()
 			self.nextUseTime = CurTime() + 2
 
@@ -166,7 +168,7 @@ if (SERVER) then
 else
 	local glowMaterial = ix.util.GetMaterial("sprites/glow04_noz")
 	local color_green = Color(0, 255, 0, 255)
-	local color_yellow =  Color(255, 150, 0, 255)
+	local color_blue = Color(0, 100, 255, 255)
 	local color_red = Color(255, 50, 50, 255)
 
 	function ENT:Draw()
@@ -177,7 +179,7 @@ else
 		if (self:GetDisplayError()) then
 			color = color_red
 		elseif (self:GetLocked()) then
-			color = color_yellow
+			color = color_blue
 		end
 
 		local position = self:GetPos() + self:GetUp() * -8.7 + self:GetForward() * -3.85 + self:GetRight() * -6
