@@ -932,8 +932,10 @@ Schema.voices.Add("CombineHLA", "10-4 OVER", "10-4, over.", "HLAComVoice/grunt/c
 Schema.voices.Add("CombineHLA", "COPY OVER", "Copy, over.", "HLAComVoice/grunt/custom/copyover.wav")
 Schema.voices.Add("CombineHLA", "9", "Nine.", "HLAComVoice/grunt/custom/nine.wav")
 Schema.voices.Add("CombineHLA", "NINE", "Nine.", "HLAComVoice/grunt/custom/nine.wav")
+Schema.voices.Add("CombineHLA", "YEP", "Yep.", "HLAComVoice/grunt/custom/yep.wav")
+Schema.voices.Add("CombineHLA", "FLARE DOWN", "Flare down." "HLAComVoice/grunt/custom/flaredown.wav")
 
 
 Schema.voices.AddClass("CombineHLA", function(client)
-	return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "hla")
+	return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "HLA")
 end)
