@@ -19,7 +19,7 @@ ITEM.functions.Open = {
         if(itemTable.contains and itemTable.contains[1]) then
             for k, v in pairs(itemTable.contains) do
                 if(v.uniqueID and v.amount) then
-                    if (!character:GetInventory():Add(v.uniqueID, v.amount or 1, v.data)) then
+                    if (!client:GetCharacter():GetInventory():Add(v.uniqueID, v.amount or 1, v.data)) then
                         ix.item.Spawn(v, client)
                     end
                 else
