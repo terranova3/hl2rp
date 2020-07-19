@@ -23,7 +23,7 @@ ix.command.Add("CharSetCPVoiceType", {
             end
 
             if(acceptedInput) then
-                target:SetData("cpVoiceType", text)
+                target:SetData("cpVoiceType", text:lower())
 
                 if(target:GetPlayer() != client) then
                     client:Notify(string.format("%s has set your voice type to %s.", client:GetName(), text))

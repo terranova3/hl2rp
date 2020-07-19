@@ -935,5 +935,5 @@ Schema.voices.Add("CombineHLA", "NINE", "Nine.", "HLAComVoice/grunt/custom/nine.
 
 
 Schema.voices.AddClass("CombineHLA", function(client)
-	return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "HLA")
+	return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "hla")
 end)

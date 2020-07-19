@@ -69,7 +69,7 @@ function FACTION:OnCharacterCreated(client, character)
 	character:SetData("cpCitizenDesc", character:GetDescription())
 	character:SetData("cpDesc", character:GetCpdesc())
 	character:SetData("cpTagline", character:GetTagline() or "ERROR");
-	character:SetData("cpVoiceType", character:GetVoiceType() or "Legacy")
+	character:SetData("cpVoiceType", character:GetVoiceType() or "legacy")
 	character:SetData("cpID", character:GetCpid() or 1);
 	character:SetData("cid", cid);
 
