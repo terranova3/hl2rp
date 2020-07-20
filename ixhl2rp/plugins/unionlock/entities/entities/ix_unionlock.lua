@@ -151,7 +151,7 @@ if (SERVER) then
 			return
 		end
 
-		if (!client:GetCharacter():GetInventory():HasItem("union_card"))) then
+		if (!client:GetCharacter():GetInventory():HasItem("union_card")) then
 			self:DisplayError()
 			self.nextUseTime = CurTime() + 2
 
