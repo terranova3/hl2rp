@@ -10,7 +10,9 @@ FACTION.runSounds = {[0] = "NPC_CombineS.RunFootstepLeft", [1] = "NPC_CombineS.R
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
+
 	character:SetData("cpVoiceType", "hla")
+	character:SetCustomClass("Overwatch Transhuman Arm")
 
 	inventory:Add("ar2", 1)
 	inventory:Add("ar2ammo", 2)

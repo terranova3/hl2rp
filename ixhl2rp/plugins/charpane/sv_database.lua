@@ -57,8 +57,6 @@ function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
 		charPanelQuery:Callback(function(info)
 			if (istable(info) and #info > 0) then
 				local row = info[1];
-				
-				print("Restoring!")
 
 				ix.charPanel.RestoreCharPanel(tonumber(row.panel_id), function(charPanel)
 					character:SetCharPanel(charPanel)

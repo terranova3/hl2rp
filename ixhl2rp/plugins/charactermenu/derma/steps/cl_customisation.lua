@@ -23,6 +23,12 @@ function PANEL:Display()
 	local skins = model.Entity:SkinCount()
 	local oldChildren = self.skins:GetChildren()
 
+	if(faction.name == "Overwatch Transhuman Arm") then
+		self.face:SetText("Uniform type")
+	else
+		self.face:SetText("Facial appearence")
+	end
+
 	self.skins:InvalidateLayout(true)
 
 	local function PaintIcon(icon, w, h)

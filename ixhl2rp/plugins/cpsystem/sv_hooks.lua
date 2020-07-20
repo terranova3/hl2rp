@@ -110,7 +110,6 @@ function PLUGIN:SendCache()
 		netstream.Start(v, "ReceiveTaglineCache", cpSystem.cache.taglines)
 	end
 
-	print("Rebuilding cache!")
 	PrintTable(cpSystem.cache.taglines)
 end
 
