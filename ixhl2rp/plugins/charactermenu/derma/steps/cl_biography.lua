@@ -57,13 +57,12 @@ function PANEL:Display()
 	end
 
 	if (override) then
+		self:SetPayload("name", default)
 		self.nameLabel:SetText(default)
 		self.nameLabel:DockMargin(0, 0, 0, 10)
 		self.name:SetVisible(false)
 	else
-		if (default and not self:GetPayload("name")) then
-			self:SetPayload("name", default)
-		end
+		self:SetPayload("name", "")
 		self.nameLabel:SetVisible(true)
 		self.name:SetVisible(true)
 		self.name:SetText(self:GetPayload("name", ""))
