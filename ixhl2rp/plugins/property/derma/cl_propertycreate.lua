@@ -97,6 +97,9 @@ function PANEL:Build(doors, sections)
     self.complete:SetText("Complete")
     self.complete:SetFont("ixPluginCharTraitFont")
     self.complete:SetTall(32)
+    self.complete.DoClick = function()
+        self:Save()
+    end
 
 	self:SetVisible(true)
 end
@@ -114,10 +117,10 @@ function PANEL:SetType(propertyType)
 
         self.apartmentBlock = self.property:Add(self:AddComboBox("Select section"))
         self.apartmentBlock.OnSelect = function( self, index, value )
-            self.apartmentBlock = value
+            parent.section = value
         end
 
-        for k, v in pairs(self.sections[propertyType]) do
+        for k, v in pairs(self.sections[propertyType] or {}) do
             self.apartmentBlock:AddChoice(v.name)
         end
     elseif(propertyType == "Business") then
@@ -139,12 +142,19 @@ function PANEL:SetType(propertyType)
     end
 end
 
-function PANEL:OnRemove()
-	self:Save()
-end
-
 function PANEL:Save()
+    if(self.type == "Residential") then
+        data = {
+            section = self.section,
+            doors = self.doors
+        }
 
+        net.Start("ixPropertyNew")
+            net.WriteTable(data)
+        net.SendToServer()
+    end
+
+    self:Remove()
 end
 
 function PANEL:AddLabel(text, colored, subtitle)

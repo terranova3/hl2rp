@@ -17,7 +17,9 @@ local variables = {
 	-- The class that owns a door.
 	"class",
 	-- Whether or not the door will be hidden.
-	"visible"
+	"visible",
+	-- What property this belongs to
+	"property"
 }
 
 function PLUGIN:CallOnDoorChildren(entity, callback)
