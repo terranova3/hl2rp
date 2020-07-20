@@ -223,5 +223,5 @@ Schema.voices.Add("RadioDispatch", "IS NOW", "is now", "npc/overwatch/radiovoice
 Schema.voices.Add("RadioDispatch", "STABLIZATION JURISDICTION", "Stabilization jurisdiction.", "npc/overwatch/radiovoice/stabilizationjurisdiction.wav")
 
 Schema.voices.AddClass("RadioDispatch", function(client)
-	return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "RadioDispatch")
+	return (client:IsCombine() and client:GetCharacter():HasVoiceType("RadioDispatch"))
 end)

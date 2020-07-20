@@ -93,6 +93,17 @@ function CHAR:GetCPName()
     return name;
 end;
 
+-- Returns if a character has a voice type
+function CHAR:HasVoiceType(text)
+	local voiceType = self:GetData("cpVoiceType", "nil"):lower()
+
+	if(string.find(voiceType, text:lower())) then
+		return true
+	end
+
+	return false
+end
+
 -- Returns tagline and id together as a single string
 function CHAR:GetCPTagline()
     return string.match(self:GetCPName(), self:GetData("cpTagline")..'.-$');

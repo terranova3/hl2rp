@@ -754,5 +754,5 @@ Schema.voices.Add("Charger", "TAKING FIRE", "Taking fire.", "HLAComVoice/Charger
 Schema.voices.Add("Charger", "EXECUTING RESPONSE", "Executing full response.", "HLAComVoice/Charger/underattack_12.wav")
 
 Schema.voices.AddClass("Charger", function(client)
-    return (client:IsCombine() and client:GetCharacter():GetData("cpVoiceType") == "Charger")
+    return (client:IsCombine() and client:GetCharacter():HasVoiceType("Charger"))
 end)
