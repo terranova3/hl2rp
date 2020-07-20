@@ -45,11 +45,6 @@ SWEP.LowerAngles = Angle(15, -10, -20)
 
 SWEP.FireWhenLowered = true
 
-if (CLIENT) then
-	SWEP.FirstPersonGlowSprite = Material("sprites/light_glow02_add_noz");
-	SWEP.ThirdPersonGlowSprite = Material("sprites/light_glow02_add");
-end;
-
 function SWEP:SetupDataTables()
 	self:NetworkVar("Bool", 0, "Activated")
 end
@@ -86,19 +81,20 @@ function SWEP:DrawWorldModel()
 	self:DrawModel()
 
 	if (self:GetActivated()) then
-		local attachment = self:GetAttachment(1);
-		local curTime = CurTime();
-		local scale = math.abs(math.sin(curTime) * 4);
-		local alpha = math.abs(math.sin(curTime) / 4);
-		
-		self.ThirdPersonGlowSprite:SetFloat("$alpha", 0.7 + alpha);
-		
-		if (attachment and attachment.Pos) then
-			cam.Start3D( EyePos(), EyeAngles() );
-				render.SetMaterial(self.ThirdPersonGlowSprite);
-				render.DrawSprite( attachment.Pos, 32 + scale, 32 + scale, Color(0, 132, 237, 255 ) );
-			cam.End3D();
-		end;
+		local size = math.Rand(4.0, 6.0)
+		local glow = math.Rand(0.6, 0.8) * 255
+		local color = Color(glow, glow, glow)
+		local attachment = self:GetAttachment(1)
+
+		if (attachment) then
+			local position = attachment.Pos
+
+			render.SetMaterial(STUNSTICK_GLOW_MATERIAL2)
+			render.DrawSprite(position, size * 2, size * 2, color)
+
+			render.SetMaterial(STUNSTICK_GLOW_MATERIAL)
+			render.DrawSprite(position, size, size + 3, color_glow)
+		end
 	end
 end
 
