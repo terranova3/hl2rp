@@ -17,7 +17,22 @@ ix.anim.SetModelClass("models/cultist/hl_a/combine_grunt/combine_grunthazmatlead
 ix.anim.SetModelClass("models/cultist/hl_a/combine_grunt/combine_grunthazmatregular.mdl", "overwatch");
 ix.anim.SetModelClass("models/cultist/hl_a/combine_heavy/combine_heavy_trooper.mdl", "overwatch");
 ix.anim.SetModelClass("models/cultist/hl_a/combine_suppresor/combine_suppresorterranova.mdl", "overwatch");
+ix.anim.SetModelClass("models/cultist/hl_a/combine_grunt/combine_grunthazmatlead.mdl", "overwatch");
+ix.anim.SetModelClass("models/cultist/hl_a/combine_grunt/combine_grunthazmatregular.mdl", "overwatch");
 ix.anim.SetModelClass("models/combine_sniper.mdl", "overwatch");
 ix.anim.SetModelClass("models/combine_sniper_2.mdl", "overwatch");
 
-
+ix.anim:AddCombineHands("combine_soldier.mdl");
+ix.anim:AddCombineHands("worker_combine.mdl");
+ix.anim:AddCombineHands("hazmat_worker_combine.mdl");
+ix.anim:AddCombineHands("combine_s_super.mdl");
+ix.anim:AddCombineHands("combine_pilot.mdl");
+ix.anim:AddCombineHands("combine_commander.mdl");
+ix.anim:AddCombineHands("combine_grunthazmatlead.mdl");
+ix.anim:AddCombineHands("combine_grunthazmatregular.mdl");
+ix.anim:AddCombineHands("combine_heavy_trooper.mdl");
+ix.anim:AddCombineHands("combine_suppresorterranova.mdl");
+ix.anim:AddCombineHands("combine_grunthazmatlead.mdl");
+ix.anim:AddCombineHands("combine_grunthazmatregular.mdl");
+ix.anim:AddCombineHands("combine_sniper.mdl");
+ix.anim:AddCombineHands("combine_sniper_2.mdl");
