@@ -11,12 +11,8 @@ function playerMeta:IsDispatch()
 	local bStatus = faction == FACTION_OTA
 
 	if (!bStatus) then
-		for k, v in ipairs({ "SCN", "DvL", "SeC" }) do
-			if (Schema:IsCombineRank(name, v)) then
-				bStatus = true
-
-				break
-			end
+		if(ix.ranks.HasPermission(self:GetCharacter():GetRank().uniqueID, "Dispatch")) then
+			bStatus = true
 		end
 	end
 
