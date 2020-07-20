@@ -38,7 +38,7 @@ end;
 function ix.anim:AddCivilProtectionHands(model)
 	self:AddHandsModel(model, {
 		body = 0000000,
-		model = "models/dpfilms/weapons/v_arms_metropolice.mdl",
+		model = "models/weapons/c_arms_metrocop_hd.mdl",
 		skin = 0
 	});
 end
