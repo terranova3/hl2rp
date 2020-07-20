@@ -2,6 +2,15 @@
 util.AddNetworkString("ixDoorMenu")
 util.AddNetworkString("ixDoorPermission")
 
+local PLUGIN = PLUGIN
+
+ix.doors = {}
+
+-- A global accessor so we can save door data outside of this door plugin.
+function ix.doors.Save()
+	PLUGIN:SaveDoorData()
+end
+
 -- Variables for door data.
 local variables = {
 	-- Whether or not the door will be disabled.

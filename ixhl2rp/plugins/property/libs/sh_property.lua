@@ -13,16 +13,20 @@ ix.property.types = {
 	"Business"
 }
 
--- Instead of using cache for every LUA autorefresh, reload the files.
-if(SERVER) then
-    PLUGIN:LoadProperties()
-end
-
 -- Add a new property to the property table and update it's doors.
 function ix.property.Add(data)
     local index = #ix.property.stored+1
-    
+    local mapCreationIDs = {}
+
+    for _, v in ipairs(data.doors) do
+        if (v:IsDoor()) then
+            table.insert(mapCreationIDs, v:MapCreationID())
+        end
+    end
+
+    data.doors = mapCreationIDs
     data.index = index
+
     table.insert(ix.property.stored, data)
 
     ix.property.Setup(data)
@@ -89,4 +93,9 @@ function ix.property.GetType(type)
     end
 
     return false
+end
+
+-- Instead of using cache for every LUA autorefresh, reload the files.
+if(SERVER) then
+    PLUGIN:LoadProperties()
 end

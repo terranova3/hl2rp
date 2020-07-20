@@ -8,22 +8,27 @@ local PLUGIN = PLUGIN
 -- Adds an apartment to a section table, includes doors.
 function ix.property.Setup(data)
     for k, v in pairs(data.doors) do
-        if(IsValid(v) and v:IsDoor() and !v:GetNetVar("disabled")) then
+        local door = ents.GetMapCreatedEntity(v)
+
+        if(IsValid(door) and door:IsDoor() and !door:GetNetVar("disabled")) then
             if(!data.name) then
                 if(ix.property.GetSection(data.section)) then
                     local section = ix.property.GetSection(data.section)
 
-                    v:SetNetVar("name", string.format("%s - Apartment %s", section.tag, ix.property.GetSectionCount(data.section)))
-                    v:SetNetVar("visible", true)
-                    v:SetNetVar("ownable", nil)
-                    v:SetNetVar("property", data.index)
+                    door:SetNetVar("name", string.format("%s - Apartment %s", section.tag, ix.property.GetSectionCount(data.section)))
+                    door:SetNetVar("visible", true)
+                    door:SetNetVar("ownable", nil)
+                    door:SetNetVar("property", data.index)
                 end
             else
-                -- do naming
+                door:SetNetVar("name", data.name)
+                door:SetNetVar("visible", true)
+                door:SetNetVar("ownable", nil)
+                door:SetNetVar("property", data.index)
             end 
         end
     end
 
-    PrintTable(ix.property.stored)
     PLUGIN:SaveProperties()
+    ix.doors.Save()
 end;
