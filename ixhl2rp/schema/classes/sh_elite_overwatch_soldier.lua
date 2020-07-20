@@ -7,7 +7,7 @@ function CLASS:OnSet(client)
 	local character = client:GetCharacter()
 
 	if (character) then
-		character:SetModel("models/combine_super_soldier.mdl")
+		character:SetModel("models/cultist/hl_a/vannila_combine/npc/combine_soldier.mdl")
 	end
 end
 
