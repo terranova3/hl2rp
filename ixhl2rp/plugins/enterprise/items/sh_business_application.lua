@@ -6,7 +6,7 @@
 ITEM.name = "Business Application"
 ITEM.description = "Contains a compact form with various questions and answers, for creating a business. Has a small union Ministry of Workforce logo at the top right."
 ITEM.model = "models/props_office/paperfolder01.mdl"
-ITEM.category = "Miscellaneous";
+ITEM.category = "Enterprise";
 ITEM.functions.View = {
     icon = "icon16/book_edit.png",
 	OnRun = function(itemTable)
@@ -18,6 +18,8 @@ ITEM.functions.View = {
 		end
 		
 		net.Start("ixBusinessApplicationEdit")
+			net.WriteTable(ix.property.sections)
+			net.WriteTable(ix.property.stored)
 			net.WriteInt(itemTable.id, 16)
 			net.WriteBool(editMode)
 		net.Send(client)
@@ -65,7 +67,9 @@ function ITEM:PopulateTooltip(tooltip)
 	if(self:GetData("businessOwner")) then
 		local data = tooltip:AddRow("data")
 		local permitString = ""
+		local propertiesString = ""
 		local permits = self:GetData("businessPermits", {})
+		local properties = self:GetData("businessProperties", {})
 
 		for i = 1, #permits do
 			if(i == 1) then
@@ -75,10 +79,19 @@ function ITEM:PopulateTooltip(tooltip)
 			end
 		end
 
+		for i = 1, #properties do
+			if(i == 1) then
+				propertiesString = propertiesString .. properties[i].name
+			else 
+				propertiesString = propertiesString .. ", " .. properties[i].name
+			end
+		end
+
 		data:SetText("Business owner: " .. self:GetData("businessOwner", "N/A") .. 
 			"\nBusiness name: " .. self:GetData("businessName", "N/A") .. 
 			"\nBusiness description: " .. self:GetData("businessDescription", "N/A") ..
-			"\nBusiness permits: " .. permitString or "N/A"
+			"\nBusiness permits: " .. permitString or "N/A" ..
+			"\nBusiness properties: " .. propertiesString or "N/A" 
 		)
 
 		data:SetExpensiveShadow(0.5)

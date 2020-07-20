@@ -6,8 +6,14 @@
 local PLUGIN = PLUGIN
 
 net.Receive("ixBusinessApplicationEdit", function()
+	local sections = net.ReadTable()
+	local stored = net.ReadTable()
 	local id = net.ReadInt(16)
 	local editMode = net.ReadBool()
+
+	local properties = {}
+	properties.stored = stored
+	properties.sections = sections
 
 	if(IsValid(ix.gui.menu)) then
 		ix.gui.menu:Remove()
@@ -19,7 +25,7 @@ net.Receive("ixBusinessApplicationEdit", function()
 	end
 
 	PLUGIN.businessApplication = vgui.Create("ixBusinessApplication")
-	PLUGIN.businessApplication:Build(id, editMode)
+	PLUGIN.businessApplication:Build(id, editMode, properties)
 end)
 
 function PLUGIN:BuildBusinessMenu(panel)

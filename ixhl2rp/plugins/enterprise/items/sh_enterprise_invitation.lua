@@ -6,7 +6,7 @@
 ITEM.name = "Offer of Employment"
 ITEM.description = "A piece of paper that contains an offer of employment."
 ITEM.model = "models/props_office/folder.mdl"
-ITEM.category = "Miscellaneous";
+ITEM.category = "Enterprise";
 ITEM.enterprise = true
 ITEM.functions.FillOut = {
     name = "Fill out form",
