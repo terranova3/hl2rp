@@ -4,7 +4,7 @@
 --]]
 
 
-ix.command.Add("PropertyNew", {
+ix.command.Add("PropertyAdd", {
 	description = "Enters property edit mode and allows you to make a property by selecting doors.",
 	superAdminOnly = true,
     OnRun = function(self, client)

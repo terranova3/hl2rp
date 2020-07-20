@@ -107,6 +107,8 @@ end
 function PANEL:SetType(propertyType)
     local parent = self
 
+    self.name = nil
+    self.section = nil
     self.type = propertyType
     self.property:Clear()
 
@@ -123,8 +125,12 @@ function PANEL:SetType(propertyType)
         for k, v in pairs(self.sections[propertyType] or {}) do
             self.apartmentBlock:AddChoice(v.name)
         end
-    elseif(propertyType == "Business") then
-        self.property:Add(self:AddLabel("Business"))
+    else
+        self.property:Add(self:AddLabel("Set property name", false, true))
+
+        self.propertyName = self.property:Add("DTextEntry")
+        self.propertyName:Dock(TOP)
+        self.propertyName:DockMargin(4,4,4,4)
     end
 
     self.property:Add(self:AddLabel("Rent", false, true))
@@ -143,16 +149,26 @@ function PANEL:SetType(propertyType)
 end
 
 function PANEL:Save()
-    if(self.type == "Residential") then
-        data = {
-            section = self.section,
-            doors = self.doors
-        }
+    local data = {
+        rent = self.rent:GetValue(),
+        doors = self.doors
+    }
 
-        net.Start("ixPropertyNew")
-            net.WriteTable(data)
-        net.SendToServer()
+    if(self.section) then 
+        data.section = self.section
     end
+    
+    if(self.propertyName:GetText()) then
+        data.name = self.propertyName:GetText()
+    end
+
+    if(self.rent:GetValue()) then
+        data.rent = self.rent:GetValue()
+    end
+
+    net.Start("ixPropertyNew")
+        net.WriteTable(data)
+    net.SendToServer()
 
     self:Remove()
 end
