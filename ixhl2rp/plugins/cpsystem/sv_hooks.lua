@@ -109,8 +109,6 @@ function PLUGIN:SendCache()
 	for _, v in ipairs(player.GetAll()) do
 		netstream.Start(v, "ReceiveTaglineCache", cpSystem.cache.taglines)
 	end
-
-	PrintTable(cpSystem.cache.taglines)
 end
 
 function Schema:PlayerFootstep(client, position, foot, soundName, volume)
