@@ -63,6 +63,10 @@ function CHAR:HasOverride()
 end
 
 function CHAR:SetupRankBodygroups()
+	if(!self:GetRank()) then
+		return
+	end
+	
 	if(hook.Run("SetupRankBodygroups", self)) then
 		for k, v in pairs(self:GetRankBodygroups()) do
 			self:GetPlayer():SetBodygroup(k, v)

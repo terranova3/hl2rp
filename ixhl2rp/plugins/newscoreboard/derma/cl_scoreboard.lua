@@ -39,7 +39,7 @@ function PANEL:Rebuild()
 
 		if(character) then
 			local class = character:GetCustomClass() or character:GetClassName() or "ERROR"
-			local priority = ix.class.list[character:GetClass()].order or 10
+			local priority = character:GetClassScoreboardPriority()
 
 			if (!availableClasses[class]) then
 				availableClasses[class] = {
@@ -73,7 +73,6 @@ function PANEL:Rebuild()
 					steamName = v2:SteamName(),
 					faction = v2:GetCharacter():GetFaction(),
 					player = v2,
-					class = ix.class.list[v2:GetCharacter():GetClass()].name,
 					model = v2:GetModel(),
 					skin = v2:GetSkin(),
 					name = v2:Name()
@@ -142,7 +141,6 @@ function PANEL:Init()
 		faction = playerData.faction,
 		player = playerData.player,
 		doesRecognise = true,
-		class = playerData.class,
 		model = playerData.model,
 		skin = playerData.skin,
 		name = playerData.name

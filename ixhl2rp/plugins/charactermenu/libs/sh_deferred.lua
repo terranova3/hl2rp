@@ -198,7 +198,6 @@ function Promise:_handle(value)
                 ErrorNoHalt(
                     "Unhandled rejection: "..tostring(self.reason or "").."\n"
                 )
-                print(trace)
             end
         end)
     end

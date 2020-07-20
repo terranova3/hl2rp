@@ -70,7 +70,6 @@ function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
 				local insertQuery = mysql:Insert("ix_charpanels")
 					insertQuery:Insert("character_id", charID)
 					insertQuery:Callback(function(result, status, lastID)
-						print(lastID)
 						local charPanel = ix.charPanel.CreatePanel(lastID);
 
 						character:SetCharPanel(charPanel)

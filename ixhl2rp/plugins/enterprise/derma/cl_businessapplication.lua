@@ -132,7 +132,7 @@ end;
 
 function PANEL:Build(id, editMode)
 	self.id = id
-	print(id)
+
 	self.item = ix.item.instances[id]
 
 	self.name:SetValue(self.item:GetData("businessName", ""))

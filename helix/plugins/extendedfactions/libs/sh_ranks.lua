@@ -28,6 +28,10 @@ end
 
 -- Checks all the factions and returns the rank object according to the uniqueID
 function ix.ranks.Get(uniqueID)
+	if(!uniqueID) then
+		return nil
+	end
+	
 	for _, faction in pairs(ix.ranks.stored) do
 		for _, v in pairs(faction) do
 			if(v.uniqueID == uniqueID:lower()) then

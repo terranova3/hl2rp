@@ -6,9 +6,26 @@
 local character = ix.meta.character
 
 function character:GetClassName()
-    return ix.class.list[self:GetClass()].name or "Error"
+    if(self:GetClass()) then
+        return ix.class.list[self:GetClass()].name
+    end
+
+    return ix.faction.indices[character:GetFaction()].name
 end
 
+function character:GetClassScoreboardPriority()
+    if(self:GetClass()) then
+        return ix.class.list[self:GetClass()].order
+    end
+
+    return 10
+end
+
+
 function character:GetClassColor()
-    return ix.class.list[self:GetClass()].color or team.GetColor(character:GetPlayer():Team())
+    if(self:GetClass()) then
+        return ix.class.list[self:GetClass()].color
+    end
+
+    return team.GetColor(self:GetPlayer():Team())
 end 
