@@ -18,10 +18,14 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 			panel:Dock(FILL)
 
 			for k, v in SortedPairs(ix.faction.indices) do
+				PrintTable(v)
+
 				local button = vgui.Create("DButton", panel)
 				button:Dock(TOP)
 				button:SetSize(20,30)
 				button:SetText(L(v.name))
+				button:SetFont("ixSmallFont")
+				button:DockMargin(4,4,4,4)
 
 				function button:DoClick()
 					ix.command.Send("PlyWhitelist", client:Name(), v.name)
@@ -36,6 +40,10 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 
 					surface.SetTextColor(Color(255,255,255,255))
 					surface.SetTextPos(4, 4)
+				end
+
+				if(client:HasWhitelist(v.index)) then
+					button:Remove()
 				end
 			end
 		end
