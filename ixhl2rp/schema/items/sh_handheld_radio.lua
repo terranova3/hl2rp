@@ -1,6 +1,6 @@
 
 ITEM.name = "Handheld Radio"
-ITEM.model = Model("models/deadbodies/dead_male_civilian_radio.mdl")
+ITEM.model = Model("models/radio/w_radio.mdl")
 ITEM.description = "A shiny handheld radio with a frequency tuner.\nIt is currently turned %s%s."
 ITEM.cost = 50
 ITEM.classes = {CLASS_EMP, CLASS_EOW}
