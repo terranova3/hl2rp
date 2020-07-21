@@ -39,20 +39,18 @@ if (CLIENT) then
     function ITEM:PaintOver(item, w, h)
         local amount = item:GetData("currentAmount", 0)
 
-		if (amount) then
-            if(!self.useLabel) then
-                self.useLabel = self:Add("DLabel")
-                self.useLabel:SetPos(w - 60, h - 20)
-                self.useLabel:SetColor(Color(25, 197, 255, 125))
-                self.useLabel:SetExpensiveShadow(2)
-            end
+        if (amount) then
+            surface.SetDrawColor(35, 35, 35, 225)
+            surface.DrawRect(2, h-9, w-4, 7)
 
-            self.useLabel:SetText(item:GetData("currentAmount", 0) .. " mL")   
-        end
-        
-        surface.SetDrawColor(25,25,25,20)
-		surface.DrawRect(0,h-20, self:GetWide(), 2)
-    end
+			local filledWidth = (w-5) * (item:GetData("currentAmount", 0) / item.capacity)
+			
+            surface.SetDrawColor(93, 122, 229, 255)
+            surface.DrawRect(3, h-8, filledWidth, 5)
+
+            --self.useLabel:SetText(item:GetData("currentAmount", 0) .. " mL")   
+		end
+	end
 end
 
 function ITEM:PopulateTooltip(tooltip)

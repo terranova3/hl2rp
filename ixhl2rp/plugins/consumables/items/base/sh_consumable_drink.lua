@@ -97,29 +97,30 @@ function ITEM:OnInstanced(invID, x, y)
     self:SetData("currentAmount", self.capacity)
 end
 
-if (CLIENT) then
-    function ITEM:PaintOver(item, w, h)
-        local amount = item:GetData("currentAmount", 0)
-
-		if (amount) then
-            if(!self.useLabel) then
-                self.useLabel = self:Add("DLabel")
-                self.useLabel:SetPos(w - 60, h - 20)
-                self.useLabel:SetColor(Color(25, 197, 255, 125))
-                self.useLabel:SetExpensiveShadow(3)       
-            end
-
-            self.useLabel:SetText(item:GetData("currentAmount", 0) .. " mL")   
-		end
-	end
-end
-
 function ITEM:GetLiquid()
     if(self:GetData("currentAmount") > 0) then
         return true, self:GetData("currentAmount")
     end
 
     return false, nil
+end
+
+if (CLIENT) then
+    function ITEM:PaintOver(item, w, h)
+        local amount = item:GetData("currentAmount", 0)
+
+        if (amount) then
+            surface.SetDrawColor(35, 35, 35, 225)
+            surface.DrawRect(2, h-9, w-4, 7)
+
+			local filledWidth = (w-5) * (item:GetData("currentAmount", 0) / item.capacity)
+			
+            surface.SetDrawColor(93, 122, 229, 255)
+            surface.DrawRect(3, h-8, filledWidth, 5)
+
+            --self.useLabel:SetText(item:GetData("currentAmount", 0) .. " mL")   
+		end
+	end
 end
 
 function ITEM:PopulateTooltip(tooltip)

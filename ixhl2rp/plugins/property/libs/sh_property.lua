@@ -94,8 +94,3 @@ function ix.property.GetType(type)
 
     return false
 end
-
--- Instead of using cache for every LUA autorefresh, reload the files.
-if(SERVER) then
-    PLUGIN:LoadProperties()
-end

@@ -5,7 +5,7 @@
 
 ITEM.name = "Bandage base"
 ITEM.model = Model("models/carlsmei/escapefromtarkov/medical/bandage_med.mdl")
-ITEM.backgroundColor = Color(62, 40, 26, 130)
+ITEM.backgroundColor = Color(76, 37, 29, 100)
 ITEM.description = "A sealed gauze package manufactured in Russia able to temporarily patch certain trauma."
 ITEM.category = "Medical"
 ITEM.price = 18

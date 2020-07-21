@@ -82,3 +82,8 @@ function PLUGIN:KeyPress(client, key)
 		end
 	end
 end
+
+-- Instead of using cache for every LUA autorefresh, reload the files.
+if(SERVER) then
+    PLUGIN:LoadProperties()
+end
