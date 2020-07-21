@@ -151,15 +151,15 @@ if (SERVER) then
 			return
 		end
 
-		if (!client:GetCharacter():GetInventory():HasItem("union_card")) then
+		local character = client:GetCharacter()
+
+		if (character:GetInventory():HasItem("union_card") or character:IsCombine()) then
+			self:SetLocked(!self:GetLocked())
+			self.nextUseTime = CurTime() + 2
+		else
 			self:DisplayError()
 			self.nextUseTime = CurTime() + 2
-
-			return
 		end
-
-		self:SetLocked(!self:GetLocked())
-		self.nextUseTime = CurTime() + 2
 	end
 
 	function ENT:Use(client)
