@@ -26,6 +26,7 @@ net.Receive("ixEnterpriseRequestInformation", function(length, client)
 
     net.Start("ixEnterpriseReceiveInformation")
         net.WriteTable(enterprise)
+        net.WriteTable(ix.property)
     net.Send(client)
 end)
 

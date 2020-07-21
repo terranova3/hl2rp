@@ -34,6 +34,10 @@ end
 
 net.Receive("ixEnterpriseReceiveInformation", function()
 	local enterprise = net.ReadTable()
+	local property = net.ReadTable()
+
+	ix.property.sections = property.sections
+	ix.property.stored = property.stored
 
 	if(ix.gui.enterprise) then
 		ix.gui.enterprise.enterprise = setmetatable(enterprise, ix.meta.enterprise)
