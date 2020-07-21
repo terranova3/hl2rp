@@ -10,15 +10,21 @@ Rough list of custom features include:
 Bodygroup slot support
 Books
 Character Panel
+Clothing
 Character traits
 Civil Protection System
 Civil Protection Armory
 Custom notification framework
 Custom class support
+Custom item interact UI
+Drag and drop item interaction
 Enterprises and businesses
 Extended Factions
 F1 menu
 Half-Life Alyx Voicelines
+Inventory UI updates
+Item icon UI extensions
+Languages
 Liquid items
 Medical and Limb system
 New introduction
@@ -28,6 +34,7 @@ Permits
 Property system
 Scoreboard uses class names
 Vortigaunts
+View data and unit records
 ```
 
 ## Usage
