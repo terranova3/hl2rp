@@ -8,7 +8,6 @@ ITEM.model = "models/griim/foodpack/potato.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "An earthy, grown potato. If you can find a peeler, you could make many things with this wonderful vegetable.";
-ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
 ITEM.price = 5;
 ITEM.restoreHealth = 5;

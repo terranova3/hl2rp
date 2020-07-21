@@ -4,6 +4,7 @@ ITEM.description = "A metal apparatus applied to doors."
 ITEM.model = Model("models/props_combine/combine_lock01.mdl")
 ITEM.width = 1
 ITEM.height = 2
+ITEM.category = "Utilities"
 ITEM.iconCam = {
 	pos = Vector(-0.5, 50, 2),
 	ang = Angle(0, 270, 0),

@@ -8,7 +8,6 @@ ITEM.model = "models/kek1ch/dev_beans.mdl";
 ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "An aluminium can containing baked beans in a thick, delicious tomato sauce. Filled with fiber, these make you very full.";
-ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
 ITEM.price = 8;
 ITEM.restoreHealth = 10;

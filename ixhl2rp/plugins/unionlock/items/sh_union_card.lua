@@ -1,6 +1,7 @@
 ITEM.name = "Civil Access Card"
 ITEM.model = Model("models/dorado/tarjeta4.mdl")
 ITEM.description = "A machine manufactured card that gives the holder access to blue coded combine locks."
+ITEM.category = "Other"
 
 function ITEM:PopulateTooltip(tooltip)
 	local warning = tooltip:AddRow("warning")

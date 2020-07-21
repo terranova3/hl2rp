@@ -8,6 +8,7 @@ ITEM.cost = 5;
 ITEM.model = "models/props_lab/clipboard.mdl";
 ITEM.weight = 0.1;
 ITEM.business = true;
+ITEM.category = "Other"
 ITEM.description = "A clean notepad, useful for note taking.";
 ITEM.functions.Use = {
 	OnRun = function(item)

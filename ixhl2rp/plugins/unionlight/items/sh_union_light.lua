@@ -1,7 +1,7 @@
 ITEM.name = "Union Light";
 ITEM.cost = 50;
 ITEM.model = "models/props_combine/combine_light001a.mdl";
-ITEM.category = "Other"
+ITEM.category = "Utilities"
 ITEM.business = true;
 ITEM.description = "A Union Light capable of illuminating large areas.";
 ITEM.functions.Place = {

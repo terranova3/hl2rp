@@ -8,7 +8,6 @@ ITEM.model = "models/gibs/props_canteen/vm_snack15.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "Some chocolate candy wrapper of some kind. Soft and melted. It's mushy, but still chocolate.";
-ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
 ITEM.price = 4;
 ITEM.restoreHealth = 10;

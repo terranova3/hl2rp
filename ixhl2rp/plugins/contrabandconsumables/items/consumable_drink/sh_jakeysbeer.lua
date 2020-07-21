@@ -8,7 +8,6 @@ ITEM.model = "models/mark2580/gtav/barstuff/Beer_Jakey.mdl";
 ITEM.width = 1;
 ITEM.height	= 2;
 ITEM.description = "A strong, very cold pale ale with a tolerable taste. A taste that you can only describe as light and crisp hits you.";
-ITEM.category = "Contraband Drinks";
 ITEM.permit = "consumables";
 ITEM.price = 10;
 ITEM.restoreStamina = 20;

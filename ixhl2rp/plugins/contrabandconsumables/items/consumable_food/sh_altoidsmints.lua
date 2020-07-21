@@ -8,7 +8,6 @@ ITEM.model = "models/kek1ch/dev_mint.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A small tin of peppermint flavoured breath mints.";
-ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
 ITEM.price = 3;
 ITEM.restoreStamina = 10;

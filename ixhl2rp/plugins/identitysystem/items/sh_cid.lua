@@ -1,6 +1,7 @@
 ITEM.name = "ID Card"
 ITEM.model = Model("models/dorado/tarjeta2.mdl")
 ITEM.description = "Originally instituted when proposed by Luna Solaris in 2015, the now-standard ID Card system replaced the previous system of exclusively ID Numbers.\nPreviously, Citizens were expected to remember their 5 digit identification number, which was wildly unpopular with the elderly."
+ITEM.category = "Other"
 
 function ITEM:GetDescription()
 	return self.description

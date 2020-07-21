@@ -6,7 +6,7 @@
 ITEM.name = "Business Application"
 ITEM.description = "Contains a compact form with various questions and answers, for creating a business. Has a small union Ministry of Workforce logo at the top right."
 ITEM.model = "models/props_office/paperfolder01.mdl"
-ITEM.category = "Enterprise";
+ITEM.category = "Other";
 ITEM.functions.View = {
     icon = "icon16/book_edit.png",
 	OnRun = function(itemTable)

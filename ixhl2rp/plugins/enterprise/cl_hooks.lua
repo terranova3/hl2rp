@@ -27,7 +27,3 @@ net.Receive("ixBusinessApplicationEdit", function()
 	PLUGIN.businessApplication = vgui.Create("ixBusinessApplication")
 	PLUGIN.businessApplication:Build(id, editMode, properties)
 end)
-
-function PLUGIN:BuildBusinessMenu(panel)
-	return true
-end

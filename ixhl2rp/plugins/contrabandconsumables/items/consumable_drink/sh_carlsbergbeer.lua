@@ -8,7 +8,6 @@ ITEM.model = "models/griim/foodpack/beercan_carlsberg.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A pale lager in a green can. It has a bitter, warm taste and is crisp to the mouth.";
-ITEM.category = "Contraband Drinks";
 ITEM.permit = "consumables";
 ITEM.price = 10;
 ITEM.restoreStamina = 15;

@@ -8,7 +8,6 @@ ITEM.model = "models/mark2580/gtav/barstuff/Bottle_Brandy.mdl";
 ITEM.width = 1;
 ITEM.height = 2;
 ITEM.description = "An extremely tasty, fancy brandy that recalls a forgotten time.";
-ITEM.category = "Contraband Drinks";
 ITEM.permit = "consumables";
 ITEM.price = 38;
 ITEM.restoreStamina = 25;

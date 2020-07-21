@@ -8,7 +8,6 @@ ITEM.model = "models/griim/foodpack/pie.mdl";
 ITEM.width = 2;
 ITEM.height = 1;
 ITEM.description = "Crusted delight with something sweet.";
-ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
 ITEM.price = 15;
 ITEM.restoreHealth = 10;

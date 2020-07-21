@@ -8,7 +8,6 @@ ITEM.model = "models/mre_box_t2/mre_box_t2.mdl";
 ITEM.width = 1;
 ITEM.height	= 2;
 ITEM.description = "A french meal kit ready to eat. Probably filled with snails.";
-ITEM.category = "Contraband Food";
 ITEM.permit = "consumables";
 ITEM.price = 35;
 ITEM.restoreHealth = 10;

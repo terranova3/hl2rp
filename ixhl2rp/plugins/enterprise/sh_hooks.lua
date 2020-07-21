@@ -3,6 +3,4 @@
 	without permission of its author.
 --]]
 
-function PLUGIN:CanPlayerUseBusiness(client, uniqueID)
-	
-end
+function PLUGIN:CanPlayerUseBusiness(client, uniqueID) end
