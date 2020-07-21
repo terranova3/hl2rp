@@ -11,7 +11,7 @@ function playerMeta:IsDispatch()
 	local bStatus = faction == FACTION_OTA
 
 	if (!bStatus) then
-		if(ix.ranks.HasPermission(self:GetCharacter():GetRank().uniqueID, "Dispatch")) then
+		if(self:GetCharacter():GetRank() and ix.ranks.HasPermission(self:GetCharacter():GetRank().uniqueID, "Dispatch")) then
 			bStatus = true
 		end
 	end
