@@ -45,9 +45,6 @@ function PLUGIN:LoadProperties()
 	if(data) then
 		ix.property.sections = data.sections or {}
 		ix.property.stored = data.properties or {}
-
-		PrintTable(ix.property.sections)
-		PrintTable(ix.property.stored)
 	end
 end
 
