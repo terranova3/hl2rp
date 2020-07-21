@@ -17,4 +17,4 @@ ITEM.iconCam = {
 	ang = Angle(89.083892822266, -89.995094299316, 0),
 	fov = 8.8235294117647
 }
-ITEM.backgroundColor = Color(54, 76, 88, 130)
+ITEM.backgroundColor = Color(19, 72, 96, 100)
