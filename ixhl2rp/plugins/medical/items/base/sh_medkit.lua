@@ -51,15 +51,16 @@ local font = font
 
 if (CLIENT) then
     function ITEM:PaintOver(item, w, h)
-        if (item:GetData("currentCharge", 0)) then
-            if(!self.useLabel) then
-                self.useLabel = self:Add("DLabel")
-                self.useLabel:SetPos(w - 60, h - 20)
-                self.useLabel:SetColor(Color(190, 62, 39, 255))
-                self.useLabel:SetExpensiveShadow(2)       
-            end
+        local amount = item:GetData("currentAmount", 0)
 
-            self.useLabel:SetText(item:GetData("currentCharge", item.charge) .. "/" .. item.charge)   
+        if (amount) then
+            surface.SetDrawColor(35, 35, 35, 225)
+            surface.DrawRect(2, h-9, w-4, 7)
+
+			local filledWidth = (w-5) * (item:GetData("currentCharge", item.charge) / item.charge)
+			
+            surface.SetDrawColor(190, 62, 39, 255)
+            surface.DrawRect(3, h-8, filledWidth, 5) 
 		end
 	end
 end
