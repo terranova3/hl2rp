@@ -20,10 +20,10 @@ Extended Factions
 F1 menu
 Half-Life Alyx Voicelines
 Liquid items
-Medical & Limb system
+Medical and Limb system
 New introduction
 New scoreboard
-Overhauled character select and creation
+Overhauled character menu and creation
 Permits
 Property system
 Scoreboard uses class names
