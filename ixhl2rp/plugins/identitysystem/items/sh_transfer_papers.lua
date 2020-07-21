@@ -6,6 +6,12 @@ function ITEM:GetDescription()
 	return self.description
 end
 
+if (CLIENT) then
+    function ITEM:PaintOver(item, w, h)
+		ix.util.DrawText("!", w-8, h-19, Color(218,171,3,255), 0, 0, "ixSmallFont")
+	end
+end
+
 function ITEM:PopulateTooltip(tooltip)
 	local data = tooltip:AddRow("data")
 	data:SetBackgroundColor(derma.GetColor("Success", tooltip))
