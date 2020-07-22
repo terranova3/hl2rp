@@ -10,4 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "A mean-faced lager with a decent taste.";
 ITEM.permit = "consumables";
 ITEM.price = 12;
+ITEM.capacity = 355
 ITEM.restoreStamina = 20;

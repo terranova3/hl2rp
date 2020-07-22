@@ -10,4 +10,5 @@ ITEM.height = 1;
 ITEM.description = "A can of delicious Victoria Bitter, which is a lager made and sold mostly in Australia.";
 ITEM.permit = "consumables";
 ITEM.price = 15;
+ITEM.capacity = 375
 ITEM.restoreStamina = 15;

@@ -9,5 +9,6 @@ ITEM.width = 1;
 ITEM.height	= 2;
 ITEM.description = "High-society red wine that makes you talk special.";
 ITEM.permit = "consumables";
+ITEM.capacity = 750
 ITEM.price = 45;
 ITEM.restoreStamina = 25;

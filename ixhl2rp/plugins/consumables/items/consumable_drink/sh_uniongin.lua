@@ -12,4 +12,5 @@ ITEM.description = "This Civil-Approved drink does indeed have alcohol, unlike i
 ITEM.category = "Civil-Approved Drinks";
 ITEM.permit = "consumables";
 ITEM.price = 8;
+ITEM.capacity = 600
 ITEM.restoreStamina = 20;

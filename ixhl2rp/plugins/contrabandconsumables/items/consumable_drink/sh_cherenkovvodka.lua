@@ -10,4 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "Premium vodka with a premium penalty. Famously used for molotov cocktails.";
 ITEM.permit = "consumables";
 ITEM.price = 25;
+ITEM.capacity = 750
 ITEM.restoreStamina = 25;

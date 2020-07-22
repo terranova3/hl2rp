@@ -10,4 +10,5 @@ ITEM.height = 2;
 ITEM.description = "An obnoxiously branded lager that tastes suprisingly good.";
 ITEM.permit = "consumables";
 ITEM.price = 10;
+ITEM.capacity = 355
 ITEM.restoreStamina = 20;

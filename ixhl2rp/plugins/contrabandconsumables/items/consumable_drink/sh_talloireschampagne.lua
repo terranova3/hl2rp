@@ -10,4 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "Champagne for the winner, possibly soon to be loser.";
 ITEM.permit = "consumables";
 ITEM.price = 50;
+ITEM.capacity = 750
 ITEM.restoreStamina = 25;

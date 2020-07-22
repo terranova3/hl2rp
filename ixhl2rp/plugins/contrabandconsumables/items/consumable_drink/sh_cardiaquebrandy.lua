@@ -10,4 +10,5 @@ ITEM.height = 2;
 ITEM.description = "An extremely tasty, fancy brandy that recalls a forgotten time.";
 ITEM.permit = "consumables";
 ITEM.price = 38;
+ITEM.capacity = 750
 ITEM.restoreStamina = 25;

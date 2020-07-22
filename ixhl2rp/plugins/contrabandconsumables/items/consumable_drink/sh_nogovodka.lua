@@ -10,4 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "Maybe the universe is trying to tell me something.";
 ITEM.permit = "consumables";
 ITEM.price = 35;
+ITEM.capacity = 750
 ITEM.restoreStamina = 25;

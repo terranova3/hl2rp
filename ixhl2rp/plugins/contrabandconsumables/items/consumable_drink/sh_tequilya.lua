@@ -10,4 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "This bottle of mezcal 'tequila' has a maguey larva in it. It's very strong and has an earthy aftertaste. It goes down clean and leaves a light sting at the back of the throat.";
 ITEM.permit = "consumables";
 ITEM.price = 40;
+ITEM.capacity = 750
 ITEM.restoreStamina = 25;

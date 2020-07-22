@@ -10,4 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "Cheap pinot noir for a cheap taste of red wine. It's bitter, sour, and has a low alcohol percentage.";
 ITEM.permit = "consumables";
 ITEM.price = 25;
+ITEM.capacity = 750
 ITEM.restoreStamina = 25;

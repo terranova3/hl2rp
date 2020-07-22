@@ -10,4 +10,5 @@ ITEM.height	= 2;
 ITEM.description = "A pale ale comically branded for those who drink in the morning.";
 ITEM.permit = "consumables";
 ITEM.price = 10;
+ITEM.capacity = 355
 ITEM.restoreStamina = 20;
