@@ -178,7 +178,7 @@ function PLUGIN:CheckForErrors(client, character)
 		character:SetData("cpTagline", "ERROR");
 	end
 
-	if(!character:GetData("rank"))
+	if(!character:GetData("rank")) then
 		character:SetData("rank", ix.ranks.GetDefaultRank(faction))
 	end
 
