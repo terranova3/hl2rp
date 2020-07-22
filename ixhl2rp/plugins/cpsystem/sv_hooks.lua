@@ -145,14 +145,7 @@ function PLUGIN:PlayerLoadedCharacter(client, character)
 
  	-- Updates player name if the city has been changed. --
 	if(faction == FACTION_MPF) then
-
-		if(!character:GetData("cpID")) then
-			character:SetData("cpID", 1);
-		end
-
-		if(!character:GetData("cpTagline")) then
-			character:SetData("cpTagline", "ERROR");
-		end
+		self:CheckForErrors()
 
 		if(character:GetName() == character:GetCPName()) then
 			if(!string.find(character:GetName(), ix.config.Get("City Name"))) then 
@@ -172,6 +165,35 @@ function PLUGIN:PlayerLoadedCharacter(client, character)
 		end;
 	end;
 end;
+
+-- Sometimes data might disappear. Make sure we always have data.
+function PLUGIN:CheckForErrors(client, character)
+	local faction = character:GetFaction()
+
+	if(!character:GetData("cpID")) then
+		character:SetData("cpID", 1);
+	end
+
+	if(!character:GetData("cpTagline")) then
+		character:SetData("cpTagline", "ERROR");
+	end
+
+	if(!character:GetData("rank"))
+		character:SetData("rank", ix.ranks.GetDefaultRank(faction))
+	end
+
+	if(!character:GetData("cpCitizenName")) then
+		character:SetData("cpCitizenName", "Fatal error")
+	end
+
+	if(!character:GetData("cpCitizenDesc")) then
+		character:SetData("cpCitizenDesc", "Fatal error")
+	end
+
+	if(!character:GetData("cpDesc")) then
+		character:SetData("cpDesc", "Fatal error")
+	end
+end
 
 -- Called just after a player spawns.
 function PLUGIN:PlayerSpawn(client)
