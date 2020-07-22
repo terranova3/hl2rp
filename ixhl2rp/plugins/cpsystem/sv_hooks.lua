@@ -207,8 +207,14 @@ end
 -- Called when we need to setup bodygroups for a rank
 function PLUGIN:SetupRankBodygroups(character)
 	if(character:IsMetropolice() and !character:IsUndercover()) then
+		local spec = character:GetSpec()
+
 		for k, v in pairs(character:GetRankBodygroups()) do
-			character:GetPlayer():SetBodygroup(k, v)
+			if(spec and k == 2) then
+				character:GetPlayer():SetBodygroup(k, v+spec.offset)	
+			else	
+				character:GetPlayer():SetBodygroup(k, v)
+			end
 		end
 
 		return false

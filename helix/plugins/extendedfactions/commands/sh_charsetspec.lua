@@ -30,6 +30,8 @@ ix.command.Add("CharSetSpec", {
                     target:SetData("certs", certs)
                     target:SetData("spec", text)
 
+                    target:UpdateCPStatus()
+
                     client:Notify(string.format("You have given %s the %s specialization.", target:GetName(), cert.name))
                 else
                     client:Notify(error)

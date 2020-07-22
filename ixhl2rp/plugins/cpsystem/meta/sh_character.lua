@@ -34,6 +34,10 @@ end;
 
 -- Called when a character has had data changed
 function CHAR:UpdateCPStatus()
+	if(!self:IsMetropolice()) then
+		return
+	end
+
     local cpData = self:GetCPInfo()
 
     if(!self:IsUndercover()) then

@@ -20,6 +20,8 @@ ix.command.Add("CharRemoveSpec", {
                 if(canChangeCert) then
                     target:SetData("spec", nil)
 
+                    target:UpdateCPStatus()
+                    
                     client:Notify(string.format("You have removed %s's specialization.", target:GetName()))
                 else
                     client:Notify(error)
