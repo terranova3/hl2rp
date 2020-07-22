@@ -9,7 +9,7 @@ CERT.description = "Deployment and maintenance of manhacks, turrets and defensiv
 CERT.icon = "icon16/emoticon_smile.png"
 
 -- This is used to define the start of the colour 'group' for the armband bodygroups.
-CERT.offset = 18
+CERT.offset = 16
 
 -- The 'faction object' of the faction that can obtain the certification
 CERT.faction = FACTION_MPF

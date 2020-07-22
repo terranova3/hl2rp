@@ -10,7 +10,7 @@ function character:GetClassName()
         return ix.class.list[self:GetClass()].name
     end
 
-    return ix.faction.indices[character:GetFaction()].name
+    return ix.faction.indices[self:GetFaction()].name
 end
 
 function character:GetClassScoreboardPriority()
