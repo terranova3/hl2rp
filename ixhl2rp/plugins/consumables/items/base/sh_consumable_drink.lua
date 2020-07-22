@@ -15,13 +15,18 @@ ITEM.functions.Drink = {
 	OnRun = function(itemTable)
         local client = itemTable.player
         local hasLiquid, liquid = itemTable:GetLiquid()
+
+        if(!hasLiquid) then
+            client:Notify(string.format("%s is empty.", itemTable.name))
+
+            return false
+        end
+
         local modifier = liquid / itemTable.capacity
 
         if(hasLiquid) then
             itemTable:SetData("currentAmount", 0)
             itemTable.drinkEffects(itemTable, modifier)
-        else
-            client:Notify(string.format("%s is empty.", itemTable.name))
         end
 
         return false
@@ -32,6 +37,13 @@ ITEM.functions.Sip = {
 	OnRun = function(itemTable)
         local client = itemTable.player
         local hasLiquid, liquid = itemTable:GetLiquid()
+
+        if(!hasLiquid) then
+            client:Notify(string.format("%s is empty.", itemTable.name))
+
+            return false
+        end
+
         local modifier = liquid / itemTable.capacity
 
         if(modifier > 0.1) then
@@ -43,8 +55,6 @@ ITEM.functions.Sip = {
 
             itemTable:SetData("currentAmount", math.Clamp(newAmount, 0, 9999))
             itemTable.drinkEffects(itemTable, modifier)
-        else
-            client:Notify(string.format("%s is empty.", itemTable.name))
         end
 
         return false
@@ -66,18 +76,18 @@ end
 ITEM.dragged = function(item, item2)
     local client = item:GetOwner()
 
-    if(item2.capacity and item:GetLiquid()) then
+    if(item2.capacity and item:GetLiquid() and item2.isContainer) then
         local hasSpace, spaceLeft = item2:GetSpace()
-        local hasLiquid, liquid = item2:GetLiquid()
+        local hasLiquid, liquid = item2:GetLiquidType()
 
         if(hasSpace) then
-            if(!hasLiquid) then
+            if(!hasLiquid or liquid == item.uniqueID) then
                 local amountToGive
                 
                 if(spaceLeft >= item:GetData("currentAmount", 0)) then
                     amountToGive = item:GetData("currentAmount", 0)
                 else
-                    amountToGive = item:GetData("currentAmount", 0) - spaceLeft
+                    amountToGive = spaceLeft
                 end
 
                 item2:SetData("currentAmount", item2:GetData("currentAmount") + amountToGive)
@@ -90,6 +100,17 @@ ITEM.dragged = function(item, item2)
             client:Notify(string.format("%s has reached its maximum capacity.", item2.name))
         end
     end
+end
+ITEM.suppressed = function(itemTable, name)
+    if(name == "drop") then
+        return
+    end
+    
+	if(itemTable:GetData("currentAmount", 0) <= 0) then
+		return true, name, "This drink is empty."
+	end
+
+	return false
 end
 
 -- Called when a new instance of this item has been made.
@@ -124,10 +145,14 @@ if (CLIENT) then
 end
 
 function ITEM:PopulateTooltip(tooltip)
-	local data = tooltip:AddRow("data")
-	data:SetBackgroundColor(derma.GetColor("Success", tooltip))
-	data:SetText("Capacity: " .. self.capacity .." mL\nCurrent Amount: " .. self:GetData("currentAmount", self.capacity) .. " mL")
-	data:SetFont("BudgetLabel")
-	data:SetExpensiveShadow(0.5)
+    local data = tooltip:AddRow("data")
+
+    if(self:GetData("currentAmount", 0) <= 0) then
+        data:SetText("\nCapacity: " .. self.capacity .." mL\nEmpty")
+    else 
+	    data:SetText("Capacity: " .. self.capacity .." mL\nCurrent Amount: " .. self:GetData("currentAmount", self.capacity) .. " mL")
+    end
+
+    data:SetFont("ixPluginCharSubTitleFont")
 	data:SizeToContents()
 end

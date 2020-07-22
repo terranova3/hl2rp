@@ -10,6 +10,82 @@ ITEM.height	= 1;
 ITEM.description = "Liquid Container base";
 ITEM.category = "Containers";
 ITEM.capacity = 500
+ITEM.isContainer = true
+ITEM.functions.Drink = {
+    icon = "icon16/drink.png",
+    OnRun = function(itemTable)
+        local client = itemTable.player
+        local hasLiquid, amount = itemTable:GetLiquid()
+
+        if(!hasLiquid) then
+            client:Notify(string.format("%s is empty.", itemTable.name))
+            return false
+        end
+
+        local _, liquidType = itemTable:GetLiquidType()
+        local modifier = amount / itemTable.capacity
+        local liquid = ix.item.list[liquidType]
+
+        if(liquid) then
+            itemTable:SetData("currentAmount", 0)
+            itemTable:SetData("currentLiquid", nil)
+
+            if(liquid.drinkEffects) then
+                liquid.drinkEffects(itemTable, modifier)
+            end
+        end
+
+        return false
+	end
+}
+ITEM.functions.Sip = {
+    icon = "icon16/drink.png",
+	OnRun = function(itemTable)
+        local client = itemTable.player
+        local hasLiquid, amount = itemTable:GetLiquid()
+
+        if(!hasLiquid) then
+            client:Notify(string.format("%s is empty.", itemTable.name))
+            return false
+        end
+
+        local modifier = amount / itemTable.capacity
+
+        if(modifier > 0.1) then
+            modifier = 0.1
+        end
+
+        local _, liquidType = itemTable:GetLiquidType()
+        local liquid = ix.item.list[liquidType]
+        
+        if(liquid) then
+            local newAmount = itemTable:GetData("currentAmount") - (itemTable.capacity * modifier)
+
+            itemTable:SetData("currentAmount", math.Clamp(newAmount, 0, 9999))
+
+            if(itemTable:GetData("currentAmount") <= 0) then
+                itemTable:SetData("currentLiquid", nil)
+            end
+
+            if(liquid.drinkEffects) then
+                liquid.drinkEffects(itemTable, modifier)
+            end
+        end
+
+        return false
+	end
+}
+ITEM.suppressed = function(itemTable, name)
+    if(name == "drop") then
+        return
+    end
+
+	if(itemTable:GetData("currentAmount", 0) <= 0) then
+		return true, name, "This container is empty."
+	end
+
+	return false
+end
 
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)
@@ -26,6 +102,14 @@ function ITEM:GetSpace()
 end
 
 function ITEM:GetLiquid()
+    if(self:GetData("currentAmount") > 0) then
+        return true, self:GetData("currentAmount")
+    end
+
+    return false, nil
+end
+
+function ITEM:GetLiquidType()
     local currentLiquid = self:GetData("currentLiquid")
 
     if(currentLiquid) then
@@ -57,14 +141,13 @@ function ITEM:PopulateTooltip(tooltip)
     local data = tooltip:AddRow("data")
 
     if(self:GetData("currentAmount", 0) <= 0) then
-        data:SetBackgroundColor(derma.GetColor("Info", tooltip))
-        data:SetText("Capacity: " .. self.capacity .." mL\nEmpty")
+        data:SetText("\nCapacity: " .. self.capacity .." mL\nEmpty")
     else 
-        data:SetBackgroundColor(derma.GetColor("Success", tooltip))
-        data:SetText("Capacity: " .. self.capacity .." mL\nCurrent Amount: " .. self:GetData("currentAmount") .. " mL")
+        data:SetText("\nCapacity: " .. self.capacity .." mL\n" ..
+        "Current Amount: " .. self:GetData("currentAmount") .. " mL\n" ..
+        "Contains " .. ix.item.list[self:GetData("currentLiquid")].name .. ".")
     end
 
-	data:SetFont("BudgetLabel")
-	data:SetExpensiveShadow(0.5)
+    data:SetFont("ixPluginCharSubTitleFont")
 	data:SizeToContents()
 end
