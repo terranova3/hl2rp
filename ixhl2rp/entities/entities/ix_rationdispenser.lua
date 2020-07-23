@@ -77,20 +77,10 @@ if (SERVER) then
 		self.nextUseTime = CurTime()
 	end
 
-	function ENT:SpawnRation(character, callback, releaseDelay)
+	function ENT:SpawnRation(callback, releaseDelay)
 		releaseDelay = releaseDelay or 1.2
 
 		local itemTable = ix.item.Get("ration")
-		local characterSalary = 0
-		local inventory = character:GetInventory()
-
-		for k, v in pairs(inventory:GetItems()) do
-			if(v.uniqueID == "cid" and v:GetData("cid", 00000) == character:GetData("cid", 00000)) then
-				characterSalary = v:GetData("salary", 0)
-
-				break
-			end
-		end
 
 		self.dummy:SetModel(itemTable:GetModel())
 		self.dummy:SetNoDraw(false)
@@ -102,7 +92,7 @@ if (SERVER) then
 		timer.Simple(releaseDelay, function()
 			ix.item.Spawn("ration", self.dummy:GetPos(), function(item, entity)
 				self.dummy:SetNoDraw(true)
-			end, self.dummy:GetAngles(), { salary = characterSalary })
+			end, self.dummy:GetAngles())
 
 			-- display cooldown notice
 			timer.Simple(releaseDelay, function()
@@ -117,9 +107,9 @@ if (SERVER) then
 		end)
 	end
 
-	function ENT:StartDispense(character)
+	function ENT:StartDispense()
 		self:SetDisplay(3)
-		self:SpawnRation(character, function()
+		self:SpawnRation(function()
 			self.dispenser:Fire("SetAnimation", "dispense_package")
 			self:EmitSound("ambient/machines/combine_terminal_idle4.wav")
 		end)
@@ -144,47 +134,45 @@ if (SERVER) then
 			return
 		end
 
-		if (!self:GetEnabled()) then
-			self:DisplayError(6)
-			return
-		end
+		if (client:Team() == FACTION_CITIZEN) then
+			if (!self:GetEnabled()) then
+				self:DisplayError(6)
+				return
+			end
 
-		if (client:IsCombine()) then
+			local cid = client:GetCharacter():GetInventory():HasItem("cid")
+
+			if (!cid) then
+				self:DisplayError(7)
+				return
+			end
+
+			-- display checking message
+			self.canUse = false
+			self:SetDisplay(2)
+			self:EmitSound("ambient/machines/combine_terminal_idle2.wav")
+
+			-- check cid ration time and dispense if allowed
+			timer.Simple(math.random(1.8, 2.2), function()
+				if (cid:GetData("nextRationTime", 0) < os.time()) then
+					self:SetDisplay(8)
+					self:EmitSound("ambient/machines/combine_terminal_idle3.wav")
+
+					timer.Simple(10.2, function()
+						self:StartDispense()
+						cid:SetData("nextRationTime", os.time() + ix.config.Get("rationInterval", 1))
+					end)
+				else
+					self:DisplayError(4)
+				end
+			end)
+		elseif (client:IsCombine()) then
 			self:SetEnabled(!self:GetEnabled())
 			self:EmitSound(self:GetEnabled() and "buttons/combine_button1.wav" or "buttons/combine_button2.wav")
 
 			Schema:SaveRationDispensers()
 			self.nextUseTime = CurTime() + 2
-
-			return
 		end
-
-		local cid = client:GetCharacter():GetInventory():HasItem("cid")
-
-		if (!cid) then
-			self:DisplayError(7)
-			return
-		end
-
-		-- display checking message
-		self.canUse = false
-		self:SetDisplay(2)
-		self:EmitSound("ambient/machines/combine_terminal_idle2.wav")
-
-		-- check cid ration time and dispense if allowed
-		timer.Simple(math.random(1.8, 2.2), function()
-			if (cid:GetData("nextRationTime", 0) < os.time()) then
-				self:SetDisplay(8)
-				self:EmitSound("ambient/machines/combine_terminal_idle3.wav")
-
-				timer.Simple(10.2, function()
-					self:StartDispense(client:GetCharacter())
-					cid:SetData("nextRationTime", os.time() + ix.config.Get("rationInterval", 1))
-				end)
-			else
-				self:DisplayError(4)
-			end
-		end)
 	end
 
 	function ENT:OnRemove()

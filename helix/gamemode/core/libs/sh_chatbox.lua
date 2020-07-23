@@ -414,7 +414,7 @@ do
 
 				icon = Material(hook.Run("GetPlayerIcon", speaker) or icon)
 
-				chat.AddText(icon, Color(255, 50, 50), "[OOC] ", speaker:GetCharacter():GetClassColor(), speaker:Name(), color_white, ": "..text)
+				chat.AddText(icon, Color(255, 50, 50), "[OOC] ", speaker, color_white, ": "..text)
 			end,
 			prefix = {"//", "/OOC"},
 			description = "@cmdOOC",

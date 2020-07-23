@@ -12,44 +12,38 @@ if CLIENT then
 		vgui.Create("ixCIDCreater")
 	end)
 
+	netstream.Hook("OpenRecordMenu", function(data)
+		vgui.Create("ixRecordPanel")
+		--ix.gui.cidview:SetItem(ix.item.instances[data[1]])
+
+		if(IsValid(ix.gui.menu)) then
+			ix.gui.menu:Remove()
+		end
+	end)
+
 	netstream.Hook("ViewData", function(target, cid, data, cpData)
 		Schema:AddCombineDisplayMessage("@cViewData")
 		vgui.Create("ixRecordPanel"):Build(target, cid, data, cpData)
 	end)
 else
-	netstream.Hook("SubmitNewCID", function(client, data)
-		if(client:IsCombine() or client:GetCharacter():HasFlags("i")) then
-			local character = client:GetCharacter()
-			local inventory = character:GetInventory()
+	netstream.Hook("SubmitNewCID", function(ply, data)
+		if ply:IsCombine() then
+			local char = ply:GetCharacter()
+			local inv = char:GetInventory()
+			local Timestamp = os.time()
+			local TimeString = os.date("%H:%M:%S - %d/%m/%Y", Timestamp)
 
-			if(!character or !inventory) then
-				return
-			end
+			local data2 = {
+				["citizen_name"] = data[1],
+				["cid"] = data[2],
+				["issue_date"] = TimeString,
+				["officer"] = ply:Name()
+			}
 
-			if(data[4] == 0) then
-				data[4] = nil
-			end
-
-			if(data[5]) then
-				inventory:Remove(data[5])
-			end
-
-			inventory:Add("cid", 1, {
-				citizen_name = data[1],
-				cid = data[2],
-				occupation = data[3],
-				salary = data[4],
-				issue_date = os.date("%H:%M:%S - %d/%m/%Y", os.time()),
-				officer = client:Name()
-			})
-
-			client:EmitSound("buttons/button14.wav", 100, 25)
-
-			if(character:IsMetropolice()) then
-				client:ForceSequence("harassfront1")
-			end
-
-			ix.log.AddRaw(client:Name() .. " has created a new CID with the name " .. data[1])
+			inv:Add("cid", 1, data2)
+			ply:EmitSound("buttons/button14.wav", 100, 25)
+			ply:ForceSequence("harassfront1")
+			ix.log.AddRaw(ply:Name() .. " has created a new CID with the name " .. data[1])
 		end
 	end)
 end
@@ -57,13 +51,14 @@ end
 function PLUGIN:OnCharacterCreated(client, character)
 	if(character:GetFaction() == FACTION_CITIZEN) then
 		local inventory = character:GetInventory()
+		local TimeString = os.date( "%H:%M:%S - %d/%m/%Y", os.time() )
 
 		inventory:Add("suitcase", 1)
 		inventory:Add("transfer_papers", 1, {
 			citizen_name = character:GetName(),
 			cid = character:GetData("cid", "99999"),
 			unique = math.random(0000000,999999999),
-			issue_date = tostring(os.date( "%H:%M:%S - %d/%m/%Y", os.time()))
+			issue_date = tostring(TimeString)
 		})
 	end
 end

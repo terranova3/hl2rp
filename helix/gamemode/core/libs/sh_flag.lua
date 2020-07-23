@@ -198,5 +198,4 @@ do
 	ix.flag.Add("r", "Access to spawn ragdolls.")
 	ix.flag.Add("e", "Access to spawn props.")
 	ix.flag.Add("n", "Access to spawn NPCs.")
-	ix.flag.Add("i", "Access to identification terminals.")
 end
