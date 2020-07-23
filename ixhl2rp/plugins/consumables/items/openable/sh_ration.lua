@@ -11,5 +11,10 @@ ITEM.contains = {
         uniqueID = "water",
         amount = 1,
         data = {}
+    },
+    [3] = {
+        uniqueID = "money"
+        amount = 25,
+        data = {}
     }
 }

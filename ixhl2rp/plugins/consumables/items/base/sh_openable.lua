@@ -19,8 +19,13 @@ ITEM.functions.Open = {
         if(itemTable.contains and itemTable.contains[1]) then
             for k, v in pairs(itemTable.contains) do
                 if(v.uniqueID and v.amount) then
-                    if (!client:GetCharacter():GetInventory():Add(v.uniqueID, v.amount or 1, v.data)) then
-                        ix.item.Spawn(v, client)
+
+                    if(v.uniqueID:lower() != "money")
+                        if (!client:GetCharacter():GetInventory():Add(v.uniqueID, v.amount or 1, v.data)) then
+                            ix.item.Spawn(v, client)
+                        end
+                    else
+                        client:GetCharacter():GiveMoney(v.amount)
                     end
                 else
                     ErrorNoHalt(string.format("%s does not have a valid 'contains' array. Missing uniqueID and amount fields.", itemTable.name))
