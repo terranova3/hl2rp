@@ -22,7 +22,6 @@ ITEM.functions.Open = {
 
                     if(v.uniqueID:lower() != "money") then
                         if (!client:GetCharacter():GetInventory():Add(v.uniqueID, v.amount or 1, v.data)) then
-                            print(v.uniqueID)
                             ix.item.Spawn(v.uniqueID, client, nil, nil, v.data)
                         end
                     else
@@ -31,6 +30,10 @@ ITEM.functions.Open = {
                 else
                     ErrorNoHalt(string.format("%s does not have a valid 'contains' array. Missing uniqueID and amount fields.", itemTable.name))
                 end
+            end
+
+            if(itemTable.OnOpen) then
+                itemTable:OnOpen()
             end
         else
             client:Notify(string.format("%s does not contain anything!", itemTable.name))
@@ -45,3 +48,20 @@ ITEM.functions.Open = {
         end
 	end
 }
+
+function ITEM:OnOpen()
+    local client = self.player
+
+    if(self:GetData("salary", 0) != 0) then
+        client:GetCharacter():GiveMoney(self:GetData("salary"))
+    end
+end
+
+function ITEM:PopulateTooltip(tooltip)
+    if(self:GetData("salary", 0) > 0) then
+        local data = tooltip:AddRow("data")
+        data:SetText(string.format("\nContains %s tokens.", self:GetData("salary")))
+        data:SetFont("ixPluginCharSubTitleFont")
+        data:SizeToContents()
+    end
+end

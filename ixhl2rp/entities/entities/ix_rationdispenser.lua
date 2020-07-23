@@ -77,10 +77,20 @@ if (SERVER) then
 		self.nextUseTime = CurTime()
 	end
 
-	function ENT:SpawnRation(callback, releaseDelay)
+	function ENT:SpawnRation(character, callback, releaseDelay)
 		releaseDelay = releaseDelay or 1.2
 
 		local itemTable = ix.item.Get("ration")
+		local characterSalary = 0
+		local inventory = character:GetInventory()
+
+		for k, v in pairs(inventory:GetItems()) do
+			if(v.uniqueID == "cid" and v:GetData("cid", 00000) == character:GetData("cid", 00000)) then
+				characterSalary = v:GetData("salary", 0)
+
+				break
+			end
+		end
 
 		self.dummy:SetModel(itemTable:GetModel())
 		self.dummy:SetNoDraw(false)
@@ -92,7 +102,7 @@ if (SERVER) then
 		timer.Simple(releaseDelay, function()
 			ix.item.Spawn("ration", self.dummy:GetPos(), function(item, entity)
 				self.dummy:SetNoDraw(true)
-			end, self.dummy:GetAngles())
+			end, self.dummy:GetAngles(), { salary = characterSalary })
 
 			-- display cooldown notice
 			timer.Simple(releaseDelay, function()
@@ -107,9 +117,9 @@ if (SERVER) then
 		end)
 	end
 
-	function ENT:StartDispense()
+	function ENT:StartDispense(character)
 		self:SetDisplay(3)
-		self:SpawnRation(function()
+		self:SpawnRation(character, function()
 			self.dispenser:Fire("SetAnimation", "dispense_package")
 			self:EmitSound("ambient/machines/combine_terminal_idle4.wav")
 		end)
@@ -168,7 +178,7 @@ if (SERVER) then
 				self:EmitSound("ambient/machines/combine_terminal_idle3.wav")
 
 				timer.Simple(10.2, function()
-					self:StartDispense()
+					self:StartDispense(client:GetCharacter())
 					cid:SetData("nextRationTime", os.time() + ix.config.Get("rationInterval", 1))
 				end)
 			else
