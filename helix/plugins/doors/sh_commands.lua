@@ -307,6 +307,12 @@ ix.command.Add("DoorSetTitle", {
 			if (entity:CheckDoorAccess(client, DOOR_TENANT)) then
 				entity:SetNetVar("title", name)
 			elseif (CAMI.PlayerHasAccess(client, "Helix - Manage Doors", nil)) then
+				entity:SetNetVar("visible", true)
+
+				PLUGIN:CallOnDoorChildren(entity, function(child)
+					child:SetNetVar("visible", true)
+				end)
+
 				entity:SetNetVar("name", name)
 
 				PLUGIN:CallOnDoorChildren(entity, function(child)

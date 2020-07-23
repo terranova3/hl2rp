@@ -3,64 +3,75 @@ local PANEL = {}
 function PANEL:Init()
 	ix.gui.cidcreator = self
 
-	self:SetSize(ScrW() / 4, 200)
+	self:SetSize(ScrW() / 4, 400)
 	self:Center()
 	self:MakePopup()
 	self:SetBackgroundBlur(true)
 
-	self.toptext = self:Add("DLabel")
-	self.toptext:SetContentAlignment(5)
-	self.toptext:Dock(TOP)
-	self.toptext:SetText("Automatic Registration Center")
-	self.toptext:SetExpensiveShadow(2)
-	self.toptext:SetFont("ixSmallFont")
-	self.toptext:SetTall(32)
+	self.toptext = self:AddLabel("Identification Registration Center", true)
+	self.sourceText = self:AddLabel("Select a data source")
 
-	self.nametext = self:Add("DLabel")
-	self.nametext:SetContentAlignment(5)
-	self.nametext:Dock(TOP)
-	self.nametext:SetText("Input Name")
-	self.nametext:SetExpensiveShadow(2)
-	self.nametext:SetFont("ixSmallFont")
+	self.itemswang = self:Add("DComboBox")
+	self.itemswang:Dock(TOP)
+	self.itemswang:SetValue("Select a source")
+
+	self.characterTitle = self:AddLabel("Character details", true)
+	self.nameText = self:AddLabel("Input Name")
 	self.nameinput = self:Add("DTextEntry")
 	self.nameinput:Dock(TOP)
+	self.nameinput:DockMargin(16, 0, 16, 8)
 
-	self.idtext = self:Add("DLabel")
-	self.idtext:SetContentAlignment(5)
-	self.idtext:Dock(TOP)
-	self.idtext:SetText("Input ID")
-	self.idtext:SetExpensiveShadow(2)
-	self.idtext:SetFont("ixSmallFont")
+	self.idtext = self:AddLabel("Input ID")
 	self.idinput = self:Add("DTextEntry")
 	self.idinput:Dock(TOP)
+	self.idinput:DockMargin(16, 0, 16, 8)
 	self.idinput:SetUpdateOnType(true)
 	self.idinput:SetNumeric(true)
 
-	function self.idinput:SetRealValue(text)
-		self:SetValue(text);
-		ix.gui.cidcreator.nameinput:RequestFocus()
-	end;
+	self.nameText = self:AddLabel("Employment", true)
+	self.occupationText = self:AddLabel("Occupation name")
+	self.occupationInput = self:Add("DTextEntry")
+	self.occupationInput:Dock(TOP)
+	self.occupationInput:DockMargin(16, 0, 16, 8)
+
+	self.wageText = self:AddLabel("Input Wage")
+	self.wageInput = self:Add("DNumberWang")
+	self.wageInput:Dock(TOP)
+	self.wageInput:DockMargin(16,0,16,8)
+	self.wageInput:SetMin(0)
+	self.wageInput:SetMax(100)
+
+	for k, v in pairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
+		if(v.uniqueID == "transfer_papers" or v.uniqueID == "cid") then
+			local name = "ID"
+
+			if(v.uniqueID == "transfer_papers") then
+				name = "TRANSFER"
+			end
+
+			self.itemswang:AddChoice(string.format("%s - %s", name, v:GetData("citizen_name", "error")), {v})
+		end
+	end
 
 	function self.idinput:Think()
 		local text = self:GetValue();
 		
 		if (string.len(text) > 5) then
-			self:SetRealValue( string.sub(text, 0, 5) );
-			
+			self:SetValue( string.sub(text, 0, 5) );
+			ix.gui.cidcreator.nameinput:RequestFocus()
+
 			surface.PlaySound("common/talk.wav");
 		end;
 	end;
-	
-	self.itemswang = self:Add("DComboBox")
-	self.itemswang:Dock(BOTTOM)
-	self.itemswang:SetValue("Or select a transfer card.")
 
-	self.itemswang.OnSelect = function(self, index, value)
-		ix.gui.cidcreator.nameinput:SetDisabled(true)
-		ix.gui.cidcreator.nameinput:SetText("")
+	self.itemswang.OnSelect = function(self, index, value, data)
+		local item = data[1]
 
-		ix.gui.cidcreator.idinput:SetDisabled(true)
-		ix.gui.cidcreator.idinput:SetText("")
+		ix.gui.cidcreator.nameinput:SetText(item:GetData("citizen_name", "error"))
+		ix.gui.cidcreator.idinput:SetValue(item:GetData("cid", 99999))
+		ix.gui.cidcreator.occupationInput:SetText(item:GetData("occupation", ""))
+		ix.gui.cidcreator.wageInput:SetValue(item:GetData("salary", 0))
+		ix.gui.cidcreator.item = item
 	end
 
 	self.submitbutton = self:Add("DButton")
@@ -70,38 +81,42 @@ function PANEL:Init()
 	self:InvalidateLayout(true)
 	self:SizeToChildren(false, true)
 
-	for k, v in pairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
-		if v.uniqueID == "transfer_papers" then
-			self.itemswang:AddChoice(v:GetData("citizen_name", "error"), v:GetData("cid", 99999))
-		end
-	end
-
 	function self.submitbutton:DoClick()
 		if(!string.len(ix.gui.cidcreator.idinput:GetText()) == 5) then
 			LocalPlayer():Notify("The CID must contain 5 digits.")
 			return
 		end
 
-		local data = {}
+		local data = {
+			ix.gui.cidcreator.nameinput:GetText(),
+			ix.gui.cidcreator.idinput:GetText(),
+			ix.gui.cidcreator.occupationInput:GetText(),
+			ix.gui.cidcreator.wageInput:GetValue()
+		}
 
-		if(ix.gui.cidcreator.itemswang:GetSelected() != nil) then
-			local name, id = ix.gui.cidcreator.itemswang:GetSelected()
-
-			data = {
-				name,
-				id
-			}
-		else
-			data = {
-				ix.gui.cidcreator.nameinput:GetText(),
-				ix.gui.cidcreator.idinput:GetText()
-			}
+		if(ix.gui.cidcreator.item) then
+			table.insert(data, ix.gui.cidcreator.item.id)
 		end
 
 		netstream.Start("SubmitNewCID", data)
 
 		ix.gui.cidcreator:Remove()
 	end
+end
+
+function PANEL:AddLabel(text, colored)
+	local label = self:Add("DLabel")
+	label:SetContentAlignment(5)
+	label:Dock(TOP)
+	label:SetText(text)
+	label:SetExpensiveShadow(2)
+	label:SetFont("ixSmallFont")
+
+    if(colored) then
+        label:SetTextColor(ix.config.Get("color"))
+	end
+	
+	return label
 end
 
 vgui.Register("ixCIDCreater", PANEL, "DFrame")
