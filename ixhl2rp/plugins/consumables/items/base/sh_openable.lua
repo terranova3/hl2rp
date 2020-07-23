@@ -20,9 +20,10 @@ ITEM.functions.Open = {
             for k, v in pairs(itemTable.contains) do
                 if(v.uniqueID and v.amount) then
 
-                    if(v.uniqueID:lower() != "money")
+                    if(v.uniqueID:lower() != "money") then
                         if (!client:GetCharacter():GetInventory():Add(v.uniqueID, v.amount or 1, v.data)) then
-                            ix.item.Spawn(v, client)
+                            print(v.uniqueID)
+                            ix.item.Spawn(v.uniqueID, client, nil, nil, v.data)
                         end
                     else
                         client:GetCharacter():GiveMoney(v.amount)

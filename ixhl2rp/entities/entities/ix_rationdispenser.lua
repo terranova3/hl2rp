@@ -134,45 +134,47 @@ if (SERVER) then
 			return
 		end
 
-		if (client:Team() == FACTION_CITIZEN) then
-			if (!self:GetEnabled()) then
-				self:DisplayError(6)
-				return
-			end
+		if (!self:GetEnabled()) then
+			self:DisplayError(6)
+			return
+		end
 
-			local cid = client:GetCharacter():GetInventory():HasItem("cid")
-
-			if (!cid) then
-				self:DisplayError(7)
-				return
-			end
-
-			-- display checking message
-			self.canUse = false
-			self:SetDisplay(2)
-			self:EmitSound("ambient/machines/combine_terminal_idle2.wav")
-
-			-- check cid ration time and dispense if allowed
-			timer.Simple(math.random(1.8, 2.2), function()
-				if (cid:GetData("nextRationTime", 0) < os.time()) then
-					self:SetDisplay(8)
-					self:EmitSound("ambient/machines/combine_terminal_idle3.wav")
-
-					timer.Simple(10.2, function()
-						self:StartDispense()
-						cid:SetData("nextRationTime", os.time() + ix.config.Get("rationInterval", 1))
-					end)
-				else
-					self:DisplayError(4)
-				end
-			end)
-		elseif (client:IsCombine()) then
+		if (client:IsCombine()) then
 			self:SetEnabled(!self:GetEnabled())
 			self:EmitSound(self:GetEnabled() and "buttons/combine_button1.wav" or "buttons/combine_button2.wav")
 
 			Schema:SaveRationDispensers()
 			self.nextUseTime = CurTime() + 2
+
+			return
 		end
+
+		local cid = client:GetCharacter():GetInventory():HasItem("cid")
+
+		if (!cid) then
+			self:DisplayError(7)
+			return
+		end
+
+		-- display checking message
+		self.canUse = false
+		self:SetDisplay(2)
+		self:EmitSound("ambient/machines/combine_terminal_idle2.wav")
+
+		-- check cid ration time and dispense if allowed
+		timer.Simple(math.random(1.8, 2.2), function()
+			if (cid:GetData("nextRationTime", 0) < os.time()) then
+				self:SetDisplay(8)
+				self:EmitSound("ambient/machines/combine_terminal_idle3.wav")
+
+				timer.Simple(10.2, function()
+					self:StartDispense()
+					cid:SetData("nextRationTime", os.time() + ix.config.Get("rationInterval", 1))
+				end)
+			else
+				self:DisplayError(4)
+			end
+		end)
 	end
 
 	function ENT:OnRemove()
