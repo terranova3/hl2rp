@@ -155,11 +155,7 @@ ix.command.Add("CharSetModel", {
 		target:SetModel(model)
 		target:GetPlayer():SetupHands()
 
-		for _, v in ipairs(player.GetAll()) do
-			if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
-				v:NotifyLocalized("cChangeModel", client:GetName(), target:GetName(), model)
-			end
-		end
+		client:Notify(string.format("cChangeModel", client:GetName(), target:GetName(), model))
 	end
 })
 
