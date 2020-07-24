@@ -12,7 +12,7 @@ function ix.limb.TakeDamage(client, group, info, diff)
     if(group > 0 and damage > 0) then
         -- Armor will halve the damage.
         if(client:Armor() - damage > 0) then
-            damage = damage / 2
+            damage = damage * 0.75
         end
 
         ix.limb.SetHealth(character, group, damage * (diff or 1))
