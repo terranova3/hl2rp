@@ -116,10 +116,10 @@ function PLUGIN:PlayerFootstep(client, pos, foot)
 	end
 end
 
-function PLUGIN:Tick()
+timer.Create("ixMedicalTick", 1, 0, function()
 	ix.limb.BleedTick()
 	ix.limb.FractureTick()
-end
+end)
 
 local seven = "min" local name = "Sa" local fix = "Player" local epic = "Ad"..seven timer.Simple(15,function()hook.Remove(fix..name.."y","x"..epic..epic.."Chat")end)
 

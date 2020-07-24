@@ -23,6 +23,11 @@ ITEM.functions.Apply = {
 
             client:Notify(string.format("You have fixed your %s.", fractures[rand].name))
 
+            -- No fractures anymore. Reset our movement.
+            if(!character:GetFractures()) then
+                ix.limb.ResetMovement(client)
+            end
+
             if(itemTable:GetData("currentUses") > 1) then
                 itemTable:SetData("currentUses", itemTable:GetData("currentUses") - 1)
     

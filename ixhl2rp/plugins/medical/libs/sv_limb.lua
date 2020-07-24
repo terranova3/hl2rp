@@ -125,6 +125,35 @@ function ix.limb.BleedTick()
 end
 
 function ix.limb.FractureTick()
+    for k, v in pairs(player.GetAll()) do
+        if(!v:GetCharacter() or v:GetCharacter():GetFractures() == false) then
+            return
+        end
+
+        local client = v
+        local character = client:GetCharacter()
+
+		local leftLeg = ix.limb.GetHealthPercentage(client, HITGROUP_LEFTLEG, true) / 100
+		local rightLeg = ix.limb.GetHealthPercentage(client, HITGROUP_RIGHTLEG, true) / 100
+        local legDamage = leftLeg + rightLeg / 2
+
+        if(legDamage < 0.65) then
+            legDamage = 0.65
+        end
+
+        local walkSpeed = ix.config.Get("walkSpeed") * legDamage
+        local runSpeed = ix.config.Get("runSpeed") * legDamage
+
+        if(legDamage > 0) then
+            client:SetWalkSpeed(walkSpeed)
+            client:SetRunSpeed(runSpeed)
+        end
+    end 
+end
+
+function ix.limb.ResetMovement(client)
+    client:SetWalkSpeed(ix.config.Get("walkSpeed"))
+    client:SetRunSpeed(ix.config.Get("runSpeed"))
 end
 
 -- A function to reset a player's limb data.
