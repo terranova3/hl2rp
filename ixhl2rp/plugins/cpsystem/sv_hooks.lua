@@ -230,9 +230,12 @@ end
 function PLUGIN:SetupRankBodygroups(character)
 	if(character:IsMetropolice() and !character:IsUndercover()) then
 		local spec = character:GetSpec()
+		local rank = character:GetRank()
+
+		PrintTable(rank)
 
 		for k, v in pairs(character:GetRankBodygroups()) do
-			if(spec and k == 2) then
+			if((spec and k == 2) and rank.overrideBodygroup != true) then
 				character:GetPlayer():SetBodygroup(k, v+spec.offset)	
 			else	
 				character:GetPlayer():SetBodygroup(k, v)

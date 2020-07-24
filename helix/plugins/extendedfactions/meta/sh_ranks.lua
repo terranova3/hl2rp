@@ -17,6 +17,7 @@ RANK.permissions = {}
 RANK.order = nil
 RANK.isDefault = false
 RANK.faction = nil
+RANK.overrideBodygroup = false
 
 function RANK:GetName()
 	return self.name

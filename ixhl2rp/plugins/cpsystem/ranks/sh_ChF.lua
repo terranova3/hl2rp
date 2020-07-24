@@ -21,6 +21,9 @@ RANK.bodygroups = {
     [2] = 6,
 }
 
+-- Overrides the bodygroup offest applied by specializations.
+RANK.overrideBodygroup = true
+
 -- Permissions the rank has access to.
 RANK.permissions = {
     "Promote",
