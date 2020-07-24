@@ -15,6 +15,28 @@ FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPo
 FACTION.models = {
 	"models/combine_scanner.mdl"
 }
+FACTION.npcRelations = {
+    ["npc_citizen"] = D_HT,
+    ["npc_vortigaunt"] = D_HT,
+    ["npc_metropolice"] = D_LI,
+    ["npc_combinedropship"] = D_LI,
+    ["npc_combinegunship"] = D_LI,
+    ["npc_combine_s"] = D_LI,
+    ["npc_strider"] = D_LI,
+    ["npc_combine_camera"] = D_LI,
+    ["npc_turret_ceiling"] = D_LI,
+    ["npc_turret_floor"] = D_LI,
+    ["npc_turret_ground"] = D_LI,
+    ["npc_cscanner"] = D_LI,
+    ["CombineElite"] = D_LI,
+    ["npc_rollermine"] = D_LI,
+    ["npc_manhack"] = D_LI,
+    ["npc_sniper"] = D_LI,
+    ["npc_helicopter"] = D_LI,
+    ["npc_turret_floor_rebel"] = D_HT,
+    ["Rebel"] = D_HT,
+    ["combine_mine"] = D_LI
+}
 
 function FACTION:GetDefaultName(client)
 	return self:GetScannerName(), true;

@@ -41,3 +41,56 @@ function PLUGIN:PlayerSetHandsModel(client, entity, model)
 		end;
 	end;
 end;
+
+function PLUGIN:OnEntityCreated(entity)
+	if (entity:IsNPC()) then
+		local class = entity:GetClass()
+
+		-- fake class for rebel turrets
+		if (class == "npc_turret_floor") then
+			if (!entity.m_bInitialized) then
+				timer.Simple(0, function()
+					self:OnEntityCreated(entity)
+				end)
+
+				entity.m_bInitialized = true
+				return
+			elseif (entity.bCitizenModified) then
+				class = "npc_turret_floor_rebel"
+			end
+		end
+
+		for _, client in ipairs(player.GetAll()) do
+			local character = client:GetCharacter()
+
+			if (character) then
+				local faction = ix.faction.indices[client:Team()]
+				local relations = faction.npcRelations
+
+				entity:AddEntityRelationship(client, istable(relations) and relations[class] or D_HT, 0)
+			end
+		end
+	end
+end
+
+function PLUGIN:PlayerSpawn(client)
+	local character = client:GetCharacter()
+
+	if (character) then
+		local faction = ix.faction.indices[character:GetFaction()]
+		local relations = faction.npcRelations
+
+		for _, v in ipairs(ents.FindByClass("npc_*")) do
+			if (v:IsNPC()) then
+				local class = v:GetClass()
+
+				-- fake class for rebel turrets
+				if (class == "npc_turret_floor" and v.bCitizenModified) then
+					class = "npc_turret_floor_rebel"
+				end
+
+				v:AddEntityRelationship(client, istable(relations) and relations[class] or D_HT, 0)
+			end
+		end
+	end
+end

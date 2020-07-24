@@ -34,6 +34,29 @@ FACTION.models = {
 	"models/ug/new/citizens/male_12.mdl",
 	"models/ug/new/citizens/male_13.mdl"
 }
+FACTION.npcRelations = {
+    ["npc_citizen"] = D_LI,
+    ["npc_vortigaunt"] = D_LI,
+    ["npc_metropolice"] = D_HT,
+    ["npc_combinedropship"] = D_HT,
+    ["npc_combinegunship"] = D_HT,
+    ["npc_combine_s"] = D_HT,
+    ["npc_strider"] = D_HT,
+    ["npc_combine_camera"] = D_HT,
+    ["npc_turret_ceiling"] = D_HT,
+    ["npc_turret_floor"] = D_HT,
+    ["npc_turret_ground"] = D_HT,
+    ["npc_cscanner"] = D_HT,
+    ["CombineElite"] = D_HT,
+    ["npc_rollermine"] = D_HT,
+    ["npc_manhack"] = D_HT,
+    ["npc_sniper"] = D_HT,
+    ["npc_helicopter"] = D_HT,
+    ["npc_turret_floor_rebel"] = D_LI,
+    ["Rebel"] = D_LI,
+    ["combine_mine"] = D_HT
+}
+
 
 function FACTION:OnCharacterCreated(client, character)
 	local id = Schema:ZeroNumber(math.random(1, 99999), 5)
