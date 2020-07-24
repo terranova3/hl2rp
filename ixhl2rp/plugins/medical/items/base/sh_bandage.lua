@@ -19,7 +19,7 @@ ITEM.functions.Apply = {
         if(hasBleed) then
             local rand = math.random(1, #bleeds)
 
-            ix.limb.SetBleed(character, bleeds[rand].hitgroup, false) 
+            ix.limb.SetBleeding(character, bleeds[rand].hitgroup, false) 
 
             client:Notify(string.format("You have bandaged your %s.", bleeds[rand].name))
 
