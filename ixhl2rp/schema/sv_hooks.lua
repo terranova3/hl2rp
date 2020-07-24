@@ -363,30 +363,69 @@ function Schema:PlayerMessageSend(speaker, chatType, text, anonymous, receivers,
 		local class = self.voices.GetClass(speaker)
 
 		for k, v in ipairs(class) do
-			local info = self.voices.Get(v, rawText)
+			if(v != "dispatch") then
+				local info = self.voices.Get(v, rawText)
 
-			if (info) then
-				local volume = 80
+				if (info) then
+					local volume = 80
 
-				if (chatType == "w") then
-					volume = 60
-				elseif (chatType == "y") then
-					volume = 150
-				end
+					if (chatType == "w") then
+						volume = 60
+					elseif (chatType == "y") then
+						volume = 150
+					end
 
-				if (info.sound) then
-					if (info.global) then
-						netstream.Start(nil, "PlaySound", info.sound)
+					if (info.sound) then
+						if (info.global) then
+							netstream.Start(nil, "PlaySound", info.sound)
+						else
+							speaker.bTypingBeep = nil
+							ix.util.EmitQueuedSounds(speaker, {info.sound, VOCODEROFF[math.random(1, #VOCODEROFF)]}, nil, nil, volume)
+						end
+					end
+
+					if (speaker:IsCombine()) then
+						return string.format("<:: %s ::>", info.text)
 					else
-						speaker.bTypingBeep = nil
-						ix.util.EmitQueuedSounds(speaker, {info.sound, VOCODEROFF[math.random(1, #VOCODEROFF)]}, nil, nil, volume)
+						return info.text
 					end
 				end
+			end
+		end
 
-				if (speaker:IsCombine()) then
-					return string.format("<:: %s ::>", info.text)
-				else
-					return info.text
+		if (speaker:IsCombine()) then
+			return string.format("<:: %s ::>", text)
+		end
+	elseif(chatType == "dispatch") then
+		local class = self.voices.GetClass(speaker)
+
+		for k, v in ipairs(class) do
+			if(v == "dispatch") then
+				local info = self.voices.Get(v, rawText)
+
+				if (info) then
+					local volume = 80
+
+					if (chatType == "w") then
+						volume = 60
+					elseif (chatType == "y") then
+						volume = 150
+					end
+
+					if (info.sound) then
+						if (info.global) then
+							netstream.Start(nil, "PlaySound", info.sound)
+						else
+							speaker.bTypingBeep = nil
+							ix.util.EmitQueuedSounds(speaker, {info.sound, VOCODEROFF[math.random(1, #VOCODEROFF)]}, nil, nil, volume)
+						end
+					end
+
+					if (speaker:IsCombine()) then
+						return string.format("<:: %s ::>", info.text)
+					else
+						return info.text
+					end
 				end
 			end
 		end
