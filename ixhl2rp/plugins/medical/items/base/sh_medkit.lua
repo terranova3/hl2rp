@@ -11,6 +11,7 @@ ITEM.category = "Medical"
 ITEM.price = 18
 ITEM.charge = 300
 ITEM.height = 2
+ITEM.healthHealed = 30
 ITEM.functions.Apply = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
@@ -31,6 +32,7 @@ ITEM.functions.Apply = {
             end
 
             ix.limb.SetHealth(character, limb.hitgroup, -healing)
+            client:SetHealth(math.Clamp(client:Health() + itemTable.healthHealed, 0, client:GetMaxHealth()))
             client:Notify(string.format("You have healed your %s for %s.", limb.name, healing))
 
             return empty

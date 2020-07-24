@@ -10,6 +10,7 @@ ITEM.description = "A sealed gauze package manufactured in Russia able to tempor
 ITEM.category = "Medical"
 ITEM.price = 18
 ITEM.uses = 2
+ITEM.healthHealed = 30
 ITEM.functions.Apply = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
@@ -21,6 +22,7 @@ ITEM.functions.Apply = {
 
             ix.limb.SetBleeding(character, bleeds[rand].hitgroup, false) 
 
+            client:SetHealth(math.Clamp(client:Health() + itemTable.healthHealed, 0, client:GetMaxHealth()))
             client:Notify(string.format("You have bandaged your %s.", bleeds[rand].name))
 
             if(itemTable:GetData("currentUses") > 1) then
