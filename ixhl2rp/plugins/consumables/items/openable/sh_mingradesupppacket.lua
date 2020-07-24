@@ -9,7 +9,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "This supplement packet is just filled with a nutritional mushy mass without flavour."
 ITEM.category = "Rations"
-
 ITEM.functions.Eat = {
 	OnRun = function(itemTable)
 		local client = itemTable.player

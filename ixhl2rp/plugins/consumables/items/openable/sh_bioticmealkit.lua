@@ -9,7 +9,6 @@ ITEM.width = 1
 ITEM.height = 2
 ITEM.description = "This biotic-grade meal kit is in fact, a real meal, using leftover antlion grub bits."
 ITEM.category = "Rations"
-
 ITEM.functions.Eat = {
 	OnRun = function(itemTable)
 		local client = itemTable.player

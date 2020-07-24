@@ -21,17 +21,17 @@ ITEM.contains = {
         data = {}
     },
     [3] = {
-        uniqueID = "money"
+        uniqueID = "money",
         amount = 35,
         data = {}
-	}
+	},
 	[4] = {
-		uniqueID = "loyalgrademealkit"
+		uniqueID = "loyalgrademealkit",
 		amount = 1,
         data = {}
-	}
+	},
 	[5] = {
-		uniqueID = "unionchocolate"
+		uniqueID = "unionchocolate",
 		amount = 1,
 		data = {}
 	}

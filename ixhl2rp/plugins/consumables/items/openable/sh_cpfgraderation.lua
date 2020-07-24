@@ -9,8 +9,6 @@ ITEM.width = 1
 ITEM.height = 2
 ITEM.description = "A vacuum-sealed plastic flexi-container filled with the unit's salary, MRE, and a supplement packet."
 ITEM.category = "Rations"
-ITEM.items = {"cpfgrademealkit", "cpfgradesupppack", "cpfgradesupppack", "unionchocolate", "unionwater"} -- Items to be unpacked/opened
-
 ITEM.contains = {
     [1] = {
         uniqueID = "cpfgradesupppack",
@@ -23,17 +21,17 @@ ITEM.contains = {
         data = {}
     },
     [3] = {
-        uniqueID = "money"
+        uniqueID = "money",
         amount = 50,
         data = {}
-    }
+    },
 	[4] = {
-		uniqueID = "cpfgrademealkit"
+		uniqueID = "cpfgrademealkit",
 		amount = 1,
 		data = {}
-	}
+	},
 	[5] = {
-		uniqueID = "unionchocolate"
+		uniqueID = "unionchocolate",
 		amount = 1,
 		data = {}
 	}

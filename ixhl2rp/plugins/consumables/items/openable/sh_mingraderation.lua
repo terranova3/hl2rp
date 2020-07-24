@@ -9,21 +9,21 @@ ITEM.width = 1
 ITEM.height = 2
 ITEM.description = "This is a minimum grade ration. It's nothing special. A bottle of water, and some weird grey goop in a jar."
 ITEM.category = "Rations"
-ITEM.contains =
+ITEM.contains = {
 	[1] = {
-	uniqueID = "money"
-	amount = 0,
-	data = {}
-	}
+		uniqueID = "money",
+		amount = 0,
+		data = {}
+	},
 	[2] = {
-	uniqueID = "mingradesupppacket"
-	amount = 1,
-	data = {}
-	}
+		uniqueID = "mingradesupppacket",
+		amount = 1,
+		data = {}
+	},
 	[3] = {
-	uniqueID = "unionwater"
-	amount = 1,
-	data = {}
+		uniqueID = "unionwater",
+		amount = 1,
+		data = {}
 	}
 }
 	
