@@ -66,7 +66,7 @@ function FACTION:OnCharacterCreated(client, character)
 		citizen_name = character:GetName(),
 		cid = cid,
 		issue_date = tostring(TimeString),
-		occupation = string.format("CP - %s", ix.ranks.GetDefaultRank(character:GetFaction()).displayName),
+		occupation = string.format("CP - %s", "Intention 5"),
 		salary = 10,
 		cca = true
 	})

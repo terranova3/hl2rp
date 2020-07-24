@@ -18,6 +18,7 @@ RANK.faction = FACTION_MPF
 
 -- Applied to the character when they are this rank
 RANK.bodygroups = {
+    [1] = 0,
     [2] = 3,
 }
 

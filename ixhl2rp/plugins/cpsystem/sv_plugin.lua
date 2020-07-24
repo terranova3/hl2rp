@@ -14,7 +14,6 @@ function PLUGIN:AdjustPlayer(event, client)
         if(event == "Unequipped") then
             character:SetDescription(cpData.cpCitizenDesc);
             character:SetClass(CLASS_MPUH); 
-            client:SetBodygroup(1, 0)
             character:SetCustomClass("Citizen" );	
         elseif(event == "Equipped") then
             character:SetDescription(cpData.cpDesc);
@@ -24,7 +23,8 @@ function PLUGIN:AdjustPlayer(event, client)
         end;
 
         ix.charPanel.Update(client)
-
+        
+        client:ResetBodygroups()
         character:UpdateCPStatus();
     end;
 end;

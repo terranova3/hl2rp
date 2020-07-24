@@ -228,17 +228,17 @@ end
 
 -- Called when we need to setup bodygroups for a rank
 function PLUGIN:SetupRankBodygroups(character)
-	if(character:IsMetropolice() and !character:IsUndercover()) then
-		local spec = character:GetSpec()
-		local rank = character:GetRank()
+	if(character:IsMetropolice()) then
+		if(!character:IsUndercover()) then
+			local spec = character:GetSpec()
+			local rank = character:GetRank()
 
-		PrintTable(rank)
-
-		for k, v in pairs(character:GetRankBodygroups()) do
-			if((spec and k == 2) and rank.overrideBodygroup != true) then
-				character:GetPlayer():SetBodygroup(k, v+spec.offset)	
-			else	
-				character:GetPlayer():SetBodygroup(k, v)
+			for k, v in pairs(character:GetRankBodygroups()) do
+				if((spec and k == 2) and rank.overrideBodygroup != true) then
+					character:GetPlayer():SetBodygroup(k, v+spec.offset)	
+				else	
+					character:GetPlayer():SetBodygroup(k, v)
+				end
 			end
 		end
 
