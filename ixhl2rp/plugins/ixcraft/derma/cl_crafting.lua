@@ -158,63 +158,6 @@ function PANEL:LoadRecipes(category, search)
 end
 
 vgui.Register("ixCrafting", PANEL, "EditablePanel")
-
-hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
-	if (hook.Run("BuildCraftingMenu") != false) then
-	
-		tabs["inv"] = {
-			bDefault = true,
-			Create = function(info, container)
-				local canvas = container:Add("DTileLayout")
-				local canvasLayout = canvas.PerformLayout
-				canvas.PerformLayout = nil -- we'll layout after we add the panels instead of each time one is added
-				canvas:SetBorder(0)
-				canvas:SetSpaceX(2)
-				canvas:SetSpaceY(2)
-				canvas:Dock(FILL)
-
-				ix.gui.menuInventoryContainer = canvas
-
-				local panel = canvas:Add("ixInventory")
-				panel:SetPos(0, 0)
-				panel:SetDraggable(false)
-				panel:SetSizable(false)
-				panel:SetTitle(nil)
-				panel.bNoBackgroundBlur = true
-				panel.childPanels = {}
-
-				local inventory = LocalPlayer():GetCharacter():GetInventory()
-
-				if (inventory) then
-					panel:SetInventory(inventory)
-				end
-
-				ix.gui.inv1 = panel
-
-				if (ix.option.Get("openBags", true)) then
-					for _, v in pairs(inventory:GetItems()) do
-						if (!v.isBag) then
-							continue
-						end
-
-						v.functions.View.OnClick(v)
-					end
-				end
-
-				canvas.PerformLayout = canvasLayout
-				canvas:Layout()
-			end,
-			Sections = {
-				crafting = {
-					Create = function(info, container)
-						ix.gui.craftingMenu = container:Add("ixCrafting")
-					end,
-				}
-			}
-		}	
-	end
-end)
-
 net.Receive("ixCraftRefresh", function()
 	local craftPanel = ix.gui.crafting
 

@@ -35,7 +35,7 @@ end
 local function DragCombine(itemID, targetID, invID)
 	net.Start("ixInventoryDragCombine")
         net.WriteUInt(itemID, 32)
-        net.WriteUInt(targetID), 32)
+        net.WriteUInt(targetID, 32)
 		net.WriteUInt(invID, 32)
 	net.SendToServer()
 end

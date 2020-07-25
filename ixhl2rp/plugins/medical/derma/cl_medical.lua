@@ -75,6 +75,11 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 				Create = function(info, container)
 					ix.gui.limbPanel = container:Add("ixLimbPanel")
 				end,
+			},
+			crafting = {
+				Create = function(info, container)
+					ix.gui.craftingMenu = container:Add("ixCrafting")
+				end,
 			}
 		}
 	}	
