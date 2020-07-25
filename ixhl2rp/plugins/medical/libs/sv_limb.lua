@@ -45,7 +45,7 @@ function ix.limb.RunDamage(character, hitgroup)
     local limbType = ix.limb.GetName(hitgroup)
 
     if(limbType == "Chest" or limbType == "Head") then
-        if(limbHP >= 0) then
+        if(limbHP <= 0) then
             character:GetPlayer():Kill()
         end
     end
@@ -175,10 +175,12 @@ function ix.limb.FractureTick()
 
         local walkSpeed = ix.config.Get("walkSpeed") * legDamage
         local runSpeed = ix.config.Get("runSpeed") * legDamage
+        local jumpPower = 160 * legDamage
 
         if(legDamage > 0) then
             client:SetWalkSpeed(math.Clamp(walkSpeed, 0, ix.config.Get("walkSpeed")))
             client:SetRunSpeed(math.Clamp(runSpeed, 0, ix.config.Get("runSpeed")))
+            client:SetJumpPower(math.Clamp(jumpPower, 0, 160))
         end
     end 
 end
@@ -186,6 +188,7 @@ end
 function ix.limb.ResetMovement(client)
     client:SetWalkSpeed(ix.config.Get("walkSpeed"))
     client:SetRunSpeed(ix.config.Get("runSpeed"))
+    client:SetJumpPower(160)
 end
 
 -- A function to reset a player's limb data.
