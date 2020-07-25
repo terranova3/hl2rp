@@ -73,7 +73,7 @@ ITEM.drinkEffects = function(itemTable, modifier)
         client:SetHealth(math.Clamp(client:Health() + (itemTable.restoreHealth * modifier), 0, client:GetMaxHealth()))
     end
 end
-ITEM.dragged = function(item, item2)
+ITEM.combine = function(item, item2)
     local client = item:GetOwner()
 
     if(item2.capacity and item:GetLiquid() and item2.isContainer) then

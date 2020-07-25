@@ -32,10 +32,10 @@ local function InventoryAction(action, itemID, invID, data)
 	net.SendToServer()
 end
 
-local function DragCombine(itemID, item2ID, invID)
+local function DragCombine(itemID, targetID, invID)
 	net.Start("ixInventoryDragCombine")
         net.WriteUInt(itemID, 32)
-        net.WriteUInt(item2ID, 32)
+        net.WriteUInt(targetID), 32)
 		net.WriteUInt(invID, 32)
 	net.SendToServer()
 end
@@ -207,10 +207,10 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 			self:Move(gridX, gridY, inventoryPanel)
 		end
 	else
-		local item2 = inventory:GetItemAt(gridX, gridY)
+		local target = inventory:GetItemAt(gridX, gridY)
 
-		if(item2) then
-			DragCombine(item.id, item2.id, self.inventoryID)
+		if(target) then
+			DragCombine(item.id, target.id, self.inventoryID)
 		end
 	end
 end

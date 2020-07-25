@@ -5,7 +5,7 @@
 
 util.AddNetworkString("ixInventoryDragCombine")
 
-function ix.item.PerformDragCombine(client, item, item2, invID)
+function ix.item.PerformDragCombine(client, item, targetItem, invID)
     local character = client:GetCharacter()
 
     if (!character) then
@@ -19,20 +19,20 @@ function ix.item.PerformDragCombine(client, item, item2, invID)
     end
 
     item = ix.item.instances[item]
-    item2 = ix.item.instances[item2]
+    targetItem = ix.item.instances[targetItem]
 
-    if (!item or !item2) then return end
+    if (!item or !targetItem) then return end
 
     if (!inventory:OnCheckAccess(client)) then
         return
     end
 
-    if (!inventory:GetItemByID(item.id) and !inventory:GetItemByID(item2.id)) then
+    if (!inventory:GetItemByID(item.id) and !inventory:GetItemByID(targetItem.id)) then
         return
     end
 
-    if (item.dragged) then
-        item.dragged(item, item2)
+    if (item.combine) then
+        item.combine(item, targetItem)
     end
 end
 
