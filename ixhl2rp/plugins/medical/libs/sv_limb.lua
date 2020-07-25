@@ -39,6 +39,18 @@ function ix.limb.TakeDamage(client, group, info, diff)
     end
 end
 
+-- A function to instantly kill the player if their limbs are gone.
+function ix.limb.RunDamage(character, hitgroup)
+    local limbHP = character:GetLimbHP(hitgroup)
+    local limbType = ix.limb.GetName(hitgroup)
+
+    if(limbType == "Chest" or limbType == "Head") then
+        if(limbHP >= 0) then
+            character:GetPlayer():Kill()
+        end
+    end
+end
+
 -- A function to subtract or add to a limb's health
 function ix.limb.SetHealth(character, group, damage)
     local limbs = character:GetLimbs()
@@ -122,6 +134,26 @@ function ix.limb.GetScaleDamage(group)
 end
 
 function ix.limb.BleedTick()
+    for _, v in pairs(player.GetAll()) do
+        local client = v
+
+        if(IsValid(client) and client:Alive() and client:GetCharacter()) then
+            local character = client:GetCharacter()
+            local isBleeding, bleedingLimbs = character:GetBleeds()
+
+            if(isBleeding and !client:IsNoclipping()) then
+                for k, v in pairs(bleedingLimbs) do
+                    local newHealth = client:Health() - 1
+
+                    if(newHealth <= 0) then
+                        client:Kill()
+                    else
+                        client:SetHealth(newHealth)
+                    end
+                end
+            end
+        end
+    end
 end
 
 function ix.limb.FractureTick()
@@ -145,8 +177,8 @@ function ix.limb.FractureTick()
         local runSpeed = ix.config.Get("runSpeed") * legDamage
 
         if(legDamage > 0) then
-            client:SetWalkSpeed(walkSpeed)
-            client:SetRunSpeed(runSpeed)
+            client:SetWalkSpeed(math.Clamp(walkSpeed, 0, ix.config.Get("walkSpeed")))
+            client:SetRunSpeed(math.Clamp(runSpeed, 0, ix.config.Get("runSpeed")))
         end
     end 
 end

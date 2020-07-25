@@ -44,6 +44,14 @@ function CHAR:GetInjuredLimbs()
     return injuredLimbs
 end
 
+function CHAR:GetLimbHP(hitgroup)
+    local limb = self:GetLimbs()[hitgroup]
+
+    if(!limb) then return 0 end
+
+    return ix.limb.GetHealthPercentage(self:GetPlayer(), hitgroup, true)
+end
+
 function CHAR:GetFractures()
     local fractures = {}
 

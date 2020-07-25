@@ -8,7 +8,7 @@ ix.limb.AddHitGroup(HITGROUP_HEAD, ix.limb.HitGroupData({
 	25,
     20,
     5,
-    1
+    0.5
 }))
 
 ix.limb.AddHitGroup(HITGROUP_CHEST, ix.limb.HitGroupData({

@@ -7,3 +7,11 @@ function CLIENT:LimbsImmune()
 	
 	return false
 end
+
+function CLIENT:IsNoclipping()
+	if(self:GetMoveType() == MOVETYPE_NOCLIP) then
+		return true
+	end
+	
+	return false
+end

