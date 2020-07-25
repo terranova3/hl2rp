@@ -1,3 +1,41 @@
+local PLUGIN = PLUGIN
+
+local tickmat = Material("terranova/ui/medical/tickmat.png")
+local damagepanel = Material("terranova/ui/medical/damagepanel.png")
+local brokenmat = Material("terranova/ui/medical/fracture.png")
+local bleedingmat = Material("terranova/ui/medical/bleeding.png")
+
+function PLUGIN:HUDPaintBackground()
+    local character = LocalPlayer():GetCharacter()
+
+    if(!character) then
+        return
+    end
+
+    local hasFracture, fractures = character:GetFractures()
+    local hasBleed, bleeds = character:GetBleeds()
+    local height = ScrH()
+    local currentWidth = 4
+
+    if(hasFracture) then
+        surface.SetMaterial(brokenmat)
+        surface.SetDrawColor(color_white)
+        surface.DrawTexturedRect(currentWidth, height - 28, 24, 24)
+        
+        ix.util.DrawText(#fractures, currentWidth + 13.5, height - 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, nil, 1)
+        
+        currentWidth = currentWidth + 27
+    end
+
+    if(hasBleed) then
+        surface.SetMaterial(bleedingmat)
+        surface.SetDrawColor(color_white)
+        surface.DrawTexturedRect(currentWidth, height - 28, 24, 24)
+
+        ix.util.DrawText(#bleeds, currentWidth + 13.5, height - 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, nil, 1)
+    end
+end
+
 local PANEL = {}
 local body = "terranova/ui/medical/body.png"
 local limbs = {
@@ -55,10 +93,6 @@ end)
 vgui.Register("ixLimbPicture", PANEL, "Material")
 
 local PANEL = {}
-local tickmat = Material("terranova/ui/medical/tickmat.png")
-local damagepanel = Material("terranova/ui/medical/damagepanel.png")
-local brokenmat = Material("terranova/ui/medical/fracture.png")
-local bleedingmat = Material("terranova/ui/medical/bleeding.png")
 
 function PANEL:Init()
     self:SetSize(505, 699)
