@@ -17,7 +17,7 @@ function ITEM:OnGetReplacement()
 	local newModel = ""
 
 	if(string.find(model, "models/ug/new/citizens/")) then
-		newModel = string.Replace(model, "models/ug/new/citizens/", "models/cmbofficers/female/")
+		newModel = string.Replace(model, "models/ug/new/citizens/", "models/cmbofficers/")
 		newModel = string.Replace(newModel, ".mdl", "_cmbofficer.mdl")
 
 		return newModel
