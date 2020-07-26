@@ -19,6 +19,9 @@ function PANEL:Init()
     self.content:SetTall(128)
     self.content:Dock(TOP)
     self.content:SetContentAlignment(5)
+    self.content.Paint = function()
+        
+    end
 
     for i = 1, 5 do
         local stepText = self.content:Add("DLabel")
