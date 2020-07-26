@@ -64,8 +64,8 @@ ix.util.Include("sh_hooks.lua", "shared")
 ix.util.Include("meta/sh_recipe.lua", "shared")
 ix.util.Include("meta/sh_station.lua", "shared")
 
-ix.flag.Add("w", "Access to fabricator resin system recipies.")
-ix.flag.Add("W", "Access to workcylce tools and recipies.")
+ix.flag.Add("W", "Access to fabricator resin system recipies.")
+
 
 
 

@@ -11,7 +11,7 @@ ITEM.description = "This is a loyalty-grade ration reserved for CWU workers or f
 ITEM.category = "Rations"
 ITEM.contains = {
     [1] = {
-        uniqueID = "loyalgradesupppack",
+        uniqueID = "loyalgradesupppackage",
         amount = 1,
         data = {}
     },
