@@ -36,6 +36,22 @@ function PLUGIN:HUDPaintBackground()
     end
 end
 
+function PLUGIN:HUDPaint()
+    local client = LocalPlayer()
+
+    local maxHealth = client:GetMaxHealth()
+    local health = client:Health()
+
+    if(health < (maxHealth/2)) then
+        local scrW, scrH = ScrW(), ScrH();
+        local damageFraction = 1 - ((1 / maxHealth) * health)
+
+        surface.SetDrawColor(255, 255, 255, math.Clamp(255 * damageFraction, 0, 255))
+        surface.SetMaterial(Material("terranova/ui/medical/screendamage.png"))
+        surface.DrawTexturedRect(0, 0, scrW, scrH)
+    end
+end
+
 local PANEL = {}
 local body = "terranova/ui/medical/body.png"
 local limbs = {
