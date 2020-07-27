@@ -131,7 +131,7 @@ PANEL = {}
 
 -- Called when the panel is initialized.
 function PANEL:Init()
-	self:SetSize(self:GetParent():GetWide(), 48);
+	self:SetSize(self:GetParent():GetWide(), 64);
 
 	local playerData = self:GetParent().playerData;
 
@@ -155,39 +155,31 @@ function PANEL:Init()
 	info.doesRecognize = hook.Run("IsCharacterRecognized", localCharacter, character:GetID()) or hook.Run("IsPlayerRecognized", self.player)
 	info.text = playerData.player:GetCharacter():GetDescription(); 
 	
-	self.nameLabel = vgui.Create("DLabel", self);
-	self.nameLabel:SetFont("ixGenericFont")
-	self.nameLabel:SetText(info.name);
-	self.nameLabel:SetDark(true);
-	self.nameLabel:SizeToContents();
-	self.nameLabel:SetTextColor(Color(255,255,255,180))
+	self.spawnIcon = vgui.Create("ixScoreboardIcon", self);
 
-	self.factionLabel = vgui.Create("DLabel", self); 
-	self.factionLabel:SetText(info.faction);
-	self.factionLabel:SetFont("ixSmallFont")
-	self.factionLabel:SizeToContents();
-	self.factionLabel:SetDark(true);
-	self.factionLabel:SetTextColor(Color(255,255,255,180))
+	self.name = vgui.Create("DLabel", self);
+	self.name:SetFont("ixGenericFont")
+	self.name:SetText(info.name);
+	self.name:SetDark(true);
+	self.name:SizeToContents();
+	self.name:SetTextColor(Color(255,255,255,180))
+
+	self.description = vgui.Create("DLabel", self); 
+	self.description:SetText(info.text);
+	self.description:SetFont("ixSmallFont")
+	self.description:SizeToContents();
+	self.description:SetDark(true);
+	self.description:SetTextColor(Color(255,255,255,180))
 	
-	if (type(info.text) == "string") then
-		self.factionLabel:SetText(info.text);
-		self.factionLabel:SizeToContents();
-	end;
-	
-	if (info.doesRecognise) then
-		self.spawnIcon = vgui.Create("ixScoreboardIcon", self);
+
+	if (info.doesRecognize) then
 		self.spawnIcon:SetModel(info.model, info.skin);
-		self.spawnIcon:SetPos(1, 1);
-		self.spawnIcon:SetSize(30, 30);
 
 		for _, v in pairs(info.player:GetBodyGroups()) do
 			self.spawnIcon:SetBodygroup(v.id, info.player:GetBodygroup(v.id))
 		end
 	else
-		self.spawnIcon = vgui.Create("DImageButton", self);
-		self.spawnIcon:SetImage("clockwork/unknown.png");
-		self.spawnIcon:SetPos(1, 1);
-		self.spawnIcon:SetSize(30, 30);
+		self.spawnIcon:SetImage("terranova/ui/scoreboard/unknown.png");
 	end;
 	
 	self.spawnIcon:SetHelixTooltip(function(tooltip)
@@ -210,12 +202,12 @@ end;
 
 -- Called when the layout should be performed.
 function PANEL:PerformLayout(w, h)
-	self.factionLabel:SizeToContents();
+	self.description:SizeToContents();
 	
-	self.spawnIcon:SetPos(4, 4);
-	self.spawnIcon:SetSize(40, 40);
-	self.nameLabel:SetPos(50, 8);
-	self.factionLabel:SetPos(50, 24); 
+	self.spawnIcon:SetPos(4, 8);
+	self.spawnIcon:SetSize(48, 48);
+	self.name:SetPos(58, 16);
+	self.description:SetPos(58, 32); 
 end;
 
 vgui.Register("ixScoreboardItem", PANEL, "Panel");
