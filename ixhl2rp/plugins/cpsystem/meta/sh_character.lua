@@ -76,6 +76,14 @@ function CHAR:GetCitizenName()
 	return self:GetName()
 end
 
+function CHAR:GetCitizenModel()
+	if(self:IsMetropolice()) then
+		self:GetData("cpCitizenModel", "")
+	end
+
+	return self:GetModel()
+end
+
 -- Returns full civil protection name as a single string
 function CHAR:GetCPName()
     local template = ix.config.Get("Naming Scheme");
