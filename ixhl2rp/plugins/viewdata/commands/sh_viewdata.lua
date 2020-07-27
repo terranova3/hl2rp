@@ -9,13 +9,12 @@ ix.command.Add("ViewData", {
 		ix.type.character
 	},
 	OnRun = function(self, client, target)
-		local targetClient = target:GetPlayer()
-		local cpData = target:GetCPInfo()
-
 		--if (!hook.Run("CanPlayerViewData", client, targetClient)) then
 		--	return "@cantViewData"
 		--end
 		
-		netstream.Start(client, "ViewData", targetClient, target:GetData("cid"), target:GetData("combineData", {}), cpData)
+		net.Start("ixViewdataInitiate")
+			net.WriteInt(target.id, 16)
+		net.Send(client)
 	end;
 })
