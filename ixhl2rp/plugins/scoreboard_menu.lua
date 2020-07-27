@@ -18,8 +18,6 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 			panel:Dock(FILL)
 
 			for k, v in SortedPairs(ix.faction.indices) do
-				PrintTable(v)
-
 				local button = vgui.Create("DButton", panel)
 				button:Dock(TOP)
 				button:SetSize(20,30)
@@ -43,6 +41,45 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 				end
 
 				if(client:HasWhitelist(v.index)) then
+					button:Remove()
+				end
+			end
+		end
+	}
+
+	options["Give Flag"] = {
+		function()
+			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
+			local menu = vgui.Create("DFrame")
+			menu:SetSize(ScrW() / 6, ScrH() / 3)
+			menu:MakePopup()
+			menu:Center()
+			menu:SetTitle("Character Flag Menu")
+
+			local panel = menu:Add("DScrollPanel")
+			panel:Dock(FILL)
+
+			for k, v in SortedPairs(ix.flag.list) do
+				local button = vgui.Create("DButton", panel)
+				button:Dock(TOP)
+				button:SetSize(20,30)
+				button:SetText(L(k) .. " - " .. v.description)
+				button:SetFont("ixSmallFont")
+				button:DockMargin(4,4,4,4)
+
+				function button:DoClick()
+					ix.command.Send("CharGiveFlag", client:Name(), k)
+					button:Remove()
+				end
+
+				function button.Paint(w, h)
+					derma.SkinFunc("PaintCategoryPanel", button, "", Color(0,0,0,100))
+
+					surface.SetTextColor(Color(255,255,255,255))
+					surface.SetTextPos(4, 4)
+				end
+
+				if(client:GetCharacter():HasFlags(k)) then
 					button:Remove()
 				end
 			end

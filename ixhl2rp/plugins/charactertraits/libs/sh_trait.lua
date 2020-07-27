@@ -45,18 +45,6 @@ function ix.traits.NameToUniqueID(name)
 	return string.gsub(name, " ", "_"):lower();
 end
 
-function ix.traits.CallHook(hook, character)
-	local client = character:GetPlayer();
-	
-	for _, v in pairs(character:GetData("traits", {})) do
-		local trait = ix.traits.Get(v);
-
-		if(IsValid(trait) and trait.hooks[hook]) then
-			trait.hooks[hook](client, character);
-		end
-	end
-end
-
 hook.Add("DoPluginIncludes", "ixTraits", function(path, pluginTable)
 	if (!PLUGIN.paths) then
 		PLUGIN.paths = {}

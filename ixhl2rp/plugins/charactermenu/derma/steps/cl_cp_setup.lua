@@ -141,8 +141,6 @@ function PANEL:Display()
 		cpSystem.cache.taglines = {}
 		cpSystem.cache.taglines = cache
 	
-		PrintTable(cache)
-	
 		self.taglines = self.taglines or self:GetTaglines()
 		self.sublabel:SetText("CUSTOMISE YOUR UNIT")
 	

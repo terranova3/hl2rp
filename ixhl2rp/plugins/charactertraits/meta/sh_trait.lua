@@ -48,8 +48,4 @@ function TRAIT:GetColor()
 	end
 end
 
-function TRAIT:AddHook(name, func)
-	self.hooks[name] = func
-end
-
 ix.meta.trait = TRAIT

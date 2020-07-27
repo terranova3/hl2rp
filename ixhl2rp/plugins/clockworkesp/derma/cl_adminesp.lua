@@ -43,8 +43,6 @@ function PLUGIN.esp:DrawAdminESP()
 		local position = v.position:ToScreen();
 		local text, color, height, font;
 		
-		PrintTable(self.ESPInfo)
-		
 		if (position) then
 			if (type(v.text) == "string") then
 				ix.util.DrawText(v.text, position.x, position.y, v.color or colorWhite, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, nil, alpha)
