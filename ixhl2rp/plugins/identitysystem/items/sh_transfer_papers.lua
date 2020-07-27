@@ -2,6 +2,7 @@ ITEM.name = "Transfer Papers"
 ITEM.model = "models/props_lab/clipboard.mdl"
 ITEM.description = "A piece of paper, indicating your new transfer status."
 ITEM.category = "Other"
+ITEM.noBusiness = true
 
 function ITEM:GetDescription()
 	return self.description

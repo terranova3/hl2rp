@@ -4,7 +4,7 @@ ITEM.model = Model("models/radio/w_radio.mdl")
 ITEM.description = "A shiny handheld radio with a frequency tuner.\nIt is currently turned %s%s."
 ITEM.category = "Other"
 ITEM.cost = 50
-ITEM.classes = {CLASS_EMP, CLASS_EOW}
+ITEM.factions = {FACTION_MPF, FACTION_OTA}
 ITEM.flag = "v"
 
 -- Inventory drawing

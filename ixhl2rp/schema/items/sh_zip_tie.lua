@@ -1,8 +1,8 @@
-
 ITEM.name = "Zip Tie"
 ITEM.description = "An orange zip-tie used to restrict people."
 ITEM.price = 8
 ITEM.model = "models/items/crossbowrounds.mdl"
+ITEM.flag = "v"
 ITEM.factions = {FACTION_MPF, FACTION_OTA}
 ITEM.functions.Use = {
 	OnRun = function(itemTable)

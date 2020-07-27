@@ -12,6 +12,7 @@ ITEM.height = 1
 ITEM.invWidth = 2
 ITEM.invHeight = 1
 ITEM.isBag = true
+ITEM.flag = "g"
 ITEM.functions.View = {
 	icon = "icon16/briefcase.png",
 	OnClick = function(item)

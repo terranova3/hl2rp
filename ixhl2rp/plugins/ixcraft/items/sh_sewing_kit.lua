@@ -5,4 +5,5 @@ ITEM.description = "Sewing Kits containing a variety of useful tailoring tools."
 ITEM.width = 2
 ITEM.height = 2
 ITEM.price = 150
-ITEM.category = "Crafting"
+ITEM.flag = "g"
+ITEM.category = "Tools"

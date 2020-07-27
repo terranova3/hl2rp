@@ -5,6 +5,7 @@ ITEM.model = Model("models/props_combine/combine_lock01.mdl")
 ITEM.category = "Utilities"
 ITEM.width = 1
 ITEM.height = 2
+ITEM.factions = {FACTION_MPF, FACTION_OTA}
 ITEM.iconCam = {
 	pos = Vector(-0.5, 50, 2),
 	ang = Angle(0, 270, 0),

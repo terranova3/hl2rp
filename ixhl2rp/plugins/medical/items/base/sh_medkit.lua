@@ -11,6 +11,7 @@ ITEM.category = "Medical"
 ITEM.price = 18
 ITEM.charge = 300
 ITEM.height = 2
+ITEM.flag = "m"
 ITEM.healthHealed = 30
 ITEM.functions.Apply = {
 	OnRun = function(itemTable)

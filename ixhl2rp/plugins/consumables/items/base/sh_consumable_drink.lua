@@ -9,6 +9,7 @@ ITEM.width	= 1;
 ITEM.height	= 1;
 ITEM.description = "Drink Consumable base";
 ITEM.category = "Drinks";
+ITEM.flag = "F"
 ITEM.capacity = 500
 ITEM.functions.Drink = {
     icon = "icon16/drink.png",

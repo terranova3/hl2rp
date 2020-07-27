@@ -33,10 +33,11 @@ ix.flag.list = ix.flag.list or {}
 -- @string flag Alphanumeric character to use for the flag
 -- @string description Description of the flag
 -- @func callback Function to call when the flag is given or taken from a player
-function ix.flag.Add(flag, description, callback)
+function ix.flag.Add(flag, description, flagType, callback)
 	ix.flag.list[flag] = {
 		description = description,
-		callback = callback
+		callback = callback,
+		flagType = flagType or "Access"
 	}
 end
 
@@ -175,7 +176,7 @@ do
 end
 
 do
-	ix.flag.Add("p", "Access to the physgun.", function(client, isGiven)
+	ix.flag.Add("p", "Access to the physgun.", nil, function(client, isGiven)
 		if (isGiven) then
 			client:Give("weapon_physgun")
 			client:SelectWeapon("weapon_physgun")
@@ -184,7 +185,7 @@ do
 		end
 	end)
 
-	ix.flag.Add("t", "Access to the toolgun", function(client, isGiven)
+	ix.flag.Add("t", "Access to the toolgun", nil, function(client, isGiven)
 		if (isGiven) then
 			client:Give("gmod_tool")
 			client:SelectWeapon("gmod_tool")
@@ -199,4 +200,12 @@ do
 	ix.flag.Add("e", "Access to spawn props.")
 	ix.flag.Add("n", "Access to spawn NPCs.")
 	ix.flag.Add("i", "Access to identification terminals.")
+
+	ix.flag.Add("a", "Access to general clothing", "Business")
+	ix.flag.Add("A", "Access to MCS clothing.", "Business")
+	ix.flag.Add("m", "Access to medical items.", "Business")
+	ix.flag.Add("l", "Access to language books", "Business")
+	ix.flag.Add("f", "Access to union approved goods", "Business")
+	ix.flag.Add("F", "Access to non-approved goods", "Business")
+	ix.flag.Add("g", "Access to general goods", "Business")
 end

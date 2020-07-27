@@ -19,7 +19,7 @@ ITEM.iconCam = {
 	fov = 4.1176470588235
 }
 ITEM.maxArmor = 100;
-ITEM.access = "Z";
+ITEM.noBusiness = true
 ITEM.suppressed = function(itemTable)
 	local charPanel = itemTable.player:GetCharacter():GetCharPanel()
 

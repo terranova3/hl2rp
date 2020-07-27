@@ -12,6 +12,7 @@ ITEM.category = "Clothing";
 ITEM.description = "Legs Base";
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 40
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),
 	ang = Angle(89.083892822266, -89.995094299316, 0),

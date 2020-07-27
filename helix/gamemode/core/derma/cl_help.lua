@@ -288,7 +288,34 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 		end
 
 		-- flags
-		for k, v in SortedPairs(ix.flag.list) do
+		local curType = ""
+
+		for k, v in SortedPairsByMemberValue(ix.flag.list, "flagType") do
+			if(v.flagType != curType) then
+				local panel = container:Add("Panel")
+				panel:Dock(TOP)
+				panel:DockMargin(0, 0, 0, 8)
+				panel:DockPadding(4, 4, 4, 4)
+				panel.Paint = function(_, width, height)
+					derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, Color(0,0,0,100))
+				end
+
+				local flag = panel:Add("DLabel")
+				flag:SetFont("ixMonoMediumFont")
+				flag:SetText(v.flagType)
+				flag:Dock(LEFT)
+				flag:SetTextColor(color_white)
+				flag:SetExpensiveShadow(1, color_black)
+				flag:SetTextInset(4, 0)
+				flag:SizeToContents()
+				flag:SetTall(flag:GetTall() + 8)
+
+				-- This string represents the start. We don't want a DockMargin at the top of this panel.
+				if(curType != "") then
+					panel:DockMargin(0, 0, 0, 8)
+				end
+			end
+
 			local background = ColorAlpha(
 				LocalPlayer():GetCharacter():HasFlags(k) and derma.GetColor("Success", info) or derma.GetColor("Error", info), 88
 			)
@@ -322,6 +349,8 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 			description:SetTall(description:GetTall() + 8)
 
 			panel:SizeToChildren(false, true)
+
+			curType = v.flagType
 		end
 	end
 

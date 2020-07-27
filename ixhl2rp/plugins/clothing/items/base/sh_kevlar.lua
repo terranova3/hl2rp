@@ -15,6 +15,7 @@ ITEM.width = 1;
 ITEM.height = 1;
 ITEM.maxArmor = 100;
 ITEM.backgroundColor = Color(19, 72, 96, 100)
+ITEM.price = 40
 
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)

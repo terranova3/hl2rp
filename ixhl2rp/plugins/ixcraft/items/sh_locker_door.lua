@@ -5,5 +5,6 @@ ITEM.description = "Pure Junk, better sell this."
 ITEM.width = 1
 ITEM.height = 2
 ITEM.price = 100
-ITEM.category = "Junk"
+ITEM.category = "Crafting"
+ITEM.noBusiness = true
 ITEM.rarity = "Rare"

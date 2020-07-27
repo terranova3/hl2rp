@@ -6,3 +6,4 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 5
 ITEM.category = "Crafting"
+ITEM.noBusiness = true

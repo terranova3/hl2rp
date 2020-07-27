@@ -7,6 +7,7 @@ ITEM.base = "base_legs";
 ITEM.name = "Dark Blue Tracksuit Pants";
 ITEM.model = "models/fty/items/tracksuitpants.mdl"
 ITEM.description = "A comfortable-fitting pair of track-suit pants. A tag on the inside of the rear of the pants, reads 'CWU-Approved'."
+ITEM.flag = "a"
 ITEM.bodyGroups = {
 	["legs"] = 4
 }

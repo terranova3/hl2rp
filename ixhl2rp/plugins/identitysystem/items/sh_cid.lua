@@ -2,6 +2,7 @@ ITEM.name = "Identification Card"
 ITEM.model = Model("models/dorado/tarjeta2.mdl")
 ITEM.description = "Originally instituted when proposed by San Guijuelo in 2007, the now-standard ID Card system replaced the previous system of exclusively ID Numbers.\n"
 ITEM.category = "Other"
+ITEM.noBusiness = true
 
 function ITEM:GetDescription()
 	return self.description

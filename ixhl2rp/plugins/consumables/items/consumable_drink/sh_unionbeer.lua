@@ -11,5 +11,6 @@ ITEM.description = "This yellow-colored, carbonated beverage doesn't taste like 
 ITEM.category = "Civil-Approved Drinks";
 ITEM.permit = "consumables";
 ITEM.price = 8;
+ITEM.flag = "f"
 ITEM.capacity = 355
 ITEM.restoreStamina = 15;

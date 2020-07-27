@@ -1,4 +1,4 @@
-
+--[[ This is used for the permits.
 function Schema:CanPlayerUseBusiness(client, uniqueID)
 	if (client:Team() == FACTION_CITIZEN) then
 		local itemTable = ix.item.list[uniqueID]
@@ -16,7 +16,7 @@ function Schema:CanPlayerUseBusiness(client, uniqueID)
 			end
 		end
 	end
-end
+end--]]
 
 -- called when the client wants to view the combine data for the given target
 function Schema:CanPlayerViewData(client, target)

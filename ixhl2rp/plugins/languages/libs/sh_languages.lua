@@ -66,6 +66,7 @@ function ix.language.RegisterItem(k, v)
     ITEM.model = "models/gibs/props_office/books_3_gib1.mdl"
     ITEM.category = "Literature"
     ITEM.language = v
+    ITEM.flag = "l"
     ITEM.functions.learn = {
         name = "Learn Language",
         icon = "icon16/book_open.png",

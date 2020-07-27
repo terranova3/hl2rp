@@ -7,6 +7,7 @@ ITEM.base = "base_legs";
 ITEM.name = "Light Green Jeans";
 ITEM.model = "models/fty/items/lightgreenpants.mdl"
 ITEM.description = "Comfortable, green coloured stretch-fit jeans. A tag on the inside of the rear of the jeans, reads 'CWU-Approved'."
+ITEM.flag = "a"
 ITEM.bodyGroups = {
 	["legs"] = 3
 }

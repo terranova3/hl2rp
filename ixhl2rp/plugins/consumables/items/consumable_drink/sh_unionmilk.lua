@@ -12,5 +12,6 @@ ITEM.description = "A large carton of well-sealed full-cream cow's milk.";
 ITEM.category = "Civil-Approved Drinks";
 ITEM.permit = "consumables";
 ITEM.price = 5;
+ITEM.flag = "f"
 ITEM.capacity = 1000
 ITEM.restoreStamina = 20;

@@ -9,6 +9,7 @@ ITEM.description = "An orange, multi-use brace able to set fractures and breaks.
 ITEM.category = "Medical"
 ITEM.price = 18
 ITEM.uses = 5
+ITEM.flag = "m"
 ITEM.backgroundColor = Color(76, 37, 29, 100)
 ITEM.functions.Apply = {
 	OnRun = function(itemTable)

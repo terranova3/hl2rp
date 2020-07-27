@@ -11,6 +11,7 @@ ITEM.description = "Liquid Container base";
 ITEM.category = "Containers";
 ITEM.capacity = 500
 ITEM.isContainer = true
+ITEM.flag = "g"
 ITEM.functions.Drink = {
     icon = "icon16/drink.png",
     OnRun = function(itemTable)

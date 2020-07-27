@@ -9,6 +9,7 @@ ITEM.width = 1
 ITEM.height = 2
 ITEM.description = "A vacuum-sealed plastic flexi-container filled with the unit's salary, MRE, and a supplement packet."
 ITEM.category = "Rations"
+ITEM.noBusiness = true
 ITEM.contains = {
     [1] = {
         uniqueID = "cpfgradesupppack",

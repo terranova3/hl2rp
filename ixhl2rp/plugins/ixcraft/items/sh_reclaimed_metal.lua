@@ -7,3 +7,4 @@ ITEM.height = 1
 ITEM.price = 25
 ITEM.category = "Crafting"
 ITEM.rarity = "Common"
+ITEM.noBusiness = true

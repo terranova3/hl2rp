@@ -6,3 +6,4 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 90
 ITEM.category = "Tools"
+ITEM.flag = "g"

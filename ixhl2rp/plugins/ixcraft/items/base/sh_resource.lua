@@ -6,6 +6,7 @@ ITEM.baseAmount = 1 -- amount of the ammo
 ITEM.maxAmount = 10
 ITEM.description = "A pile with %s amount of resource."
 ITEM.category = "Resource"
+ITEM.noBusiness = true
 ITEM.splitSize = {1, 2, 5, 10}
 
 function ITEM:GetDescription()

@@ -11,5 +11,6 @@ ITEM.description = "What is that taste? It's water... but also not.";
 ITEM.category = "Civil-Approved Drinks";
 ITEM.permit = "consumables";
 ITEM.price = 2;
+ITEM.flag = "f"
 ITEM.capacity = 375
 ITEM.restoreStamina = 10;

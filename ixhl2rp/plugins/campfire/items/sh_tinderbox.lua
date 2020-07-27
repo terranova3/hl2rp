@@ -2,6 +2,7 @@ ITEM.name = "Tinder Box";
 ITEM.model = "models/props_junk/cardboard_box003a.mdl";
 ITEM.category = "Other"
 ITEM.business = true;
+ITEM.flag = "v"
 ITEM.description = "A box containing a few small logs and a flint and tinder to create a small controlled fire. The fire can be used for cooking certain items.";
 ITEM.functions.Use = {
 	OnRun = function(item)

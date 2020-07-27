@@ -10,6 +10,7 @@ ITEM.description = "A sealed gauze package manufactured in Russia able to tempor
 ITEM.category = "Medical"
 ITEM.price = 18
 ITEM.uses = 2
+ITEM.flag = "m"
 ITEM.healthHealed = 30
 ITEM.functions.Apply = {
 	OnRun = function(itemTable)
