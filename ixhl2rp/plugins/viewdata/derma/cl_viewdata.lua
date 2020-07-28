@@ -18,10 +18,13 @@ function PANEL:Init()
     self:SetTitle("")
     self:SetAlpha(0)
 
-    self.content = self:Add("DPanel")
-    --self.content:SetDrawBackground(false)
-    self.content:Dock(FILL)
-    self.content:DockMargin(16,0,16,16)
+    self.content = self:AddStage("Home")
+    self.record = self:AddStage("Record")
+    self.note = self:AddStage("Note")
+    self.unitrecord = self:AddStage("UnitRecord")
+    self.vars = self:AddStage("EditData")
+
+    self:SetStage("Home")
 end
 
 function PANEL:Paint() 
@@ -43,13 +46,41 @@ function PANEL:Think()
 	self:SetPos((scrW / 2) - (self:GetWide() / 2), (scrH / 2) - (self:GetTall() / 2))
 end
 
+function PANEL:AddStage(text)
+    local panel = self:Add("DPanel")
+    panel:Dock(FILL)
+    panel:DockMargin(16,0,16,16)
+    panel:SetVisible(false)
+
+    if(!self.stages) then
+        self.stages = {}
+    end
+
+    self.stages[text] = panel
+
+    return panel
+end
+
+function PANEL:SetStage(text)
+    if(!self.stages[text]) then
+        return
+    end
+
+    for k, v in pairs(self.stages) do
+        if(k != text) then
+            v:SetVisible(false)
+        else
+            v:SetVisible(true)
+        end
+    end
+end
+
 -- Called when the panel is receiving data and will start to build.
 function PANEL:Build(charID)
     self.character = ix.char.loaded[charID]
     self.target = self.character:GetPlayer()
 
     self:AlphaTo(255, 0.5)
-
     self.content:Add(self:BuildLabel("Civil Protection Datapad", true))
 
     self:BuildCID()
@@ -84,14 +115,12 @@ function PANEL:BuildCID()
 
     self.rightDock = self.cid:Add("DPanel")
     self.rightDock:Dock(FILL)
-    self.rightDock:DockMargin(16,16,16,16)
+    self.rightDock:DockMargin(8,16,16,16)
     self.rightDock:SetDrawBackground(false)
 
-    self.rightDockLabel = self.rightDock:Add(self:BuildLabel("Information\n"))
-
-    self.name = self.rightDock:Add(self:BuildLabel("Citizen Name: " .. self.character:GetName()))
-    self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.character:GetData("cid")))
-    self.points = self.rightDock:Add(self:BuildLabel("Total Points: " ..  "seven"))
+    self.name = self.rightDock:Add(self:BuildLabel("Citizen Name: " .. self.character:GetName(), false, 4))
+    self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.character:GetData("cid"), false, 4))
+    self.points = self.rightDock:Add(self:BuildLabel("Total Points: " ..  "seven", false, 4))
 end
 
 function PANEL:BuildButtons()
@@ -104,16 +133,10 @@ function PANEL:BuildButtons()
     self.buttonLayout:SetStretchHeight(true)
     self.buttonLayout:InvalidateLayout(true)
 
-    local buttons = {
-        "View Record",
-        "Edit Data",
-        "View Note",
-        "Unit Record"
-    }
-
-    for i = 1, 4 do
-        self.buttonLayout:Add(self:AddStageButton(buttons[i]))
-    end
+    self.buttonLayout:Add(self:AddStageButton("View Record", "Record", "ixCombineViewDataRecord"))
+    self.buttonLayout:Add(self:AddStageButton("View Note", "Note", "ixCombineViewDataRecord"))
+    self.buttonLayout:Add(self:AddStageButton("View Unit Record", "UnitRecord", "ixCombineViewDataRecord"))
+    self.buttonLayout:Add(self:AddStageButton("Edit Data", "EditData", "ixCombineViewDataRecord"))
 end
 
 function PANEL:DrawCharacter()
@@ -133,13 +156,15 @@ function PANEL:DrawCharacter()
     return model
 end
 
-function PANEL:BuildLabel(text, title, align)
+function PANEL:BuildLabel(text, title, align, overrideFont)
     local label = self:Add("DLabel")
     local font = "ixSmallFont"
 
     if(title) then
         font = "ixBigFont"
     end
+
+    font = overrideFont or font
 
 	label:SetContentAlignment(align or 5)
 	label:SetFont(font)
@@ -151,16 +176,16 @@ function PANEL:BuildLabel(text, title, align)
 	return label
 end
 
-function PANEL:AddStageButton(name, callback)
+function PANEL:AddStageButton(name, parent, elementName)
+    local this = self
     local button = vgui.Create("DButton")
     button:SetSize(233, 108)
     button:SetText(name)
     button:SetFont("ixSmallFont")
     
     function button.DoClick()
-        if(callback) then
-            callback()
-        end
+        this:SetStage(parent)
+        self.stages[parent]:Add(elementName)
     end
 
     return button
