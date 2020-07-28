@@ -9,6 +9,8 @@ local PANEL = {}
 -- Called when the panel is first initialized.
 function PANEL:Init()
 	local parent = self
+	
+	self.recordReferences = {}
 
 	self:Dock(FILL)
 	self:SetDrawBackground(false)
@@ -37,10 +39,16 @@ function PANEL:Init()
 	end))
 	self.deleteRecord = self.bottomBox:Add(self:AddButton("Delete Record", self.DeleteRecord))
 
+	local index = 1
 	-- Loading the combine data records into the UI.
 	for k, v in pairs(ix.gui.record:GetRecord().rows) do
+		self.recordReferences[index] = k
 		self:AddRecord(v)
+
+		index=index+1
 	end
+
+	PrintTable(self.recordReferences)
 
 	ix.gui.loadedRecord = self.record
 	ix.gui.record:SetLoyaltyPoints(self.record)
@@ -134,8 +142,16 @@ end
 -- Called when we need to delete a row we have selected.
 function PANEL:DeleteRecord(data)
 	if(self:GetSelectedRow()) then
+		local index = self:GetSelectedRow()
+
+		-- Hack
+		if(self.recordReferences[self:GetSelectedRow()]) then
+			index = self.recordReferences[self:GetSelectedRow()]
+			self.recordReferences[self:GetSelectedRow()] = nil
+		end
+
 		ix.gui.record:SendToServer(PLUGIN.message.REMOVEROW, {
-			index = self:GetSelectedRow()
+			index = index
 		})
 
 		self.record:RemoveLine(self:GetSelectedRow())
@@ -177,6 +193,12 @@ function PANEL:EditRecord(data)
 	row:SetColumnText(1, data.title)
 	row:SetColumnText(2, data.creator or LocalPlayer():GetName())
 	row:SetColumnText(3, data.points or 0)
+
+	-- Hack
+	if(self.recordReferences[data.index]) then
+		data.index = self.recordReferences[data.index]
+		self.recordReferences[data.index] = nil
+	end
 
 	-- Send the data to the server so it can update the record there.
 	ix.gui.record:SendToServer(PLUGIN.message.EDITROW, data)
