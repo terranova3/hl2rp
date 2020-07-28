@@ -13,18 +13,21 @@ function PANEL:Init()
 	end
 
     self:SetBackgroundBlur(true);
+    self:ShowCloseButton(false)
     self:Center()
     self:MakePopup()
     self:SetTitle("")
     self:SetAlpha(0)
 
-    self.content = self:AddStage("Home")
-    self.record = self:AddStage("Record")
-    self.note = self:AddStage("Note")
-    self.unitrecord = self:AddStage("UnitRecord")
-    self.vars = self:AddStage("EditData")
+    self.exitButton = self:Add("ixNewButton")
+    self.exitButton:SetFont("ixSmallFont")
+    self.exitButton:SetSize(16,16)
+    self.exitButton:SetPos(480, 16)
+    self.exitButton:SetText("X")
 
-    self:SetStage("Home")
+    function self.exitButton:DoClick()
+        ix.gui.record:Remove()
+    end
 end
 
 function PANEL:Paint() 
@@ -46,8 +49,8 @@ function PANEL:Think()
 	self:SetPos((scrW / 2) - (self:GetWide() / 2), (scrH / 2) - (self:GetTall() / 2))
 end
 
-function PANEL:AddStage(text)
-    local panel = self:Add("DPanel")
+function PANEL:AddStage(text, panelType)
+    local panel = self:Add(panelType or "DPanel")
     panel:Dock(FILL)
     panel:DockMargin(16,0,16,16)
     panel:SetVisible(false)
@@ -80,11 +83,29 @@ function PANEL:Build(charID)
     self.character = ix.char.loaded[charID]
     self.target = self.character:GetPlayer()
 
-    self:AlphaTo(255, 0.5)
+    self.content = self:AddStage("Home")
+    self.content:SetDrawBackground(false)
     self.content:Add(self:BuildLabel("Civil Protection Datapad", true))
-
+    
     self:BuildCID()
+
+    self.record = self:AddStage("Record", "ixCombineViewDataRecord")
+    self.note = self:AddStage("Note", "ixCombineViewDataViewNote")
+    self.unitrecord = self:AddStage("UnitRecord", "ixCombineViewDataUnitRecord")
+    self.vars = self:AddStage("EditData", "ixCombineViewDataEditData")
+
+    self:SetStage("Home")
+    self:AlphaTo(255, 0.5)
+
     self:BuildButtons()
+end
+
+function PANEL:GetRecord()
+    if(!self.character) then
+        return nil
+    end
+
+    return self.character:GetData("record")
 end
 
 function PANEL:BuildCID()
@@ -94,24 +115,7 @@ function PANEL:BuildCID()
     self.cid:SetTall(196)
     self.cid:SetDrawBackground(false)
 
-    self.modelBackground = self.cid:Add("DPanel")
-    self.modelBackground:Dock(LEFT)
-    self.modelBackground:SetSize(180,180)
-    self.modelBackground:DockMargin(16,16,16,16)
-    
-    function self.modelBackground:Paint(w, h)
-        surface.SetDrawColor(25, 25, 25, 225)
-        surface.DrawRect(0, 0, w, h)
-    
-        surface.SetMaterial(ix.util.GetMaterial("materials/terranova/ui/viewdata/datamugshot.png"))
-        surface.SetDrawColor(255, 255, 255, 225)
-        surface.DrawTexturedRect(0, 0, w, h)
-    
-        surface.SetDrawColor(90, 90, 90, 255)
-        surface.DrawOutlinedRect(0, 0, w, h)
-    end
-
-    self.model = self.modelBackground:Add(self:DrawCharacter())
+    self.modelBackground = self.cid:Add(self:DrawCharacter())
 
     self.rightDock = self.cid:Add("DPanel")
     self.rightDock:Dock(FILL)
@@ -133,17 +137,62 @@ function PANEL:BuildButtons()
     self.buttonLayout:SetStretchHeight(true)
     self.buttonLayout:InvalidateLayout(true)
 
-    self.buttonLayout:Add(self:AddStageButton("View Record", "Record", "ixCombineViewDataRecord"))
-    self.buttonLayout:Add(self:AddStageButton("View Note", "Note", "ixCombineViewDataRecord"))
-    self.buttonLayout:Add(self:AddStageButton("View Unit Record", "UnitRecord", "ixCombineViewDataRecord"))
-    self.buttonLayout:Add(self:AddStageButton("Edit Data", "EditData", "ixCombineViewDataRecord"))
+    self.buttonLayout:Add(self:AddStageButton("View Record", "Record"))
+    self.buttonLayout:Add(self:AddStageButton("View Note", "Note"))
+
+    local unitRecord = self.buttonLayout:Add(self:AddStageButton("View Unit Record\n(Unavaliable)", "UnitRecord"))
+    local editData = self.buttonLayout:Add(self:AddStageButton("Edit Data\n(Unavaliable)", "EditData"))
+
+    unitRecord:SetEnabled(false)
+    editData:SetEnabled(false)
 end
 
-function PANEL:DrawCharacter()
-    local model = vgui.Create("DModelPanel")
+function PANEL:SetLoyaltyPoints(record)
+    local count = 0
+
+    if(IsValid(record)) then
+        for k, v in pairs(record:GetLines()) do
+            count = count + (v:GetValue(3) or 0)
+        end
+    end
+
+    self.points:SetText("Loyalty Points: " .. count)
+end
+
+function PANEL:DrawCharacter(small)
+    local modelBackground = vgui.Create("DPanel")
+    modelBackground:Dock(LEFT)
+
+    if(!small) then
+        modelBackground:SetSize(180,180)
+        modelBackground:DockMargin(16,16,16,16)
+    end
+    
+    function modelBackground:Paint(w, h)
+        surface.SetDrawColor(25, 25, 25, 225)
+        surface.DrawRect(0, 0, w, h)
+    
+        surface.SetMaterial(ix.util.GetMaterial("materials/terranova/ui/viewdata/datamugshot.png"))
+        surface.SetDrawColor(255, 255, 255, 225)
+        surface.DrawTexturedRect(0, 0, w, h)
+    
+        surface.SetDrawColor(90, 90, 90, 255)
+        surface.DrawOutlinedRect(0, 0, w, h)
+    end
+    
+    local model = modelBackground:Add("DModelPanel")
     model:Dock(FILL)
-    model:DockMargin(2,2,2,2)
+
+    if(!small) then
+        model:DockMargin(2,2,2,2)
+    end
+
     model:SetModel(self.target:GetModel())
+    model.Entity:SetSkin(self.character:GetData("skin", 0))
+
+    for k, v in pairs(self.character:GetData("groups", {})) do
+        model.Entity:SetBodygroup(k, v)
+    end
 
     function model:LayoutEntity( Entity ) return end
 
@@ -152,8 +201,8 @@ function PANEL:DrawCharacter()
     model:SetLookAt(eyepos)
     model:SetCamPos(eyepos-Vector(-12, 4, 0))	-- Move cam in front of eyes
     model.Entity:SetEyeTarget(eyepos-Vector(-12, 0, 0))
-
-    return model
+    
+    return modelBackground
 end
 
 function PANEL:BuildLabel(text, title, align, overrideFont)
@@ -176,19 +225,75 @@ function PANEL:BuildLabel(text, title, align, overrideFont)
 	return label
 end
 
-function PANEL:AddStageButton(name, parent, elementName)
-    local this = self
-    local button = vgui.Create("DButton")
-    button:SetSize(233, 108)
+local gradient = surface.GetTextureID("vgui/gradient-d")
+
+function PANEL:AddStageButton(name, parent)
+    local button = vgui.Create("ixNewButton")
+    button:SetSize(233, 100)
     button:SetText(name)
-    button:SetFont("ixSmallFont")
     
     function button.DoClick()
-        this:SetStage(parent)
-        self.stages[parent]:Add(elementName)
+        ix.gui.record:SetStage(parent)
     end
 
     return button
+end
+
+function PANEL:AddBackHeader(callback)
+	local header = vgui.Create("DPanel")
+	header:Dock(TOP)
+	header:SetTall(32)
+	header:DockMargin(0, 0, 0, 4)
+	header:SetDrawBackground(false)
+
+    local model = header:Add(self:DrawCharacter(true))
+    model:SetSize(32,32)
+    model:DockMargin(4,4,4,4)
+
+	local back = header:Add("ixNewButton")
+    back:Dock(LEFT)
+    back:DockMargin(2,2,2,2)
+    back:SetText("Back")
+
+    function back.DoClick()
+        if(!callback) then
+            ix.gui.record:SetStage("Home")
+        else
+            callback()
+        end
+    end
+    
+    return header
+end
+
+function draw.Circle( x, y, radius, seg )
+	local cir = {}
+
+	table.insert( cir, { x = x, y = y, u = 0.5, v = 0.5 } )
+	for i = 0, seg do
+		local a = math.rad( ( i / seg ) * -360 )
+		table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
+	end
+
+	local a = math.rad( 0 ) -- This is needed for non absolute segment counts
+	table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
+
+	surface.DrawPoly( cir )
+end
+
+function PANEL:SendToServer(message, data)
+    if(!message or !data) then
+        return
+    end
+
+    if(!data.target) then
+        data.target = self.character.id
+    end
+
+    net.Start("ixViewDataAction")
+        net.WriteInt(message, 16)
+        net.WriteTable(data)
+    net.SendToServer()
 end
 
 vgui.Register("ixCombineViewData", PANEL, "DFrame")

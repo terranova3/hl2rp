@@ -8,7 +8,8 @@ local PANEL = {}
 
 -- Called when the panel is first initialized.
 function PANEL:Init()
-
+	self:Dock(FILL)
+	self.backHeader = self:Add(ix.gui.record:AddBackHeader())
 end
 
-vgui.Register("ixCombineViewDataRecord", PANEL, "DFrame")
+vgui.Register("ixCombineViewDataEditData", PANEL, "DPanel")

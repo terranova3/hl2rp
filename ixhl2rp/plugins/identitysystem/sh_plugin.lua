@@ -1,5 +1,5 @@
 PLUGIN.name = "Identity System"
-PLUGIN.author = "ZeMysticalTaco"
+PLUGIN.author = "ZeMysticalTaco, Adolphus"
 PLUGIN.description = "A comprehensive identity system to allow for deeper espionage roleplay."
 
 ix.util.Include("sv_hooks.lua")

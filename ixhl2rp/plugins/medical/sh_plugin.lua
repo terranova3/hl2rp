@@ -5,7 +5,7 @@
 
 PLUGIN.name = "Medical";
 PLUGIN.description = "Needs a description.";
-PLUGIN.author = "Adolphus";
+PLUGIN.author = "Heyter, Adolphus";
 
 ix.util.IncludeDir(PLUGIN.folder .. "/config", true);
 ix.util.IncludeDir(PLUGIN.folder .. "/meta", true);

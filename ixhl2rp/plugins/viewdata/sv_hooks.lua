@@ -10,14 +10,14 @@ util.AddNetworkString("ixViewdataAction")
 
 -- Called when a player adds a new row to a data file.
 function PLUGIN.AddRow(data)
-    if(!data.title) then
+    if(!data.title or !data.creator) then
         return
     end
 
     data.record.rows[#data.record.rows+1] = {
         title = data.title,
+        creator = data.creator,
         points = data.points or 0,
-        description = data.description or nil
     }
 
     return data.record
@@ -25,7 +25,7 @@ end
 
 -- Called when a player removes a row from a data file.
 function PLUGIN.RemoveRow(data)
-    if(!data.title and !data.index) then
+    if(!data.index) then
         return
     end
 
@@ -38,17 +38,15 @@ end
 
 -- Called when a player edits a row in a data file.
 function PLUGIN.EditRow(data)
-    if(!data.title and !data.index) then
+    if(!data.title or !data.index) then
         return
     end
 
-    local row = data.record.rows[data.index]
-
-    if(row) then
-        row = {
+    if(data.record.rows[data.index]) then
+        data.record.rows[data.index] = {
             title = data.title,
+            creator = data.creator,
             points = data.points or 0,
-            description = data.description or nil
         }
     end
 
@@ -71,7 +69,9 @@ function PLUGIN:CharacterLoaded(character)
     if(!character:GetData("record")) then
         character:SetData("record", {
             rows = {},
-            vars = {}
+            vars = {
+                ["note"] = PLUGIN.defaultNote
+            }
         })
     end
 end
@@ -87,13 +87,16 @@ end
 
 -- Receives the net message from the client and checks if the message they're trying to run is implemented.
 net.Receive("ixViewDataAction", function(length, client)
-    local message = net.ReadString(16)
+    local message = net.ReadInt(16)
     local data = net.ReadTable()
 
-    if(!PLUGIN.message[message] or !data or !data.target) then
+    if(!PLUGIN.methods[message] or !data or !data.target) then
         return
     end
 
+    -- We aren't receiving the character metatable, only the id.
+    data.target = ix.char.loaded[data.target]
+    
     local record = data.target:GetData("record", {})
 
     -- We could send these as seperate variables, but its easier to have everything under 'data'.
@@ -101,7 +104,7 @@ net.Receive("ixViewDataAction", function(length, client)
     data.client = client
 
     -- Using the message type to run the correct method.
-    local newRecord = PLUGIN.message[message](data)
+    local newRecord = PLUGIN.methods[message](data)
 
     -- Getting the data from the return method and updating the record.
     if(newRecord) then
