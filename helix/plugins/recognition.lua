@@ -148,6 +148,13 @@ else
 		end
 	end
 
+	function PLUGIN:ShowTeam(client)
+		if (client:GetCharacter()) then
+			net.Start("ixRecognizeMenu")
+			net.Send(client)
+		end
+	end
+
 	net.Receive("ixRecognize", function(length, client)
 		local level = net.ReadUInt(2)
 
