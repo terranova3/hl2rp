@@ -10,6 +10,6 @@ ITEM.height = 1;
 ITEM.description = "A small bag of peanuts that taste like the dirt they used to come from. With a small coating of salt, it makes them somewhat enjoyable. It's seemingly one of the few foods that don't taste like chemicals.";
 ITEM.category = "Civil-Approved Food";
 ITEM.permit = "consumables";
-ITEM.price = 3;
+ITEM.price = 10;
 ITEM.restoreHealth = 5;
 ITEM.flag = "f"

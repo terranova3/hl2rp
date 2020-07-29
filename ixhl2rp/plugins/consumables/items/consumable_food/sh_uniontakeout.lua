@@ -10,6 +10,6 @@ ITEM.height	= 1;
 ITEM.description = "A takeout shaped box with cooked hokkien 'egg' noodles and some light seasoning. It's still quite bad.";
 ITEM.category = "Civil-Approved Food";
 ITEM.permit = "consumables";
-ITEM.price = 8;
+ITEM.price = 10;
 ITEM.restoreHealth = 5;
 ITEM.flag = "f"
