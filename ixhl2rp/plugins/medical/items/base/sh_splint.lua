@@ -12,7 +12,9 @@ ITEM.uses = 5
 ITEM.flag = "m"
 ITEM.backgroundColor = Color(76, 37, 29, 100)
 ITEM.functions.Apply = {
-	OnRun = function(itemTable)
+    icon = "icon16/pill.png",
+    sound = "items/medshot4.wav",
+    OnRun = function(itemTable)
 		local client = itemTable.player
         local character = client:GetCharacter()
         local hasFracture, fractures = character:GetFractures()
@@ -41,6 +43,46 @@ ITEM.functions.Apply = {
         end
 	end
 }
+ITEM.functions.Give = {
+    icon = "icon16/pill.png",
+    sound = "items/medshot4.wav",
+    OnRun = function(itemTable)
+        local client = itemTable.player   
+		local target = client:GetEyeTraceNoCursor().Entity;
+
+        if (!target or target:GetPos():Distance(client:GetShootPos() ) >= 192) then
+            return false
+        end
+
+        local character = target:GetCharacter()
+        local hasFracture, fractures = character:GetFractures()
+
+        if(hasFracture) then
+            local rand = math.random(1, #fractures)
+
+            ix.limb.SetFracture(character, fractures[rand].hitgroup, false) 
+
+            client:Notify(string.format("You have fixed your target's %s.", fractures[rand].name))
+
+            -- No fractures anymore. Reset our movement.
+            if(!character:GetFractures()) then
+                ix.limb.ResetMovement(target)
+            end
+
+            if(itemTable:GetData("currentUses") > 1) then
+                itemTable:SetData("currentUses", itemTable:GetData("currentUses") - 1)
+    
+                return false
+            end
+        else
+            client:Notify("You target doesn't have a fracture on one of their limbs!")
+
+            return false
+        end
+	end
+}
+
+
 
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)

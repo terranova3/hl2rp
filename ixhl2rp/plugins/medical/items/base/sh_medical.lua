@@ -20,3 +20,18 @@ ITEM.functions.Apply = {
 		client:SetHealth(math.min(client:Health() + itemTable.restoreHealth, client:GetMaxHealth()))
 	end
 }
+ITEM.functions.Give = {
+    name = "Apply",
+    icon = "icon16/pill.png",
+	sound = "items/medshot4.wav",
+	OnRun = function(itemTable)
+        local client = itemTable.player   
+		local target = client:GetEyeTraceNoCursor().Entity;
+
+        if (!target or target:GetPos():Distance(client:GetShootPos() ) >= 192) then
+            return false
+		end
+
+		target:SetHealth(math.min(target:Health() + itemTable.restoreHealth, target:GetMaxHealth()))
+	end
+}

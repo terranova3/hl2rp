@@ -13,6 +13,8 @@ ITEM.uses = 2
 ITEM.flag = "m"
 ITEM.healthHealed = 30
 ITEM.functions.Apply = {
+    icon = "icon16/pill.png",
+	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
 		local client = itemTable.player
         local character = client:GetCharacter()
@@ -38,6 +40,41 @@ ITEM.functions.Apply = {
         end
 	end
 }
+ITEM.functions.Give = {
+    icon = "icon16/pill.png",
+	sound = "items/medshot4.wav",
+    OnRun = function(itemTable)
+        local client = itemTable.player   
+		local target = client:GetEyeTraceNoCursor().Entity;
+
+        if (!target or target:GetPos():Distance(client:GetShootPos() ) >= 192) then
+            return false
+        end
+
+        local character = target:GetCharacter()
+        local hasBleed, bleeds = character:GetBleeds()
+
+        if(hasBleed) then
+            local rand = math.random(1, #bleeds)
+
+            ix.limb.SetBleeding(character, bleeds[rand].hitgroup, false) 
+
+            target:SetHealth(math.Clamp(target:Health() + itemTable.healthHealed, 0, target:GetMaxHealth()))
+            client:Notify(string.format("You have bandaged your target's %s.", bleeds[rand].name))
+
+            if(itemTable:GetData("currentUses") > 1) then
+                itemTable:SetData("currentUses", itemTable:GetData("currentUses") - 1)
+    
+                return false
+            end
+        else
+            client:Notify("Your target doesn't have a bleed on one of their limbs!")
+
+            return false
+        end
+	end
+}
+
 
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)

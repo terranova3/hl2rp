@@ -14,6 +14,8 @@ ITEM.height = 2
 ITEM.flag = "m"
 ITEM.healthHealed = 30
 ITEM.functions.Apply = {
+    icon = "icon16/pill.png",
+	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
 		local client = itemTable.player
         local character = client:GetCharacter()
@@ -39,6 +41,45 @@ ITEM.functions.Apply = {
             return empty
         else
             client:Notify("Your limbs are all full health!")
+
+            return false
+        end
+	end
+}
+ITEM.functions.Give = {
+    icon = "icon16/pill.png",
+	sound = "items/medshot4.wav",
+	OnRun = function(itemTable)
+        local client = itemTable.player   
+		local target = client:GetEyeTraceNoCursor().Entity;
+
+        if (!target or target:GetPos():Distance(client:GetShootPos() ) >= 192) then
+            return false
+        end
+
+        local character = target:GetCharacter()
+        local injuredLimbs = character:GetInjuredLimbs()
+
+        if(injuredLimbs[1]) then
+            local limb = injuredLimbs[math.random(1, #injuredLimbs)]
+            local healingRequired = limb.health
+            local healing = healingRequired
+            local empty = false
+
+            if(itemTable:GetData("currentCharge") >= healingRequired) then
+                itemTable:SetData("currentCharge", itemTable:GetData("currentCharge") - healing)
+            elseif(itemTable:GetData("currentCharge") < healingRequired) then
+                healing = itemTable:GetData("currentCharge")
+                empty = true
+            end
+
+            ix.limb.SetHealth(character, limb.hitgroup, -healing)
+            target:SetHealth(math.Clamp(target:Health() + itemTable.healthHealed, 0, target:GetMaxHealth()))
+            client:Notify(string.format("You have healed your target's %s for %s.", limb.name, healing))
+
+            return empty
+        else
+            client:Notify("Your target's limbs are all full health!")
 
             return false
         end
