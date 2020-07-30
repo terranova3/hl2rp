@@ -9,14 +9,4 @@ ITEM.description = "A synthetic mixture of antlion properties used to releive im
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 30
-
-ITEM.functions.Apply = {
-    name = "Apply",
-    icon = "icon16/pill.png",
-	sound = "items/medshot4.wav",
-	OnRun = function(itemTable)
-		local client = itemTable.player
-
-		client:SetHealth(math.min(client:Health() + 30, client:GetMaxHealth()))
-	end
-}
+ITEM.restoreHealth = 10

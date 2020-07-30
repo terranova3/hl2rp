@@ -9,13 +9,4 @@ ITEM.description = "A bottle of painkiller tablets used to relieve immediate pai
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 20
-
-ITEM.functions.Apply = {
-    name = "Apply",
-    icon = "icon16/pill.png",
-	OnRun = function(itemTable)
-		local client = itemTable.player
-
-		client:SetHealth(math.min(client:Health() + 20, client:GetMaxHealth()))
-	end
-}
+ITEM.restoreHealth = 10

@@ -9,13 +9,4 @@ ITEM.description = "A small bottle of Antiviral drugs used to treat viral infect
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 40
-
-ITEM.functions.Apply = {
-    name = "Apply",
-    icon = "icon16/pill.png",
-	OnRun = function(itemTable)
-		local client = itemTable.player
-
-		client:SetHealth(math.min(client:Health() + 10, client:GetMaxHealth()))
-	end
-}
+ITEM.restoreHealth = 10
