@@ -179,7 +179,7 @@ function PANEL:Init()
 			self.spawnIcon:SetBodygroup(v.id, info.player:GetBodygroup(v.id))
 		end
 	--else
-		self.spawnIcon:SetImage("terranova/ui/scoreboard/unknown.png");
+	--	self.spawnIcon:SetImage("terranova/ui/scoreboard/unknown.png");
 	--end;
 	
 	self.spawnIcon:SetHelixTooltip(function(tooltip)
