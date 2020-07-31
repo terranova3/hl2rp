@@ -10,6 +10,7 @@ ITEM.height = 2
 ITEM.description = "This is a minimum grade ration. It's nothing special. A bottle of water, and some weird grey goop in a jar."
 ITEM.category = "Rations"
 ITEM.noBusiness = true
+ITEM.isRation = true
 ITEM.contains = {
 	[1] = {
 		uniqueID = "money",

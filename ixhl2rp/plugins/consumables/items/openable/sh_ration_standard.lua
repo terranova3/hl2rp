@@ -10,6 +10,7 @@ ITEM.height = 2
 ITEM.description = "A vacuum-sealed ration packet that's only slightly better than it's lesser version."
 ITEM.category = "Rations"
 ITEM.noBusiness = true
+ITEM.isRation = true
 ITEM.contains = {
     [1] = {
         uniqueID = "standardgradesupppack",

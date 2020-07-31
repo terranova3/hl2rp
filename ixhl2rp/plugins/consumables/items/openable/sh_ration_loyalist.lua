@@ -10,6 +10,7 @@ ITEM.height = 2
 ITEM.description = "This is a loyalty-grade ration reserved for CWU workers or for those given loyalist status."
 ITEM.category = "Rations"
 ITEM.noBusiness = true
+ITEM.isRation = true
 ITEM.contains = {
     [1] = {
         uniqueID = "loyalgradesupppackage",
