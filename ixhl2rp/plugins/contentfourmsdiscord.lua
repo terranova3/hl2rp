@@ -6,7 +6,7 @@ PLUGIN.description = "Adds links to the various Terra-Nova Content"
 PLUGIN.urls = {
 	["Discord"] = "https://discord.gg/4fTSp6Y",
 	["Forums"] = "https://forum.terranova-rp.com/index.php",
-	["Content"] = "https://steamcommunity.com/sharedfiles/filedetails/?id=2079140662"
+	["Content"] = "https://steamcommunity.com/sharedfiles/filedetails/?id=856404947"
 }
 
 -- Adding commands for URLs.
