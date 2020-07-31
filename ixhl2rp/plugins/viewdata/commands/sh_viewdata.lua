@@ -9,7 +9,7 @@ ix.command.Add("ViewData", {
 		ix.type.character
 	},
 	OnRun = function(self, client, target)
-		if (!hook.Run("CanPlayerViewData", client, targetClient)) then
+		if (!hook.Run("CanPlayerViewData", client, target:GetPlayer())) then
 			return "@cantViewData"
 		end
 		
