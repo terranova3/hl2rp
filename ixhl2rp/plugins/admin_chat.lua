@@ -43,7 +43,10 @@ ix.chat.Register("adminchat", {
 		end
 
 		icon = Material(icon)
-		chat.AddText(icon, Color(65, 129, 129), "@admin - ", Color(225,225,225), speaker:SteamName(), ": ", Color(200, 200, 200), text)
+
+		if LocalPlayer():IsAdmin() then
+			chat.AddText(icon, Color(65, 129, 129), "@admin - ", Color(225,225,225), speaker:SteamName(), ": ", Color(200, 200, 200), text)
+		end
 	end,
 	prefix = "/a"
 })
