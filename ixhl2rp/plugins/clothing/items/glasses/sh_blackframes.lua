@@ -12,3 +12,9 @@ ITEM.flag = "a"
 ITEM.bodyGroups = {
 	["glasses"] = 1
 }
+
+ITEM.iconCam = {
+	ang	= Angle(-0.70499622821808, 268.25439453125, 0),
+	fov	= 6.085652091515,
+	pos	= Vector(0, 200, 0)
+}
