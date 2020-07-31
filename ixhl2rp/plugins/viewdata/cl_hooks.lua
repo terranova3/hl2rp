@@ -14,6 +14,8 @@ net.Receive("ixViewdataInitiate", function()
 		return
 	end
 
+	character = setmetatable(character, ix.meta.character)
+
 	-- Adds a display message for combine displaying that a record has been opened.
 	Schema:AddCombineDisplayMessage("@cViewData")
 
