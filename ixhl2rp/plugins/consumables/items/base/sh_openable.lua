@@ -60,7 +60,7 @@ end
 function ITEM:PopulateTooltip(tooltip)
     if(self:GetData("salary", 0) > 0) then
         local data = tooltip:AddRow("data")
-        data:SetText(string.format("\nContains %s tokens.", self:GetData("salary")))
+        data:SetText(string.format("\nContains %s bonus tokens from your salary.", self:GetData("salary")))
         data:SetFont("ixPluginCharSubTitleFont")
         data:SizeToContents()
     end
