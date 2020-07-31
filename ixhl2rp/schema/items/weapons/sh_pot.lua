@@ -2,6 +2,7 @@ ITEM.name = "Pot"
 ITEM.description = "A cooking pot used for various activities with a stove."
 ITEM.model = "models/weapons/hl2meleepack/w_pot.mdl"
 ITEM.class = "weapon_hl2pot"
+ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "V"
 ITEM.width = 1
