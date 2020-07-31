@@ -109,16 +109,6 @@ function RECIPE:OnCanCraft(client)
 		end
 	end
 	
-    for uniqueID, amount in pairs(workTable) do
-        if amount > 0 then
-            bHasItems = false
-            local itemTable = ix.item.Get(uniqueID)
-            if itemTable then
-                missing = missing .. itemTable.name .. " x" .. amount .. ", "
-            end
-        end
-    end
-
 	if (missing != "") then
 		missing = missing:sub(1, -3)
 	end
