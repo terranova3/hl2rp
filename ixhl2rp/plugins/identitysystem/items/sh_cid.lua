@@ -52,7 +52,7 @@ ITEM.functions.ViewRecord = {
 		local target = nil
 
 		for _, v in pairs(player.GetAll()) do
-			if(v:GetCharacter():GetData("cid", "") == item:GetData("cid", 00000)) then
+			if(v:GetCharacter() and v:GetCharacter():GetData("cid", "") == item:GetData("cid", 00000)) then
 				target = v
 				break
 			end
@@ -69,7 +69,12 @@ ITEM.functions.ViewRecord = {
 		end
 
 		local character = target:GetCharacter()
-		netstream.Start(client, "ViewData", target, character:GetData("cid"), character:GetData("combineData", {}), character:GetCPInfo())
+		
+		if(character) then
+			net.Start("ixViewdataInitiate")
+				net.WriteInt(character.id, 16) -- We can actually save on data by just sending the character id. The client can index it from char loaded table.
+			net.Send(client)
+		end
 
 		return false
 	end,
