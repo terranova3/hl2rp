@@ -17,3 +17,7 @@ function PLUGIN:LoadedMenuButtons(buttons)
 		end
 	end
 end
+
+function ArcCW:ShouldDrawHUDElement(ele)
+	return false
+end
