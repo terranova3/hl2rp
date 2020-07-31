@@ -7,10 +7,10 @@ local PLUGIN = PLUGIN;
 
 -- Called when viewdata panel has been requested.
 net.Receive("ixViewdataInitiate", function()
-	local charID = net.ReadInt(16)
+	local character = net.ReadTable()
 
 	-- Check if the entity still exists.
-	if(!charID) then
+	if(!character) then
 		return
 	end
 
@@ -18,5 +18,5 @@ net.Receive("ixViewdataInitiate", function()
 	Schema:AddCombineDisplayMessage("@cViewData")
 
 	ix.gui.record = vgui.Create("ixCombineViewData")
-	ix.gui.record:Build(charID)
+	ix.gui.record:Build(character)
 end)

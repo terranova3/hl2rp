@@ -79,8 +79,8 @@ function PANEL:SetStage(text)
 end
 
 -- Called when the panel is receiving data and will start to build.
-function PANEL:Build(charID)
-    self.character = ix.char.loaded[charID]
+function PANEL:Build(character)
+    self.character = character
     self.target = self.character:GetPlayer()
 
     self.content = self:AddStage("Home")
@@ -105,7 +105,7 @@ function PANEL:GetRecord()
         return nil
     end
 
-    return self.character:GetData("record")
+    return self.character:GetData("record", {})
 end
 
 function PANEL:BuildCID()
@@ -123,8 +123,8 @@ function PANEL:BuildCID()
     self.rightDock:SetDrawBackground(false)
 
     self.name = self.rightDock:Add(self:BuildLabel("Citizen Name: " .. self.character:GetName(), false, 4))
-    self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.character:GetData("cid"), false, 4))
-    self.points = self.rightDock:Add(self:BuildLabel("Total Points: " ..  "seven", false, 4))
+    self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.character:GetData("cid", "ERROR"), false, 4))
+    self.points = self.rightDock:Add(self:BuildLabel("Total Points: " ..  "ERROR", false, 4))
 end
 
 function PANEL:BuildButtons()

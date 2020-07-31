@@ -72,7 +72,7 @@ ITEM.functions.ViewRecord = {
 		
 		if(character) then
 			net.Start("ixViewdataInitiate")
-				net.WriteInt(character.id, 16) -- We can actually save on data by just sending the character id. The client can index it from char loaded table.
+				net.WriteTable(character) -- We can actually save on data by just sending the character id. The client can index it from char loaded table.
 			net.Send(client)
 		end
 

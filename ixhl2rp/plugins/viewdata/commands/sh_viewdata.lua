@@ -14,7 +14,7 @@ ix.command.Add("ViewData", {
 		end
 		
 		net.Start("ixViewdataInitiate")
-			net.WriteInt(target.id, 16) -- We can actually save on data by just sending the character id. The client can index it from char loaded table.
+			net.WriteTable(target) -- We can actually save on data by just sending the character id. The client can index it from char loaded table.
 		net.Send(client)
 	end;
 })
