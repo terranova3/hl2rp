@@ -46,9 +46,7 @@ function PLUGIN.esp:DrawAdminESP()
 		if (position) then
 			if (type(v.text) == "string") then
 				ix.util.DrawText(v.text, position.x, position.y, v.color or colorWhite, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, nil, alpha)
-			else
-				print("calling this")
-				
+			else			
 				for k2, v2 in ipairs(v.text) do	
 					local barValue;
 					local maximum = 100;

@@ -172,15 +172,15 @@ function PANEL:Init()
 	self.description:SetTextColor(Color(255,255,255,180))
 	
 
-	if (info.doesRecognize) then
+	--if (info.doesRecognize) then
 		self.spawnIcon:SetModel(info.model, info.skin);
 
 		for _, v in pairs(info.player:GetBodyGroups()) do
 			self.spawnIcon:SetBodygroup(v.id, info.player:GetBodygroup(v.id))
 		end
-	else
+	--else
 		self.spawnIcon:SetImage("terranova/ui/scoreboard/unknown.png");
-	end;
+	--end;
 	
 	self.spawnIcon:SetHelixTooltip(function(tooltip)
 		local client = self.player
