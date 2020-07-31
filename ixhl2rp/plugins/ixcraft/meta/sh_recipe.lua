@@ -87,28 +87,22 @@ function RECIPE:OnCanCraft(client)
 	end
 
 	local inventory = character:GetInventory()
-	local invItems = inventory:GetItems()
 	local bHasItems, bHasTools
 	local missing = ""
-	local workTable = table.Copy(self.requirements) or {}
 
 	if (self.flag and !character:HasFlags(self.flag)) then
 		return false, "@CraftMissingFlag", self.flag
 	end
 
-	for uniqueID, amount in pairs(workTable) do
-		for _,item in pairs(invItems) do
-			if item.uniqueID == uniqueID then
-				local quant = item:GetData("quantity",1)
-				if quant >= amount then
-					workTable[uniqueID] = 0
-				else
-					workTable[uniqueID] = (amount - quant)
-				end
-			end
+	for uniqueID, amount in pairs(self.requirements or {}) do
+		if (inventory:GetItemCount(uniqueID) < amount) then
+			local itemTable = ix.item.Get(uniqueID)
+			bHasItems = false
+
+			missing = missing..(itemTable and itemTable.name or uniqueID)..", "
 		end
 	end
-	
+
 	if (missing != "") then
 		missing = missing:sub(1, -3)
 	end
@@ -161,33 +155,17 @@ if (SERVER) then
 
 		local character = client:GetCharacter()
 		local inventory = character:GetInventory()
-		local invItems = inventory:GetItems()
-		local workTable = table.Copy(self.requirements) or {}
-		
-		for uniqueID, amount in pairs(workTable) do
-			for _,item in pairs(invItems) do
-				if item.uniqueID == uniqueID then
-					local quant = item:GetData("quantity",1)
-					if quant >= amount then
-						workTable[uniqueID] = 0
-						item:SetData("quantity", (quant - amount))
-					else
-						workTable[uniqueID] = (amount - quant)
-						item:Remove()
-					end
-				end
-			end
-		end
-		
-		--[[		literal fucking dogbrain coomer brain retard mode engaged
+
 		if (self.requirements) then
+			local removedItems = {}
+
 			for _, itemTable in pairs(inventory:GetItems()) do
 				local uniqueID = itemTable.uniqueID
-				
+
 				if (self.requirements[uniqueID]) then
 					local amountRemoved = removedItems[uniqueID] or 0
 					local amount = self.requirements[uniqueID]
-					
+
 					if (amountRemoved < amount) then
 						itemTable:Remove()
 
@@ -195,11 +173,10 @@ if (SERVER) then
 					end
 				end
 			end
-		end 
-		--]] 
-		
+		end
+
 		for uniqueID, amount in pairs(self.results or {}) do
-			if (type(amount) == "table") then
+			if (istable(amount)) then
 				if (amount["min"] and amount["max"]) then
 					amount = math.random(amount["min"], amount["max"])
 				else

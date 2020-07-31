@@ -56,6 +56,8 @@ STATION.model = "WorldModel"
 ## Preview
 ![Menu](https://i.imgur.com/UxzQ3kz.png)
 If you like this plugin and want to see more consider getting me a coffee. https://ko-fi.com/wowm0d
+
+Support for this plugin can be found here: https://discord.gg/mntpDMU
 ]]
 
 ix.util.Include("cl_hooks.lua", "client")
@@ -63,9 +65,3 @@ ix.util.Include("sh_hooks.lua", "shared")
 
 ix.util.Include("meta/sh_recipe.lua", "shared")
 ix.util.Include("meta/sh_station.lua", "shared")
-
-ix.flag.Add("W", "Access to fabricator resin system recipies.", nil)
-
-
-
-
