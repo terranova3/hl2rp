@@ -1,0 +1,9 @@
+ITEM.name = "Hook"
+ITEM.description = "An old large fishing hoot bait line."
+ITEM.model = "models/weapons/hl2meleepack/w_hook.mdl"
+ITEM.class = "weapon_hl2hook"
+ITEM.weaponCategory = "melee"
+ITEM.flag = "V"
+ITEM.width = 1
+ITEM.height = 2
+ITEM.bDropOnDeath = true

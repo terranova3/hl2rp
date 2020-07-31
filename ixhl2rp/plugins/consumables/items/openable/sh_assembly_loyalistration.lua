@@ -9,7 +9,7 @@ ITEM.contains = {
         data = {}
     },
     [2] = {
-        uniqueID = "unionwater",
+        uniqueID = "unionchocolate",
         amount = 1,
         data = {}
     },
@@ -22,10 +22,5 @@ ITEM.contains = {
 		uniqueID = "loyalgrademealkit",
 		amount = 1,
         data = {}
-	},
-	[5] = {
-		uniqueID = "unionchocolate",
-		amount = 1,
-		data = {}
 	}
 }

@@ -9,11 +9,6 @@ ITEM.contains = {
 		data = {}
 	},
 	[2] = {
-		uniqueID = "unionwater",
-		amount = 1,
-		data = {}
-	},
-	[3] = {
 		uniqueID = "empty_ration",
 		amount = 1,
 		data = {}

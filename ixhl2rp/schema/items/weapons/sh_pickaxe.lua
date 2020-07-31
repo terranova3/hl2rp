@@ -1,0 +1,9 @@
+ITEM.name = "Pickaxe"
+ITEM.description = "A metal pickaxe with a heavy handle and durable steel head."
+ITEM.model = "models/weapons/hl2meleepack/w_pickaxe.mdl"
+ITEM.class = "weapon_hl2pickaxe"
+ITEM.weaponCategory = "melee"
+ITEM.flag = "V"
+ITEM.width = 1
+ITEM.height = 2
+ITEM.bDropOnDeath = true

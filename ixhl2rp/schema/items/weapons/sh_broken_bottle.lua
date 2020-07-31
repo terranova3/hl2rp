@@ -1,0 +1,9 @@
+ITEM.name = "Broken Glass Bottle"
+ITEM.description = "A sharp piece of glass capable of cutting."
+ITEM.model = "models/weapons/hl2meleepack/w_brokenbottle.mdl"
+ITEM.class = "weapon_hl2brokenbottle"
+ITEM.weaponCategory = "melee"
+ITEM.flag = "V"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.bDropOnDeath = true

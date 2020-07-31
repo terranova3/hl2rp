@@ -5,7 +5,7 @@ RECIPE.model = "models/weapons/w_packatc.mdl"
 RECIPE.category = "Work Cycle"
 RECIPE.requirements = {
 	["standardgradesupppacket"] = 1,
-	["unionwater"] = 1,
+	["standardgrademealkit"] = 1,
 	["empty_ration"] = 1
 }
 RECIPE.results = {

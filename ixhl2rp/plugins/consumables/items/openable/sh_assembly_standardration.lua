@@ -4,12 +4,12 @@ ITEM.description = "A small labled package containing all the items to assemble 
 ITEM.noBusiness = true
 ITEM.contains = {
 	[1] = {
-		uniqueID = "standardgradesupppack",
+		uniqueID = "standardgradesupppacket",
 		amount = 1,
 		data = {}
 	},
 	[2] = {
-		uniqueID = "unionwater",
+		uniqueID = "standardgrademealkit",
 		amount = 1,
 		data = {}
 	},

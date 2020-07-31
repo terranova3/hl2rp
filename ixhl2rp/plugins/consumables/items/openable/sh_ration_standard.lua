@@ -13,16 +13,21 @@ ITEM.noBusiness = true
 ITEM.isRation = true
 ITEM.contains = {
     [1] = {
-        uniqueID = "standardgradesupppack",
+        uniqueID = "standardgradesupppacket",
         amount = 1,
         data = {}
     },
     [2] = {
-        uniqueID = "unionwater",
+        uniqueID = "standardgrademealkit",
         amount = 1,
         data = {}
     },
     [3] = {
+        uniqueID = "unionwater",
+        amount = 1,
+        data = {}
+    },
+    [4] = {
         uniqueID = "money",
         amount = 30,
         data = {}

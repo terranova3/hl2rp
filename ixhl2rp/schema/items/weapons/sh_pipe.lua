@@ -1,0 +1,9 @@
+ITEM.name = "Pipe"
+ITEM.description = "A large rusty metal pipe, it feels heavy."
+ITEM.model = "models/props_canal/mattpipe.mdl"
+ITEM.class = "weapon_hl2pipe"
+ITEM.weaponCategory = "melee"
+ITEM.flag = "V"
+ITEM.width = 1
+ITEM.height = 2
+ITEM.bDropOnDeath = true

@@ -1,0 +1,9 @@
+ITEM.name = "Glass Bottle"
+ITEM.description = "An empty glass bottle."
+ITEM.model = "models/weapons/hl2meleepack/w_bottle.mdll"
+ITEM.class = "weapon_hl2bottle"
+ITEM.weaponCategory = "melee"
+ITEM.flag = "V"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.bDropOnDeath = true
