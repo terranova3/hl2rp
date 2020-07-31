@@ -65,41 +65,19 @@ ITEM.functions.split = {
 	end,
 }
 
-ITEM.functions.combine = {
-    OnCanRun = function(item, data)
-        if !data then
-            return false
-        end
-        
-        if !data[1] then
-            return false
-        end
-        
-        local targetItem = ix.item.instances[data[1]]
+ITEM.combine = function(item, targetItem)
+    local localQuant = item:GetData("quantity", item.baseAmount)
+    local targetQuant = targetItem:GetData("quantity", targetItem.baseAmount)
+    local combinedQuant = (localQuant + targetQuant)
 
-        if targetItem.uniqueID == item.uniqueID then
-            return true
-        else
-            return false
-        end
-    end,
-    OnRun = function(item, data)
-        local targetItem = ix.item.instances[data[1]]
-        local localQuant = item:GetData("quantity", item.baseAmount)
-        local targetQuant = targetItem:GetData("quantity", targetItem.baseAmount)
-        local combinedQuant = (localQuant + targetQuant)
-
-        if combinedQuant <= item.maxAmount then
-            targetItem:SetData("quantity", combinedQuant)
-            return true
-        elseif localQuant >= targetQuant then
-            targetItem:SetData("quantity",item.maxAmount)
-            item:SetData("quantity",(localQuant - (item.maxAmount - targetQuant)))
-            return false
-        else
-            targetItem:SetData("quantity",(targetQuant - (item.maxAmount - localQuant)))
-            item:SetData("quantity",item.maxAmount)
-            return false
-        end
-    end,
-}
+    if combinedQuant <= item.maxAmount then
+        targetItem:SetData("quantity", combinedQuant)
+        item:Remove()
+    elseif localQuant >= targetQuant then
+        targetItem:SetData("quantity",item.maxAmount)
+        item:SetData("quantity",(localQuant - (item.maxAmount - targetQuant)))
+    else
+        targetItem:SetData("quantity",(targetQuant - (item.maxAmount - localQuant)))
+        item:SetData("quantity",item.maxAmount)
+    end
+end
