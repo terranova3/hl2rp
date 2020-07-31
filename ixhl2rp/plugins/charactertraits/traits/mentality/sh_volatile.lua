@@ -8,3 +8,4 @@ TRAIT.opposite = "Calm";
 TRAIT.description = "Quick to anger and potentially dangerous.";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/cruel.png";
+TRAIT.negative = true;
