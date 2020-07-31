@@ -4,7 +4,7 @@ RECIPE.description = "Assemble a standard ration unit."
 RECIPE.model = "models/weapons/w_packatc.mdl"
 RECIPE.category = "Work Cycle"
 RECIPE.requirements = {
-	["standardgradesupppack"] = 1,
+	["standardgradesupppacket"] = 1,
 	["unionwater"] = 1,
 	["empty_ration"] = 1
 }
