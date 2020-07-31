@@ -11,11 +11,9 @@ TRAIT.icon = "materials/terranova/ui/traits/foureyes.png";
 TRAIT.negative = true;
 
 function TRAIT:CharacterLoaded(character)
-    print("Trait:CharacterLoaded")
 end
 
 function TRAIT:OnCharacterCreated(character)
-    print("Called?")
     local inventory = character:GetInventory()
     local charPanel = character:GetCharPanel()
     local id

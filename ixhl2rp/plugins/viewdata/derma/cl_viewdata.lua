@@ -26,6 +26,10 @@ function PANEL:Init()
     self.exitButton:SetText("X")
 
     function self.exitButton:DoClick()
+        ix.gui.record:SendToServer(PLUGIN.message.UPDATEVAR, {
+			var = "note",
+			info = ix.gui.record.note.textEntry:GetText()
+		})
         ix.gui.record:Remove()
     end
 end
@@ -79,9 +83,10 @@ function PANEL:SetStage(text)
 end
 
 -- Called when the panel is receiving data and will start to build.
-function PANEL:Build(character)
-    self.character = character
-    self.target = self.character:GetPlayer()
+function PANEL:Build(target, cid, record)
+    self.target = target
+    self.character = target:GetCharacter()
+    self.recordTable = record
 
     self.content = self:AddStage("Home")
     self.content:SetDrawBackground(false)
@@ -101,11 +106,7 @@ function PANEL:Build(character)
 end
 
 function PANEL:GetRecord()
-    if(!self.character) then
-        return nil
-    end
-
-    return self.character:GetData("record", {})
+    return self.recordTable or {}
 end
 
 function PANEL:BuildCID()
@@ -122,7 +123,13 @@ function PANEL:BuildCID()
     self.rightDock:DockMargin(8,16,16,16)
     self.rightDock:SetDrawBackground(false)
 
-    self.name = self.rightDock:Add(self:BuildLabel("Citizen Name: " .. self.character:GetName(), false, 4))
+    local name = self.character:GetName()
+
+    if(self.character:IsMetropolice()) then
+        name = self.character:GetData("cpCitizenName")
+    end
+
+    self.name = self.rightDock:Add(self:BuildLabel("Name: " .. name or "Error", false, 4))
     self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.character:GetData("cid", "ERROR"), false, 4))
     self.points = self.rightDock:Add(self:BuildLabel("Total Points: " ..  "ERROR", false, 4))
 end
@@ -286,9 +293,7 @@ function PANEL:SendToServer(message, data)
         return
     end
 
-    if(!data.target) then
-        data.target = self.character.id
-    end
+    data.target = self.character:GetID()
 
     net.Start("ixViewDataAction")
         net.WriteInt(message, 16)

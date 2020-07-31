@@ -29,8 +29,6 @@ function PLUGIN:LoadData()
 		end
 	end
 
-	print("Loading taglines...")
-
 	local query = mysql:Select("ix_characters")
 	query:Select("faction")
 	query:Select("data")

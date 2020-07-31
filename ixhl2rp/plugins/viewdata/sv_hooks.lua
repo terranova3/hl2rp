@@ -93,7 +93,7 @@ net.Receive("ixViewDataAction", function(length, client)
     if(!PLUGIN.methods[message] or !data or !data.target) then
         return
     end
-
+    
     -- We aren't receiving the character metatable, only the id.
     data.target = ix.char.loaded[data.target]
     

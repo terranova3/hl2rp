@@ -13,8 +13,9 @@ ix.command.Add("ViewData", {
 			return "@cantViewData"
 		end
 		
-		net.Start("ixViewdataInitiate")
-			net.WriteTable(target) -- We can actually save on data by just sending the character id. The client can index it from char loaded table.
-		net.Send(client)
+		local data = target:GetData("record", {})
+		local cid = target:GetData("cid", 00000)
+
+		netstream.Start(client, "ixViewData", target:GetPlayer(), cid, data)
 	end;
 })
