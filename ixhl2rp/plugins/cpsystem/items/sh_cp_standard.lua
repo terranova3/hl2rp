@@ -16,9 +16,5 @@ function ITEM:OnGetReplacement()
 	local model = client:GetModel()
 	local newModel = "models/ma/hla/terranovapolice.mdl"
 
-	if(string.find(model, "female")) then
-		return "models/ma/hla/terranovafemalepolice.mdl"
-	end
-
 	return newModel
 end 
