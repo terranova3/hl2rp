@@ -79,8 +79,8 @@ ITEM.pacData = {
 }
 
 ITEM.iconCam = {
-	ang	= Angle(0.33879372477531, 270.15808105469, 0),
+	ang	= Angle(90, -90, 0),
 	fov	= 5.0470897275697,
-	pos	= Vector(0, 200, -1)
+	pos	= Vector(-2, 0, 100)
 }
 ITEM.bDropOnDeath = true

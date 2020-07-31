@@ -1,17 +1,17 @@
 
-RECIPE.name = "Watermelon"
-RECIPE.description = "Craft a watermelon."
-RECIPE.model = "models/props_junk/watermelon01.mdl"
-RECIPE.category = "Watermelon"
+RECIPE.name = "Sewn Cloth"
+RECIPE.description = "Refine cloth scraps into some useable material."
+RECIPE.model = "models/props_pipes/pipe01_straight01_short.mdl"
+RECIPE.category = "Sewing"
 RECIPE.requirements = {
-	["loyalgrademealkit"] = 1
+	["scrap_cloth"] = 3
+}
 RECIPE.results = {
-	["loyalgradesupppackage"] = 1
+	["sewn_cloth"] = 1
 }
 RECIPE.tools = {
-	"cid"
+	"sewing_kit"
 }
-RECIPE.flag = "V"
 
 RECIPE:PostHook("OnCanCraft", function(recipeTable, client)
 	for _, v in pairs(ents.FindByClass("ix_station_workbench")) do
