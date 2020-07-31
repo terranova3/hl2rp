@@ -71,9 +71,10 @@ ITEM.functions.ViewRecord = {
 		local character = target:GetCharacter()
 		
 		if(character) then
-			net.Start("ixViewdataInitiate")
-				net.WriteTable(character) -- We can actually save on data by just sending the character id. The client can index it from char loaded table.
-			net.Send(client)
+			local data = character:GetData("record", {})
+			local cid = character:GetData("cid", 00000)
+	
+			netstream.Start(client, "ixViewData", character:GetPlayer(), cid, data)
 		end
 
 		return false
