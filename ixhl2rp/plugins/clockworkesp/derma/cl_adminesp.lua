@@ -39,7 +39,7 @@ function PLUGIN.esp:DrawAdminESP()
 		PLUGIN.esp:GetAdminESPInfo(self.ESPInfo)
 	end;
 	
-	for k, v in pairs(self.ESPInfo) do
+	for k, v in pairs(self.ESPInfo or {}) do
 		local position = v.position:ToScreen();
 		local text, color, height, font;
 		
