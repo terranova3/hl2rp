@@ -10,6 +10,7 @@ ITEM.height = 2
 ITEM.description = "A vacuum-sealed plastic compartment filled with nutritious necessities for biotics."
 ITEM.category = "Rations"
 ITEM.noBusiness = true
+ITEM.isRation = true
 ITEM.contains = {
     [1] = {
         uniqueID = "bioticgradesuppunit",
