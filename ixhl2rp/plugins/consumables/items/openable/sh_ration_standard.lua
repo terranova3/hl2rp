@@ -29,7 +29,7 @@ ITEM.contains = {
     },
     [4] = {
         uniqueID = "money",
-        amount = 30,
+        amount = 5,
         data = {}
 	}
 }
