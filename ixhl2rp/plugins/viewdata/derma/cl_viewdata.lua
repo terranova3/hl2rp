@@ -123,13 +123,7 @@ function PANEL:BuildCID()
     self.rightDock:DockMargin(8,16,16,16)
     self.rightDock:SetDrawBackground(false)
 
-    local name = self.character:GetName()
-
-    if(self.character:IsMetropolice()) then
-        name = self.character:GetData("cpCitizenName")
-    end
-
-    self.name = self.rightDock:Add(self:BuildLabel("Name: " .. name or "Error", false, 4))
+    self.name = self.rightDock:Add(self:BuildLabel("Name: " .. self.character:GetName() or "Error", false, 4))
     self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.character:GetData("cid", "ERROR"), false, 4))
     self.points = self.rightDock:Add(self:BuildLabel("Total Points: " ..  "ERROR", false, 4))
 end
