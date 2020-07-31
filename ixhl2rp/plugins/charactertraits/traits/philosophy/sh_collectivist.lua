@@ -7,4 +7,4 @@ TRAIT.name = "Collectivist";
 TRAIT.opposite = "Individualist";
 TRAIT.description = "We're all in this together.";
 TRAIT.category = "Philosophy";
-TRAIT.icon = "materials/terranova/ui/traits/tribalist.png";
+TRAIT.icon = "materials/terranova/ui/traits/tribal.png";
