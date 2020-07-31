@@ -5,7 +5,7 @@
 
 TRAIT.name = "Strong";
 TRAIT.opposite = "Weak";
-TRAIT.description = "It'll move, get out of my way.";
+TRAIT.description = "Harder, better, faster, stronger.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/strong.png";
 TRAIT.positive = true

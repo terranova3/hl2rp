@@ -5,6 +5,6 @@
 
 TRAIT.name = "Transhumanist";
 TRAIT.opposite = "Naturalist";
-TRAIT.description = "Evolution is in our hands. The stars are ours.";
+TRAIT.description = "Immortality is in our reach.";
 TRAIT.category = "Philosophy";
 TRAIT.icon = "materials/terranova/ui/traits/transhumanist.png";

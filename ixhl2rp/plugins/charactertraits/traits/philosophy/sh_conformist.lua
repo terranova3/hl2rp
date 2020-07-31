@@ -3,8 +3,8 @@
     without permission of its author.
 --]]
 
-TRAIT.name = "Collaborator";
+TRAIT.name = "Conformist";
 TRAIT.opposite = "Rebellious";
-TRAIT.description = "Our saviours are here to help us.";
+TRAIT.description = "Don't bite the hand that feeds you.";
 TRAIT.category = "Philosophy";
-TRAIT.icon = "materials/terranova/ui/traits/collaborator.png";
+TRAIT.icon = "materials/terranova/ui/traits/passive.png";

@@ -3,9 +3,9 @@
     without permission of its author.
 --]]
 
-TRAIT.name = "Gleeful";
-TRAIT.opposite = "Depressive";
-TRAIT.description = "Cheery despite possible extinction.";
+TRAIT.name = "Optimist";
+TRAIT.opposite = "Pessimist";
+TRAIT.description = "Every cloud has a silver lining.";
 TRAIT.category = "Mentality";
 TRAIT.icon = "materials/terranova/ui/traits/gleeful.png";
 TRAIT.positive = true

@@ -5,7 +5,7 @@
 
 TRAIT.name = "Healthy";
 TRAIT.opposite = "Sickly";
-TRAIT.description = "My engines run clean. I feel good.";
+TRAIT.description = "Consistent apple consumption has created a superhuman.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/healthy.png";
 TRAIT.positive = true

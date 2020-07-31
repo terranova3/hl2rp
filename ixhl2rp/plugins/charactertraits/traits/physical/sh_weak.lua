@@ -5,7 +5,7 @@
 
 TRAIT.name = "Weak";
 TRAIT.opposite = "Strong";
-TRAIT.description = "I can't hold on!";
+TRAIT.description = "Never had the makings of a varisty athlete.";
 TRAIT.category = "Physical";
 TRAIT.icon = "materials/terranova/ui/traits/weak.png";
 TRAIT.negative = true;

@@ -4,7 +4,7 @@
 --]]
 
 TRAIT.name = "Rebellious";
-TRAIT.opposite = "Collaborator";
-TRAIT.description = "I am sick and tired of these assholes.";
+TRAIT.opposite = "Conformist";
+TRAIT.description = "Never take it lying down.";
 TRAIT.category = "Philosophy";
 TRAIT.icon = "materials/terranova/ui/traits/rebellious.png";

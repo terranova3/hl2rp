@@ -3,8 +3,8 @@
     without permission of its author.
 --]]
 
-TRAIT.name = "Communal";
-TRAIT.opposite = "Tribal";
+TRAIT.name = "Collectivist";
+TRAIT.opposite = "Individualist";
 TRAIT.description = "We're all in this together.";
 TRAIT.category = "Philosophy";
-TRAIT.icon = "materials/terranova/ui/traits/communal.png";
+TRAIT.icon = "materials/terranova/ui/traits/tribalist.png";
