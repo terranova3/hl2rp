@@ -21,7 +21,6 @@ ITEM.functions.Apply = {
 	end
 }
 ITEM.functions.Give = {
-    name = "Apply",
     icon = "icon16/pill.png",
 	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
