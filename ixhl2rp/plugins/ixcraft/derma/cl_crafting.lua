@@ -158,6 +158,15 @@ function PANEL:LoadRecipes(category, search)
 end
 
 vgui.Register("ixCrafting", PANEL, "EditablePanel")
+
+hook.Add("CreateMenuButtons", "ixCrafting", function(tabs)
+	if (hook.Run("BuildCraftingMenu") != false) then
+		tabs["crafting"] = function(container)
+			container:Add("ixCrafting")
+		end
+	end
+end)
+
 net.Receive("ixCraftRefresh", function()
 	local craftPanel = ix.gui.crafting
 
