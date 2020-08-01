@@ -5,7 +5,6 @@ RECIPE.model = "models/weapons/w_packatp.mdl"
 RECIPE.category = "Work Cycle"
 RECIPE.requirements = {
 	["loyalgradesupppackage"] = 1,
-	["unionwater"] = 1,
 	["loyalgrademealkit"] = 1,
 	["unionchocolate"] = 1,
 	["empty_ration"] = 1

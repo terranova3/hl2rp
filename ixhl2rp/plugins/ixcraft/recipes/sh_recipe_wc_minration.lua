@@ -5,7 +5,6 @@ RECIPE.model = "models/weapons/w_packati.mdl"
 RECIPE.category = "Work Cycle"
 RECIPE.requirements = {
 	["mingradesupppacket"] = 1,
-	["unionwater"] = 1,
 	["empty_ration"] = 1
 }
 RECIPE.results = {
