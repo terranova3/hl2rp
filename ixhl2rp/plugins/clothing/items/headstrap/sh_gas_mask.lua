@@ -9,6 +9,7 @@ ITEM.model = "models/fty/items/civshittygasmask.mdl"
 ITEM.description = "A World War 2 era gasmask that does a pretty good job at filtering the toxins from the air breathed in."
 ITEM.price = 25
 ITEM.flag = "A"
+item.gasImmunity = true
 ITEM.bodyGroups = {
 	["headstrap"] = 4
 }

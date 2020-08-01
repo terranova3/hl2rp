@@ -124,3 +124,45 @@ ix.container.Register("models/props_c17/cashregister01a.mdl", {
 	width = 2,
 	height = 1
 })
+
+ix.container.Register("models/props_c17/oildrum001.mdl", {
+	name = "Oil Barrel",
+	description = "An old rusted hollow barrel.",
+	width = 3,
+	height = 5
+})
+
+ix.container.Register("models/props_junk/TrashBin01a.mdl", {
+	name = "Trash Bin",
+	description = "A blue plastic wheelie bin.",
+	width = 2,
+	height = 4
+})
+
+ix.container.Register("models/props_c17/FurnitureDrawer001a.mdl", {
+	name = "Wooden Drawers",
+	description = "An antique set of wooden drawers",
+	width = 4,
+	height = 3
+})
+
+ix.container.Register("models/props/CS_militia/footlocker01_closed.mdl", {
+	name = "Footlocker",
+	description = "A standard footlocker container.",
+	width = 5,
+	height = 3
+})
+
+ix.container.Register("models/props_c17/streetsign001c.mdl", {
+	name = "Hidden Compartment 2x2",
+	description = "",
+	width = 2,
+	height = 2
+})
+
+ix.container.Register("models/props_c17/streetsign002b.mdl", {
+	name = "Hidden Compartment 3x3",
+	description = "",
+	width = 3,
+	height = 3
+})
