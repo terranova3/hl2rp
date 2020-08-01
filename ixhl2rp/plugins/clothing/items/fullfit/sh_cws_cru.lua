@@ -5,6 +5,7 @@
 
 local PLUGIN = PLUGIN;
 
+ITEM.base = "base_fullfit";
 ITEM.name = "Civil Restoration Uniform";
 ITEM.category = "Clothing";
 ITEM.description = "A complete uniform kit that includes a vulcanized rubber jacket, contamination suit, air canister,gas mask, steel toed jackboots, rubber gloves and more.";

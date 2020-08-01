@@ -5,6 +5,7 @@
 
 local PLUGIN = PLUGIN;
 
+ITEM.base = "base_fullfit";
 ITEM.name = "Civil Factory Uniform";
 ITEM.category = "Clothing";
 ITEM.description = "A complete uniform kit that includes a gas mask, air canister, polyester jacket, steel toed jack boots,hard cut resistant ballistic gloves and more.";
