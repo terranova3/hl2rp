@@ -32,7 +32,6 @@ end
 function ITEM:OnUnequipped()
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
-
 end
 
 function ITEM:Repair(amount)

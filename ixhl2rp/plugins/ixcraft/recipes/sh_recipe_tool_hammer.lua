@@ -1,7 +1,7 @@
 
 RECIPE.name = "Hammer"
 RECIPE.description = "A hammer to smash away your problems."
-RECIPE.model = "models/props_interiors/pot02a.mdl"
+RECIPE.model = "models/mark2580/gtav/garage_stuff/cs_hammer.mdl"
 RECIPE.category = "Tools"
 RECIPE.requirements = {
 	["reclaimed_metal"] = 2,

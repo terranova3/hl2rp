@@ -1,6 +1,6 @@
 
 ITEM.name = "Screwdriver"
-ITEM.model = Model("models/props_c17/TrapPropeller_Lever.mdl")
+ITEM.model = Model("models/mark2580/gtav/garage_stuff/sdriver_01.mdl")
 ITEM.description = "A full fledged screwdriver."
 ITEM.width = 1
 ITEM.height = 1
