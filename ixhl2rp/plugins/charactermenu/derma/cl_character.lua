@@ -22,8 +22,6 @@ function PANEL:createTabs()
 		load = self:addTab("continue", self.createCharacterSelection)
 	end
 
-	self:addTab("content", self.showContent)
-
 	local maxChars = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
 	local charCount = #ix.characters
 
@@ -158,12 +156,6 @@ function PANEL:addTab(name, callback, justClick)
 	end
 
 	return button
-end
-
-function PANEL:showContent()
-	local content = "https://steamcommunity.com/sharedfiles/filedetails/?id=856404947"	
-	local lua = "gui.OpenURL('" .. content .. "')"
-	LocalPlayer():SendLua(lua)
 end
 
 function PANEL:createCharacterSelection()

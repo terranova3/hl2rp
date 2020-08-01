@@ -34,8 +34,9 @@ end
 
 function PLUGIN:IsGasImmune(client)
     local character = client:GetCharacter()
+    local charPanel = character:GetCharPanel()
 
-    if(!character) then 
+    if(!character or !charPanel) then 
         return false 
     end
 
@@ -47,7 +48,7 @@ function PLUGIN:IsGasImmune(client)
     end
 
     -- Iterate through the character panel (for bodygrouped items)
-    for _, item in pairs(character:GetCharPanel():GetItems()) do
+    for _, item in pairs(charPanel:GetItems()) do
         if(item.gasImmunity) then
             return true
         end
@@ -123,8 +124,11 @@ if SERVER then
             local canBreathe = false
 			local character = ply:GetCharacter()
 
-            if ply:IsCombine() then canBreathe = true end
-            if ix.faction.Get(character:GetFaction()).name == "Vortigaunt" then canBreathe = true end
+            if (character:IsMetropolice() and !character:IsUndercover() or character:GetFaction() == FACTION_OTA) then 
+                canBreathe = true 
+            end
+
+            if ply:IsVortigaunt() then canBreathe = true end
 			
             if not canBreathe then
                 canBreathe = self:IsGasImmune(ply)
