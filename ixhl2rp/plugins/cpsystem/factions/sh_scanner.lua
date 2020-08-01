@@ -8,7 +8,6 @@ local PLUGIN = PLUGIN;
 FACTION.name = "Scanner"
 FACTION.description = "A scanner unit belonging to the Civil Protection"
 FACTION.color = Color(50, 100, 150)
-FACTION.pay = 10
 FACTION.isDefault = false
 FACTION.isGloballyRecognized = true
 FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPolice.RunFootstepRight"}

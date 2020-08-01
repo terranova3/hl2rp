@@ -7,7 +7,6 @@ local PLUGIN = PLUGIN;
 FACTION.name = "Civil Protection"
 FACTION.description = "A metropolice unit working as Civil Protection."
 FACTION.color = Color(50, 100, 150)
-FACTION.pay = 10
 FACTION.description = "Civil Protection is essentially the Combine's secret police in all urban areas on Earth. They are ordinary human volunteers who have 'willingly' joined the Combine. Many join for more privileges, such as additional food, better living conditions, an increase in authority and status over others, or out of genuine sympathy and identification with the Combine's aims. "
 FACTION.selectModelText = "Select an off-duty model"
 FACTION.isDefault = false
