@@ -121,30 +121,32 @@ if SERVER then
             local pos = ply:EyePos()
             if not ply:Alive() then continue end
 
-            local canBreathe = false
-			local character = ply:GetCharacter()
+            if(ply:GetCharacter()) then
+                local canBreathe = false
+                local character = ply:GetCharacter()
 
-            if (character:IsMetropolice() and !character:IsUndercover() or character:GetFaction() == FACTION_OTA) then 
-                canBreathe = true 
-            end
+                if (character:IsMetropolice() and !character:IsUndercover() or character:GetFaction() == FACTION_OTA) then 
+                    canBreathe = true 
+                end
 
-            if ply:IsVortigaunt() then canBreathe = true end
-			
-            if not canBreathe then
-                canBreathe = self:IsGasImmune(ply)
-            end
+                if ply:IsVortigaunt() then canBreathe = true end
+                
+                if not canBreathe then
+                    canBreathe = self:IsGasImmune(ply)
+                end
 
-            if not canBreathe then
-                for _, gasBox in pairs(PLUGIN.positions) do
-                    if pos:WithinAABox(gasBox.min, gasBox.max) then
-                        ply.nextGasDamage = ply.nextGasDamage or CurTime()
+                if not canBreathe then
+                    for _, gasBox in pairs(PLUGIN.positions) do
+                        if pos:WithinAABox(gasBox.min, gasBox.max) then
+                            ply.nextGasDamage = ply.nextGasDamage or CurTime()
 
-                        if CurTime() >= ply.nextGasDamage then
-                            ply.nextGasDamage = CurTime() + 30
-                            ply:TakeDamage(5)
+                            if CurTime() >= ply.nextGasDamage then
+                                ply.nextGasDamage = CurTime() + 30
+                                ply:TakeDamage(5)
+                            end
+
+                            break
                         end
-
-                        break
                     end
                 end
             end
