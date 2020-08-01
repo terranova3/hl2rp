@@ -24,8 +24,8 @@ end
 
 function character:GetClassColor()
     if(self:GetClass()) then
-        return ix.class.list[self:GetClass()].color
+        return ix.class.list[self:GetClass()].color or Color(255,255,255)
     end
 
-    return team.GetColor(self:GetPlayer():Team())
+    return team.GetColor(self:GetPlayer():Team() or Color(255,255,255))
 end 
