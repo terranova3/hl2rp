@@ -1,14 +1,17 @@
 
-RECIPE.name = "Package Minimum Ration"
-RECIPE.description = "Assemble a minimum ration unit."
-RECIPE.model = "models/weapons/w_packati.mdl"
+RECIPE.name = "Package Loyalist Ration"
+RECIPE.description = "Assemble a loyalist ration unit."
+RECIPE.model = "models/weapons/w_packatp.mdl"
 RECIPE.category = "Work Cycle"
 RECIPE.requirements = {
-	["mingradesupppacket"] = 1,
+	["loyalgradesupppackage"] = 1,
+	["unionwater"] = 1,
+	["loyalgrademealkit"] = 1,
+	["unionchocolate"] = 1,
 	["empty_ration"] = 1
 }
 RECIPE.results = {
-	["ration_minimum"] = 1
+	["ration_loyalist"] = 1
 }
 
 RECIPE:PostHook("OnCanCraft", function(recipeTable, client)

@@ -1,15 +1,15 @@
 
-RECIPE.name = "Package Standard Ration"
-RECIPE.description = "Assemble a standard ration unit."
-RECIPE.model = "models/weapons/w_packatc.mdl"
-RECIPE.category = "Work Cycle"
+RECIPE.name = "Improvise First aidkit"
+RECIPE.description = "Assemble various medical resources into a kit for emergency situations."
+RECIPE.model = "models/firstaid/item_firstaid.mdl"
+RECIPE.category = "Medicinal"
 RECIPE.requirements = {
-	["standardgradesupppacket"] = 1,
-	["standardgrademealkit"] = 1,
-	["empty_ration"] = 1
+	["cloth_bandage"] = 2,
+	["medigel"] = 1,
+	["painkillers"] = 1
 }
 RECIPE.results = {
-	["ration_standard"] = 1
+	["first_aidkit"] = 1
 }
 
 RECIPE:PostHook("OnCanCraft", function(recipeTable, client)
