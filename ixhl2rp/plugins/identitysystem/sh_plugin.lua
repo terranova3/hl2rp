@@ -59,11 +59,5 @@ function PLUGIN:OnCharacterCreated(client, character)
 		local inventory = character:GetInventory()
 
 		inventory:Add("suitcase", 1)
-		inventory:Add("transfer_papers", 1, {
-			citizen_name = character:GetName(),
-			cid = character:GetData("cid", "99999"),
-			unique = math.random(0000000,999999999),
-			issue_date = tostring(os.date( "%H:%M:%S - %d/%m/%Y", os.time()))
-		})
 	end
 end
