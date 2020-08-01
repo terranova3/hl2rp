@@ -153,3 +153,39 @@ properties.Add("ixSetDescriptionProperty", {
 		end
 	end
 })
+
+properties.Add("ixViewTraits", {
+	MenuLabel = "#Print Traits",
+	Order = 4,
+	MenuIcon = "icon16/book_edit.png",
+
+	Filter = function(self, entity, client)
+		return CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil) and entity:IsPlayer()
+	end,
+
+	Action = function(self, entity)
+		self:MsgStart()
+			net.WriteEntity(entity)
+		self:MsgEnd()
+	end,
+
+	Receive = function(self, length, client)
+		if (CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil)) then
+			local entity = net.ReadEntity()
+			local character = entity:GetCharacter()
+			local traits = character:GetData("traits", {})
+			local traitString = ""
+
+			for i = 1, #traits do
+				if(i == 1) then
+					traitString = traitString .. traits[i]
+				else 
+					traitString = traitString .. ", " .. traits[i]
+				end
+			end
+	
+
+			client:NotifyLocalized("This players traits are: " .. traitString)
+		end
+	end
+})
