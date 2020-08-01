@@ -1,7 +1,6 @@
 RECIPE.name = "Backpack"
 RECIPE.description = "Sew cloth together into a rugged backpack capable of holding your things."
 RECIPE.model = "models/props_c17/SuitCase001a.mdl"
-RECIPE.category = "Sewing"
 RECIPE.requirements = {
 	["sewn_cloth"] = 5
 }
