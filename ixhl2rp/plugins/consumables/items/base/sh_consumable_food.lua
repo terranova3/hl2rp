@@ -16,6 +16,7 @@ ITEM.functions.Eat = {
         
         if(itemTable.restoreStamina) then
             client:RestoreStamina(itemTable.restoreStamina)
+            client:SetHealth(math.Clamp(client:Health() + itemTable.restoreStamina, 0, client:GetMaxHealth()))
         end
 
         if(itemTable.restoreHealth) then
