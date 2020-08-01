@@ -20,9 +20,9 @@ function PLUGIN:LoadData()
 	for _, v in pairs(ix.item.list) do
 		if(v.rarity) then
 			if(v.rarity == "Rare") then
-				table.insert(self.items.rare, v.name)
+				table.insert(self.items.rare, v.uniqueID)
 			elseif(v.rarity == "Common") then
-				table.insert(self.items.common, v.name)
+				table.insert(self.items.common, v.uniqueID)
 			end;
 		end;
 	end;
