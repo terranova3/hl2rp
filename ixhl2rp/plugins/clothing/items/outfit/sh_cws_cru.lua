@@ -6,15 +6,8 @@
 local PLUGIN = PLUGIN;
 
 ITEM.name = "Civil Restoration Uniform";
-ITEM.base = "base_cp_uniform"
 ITEM.category = "Clothing";
 ITEM.description = "A complete uniform kit that includes a vulcanized rubber jacket, contamination suit, air canister,gas mask, steel toed jackboots, rubber gloves and more.";
 ITEM.maxArmor = 25;
-item.gasImmunity = true
-
-function ITEM:OnGetReplacement()
-	local client = self:GetOwner()
-	local model = client:GetModel()
-	local newModel = "models/hlvr/characters/hazmat_worker/npc/hazmat_worker_citizen.mdl"
-	return newModel
-end 
+ITEM.gasImmunity = true
+ITEM.replacements = "models/hlvr/characters/hazmat_worker/npc/hazmat_worker_citizen.mdl"
