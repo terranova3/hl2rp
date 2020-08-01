@@ -63,13 +63,7 @@ if (CLIENT) then
 			collapsibleCategory.category = realName
 
 			for k, v in pairs(ix.item.list) do
-				local override = nil
-
-				if(v.category == "misc") then
-					override = "Miscellaneous"
-				end
-
-				if (override or v.category) == collapsibleCategory.category then
+				if (v.category) == collapsibleCategory.category then
 					local item = collapsibleCategory:Add("DButton")
 					item:SetText(v.name)
 					item:SetTextColor( Color(255,255,255, 255) )
