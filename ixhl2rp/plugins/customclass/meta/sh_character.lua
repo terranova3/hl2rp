@@ -21,7 +21,6 @@ function character:GetClassScoreboardPriority()
     return 10
 end
 
-
 function character:GetClassColor()
     if(self:GetClass()) then
         return ix.class.list[self:GetClass()].color or Color(255,255,255)
