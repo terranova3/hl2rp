@@ -10,6 +10,7 @@ ITEM.base = "base_cp_uniform"
 ITEM.category = "Clothing";
 ITEM.description = "A complete uniform kit that includes a gas mask, air canister, polyester jacket, steel toed jack boots,hard cut resistant ballistic gloves and more.";
 ITEM.maxArmor = 5;
+item.gasImmunity = true
 
 function ITEM:OnGetReplacement()
 	local client = self:GetOwner()
