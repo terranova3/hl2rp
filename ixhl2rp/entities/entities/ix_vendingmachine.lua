@@ -10,11 +10,12 @@ ENT.PhysgunDisable = true
 ENT.bNoPersist = true
 
 ENT.MaxRenderDistance = math.pow(256, 2)
-ENT.MaxStock = 4
+ENT.MaxStock = 5
 ENT.Items = {
-	{"REGULAR", "water", 15},
-	{"SPARKLING", "water_sparkling", 25},
-	{"SPECIAL", "water_special", 35}
+	{"Water", "unionwater", 8},
+	{"Milk", "unionmilk", 8},
+	{"Chips", "unionchips", 10}
+	{"Supplements", "mingradesupppacket", 15}
 }
 
 function ENT:GetStock(id)
