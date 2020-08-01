@@ -9,4 +9,4 @@ ITEM.description = "A bottle of antibiotics used to treat bacterial complication
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 20
-ITEM.restoreHealth = 10
+ITEM.restoreHealth = 40

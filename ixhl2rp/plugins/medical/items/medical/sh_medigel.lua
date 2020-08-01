@@ -9,4 +9,4 @@ ITEM.description = "A small vial of medicinal antlion liquids, combined with syn
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 30
-ITEM.restoreHealth = 10
+ITEM.restoreHealth = 60

@@ -9,4 +9,4 @@ ITEM.description = "A small bottle of Antiviral drugs used to treat viral infect
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 40
-ITEM.restoreHealth = 10
+ITEM.restoreHealth = 40
