@@ -101,14 +101,12 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 		function()
 			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end
 			if (IsValid(client) and LocalPlayer():IsAdmin()) then
-				Derma_StringRequest("Change Character Class", "What do you want to change this character's name to?", client:GetCharacter():GetCustomClass(), function(text)
+				Derma_StringRequest("Change Character Class", "What do you want to change this character's name to?", client:GetCharacter():GetData("customclass"), function(text)
 					ix.command.Send("CharSetCustomClass", client:Name(), text)
 				end, nil, "Change", "Cancel")
 			end
 		end
 	}
-
-
 
 	options["Change Model"] = {
 		function()

@@ -34,7 +34,7 @@ function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 
 	character:SetData("cpVoiceType", "HLA")
-	character:SetCustomClass("Overwatch Transhuman Arm")
+	character:SetData("customclass", "Overwatch Transhuman Arm")
 
 	inventory:Add("ar2", 1)
 	inventory:Add("ar2ammo", 2)

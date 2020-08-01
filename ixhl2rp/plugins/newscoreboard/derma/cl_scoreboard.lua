@@ -38,7 +38,7 @@ function PANEL:Rebuild()
 		local character = v:GetCharacter()
 
 		if(character) then
-			local class = character:GetCustomClass() or character:GetClassName() or "ERROR"
+			local class = character:GetData("customclass") or character:GetClassName() or "ERROR"
 			local priority = character:GetClassScoreboardPriority()
 
 			if (!availableClasses[class]) then

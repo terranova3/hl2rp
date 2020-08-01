@@ -14,11 +14,11 @@ function PLUGIN:AdjustPlayer(event, client)
         if(event == "Unequipped") then
             character:SetDescription(cpData.cpCitizenDesc);
             character:SetClass(CLASS_MPUH); 
-            character:SetCustomClass("Citizen" );	
+            character:SetData("customclass", "Citizen" );	
         elseif(event == "Equipped") then
             character:SetDescription(cpData.cpDesc);
             character:SetClass(CLASS_MPU);
-            character:SetCustomClass("Civil Protection");
+            character:SetData("customclass", "Civil Protection");
             netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
         end;
 
