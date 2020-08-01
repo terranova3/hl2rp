@@ -1,7 +1,7 @@
 
-RECIPE.name = "Handsaw"
+RECIPE.name = "Saw"
 RECIPE.description = "A saw, perfect for cutting wood."
-RECIPE.model = "models/props_c17/grinderclamp01a.mdl"
+RECIPE.model = "models/mark2580/gtav/garage_stuff/grinder_01a.mdl"
 RECIPE.category = "Tools"
 RECIPE.requirements = {
 	["refined_metal"] = 1,

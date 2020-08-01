@@ -1,7 +1,7 @@
 
 RECIPE.name = "Screwdriver"
 RECIPE.description = "Screw your problems."
-RECIPE.model = "models/props_c17/TrapPropeller_Lever.mdl"
+RECIPE.model = "models/mark2580/gtav/garage_stuff/sdriver_01.mdl"
 RECIPE.category = "Tools"
 RECIPE.requirements = {
 	["refined_metal"] = 1,

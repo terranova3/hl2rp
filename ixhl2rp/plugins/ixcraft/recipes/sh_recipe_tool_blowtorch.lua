@@ -1,7 +1,7 @@
 
 RECIPE.name = "Blowtorch"
 RECIPE.description = "Cant be tight if it's a liquid. Comes in various heat settings."
-RECIPE.model = "models/props_c17/utilityconnecter006.mdl"
+RECIPE.model = "models/mark2580/gtav/garage_stuff/blowtorch.mdl"
 RECIPE.category = "Tools"
 RECIPE.requirements = {
 	["niter"] = 2,
