@@ -39,8 +39,16 @@ function PLUGIN:IsGasImmune(client)
         return false 
     end
 
+    -- Iterate through the inventory (for uniforms)
     for _, item in pairs(character:GetInventory():GetItems()) do
         if(item.gasImmunity and item:GetData("equip") == true) then
+            return true
+        end
+    end
+
+    -- Iterate through the character panel (for bodygrouped items)
+    for _, item in pairs(character:GetCharPanel():GetItems()) do
+        if(item.gasImmunity) then
             return true
         end
     end
