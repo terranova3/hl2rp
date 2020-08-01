@@ -2,7 +2,7 @@
 RECIPE.name = "Sewn Cloth"
 RECIPE.description = "Refine cloth scraps into some useable material."
 RECIPE.model = "models/props_pipes/pipe01_straight01_short.mdl"
-RECIPE.category = "Sewing"
+RECIPE.category = "Crafting"
 RECIPE.requirements = {
 	["scrap_cloth"] = 3
 }

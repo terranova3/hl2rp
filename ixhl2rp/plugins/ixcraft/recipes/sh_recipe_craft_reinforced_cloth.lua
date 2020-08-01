@@ -2,7 +2,7 @@
 RECIPE.name = "Reinforced Cloth"
 RECIPE.description = "Using metals and harden materials, make a durable fabric material."
 RECIPE.model = "models/gibs/scanner_gib02.mdl"
-RECIPE.category = "Sewing"
+RECIPE.category = "Crafting"
 RECIPE.requirements = {
 	["sewn_cloth"] = 2,
 	["refined_metal"] = 1
