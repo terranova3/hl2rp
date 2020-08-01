@@ -76,7 +76,7 @@ ix.container.Register("models/props_junk/trashbin01a.mdl", {
 	name = "Trash Bin",
 	description = "What do you expect to find in here?",
 	width = 2,
-	height = 2,
+	height = 4,
 })
 
 ix.container.Register("models/props_junk/trashdumpster01a.mdl", {
@@ -132,21 +132,14 @@ ix.container.Register("models/props_c17/oildrum001.mdl", {
 	height = 5
 })
 
-ix.container.Register("models/props_junk/TrashBin01a.mdl", {
-	name = "Trash Bin",
-	description = "A blue plastic wheelie bin.",
-	width = 2,
-	height = 4
+ix.container.Register("models/props/de_nuke/crate_small.mdl", {
+	name = "Shipment Crate",
+	description = "A wooden shipment crate.",
+	width = 5,
+	height = 5
 })
 
-ix.container.Register("models/props_c17/FurnitureDrawer001a.mdl", {
-	name = "Wooden Drawers",
-	description = "An antique set of wooden drawers",
-	width = 4,
-	height = 3
-})
-
-ix.container.Register("models/props/CS_militia/footlocker01_closed.mdl", {
+ix.container.Register("models/kali/props/cases/hard case c.mdl", {
 	name = "Footlocker",
 	description = "A standard footlocker container.",
 	width = 5,
