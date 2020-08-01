@@ -259,11 +259,16 @@ function SWEP:DropObject(bThrow)
 		return
 	end
 
-	self.constraint:Remove()
-	self.holdEntity:Remove()
+	if(self.constraint) then
+		self.constraint:Remove()
+	end
 
-	self.heldEntity:StopMotionController()
-	self.heldEntity:SetCollisionGroup(self.heldEntity.ixCollisionGroup or COLLISION_GROUP_NONE)
+	if(self.holdEntity) then
+		self.holdEntity:Remove()
+
+		self.heldEntity:StopMotionController()
+		self.heldEntity:SetCollisionGroup(self.heldEntity.ixCollisionGroup or COLLISION_GROUP_NONE)
+	end
 
 	local physics = self:GetHeldPhysicsObject()
 	physics:EnableGravity(true)
