@@ -25,33 +25,14 @@ ITEM.suppressed = function(itemTable)
 	return false
 end
 
-if (CLIENT) then
-	function ITEM:PopulateTooltip(tooltip)
-		local panel = tooltip:AddRowAfter("name", "armor")
-		panel:SetBackgroundColor(derma.GetColor("Info", tooltip))
-		panel:SetText("Armor: " .. (self:GetData("equip") and LocalPlayer():Armor() or self:GetData("armor", self.maxArmor)))
-		panel:SizeToContents()
-
-		if(self:GetData("name")) then
-			local panelID = tooltip:AddRowAfter("name", "armor")
-		
-			panelID:SetBackgroundColor(derma.GetColor("Info", tooltip))
-			panelID:SetText(string.format("This uniform is assigned to: %s", self:GetData("name")))
-			panelID:SizeToContents()
-		end;
-	end
-end
-
 function ITEM:OnEquipped()
 	self.player:SetArmor(self:GetData("armor", self.maxArmor))
-	PLUGIN:AdjustPlayer("Equipped", self.player);
 end
 
 function ITEM:OnUnequipped()
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
 
-	PLUGIN:AdjustPlayer("Unequipped", self.player);
 end
 
 function ITEM:Repair(amount)
