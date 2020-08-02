@@ -14,7 +14,7 @@ ENT.MaxStock = 5
 ENT.Items = {
 	{"Water", "unionwater", 8},
 	{"Milk", "unionmilk", 8},
-	{"Chips", "unionchips", 10}
+	{"Chips", "unionchips", 10},
 	{"Supplements", "mingradesupppacket", 15}
 }
 
