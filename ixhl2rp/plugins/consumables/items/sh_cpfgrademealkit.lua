@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "CPF-Grade Ration Unit"
+ITEM.name = "CPF-Grade Meal Kit"
 ITEM.model = Model("models/mres/consumables/zag_mre.mdl")
 ITEM.width = 1
 ITEM.height = 2
