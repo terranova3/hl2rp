@@ -59,11 +59,6 @@ function PANEL:Init()
         surface.SetDrawColor(255,255,255,5)
         surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
 	end
-	self.taglineDropBox.Think = function()
-		if(IsValid(self.taglineDropBox.Menu)) then
-			self.taglineDropBox.Menu:SetMaxHeight(256)
-		end
-	end
 
 	self.idDropBox = self.container:Add("DComboBox")
 	self.idDropBox:SetFont("ixPluginCharTraitFont")
