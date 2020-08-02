@@ -13,6 +13,12 @@ ix.command.Add("ViewData", {
 			return "@cantViewData"
 		end
 		
+		local faction = target:GetFaction()
+
+		if(faction != FACTION_CITIZEN and faction != FACTION_MPF) then
+			return "Can only view the data of citizens and units."
+		end
+
 		local data = target:GetData("record", {})
 		local cid = target:GetData("cid", 00000)
 
