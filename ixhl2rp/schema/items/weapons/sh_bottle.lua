@@ -1,9 +1,10 @@
 ITEM.name = "Glass Bottle"
 ITEM.description = "An empty glass bottle."
-ITEM.model = "models/weapons/hl2meleepack/w_bottle.mdll"
+ITEM.model = "models/weapons/hl2meleepack/w_bottle.mdl"
 ITEM.class = "weapon_hl2bottle"
 ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
+ITEM.rarity = "Common"
 ITEM.flag = "V"
 ITEM.width = 1
 ITEM.height = 1

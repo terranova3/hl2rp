@@ -11,3 +11,4 @@ ITEM.description = "An American mealkit, and boy, they know how to eat.";
 ITEM.permit = "consumables";
 ITEM.price = 30;
 ITEM.restoreHealth = 10;
+ITEM.rarity = "Rare"

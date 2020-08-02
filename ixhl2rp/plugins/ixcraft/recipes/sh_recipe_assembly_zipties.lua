@@ -1,5 +1,5 @@
 
-RECIPE.name = "Assemble Zipties"
+RECIPE.name = "Zipties"
 RECIPE.description = "Some cable zipties"
 RECIPE.model = "models/items/crossbowrounds.mdl"
 RECIPE.category = "Assembly"

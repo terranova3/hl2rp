@@ -11,3 +11,4 @@ ITEM.description = "Dried grapes that taste more saturated and less citric then 
 ITEM.permit = "consumables";
 ITEM.price = 3;
 ITEM.restoreHealth = 5;
+ITEM.rarity = "Common"

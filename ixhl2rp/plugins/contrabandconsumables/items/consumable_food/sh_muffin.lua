@@ -11,3 +11,4 @@ ITEM.description = "A delicious, still moist muffin in a tin, with chocolate chi
 ITEM.permit = "consumables";
 ITEM.price = 10;
 ITEM.restoreHealth = 5;
+ITEM.rarity = "Common"

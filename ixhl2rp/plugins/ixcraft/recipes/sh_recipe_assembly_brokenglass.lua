@@ -1,15 +1,15 @@
 
-RECIPE.name = "Assemble Zipties"
-RECIPE.description = "Some cable zipties"
-RECIPE.model = "models/items/crossbowrounds.mdl"
+RECIPE.name = "Scrap Glass Bottle"
+RECIPE.description = "Prep your broken glass bottle as a weapon"
+RECIPE.model = "models/weapons/hl2meleepack/w_brokenbottle.mdl"
 RECIPE.category = "Assembly"
 RECIPE.requirements = {
-	["chunk_of_plastic"] = 1,
-	["cable"] = 1
+	["scrap_cloth"] = 1,
+	["scrap_glass"] = 1
 }
 
 RECIPE.results = {
-	["zip_tie"] = 1
+	["broken_bottle"] = 1
 }
 
 RECIPE:PostHook("OnCanCraft", function(recipeTable, client)
