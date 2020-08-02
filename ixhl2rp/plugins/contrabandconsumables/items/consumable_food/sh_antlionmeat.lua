@@ -10,4 +10,4 @@ ITEM.height = 1
 ITEM.description = "An uncooked small piece of a large burrowing alien insect. Definitely has a lot of protein."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

@@ -10,4 +10,4 @@ ITEM.height = 1
 ITEM.description = "Uncooked meat from a fish you would deserve a medal for killing, and many more awards for eating."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

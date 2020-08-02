@@ -9,6 +9,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "Delicious, authentic, lung-killing addiction sticks. There's a brand indent on the filter of the cigarette, reading 'MARLBORO'."
 ITEM.category = "Contraband"
+ITEM.flag = "G"
 ITEM.functions.Smoke = {
 	OnRun = function(itemTable)
 		local client = itemTable.player

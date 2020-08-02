@@ -10,4 +10,4 @@ ITEM.height = 1
 ITEM.description = "Breathing is overrated."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

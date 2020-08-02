@@ -9,6 +9,7 @@ ITEM.width = 1
 ITEM.height = 2
 ITEM.description = "Authentic, neatly presented package of delicious addiction sticks."
 ITEM.category = "Contraband"
+ITEM.flag = "G"
 ITEM.contains = {
     [1] = {
         uniqueID = "tekelcigarette",

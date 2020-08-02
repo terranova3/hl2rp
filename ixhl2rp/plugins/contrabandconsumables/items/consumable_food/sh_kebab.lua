@@ -10,4 +10,4 @@ ITEM.height = 1
 ITEM.description = "A freshly made kebab. Smells amazing and tastes even better."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

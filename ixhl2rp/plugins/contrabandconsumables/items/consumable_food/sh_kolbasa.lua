@@ -10,4 +10,4 @@ ITEM.height = 1
 ITEM.description = "A Russian variety of meats, ground and wrapped with animal intestines as its casing. Not very appetizing, huh?"
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

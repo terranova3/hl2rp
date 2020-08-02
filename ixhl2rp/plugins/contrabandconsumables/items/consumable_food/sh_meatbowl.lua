@@ -10,4 +10,4 @@ ITEM.height = 1
 ITEM.description = "A hot meal. It's mixed with assorted meats."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

@@ -8,9 +8,9 @@ ITEM.model = Model("models/phycitnew.mdl")
 ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "Something resembling the original deliciously flavoured death-sticks of time past. It's okay."
-ITEM.category = "Contraband Consumables Misc"
-
-ITEM.functions.Use = {
+ITEM.category = "Other"
+ITEM.flag = "n"
+ITEM.functions.Smoke = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
 		client:RestoreStamina(12)

@@ -10,4 +10,4 @@ ITEM.height = 1
 ITEM.description = "Optical illusion. It's chicken."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

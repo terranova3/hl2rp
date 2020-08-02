@@ -10,4 +10,4 @@ ITEM.height = 2
 ITEM.description = "A human heart that could be edible, if you're desperate."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"

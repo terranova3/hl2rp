@@ -10,4 +10,4 @@ ITEM.height = 2
 ITEM.description = "Used to be lively. Dead now."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
-ITEM.flag = "n"
+ITEM.flag = "G"
