@@ -21,6 +21,15 @@ function Schema:CanPlayerEditObjectives(client)
 	if (!client:IsCombine() or !client:GetCharacter()) then
 		return false
 	end
+
+	local character = client:GetCharacter()
+	local bCanEdit = false
+	
+	if(character:GetRank() and ix.ranks.HasPermission(character:GetRank().uniqueID, "Edit viewobjectives")) then
+		bCanEdit = true
+	end
+
+	return bCanEdit
 end
 
 function PLUGIN:PlayerTick(player)
