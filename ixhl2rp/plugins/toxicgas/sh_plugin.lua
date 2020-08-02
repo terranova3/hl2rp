@@ -143,8 +143,8 @@ if SERVER then
                             if CurTime() >= ply.nextGasDamage then
                                 ply.nextGasDamage = CurTime() + 30
                                 ply:TakeDamage(5)
-                                ply:ScreenFade(1, ColorAlpha(234, 177, 33), .5, 0)
-							    ix.util.Notify("You feel a burning, sensation in the back of your throat.", ply)
+                                ply:ScreenFade(1, Color(234, 177, 33, 100), 0.5, 0)
+							    ix.util.Notify("You feel a burning sensation in the back of your throat.", ply)
                             end
 
                             break
