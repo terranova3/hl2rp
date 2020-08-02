@@ -142,6 +142,11 @@ function PANEL:BuildTraits()
             self.icon.AutoSize = false
 
             self.icon:SetHelixTooltip(function(tooltip)
+                local name = tooltip:AddRow("description")
+				name:SetText(trait.name)
+				name:SetFont("ixPluginTooltipDescFont")
+				name:SizeToContents()
+
 				local description = tooltip:AddRow("description")
 				description:SetText(trait.description)
 				description:SetFont("ixPluginTooltipDescFont")
