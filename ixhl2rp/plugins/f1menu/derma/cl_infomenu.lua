@@ -50,6 +50,7 @@ function PANEL:Init(logs)
 	self:SetTitle("");
 
     self:Populate()
+    self:BuildTraits()
     self:BuildMenuPanel()
     self:SetPos((ScrW() * 0.5) - self:GetWide() * 0.5, (ScrH() * 0.25))
 
@@ -109,7 +110,55 @@ function PANEL:Populate()
     for k, v in pairs(ix.infoMenu.stored) do
         self.infoBox:Add(self:AddLabel(0, v))
     end
+end
 
+function PANEL:BuildTraits()
+    local character = LocalPlayer():GetCharacter()
+
+    self.container = self.infoBox:Add("DPanel")
+    self.container:Dock(TOP)
+    self.container:DockMargin(0, 4, 0, 0)
+    self.container:SetTall(36)
+    self.container.Paint = function() end
+
+    self.center = self.container:Add("DPanel")
+    self.center:SetTall(36)
+    self.center:SetPos(90, 2)
+    self.center:SetWide(190)
+    self.center:SetContentAlignment(5)
+    self.center:SetDrawBackground(false)
+    
+    local traits = character:GetData("traits", {})
+
+    for k, v in pairs(traits) do
+        local trait = ix.traits.Get(v)
+
+        if(trait) then
+            self.icon = self.center:Add("Material")
+            self.icon:SetSize(32, 32)
+            self.icon:DockMargin(2,2,2,2)
+            self.icon:Dock(LEFT)
+            self.icon:SetMaterial(trait.icon)
+            self.icon.AutoSize = false
+
+            self.icon:SetHelixTooltip(function(tooltip)
+				local description = tooltip:AddRow("description")
+				description:SetText(trait.description)
+				description:SetFont("ixPluginTooltipDescFont")
+				description:SizeToContents()
+
+                if(trait.opposite) then
+                    local exclusive = tooltip:AddRow("exclusive")
+                    exclusive:SetText("Mutually exclusive with " .. trait.opposite)
+                    exclusive:SizeToContents()
+                    exclusive:SetFont("ixPluginTooltipSmallFont")
+                end
+            end)
+        end
+    end
+
+    self.container:InvalidateLayout(true)
+    self.container:SizeToChildren(false, true)
     self.infoBox:InvalidateLayout(true)
     self.infoBox:SizeToChildren(false, true)
 end
