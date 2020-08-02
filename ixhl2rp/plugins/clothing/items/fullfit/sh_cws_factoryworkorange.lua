@@ -13,5 +13,6 @@ ITEM.maxArmor = 5;
 ITEM.gasImmunity = true
 ITEM.replacements = "models/hlvr/characters/worker/npc/worker_citizen.mdl"
 ITEM.bodyGroups = {
+	["skin"] = 1,
 	["uniform variant"] = 1
 }
