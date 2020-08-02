@@ -10,6 +10,7 @@ ITEM.name = "Uniform";
 ITEM.model = "models/vj_props/duffle_bag.mdl";
 ITEM.replacements = "models/ma/hla/terranovapolice.mdl";
 ITEM.category = "Clothing";
+ITEM.outfitCategory = "model"
 ITEM.description = "A suitcase full of clothes.";
 ITEM.width = 2
 ITEM.height = 2

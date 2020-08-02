@@ -200,19 +200,6 @@ function PLUGIN:PlayerSpawn(client)
 	end;
 end;
 
-function PLUGIN:CanPlayerEquipItem(client, item)
-	local charPanel = client:GetCharacter():GetCharPanel();
-
-	if(item.base == "base_cp_uniform") then
-		if(charPanel:HasEquipped()) then
-			client:Notify("You can't equip a uniform with items in your character panel!")
-			return false;
-		end
-	end;
-
-	return true;
-end
-
 function PLUGIN:OnCharacterRankChanged(character, target, rank)
 	if(target:IsMetropolice()) then
 		local notification = cpSystem.config.notification;

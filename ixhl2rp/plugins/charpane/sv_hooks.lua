@@ -33,6 +33,20 @@ function PLUGIN:OnPlayerObserve(client, state)
 	end
 end
 
+-- Called when a player tries to equip an item with items in their character panel.
+function PLUGIN:CanPlayerEquipItem(client, item)
+	local charPanel = client:GetCharacter():GetCharPanel();
+
+	if(item.outfitCategory) then
+		if(charPanel:HasEquipped()) then
+			client:Notify("You can't equip a full outfit with items in your character panel!")
+			return false;
+		end
+	end;
+
+	return true;
+end
+
 function PLUGIN:CharPanelLoaded(character)
 	local charPanel = character:GetCharPanel();
 

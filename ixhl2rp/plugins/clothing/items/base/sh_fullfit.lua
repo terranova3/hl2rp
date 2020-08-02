@@ -13,6 +13,7 @@ ITEM.category = "Clothing";
 ITEM.description = "A suitcase full of clothes.";
 ITEM.width = 2
 ITEM.height = 2
+ITEM.outfitCategory = "model"
 ITEM.maxArmor = 10;
 ITEM.noBusiness = true
 ITEM.suppressed = function(itemTable)
@@ -27,11 +28,16 @@ end
 
 function ITEM:OnEquipped()
 	self.player:SetArmor(self:GetData("armor", self.maxArmor))
+	self.player:ResetBodygroups()
+	ix.charPanel.Update(self.player) 
 end
 
 function ITEM:OnUnequipped()
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
+
+	self.player:ResetBodygroups()
+	ix.charPanel.Update(self.player) 
 end
 
 function ITEM:Repair(amount)

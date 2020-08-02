@@ -299,6 +299,17 @@ do
 	end
 end
 
+-- Called when the client is checking if it has access to see the character panel
+function PLUGIN:CharPanelShouldShow(client)
+	local character = client:GetCharacter()
+
+	for k, v in pairs(character:GetInventory():GetItems()) do
+		if(v.outfitCategory and v:GetData("equip") == true) then
+			return false
+		end
+	end
+end;
+
 --- Returns this character's associated `CharPanel` object.
 -- @function :GetCharPanel
 ix.char.RegisterVar("CharPanel", {
