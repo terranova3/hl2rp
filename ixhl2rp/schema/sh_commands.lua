@@ -61,6 +61,8 @@ do
 				itemTable:SetData("frequency", frequency)
 
 				client:Notify(string.format("You have set your radio frequency to %s.", frequency))
+			else
+				client:Notify(string.format("%s is a incorrect frequency string.", frequency))
 			end
 		end
 	end
