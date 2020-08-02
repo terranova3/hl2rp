@@ -207,7 +207,7 @@ function PLUGIN:OnCharacterRankChanged(character, target, rank)
 		notification.additional = string.format("'Rank - %s'", rank.displayName)
 
 		ix.notify.SendMessage(target:GetPlayer(), notification);
-		character:UpdateCPStatus()
+		target:UpdateCPStatus()
 	end;
 end
 
