@@ -82,7 +82,7 @@ function ix.limb.SetBleedDamage(character, group, damage)
     local limbs = character:GetLimbs()
 
     if(limbs) then
-        data[group].bleedDamage = damage
+        limbs[group].bleedDamage = damage
 
         character:SetLimbs(limbs)
     end
