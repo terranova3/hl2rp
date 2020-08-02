@@ -79,8 +79,15 @@ if (SERVER) then
 
 	function ENT:SpawnRation(character, callback, releaseDelay)
 		releaseDelay = releaseDelay or 1.2
+		local itemUniqueID = "ration_standard"
 
-		local itemTable = ix.item.Get("ration_standard")
+		if(character:IsMetropolice()) then
+			itemUniqueID = "ration_cpf"
+		elseif(character:GetClass() == CLASS_CWU or character:GetCustomClass() == "Civil Services") then
+			itemUniqueID = "ration_loyalist"
+		end
+
+		local itemTable = ix.item.Get(itemUniqueID)
 		local characterSalary = 0
 		local inventory = character:GetInventory()
 
@@ -100,7 +107,7 @@ if (SERVER) then
 		end
 
 		timer.Simple(releaseDelay, function()
-			ix.item.Spawn("ration_standard", self.dummy:GetPos(), function(item, entity)
+			ix.item.Spawn(itemUniqueID, self.dummy:GetPos(), function(item, entity)
 				self.dummy:SetNoDraw(true)
 			end, self.dummy:GetAngles(), { salary = characterSalary })
 
