@@ -114,56 +114,58 @@ end
 
 function PANEL:BuildTraits()
     local character = LocalPlayer():GetCharacter()
-
-    self.container = self.infoBox:Add("DPanel")
-    self.container:Dock(TOP)
-    self.container:DockMargin(0, 4, 0, 0)
-    self.container:SetTall(36)
-    self.container.Paint = function() end
-
-    self.center = self.container:Add("DPanel")
-    self.center:SetTall(36)
-    self.center:SetPos(90, 2)
-    self.center:SetWide(190)
-    self.center:SetContentAlignment(5)
-    self.center:SetDrawBackground(false)
-    
     local traits = character:GetData("traits", {})
 
-    for k, v in pairs(traits) do
-        local trait = ix.traits.Get(v)
+    if(traits[1]) then
+        self.container = self.infoBox:Add("DPanel")
+        self.container:Dock(TOP)
+        self.container:DockMargin(0, 4, 0, 0)
+        self.container:SetTall(36)
+        self.container.Paint = function() end
 
-        if(trait) then
-            self.icon = self.center:Add("Material")
-            self.icon:SetSize(32, 32)
-            self.icon:DockMargin(2,2,2,2)
-            self.icon:Dock(LEFT)
-            self.icon:SetMaterial(trait.icon)
-            self.icon.AutoSize = false
+        self.center = self.container:Add("DPanel")
+        self.center:SetTall(36)
+        self.center:SetPos(90, 2)
+        self.center:SetWide(190)
+        self.center:SetContentAlignment(5)
+        self.center:SetDrawBackground(false)
+        
+        for k, v in pairs(traits) do
+            local trait = ix.traits.Get(v)
 
-            self.icon:SetHelixTooltip(function(tooltip)
-                local name = tooltip:AddRow("description")
-				name:SetText(trait.name)
-				name:SetFont("ixPluginTooltipDescFont")
-				name:SizeToContents()
+            if(trait) then
+                self.icon = self.center:Add("Material")
+                self.icon:SetSize(32, 32)
+                self.icon:DockMargin(2,2,2,2)
+                self.icon:Dock(LEFT)
+                self.icon:SetMaterial(trait.icon)
+                self.icon.AutoSize = false
 
-				local description = tooltip:AddRow("description")
-				description:SetText(trait.description)
-				description:SetFont("ixPluginTooltipDescFont")
-				description:SizeToContents()
+                self.icon:SetHelixTooltip(function(tooltip)
+                    local name = tooltip:AddRow("description")
+                    name:SetText(trait.name)
+                    name:SetFont("ixPluginTooltipDescFont")
+                    name:SizeToContents()
 
-                if(trait.opposite) then
-                    local exclusive = tooltip:AddRow("exclusive")
-                    exclusive:SetText("Mutually exclusive with " .. trait.opposite)
-                    exclusive:SizeToContents()
-                    exclusive:SetFont("ixPluginTooltipSmallFont")
-                end
-            end)
+                    local description = tooltip:AddRow("description")
+                    description:SetText(trait.description)
+                    description:SetFont("ixPluginTooltipDescFont")
+                    description:SizeToContents()
+
+                    if(trait.opposite) then
+                        local exclusive = tooltip:AddRow("exclusive")
+                        exclusive:SetText("Mutually exclusive with " .. trait.opposite)
+                        exclusive:SizeToContents()
+                        exclusive:SetFont("ixPluginTooltipSmallFont")
+                    end
+                end)
+            end
         end
-    end
 
-    self.container:InvalidateLayout(true)
-    self.container:SizeToChildren(false, true)
+        self.container:InvalidateLayout(true)
+        self.container:SizeToChildren(false, true)
+    end
+    
     self.infoBox:InvalidateLayout(true)
     self.infoBox:SizeToChildren(false, true)
 end
