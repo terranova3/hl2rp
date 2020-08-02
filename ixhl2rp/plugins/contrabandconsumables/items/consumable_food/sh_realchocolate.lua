@@ -11,3 +11,4 @@ ITEM.description = "Although its long since melted inside its aluminium packagin
 ITEM.permit = "consumables";
 ITEM.price = 8;
 ITEM.restoreHealth = 10;
+ITEM.rarity = "Rare"

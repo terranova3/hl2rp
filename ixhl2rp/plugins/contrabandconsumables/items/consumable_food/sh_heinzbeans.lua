@@ -11,3 +11,4 @@ ITEM.description = "An aluminium can containing baked beans in a thick, deliciou
 ITEM.permit = "consumables";
 ITEM.price = 8;
 ITEM.restoreHealth = 10;
+ITEM.rarity = "Common"

@@ -11,3 +11,4 @@ ITEM.description = "Fresh, hearty bread that's still just a little warm to the t
 ITEM.permit = "consumables";
 ITEM.price = 15;
 ITEM.restoreHealth = 10;
+ITEM.rarity = "Rare"

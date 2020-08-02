@@ -11,3 +11,4 @@ ITEM.description = "A packet of expired but still delicious chocolate bits.";
 ITEM.permit = "consumables";
 ITEM.price = 8;
 ITEM.restoreHealth = 5;
+ITEM.rarity = "Rare"

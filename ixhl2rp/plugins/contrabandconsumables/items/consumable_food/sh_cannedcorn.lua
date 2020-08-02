@@ -11,3 +11,4 @@ ITEM.description = "An aluminium can filled with corn.";
 ITEM.permit = "consumables";
 ITEM.price = 8;
 ITEM.restoreHealth = 5;
+ITEM.rarity = "Common"
