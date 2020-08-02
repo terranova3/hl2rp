@@ -13,16 +13,15 @@ ITEM.restoreHealth = 0
 ITEM.functions.Apply = {
     name = "Apply",
     icon = "icon16/pill.png",
-	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
 		local client = itemTable.player
 
 		client:SetHealth(math.min(client:Health() + itemTable.restoreHealth, client:GetMaxHealth()))
+		client:EmitSound("items/medshot4.wav", 80)
 	end
 }
 ITEM.functions.Give = {
     icon = "icon16/pill.png",
-	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
         local client = itemTable.player   
 		local target = client:GetEyeTraceNoCursor().Entity;
@@ -31,6 +30,7 @@ ITEM.functions.Give = {
             return false
 		end
 
+		client:EmitSound("items/medshot4.wav", 80)
 		target:SetHealth(math.min(target:Health() + itemTable.restoreHealth, target:GetMaxHealth()))
 	end
 }

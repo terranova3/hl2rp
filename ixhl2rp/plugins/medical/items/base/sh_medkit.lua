@@ -15,7 +15,6 @@ ITEM.flag = "m"
 ITEM.healthHealed = 30
 ITEM.functions.Apply = {
     icon = "icon16/pill.png",
-	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
 		local client = itemTable.player
         local character = client:GetCharacter()
@@ -37,6 +36,7 @@ ITEM.functions.Apply = {
             ix.limb.SetHealth(character, limb.hitgroup, -healing)
             client:SetHealth(math.Clamp(client:Health() + itemTable.healthHealed, 0, client:GetMaxHealth()))
             client:Notify(string.format("You have healed your %s for %s.", limb.name, healing))
+            client:EmitSound("items/medshot4.wav", 80)
 
             return empty
         else
@@ -48,7 +48,6 @@ ITEM.functions.Apply = {
 }
 ITEM.functions.Give = {
     icon = "icon16/pill.png",
-	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
         local client = itemTable.player   
 		local target = client:GetEyeTraceNoCursor().Entity;
@@ -76,6 +75,7 @@ ITEM.functions.Give = {
             ix.limb.SetHealth(character, limb.hitgroup, -healing)
             target:SetHealth(math.Clamp(target:Health() + itemTable.healthHealed, 0, target:GetMaxHealth()))
             client:Notify(string.format("You have healed your target's %s for %s.", limb.name, healing))
+            client:EmitSound("items/medshot4.wav", 80)
 
             return empty
         else

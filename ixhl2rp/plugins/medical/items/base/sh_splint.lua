@@ -13,7 +13,6 @@ ITEM.flag = "m"
 ITEM.backgroundColor = Color(76, 37, 29, 100)
 ITEM.functions.Apply = {
     icon = "icon16/pill.png",
-    sound = "items/medshot4.wav",
     OnRun = function(itemTable)
 		local client = itemTable.player
         local character = client:GetCharacter()
@@ -25,6 +24,7 @@ ITEM.functions.Apply = {
             ix.limb.SetFracture(character, fractures[rand].hitgroup, false) 
 
             client:Notify(string.format("You have fixed your %s.", fractures[rand].name))
+            client:EmitSound("items/medshot4.wav", 80)
 
             -- No fractures anymore. Reset our movement.
             if(!character:GetFractures()) then
@@ -45,7 +45,6 @@ ITEM.functions.Apply = {
 }
 ITEM.functions.Give = {
     icon = "icon16/pill.png",
-    sound = "items/medshot4.wav",
     OnRun = function(itemTable)
         local client = itemTable.player   
 		local target = client:GetEyeTraceNoCursor().Entity;
@@ -63,6 +62,7 @@ ITEM.functions.Give = {
             ix.limb.SetFracture(character, fractures[rand].hitgroup, false) 
 
             client:Notify(string.format("You have fixed your target's %s.", fractures[rand].name))
+            client:EmitSound("items/medshot4.wav", 80)
 
             -- No fractures anymore. Reset our movement.
             if(!character:GetFractures()) then

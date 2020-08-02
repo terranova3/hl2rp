@@ -14,7 +14,6 @@ ITEM.flag = "m"
 ITEM.healthHealed = 30
 ITEM.functions.Apply = {
     icon = "icon16/pill.png",
-	sound = "items/medshot4.wav",
 	OnRun = function(itemTable)
 		local client = itemTable.player
         local character = client:GetCharacter()
@@ -27,6 +26,7 @@ ITEM.functions.Apply = {
 
             client:SetHealth(math.Clamp(client:Health() + itemTable.healthHealed, 0, client:GetMaxHealth()))
             client:Notify(string.format("You have bandaged your %s.", bleeds[rand].name))
+            client:EmitSound("items/medshot4.wav", 80)
 
             if(itemTable:GetData("currentUses") > 1) then
                 itemTable:SetData("currentUses", itemTable:GetData("currentUses") - 1)
@@ -42,7 +42,6 @@ ITEM.functions.Apply = {
 }
 ITEM.functions.Give = {
     icon = "icon16/pill.png",
-	sound = "items/medshot4.wav",
     OnRun = function(itemTable)
         local client = itemTable.player   
 		local target = client:GetEyeTraceNoCursor().Entity;
@@ -61,7 +60,8 @@ ITEM.functions.Give = {
 
             target:SetHealth(math.Clamp(target:Health() + itemTable.healthHealed, 0, target:GetMaxHealth()))
             client:Notify(string.format("You have bandaged your target's %s.", bleeds[rand].name))
-
+            client:EmitSound("items/medshot4.wav", 80)
+            
             if(itemTable:GetData("currentUses") > 1) then
                 itemTable:SetData("currentUses", itemTable:GetData("currentUses") - 1)
     

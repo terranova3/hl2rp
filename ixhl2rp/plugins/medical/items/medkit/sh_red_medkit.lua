@@ -5,7 +5,7 @@
 
 ITEM.name = "Emergency Medkit"
 ITEM.model = Model("models/carlsmei/escapefromtarkov/medical/salewa.mdl")
-ITEM.description = "Contains pre-combine medicine and various other tools and medical equipment."
+ITEM.description = "Contains pre-combine medicine and various other tools and medical equipment. Used for healing limbs."
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 200
