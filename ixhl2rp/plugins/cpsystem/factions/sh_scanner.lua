@@ -37,6 +37,12 @@ FACTION.npcRelations = {
     ["combine_mine"] = D_LI
 }
 
+function FACTION:OnCharacterCreated(client, character)
+	local inventory = character:GetInventory()
+
+	inventory:Add("handheld_radio", 1)
+end;
+
 function FACTION:GetDefaultName(client)
 	return self:GetScannerName(), true;
 end
