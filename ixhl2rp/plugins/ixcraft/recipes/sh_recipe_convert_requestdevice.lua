@@ -2,7 +2,7 @@
 RECIPE.name = "Request Device"
 RECIPE.description = "Smash the tamper proof request devices for spare electronics, you may break alot in the process."
 RECIPE.model = "models/gibs/shield_scanner_gib1.mdl"
-RECIPE.category = "Electrical"
+RECIPE.category = "Convert"
 RECIPE.requirements = {
 	["request_device"] = 3
 }

@@ -126,8 +126,8 @@ ix.container.Register("models/props_c17/cashregister01a.mdl", {
 })
 
 ix.container.Register("models/props_c17/oildrum001.mdl", {
-	name = "Oil Barrel",
-	description = "An old rusted hollow barrel.",
+	name = "Oil Drum",
+	description = "An old rusted hollow drum.",
 	width = 3,
 	height = 5
 })
