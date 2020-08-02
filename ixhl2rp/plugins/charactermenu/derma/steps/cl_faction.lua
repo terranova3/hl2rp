@@ -9,10 +9,14 @@ function PANEL:Init()
 	self.faction:Dock(TOP)
 	self.faction:DockMargin(0, 4, 0, 0)
 	self.faction:SetTall(40)
-	self.faction.Paint = function(faction, w, h)
-		ix.util.DrawBlur(faction)
-		surface.SetDrawColor(0, 0, 0, 100)
-		surface.DrawRect(0, 0, w, h)
+	self.faction.Paint = function()
+        surface.SetDrawColor(255,255,255,5)
+        surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+	end
+	self.faction.Think = function()
+		if(IsValid(self.faction.Menu)) then
+			self.faction.Menu:SetMaxHeight(256)
+		end
 	end
 	self.faction:SetTextColor(color_white)
 	self.faction.OnSelect = function(faction, index, value, id)

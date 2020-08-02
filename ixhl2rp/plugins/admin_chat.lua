@@ -27,9 +27,10 @@ ix.chat.Register("adminchat", {
 		return false
 	end,
 	OnCanSay = function(self, speaker, text)
-
 		if not speaker:IsAdmin() then
-			speaker:Notify("You aren't an admin.")
+			speaker:Notify("You aren't an admin. Use '@messagehere' to create a ticket.")
+
+			return false
 		end
 
 		return true
