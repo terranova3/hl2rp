@@ -37,8 +37,9 @@ function PLUGIN:AddSpawner(client, position, title)
 
 	local respawnTime = ix.config.Get("spawnerRespawnTime", 600)
 	local offsetTime  = ix.config.Get("spawnerOffsetTime", 100)
+	
 	if (respawnTime < offsetTime) then
-		math.Clamp(offsetTime = respawnTime - 60, 5, 6000)
+		offsetTime = math.Clamp(respawnTime - 60, 5, 6000)
 	end
 
 	table.insert(PLUGIN.spawner.positions, {
