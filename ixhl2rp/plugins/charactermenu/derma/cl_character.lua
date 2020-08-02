@@ -22,7 +22,7 @@ function PANEL:createTabs()
 		load = self:addTab("continue", self.createCharacterSelection)
 	end
 
-	local maxChars = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
+	local maxChars = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 10)
 	local charCount = #ix.characters
 
 	-- Only show the create tab if the local player can create characters.
