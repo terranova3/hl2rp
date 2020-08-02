@@ -12,8 +12,8 @@ RECIPE.results = {
 	["handheld_radio"] = 1
 }
 RECIPE.tools = {
-	"pliers"
-	"screwdriver"
+	"pliers",
+	"screwdriver",
 	"book_advelec"
 }
 
