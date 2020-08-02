@@ -4,7 +4,7 @@ RECIPE.description = "Smash the tamper proof request devices for spare electroni
 RECIPE.model = "models/gibs/shield_scanner_gib1.mdl"
 RECIPE.category = "Electrical"
 RECIPE.requirements = {
-	["request_device"] = 3,
+	["request_device"] = 3
 }
 RECIPE.results = {
 	["scrap_electronics"] = 1
