@@ -7,4 +7,5 @@ RECIPE.requirements = {
 	["bottle"] = 1
 }
 RECIPE.results = {
+	["scrap_glass"] = 2
 }
