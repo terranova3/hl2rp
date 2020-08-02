@@ -9,5 +9,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "An uncooked piece of a head-hugging creature."
 ITEM.category = "Contraband"
-ITEM.restoreHealth = 15
+ITEM.restoreHealth = 12
+ITEM.price = 8;
 ITEM.flag = "G"

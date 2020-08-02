@@ -10,6 +10,7 @@ ITEM.height = 1
 ITEM.description = "A stick of pre-Union glue. Please do not eat, or sniff."
 ITEM.category = "Contraband"
 ITEM.flag = "G"
+ITEM.price = 10;
 ITEM.functions.Sniff = {
 	OnRun = function(itemTable)
 		local client = itemTable.player

@@ -9,5 +9,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "The thinking part of a now non-thinking entity."
 ITEM.category = "Contraband"
-ITEM.restoreHealth = 15
+ITEM.restoreHealth = 20
+ITEM.price = 20;
 ITEM.flag = "G"
