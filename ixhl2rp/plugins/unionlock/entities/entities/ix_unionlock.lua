@@ -64,7 +64,7 @@ if (SERVER) then
 	function ENT:SpawnFunction(client, trace)
 		local door = trace.Entity
 
-		if (!IsValid(door) or !door:IsDoor() or IsValid(door.)) then
+		if (!IsValid(door) or !door:IsDoor() or IsValid(door.ixLock)) then
 			return client:NotifyLocalized("dNotValid")
 		end
 

@@ -13,6 +13,6 @@ ITEM.functions.Apply = {
 	name = "Use",
 	OnRun = function(itemTable)
 		local client = itemTable.player
-		client:SetArmor(math.min(client:Armor() + 10, client:GetMaxArmor))
+		client:SetArmor(math.min(client:Armor() + 10, client:GetMaxArmor()))
 	end
 }
