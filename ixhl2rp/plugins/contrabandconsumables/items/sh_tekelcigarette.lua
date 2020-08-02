@@ -3,16 +3,13 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Marlboro Cigarette"
+ITEM.name = "Tekel Cigarette"
 ITEM.model = Model("models/phycinnew.mdl")
 ITEM.width = 1
 ITEM.height = 1
-ITEM.description = "Delicious, authentic, lung-killing addiction sticks. There's a brand indent on the filter of the cigarette, reading 'MARLBORO'."
-ITEM.category = "Contraband Consumables Misc"
-
-
-
-ITEM.functions.Use = {
+ITEM.description = "Delicious, authentic lung-killing addiction sticks. There's a little branding on the filter of the cigarette, reading 'TEKEL'."
+ITEM.category = "Contraband"
+ITEM.functions.Smoke = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
 		client:RestoreStamina(12)
