@@ -87,15 +87,15 @@ end
 
 -- Receives the net message from the client and checks if the message they're trying to run is implemented.
 net.Receive("ixViewDataAction", function(length, client)
+    local target = net.ReadEntity()
     local message = net.ReadInt(16)
     local data = net.ReadTable()
 
-    if(!PLUGIN.methods[message] or !data or !data.target) then
+    if(!PLUGIN.methods[message] or !data or !target or !target:GetCharacter()) then
         return
     end
     
-    -- We aren't receiving the character metatable, only the id.
-    data.target = ix.char.loaded[data.target]
+    data.target = target:GetCharacter()
     
     local record = data.target:GetData("record", {})
 

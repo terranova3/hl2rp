@@ -86,6 +86,7 @@ end
 function PANEL:Build(target, cid, record)
     self.target = target
     self.character = target:GetCharacter()
+    self.cidValue = cid
     self.recordTable = record
 
     self.content = self:AddStage("Home")
@@ -124,7 +125,7 @@ function PANEL:BuildCID()
     self.rightDock:SetDrawBackground(false)
 
     self.name = self.rightDock:Add(self:BuildLabel("Name: " .. self.character:GetName() or "Error", false, 4))
-    self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.character:GetData("cid", "ERROR"), false, 4))
+    self.cid = self.rightDock:Add(self:BuildLabel("Citizen ID: #" .. self.cidValue or "ERROR", false, 4))
     self.points = self.rightDock:Add(self:BuildLabel("Total Points: " ..  "ERROR", false, 4))
 end
 
@@ -287,9 +288,8 @@ function PANEL:SendToServer(message, data)
         return
     end
 
-    data.target = self.character:GetID()
-
     net.Start("ixViewDataAction")
+        net.WriteEntity(self.target)
         net.WriteInt(message, 16)
         net.WriteTable(data)
     net.SendToServer()
