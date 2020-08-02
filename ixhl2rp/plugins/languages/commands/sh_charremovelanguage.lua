@@ -12,10 +12,10 @@ ix.command.Add("CharRemoveLanguage", {
 		ix.type.string
 	},
 	OnRun = function(self, client, target, text)
-		local result = target:RemoveLanguage(L(text))
+		local result = target:RemoveLanguage(text)
 		
 		if(result) then
-			client:Notify(string.format("You have removed the language %s from %s.", L(text), target:GetName()))
+			client:Notify(string.format("You have removed the language %s from %s.", text, target:GetName()))
 		elseif(error) then
 			client:Notify(error)
 		end

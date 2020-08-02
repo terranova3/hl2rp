@@ -12,10 +12,10 @@ ix.command.Add("CharAddLanguage", {
 		ix.type.string
 	},
 	OnRun = function(self, client, target, text)
-		local result, error = target:AddLanguage(L(text))
+		local result, error = target:AddLanguage(text)
 
 		if(result) then
-			client:Notify(string.format("You added the language %s to %s.", L(text), target:GetName()))
+			client:Notify(string.format("You added the language %s to %s.", text, target:GetName()))
 		elseif(error) then
 			client:Notify(error)
 		end
