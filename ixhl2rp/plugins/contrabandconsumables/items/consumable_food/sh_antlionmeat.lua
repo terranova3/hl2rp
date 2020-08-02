@@ -9,5 +9,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "An uncooked small piece of a large burrowing alien insect. Definitely has a lot of protein."
 ITEM.category = "Contraband"
+ITEM.price = 10;
 ITEM.restoreHealth = 15
 ITEM.flag = "G"

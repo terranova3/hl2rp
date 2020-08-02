@@ -10,4 +10,5 @@ ITEM.height = 1
 ITEM.description = "The uncooked meat from some passive airborne creature."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 15
+ITEM.price = 10;
 ITEM.flag = "G"

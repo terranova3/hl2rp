@@ -10,6 +10,7 @@ ITEM.height = 2
 ITEM.description = "A pre-war pack of authentic Malboro cigarette's. The smell of nicotine wafts from the pack; it's definitely real tobbacco."
 ITEM.category = "Contraband"
 ITEM.flag = "G"
+ITEM.price = 18;
 ITEM.contains = {
     [1] = {
         uniqueID = "marlborocigarette",

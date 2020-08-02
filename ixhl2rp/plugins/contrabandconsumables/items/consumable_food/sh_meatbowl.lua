@@ -9,5 +9,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "A hot meal. It's mixed with assorted meats."
 ITEM.category = "Contraband"
-ITEM.restoreHealth = 15
+ITEM.restoreHealth = 22
+ITEM.price = 19;
 ITEM.flag = "G"

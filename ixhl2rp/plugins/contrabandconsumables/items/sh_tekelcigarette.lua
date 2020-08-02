@@ -9,6 +9,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "Delicious, authentic lung-killing addiction sticks. There's a little branding on the filter of the cigarette, reading 'TEKEL'."
 ITEM.category = "Contraband"
+ITEM.price = 4;
 ITEM.flag = "G"
 ITEM.functions.Smoke = {
 	OnRun = function(itemTable)
