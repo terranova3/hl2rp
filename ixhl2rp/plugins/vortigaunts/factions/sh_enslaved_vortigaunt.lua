@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-FACTION.name = "Enslaved Vortigaunt"
+FACTION.name = "Biotic"
 FACTION.description = "An alien race not from this planet."
 FACTION.color = Color(0, 255, 200, 255);
 FACTION.runSounds = {[0] = "NPC_Vortigaunt.FootstepLeft", [1] = "NPC_Vortigaunt.FootstepRight"}
@@ -19,4 +19,4 @@ function FACTION:OnTransferred(client)
 	character:SetModel(self.models[1])
 end
 
-FACTION_ENSLAVED_VORT = FACTION.index
+FACTION_BIOTIC = FACTION.index

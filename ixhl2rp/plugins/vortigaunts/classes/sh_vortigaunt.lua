@@ -12,4 +12,4 @@ function CLASS:CanSwitchTo(client)
 	return false
 end
 
-CLASS_VORTd = CLASS.index
+CLASS_VORT = CLASS.index

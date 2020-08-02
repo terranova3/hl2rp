@@ -7,7 +7,7 @@ local playerMeta = FindMetaTable("Player")
 
 function playerMeta:IsVortigaunt()
 	local faction = self:Team()
-	return faction == FACTION_VORT or faction == FACTION_ENSLAVED_VORT
+	return faction == FACTION_VORT or faction == FACTION_BIOTIC
 end
 
 -- A function to handle a vortigaunt's night vision

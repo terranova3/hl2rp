@@ -32,7 +32,7 @@ function PLUGIN:ShouldDisableLegs()
 	
 	local faction = LocalPlayer():GetCharacter():GetFaction()
 
-	if(faction == FACTION_VORT or faction == FACTION_ENSLAVED_VORT) then
+	if(faction == FACTION_VORT or faction == FACTION_BIOTIC) then
 		return true
 	end
 end

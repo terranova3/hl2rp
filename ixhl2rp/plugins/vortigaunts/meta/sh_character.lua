@@ -7,5 +7,5 @@ local CHAR = ix.meta.character
 
 function CHAR:IsVortigaunt()
 	local faction = self:GetFaction()
-	return faction == FACTION_VORT or faction == FACTION_ENSLAVED_VORT
+	return faction == FACTION_VORT or faction == FACTION_BIOTIC
 end
