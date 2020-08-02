@@ -171,8 +171,7 @@ function PANEL:CanCreateCharacter()
 	end
 	self.validFactions = validFactions
 
-	local maxChars = hook.Run("GetMaxPlayerCharacter", LocalPlayer())
-		or ix.config.Get("maxChars", 5)
+	local maxChars = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 10)
 	if (ix.characters and #ix.characters >= maxChars) then
 		return false, "You have reached the maximum number of characters"
 	end
