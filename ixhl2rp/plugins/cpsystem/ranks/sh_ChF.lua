@@ -38,5 +38,6 @@ RANK.permissions = {
     "Set CP ID",
     "Set CP Tagline",
     "Set sociostatus",
+    "Edit viewobjectives",
     "Change wage"
 }

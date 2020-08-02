@@ -31,6 +31,7 @@ RANK.permissions = {
     "Set spec",
     "Remove spec",
     "Remove cert",
+    "Edit viewobjectives",
 	"Set sociostatus",
 }
 

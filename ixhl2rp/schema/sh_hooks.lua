@@ -37,14 +37,11 @@ function Schema:CanPlayerEditObjectives(client)
 		return false
 	end
 
+	local character = client:GetCharacter()
 	local bCanEdit = false
-	local name = client:GetCharacter():GetName()
-
-	for k, v in ipairs({"OfC", "EpU", "DvL", "SeC"}) do
-		if (self:IsCombineRank(name, v)) then
-			bCanEdit = true
-			break
-		end
+	
+	if(character:GetRank() and ix.ranks.HasPermission(character:GetRank().uniqueID, "Edit viewobjectives")) then
+		bCanEdit = true
 	end
 
 	return bCanEdit
