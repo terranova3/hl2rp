@@ -98,16 +98,16 @@ Schema.voices.Add("CombineHLA", "ANTLION8", "Antlion here!", "HLAComVoice/grunt/
 
 -- Announcing Enemy Headcrab
 
-Schema.voices.Add("CombineHLA", "HEADCRAB2", "Parasitics!", "HLAComVoice/grunt/announceenemy_headcrab_01.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB3", "Parasitics at sector.", "HLAComVoice/grunt/announceenemy_headcrab_02.wav")
-Schema.voices.Add("CombineHLA", "3 HEADCRABS", "Eugh, three parasitics inbound.", "HLAComVoice/grunt/announceenemy_headcrab_03.wav")
---Schema.voices.Add("CombineHLA", "", "Echo-1 visual on parasitics.", "HLAComVoice/grunt/announceenemy_headcrab_04.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB4", "Contact, parasitics.", "HLAComVoice/grunt/announceenemy_headcrab_05.wav")
-Schema.voices.Add("CombineHLA", "I HATE", "I hate these things.", "HLAComVoice/grunt/announceenemy_headcrab_06.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB5", "We've got parasitics over here!", "HLAComVoice/grunt/announceenemy_headcrab_07.wav")
---Schema.voices.Add("CombineHLA", "", "Live parasitics, Echo-1.", "HLAComVoice/grunt/announceenemy_headcrab_08.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB6", "Parasitics here!", "HLAComVoice/grunt/announceenemy_headcrab_09.wav")
-Schema.voices.Add("CombineHLA", "HEADCRAB7", "Parasitic infestation confirmed.", "HLAComVoice/grunt/announceenemy_headcrab_10.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB2", "Parasitics!", "HLAComVoice/grunt/announceenemy_headcrabs_01.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB3", "Parasitics at sector.", "HLAComVoice/grunt/announceenemy_headcrabs_02.wav")
+Schema.voices.Add("CombineHLA", "3 HEADCRABS", "Eugh, three parasitics inbound.", "HLAComVoice/grunt/announceenemy_headcrabs_03.wav")
+--Schema.voices.Add("CombineHLA", "", "Echo-1 visual on parasitics.", "HLAComVoice/grunt/announceenemy_headcrabs_04.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB4", "Contact, parasitics.", "HLAComVoice/grunt/announceenemy_headcrabs_05.wav")
+Schema.voices.Add("CombineHLA", "I HATE", "I hate these things.", "HLAComVoice/grunt/announceenemy_headcrabs_06.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB5", "We've got parasitics over here!", "HLAComVoice/grunt/announceenemy_headcrabs_07.wav")
+--Schema.voices.Add("CombineHLA", "", "Live parasitics, Echo-1.", "HLAComVoice/grunt/announceenemy_headcrabs_08.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB6", "Parasitics here!", "HLAComVoice/grunt/announceenemy_headcrabs_09.wav")
+Schema.voices.Add("CombineHLA", "HEADCRAB7", "Parasitic infestation confirmed.", "HLAComVoice/grunt/announceenemy_headcrabs_10.wav")
 
 -- Announcing Enemy Headcrab
 
@@ -932,9 +932,13 @@ Schema.voices.Add("CombineHLA", "10-4 OVER", "10-4, over.", "HLAComVoice/grunt/c
 Schema.voices.Add("CombineHLA", "COPY OVER", "Copy, over.", "HLAComVoice/grunt/custom/copyover.wav")
 Schema.voices.Add("CombineHLA", "9", "Nine.", "HLAComVoice/grunt/custom/nine.wav")
 Schema.voices.Add("CombineHLA", "NINE", "Nine.", "HLAComVoice/grunt/custom/nine.wav")
+
 Schema.voices.Add("CombineHLA", "YEP", "Yep.", "HLAComVoice/grunt/custom/yep.wav")
 Schema.voices.Add("CombineHLA", "FLARE DOWN", "Flare down.", "HLAComVoice/grunt/custom/flaredown.wav")
-
+Schema.voices.Add("CombineHLA", "YOU", "You.", "HLAComVoice/grunt/custom/you.wav")
+Schema.voices.Add("CombineHLA", "YOU2", "You.", "HLAComVoice/grunt/custom/you2.wav")
+Schema.voices.Add("CombineHLA", "YOU3", "You.", "HLAComVoice/grunt/custom/you3.wav")
+Schema.voices.Add("CombineHLA", "YOU!", "You!", "HLAComVoice/grunt/custom/you4.wav")
 
 Schema.voices.AddClass("CombineHLA", function(client)
 	return (client:IsCombine() and client:GetCharacter():HasVoiceType("HLA"))
