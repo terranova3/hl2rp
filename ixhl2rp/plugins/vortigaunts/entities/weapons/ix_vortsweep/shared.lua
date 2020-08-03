@@ -21,9 +21,7 @@ SWEP.SlotPos				= 5
 SWEP.Weight					= 5
 SWEP.Spawnable     			= true
 SWEP.AdminSpawnable			= false;
-// SWEP.ViewModel 			= "" -- causes console error spam
-SWEP.WorldModel 			= ""
-SWEP.HoldType 				= "sweep"
+SWEP.HoldType 				= "beam"
 
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= -1

@@ -265,6 +265,7 @@ ix.anim.vortigaunt = {
 		[ACT_MP_RUN] = {ACT_RUN, ACT_RUN_AIM},
 		[ACT_MP_CROUCHWALK] = {ACT_WALK, ACT_WALK},
 		[ACT_MP_WALK] = {ACT_WALK, ACT_WALK_AIM},
+		["glide"] = {"barnaclecrunch", "barnaclecrunch"}
 	},
 	grenade = {
 		["attack"] = ACT_MELEE_ATTACK1,
@@ -316,7 +317,7 @@ ix.anim.vortigaunt = {
 		["reload"] = ACT_IDLE,
 		["glide"] = {ACT_RUN, ACT_RUN}
 	},
-	glide = "jump_holding_glide"
+	glide = "barnaclecrunch"
 }
 ix.anim.player = {
 	normal = {
