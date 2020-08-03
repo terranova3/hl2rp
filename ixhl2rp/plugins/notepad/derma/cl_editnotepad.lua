@@ -32,21 +32,10 @@ function PANEL:Think()
 	
 	self:SetSize(256, 318);
 	self:SetPos( (scrW / 2) - (self:GetWide() / 2), (scrH / 2) - (self:GetTall() / 2) );
-	
-	if (!IsValid(self.entity) or self.entity:GetPos():Distance( LocalPlayer():GetPos() ) > 192) then
-		self:Close(); self:Remove();
-		
-		gui.EnableScreenClicker(false);
-	end;
-end;
-
--- A function to set the panel's entity.
-function PANEL:SetEntity(entity)
-	self.entity = entity;
 end;
 
 -- A function to populate the panel.
-function PANEL:Populate(notepad)	
+function PANEL:Populate(notepad, id)	
 	local textEntry = vgui.Create("DTextEntry");
 	local button = vgui.Create("DButton");
 	
@@ -75,13 +64,11 @@ function PANEL:Populate(notepad)
 	
 	-- Called when the button is clicked.
 	function button.DoClick(button)
-		self:Close(); self:Remove();
+		self:Close();
+		self:Remove()
+		gui.EnableScreenClicker(false);	
 		
-		gui.EnableScreenClicker(false);
-		
-		if (IsValid(self.entity)) then
-			netstream.Start( "EditNotepad", self.entity, string.sub(textEntry:GetValue(), 0, 1000) );
-		end;
+		netstream.Start("EditNotepad", string.sub(textEntry:GetValue(), 0, 1000), id);
 	end;
 	
 	self.panelList:AddItem(textEntry);
@@ -95,4 +82,4 @@ function PANEL:PerformLayout()
 	DFrame.PerformLayout(self);
 end;
 
-vgui.Register("cwEditNotepad", PANEL, "DFrame");
+vgui.Register("ixEditNotepad", PANEL, "DFrame");

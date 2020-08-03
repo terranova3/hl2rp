@@ -5,32 +5,25 @@
 
 local PLUGIN = PLUGIN;
 
-netstream.Hook("ViewNotepad", function(entity, title, text)
-	if (IsValid(entity)) then
-		if (IsValid(PLUGIN.notepadPanel)) then
-			PLUGIN.notepadPanel:Close();
-			PLUGIN.notepadPanel:Remove();
-		end;
-		
-		PLUGIN.notepadPanel = vgui.Create("cwViewNotepad");
-		PLUGIN.notepadPanel:SetEntity( entity );
-		PLUGIN.notepadPanel:Populate( title, text );
-		PLUGIN.notepadPanel:MakePopup();
-		
-		gui.EnableScreenClicker(true);
+netstream.Hook("ViewNotepad", function(text, id, editMode)
+	if (IsValid(PLUGIN.notepadPanel)) then
+		PLUGIN.notepadPanel:Close();
+		PLUGIN.notepadPanel:Remove();
 	end;
-end);
 
-netstream.Hook("EditNotepad", function(entity, title, text)
-		if (IsValid(PLUGIN.notepadPanel)) then
-			PLUGIN.notepadPanel:Close();
-			PLUGIN.notepadPanel:Remove();
-		end;
+	if(IsValid(ix.gui.menu)) then
+		ix.gui.menu:Remove()
+	end
+	
+	local uiType = "ixViewNotepad"
 
-		PLUGIN.notepadPanel = vgui.Create("cwEditNotepad");
-		PLUGIN.notepadPanel:SetEntity( entity );
-		PLUGIN.notepadPanel:Populate( title, text );
-		PLUGIN.notepadPanel:MakePopup();
-		
-		gui.EnableScreenClicker(true);
+	if(editMode) then
+		uiType = "ixEditNotepad"
+	end
+
+	PLUGIN.notepadPanel = vgui.Create(uiType);
+	PLUGIN.notepadPanel:Populate(text or "", id or 0);
+	PLUGIN.notepadPanel:MakePopup();
+	
+	gui.EnableScreenClicker(true);
 end);

@@ -32,21 +32,10 @@ function PANEL:Think()
 	
 	self:SetSize(256, 318);
 	self:SetPos( (scrW / 2) - (self:GetWide() / 2), (scrH / 2) - (self:GetTall() / 2) );
-	
-	if (!IsValid(self.entity) or self.entity:GetPos():Distance( LocalPlayer():GetPos() ) > 192) then
-		self:Close(); self:Remove();
-		
-		gui.EnableScreenClicker(false);
-	end;
-end;
-
--- A function to set the panel's entity.
-function PANEL:SetEntity(entity)
-	self.entity = entity;
 end;
 
 -- A function to populate the panel.
-function PANEL:Populate(notepad)
+function PANEL:Populate(notepad, id)
 	local colorWhite = color_white;
 	
 	self.panelList:Clear();
@@ -68,4 +57,4 @@ function PANEL:PerformLayout()
 	DFrame.PerformLayout(self);
 end;
 
-vgui.Register("cwViewNotepad", PANEL, "DFrame");
+vgui.Register("ixViewNotepad", PANEL, "DFrame");

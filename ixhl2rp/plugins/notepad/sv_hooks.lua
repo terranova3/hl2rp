@@ -32,28 +32,3 @@ function PLUGIN:LoadData()
 		end;
 	end
 end
-
--- Called just after data should be saved.
-function PLUGIN:SaveData()
-	local data = {};
-	
-	for _, entity in pairs(ents.FindByClass("ix_notepad")) do
-		local physObj = entity:GetPhysicsObject();
-		local moveable;
-		
-		if (IsValid(physObj)) then
-			moveable = physObj:IsMoveable();
-		end;
-		
-		data[#data + 1] = {
-			pos = entity:GetPos(),
-			angles = entity:GetAngles(),
-			model = entity:GetModel(),
-			text = entity.text,
-			character = entity.character,
-			moveable = moveable,
-		};
-	end;
-
-	self:SetData(data)
-end;
