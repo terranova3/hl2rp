@@ -405,6 +405,7 @@ function GM:PlayerSpawnedVehicle(client, entity)
 end
 
 ix.allowedHoldableClasses = {
+	["ix_money"] = true,
 	["ix_item"] = true,
 	["prop_physics"] = true,
 	["prop_physics_override"] = true,
