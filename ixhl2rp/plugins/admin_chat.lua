@@ -27,7 +27,7 @@ ix.chat.Register("adminchat", {
 		return false
 	end,
 	OnCanSay = function(self, speaker, text)
-		if not speaker:IsAdmin() then
+		if(!speaker:IsAdmin()) then
 			speaker:Notify("You aren't an admin. Use '@messagehere' to create a ticket.")
 
 			return false
@@ -45,7 +45,7 @@ ix.chat.Register("adminchat", {
 
 		icon = Material(icon)
 
-		if LocalPlayer():IsAdmin() then
+		if(LocalPlayer():IsAdmin() and speaker:IsAdmin()) then
 			chat.AddText(icon, Color(65, 129, 129), "@admin - ", Color(225,225,225), speaker:SteamName(), ": ", Color(200, 200, 200), text)
 		end
 	end,
