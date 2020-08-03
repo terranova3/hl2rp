@@ -13,3 +13,8 @@ ITEM.gasImmunity = true
 ITEM.bodyGroups = {
 	["headstrap"] = 1
 }
+ITEM.iconCam = {
+	pos = Vector(290.53433227539, 244.15803527832, 176.81845092773),
+	ang = Angle(25, 220, 0),
+	fov = 0.90251118195476,
+}

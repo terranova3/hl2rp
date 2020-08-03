@@ -13,8 +13,9 @@ ITEM.description = "Glasses Base";
 ITEM.width = 1;
 ITEM.height = 1;
 ITEM.price = 40
+ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.iconCam = {
-	pos = Vector(0, 0, 200),
-	ang = Angle(89.083892822266, -89.995094299316, 0),
-	fov = 8.8235294117647
+	pos = Vector(-0.048255149275064, 145.85707092285, 0.012072434648871),
+	ang = Angle(0, 270, 0),
+	fov = 3.4040450253535
 }

@@ -16,6 +16,6 @@ ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.price = 40
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),
-	ang = Angle(89.083892822266, -89.995094299316, 0),
-	fov = 8.8235294117647
+	ang = Angle(90, 0, 0),
+	fov = 2.9411764705882
 }

@@ -12,3 +12,8 @@ ITEM.flag = "a"
 ITEM.bodyGroups = {
 	["headstrap"] = 3
 }
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, 0),
+	fov = 3.8536462463626,
+}
