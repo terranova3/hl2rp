@@ -1,6 +1,6 @@
 ITEM.name = "AK74U"
 ITEM.description = "A classic 5.45mm calibre Russian assault rifle in a shortened carbine variation."
-ITEM.model = "models/weapons/arccw_insurgency/w_ak74.mdl"
+ITEM.model = "models/weapons/arccw_insurgency/w_aks74u.mdl"
 ITEM.class = "arccw_ins_aks74u_tn"
 ITEM.weaponCategory = "primary"
 ITEM.classes = {CLASS_EOW}
