@@ -23,7 +23,7 @@ SWEP.Author	= "RJ";
 
 SWEP.WorldModel = "models/weapons/w_fists_t.mdl";
 SWEP.ViewModel = "models/weapons/v_punch.mdl";
-SWEP.HoldType = "fist";
+SWEP.HoldType = "beam";
 
 SWEP.AdminSpawnable = false;
 SWEP.Spawnable = false;
@@ -67,7 +67,7 @@ function SWEP:PrimaryAttack()
 	
 	if (self.Owner:OnGround()) then
 		if (SERVER) then
-			self.Owner:SetForcedAnimation("zapattack1", 1.5);
+			self.Owner:ForceSequence("zapattack1", nil, 1.5, true);
 		end;
 		
 		local chargeSound = CreateSound(self.Owner, "npc/vort/attack_charge.wav");
@@ -96,3 +96,7 @@ function SWEP:PrimaryAttack()
 		end);
 	end;
 end;
+
+function SWEP:SecondaryAttack()
+	return false
+end

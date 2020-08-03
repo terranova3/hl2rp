@@ -40,7 +40,7 @@ if CLIENT then
 end
 
 ix.chat.Register("Vortigese", {
-	format = "%s says in vortigese \"%s\"",
+	format = "%s speaks in Vortigese \"%s\"",
 	GetColor = function(self, speaker, text)
 		-- If you are looking at the speaker, make it greener to easier identify who is talking.
 		if (LocalPlayer():GetEyeTrace().Entity == speaker) then
