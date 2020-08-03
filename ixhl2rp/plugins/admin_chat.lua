@@ -7,6 +7,27 @@ CAMI.RegisterPrivilege({
 	MinAccess = "admin"
 })
 
+CAMI.RegisterPrivilege({
+	Name = "Helix - Admin Chat",
+	MinAccess = "admin"
+})
+
+CAMI.RegisterPrivilege({
+	Name = "Helix - Gamemaster",
+	MinAccess = "admin"
+})
+
+CAMI.RegisterPrivilege({
+	Name = "Helix - Management",
+	MinAccess = "superadmin"
+})
+
+CAMI.RegisterPrivilege({
+	Name = "Helix - Developer",
+	MinAccess = "superadmin"
+})
+
+
 ix.option.Add("toggleAlert", ix.type.bool, false, {
 	category = "Admin Settings",
 	hidden = function()
@@ -20,14 +41,14 @@ ix.chat.Register("adminchat", {
 		return Color(0, 196, 255)
 	end,
 	OnCanHear = function(self, speaker, listener)
-		if listener:IsAdmin() then
+		if(CAMI.PlayerHasAccess(listener, "Helix - Admin Chat", nil)) then
 			return true
 		end
 
 		return false
 	end,
 	OnCanSay = function(self, speaker, text)
-		if(!speaker:IsAdmin()) then
+		if(CAMI.PlayerHasAccess(speaker, "Helix - Admin Chat", nil)) then
 			speaker:Notify("You aren't an admin. Use '@messagehere' to create a ticket.")
 
 			return false
@@ -37,15 +58,21 @@ ix.chat.Register("adminchat", {
 	end,
 	OnChatAdd = function(self, speaker, text)
 		local color = team.GetColor(speaker:Team())
-		local icon = "icon16/star.png"
+		local icon = "icon16/asterisk_yellow.png"
 
-		if (speaker:IsSuperAdmin()) then
+		if(CAMI.PlayerHasAccess(speaker, "Helix - Management", nil)) then
+			icon = "icon16/key.png"
+		elseif(CAMI.PlayerHasAccess(speaker, "Helix - Developer", nil)) then
+			icon = "icon16/wrench.png"
+		elseif (speaker:IsSuperAdmin()) then
 			icon = "icon16/shield.png"
+		elseif(speaker:IsAdmin()) then
+			icon = "icon16/star.png"
 		end
 
 		icon = Material(icon)
 
-		if(LocalPlayer():IsAdmin() and speaker:IsAdmin()) then
+		if(CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Admin Chat", nil) and CAMI.PlayerHasAccess(speaker, "Helix - Admin Chat", nil)) then
 			chat.AddText(icon, Color(65, 129, 129), "@admin - ", Color(225,225,225), speaker:SteamName(), ": ", Color(200, 200, 200), text)
 		end
 	end,
