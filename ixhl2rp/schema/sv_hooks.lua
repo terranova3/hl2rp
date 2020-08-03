@@ -390,7 +390,13 @@ function Schema:PlayerMessageSend(speaker, chatType, text, anonymous, receivers,
 							netstream.Start(nil, "PlaySound", info.sound)
 						else
 							speaker.bTypingBeep = nil
-							ix.util.EmitQueuedSounds(speaker, {info.sound, VOCODEROFF[math.random(1, #VOCODEROFF)]}, nil, nil, volume)
+							local sounds = {info.sound}
+
+							if(speaker:IsCombine()) then
+								table.insert(sounds, VOCODEROFF[math.random(1, #VOCODEROFF)])
+							end
+
+							ix.util.EmitQueuedSounds(speaker, sounds, nil, nil, volume)
 						end
 					end
 
