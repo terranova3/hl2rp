@@ -435,7 +435,7 @@ netstream.Hook("ShowCharacterPanel", function(show)
 		ix.gui.charPanel = cPanel
 	end
 
-	if (charPanel) then
+	if (charPanel and ix.gui.charPanel) then
 		ix.gui.charPanel:SetCharPanel(charPanel)
 	end
 end)
