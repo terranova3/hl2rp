@@ -1,6 +1,6 @@
-ITEM.name = "Civil Access Card"
+ITEM.name = "Union Card"
 ITEM.model = Model("models/dorado/tarjeta4.mdl")
-ITEM.description = "An old machine manufactured card that used to give the holder access to blue coded combine locks. It had been disabled after the Civil Services card storage was raided."
+ITEM.description = "An old machine manufactured card that used to give the holder access to blue coded combine locks. It had been disabled after the Civil Services card storage was raided in April, 2014.\n"
 ITEM.factions = {FACTION_MPF, FACTION_OTA}
 ITEM.category = "Other"
 

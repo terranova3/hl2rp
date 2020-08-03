@@ -28,3 +28,11 @@ function character:GetClassColor()
 
     return Color(150, 125, 100, 255)
 end
+
+function character:IsCWU()
+    if(self:GetClass() == CLASS_CWU or self:GetCustomClass() == "Civil Services") then
+        return true
+    end
+
+    return false
+end
