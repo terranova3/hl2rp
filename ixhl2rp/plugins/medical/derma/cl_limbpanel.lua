@@ -13,7 +13,6 @@ function PLUGIN:HUDPaintBackground()
     end
 
     local hasFracture, fractures = character:GetFractures()
-    local hasBleed, bleeds = character:GetBleeds()
     local height = ScrH()
     local currentWidth = 4
 
@@ -25,14 +24,6 @@ function PLUGIN:HUDPaintBackground()
         ix.util.DrawText(#fractures, currentWidth + 13.5, height - 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, nil, 1)
         
         currentWidth = currentWidth + 27
-    end
-
-    if(hasBleed) then
-        surface.SetMaterial(bleedingmat)
-        surface.SetDrawColor(color_white)
-        surface.DrawTexturedRect(currentWidth, height - 28, 24, 24)
-
-        ix.util.DrawText(#bleeds, currentWidth + 13.5, height - 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, nil, 1)
     end
 end
 
@@ -157,7 +148,6 @@ function PANEL:DrawDamagePanel(intLimbID, dpW, dpH)
     local dlimbname1 = ix.limb.GetName(intLimbID)
     local tick = math.Clamp(ix.limb.GetHealthFlip(character, dlimbname), 1, maxHealth) / maxHealth
     local isFractured = ix.limb.HasFracture(character, intLimbID)
-    local isBleeding = ix.limb.HasBleed(character, intLimbID)
 
     surface.SetMaterial(tickmat)
     surface.SetDrawColor(color_white)
@@ -172,14 +162,6 @@ function PANEL:DrawDamagePanel(intLimbID, dpW, dpH)
 
     if isFractured then
         surface.SetMaterial(brokenmat)
-        surface.SetDrawColor(color_white)
-        surface.DrawTexturedRect(dpW, dpH + 35, 24, 24)
-        
-        dpW = dpW + 27
-    end
-
-    if isBleeding then
-        surface.SetMaterial(bleedingmat)
         surface.SetDrawColor(color_white)
         surface.DrawTexturedRect(dpW, dpH + 35, 24, 24)
         

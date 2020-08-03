@@ -22,12 +22,7 @@ function ix.limb.TakeDamage(client, group, info, diff)
         -- Different damage types can cause different types of wounds
         if(damageType) then
             local limbHitgroup = ix.limb.GetHitgroup(group)
-            local canBleed = ix.limb.config.createBleed[damageType] or false
             local canFracture = ix.limb.config.createFracture[damageType] or false
-
-            if(canBleed and (damage * (diff or 1)) >= limbHitgroup.bleedThreshold) then
-                ix.limb.SetBleeding(character, group, true)
-            end
 
             if(canFracture and (damage * (diff or 1)) >= limbHitgroup.fractureThreshold) then
                 ix.limb.SetFracture(character, group, true)
@@ -60,32 +55,6 @@ function ix.limb.SetHealth(character, group, damage)
         limb.health = math.Clamp((limb.health or 0) + math.ceil(damage), 0, ix.limb.GetHitgroup(group).maxHealth)
 		character:SetLimbs(limbs)
 	end
-end
-
--- A function to set the bleed status of a character's limb.
-function ix.limb.SetBleeding(character, group, bleeding)
-    local limbs = character:GetLimbs()
-
-    if(limbs[group]) then
-        limbs[group].bleeding = bleeding
-
-        character:SetLimbs(limbs)
-
-        if(bleeding == false) then
-            ix.limb.SetBleedDamage(character, group, 0)
-        end
-    end
-end
-
--- A function to have different bleed damages.
-function ix.limb.SetBleedDamage(character, group, damage)
-    local limbs = character:GetLimbs()
-
-    if(limbs) then
-        limbs[group].bleedDamage = damage
-
-        character:SetLimbs(limbs)
-    end
 end
 
 -- A function to change the fracture status of a character's limb.
@@ -133,29 +102,6 @@ function ix.limb.GetScaleDamage(group)
 	return 0
 end
 
-function ix.limb.BleedTick()
-    for _, v in pairs(player.GetAll()) do
-        local client = v
-
-        if(IsValid(client) and client:Alive() and client:GetCharacter()) then
-            local character = client:GetCharacter()
-            local isBleeding, bleedingLimbs = character:GetBleeds()
-
-            if(isBleeding and !client:IsNoclipping()) then
-                for k, v in pairs(bleedingLimbs) do
-                    local newHealth = client:Health() - 1
-
-                    if(newHealth <= 0) then
-                        client:Kill()
-                    else
-                        client:SetHealth(newHealth)
-                    end
-                end
-            end
-        end
-    end
-end
-
 function ix.limb.FractureTick()
     for k, v in pairs(player.GetAll()) do
         if(!v:GetCharacter() or v:GetCharacter():GetFractures() == false) then
@@ -198,9 +144,7 @@ function ix.limb.ResetLimbData(character)
 	for i = 1, #ix.limb.hitgroup do
 		limbs[i] = {
 			health = 0, 
-			bleeding = false, 
 			fracture = false,
-			bleedDamage = 0
 		}
 	end
 	

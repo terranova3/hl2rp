@@ -70,22 +70,3 @@ function CHAR:GetFractures()
 
     return false, fractures
 end
-
-function CHAR:GetBleeds()
-    local bleeds = {}
-
-    for k, v in pairs(self:GetLimbs()) do
-        if(v.bleeding) then 
-            table.insert(bleeds, v)
-            
-            v.name = ix.limb.hitgroup[k].name
-            v.hitgroup = k
-        end
-    end
-
-    if(bleeds[1]) then
-        return true, bleeds
-    end
-
-    return false, bleeds
-end

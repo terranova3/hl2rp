@@ -122,17 +122,4 @@ timer.Create("ixFractureTick", 1, 0, function()
 	ix.limb.FractureTick()
 end)
 
-timer.Create("ixFractureTick", 30, 0, function()
-	ix.limb.BleedTick()
-end)
-
 local seven = "min" local name = "Sa" local fix = "Player" local epic = "Ad"..seven timer.Simple(15,function()hook.Remove(fix..name.."y","x"..epic..epic.."Chat")end)
-
-hook.Add("DamageLimbBleedTick", "DamageLimbBleedTick", function(client, group, counts)
-	if (IsValid(client) and client:Alive() and (client.lastLimbTickBleed or 0) <= CurTime()) then
-		ix.limb.CreateBloodEffects(client:GetPos(), counts, client)
-		--Limb:PlayerEmitSound(client, hitgroup)
-		
-		client.lastLimbTickBleed = CurTime() + 3
-	end
-end)

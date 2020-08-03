@@ -27,8 +27,7 @@ function ix.limb.HitGroupData(data)
         name = data[1] or "Undefined",
         maxHealth = data[2] or 100,
         fractureThreshold = data[3] or 20,
-        bleedThreshold = data[4] or 5,
-        scale = data[5] or 1
+        scale = data[4] or 1
     }
 
     return array
@@ -58,17 +57,6 @@ function ix.limb.GetHealth(character, group, fraction)
     end
 
     return 0
-end
-
--- A function to return whether a limb is bleeding or not.
-function ix.limb.HasBleed(character, group)
-    local limbs = character:GetLimbs()
-
-    if(limbs and limbs[group]) then
-        return limbs[group].bleeding
-    end
-
-    return false
 end
 
 -- A function to return whether a limb is fractured or not.
