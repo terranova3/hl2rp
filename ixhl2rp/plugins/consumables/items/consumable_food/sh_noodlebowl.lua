@@ -3,12 +3,13 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Bowl of Meat"
-ITEM.model = Model("models/kek1ch/meat_pseudodog.mdl")
+ITEM.name = "Noodle Bowl"
+ITEM.model = Model("models/ramen_noodels.mdl")
 ITEM.width = 1
 ITEM.height = 1
-ITEM.description = "A hot meal. It's mixed with assorted meats."
+ITEM.description = "A classic steamy hot oriental meal."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 22
+ITEM.category = "Civil-Approved Food";
 ITEM.price = 19;
-ITEM.flag = "G"
+ITEM.flag = "f"

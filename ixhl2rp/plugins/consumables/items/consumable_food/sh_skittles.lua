@@ -1,0 +1,16 @@
+--[[
+	© 2020 TERRANOVA do not share, re-distribute or modify
+	without permission of its author.
+--]]
+
+ITEM.name = "Chocolate Packet";
+ITEM.model = "models/gibs/props_canteen/vm_snack10.mdl";
+ITEM.width = 1;
+ITEM.height = 1;
+ITEM.description = "A packet of expired but still delicious chocolate bits.";
+ITEM.permit = "consumables";
+ITEM.category = "Civil-Approved Food";
+ITEM.price = 8;
+ITEM.restoreHealth = 5;
+ITEM.rarity = "Rare"
+ITEM.flag = "f"
