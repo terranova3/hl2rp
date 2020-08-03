@@ -153,7 +153,7 @@ if (SERVER) then
 
 		local character = client:GetCharacter()
 
-		if (character:GetInventory():HasItem("union_card") or character:IsCombine()) then
+		if (character:GetInventory():HasItem("access_card") or character:IsCombine()) then
 			self:SetLocked(!self:GetLocked())
 			self.nextUseTime = CurTime() + 2
 		else
