@@ -25,6 +25,9 @@ ix.util.Include("sh_definitions.lua")
 
 if (SERVER) then
 	util.AddNetworkString("ixContainerPassword")
+	util.AddNetworkString("ixContainerUpdate")
+	util.AddNetworkString("ixContainerEditFinish")
+	util.AddNetworkString("ixBuildContainerFactionEditor")
 
 	function PLUGIN:PlayerSpawnedProp(client, model, entity)
 		model = tostring(model):lower()
@@ -72,8 +75,10 @@ if (SERVER) then
 						inventory:GetID(),
 						v:GetModel(),
 						v.password,
-						v.name,
-						v:GetMoney()
+						v:GetDisplayName() or v.name,
+						v:GetMoney(),
+						v.factions,
+						v.classes
 					}
 				end
 			else
@@ -143,6 +148,14 @@ if (SERVER) then
 						entity:SetMoney(v[7])
 					end
 
+					if(v[8]) then
+						entity.factions = v[8]
+					end
+
+					if(v[9]) then
+						entity.classes = v[9]
+					end
+
 					ix.item.RestoreInv(inventoryID, data2.width, data2.height, function(inventory)
 						inventory.vars.isBag = true
 						inventory.vars.isContainer = true
@@ -174,6 +187,72 @@ if (SERVER) then
 				client:NotifyLocalized("wrongPassword")
 			end
 		end
+	end)
+
+	net.Receive("ixContainerUpdate", function(length, client)
+		if (!CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil)) then
+			return
+		end
+
+		local entity = net.ReadEntity()
+
+		if (!IsValid(entity)) then
+			return
+		end
+
+		local key = net.ReadString()
+		local data = net.ReadType()
+		local feedback = true
+
+		if (key == "faction") then
+			local faction = ix.faction.teams[data]
+
+			if (faction) then
+				entity.factions[data] = !entity.factions[data]
+
+				if (!entity.factions[data]) then
+					entity.factions[data] = nil
+				end
+			end
+
+			local uniqueID = data
+			data = {uniqueID, entity.factions[uniqueID]}
+		elseif (key == "class") then
+			local class
+
+			for _, v in ipairs(ix.class.list) do
+				if (v.uniqueID == data) then
+					class = v
+
+					break
+				end
+			end
+
+			if (class) then
+				entity.classes[data] = !entity.classes[data]
+
+				if (!entity.classes[data]) then
+					entity.classes[data] = nil
+				end
+			end
+
+			local uniqueID = data
+			data = {uniqueID, entity.classes[uniqueID]}
+		end
+
+		local receivers = {}
+
+		for _, v in ipairs(player.GetAll()) do
+			if (CAMI.PlayerHasAccess(v, "Helix - Manage Vendors", nil)) then
+				receivers[#receivers + 1] = v
+			end
+		end
+		
+		net.Start("ixContainerEditFinish")
+			net.WriteEntity(entity)
+			net.WriteString(key)
+			net.WriteType(data)
+		net.Send(receivers)
 	end)
 
 	ix.log.AddType("containerPassword", function(client, ...)
@@ -215,6 +294,48 @@ else
 				net.SendToServer()
 			end
 		)
+	end)
+
+	net.Receive("ixContainerEditFinish", function()
+		local editPanel = ix.gui.containerFaction
+
+		if (!IsValid(editPanel)) then
+			return
+		end
+
+		local entity = net.ReadEntity()
+
+		if (!IsValid(entity)) then
+			return
+		end
+
+		local key = net.ReadString()
+		local data = net.ReadType()
+
+		entity.factions = entity.factions or {}
+		entity.classes = entity.classes or {}
+
+		if (key == "faction") then
+			local uniqueID = data[1]
+			local state = data[2]
+
+			entity.factions[uniqueID] = state
+
+			if (IsValid(editPanel) and IsValid(editPanel.factions[uniqueID])) then
+				editPanel.factions[uniqueID]:SetChecked(state == true)
+			end
+		elseif (key == "class") then
+			local uniqueID = data[1]
+			local state = data[2]
+
+			entity.classes[uniqueID] = state
+
+			if (IsValid(editPanel) and IsValid(editPanel.classes[uniqueID])) then
+				editPanel.classes[uniqueID]:SetChecked(state == true)
+			end
+		end
+
+		surface.PlaySound("buttons/button14.wav")
 	end)
 end
 
@@ -277,6 +398,39 @@ properties.Add("container_setpassword", {
 		local inventory = entity:GetInventory()
 
 		ix.log.Add(client, "containerPassword", name, inventory:GetID(), password:len() != 0)
+	end
+})
+
+-- properties
+properties.Add("container_setfaction", {
+	MenuLabel = "Set Faction",
+	Order = 400,
+	MenuIcon = "icon16/lock_edit.png",
+
+	Filter = function(self, entity, client)
+		if (entity:GetClass() != "ix_container") then return false end
+		if (!gamemode.Call("CanProperty", client, "container_setfaction", entity)) then return false end
+
+		return true
+	end,
+
+	Action = function(self, entity)
+		self:MsgStart()
+			net.WriteEntity(entity)
+		self:MsgEnd()
+	end,
+	Receive = function(self, length, client)
+		local entity = net.ReadEntity()
+
+		if (!IsValid(entity)) then return end
+		if (!self:Filter(entity, client)) then return end
+
+		-- We need to send what the server has for the entity.
+		net.Start("ixBuildContainerFactionEditor")
+			net.WriteEntity(entity)
+			net.WriteTable(entity.factions or {})
+			net.WriteTable(entity.classes or {})
+		net.Send(client)
 	end
 })
 

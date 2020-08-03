@@ -17,7 +17,9 @@ if (SERVER) then
 		self:SetSolid(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
 		self.receivers = {}
-
+		self.factions = {}
+		self.classes = {}
+		
 		local definition = ix.container.stored[self:GetModel():lower()]
 
 		if (definition) then
@@ -95,6 +97,12 @@ if (SERVER) then
 	function ENT:Use(activator)
 		local inventory = self:GetInventory()
 
+		if (!self:CanAccess(activator)) then
+			activator:NotifyLocalized("You are not allowed to access this container!")
+
+			return
+		end
+
 		if (inventory and (activator.ixNextOpen or 0) < CurTime()) then
 			local character = activator:GetCharacter()
 
@@ -163,6 +171,30 @@ else
 		description:SetText(definition.description)
 		description:SizeToContents()
 	end
+end
+
+function ENT:CanAccess(client)
+	local bAccess = false
+	local uniqueID = ix.faction.indices[client:Team()].uniqueID
+
+	if (self.factions and !table.IsEmpty(self.factions)) then
+		if (self.factions[uniqueID]) then
+			bAccess = true
+		else
+			return false
+		end
+	end
+
+	if (bAccess and self.classes and !table.IsEmpty(self.classes)) then
+		local class = ix.class.list[client:GetCharacter():GetClass()]
+		local classID = class and class.uniqueID
+
+		if (classID and !self.classes[classID]) then
+			return false
+		end
+	end
+
+	return true
 end
 
 function ENT:GetInventory()
