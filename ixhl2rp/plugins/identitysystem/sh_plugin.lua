@@ -50,7 +50,7 @@ else
 				cid = data[2],
 				occupation = data[3],
 				salary = data[4],
-				issue_date = ix.date.GetFormatted(format)),
+				issue_date = ix.date.GetFormatted(format),
 				officer = client:Name(),
 				cca = isCombine
 			})
