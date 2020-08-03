@@ -3,12 +3,14 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Chocolate Packet";
-ITEM.model = "models/gibs/props_canteen/vm_snack10.mdl";
+ITEM.name = "Canned Corn";
+ITEM.model = "models/kek1ch/dev_corn.mdl";
 ITEM.width = 1;
 ITEM.height = 1;
-ITEM.description = "A packet of expired but still delicious chocolate bits.";
+ITEM.description = "An aluminium can filled with corn.";
 ITEM.permit = "consumables";
 ITEM.price = 8;
+ITEM.category = "Civil-Approved Food";
 ITEM.restoreHealth = 5;
-ITEM.rarity = "Rare"
+ITEM.rarity = "Common"
+ITEM.flag = "f"
