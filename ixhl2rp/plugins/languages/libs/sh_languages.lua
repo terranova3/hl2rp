@@ -50,7 +50,7 @@ function ix.language.Register()
                 if (LocalPlayer():GetCharacter():HasLanguage(language)) then
                     chat.AddText(self.color, string.format(self.format, speaker:GetName(), text))
                 else
-                    chat.AddText(self.color, string.format("%s says something unintelligible in %s.", speaker:GetName(), text))
+                    chat.AddText(self.color, string.format("%s says something unintelligible in %s.", speaker:GetName(), language))
                 end
             end
         })
