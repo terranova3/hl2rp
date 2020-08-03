@@ -34,13 +34,25 @@ else
 				inventory:Remove(data[5])
 			end
 
+			local isCombine = false
+
+			for _, v in pairs(player.GetAll()) do
+				if(v:GetCharacter() and v:GetCharacter():GetData("cid", "") == data[2]) then
+					isCombine = v:GetCharacter():IsCombine()
+					break
+				end
+			end
+
+			local format = "%A, %B %d, %Y. %H:%M:%S"
+
 			inventory:Add("cid", 1, {
 				citizen_name = data[1],
 				cid = data[2],
 				occupation = data[3],
 				salary = data[4],
-				issue_date = os.date("%H:%M:%S - %d/%m/%Y", os.time()),
-				officer = client:Name()
+				issue_date = ix.date.GetFormatted(format)),
+				officer = client:Name(),
+				cca = isCombine
 			})
 
 			client:EmitSound("buttons/button14.wav", 100, 25)
