@@ -4,7 +4,7 @@ ITEM.model = "models/weapons/arccw_insurgency/w_aks74u.mdl"
 ITEM.class = "arccw_ins_aks74u_tn"
 ITEM.weaponCategory = "primary"
 ITEM.classes = {CLASS_EOW}
-ITEM.width = 4
+ITEM.width = 3
 ITEM.height = 2
 
 ITEM.pacData = {
