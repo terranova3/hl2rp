@@ -3,8 +3,8 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Sausage";
-ITEM.model = "models/griim/foodpack/sausage.mdl";
+ITEM.name = "Toast";
+ITEM.model = "models/toast/toast.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A hot piece of crusted toast. Tastes a bit..off.";
