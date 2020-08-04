@@ -191,44 +191,46 @@ hook.Add("PopulateTeamMenu", "ixTeamMenu", function(tabs)
 			end
 
 			for k2, v2 in SortedPairsByMemberValue(memberList, "owner", false) do
-				local member = panel:Add("ixMenuButton")
-				member:SetFont("ixMenuButtonFont")
-				member:SetText(v2.client:Name() or "Unknown")
-				member:SizeToContents()
-				member:Dock(TOP)
-				member.Paint = function(this, width, height)
-					derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ColorAlpha(this.backgroundColor, this.currentBackgroundAlpha))
-				end
-				member.DoRightClick = function(this)
-					if (!LocalPlayer():IsDispatch()) then
-						if (!LocalPlayer().isTeamOwner or LocalPlayer().curTeam != k) then return end
+				if(v2.client) then
+					local member = panel:Add("ixMenuButton")
+					member:SetFont("ixMenuButtonFont")
+					member:SetText(v2.client:Name() or "Unknown")
+					member:SizeToContents()
+					member:Dock(TOP)
+					member.Paint = function(this, width, height)
+						derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ColorAlpha(this.backgroundColor, this.currentBackgroundAlpha))
+					end
+					member.DoRightClick = function(this)
+						if (!LocalPlayer():IsDispatch()) then
+							if (!LocalPlayer().isTeamOwner or LocalPlayer().curTeam != k) then return end
+						end
+
+						local interactMenu = DermaMenu(this)
+						local member = interactMenu:AddOption(v2.client:Name())
+						member:SetContentAlignment(5)
+						member.Paint = function(this, width, height) end
+
+						local spacer = interactMenu:AddSpacer()
+						spacer.Paint = function(this, width, height)
+							surface.SetDrawColor( Color( 255, 255, 255, 100 ) )
+							surface.DrawRect( 0, 0, width, height )
+						end
+
+						interactMenu:AddOption(L("TeamTransferOwner"), function()
+							ix.command.Send("PTLead", v2.client:Name())
+						end):SetIcon( "icon16/award_star_gold_1.png" )
+
+						interactMenu:AddOption(L("TeamKickMember"), function()
+							ix.command.Send("PTKick", v2.client:Name())
+						end):SetIcon( "icon16/cross.png" )
+
+						interactMenu:Open()
+						this.Menu = interactMenu
 					end
 
-					local interactMenu = DermaMenu(this)
-					local member = interactMenu:AddOption(v2.client:Name())
-					member:SetContentAlignment(5)
-					member.Paint = function(this, width, height) end
-
-					local spacer = interactMenu:AddSpacer()
-					spacer.Paint = function(this, width, height)
-						surface.SetDrawColor( Color( 255, 255, 255, 100 ) )
-						surface.DrawRect( 0, 0, width, height )
+					if (v2.client.isTeamOwner) then
+						member.backgroundColor = Color(50,150,100)
 					end
-
-					interactMenu:AddOption(L("TeamTransferOwner"), function()
-						ix.command.Send("PTLead", v2.client:Name())
-					end):SetIcon( "icon16/award_star_gold_1.png" )
-
-					interactMenu:AddOption(L("TeamKickMember"), function()
-						ix.command.Send("PTKick", v2.client:Name())
-					end):SetIcon( "icon16/cross.png" )
-
-					interactMenu:Open()
-					this.Menu = interactMenu
-				end
-
-				if (v2.client.isTeamOwner) then
-					member.backgroundColor = Color(50,150,100)
 				end
 			end
 		end
