@@ -1,7 +1,7 @@
 
-RECIPE.name = "Wrench"
-RECIPE.description = "A mechanical wrench for vehicles."
-RECIPE.model = "models/props_c17/tools_wrench01a.mdl"
+RECIPE.name = "Water Filter"
+RECIPE.description = "Assemble a water filter to purify liquids."
+RECIPE.model = "models/props_interiors/pot01a.mdl"
 RECIPE.category = "Tools"
 RECIPE.requirements = {
 	["charcoal_filter"] = 2,

@@ -10,6 +10,5 @@ ITEM.height = 1
 ITEM.description = "A strange round Xen..Sponge? It has an orange hue and a rough texture."
 ITEM.category = "Contraband"
 ITEM.price = 25;
-ITEM.restoreHealth = 5
+ITEM.restoreHealth = 20
 ITEM.flag = "G"
-ITEM.rarity = "Common"
