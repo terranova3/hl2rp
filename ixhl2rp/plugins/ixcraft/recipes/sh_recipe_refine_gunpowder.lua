@@ -4,7 +4,7 @@ RECIPE.description = "Mix Nitre and charocal to make gunpowder."
 RECIPE.model = "models/props_junk/metal_paintcan001a.mdl"
 RECIPE.category = "Refine"
 RECIPE.requirements = {
-	["niter"] = 2,
+	["nitre"] = 2,
 	["charcoal"] = 1
 }
 RECIPE.results = {
