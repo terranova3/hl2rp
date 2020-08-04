@@ -32,7 +32,12 @@ function ix.item.PerformDragCombine(client, item, targetItem, invID)
     end
 
     if (item.combine) then
-        item.combine(item, targetItem)
+        local destroy = item.combine(item, targetItem) or true
+
+        if(destroy) then
+            item:Remove()
+            targetItem:Remove()
+        end
     end
 end
 
