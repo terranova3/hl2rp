@@ -27,6 +27,10 @@ CAMI.RegisterPrivilege({
 	MinAccess = "superadmin"
 })
 
+CAMI.RegisterPrivilege({
+	Name = "Helix - Donator",
+	MinAccess = "superadmin"
+})
 
 ix.option.Add("toggleAlert", ix.type.bool, false, {
 	category = "Admin Settings",
@@ -64,6 +68,8 @@ ix.chat.Register("adminchat", {
 			icon = "icon16/key.png"
 		elseif(CAMI.PlayerHasAccess(speaker, "Helix - Developer", nil)) then
 			icon = "icon16/wrench.png"
+		elseif(CAMI.PlayerHasAccess(speaker, "Helix - Gamemaster", nil)) then
+			icon = "icon16/asterisk_yellow.png"
 		elseif (speaker:IsSuperAdmin()) then
 			icon = "icon16/shield.png"
 		elseif(speaker:IsAdmin()) then
