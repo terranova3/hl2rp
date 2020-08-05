@@ -3,6 +3,16 @@
 	without permission of its author.
 --]]
 
+ix.limb.fractureSounds = {
+    ["male"] = {
+        "vo/npc/male01/myleg01.wav",
+        "vo/npc/male01/myleg02.wav"
+    },
+    ["female"] = {
+        "vo/npc/female01/myleg01.wav",
+        "vo/npc/female01/myleg02.wav"
+    }
+}
 -- Called when we are being hit and need to be scaling limb damage based on various modifiers
 function ix.limb.TakeDamage(client, group, info, diff)
     local character = client:GetCharacter()
@@ -26,6 +36,16 @@ function ix.limb.TakeDamage(client, group, info, diff)
 
             if(canFracture and (damage * (diff or 1)) >= limbHitgroup.fractureThreshold) then
                 ix.limb.SetFracture(character, group, true)
+
+                if(client:IsAlive() and character:GetFaction() == FACTION_CITIZEN and (client.fractureSound or 0) < CurTime()) then
+                    if(client:IsFemale()) then
+                        client:EmitSound(ix.limb.fractureSounds["female"][math.random(1,2)], 80)
+                    else
+                        client:EmitSound(ix.limb.fractureSounds["male"][math.random(1,2)], 80)
+                    end
+
+                    client.fractureSound = CurTime() + 2
+                end
             end
         end
 
@@ -33,7 +53,6 @@ function ix.limb.TakeDamage(client, group, info, diff)
         hook.Run("LimbTakeDamage", client, group, damage, health, info)
     end
 end
-
 -- A function to instantly kill the player if their limbs are gone.
 function ix.limb.RunDamage(character, hitgroup)
     local limbHP = character:GetLimbHP(hitgroup)
