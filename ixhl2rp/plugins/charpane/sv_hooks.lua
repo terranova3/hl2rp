@@ -61,6 +61,10 @@ end
 function PLUGIN:CharPanelItemEquipped(client, item)
 	if(!item.outfitCategory) then return false end;
 
+	if(item.OnEquipped) then
+		item:OnEquipped(client)
+	end
+
 	if(item.bodyGroups) then
 		local bodygroup = 0
 
@@ -77,6 +81,10 @@ end;
 -- Called when an item has been removed from the character panel
 function PLUGIN:CharPanelItemUnequipped(client, item) 
 	if(!item.outfitCategory) then return false end;
+
+	if(item.OnUnequipped) then
+		item:OnUnequipped(client)
+	end
 
 	if(item.bodyGroups) then
 		PLUGIN:UpdateBodygroup(client, item.outfitCategory, 0)
