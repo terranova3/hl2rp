@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Union Cigarette Packet"
+ITEM.name = "Approved Cigarette Packet"
 ITEM.model = Model("models/closedboxshit.mdl")
 ITEM.width = 1
 ITEM.height = 2

@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Chips";
+ITEM.name = "Approved Chips";
 ITEM.model = "models/bioshockinfinite/bag_of_hhips.mdl";
 ITEM.width = 1;
 ITEM.height = 1;

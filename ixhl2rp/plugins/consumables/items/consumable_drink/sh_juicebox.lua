@@ -11,6 +11,6 @@ ITEM.description = "A childs juice box. Tastes like a long-gone fruit of some va
 ITEM.permit = "consumables";
 ITEM.category = "Civil-Approved Drinks";
 ITEM.flag = "f"
-ITEM.price = 6;
+ITEM.price = 10;
 ITEM.capacity = 250
 ITEM.restoreStamina = 10;

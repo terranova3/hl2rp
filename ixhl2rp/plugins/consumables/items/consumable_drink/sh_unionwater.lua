@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Water";
+ITEM.name = "Approved Water";
 ITEM.model = "models/props_lunk/popcan01a.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;

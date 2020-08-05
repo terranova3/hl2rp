@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Chocolate";
+ITEM.name = "Approved Chocolate";
 ITEM.model = "models/bioshockinfinite/hext_candy_chocolate.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;

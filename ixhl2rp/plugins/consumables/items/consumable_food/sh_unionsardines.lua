@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Fish";
+ITEM.name = "Approved Fish";
 ITEM.model = "models/bioshockinfinite/cardine_can_open.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;

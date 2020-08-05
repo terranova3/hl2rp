@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Apple"
+ITEM.name = "Approved Apple"
 ITEM.model = "models/bioshockinfinite/hext_apple.mdl";
 ITEM.width = 1;
 ITEM.height = 1;

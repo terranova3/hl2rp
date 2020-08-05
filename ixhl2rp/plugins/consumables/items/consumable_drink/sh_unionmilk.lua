@@ -4,7 +4,7 @@
 --]]
 
 
-ITEM.name = "Civil-Approved Milk";
+ITEM.name = "Approved Milk";
 ITEM.model = "models/props_junk/garbage_milkcarton002a.mdl";
 ITEM.width = 1;
 ITEM.height = 2;

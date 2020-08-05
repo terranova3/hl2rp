@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Banana";
+ITEM.name = "Approved Banana";
 ITEM.model = "models/bioshockinfinite/hext_banana.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;

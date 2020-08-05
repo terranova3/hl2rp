@@ -11,6 +11,6 @@ ITEM.description = "The globally famous pre-Union sugary drink. This one might h
 ITEM.permit = "consumables";
 ITEM.category = "Civil-Approved Drinks";
 ITEM.flag = "f"
-ITEM.price = 8;
+ITEM.price = 12;
 ITEM.capacity = 375
 ITEM.restoreStamina = 15;

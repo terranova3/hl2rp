@@ -10,6 +10,6 @@ ITEM.height = 1;
 ITEM.description = "Crusted delight with something sweet.";
 ITEM.permit = "consumables";
 ITEM.category = "Civil-Approved Food";
-ITEM.price = 15;
+ITEM.price = 19;
 ITEM.restoreHealth = 10;
 ITEM.flag = "f"

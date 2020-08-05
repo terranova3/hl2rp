@@ -1,10 +1,10 @@
-ITEM.name = "AK74"
-ITEM.description = "A classic 5.45mm calibre Russian assault rifle."
-ITEM.model = "models/weapons/arccw_insurgency/w_ak74.mdl"
-ITEM.class = "arccw_ins_ak74_tn"
+ITEM.name = "Heat Projecting Disinfection Unit (HePDU"
+ITEM.description = "A portable flamethrower used by members of CRU for decontamination."
+ITEM.model = "models/vuthakral/weapons/w_nc1.mdl"
+ITEM.class = "drc_combine_flamethrower"
 ITEM.weaponCategory = "primary"
 ITEM.classes = {CLASS_EOW}
-ITEM.width = 4
+ITEM.width = 6
 ITEM.height = 2
 
 ITEM.pacData = {
@@ -32,7 +32,7 @@ ITEM.pacData = {
 					["EyeAngles"] = false,
 					["DrawOrder"] = 0,
 					["TintColor"] = Vector(0, 0, 0),
-					["UniqueID"] = "1644819129",
+					["UniqueID"] = "2690408469",
 					["Translucent"] = false,
 					["LodOverride"] = -1,
 					["BlurSpacing"] = 0,
@@ -46,7 +46,7 @@ ITEM.pacData = {
 					["Brightness"] = 1,
 					["BoneMerge"] = false,
 					["BlurLength"] = 0,
-					["Position"] = Vector(5.61328125, -4.640380859375, 0.069747924804688),
+					["Position"] = Vector(3.919921875, -6.4338989257813, 2.810791015625),
 					["AngleOffset"] = Angle(0, 0, 0),
 					["AlternativeScaling"] = false,
 					["Hide"] = false,
@@ -54,18 +54,18 @@ ITEM.pacData = {
 					["Scale"] = Vector(1, 1, 1),
 					["ClassName"] = "model",
 					["EditorExpand"] = false,
-					["Size"] = 0.85,
+					["Size"] = 1,
 					["ModelFallback"] = "",
-					["Angles"] = Angle(-18.622611999512, -174.59838867188, -6.4337058067322),
+					["Angles"] = Angle(26.343179702759, -0.25702786445618, -0.57948458194733),
 					["TextureFilter"] = 3,
-					["Model"] = "models/weapons/arccw_insurgency/w_ak74.mdl",
+					["Model"] = "models/vuthakral/weapons/w_nc1.mdl",
 					["BlendMode"] = "",
 				},
 			},
 		},
 		["self"] = {
 			["DrawOrder"] = 0,
-			["UniqueID"] = "186800644",
+			["UniqueID"] = "1320702186",
 			["AimPartUID"] = "",
 			["Hide"] = false,
 			["Duplicate"] = false,
@@ -79,7 +79,7 @@ ITEM.pacData = {
 }
 
 ITEM.iconCam = {
-	ang	= Angle(-0.020070368424058, 270.40155029297, 0),
-	fov	= 9.2253324508038,
-	pos	= Vector(0, 200, -1)
+	ang	= Angle(-0.70499622821808, 268.25439453125, 0),
+	fov	= 12.085652091515,
+	pos	= Vector(0, 200, 0)
 }

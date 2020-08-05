@@ -11,5 +11,5 @@ ITEM.description = "A packet of expired processed french fries.";
 ITEM.category = "Civil-Approved Food";
 ITEM.permit = "consumables";
 ITEM.price = 4;
-ITEM.restoreHealth = 5;
+ITEM.restoreHealth = 7;
 ITEM.flag = "f"

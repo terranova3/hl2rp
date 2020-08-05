@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "CWU Manufactured Cigarette"
+ITEM.name = "Approved Cigarette"
 ITEM.model = Model("models/phycitnew.mdl")
 ITEM.width = 1
 ITEM.height = 1

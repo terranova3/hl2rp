@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Noodles";
+ITEM.name = "Approved Noodles";
 ITEM.model = "models/props_junk/garbage_takeoutcarton001a.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;

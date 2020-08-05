@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Flakes";
+ITEM.name = "Approved Flakes";
 ITEM.model = "models/bioshockinfinite/hext_cereal_box_cornflakes.mdl";
 ITEM.width = 2;
 ITEM.height	= 2;

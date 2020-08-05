@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Nuts";
+ITEM.name = "Approved Nuts";
 ITEM.model = "models/bioshockinfinite/rag_of_peanuts.mdl";
 ITEM.width = 1;
 ITEM.height = 1;

@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Union Coffee";
+ITEM.name = "Approved Coffee";
 ITEM.model = "models/props_lunk/popcan01a.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;

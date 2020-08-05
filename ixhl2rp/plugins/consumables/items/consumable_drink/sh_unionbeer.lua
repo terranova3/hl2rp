@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Civil-Approved Beer";
+ITEM.name = "Approved Beer";
 ITEM.model = "models/bioshockinfinite/hext_bottle_lager.mdl";
 ITEM.width = 1;
 ITEM.height = 2;
