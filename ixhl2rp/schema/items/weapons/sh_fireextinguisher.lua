@@ -5,3 +5,4 @@ ITEM.class = "weapon_extinguisher"
 ITEM.weaponCategory = "primary"
 ITEM.width = 2
 ITEM.height = 4
+ITEM.noBusiness = true

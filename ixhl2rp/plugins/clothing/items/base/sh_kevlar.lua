@@ -54,3 +54,10 @@ function ITEM:OnSave()
 		self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	end
 end
+
+ITEM.iconCam = {
+	pos = Vector(0, -3, 241.83006286621),
+	ang = Angle(90, -90, 0),
+	fov = 7.6470588235294
+}
+ITEM.backgroundColor = Color(19, 72, 96, 100)
