@@ -5,8 +5,6 @@
 
 ITEM.name = "Molle Vest";
 ITEM.price = 165;
-ITEM.width = 2;
-ITEM.height = 3;
 ITEM.model = "models/fty/items/mollevest.mdl"
 ITEM.description = "Decent bullet resistant vest likely recovered from oldworld military salvage."
 ITEM.flag = "G"
