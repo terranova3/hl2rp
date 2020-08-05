@@ -1,5 +1,5 @@
 ITEM.name = "Heat Projecting Disinfection Unit (HePDU"
-ITEM.description = "A portable flamethrower used by members of CRU for decontamination."
+ITEM.description = "A portable flamethrower used by members of CRU for decontamination. Colloquially called a flame didgeridoo."
 ITEM.model = "models/vuthakral/weapons/w_nc1.mdl"
 ITEM.class = "drc_combine_flamethrower"
 ITEM.weaponCategory = "primary"
