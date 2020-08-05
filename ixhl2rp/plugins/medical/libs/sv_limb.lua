@@ -37,7 +37,7 @@ function ix.limb.TakeDamage(client, group, info, diff)
             if(canFracture and (damage * (diff or 1)) >= limbHitgroup.fractureThreshold) then
                 ix.limb.SetFracture(character, group, true)
 
-                if(client:IsAlive() and character:GetFaction() == FACTION_CITIZEN and (client.fractureSound or 0) < CurTime()) then
+                if(client:Alive() and character:GetFaction() == FACTION_CITIZEN and (client.fractureSound or 0) < CurTime()) then
                     if(client:IsFemale()) then
                         client:EmitSound(ix.limb.fractureSounds["female"][math.random(1,2)], 80)
                     else
