@@ -91,6 +91,14 @@ function PLUGIN:CharPanelItemEquipped(client, item)
 		item:Call("OnEquipped", client)
 	end
 
+	if(item.isBag and item:GetData("id")) then
+		local inv = ix.item.inventories[item:GetData("id")]
+
+		if(inv) then
+			inv:AddReceiver(client)
+		end
+	end
+
 	if(item.bodyGroups) then
 		local bodygroup = 0
 
@@ -110,6 +118,14 @@ function PLUGIN:CharPanelItemUnequipped(client, item)
 
 	if(item.OnUnequipped) then
 		item:Call("OnUnequipped", client)
+	end
+
+	if(item.isBag and item:GetData("id")) then
+		local inv = ix.item.inventories[item:GetData("id")]
+
+		if(inv) then
+			inv:RemoveReceiver(client)
+		end
 	end
 
 	if(item.bodyGroups) then

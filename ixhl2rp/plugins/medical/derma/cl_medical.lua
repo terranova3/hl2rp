@@ -50,6 +50,7 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			panel.childPanels = {}
 
 			local inventory = LocalPlayer():GetCharacter():GetInventory()
+			local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
 
 			if (inventory) then
 				panel:SetInventory(inventory)
@@ -57,8 +58,9 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 
 			ix.gui.inv1 = panel
 
+
 			if (ix.option.Get("openBags", true)) then
-				for _, v in pairs(inventory:GetItems()) do
+				for _, v in pairs(charPanel:GetItems()) do
 					if (!v.isBag) then
 						continue
 					end

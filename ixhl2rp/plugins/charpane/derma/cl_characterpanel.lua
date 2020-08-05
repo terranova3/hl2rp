@@ -74,8 +74,8 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		net.WriteUInt(gridY or 0, 6)
 	net.SendToServer()
 
-	if(ix.gui.charpane.slots[item.outfitCategory]) then
-		ix.gui.charpane.slots[item.outfitCategory].isEmpty = true
+	if(ix.gui.charpanel.slots[item.outfitCategory]) then
+		ix.gui.charpanel.slots[item.outfitCategory].isEmpty = true
 	end
 end
 
@@ -114,7 +114,7 @@ vgui.Register("ixCharPanelItemIcon", PANEL, "SpawnIcon")
 local PANEL = {}
 
 function PANEL:Init()
-	ix.gui.charpane = self
+	ix.gui.charpanel = self
 
 	self:SetSize(360, 525)
 
@@ -136,6 +136,8 @@ function PANEL:Init()
 		["kevlar"] = {x = 5, y = 240},
 		["hands"] = {x = 291, y = 300},
 		["legs"] = {x = 291, y = 370},
+		["bag"] = {x = 5, y = 310},
+		["satchel"] = {x = 5, y = 380},
 		["pin"] = {x = 5, y = 370, condition = character:IsMetropolice()},
 	}
 

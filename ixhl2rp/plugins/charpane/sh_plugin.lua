@@ -12,8 +12,6 @@ ix.charPanels = ix.charPanels or {
 	[0] = {}
 }
 
-ix.util.Include("cl_hooks.lua")
-
 do
 	ix.util.Include("sv_database.lua");
 	ix.util.Include("sv_hooks.lua");
