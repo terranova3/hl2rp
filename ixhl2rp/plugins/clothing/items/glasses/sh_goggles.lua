@@ -5,7 +5,7 @@
 
 ITEM.base = "base_glasses";
 ITEM.name = "Goggles";
-ITEM.model = "models/fty/items/glasses.mdl"
+ITEM.model = "models/fty/items/goggles.mdl"
 ITEM.price = 50
 ITEM.description = "A pair of Mad-Max looking goggles befit for the Texan Lone Ranger."
 ITEM.flag = "a"
