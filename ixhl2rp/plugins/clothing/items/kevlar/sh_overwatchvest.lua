@@ -3,7 +3,7 @@
 	without permission of its author.
 --]]
 
-ITEM.base = "base_vest";
+ITEM.base = "base_kevlar";
 ITEM.name = "Overwatch Vest";
 ITEM.price = 230;
 ITEM.model = "models/fty/items/otavest.mdl"
