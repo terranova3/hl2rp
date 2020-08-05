@@ -44,7 +44,8 @@ function PANEL:Rebuild()
 			if (!availableClasses[class]) then
 				availableClasses[class] = {
 					players = {},
-					priority = priority
+					priority = priority,
+					classColor = character:GetClassColor()
 				};
 			end;
 				
@@ -54,7 +55,7 @@ function PANEL:Rebuild()
 
 	for k, v in pairs(availableClasses) do
 		if (#v.players > 0) then
-			classes[#classes + 1] = {name = k, priority = v.priority, players = v.players};
+			classes[#classes + 1] = {name = k, priority = v.priority, players = v.players, classColor = v.classColor};
 		end;
 	end;
 	
@@ -101,7 +102,7 @@ function PANEL:Rebuild()
 			--characterForm.Header:SetSize( 30, 30 )
 
 			function characterForm:Paint(w, h)
-				derma.SkinFunc("PaintCategoryPanel", self, "", v.players[1]:GetCharacter():GetClassColor())
+				derma.SkinFunc("PaintCategoryPanel", self, "", v.classColor)
 				surface.SetDrawColor(0, 0, 0, 50);	
 				surface.DrawRect(0, 0, w, h)
 
