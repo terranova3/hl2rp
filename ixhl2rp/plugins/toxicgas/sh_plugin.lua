@@ -139,10 +139,14 @@ if SERVER then
                     for _, gasBox in pairs(PLUGIN.positions) do
                         if pos:WithinAABox(gasBox.min, gasBox.max) then
                             ply.nextGasDamage = ply.nextGasDamage or CurTime()
-
+                        else:
+                            ix.limb.ResetMovement(client)
+                        end
                             if CurTime() >= ply.nextGasDamage then
-                                ply.nextGasDamage = CurTime() + 15
-                                ply:TakeDamage(15)
+                                ply.nextGasDamage = CurTime() + ix.config.Get("gasDmgTick", 0)
+                                ply:TakeDamage(ix.config.Get("gasDmg", 0))
+                                client:SetRunSpeed(ix.config.Get("runSpeed") * ix.config.Get("gasRunSlow"))
+                                client:SetWalkSpeed(ix.config.Get("walkSpeed") * ix.config.Get("gasWalkSlow"))
                                 ply:ScreenFade(1, Color(234, 177, 33, 100), 0.5, 0)
 							    ix.util.Notify("You feel a burning sensation in the back of your throat.", ply)
                             end
