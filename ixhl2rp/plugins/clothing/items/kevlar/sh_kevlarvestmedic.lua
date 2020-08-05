@@ -3,7 +3,6 @@
 	without permission of its author.
 --]]
 
-ITEM.base = "base_kevlar";
 ITEM.name = "Medic Kevlar Vest";
 ITEM.price = 135;
 ITEM.model = "models/fty/items/rebelvest.mdl"
