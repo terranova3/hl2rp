@@ -54,6 +54,10 @@ function PLUGIN:CharPanelLoaded(character)
 		if (v.pacData) then
 			character:GetPlayer():AddPart(v.uniqueID, v)
 		end
+
+		if(v.OnEquipped) then
+			item:OnEquipped(character:GetPlayer())
+		end
 	end
 end
 
