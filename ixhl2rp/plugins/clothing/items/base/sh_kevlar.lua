@@ -30,11 +30,13 @@ if (CLIENT) then
 	end
 end
 
-function ITEM:OnEquipped()
+function ITEM:OnEquipped(client)
+	self.player = client
 	self.player:SetArmor(self:GetData("armor", self.maxArmor))
 end
 
-function ITEM:OnUnequipped()
+function ITEM:OnUnequipped(client)
+	self.player = client
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
 end
