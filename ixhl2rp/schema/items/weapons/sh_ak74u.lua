@@ -68,7 +68,7 @@ ITEM.pacData = {
 }
 
 ITEM.iconCam = {
-	ang	= Angle(-0.020070368424058, 270.40155029297, 0),
-	fov	= 9.2253324508038,
-	pos	= Vector(0, 200, -1)
+	pos = Vector(-5.2, 200, 2.5),
+	ang = Angle(0, 270, 0),
+	fov = 10.4976470588235,
 }
