@@ -1,14 +1,14 @@
 
-RECIPE.name = "Gunpowder"
-RECIPE.description = "Mix Nitre and charocal to make gunpowder."
-RECIPE.model = "models/props_junk/metal_paintcan001a.mdl"
+RECIPE.name = "Activated Charcoal"
+RECIPE.description = "Use chemicals, charcoal and heat to create activated charcoal."
+RECIPE.model = "models/props_junk/garbage_metalcan002a.mdl"
 RECIPE.category = "Refine"
 RECIPE.requirements = {
-	["nitre"] = 2,
-	["charcoal"] = 1
+	["charcoal"] = 2,
+	["chemical"] = 1
 }
 RECIPE.results = {
-	["gunpowder"] = 1
+	["charcoal_filter"] = 2
 }
 
 RECIPE:PostHook("OnCanCraft", function(recipeTable, client)

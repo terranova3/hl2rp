@@ -101,6 +101,8 @@ ITEM.combine = function(item, item2)
             client:Notify(string.format("%s has reached its maximum capacity.", item2.name))
         end
     end
+
+    return false
 end
 ITEM.suppressed = function(itemTable, name)
     if(name == "drop") then

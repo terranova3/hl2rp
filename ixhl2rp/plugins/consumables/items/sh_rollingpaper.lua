@@ -11,5 +11,11 @@ ITEM.description = "Some papers set for some tobacco to be rolled into hand-made
 ITEM.category = "Contraband"
 ITEM.flag = "n"
 
-}
+ITEM.combine = function(item, targetItem)
+    local client = item:GetOwner()
+    local inventory = client:GetCharacter():GetInventory()
 
+	if(targetItem.uniqueID == "rollingtobaco") then
+	   inventory:Add("handmadecigarettes", 1)
+	end
+end
