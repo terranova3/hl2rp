@@ -5,7 +5,7 @@
 
 ITEM.base = "base_vest";
 ITEM.name = "Kevlar Vest";
-ITEM.price = 85;
+ITEM.price = 120;
 ITEM.model = "models/fty/items/rebelvest2.mdl"
 ITEM.description = "Basic bullet resistant vest somehow salvaged from Civil Protection."
 ITEM.flag = "G"

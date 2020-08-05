@@ -141,7 +141,7 @@ ix.container.Register("models/props/de_nuke/crate_small.mdl", {
 
 ix.container.Register("models/kali/props/cases/hard case c.mdl", {
 	name = "Footlocker",
-	description = "A very durable armoured footlocker container.",
+	description = "An extremely durable armoured footlocker.",
 	width = 5,
 	height = 3
 })
