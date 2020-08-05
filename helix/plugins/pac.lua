@@ -147,6 +147,12 @@ else
 		local pacData = ix.pac.list[uniqueID]
 
 		if (pacData) then
+			if(client:IsFemale() and pacData.female) then
+				pacData = pacData.female
+			elseif(pacData.male) then
+				pacData = pacData.male
+			end
+
 			if (itemTable and itemTable.pacAdjust) then
 				pacData = table.Copy(pacData)
 				pacData = itemTable:pacAdjust(pacData, client)
@@ -170,6 +176,12 @@ else
 		local pacData = ix.pac.list[uniqueID]
 
 		if (pacData) then
+			if(client:IsFemale() and pacData.female) then
+				pacData = pacData.female
+			elseif(pacData.male) then
+				pacData = pacData.male
+			end
+			
 			if (isfunction(client.RemovePACPart)) then
 				client:RemovePACPart(pacData)
 			else
