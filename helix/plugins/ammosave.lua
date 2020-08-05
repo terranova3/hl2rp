@@ -82,7 +82,7 @@ function PLUGIN:PlayerLoadedCharacter(client)
 		-- Check if the ammotable is exists.
 		if (ammoTable) then
 			for k, v in pairs(ammoTable) do
-				client:SetAmmo(v, 1000)
+				client:SetAmmo(v, tostring(k))
 			end
 		end
 	end)
