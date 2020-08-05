@@ -4,7 +4,7 @@
 --]]
 
 ITEM.name = "Thist"
-ITEM.model = Model("models/mosi/fallout4/props/plant/gourdflower.mdl")
+ITEM.model = Model("models/mosi/fallout4/props/plant/thistle.mdl")
 ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "A Xen flora that flourishes in a variety of colours depending on it's temperature."
