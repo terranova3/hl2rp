@@ -23,19 +23,15 @@ if (CLIENT) then
 		panel:SetBackgroundColor(derma.GetColor("Info", tooltip))
 		panel:SetText("Armor: " .. (self:GetData("equip") and LocalPlayer():Armor() or self:GetData("armor", self.maxArmor)))
 		panel:SizeToContents()
-
-		local panelID = tooltip:AddRowAfter("name", "armor")
-		panelID:SetBackgroundColor(derma.GetColor("DarkerBackground", tooltip))
-		panelID:SizeToContents()
 	end
 end
 
-function ITEM:OnEquipped(client)
+function ITEM:OnEquipped()
 	self.player = client
 	self.player:SetArmor(self:GetData("armor", self.maxArmor))
 end
 
-function ITEM:OnUnequipped(client)
+function ITEM:OnUnequipped()
 	self.player = client
 	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 	self.player:SetArmor(0)
@@ -46,15 +42,11 @@ function ITEM:Repair(amount)
 end
 
 function ITEM:OnLoadout()
-	if (self:GetData("equip")) then
-		self.player:SetArmor(self:GetData("armor", self.maxArmor))
-	end
+	self.player:SetArmor(self:GetData("armor", self.maxArmor))
 end
 
 function ITEM:OnSave()
-	if (self:GetData("equip")) then
-		self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
-	end
+	self:SetData("armor", math.Clamp(self.player:Armor(), 0, self.maxArmor))
 end
 
 ITEM.iconCam = {

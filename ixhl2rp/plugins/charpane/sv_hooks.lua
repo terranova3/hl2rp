@@ -47,6 +47,7 @@ function PLUGIN:CanPlayerEquipItem(client, item)
 	return true;
 end
 
+-- Called during character load when the panel needs to be loaded.
 function PLUGIN:CharPanelLoaded(character)
 	local charPanel = character:GetCharPanel();
 
@@ -54,9 +55,30 @@ function PLUGIN:CharPanelLoaded(character)
 		if (v.pacData) then
 			character:GetPlayer():AddPart(v.uniqueID, v)
 		end
+	end
+end
 
-		if(v.OnEquipped) then
-			item:OnEquipped(character:GetPlayer())
+-- Called when a character is spawning.
+function PLUGIN:PostPlayerLoadout(client)
+	local character = client:GetCharacter()
+	local charPanel = character:GetCharPanel();
+
+	if (charPanel) then
+		for _, v in pairs(charPanel:GetItems()) do
+			if(v.OnLoadout) then
+				v:Call("OnLoadout", client)
+			end
+		end
+	end
+end
+
+-- Called when character data is being saved.
+function PLUGIN:CharacterPreSave(character)
+	local client = character:GetPlayer()
+
+	for _, v in pairs(character:GetCharPanel():GetItems()) do
+		if (v.OnSave) then
+			v:Call("OnSave", client)
 		end
 	end
 end
@@ -66,7 +88,7 @@ function PLUGIN:CharPanelItemEquipped(client, item)
 	if(!item.outfitCategory) then return false end;
 
 	if(item.OnEquipped) then
-		item:OnEquipped(client)
+		item:Call("OnEquipped", client)
 	end
 
 	if(item.bodyGroups) then
@@ -87,7 +109,7 @@ function PLUGIN:CharPanelItemUnequipped(client, item)
 	if(!item.outfitCategory) then return false end;
 
 	if(item.OnUnequipped) then
-		item:OnUnequipped(client)
+		item:Call("OnUnequipped", client)
 	end
 
 	if(item.bodyGroups) then
