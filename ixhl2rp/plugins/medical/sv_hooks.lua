@@ -90,7 +90,7 @@ function PLUGIN:EntityTakeDamage(target, info)
 				end
 			end
 
-			ix.limb.RunDamage(target:GetCharacter(), lastHitGroup)
+			ix.limb.RunDamage(target:GetCharacter(), attacker, lastHitGroup)
 		end
 	end
 end

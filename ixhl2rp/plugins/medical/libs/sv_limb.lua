@@ -54,13 +54,16 @@ function ix.limb.TakeDamage(client, group, info, diff)
     end
 end
 -- A function to instantly kill the player if their limbs are gone.
-function ix.limb.RunDamage(character, hitgroup)
+function ix.limb.RunDamage(character, attacker, hitgroup)
     local limbHP = character:GetLimbHP(hitgroup)
     local limbType = ix.limb.GetName(hitgroup)
+    local weapon = attacker:IsPlayer() and attacker:GetActiveWeapon()
 
     if(limbType == "Chest" or limbType == "Head") then
         if(limbHP <= 0) then
             character:GetPlayer():Kill()
+            ix.log.Add(character:GetPlayer(), "playerDeath",
+			attacker:GetName() ~= "" and attacker:GetName() or attacker:GetClass(), IsValid(weapon) and weapon:GetClass())
         end
     end
 end

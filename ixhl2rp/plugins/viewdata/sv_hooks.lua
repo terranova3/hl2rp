@@ -9,7 +9,7 @@ util.AddNetworkString("ixViewdataInitiate")
 util.AddNetworkString("ixViewdataAction")
 
 -- Called when a player adds a new row to a data file.
-function PLUGIN.AddRow(data)
+function PLUGIN:AddRow(data)
     if(!data.title or !data.creator) then
         return
     end
@@ -24,7 +24,7 @@ function PLUGIN.AddRow(data)
 end
 
 -- Called when a player removes a row from a data file.
-function PLUGIN.RemoveRow(data)
+function PLUGIN:RemoveRow(data)
     if(!data.index) then
         return
     end
@@ -37,7 +37,7 @@ function PLUGIN.RemoveRow(data)
 end
 
 -- Called when a player edits a row in a data file.
-function PLUGIN.EditRow(data)
+function PLUGIN:EditRow(data)
     if(!data.title or !data.index) then
         return
     end
@@ -54,7 +54,7 @@ function PLUGIN.EditRow(data)
 end
 
 -- Called when a player updates a record variable.
-function PLUGIN.UpdateVar(data)
+function PLUGIN:UpdateVar(data)
     if(!data.info and !data.var) then
         return
     end
@@ -87,15 +87,15 @@ end
 
 -- Receives the net message from the client and checks if the message they're trying to run is implemented.
 net.Receive("ixViewDataAction", function(length, client)
-    local target = net.ReadEntity()
+    local id = net.ReadInt(32)
     local message = net.ReadInt(16)
     local data = net.ReadTable()
 
-    if(!PLUGIN.methods[message] or !data or !target or !target:GetCharacter()) then
+    data.target = ix.char.loaded[id]
+
+    if(!data or !data.target) then
         return
     end
-    
-    data.target = target:GetCharacter()
     
     local record = data.target:GetData("record", {})
 
@@ -104,8 +104,20 @@ net.Receive("ixViewDataAction", function(length, client)
     data.client = client
 
     -- Using the message type to run the correct method.
-    local newRecord = PLUGIN.methods[message](data)
+    local newRecord = nil
 
+    if(message == VIEWDATA_ADDROW) then
+        newRecord = PLUGIN:AddRow(data)
+    elseif(message == VIEWDATA_REMOVEROW) then
+        newRecord = PLUGIN:RemoveRow(data)
+    elseif(message == VIEWDATA_EDITROW) then
+        newRecord = PLUGIN:EditRow(data)
+    elseif(message == VIEWDATA_UPDATEVAR) then
+        newRecord = PLUGIN:UpdateVar(data)
+    else
+        ErrorNoHalt(client:Name() .. " has sent an invalid viewdata action type.")
+    end
+    
     -- Getting the data from the return method and updating the record.
     if(newRecord) then
         data.target:SetData("record", newRecord)

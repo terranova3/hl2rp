@@ -12,8 +12,6 @@ ix.charPanels = ix.charPanels or {
 	[0] = {}
 }
 
-ix.util.Include("cl_hooks.lua")
-
 do
 	ix.util.Include("sv_database.lua");
 	ix.util.Include("sv_hooks.lua");
@@ -236,6 +234,7 @@ do
 		util.AddNetworkString("ixCharPanelRemove")
 		util.AddNetworkString("ixCharPanelUpdateModel")
 		util.AddNetworkString("ixCharPanelLoadModel")
+		util.AddNetworkString("ixCharPanelLoadBag")
 
 		function ix.charPanel.HasIntegrity(client, item, invID, panelID, checkInventory)
 			local inventory = ix.item.inventories[invID or 0]

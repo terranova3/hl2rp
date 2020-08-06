@@ -26,7 +26,7 @@ function PANEL:Init()
     self.exitButton:SetText("X")
 
     function self.exitButton:DoClick()
-        ix.gui.record:SendToServer(PLUGIN.message.UPDATEVAR, {
+        ix.gui.record:SendToServer(VIEWDATA_UPDATEVAR, {
 			var = "note",
 			info = ix.gui.record.note.textEntry:GetText()
 		})
@@ -107,7 +107,12 @@ function PANEL:Build(target, cid, record)
 end
 
 function PANEL:GetRecord()
-    return self.recordTable or {}
+    return self.recordTable or {
+        rows = {},
+        vars = {
+            ["note"] = PLUGIN.defaultNote
+        }
+    }
 end
 
 function PANEL:BuildCID()
@@ -284,12 +289,13 @@ function draw.Circle( x, y, radius, seg )
 end
 
 function PANEL:SendToServer(message, data)
-    if(!message or !data) then
+    if(!message or !data or !self.character) then
+        ErrorNoHalt("Could not send viewdata mesage to server because data or target character is missing.")
         return
     end
-
+    
     net.Start("ixViewDataAction")
-        net.WriteEntity(self.target)
+        net.WriteInt(self.character.id, 32)
         net.WriteInt(message, 16)
         net.WriteTable(data)
     net.SendToServer()

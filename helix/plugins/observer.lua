@@ -16,6 +16,16 @@ ix.option.Add("observerTeleportBack", ix.type.bool, true, {
 	end
 })
 
+local playerMeta = FindMetaTable("Player")
+
+function playerMeta:InObserver()
+	if(self:GetMoveType() == MOVETYPE_NOCLIP) then
+		return true
+	end
+
+	return false
+end
+
 if (CLIENT) then
 	function PLUGIN:ShouldPopulateEntityInfo(entity)
 		if (IsValid(entity)) then

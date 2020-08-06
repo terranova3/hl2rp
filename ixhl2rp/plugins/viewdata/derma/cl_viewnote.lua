@@ -12,7 +12,7 @@ function PANEL:Init()
 	self:SetDrawBackground(false)
 	
 	self.backHeader = self:Add(ix.gui.record:AddBackHeader(function()
-		ix.gui.record:SendToServer(PLUGIN.message.UPDATEVAR, {
+		ix.gui.record:SendToServer(VIEWDATA_UPDATEVAR, {
 			var = "note",
 			info = self.textEntry:GetText()
 		})

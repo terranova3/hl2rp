@@ -6,3 +6,4 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 75
 ITEM.category = "Tools"
+ITEM.noBusiness = true
