@@ -1,7 +1,7 @@
 ITEM.name = "Heat Projecting Disinfection Unit (HePDU"
 ITEM.description = "A portable flamethrower used by members of CRU for decontamination. Colloquially called a flame didgeridoo."
-ITEM.model = "models/vuthakral/weapons/w_nc1.mdl"
-ITEM.class = "drc_combine_flamethrower"
+ITEM.model = "models/weapons/w_flamethrower.mdl"
+ITEM.class = "weapon_avpflamer"
 ITEM.weaponCategory = "primary"
 ITEM.classes = {CLASS_EOW}
 ITEM.width = 6
@@ -49,7 +49,7 @@ ITEM.pacData = {
 					["ClassName"] = "model2",
 					["IsDisturbing"] = false,
 					["ModelModifiers"] = "",
-					["Model"] = "models/vuthakral/weapons/w_nc1.mdl",
+					["Model"] = "models/weapons/w_flamethrower.mdl",
 				},
 			},
 		},
