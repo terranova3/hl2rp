@@ -146,7 +146,6 @@ if SERVER then
                     local curTime = CurTime() -- Micro optimization
 
                     if pos:WithinAABox(gasBox.min, gasBox.max) then
-                        print("in box.")
                         client.nextGasDamage = client.nextGasDamage or curTime
                         client.nextGasNotify = client.nextGasNotify or curTime
 
@@ -166,7 +165,9 @@ if SERVER then
                     end
 
                     if(!pos:WithinAABox(gasBox.min, gasBox.max)) then
-                        ix.limb.ResetMovement(client)
+                        if(!character:GetFractures()) then
+                            ix.limb.ResetMovement(client)
+                        end
                     end
                 end
             end

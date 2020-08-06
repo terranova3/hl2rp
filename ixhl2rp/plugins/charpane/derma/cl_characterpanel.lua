@@ -138,7 +138,6 @@ function PANEL:Init()
 		["legs"] = {x = 291, y = 370},
 		["bag"] = {x = 5, y = 310},
 		["satchel"] = {x = 5, y = 380},
-		["pin"] = {x = 5, y = 370, condition = character:IsMetropolice()},
 	}
 
 	net.Receive("ixCharPanelLoadModel", function()
