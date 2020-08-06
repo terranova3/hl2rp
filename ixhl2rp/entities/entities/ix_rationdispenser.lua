@@ -156,16 +156,6 @@ if (SERVER) then
 			return
 		end
 
-		if (client:IsCombine()) then
-			self:SetEnabled(!self:GetEnabled())
-			self:EmitSound(self:GetEnabled() and "buttons/combine_button1.wav" or "buttons/combine_button2.wav")
-
-			Schema:SaveRationDispensers()
-			self.nextUseTime = CurTime() + 2
-
-			return
-		end
-
 		local cid = client:GetCharacter():GetInventory():HasItem("cid")
 
 		if (!cid) then

@@ -41,6 +41,18 @@ function Schema:PlayerUse(client, entity)
 		return false
 	end
 
+	if(entity:GetClass() == "ix_rationdispenser" and client:KeyDown(IN_SPEED)) then
+		entity:SetEnabled(!entity:GetEnabled())
+		entity:EmitSound(entity:GetEnabled() and "buttons/combine_button1.wav" or "buttons/combine_button2.wav")
+
+		Schema:SaveRationDispensers()
+		entity.nextUseTime = CurTime() + 2
+
+		return
+
+		return false
+	end
+
 	if (!client:IsRestricted() and entity:IsPlayer() and entity:IsRestricted() and !entity:GetNetVar("untying")) then
 		entity:SetAction("@beingUntied", 5)
 		entity:SetNetVar("untying", true)
