@@ -48,8 +48,6 @@ function Schema:PlayerUse(client, entity)
 		Schema:SaveRationDispensers()
 		entity.nextUseTime = CurTime() + 2
 
-		return
-
 		return false
 	end
 
