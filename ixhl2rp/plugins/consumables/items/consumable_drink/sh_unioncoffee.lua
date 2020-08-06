@@ -4,7 +4,7 @@
 --]]
 
 ITEM.name = "Approved Coffee";
-ITEM.model = "models/props_lunk/popcan01a.mdl";
+ITEM.model = "models/props_nunk/popcan01a.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "Poorly manufactured coffee poured into an old, unmarked can. It has caffeine.";

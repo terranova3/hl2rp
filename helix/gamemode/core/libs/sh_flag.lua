@@ -209,4 +209,5 @@ do
 	ix.flag.Add("F", "Access to non-approved goods", "Business")
 	ix.flag.Add("g", "Access to general goods", "Business")
 	ix.flag.Add("G", "Access to contraband", "Business")
+	ix.flag.Add("b", "Access to bread related goods", "Business")
 end
