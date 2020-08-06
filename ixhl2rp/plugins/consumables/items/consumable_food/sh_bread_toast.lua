@@ -4,7 +4,7 @@
 --]]
 
 ITEM.name = "Fresh Toast";
-ITEM.model = "models/foodnhouseholditems/toast.mdl";
+ITEM.model = "models/toast/toast.mdl";
 ITEM.width = 1;
 ITEM.height = 1;
 ITEM.description = "A slice of hot, crispy toast.";

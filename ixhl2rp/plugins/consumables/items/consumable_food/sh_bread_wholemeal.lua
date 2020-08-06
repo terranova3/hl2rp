@@ -4,7 +4,7 @@
 --]]
 
 ITEM.name = "Wholemeal Bread";
-ITEM.model = "models/foodnhouseholditems/bread-2.mdl";
+ITEM.model = "models/foodnhouseholditems/bread_loaf.mdl";
 ITEM.width = 2;
 ITEM.height = 1;
 ITEM.description = "A loaf of delicious wholemeal bread.";
