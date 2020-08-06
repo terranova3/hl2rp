@@ -69,7 +69,5 @@ end
 function PLUGIN:OnCharacterCreated(client, character)
 	if(character:GetFaction() == FACTION_CITIZEN) then
 		local inventory = character:GetInventory()
-
-		inventory:Add("suitcase", 1)
 	end
 end
