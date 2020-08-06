@@ -168,9 +168,22 @@ if (CLIENT) then
 		local index = net.ReadUInt(32)
 		local panel = ix.gui["inv"..index]
 
+		print("This is being called.")
 		if (panel and panel:IsVisible()) then
+			print("Hi.")
 			panel:Close()
 		end
+	end)
+
+	net.Receive("ixCharPanelLoadBag", function()
+		local id = net.ReadInt(32)
+		local item = ix.item.instances[id]
+		
+		if(!id or !item) then
+			return
+		end
+
+		item.functions.View.OnClick(item)
 	end)
 end
 

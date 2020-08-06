@@ -406,7 +406,7 @@ if (SERVER) then
 	-- @bool isLogical Whether or not an entity should spawn if the item is transferred to the world
 	-- @treturn[1] bool Whether the transfer was successful or not
 	-- @treturn[1] string The error, if applicable
-	function ITEM:Transfer(invID, x, y, client, noReplication, isLogical)
+	function ITEM:Transfer(invID, x, y, client, noReplication, isLogical, charPanel)
 		invID = invID or 0
 
 		if (self.invID == invID) then
@@ -506,7 +506,7 @@ if (SERVER) then
 			elseif (IsValid(client)) then
 				-- we are transferring this item from an inventory to the world
 				self.invID = 0
-				curInv:Remove(self.id, false, true)
+				curInv:Remove(self.id, false, true, charPanel or false)
 
 				local query = mysql:Update("ix_items")
 					query:Update("inventory_id", 0)

@@ -96,7 +96,10 @@ function PLUGIN:CharPanelItemEquipped(client, item)
 
 		if(inv) then
 			inv:AddReceiver(client)
-			item.functions.View.OnClick(item)
+
+			net.Start("ixCharPanelLoadBag")
+				net.WriteInt(item.id, 32)
+			net.Send(client)
 		end
 	end
 
@@ -126,6 +129,10 @@ function PLUGIN:CharPanelItemUnequipped(client, item)
 
 		if(inv) then
 			inv:RemoveReceiver(client)
+
+			net.Start("ixCharPanelBagDrop")
+				net.WriteUInt(item:GetData("id"), 32)
+			net.Send(client)
 		end
 	end
 

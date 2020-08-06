@@ -159,7 +159,7 @@ if (SERVER) then
 			if (category) then
 				targetCharPanel.slots[category] = item
 
-				item:Transfer(nil, nil, nil, item.player, nil, true)
+				item:Transfer(nil, nil, nil, item.player, nil, true, true)
 				item.panelID = targetCharPanel:GetID()
 
 				targetCharPanel:SendSlot(category, item)
@@ -266,7 +266,7 @@ if (SERVER) then
 							query:Execute()
 						end
 		
-						hook.Run("InventoryItemAdded", ix.item.inventories[oldInvID], targetInv, item)
+						--hook.Run("InventoryItemAdded", ix.item.inventories[oldInvID], targetInv, item)
 		
 						return x, y, targetInv:GetID()
 					end	

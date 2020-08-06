@@ -234,6 +234,7 @@ do
 		util.AddNetworkString("ixCharPanelRemove")
 		util.AddNetworkString("ixCharPanelUpdateModel")
 		util.AddNetworkString("ixCharPanelLoadModel")
+		util.AddNetworkString("ixCharPanelLoadBag")
 
 		function ix.charPanel.HasIntegrity(client, item, invID, panelID, checkInventory)
 			local inventory = ix.item.inventories[invID or 0]
