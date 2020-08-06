@@ -10,6 +10,6 @@ ITEM.height = 1;
 ITEM.description = "A delicious, buttery, flakey, French croissant.";
 ITEM.permit = "consumables";
 ITEM.category = "Bread";
-ITEM.price = 8;
+ITEM.price = 19;
 ITEM.restoreHealth = 13;
 ITEM.flag = "b"
