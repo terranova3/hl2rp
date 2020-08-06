@@ -145,19 +145,19 @@ if SERVER then
 
                     if pos:WithinAABox(gasBox.min, gasBox.max) then
                         client.nextGasDamage = client.nextGasDamage or curTime
+
+                        if(curTime >= client.nextGasDamage) then
+                            client.nextGasDamage = curTime + ix.config.Get("gasDmgTick", 0)
+                            client:TakeDamage(ix.config.Get("gasDmg", 0))
+                            client:SetRunSpeed(ix.config.Get("runSpeed") * ix.config.Get("gasRunSlow"))
+                            client:SetWalkSpeed(ix.config.Get("walkSpeed") * ix.config.Get("gasWalkSlow"))
+                            client:ScreenFade(1, Color(234, 177, 33, 100), 0.5, 0)
+                            ix.util.Notify("You feel a burning sensation in the back of your throat.", client)
+                        end
                     else
                         if(character:GetFractures() == false) then
                             ix.limb.ResetMovement(client)
                         end
-                    end
-
-                    if(curTime >= client.nextGasDamage) then
-                        client.nextGasDamage = curTime + ix.config.Get("gasDmgTick", 0)
-                        client:TakeDamage(ix.config.Get("gasDmg", 0))
-                        client:SetRunSpeed(ix.config.Get("runSpeed") * ix.config.Get("gasRunSlow"))
-                        client:SetWalkSpeed(ix.config.Get("walkSpeed") * ix.config.Get("gasWalkSlow"))
-                        client:ScreenFade(1, Color(234, 177, 33, 100), 0.5, 0)
-                        ix.util.Notify("You feel a burning sensation in the back of your throat.", client)
                     end
 
                     break
