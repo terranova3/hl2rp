@@ -41,14 +41,14 @@ function PANEL:Init()
 
 	local index = 1
 	-- Loading the combine data records into the UI.
-	for k, v in pairs(ix.gui.record:GetRecord().rows) do
-		self.recordReferences[index] = k
-		self:AddRecord(v)
+	if(ix.gui.record:GetRecord().rows) then 
+		for k, v in pairs(ix.gui.record:GetRecord().rows) do
+			self.recordReferences[index] = k
+			self:AddRecord(v)
 
-		index=index+1
+			index=index+1
+		end
 	end
-
-	PrintTable(self.recordReferences)
 
 	ix.gui.loadedRecord = self.record
 	ix.gui.record:SetLoyaltyPoints(self.record)
@@ -150,7 +150,7 @@ function PANEL:DeleteRecord(data)
 			self.recordReferences[self:GetSelectedRow()] = nil
 		end
 
-		ix.gui.record:SendToServer(PLUGIN.message.REMOVEROW, {
+		ix.gui.record:SendToServer(VIEWDATA_REMOVEROW, {
 			index = index
 		})
 
@@ -177,7 +177,7 @@ function PANEL:AddRecord(data, bNetwork)
 
 	-- Send a net message to the server telling it to update the row on the server.
 	if(bNetwork) then
-		ix.gui.record:SendToServer(PLUGIN.message.ADDROW, row)		
+		ix.gui.record:SendToServer(VIEWDATA_ADDROW, row)		
 		ix.gui.record:SetLoyaltyPoints(self.record)
 	end
 end
@@ -201,7 +201,7 @@ function PANEL:EditRecord(data)
 	end
 
 	-- Send the data to the server so it can update the record there.
-	ix.gui.record:SendToServer(PLUGIN.message.EDITROW, data)
+	ix.gui.record:SendToServer(VIEWDATA_EDITROW, data)
 	ix.gui.record:SetLoyaltyPoints(self.record)
 end
 

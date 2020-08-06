@@ -6,18 +6,14 @@
 PLUGIN.name = "Viewdata";
 PLUGIN.description = "tbd";
 PLUGIN.author = "Adolphus";
-PLUGIN.message = {
-	ADDROW = 1,
-	REMOVEROW = 2,
-	EDITROW = 3,
-	UPDATEVAR = 4
-}
-PLUGIN.methods = {
-	PLUGIN.AddRow,
-	PLUGIN.RemoveRow,
-	PLUGIN.EditRow,
-	PLUGIN.UpdateVar
-}
+
+-- Globals for viewdata message types to make it neater.
+VIEWDATA_ADDROW = 1
+VIEWDATA_REMOVEROW = 2
+VIEWDATA_EDITROW = 3
+VIEWDATA_UPDATEVAR = 4
+
+-- Default viewdata note.
 PLUGIN.defaultNote = [[
 This is the default note
 ]]
