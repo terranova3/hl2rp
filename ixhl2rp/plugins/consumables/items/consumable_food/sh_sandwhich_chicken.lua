@@ -10,6 +10,6 @@ ITEM.height = 1;
 ITEM.description = "A mouth-watering sandwich with chicken meat slices, fresh crispy tomato slices, and beautifully vibrant green lettuce leaves.";
 ITEM.permit = "consumables";
 ITEM.category = "Bread";
-ITEM.price = 7;
+ITEM.price = 35;
 ITEM.restoreHealth = 10;
 ITEM.flag = "b"

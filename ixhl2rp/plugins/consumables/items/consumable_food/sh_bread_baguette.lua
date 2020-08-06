@@ -5,7 +5,7 @@
 
 ITEM.name = "Baguette";
 ITEM.model = "models/foodnhouseholditems/bagette.mdl";
-ITEM.width = 6;
+ITEM.width = 5;
 ITEM.height = 1;
 ITEM.description = "A long stick of crispy french bread, delicious and filling.";
 ITEM.permit = "consumables";

@@ -10,6 +10,6 @@ ITEM.height = 1;
 ITEM.description = "A slice of hot, crispy toast.";
 ITEM.permit = "consumables";
 ITEM.category = "Bread";
-ITEM.price = 5;
+ITEM.price = 9;
 ITEM.restoreHealth = 6;
 ITEM.flag = "b"

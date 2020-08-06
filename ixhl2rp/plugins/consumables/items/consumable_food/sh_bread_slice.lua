@@ -10,6 +10,6 @@ ITEM.height = 1;
 ITEM.description = "A slice of delicious bread.";
 ITEM.permit = "consumables";
 ITEM.category = "Bread";
-ITEM.price = 3;
+ITEM.price = 6;
 ITEM.restoreHealth = 4;
 ITEM.flag = "b"

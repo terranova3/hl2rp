@@ -10,6 +10,6 @@ ITEM.height = 1;
 ITEM.description = "A beautiful hand crafted all American New York bagel.";
 ITEM.permit = "consumables";
 ITEM.category = "Bread";
-ITEM.price = 5;
+ITEM.price = 15;
 ITEM.restoreHealth = 7;
 ITEM.flag = "b"
