@@ -7,19 +7,21 @@ if (SERVER) then
 	util.AddNetworkString("ixCharPanelBagDrop")
 end
 
-ITEM.name = "Satchel";
-ITEM.model = "models/fty/items/satchel.mdl"
+ITEM.name = "Bag";
+ITEM.model = "models/fty/items/flynnisstinkylol.mdl"
 ITEM.price = 25;
 ITEM.description = "You put shit in it."
-ITEM.outfitCategory = "satchel";
+ITEM.outfitCategory = "bag";
 ITEM.flag = "a"
+ITEM.bodyGroups = {
+	["bag"] = 1
+}
 ITEM.category = "Storage"
 ITEM.width = 2
 ITEM.height = 2
 ITEM.invWidth = 4
 ITEM.invHeight = 2
 ITEM.isBag = true
-ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.functions.View = {
 	icon = "icon16/briefcase.png",
 	OnClick = function(item)
@@ -32,9 +34,9 @@ ITEM.functions.View = {
 	end
 }
 ITEM.iconCam = {
-	pos = Vector(0, 0, 200),
-	ang = Angle(90, 0, 0),
-	fov = 2.9411764705882,
+	pos = Vector(18.528080, 263.900879, 328.379730),
+	ang = Angle(128.508, 85.745, 0.000),
+	fov = 3.8536462463626,
 }
 
 if (CLIENT) then
@@ -164,28 +166,6 @@ ITEM.postHooks.drop = function(item, result)
 	net.Start("ixCharPanelBagDrop")
 		net.WriteUInt(index, 32)
 	net.Send(item.player)
-end
-
-if (CLIENT) then
-	net.Receive("ixCharPanelBagDrop", function()
-		local index = net.ReadUInt(32)
-		local panel = ix.gui["inv"..index]
-
-		if (panel and panel:IsVisible()) then
-			panel:Close()
-		end
-	end)
-
-	net.Receive("ixCharPanelLoadBag", function()
-		local id = net.ReadInt(32)
-		local item = ix.item.instances[id]
-		
-		if(!id or !item) then
-			return
-		end
-
-		item.functions.View.OnClick(item)
-	end)
 end
 
 -- Called before the item is permanently deleted.

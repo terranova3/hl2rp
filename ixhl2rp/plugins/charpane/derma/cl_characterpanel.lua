@@ -37,6 +37,7 @@ function PANEL:OnMousePressed(code)
 	if (code == MOUSE_LEFT and self:IsDraggable()) then
 		self:MouseCapture(true)
 		self:DragMousePress(code)
+		local item = self:GetItemTable()
 
 		self.clickX, self.clickY = input.GetCursorPos()
 	end
@@ -50,6 +51,7 @@ function PANEL:OnMouseReleased(code)
 
 	self:DragMouseRelease(code)
 	self:SetZPos(99)
+	self:SetSize(64,64)
 	self:MouseCapture(false)
 end
 

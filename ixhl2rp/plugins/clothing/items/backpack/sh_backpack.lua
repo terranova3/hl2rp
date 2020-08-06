@@ -3,12 +3,13 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Satchel";
-ITEM.model = "models/fty/items/satchel.mdl"
+ITEM.name = "Backpack";
+ITEM.model = "models/fty/items/flynnisstinkylol.mdl"
 ITEM.price = 25;
 ITEM.description = "Flynn give me a fucking description."
-ITEM.outfitCategory = "satchel";
+ITEM.outfitCategory = "bag";
+ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.flag = "a"
 ITEM.bodyGroups = {
-	["satchel"] = 1
+	["bag"] = 1
 }
