@@ -96,6 +96,7 @@ function PLUGIN:CharPanelItemEquipped(client, item)
 
 		if(inv) then
 			inv:AddReceiver(client)
+			item.functions.View.OnClick(item)
 		end
 	end
 

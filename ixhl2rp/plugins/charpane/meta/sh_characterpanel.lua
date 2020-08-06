@@ -279,7 +279,7 @@ if (SERVER) then
 		end
 	end
 
-	function META:Sync(receiver, fullUpdate)
+	function META:Sync(receiver, fullUpdate, func)
 		local slots = {}
 
 		for k, item in pairs(self.slots) do
@@ -294,6 +294,14 @@ if (SERVER) then
 			net.WriteType((receiver == nil or fullUpdate) and self.owner or nil)
 			net.WriteTable(self.vars or {})
 		net.Send(receiver)
+
+		for _, v in pairs(self:GetItems()) do
+			v:Call("OnSendData", receiver)
+		end
+
+		if(func) then
+			func()
+		end
 	end
 end
 

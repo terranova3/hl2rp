@@ -62,9 +62,9 @@ function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
 					character:SetCharPanel(charPanel)
 					charPanel:SetOwner(character:GetID())
 					charPanel:AddReceiver(client)
-					charPanel:Sync(client)
-
-					hook.Run("CharPanelLoaded", character)
+					charPanel:Sync(client, function()
+						hook.Run("CharPanelLoaded", character)
+					end)
 				end, true)
 			else
 				local insertQuery = mysql:Insert("ix_charpanels")
