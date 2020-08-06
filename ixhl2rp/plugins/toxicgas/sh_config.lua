@@ -3,7 +3,7 @@ local PLUGIN = PLUGIN
 
 -- Toxic Gas Tick Timer
 ix.config.Add("gasDmgTick", 5, "The time between each tick of damage.", nil, {
-	category = "Toxic Gas"
+	category = "Toxic Gas",
 	data = { min = 1, max = 100 }
 })
 
@@ -11,6 +11,12 @@ ix.config.Add("gasDmgTick", 5, "The time between each tick of damage.", nil, {
 ix.config.Add("gasDmg", 1, "The total amount of damage per tick", nil, {
 	category = "Toxic Gas",
 	data = { min = 0, max = 100 }
+})
+
+-- Toxic Gas Damage
+ix.config.Add("gasNotifyTime", 45, "The total amount of time between each gas notification.", nil, {
+	category = "Toxic Gas",
+	data = { min = 0, max = 600 }
 })
 
 -- Toxic Gas Run Slow

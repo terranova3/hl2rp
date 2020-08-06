@@ -14,6 +14,8 @@ PLUGIN.description = "Adds configurable toxic gas and gas-mask item."
 PLUGIN.positions = PLUGIN.positions or {}
 PLUGIN.smokeStacks = PLUGIN.smokeStacks or {}
 
+ix.util.Include("sh_config.lua")
+
 function PLUGIN:LoadData()
     PLUGIN.positions = self:GetData()
     self:UpdateWorldData()
@@ -75,7 +77,7 @@ local function GetBoxLine(min, max)
 end
 
 if SERVER then
-    function PLUGIN:Think()
+    timer.Create("GasTick", 0.5, 0, function()
         for idx, gasBox in pairs(PLUGIN.positions) do
             if PLUGIN.smokeStacks[idx] == nil then
                 local min, max = gasBox.min, gasBox.max
@@ -132,39 +134,44 @@ if SERVER then
             end
 
             if(client:IsVortigaunt() or client:InObserver()) then 
-                canBreathe = true 
+                canBreathe = true
             end
             
             if(!canBreathe) then
-                canBreathe = self:IsGasImmune(client)
+                canBreathe = PLUGIN:IsGasImmune(client)
             end
 
-            if not canBreathe then
+            if(!canBreathe) then
                 for _, gasBox in pairs(PLUGIN.positions) do
                     local curTime = CurTime() -- Micro optimization
 
                     if pos:WithinAABox(gasBox.min, gasBox.max) then
+                        print("in box.")
                         client.nextGasDamage = client.nextGasDamage or curTime
+                        client.nextGasNotify = client.nextGasNotify or curTime
 
                         if(curTime >= client.nextGasDamage) then
                             client.nextGasDamage = curTime + ix.config.Get("gasDmgTick", 0)
                             client:TakeDamage(ix.config.Get("gasDmg", 0))
-                            client:SetRunSpeed(ix.config.Get("runSpeed") * ix.config.Get("gasRunSlow"))
-                            client:SetWalkSpeed(ix.config.Get("walkSpeed") * ix.config.Get("gasWalkSlow"))
-                            client:ScreenFade(1, Color(234, 177, 33, 100), 0.5, 0)
-                            ix.util.Notify("You feel a burning sensation in the back of your throat.", client)
-                        end
-                    else
-                        if(character:GetFractures() == false) then
-                            ix.limb.ResetMovement(client)
+                            client:SetRunSpeed(ix.config.Get("runSpeed") * ix.config.Get("gasRunSlow", 0.7))
+                            client:SetWalkSpeed(ix.config.Get("walkSpeed") * ix.config.Get("gasWalkSlow", 0.7))
+                            client:ScreenFade(1, Color(234, 177, 33, 100), 2, 0)
+
+                            if(curTime >= client.nextGasNotify) then
+                                client.nextGasNotify = curTime + ix.config.Get("gasNotifyTime", 45)
+
+                                ix.util.Notify("You feel a burning sensation in the back of your throat.", client)
+                            end    
                         end
                     end
 
-                    break
+                    if(!pos:WithinAABox(gasBox.min, gasBox.max)) then
+                        ix.limb.ResetMovement(client)
+                    end
                 end
             end
         end
-    end
+    end)
 end
 
 if CLIENT then
