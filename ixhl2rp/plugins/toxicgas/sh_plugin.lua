@@ -117,43 +117,50 @@ if SERVER then
             end
         end
 
-        for _, ply in pairs(player.GetAll()) do
-            local pos = ply:EyePos()
-            if not ply:Alive() then continue end
+        for _, client in pairs(player.GetAll()) do
+            local character = client:GetCharacter()
 
-            if(ply:GetCharacter()) then
-                local canBreathe = false
-                local character = ply:GetCharacter()
+            if(!client:Alive() or !character) then 
+                continue 
+            end
+            
+            local pos = client:EyePos()
+            local canBreathe = false
 
-                if (character:IsMetropolice() and !character:IsUndercover() or character:GetFaction() == FACTION_OTA) then 
-                    canBreathe = true 
-                end
+            if (character:IsMetropolice() and !character:IsUndercover() or character:GetFaction() == FACTION_OTA) then 
+                canBreathe = true 
+            end
 
-                if ply:IsVortigaunt() then canBreathe = true end
-                
-                if not canBreathe then
-                    canBreathe = self:IsGasImmune(ply)
-                end
+            if(client:IsVortigaunt() or client:InObserver()) then 
+                canBreathe = true 
+            end
+            
+            if(!canBreathe) then
+                canBreathe = self:IsGasImmune(client)
+            end
 
-                if not canBreathe then
-                    for _, gasBox in pairs(PLUGIN.positions) do
-                        if pos:WithinAABox(gasBox.min, gasBox.max) then
-                            ply.nextGasDamage = ply.nextGasDamage or CurTime()
-                        else:
+            if not canBreathe then
+                for _, gasBox in pairs(PLUGIN.positions) do
+                    local curTime = CurTime() -- Micro optimization
+
+                    if pos:WithinAABox(gasBox.min, gasBox.max) then
+                        client.nextGasDamage = client.nextGasDamage or curTime
+                    else
+                        if(character:GetFractures() == false) then
                             ix.limb.ResetMovement(client)
                         end
-                            if CurTime() >= ply.nextGasDamage then
-                                ply.nextGasDamage = CurTime() + ix.config.Get("gasDmgTick", 0)
-                                ply:TakeDamage(ix.config.Get("gasDmg", 0))
-                                client:SetRunSpeed(ix.config.Get("runSpeed") * ix.config.Get("gasRunSlow"))
-                                client:SetWalkSpeed(ix.config.Get("walkSpeed") * ix.config.Get("gasWalkSlow"))
-                                ply:ScreenFade(1, Color(234, 177, 33, 100), 0.5, 0)
-							    ix.util.Notify("You feel a burning sensation in the back of your throat.", ply)
-                            end
-
-                            break
-                        end
                     end
+
+                    if(curTime >= client.nextGasDamage) then
+                        client.nextGasDamage = curTime + ix.config.Get("gasDmgTick", 0)
+                        client:TakeDamage(ix.config.Get("gasDmg", 0))
+                        client:SetRunSpeed(ix.config.Get("runSpeed") * ix.config.Get("gasRunSlow"))
+                        client:SetWalkSpeed(ix.config.Get("walkSpeed") * ix.config.Get("gasWalkSlow"))
+                        client:ScreenFade(1, Color(234, 177, 33, 100), 0.5, 0)
+                        ix.util.Notify("You feel a burning sensation in the back of your throat.", client)
+                    end
+
+                    break
                 end
             end
         end
