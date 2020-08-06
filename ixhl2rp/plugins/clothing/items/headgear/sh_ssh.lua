@@ -12,7 +12,6 @@ ITEM.model = "models/sovietarmy/props/helmet.mdl";
 ITEM.price = 50;
 ITEM.description = "An old relic of the Soviet military bloc, it offers ample protection.";
 ITEM.flag = "G";
-
 ITEM.pacData = {
     male = {
 		[1] = {
@@ -173,7 +172,7 @@ ITEM.pacData = {
 }
 
 ITEM.iconCam = {
-	pos = Vector(-684.966064 -665.432312 300.491028),
-	ang = Angle(17.467 44.171 0.000),
+	pos = Vector(-684.966064, -665.432312, 300.491028),
+	ang = Angle(17.467, 44.171, 0.000),
 	fov = 1.9673997408365,
 }
