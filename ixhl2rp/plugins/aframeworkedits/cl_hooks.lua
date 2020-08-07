@@ -6,11 +6,11 @@
 local PLUGIN = PLUGIN;
 
 PLUGIN.rankIcons = {
-	["Management"] = "icon16/key.png",
-	["Developer"] = "icon16/shield.png",
-	["Super Admin"] = "icon16/shield.png",
-	["Admin"] = "icon16/star.png",
-	["Game Master"] = "icon16/asterisk_yellow.png",
+	["founder"] = "icon16/key.png",
+	["developer"] = "icon16/shield.png",
+	["superadmin"] = "icon16/shield.png",
+	["admin"] = "icon16/star.png",
+	["gamemaster"] = "icon16/asterisk_yellow.png",
 }
 
 -- Disables ammo interface in bottom right.
@@ -31,6 +31,14 @@ function ArcCW:ShouldDrawHUDElement(ele)
 end
 
 function PLUGIN:GetPlayerIcon(speaker)
+	if(serverguard) then
+		local rank = serverguard.ranks:GetRank(serverguard.player:GetRank(speaker))
+			
+		if (type(rank) == "table" and rank.texture) then
+			return rank.texture
+		end
+	end
+
 	if(self.rankIcons[speaker:GetUserGroup()]) then
 		return self.rankIcons[speaker:GetUserGroup()]
 	end
