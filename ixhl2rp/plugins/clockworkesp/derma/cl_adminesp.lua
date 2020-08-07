@@ -172,7 +172,7 @@ function PLUGIN:GetPlayerESPInfo(player, text)
 		table.insert(text, {
 			text = player:SteamName(), 
 			color = Color(170, 170, 170, 255), 
-			icon = player:GetChatIcon()
+			icon = Material(hook.Run("GetPlayerIcon", player))
 		});
 
 		if (player:Alive() and health > 0) then
