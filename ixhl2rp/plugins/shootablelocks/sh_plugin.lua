@@ -21,6 +21,10 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 				return
 			end
 
+			if(IsValid(entity.ixLock)) then
+				return false
+			  end
+			  
 			if (IsValid(client)) then
 				if (hook.Run("CanPlayerBustLock", client, entity) == false) then
 					return
