@@ -50,20 +50,6 @@ function PLUGIN:LoadData()
 	query:Execute()
 end
 
-function PLUGIN:SaveData()
-	local data = {}
-
-	for _, entity in ipairs(ents.FindByClass("ix_uniformgen")) do
-		data[#data + 1] = {
-			pos = entity:GetPos(),
-			angles = entity:GetAngles(),
-			model = entity:GetModel(),
-		}
-	end
-
-	self:SetData(data)
-end
-
 -- Add to the cache that was built on server launch since it doesn't auto refresh the server query for performance reasons.
 function PLUGIN:OnCharacterCreated(client, character)
 	if(character:IsMetropolice()) then
