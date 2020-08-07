@@ -2,7 +2,7 @@
 RECIPE.name = "Ichthyosaur Meat"
 RECIPE.description = "This actually seems edible, and tasty."
 RECIPE.model = "models/gibs/xenians/mgib_02.mdl"
-RECIPE.category = "Coooking"
+RECIPE.category = "Cooking"
 RECIPE.requirements = {
 	["ichthyosaurmeat"] = 1
 }

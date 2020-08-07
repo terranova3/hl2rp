@@ -2,7 +2,7 @@
 RECIPE.name = "Antlion Meat"
 RECIPE.description = "You wonder what this will taste like.."
 RECIPE.model = "models/gibs/antlion_gib_small_2.mdl"
-RECIPE.category = "Coooking"
+RECIPE.category = "Cooking"
 RECIPE.requirements = {
 	["antlionmeat"] = 1
 }

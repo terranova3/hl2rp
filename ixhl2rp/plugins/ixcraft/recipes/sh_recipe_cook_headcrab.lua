@@ -2,7 +2,7 @@
 RECIPE.name = "Headcrab Meat"
 RECIPE.description = "This... Is a bad idea."
 RECIPE.model = "models/gibs/humans/sgib_03.mdl"
-RECIPE.category = "Coooking"
+RECIPE.category = "Cooking"
 RECIPE.requirements = {
 	["headcrabgib"] = 1
 }
