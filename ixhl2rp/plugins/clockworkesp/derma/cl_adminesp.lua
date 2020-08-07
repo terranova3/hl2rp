@@ -85,7 +85,7 @@ function PLUGIN.esp:DrawAdminESP()
 						end;
 
 						surface.SetDrawColor(255, 255, 255, 255);
-						surface.SetMaterial(Material(icon));
+						surface.SetMaterial(icon);
 						surface.DrawTexturedRect(position.x - (width * 0.40) - height, position.y - height * 0.5, height, height);
 					end;
 
