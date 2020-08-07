@@ -22,11 +22,11 @@ ix.config.Add("gasNotifyTime", 45, "The total amount of time between each gas no
 -- Toxic Gas Run Slow
 ix.config.Add("gasRunSlow", 0.5, "The multiplier for run speed while affected by gas", nil, {
 	category = "Toxic Gas",
-	data = {min = 0, max = 1, decimals = 2},
+	data = {min = 0.01, max = 1, decimals = 2},
 })
 
 -- Toxic Gas Walk Slow
 ix.config.Add("gasWalkSlow", 0.6, "The multiplier for walk speed while affected by gas", nil, {
 	category = "Toxic Gas",
-	data = {min = 0, max = 1, decimals = 2},
+	data = {min = 0.01, max = 1, decimals = 2},
 })

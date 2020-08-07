@@ -18,12 +18,12 @@ ix.db.config = ix.config.server.database or {}
 function ix.db.Connect()
 	ix.db.config.adapter = ix.db.config.adapter or "sqlite"
 
-	local dbmodule = ix.db.config.adapter
-	local hostname = ix.db.config.hostname
-	local username = ix.db.config.username
-	local password = ix.db.config.password
-	local database = ix.db.config.database
-	local port = ix.db.config.port
+	local dbmodule = "mysqloo"
+	local hostname = "localhost"
+	local username = "root"
+	local password = "root"
+	local database = "helix"
+	local port = "3306"
 
 	mysql:SetModule(dbmodule)
 	mysql:Connect(hostname, username, password, database, port)
