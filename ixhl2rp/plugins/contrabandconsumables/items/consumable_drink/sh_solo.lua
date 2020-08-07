@@ -3,11 +3,11 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "VB Beer";
-ITEM.model = "models/barshesalcohol/sodacan_vb.mdl";
+ITEM.name = "SOLO";
+ITEM.model = "models/sodacan_solo/sodacan_solo.mdl";
 ITEM.width = 1;
 ITEM.height = 1;
-ITEM.description = "A can of delicious Victoria Bitter, which is a lager made and sold mostly in Australia.";
+ITEM.description = "A can of delicious SOLO, which is a soft drink mostly sold in Australia.";
 ITEM.permit = "consumables";
 ITEM.price = 15;
 ITEM.capacity = 375
