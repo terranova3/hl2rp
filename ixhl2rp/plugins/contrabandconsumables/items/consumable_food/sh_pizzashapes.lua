@@ -9,6 +9,7 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A box of Pizza shapes sold in Australia. They are second to BBQ shapes. They're okay.";
 ITEM.permit = "consumables";
+ITEM.category = "Australian"
 ITEM.price = 25;
 ITEM.restoreHealth = 10;
 ITEM.flag = "z"

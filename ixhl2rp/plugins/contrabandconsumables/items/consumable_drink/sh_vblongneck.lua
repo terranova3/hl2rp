@@ -11,5 +11,6 @@ ITEM.description = "If you're a fuckin fair dinkum fucking full grown aussie, th
 ITEM.permit = "consumables";
 ITEM.price = 15;
 ITEM.capacity = 355
+ITEM.category = "Australian"
 ITEM.restoreStamina = 20;
 ITEM.rarity = "Common"

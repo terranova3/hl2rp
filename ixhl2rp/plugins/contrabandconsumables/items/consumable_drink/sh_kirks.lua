@@ -11,6 +11,7 @@ ITEM.description = "A can of delicious Kirks soda, which is a soft drink mostly 
 ITEM.permit = "consumables";
 ITEM.price = 15;
 ITEM.capacity = 375
+ITEM.category = "Australian"
 ITEM.restoreStamina = 15;
 ITEM.rarity = "Rare"
 ITEM.flag = "z"

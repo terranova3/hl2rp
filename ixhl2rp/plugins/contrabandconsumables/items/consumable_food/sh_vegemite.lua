@@ -9,6 +9,7 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "The greatest thing humanity has to offer. It tastes of raw salt when consumed in large quantities. Don't use too much!";
 ITEM.permit = "consumables";
+ITEM.category = "Australian"
 ITEM.price = 20;
 ITEM.restoreHealth = 5;
 ITEM.flag = "z"

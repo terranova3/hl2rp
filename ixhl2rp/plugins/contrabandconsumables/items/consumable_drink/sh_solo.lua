@@ -11,6 +11,7 @@ ITEM.description = "A can of delicious SOLO, which is a soft drink mostly sold i
 ITEM.permit = "consumables";
 ITEM.price = 15;
 ITEM.capacity = 375
+ITEM.category = "Australian"
 ITEM.restoreStamina = 15;
 ITEM.rarity = "Rare"
 ITEM.flag = "z"

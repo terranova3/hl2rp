@@ -9,6 +9,7 @@ ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "A bag of original Smiths flavoured chips commonly sold in Australia.";
 ITEM.permit = "consumables";
+ITEM.category = "Australian"
 ITEM.price = 21;
 ITEM.restoreHealth = 8;
 ITEM.flag = "z"
