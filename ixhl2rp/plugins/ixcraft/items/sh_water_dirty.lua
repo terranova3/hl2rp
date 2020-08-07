@@ -7,3 +7,12 @@ ITEM.height = 1
 ITEM.price = 5
 ITEM.category = "Crafting"
 ITEM.noBusiness = true
+
+ITEM.combine = function(item, targetItem)
+    local client = item:GetOwner()
+    local inventory = client:GetCharacter():GetInventory()
+
+	if(targetItem.uniqueID == "water_purifytab") then
+	   inventory:Add("unionwater", 2)
+	end
+end
