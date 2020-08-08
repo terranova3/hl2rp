@@ -2,7 +2,7 @@
 RECIPE.name = "Boid Meat"
 RECIPE.description = "What... Is this?"
 RECIPE.model = "models/kek1ch/hide_burer.mdl"
-RECIPE.category = "Coooking"
+RECIPE.category = "Cooking"
 RECIPE.requirements = {
 	["boidbirdmeat"] = 1
 }

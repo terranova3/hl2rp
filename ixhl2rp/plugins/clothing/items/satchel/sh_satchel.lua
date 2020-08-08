@@ -6,7 +6,7 @@
 ITEM.name = "Satchel";
 ITEM.model = "models/fty/items/satchel.mdl"
 ITEM.price = 25;
-ITEM.description = "Flynn give me a fucking description."
+ITEM.description = "A bag carried on the shoulder by a long strap and closed by a flap."
 ITEM.outfitCategory = "satchel";
 ITEM.flag = "a"
 ITEM.bodyGroups = {

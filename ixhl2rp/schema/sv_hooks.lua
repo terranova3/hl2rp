@@ -41,7 +41,7 @@ function Schema:PlayerUse(client, entity)
 		return false
 	end
 
-	if(entity:GetClass() == "ix_rationdispenser" and client:KeyDown(IN_SPEED)) then
+	if(entity:GetClass() == "ix_rationdispenser" and client:KeyDown(IN_SPEED) and character:IsMetropolice() and CurTime() > (entity.nextUseTime or 0)) then
 		entity:SetEnabled(!entity:GetEnabled())
 		entity:EmitSound(entity:GetEnabled() and "buttons/combine_button1.wav" or "buttons/combine_button2.wav")
 

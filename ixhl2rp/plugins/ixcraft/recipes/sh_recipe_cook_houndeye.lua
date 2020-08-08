@@ -2,7 +2,7 @@
 RECIPE.name = "Houndeye Meat"
 RECIPE.description = "This seems edible, barely."
 RECIPE.model = "models/gibs/houndeye/back_leg.mdl"
-RECIPE.category = "Coooking"
+RECIPE.category = "Cooking"
 RECIPE.requirements = {
 	["houndeyemeat"] = 1
 }

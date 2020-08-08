@@ -1,6 +1,6 @@
 
-FACTION.name = "Administrator"
-FACTION.description = "A human Administrator advised by the Universal Union."
+FACTION.name = "Administration"
+FACTION.description = "The human administration advised by the Universal Union."
 FACTION.color = Color(255, 200, 100, 255)
 FACTION.models = {
 	"models/ug/new/citizens/female_01.mdl",

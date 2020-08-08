@@ -2,7 +2,7 @@
 RECIPE.name = "Bullsquid Meat"
 RECIPE.description = "This might be a bad idea."
 RECIPE.model = "models/gibs/xenians/mgib_02.mdl"
-RECIPE.category = "Coooking"
+RECIPE.category = "Cooking"
 RECIPE.requirements = {
 	["bullsquidmeat"] = 1
 }

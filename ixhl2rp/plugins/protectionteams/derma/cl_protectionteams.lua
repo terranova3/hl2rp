@@ -191,7 +191,7 @@ hook.Add("PopulateTeamMenu", "ixTeamMenu", function(tabs)
 			end
 
 			for k2, v2 in SortedPairsByMemberValue(memberList, "owner", false) do
-				if(v2.client) then
+				if(IsValid(v2.client)) then
 					local member = panel:Add("ixMenuButton")
 					member:SetFont("ixMenuButtonFont")
 					member:SetText(v2.client:Name() or "Unknown")
@@ -231,6 +231,8 @@ hook.Add("PopulateTeamMenu", "ixTeamMenu", function(tabs)
 					if (v2.client.isTeamOwner) then
 						member.backgroundColor = Color(50,150,100)
 					end
+				else
+					memberList[k2] = nil
 				end
 			end
 		end

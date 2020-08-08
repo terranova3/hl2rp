@@ -85,7 +85,7 @@ function PLUGIN.esp:DrawAdminESP()
 						end;
 
 						surface.SetDrawColor(255, 255, 255, 255);
-						surface.SetMaterial(Material(icon));
+						surface.SetMaterial(icon);
 						surface.DrawTexturedRect(position.x - (width * 0.40) - height, position.y - height * 0.5, height, height);
 					end;
 
@@ -172,7 +172,7 @@ function PLUGIN:GetPlayerESPInfo(player, text)
 		table.insert(text, {
 			text = player:SteamName(), 
 			color = Color(170, 170, 170, 255), 
-			icon = player:GetChatIcon()
+			icon = Material(hook.Run("GetPlayerIcon", player))
 		});
 
 		if (player:Alive() and health > 0) then
