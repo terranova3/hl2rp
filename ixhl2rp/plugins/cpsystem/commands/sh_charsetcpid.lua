@@ -16,7 +16,7 @@ ix.command.Add("CharSetCPID", {
         local character = client:GetCharacter()
         local correctInput = false
 
-        for i = 1, 9 do
+        for i = 1, 20 do
             if(text == i) then
                 correctInput = true
                 break
