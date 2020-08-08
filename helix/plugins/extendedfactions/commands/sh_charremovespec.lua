@@ -15,7 +15,7 @@ ix.command.Add("CharRemoveSpec", {
         local character = client:GetCharacter()
         local canChangeCert, error = ix.certs.CanChangeCert(character, target, cert)
 
-        if(character:GetData("spec")) then
+        if(target:GetData("spec")) then
             if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then
                 if(canChangeCert) then
                     target:SetData("spec", nil)
