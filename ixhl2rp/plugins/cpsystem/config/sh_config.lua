@@ -44,6 +44,7 @@ cpSystem.config.taglines = {
 	"UNIFORM",
 	"VAMP",
 	"VICE",
+	"VICTOR",
 	"WINDER",
 	"XRAY",
 	"ZONE"
