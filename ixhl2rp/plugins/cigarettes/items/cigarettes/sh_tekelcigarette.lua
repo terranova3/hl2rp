@@ -11,10 +11,3 @@ ITEM.description = "Delicious, authentic lung-killing addiction sticks. There's 
 ITEM.category = "Contraband"
 ITEM.price = 4;
 ITEM.flag = "G"
-ITEM.functions.Smoke = {
-	OnRun = function(itemTable)
-		local client = itemTable.player
-		client:RestoreStamina(12)
-	end
-}
-

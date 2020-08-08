@@ -3,6 +3,8 @@
 	without permission of its author.
 --]]
 
+local PLUGIN = PLUGIN
+
 ITEM.name = "Churchill Cigar"
 ITEM.model = Model("models/polievka/cigar.mdl")
 ITEM.width = 1
@@ -11,10 +13,4 @@ ITEM.description = "Churchill Cigars for the premium asshole, or gun-toting bada
 ITEM.category = "Contraband"
 ITEM.price = 20;
 ITEM.flag = "G"
-ITEM.functions.Smoke = {
-	OnRun = function(itemTable)
-		local client = itemTable.player
-		client:RestoreStamina(24)
-	end
-}
-
+ITEM.time = 90

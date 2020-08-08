@@ -6,3 +6,6 @@
 PLUGIN.name = "Cigarettes";
 PLUGIN.description = "Adds smokable cigarettes.";
 PLUGIN.author = "Adolphus";
+
+ix.util.Include("sv_hooks.lua")
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
