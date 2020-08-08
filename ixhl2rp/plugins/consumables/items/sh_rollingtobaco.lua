@@ -9,7 +9,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "Some old world tobacco set to be rolled into hand-made cigarettes."
 ITEM.category = "Contraband"
-ITEM.flag = "n"
+ITEM.flag = "F"
 ITEM.price = 4;
 
 ITEM.combine = function(item, targetItem)
