@@ -9,7 +9,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "A stick of pre-Union glue. Please do not eat, or sniff."
 ITEM.category = "Contraband"
-
+ITEM.price = 7;
 ITEM.flag = "G"
 ITEM.functions.Sniff = {
 	OnRun = function(itemTable)
