@@ -225,8 +225,9 @@ function Schema:SearchPlayer(client, target)
 
 	local name = hook.Run("GetDisplayedName", target) or target:Name()
 	local inventory = target:GetCharacter():GetInventory()
+	local charPanel = target:GetCharacter():GetCharPanel()
 
-	ix.storage.Open(client, inventory, {
+	ix.storage.OpenPlayer(client, inventory, charPanel, {
 		entity = target,
 		name = name
 	})

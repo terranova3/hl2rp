@@ -43,7 +43,7 @@ function PLUGIN:PlayerSetHandsModel(client, entity, model)
 end;
 
 function PLUGIN:OnEntityCreated(entity)
-	if (entity:IsNPC()) then
+	if (IsValid(entity) and entity:IsNPC()) then
 		local class = entity:GetClass()
 
 		-- fake class for rebel turrets
