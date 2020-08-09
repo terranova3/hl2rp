@@ -45,3 +45,7 @@ function PLUGIN:GetPlayerIcon(speaker)
 
 	return "icon16/user.png"
 end
+
+timer.Create("DisableEyeMove", 60, 0, function()
+	RunConsoleCommand("r_eyemove", 0)
+end)
