@@ -2,6 +2,7 @@ ITEM.name = "Deploy Base"
 ITEM.model = Model("models/props_junk/cardboard_box001a.mdl")
 ITEM.category = "Deployables"
 ITEM.entityName = "npc_turret_floor"
+ITEM.noBusiness = true
 ITEM.description = "Deploy It"
 ITEM.width = 2
 ITEM.height = 2
