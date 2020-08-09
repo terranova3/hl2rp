@@ -34,14 +34,13 @@ function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 
 	character:SetData("cpVoiceType", "HLA")
-	character:SetCustomClass("Overwatch Transhuman Arm")
+    character:SetCustomClass("Overwatch Transhuman Arm")
 
-	inventory:Add("ar2", 1)
-	inventory:Add("ar2ammo", 2)
+	inventory:Add("handheld_radio", 1)
 end
 
 function FACTION:GetDefaultName(client)
-	return "OTA-ECHO.OWS-" .. Schema:ZeroNumber(math.random(1, 99999), 5), true
+	return "OTA:SR5.EPSILON-" .. Schema:ZeroNumber(math.random(1, 99999), 5), true
 end
 
 FACTION_OTA = FACTION.index

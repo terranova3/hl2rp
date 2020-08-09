@@ -7,8 +7,4 @@ FACTION.isDefault = false
 FACTION.isGloballyRecognized = true
 FACTION.runSounds = {[0] = "NPC_CombineS.RunFootstepLeft", [1] = "NPC_CombineS.RunFootstepRight"}
 
-function FACTION:GetDefaultName(client)
-	return "OTA:SR5.EPSILON-" .. Schema:ZeroNumber(math.random(1, 99999), 5), true
-end
-
 FACTION_OTA = FACTION.index
