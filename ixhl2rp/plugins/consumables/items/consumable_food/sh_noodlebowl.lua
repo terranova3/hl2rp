@@ -11,5 +11,5 @@ ITEM.description = "A classic steamy hot oriental meal."
 ITEM.category = "Contraband"
 ITEM.restoreHealth = 22
 ITEM.category = "Civil-Approved Food";
-ITEM.price = 19;
+ITEM.price = 5;
 ITEM.flag = "f"

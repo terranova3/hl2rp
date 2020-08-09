@@ -11,6 +11,6 @@ ITEM.description = "Although its long since melted inside its aluminium packagin
 ITEM.permit = "consumables";
 ITEM.category = "Civil-Approved Food";
 ITEM.price = 13;
-ITEM.restoreHealth = 17;
+ITEM.restoreHealth = 5;
 ITEM.rarity = "Rare"
 ITEM.flag = "f"
