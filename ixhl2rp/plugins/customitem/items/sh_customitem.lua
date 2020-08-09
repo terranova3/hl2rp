@@ -15,3 +15,14 @@ end
 function ITEM:GetModel()
 	return self:GetData("model", "models/Gibs/HGIBS.mdl")
 end
+
+function ITEM:PopulateTooltip(tooltip)
+	if(!self:GetData("tip") != "") then
+		return
+	end 
+
+	local data = tooltip:AddRow("data")
+	data:SetText("\n" .. self:GetData("tip"))
+	data:SetFont("ixPluginCharSubTitleFont")
+	data:SizeToContents()
+end

@@ -16,13 +16,17 @@ ix.command.Add("CreateCustomItem", {
 	arguments = {
 		ix.type.string,
 		ix.type.string,
-		ix.type.string
+		ix.type.string,
+		bit.bor(ix.type.text, ix.type.optional)
 	},
-	OnRun = function(self, client, name, model, description)
+	OnRun = function(self, client, name, model, description, tooltip)
 		client:GetCharacter():GetInventory():Add("customitem", 1, {
 			name = name,
 			model = model,
-			description = description
+			description = description,
+			tip = tooltip
 		})
+
+		client:Notify(string.format("You have created a custom item with the name '%s'.", name))
 	end
 })

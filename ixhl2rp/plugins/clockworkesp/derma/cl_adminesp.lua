@@ -158,7 +158,7 @@ function PLUGIN.esp:GetAdminESPInfo(info)
 					local itemTable = v:GetItemTable()
 
 					if (itemTable) then
-						local itemName = itemTable.name
+						local itemName = itemTable:GetName()
 						local color = Color(0, 255, 255, 255);
 
 						table.insert(info, {
