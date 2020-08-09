@@ -11,7 +11,7 @@ local PLUGIN = PLUGIN
 
 if(CLIENT) then
 	function PLUGIN:ShouldShowOnScoreboard(client)
-		local faction = ix.faction.Get(v:Team())
+		local faction = ix.faction.Get(client:Team())
 
 		if(faction and faction.HideOnScoreboard) then
 			return false

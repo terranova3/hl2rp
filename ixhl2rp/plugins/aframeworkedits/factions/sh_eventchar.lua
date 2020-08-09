@@ -3,7 +3,7 @@ FACTION.name = "Event Character"
 FACTION.description = "A faction used for event characters."
 FACTION.color = Color(150, 125, 100, 255)
 FACTION.isDefault = true
-FACTION.HideOnScoreboard = false
+FACTION.HideOnScoreboard = true
 FACTION.models = {
 	"models/ug/new/citizens/female_01.mdl",
 	"models/ug/new/citizens/female_02.mdl",
