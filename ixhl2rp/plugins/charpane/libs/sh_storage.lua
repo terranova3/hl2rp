@@ -103,9 +103,6 @@ else
         local inventory = ix.item.inventories[id]
         local charPanel = ix.charPanels[charID]
 
-        PrintTable(ix.charPanels)
-        print(charID)
-
 		if (IsValid(entity) and inventory and inventory.slots and charPanel) then
 			local localInventory = LocalPlayer():GetCharacter():GetInventory()
 			local panel = vgui.Create("ixCharPanelStorageView")

@@ -149,6 +149,36 @@ function PLUGIN.esp:GetAdminESPInfo(info)
 			});
 		end;
 	end;
+
+	if (ix.option.Get("observerShowItemESP", true)) then
+		for k, v in pairs (ents.GetAll()) do 
+			if (v:GetClass() == "ix_item") then
+				if (v:IsValid()) then
+					local position = v:GetPos();
+					local itemTable = v:GetItemTable()
+
+					if (itemTable) then
+						local itemName = itemTable.name
+						local color = Color(0, 255, 255, 255);
+
+						table.insert(info, {
+							position = position,
+							text = {
+								{
+									text = "[Item]",
+									color = color
+								},
+								{
+									text = itemName,
+									color = color
+								}
+							}
+						});
+					end;
+				end;
+			end;
+		end;
+	end;
 end;
 
 -- Called to get the action text of a player.

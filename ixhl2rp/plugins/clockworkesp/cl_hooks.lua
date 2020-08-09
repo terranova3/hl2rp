@@ -16,6 +16,13 @@ ix.option.Add("observerESP", ix.type.bool, true, {
     end
 })
 
+ix.option.Add("observerShowItemESP", ix.type.bool, true, {
+    category = "Admin Settings",
+    hidden = function()
+        return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Observer", nil)
+    end
+})
+
 function PLUGIN:HUDPaint()
     local client = LocalPlayer()
 

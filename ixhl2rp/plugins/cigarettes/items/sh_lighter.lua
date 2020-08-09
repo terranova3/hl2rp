@@ -14,7 +14,7 @@ ITEM.flag = "G"
 ITEM.combine = function(item, targetItem)
 	local client = item:GetOwner()
 	
-	if(targetItem.base = "cigarettes") then
+	if(targetItem.base == "cigarettes") then
 		targetItem:SetData("lit", true)
 	end
 
