@@ -36,8 +36,10 @@ function PANEL:Rebuild()
 
 	for k, v in pairs(player.GetAll()) do
 		local character = v:GetCharacter()
+		local faction = ix.faction.Get(v:Team())
+		local shouldShow = (faction.ShowOnScoreboard or true)
 
-		if(character) then
+		if(character and shouldShow) then
 			local class = character:GetCustomClass() or character:GetClassName() or "ERROR"
 			local priority = character:GetClassScoreboardPriority()
 
