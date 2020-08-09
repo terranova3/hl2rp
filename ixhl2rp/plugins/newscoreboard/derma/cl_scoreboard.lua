@@ -37,7 +37,10 @@ function PANEL:Rebuild()
 	for k, v in pairs(player.GetAll()) do
 		local character = v:GetCharacter()
 		local faction = ix.faction.Get(v:Team())
-		local shouldShow = (faction.ShowOnScoreboard or true)
+
+		local shouldShow = hook.Run("ShouldShowOnScoreboard", v)
+
+		print(shouldShow)
 
 		if(character and shouldShow) then
 			local class = character:GetCustomClass() or character:GetClassName() or "ERROR"

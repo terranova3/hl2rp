@@ -6,3 +6,17 @@
 PLUGIN.name = "New Scoreboard";
 PLUGIN.description = "Updates the scoreboard to have custom class functionality";
 PLUGIN.author = "Adolphus";
+
+local PLUGIN = PLUGIN
+
+if(CLIENT) then
+	function PLUGIN:ShouldShowOnScoreboard(client)
+		local faction = ix.faction.Get(v:Team())
+
+		if(faction and faction.HideOnScoreboard) then
+			return false
+		end
+
+		return true
+	end
+end
