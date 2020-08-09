@@ -7,6 +7,19 @@ PLUGIN.name = "Overwatch";
 PLUGIN.description = "Replaces the old overwatch and adds ranks and automatic naming.";
 PLUGIN.author = "Adolphus";
 
+local PLUGIN = PLUGIN
+PLUGIN.config = {}
+PLUGIN.config.voiceTypes = {
+	"Legacy",
+	"HLA",
+	"Ordinal",
+	"Suppressor",
+	"Charger"
+}
+
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
+
 ix.anim.SetModelClass("models/cultist/hl_a/vannila_combine/npc/combine_soldier.mdl", "overwatch");
 ix.anim.SetModelClass("models/hlvr/characters/worker/npc/worker_combine.mdl", "overwatch");
 ix.anim.SetModelClass("models/hlvr/characters/hazmat_worker/npc/hazmat_worker_combine.mdl", "overwatch");
