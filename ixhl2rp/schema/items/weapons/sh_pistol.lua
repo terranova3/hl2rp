@@ -6,6 +6,11 @@ ITEM.weaponCategory = "sidearm"
 ITEM.flag = "V"
 ITEM.width = 2
 ITEM.height = 1
+ITEM.iconCam = {
+	pos = Vector(2, 0.5, 200),
+	ang = Angle(90, 108, 0),
+	fov = 4.1,
+}
 ITEM.cpArmory = true
 ITEM.pacData = {
 	[1] = {
@@ -78,10 +83,4 @@ ITEM.pacData = {
 	},
 }
 
-
-ITEM.iconCam = {
-	pos = Vector(9, 7.5359997749329, 45.75163269043),
-	ang = Angle(70.588233947754, -141.17646789551, -94.117645263672),
-	fov = 25.294117647059,
-}
 ITEM.bDropOnDeath = true
