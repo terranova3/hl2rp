@@ -13,7 +13,7 @@ ix.config.Add("yellRange", 280, "The maximum distance a person's IC chat message
 })
 
 ix.chat.Register("meL", {
-	format = "** %s %s",
+	format = "*** %s %s",
 	GetColor = function(self, speaker, text)
 		local color = ix.chat.classes.ic:GetColor(speaker, text)
 
@@ -21,13 +21,13 @@ ix.chat.Register("meL", {
 	end,
 	CanHear = ix.config.Get("yellRange", 280) * 2,
 	prefix = {"/MeL", "/ActionL"},
-	description = "@cmdMeL",
+	description = "Perform a physical action loudly.",
 	indicator = "chatPerforming",
 	deadCanChat = true
 })
 
 ix.chat.Register("meC", {
-	format = "** %s %s",
+	format = "* %s %s",
 	GetColor = function(self, speaker, text)
 		local color = ix.chat.classes.ic:GetColor(speaker, text)
 
@@ -35,7 +35,7 @@ ix.chat.Register("meC", {
 	end,
 	CanHear = ix.config.Get("chatRange", 280) * 0.25,
 	prefix = {"/MeC", "/ActionC"},
-	description = "@cmdMeC",
+	description = "Perform a physical action quietly.",
 	indicator = "chatPerforming",
 	deadCanChat = true
 })
@@ -47,11 +47,11 @@ ix.chat.Register("itL", {
 		return Color(color.r + 35, color.g + 35, color.b + 35)
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(ix.config.Get("chatColor"), "** "..text)
+		chat.AddText(ix.config.Get("chatColor"), "*** "..text)
 	end,
 	CanHear = ix.config.Get("yellRange", 280) * 2,
 	prefix = {"/ItL"},
-	description = "@cmdItL",
+	description = "Make something around you perform an action loudly.",
 	indicator = "chatPerforming",
 	deadCanChat = true
 })
@@ -63,11 +63,11 @@ ix.chat.Register("itC", {
 		return Color(color.r - 35, color.g - 35, color.b - 35)
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(ix.config.Get("chatColor"), "** "..text)
+		chat.AddText(ix.config.Get("chatColor"), "* "..text)
 	end,
 	CanHear = ix.config.Get("chatRange", 280) * 0.25,
 	prefix = {"/ItC"},
-	description = "@cmdItC",
+	description = "Make something around you perform an action quietly.",
 	indicator = "chatPerforming",
 	deadCanChat = true
 })
