@@ -1,7 +1,6 @@
 
-PLUGIN.name = "Doorkick"
-PLUGIN.author = "B4tr1p"
-PLUGIN.description = "Adds doorkick to the server."
+PLUGIN.name = "Doorkick Terranova Edit"
+PLUGIN.author = "Ayreborne"
 
 ix.config.Add("combineonly", false, "Whether or not doorkick is restricted to combines the server.", nil, {
 	category = "Doorkick"
