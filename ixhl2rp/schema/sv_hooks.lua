@@ -30,9 +30,10 @@ function Schema:PlayerUse(client, entity)
 
 	if (entity:IsDoor() and IsValid(entity.ixLock) and client:KeyDown(IN_SPEED)) then
 		local eClass = entity.ixLock:GetClass()
-		local hasCard = character:GetInventory():HasItem("access_card")
 
-		if(eClass == "ix_unionlock" and (hasCard or character:IsCombine())) then
+		if(eClass == "ix_unionlock" and (character:GetInventory():HasItem("access_card") or character:IsCombine())) then
+			entity.ixLock:Toggle(client)
+		elseif(eClass == "ix_unionlock" and (character:GetInventory():HasItem("restoration_card") or character:IsCombine()))
 			entity.ixLock:Toggle(client)
 		elseif(eClass != "ix_unionlock" and character:IsCombine()) then
 			entity.ixLock:Toggle(client)
