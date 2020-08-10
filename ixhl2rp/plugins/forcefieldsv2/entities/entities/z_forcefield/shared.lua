@@ -174,15 +174,18 @@ if (SERVER) then
 		end;
 	end;
 
-	function ENT:Use(act, call, type, val)
+	function ENT:Use(client, call, type, val)
+
+		local character = client:GetCharacter()
+
 		if ((self.nextUse or 0) < CurTime()) then
 			self.nextUse = CurTime() + 1;
 		else
 			return;
 		end;
 
-		if (client:IsCombine() or character:Team() == FACTION_ADMIN) then
-			if (act:KeyDown(IN_WALK)) then
+		if (client:IsCombine() or client:Team() == FACTION_ADMIN) then
+			if (client:KeyDown(IN_WALK)) then
 				netstream.Start(act, "forcefieldMenu", self);
 
 				act:SetNWEntity("ffTarget", self);

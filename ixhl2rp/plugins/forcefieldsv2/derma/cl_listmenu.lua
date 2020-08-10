@@ -79,7 +79,8 @@ end;
 function PANEL:Populate()
 	self.scroll:Clear();
 
-	local teamList = ix.class.Get(Class);
+	local teamList = ;
+	-- no fucking clue :)
 
 	for class, classTable in SortedPairs(teamList) do
 		for key, faction in pairs(classTable["factions"]) do
