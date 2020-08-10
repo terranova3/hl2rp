@@ -34,3 +34,10 @@ ITEM.functions.Give = {
 		target:SetHealth(math.min(target:Health() + itemTable.restoreHealth, target:GetMaxHealth()))
 	end
 }
+
+function ITEM:PopulateTooltip(tooltip)
+	local data = tooltip:AddRow("data")
+	data:SetBackgroundColor(Color(190, 62, 39, 120))
+	data:SetText("This item will only restore your health.")
+	data:SizeToContents()
+end

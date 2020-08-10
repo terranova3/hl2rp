@@ -9,4 +9,4 @@ ITEM.description = "A synthetic mixture of antlion properties used to releive im
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 30
-ITEM.restoreHealth = 70
+ITEM.restoreHealth = 50

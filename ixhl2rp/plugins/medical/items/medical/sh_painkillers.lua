@@ -9,4 +9,4 @@ ITEM.description = "A bottle of painkiller tablets used to relieve immediate pai
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 20
-ITEM.restoreHealth = 35
+ITEM.restoreHealth = 40

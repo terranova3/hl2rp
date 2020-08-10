@@ -9,5 +9,5 @@ ITEM.description = "A basic first aid kid used for treating wounds and injuries.
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 80
-ITEM.charge = 125
+ITEM.charge = 400
 ITEM.height = 1

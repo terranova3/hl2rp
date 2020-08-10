@@ -19,7 +19,7 @@ ITEM.functions.Apply = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
 
-        local shouldDelete, notify = PLUGIN:HealPlayer(client:GetCharacter(), item, true)
+        local shouldDelete, notify = PLUGIN:HealPlayer(client:GetCharacter(), itemTable)
         client:Notify(notify)
 
         return shouldDelete
@@ -35,7 +35,7 @@ ITEM.functions.Give = {
             return false
         end
 
-        local shouldDelete, notify = PLUGIN:HealPlayer(target:GetCharacter(), item, true)
+        local shouldDelete, notify = PLUGIN:HealPlayer(target:GetCharacter(), itemTable, true)
         client:Notify(notify)
 
         return shouldDelete
@@ -69,7 +69,6 @@ function ITEM:PopulateTooltip(tooltip)
 	local data = tooltip:AddRow("data")
 	data:SetBackgroundColor(Color(190, 62, 39, 120))
 	data:SetText("Uses Left: " .. self:GetData("currentAmount", self.charge))
-	data:SetFont("BudgetLabel")
 	data:SetExpensiveShadow(0.5)
 	data:SizeToContents()
 end
