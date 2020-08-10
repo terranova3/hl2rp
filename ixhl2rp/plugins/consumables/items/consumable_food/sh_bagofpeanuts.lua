@@ -11,5 +11,5 @@ ITEM.description = "A bag of unseperated, lightly salted peanuts.";
 ITEM.category = "Civil-Approved Food";
 ITEM.permit = "consumables";
 ITEM.price = 19;
-ITEM.restoreHealth = 20;
+ITEM.restoreHealth = 5;
 ITEM.flag = "f"

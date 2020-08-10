@@ -1,7 +1,6 @@
 
 PLUGIN.name = "Doorkick Terranova Edit"
 PLUGIN.author = "Ayreborne"
-PLUGIN.description = "Adds doorkick to the server."
 
 ix.config.Add("combineonly", false, "Whether or not doorkick is restricted to combines the server.", nil, {
 	category = "Doorkick"
@@ -24,10 +23,13 @@ ix.command.Add("Doorkick", {
 		if(client:IsCombine()) then
 					if (IsValid(entity) and entity:IsDoor() and !entity:GetNetVar("disabled")) then
 						if (client:GetPos():Distance(entity:GetPos())< 100) then	
-
-								if(current > 95) then		
+								if(current > 90) then
+									if(IsValid(entity.ixLock)) then
+										client:Notify("You cannot kick down a combine lock!")
+										return false
+									  end		
 									print(client:GetCharacter():GetAttribute("str", 0))
-									client:ConsumeStamina(110)
+									client:ConsumeStamina(80)
 									--	 client:ForceSequence("adoorkick") --Entra que nem maluco
 									client:ForceSequence("kickdoorbaton")
 									timer.Simple( 0.5, function()
@@ -51,10 +53,14 @@ ix.command.Add("Doorkick", {
 	else
 		if (IsValid(entity) and entity:IsDoor() and !entity:GetNetVar("disabled")) then
 			if (client:GetPos():Distance(entity:GetPos())< 100) then	
-
-					if(current > 95) then		
+					if(current > 90) then
+						if(IsValid(entity.ixLock)) then
+							client:Notify("You cannot kick down a combine lock!")
+							return false
+						  end			
 						print(client:GetCharacter():GetAttribute("str", 0))
-						client:ConsumeStamina(110)
+						client:ConsumeStamina(80)
+						entity:EmitSound("physics/wood/wood_panel_break1.wav", 100, 120)
 					--	 client:ForceSequence("adoorkick") --Entra que nem maluco
 					--	client:ForceSequence("kickdoor")
 						client:ForceSequence("kickdoorbaton")

@@ -9,6 +9,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "A freshly made kebab. Smells amazing and tastes even better."
 ITEM.category = "Civil-Approved Food";
-ITEM.restoreHealth = 18
+ITEM.restoreHealth = 5
 ITEM.price = 14;
 ITEM.flag = "f"

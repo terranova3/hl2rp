@@ -4,7 +4,7 @@ PLUGIN.author = "Ayreborne"
 PLUGIN.description = "Adds links to the various Terra-Nova Content"
 
 PLUGIN.urls = {
-	["Discord"] = "https://discord.gg/4fTSp6Y",
+	["Discord"] = "https://discord.gg/hl2rp",
 	["Forums"] = "https://forum.terranova-rp.com/index.php",
 	["Content"] = "https://steamcommunity.com/sharedfiles/filedetails/?id=856404947"
 }
