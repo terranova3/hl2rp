@@ -3,7 +3,6 @@ function Schema:LoadData()
 	self:LoadRationDispensers()
 	self:LoadVendingMachines()
 	self:LoadCombineLocks()
-	self:LoadForceFields()
 
 	Schema.CombineObjectives = ix.data.Get("combineObjectives", {}, false, true)
 end
@@ -12,7 +11,6 @@ function Schema:SaveData()
 	self:SaveRationDispensers()
 	self:SaveVendingMachines()
 	self:SaveCombineLocks()
-	self:SaveForceFields()
 end
 
 function Schema:PlayerSwitchFlashlight(client, enabled)
@@ -33,7 +31,7 @@ function Schema:PlayerUse(client, entity)
 
 		if(eClass == "ix_unionlock" and (character:GetInventory():HasItem("access_card") or character:IsCombine())) then
 			entity.ixLock:Toggle(client)
-		elseif(eClass == "ix_unionlock" and (character:GetInventory():HasItem("restoration_card") or character:IsCombine()))
+		elseif(eClass == "ix_restorationlock" and (character:GetInventory():HasItem("restoration_card") or character:IsCombine())) then
 			entity.ixLock:Toggle(client)
 		elseif(eClass != "ix_unionlock" and character:IsCombine()) then
 			entity.ixLock:Toggle(client)
