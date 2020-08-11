@@ -4,7 +4,7 @@ AddCSLuaFile()
 local PLUGIN = PLUGIN
 
 ENT.Type = "anim"
-ENT.PrintName = "Restoration Lock"
+ENT.PrintName = "CRU Lock"
 ENT.Category = "HL2 RP"
 ENT.Spawnable = true
 ENT.AdminOnly = true
