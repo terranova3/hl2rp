@@ -74,12 +74,6 @@ function PLUGIN:EntityTakeDamage(target, info)
 				ix.limb.TakeDamage(target, lastHitGroup, info, 3)
 			end
 
-			if (info:IsBulletDamage()) then		
-				ix.limb.CreateBloodEffects(info:GetDamagePosition(), 1, target)
-					
-				--Limb:PlayerEmitSound(player, lastHitGroup)
-			end
-			
 			if (lastHitGroup > 0) then
 				local hit = ix.limb.GetHealthPercentage(target, lastHitGroup) / 100
 

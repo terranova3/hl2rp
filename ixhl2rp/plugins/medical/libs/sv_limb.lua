@@ -90,29 +90,6 @@ function ix.limb.SetFracture(character, group, fracture)
     end
 end
 
-function ix.limb.CreateBloodEffects(pos, decals, entity, fScale)
-	if (!entity.limbNextBlood or CurTime() >= entity.limbNextBlood) then
-		local effectData = EffectData()
-			effectData:SetOrigin(pos)
-			effectData:SetEntity(entity)
-			effectData:SetStart(pos)
-			effectData:SetScale(fScale or 0.5)
-		util.Effect("BloodImpact", effectData, true, true)
-		
-		for i = 1, decals do
-			local trace = {}
-				trace.start = pos
-				trace.endpos = trace.start
-				trace.filter = entity
-			trace = util.TraceLine(trace)
-			
-			util.Decal("Blood", trace.HitPos + trace.HitNormal, trace.HitPos - trace.HitNormal)
-		end
-		
-		entity.limbNextBlood = CurTime() + 0.5
-	end
-end
-
 -- A function to get scale damage.
 function ix.limb.GetScaleDamage(group)
     local limb = ix.limb.GetHitgroup(group)
