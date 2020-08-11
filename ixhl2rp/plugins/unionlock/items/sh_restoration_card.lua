@@ -1,4 +1,4 @@
-ITEM.name = "Restoration Card"
+ITEM.name = "CRU Card"
 ITEM.model = Model("models/dorado/tarjeta3.mdl")
 ITEM.description = "A machine manufactured card that gives the holder access to purple coded combine locks."
 ITEM.noBusiness = true
