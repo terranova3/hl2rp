@@ -1,10 +1,27 @@
 local PANEL = {}
+local PLUGIN = PLUGIN
+
+function GetIndex(item)
+	local cur = 1
+	local text = item:GetData("paygrade", "Unemployed")
+
+	for k, v in pairs(PLUGIN.paygrades) do
+		if(k == text) then
+			return cur
+		end
+
+		cur = cur + 1
+	end
+
+	return cur
+end
 
 function PANEL:Init()
 	ix.gui.cidcreator = self
 
 	self:SetSize(ScrW() / 4, 400)
 	self:Center()
+	self:SetTitle("")
 	self:MakePopup()
 	self:SetBackgroundBlur(true)
 
@@ -14,7 +31,7 @@ function PANEL:Init()
 	self.itemswang = self:Add("DComboBox")
 	self.itemswang:Dock(TOP)
 	self.itemswang:SetValue("Select a source")
-
+	
 	self.characterTitle = self:AddLabel("Character details", true)
 	self.nameText = self:AddLabel("Input Name")
 	self.nameinput = self:Add("DTextEntry")
@@ -29,17 +46,23 @@ function PANEL:Init()
 	self.idinput:SetNumeric(true)
 
 	self.nameText = self:AddLabel("Employment", true)
-	self.occupationText = self:AddLabel("Occupation name")
-	self.occupationInput = self:Add("DTextEntry")
-	self.occupationInput:Dock(TOP)
-	self.occupationInput:DockMargin(16, 0, 16, 8)
 
-	self.wageText = self:AddLabel("Input Wage")
-	self.wageInput = self:Add("DNumberWang")
-	self.wageInput:Dock(TOP)
-	self.wageInput:DockMargin(16,0,16,8)
-	self.wageInput:SetMin(0)
-	self.wageInput:SetMax(100)
+	self.paygrade = self:Add("DComboBox")
+	self.paygrade:Dock(TOP)
+	self.paygrade:SetValue("Select a paygrade")
+	self.paygrade.Think = function()
+		if(IsValid(self.paygrade.Menu)) then
+			self.paygrade.Menu:SetMaxHeight(120)
+		end
+	end
+	self.paygrade.Paint = function()
+        surface.SetDrawColor(125,125,125,5)
+        surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+	end
+	
+	for k, v in pairs(PLUGIN.paygrades) do
+		self.paygrade:AddChoice(string.format("%s (%s tokens)", k, v), {paygrade = k, salary = v})
+	end
 
 	for k, v in pairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
 		if(v.uniqueID == "transfer_papers" or v.uniqueID == "cid") then
@@ -66,12 +89,18 @@ function PANEL:Init()
 
 	self.itemswang.OnSelect = function(self, index, value, data)
 		local item = data[1]
+		local salary = item:GetData("salary", 0)
 
 		ix.gui.cidcreator.nameinput:SetText(item:GetData("citizen_name", "error"))
 		ix.gui.cidcreator.idinput:SetValue(item:GetData("cid", 99999))
-		ix.gui.cidcreator.occupationInput:SetText(item:GetData("occupation", ""))
-		ix.gui.cidcreator.wageInput:SetValue(item:GetData("salary", 0))
+		ix.gui.cidcreator.salary = salary
+		ix.gui.cidcreator.paygrade:ChooseOptionID(GetIndex(item))
 		ix.gui.cidcreator.item = item
+	end
+
+	self.paygrade.OnSelect = function(self, index, value, data)
+		ix.gui.cidcreator.paygradeName = data.paygrade
+		ix.gui.cidcreator.salary = data.salary
 	end
 
 	self.submitbutton = self:Add("DButton")
@@ -90,8 +119,8 @@ function PANEL:Init()
 		local data = {
 			ix.gui.cidcreator.nameinput:GetText(),
 			ix.gui.cidcreator.idinput:GetText(),
-			ix.gui.cidcreator.occupationInput:GetText(),
-			ix.gui.cidcreator.wageInput:GetValue()
+			ix.gui.cidcreator.paygradeName or "Unemployed",
+			ix.gui.cidcreator.salary or 0
 		}
 
 		if(ix.gui.cidcreator.item) then

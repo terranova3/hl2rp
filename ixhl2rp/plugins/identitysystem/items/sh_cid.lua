@@ -26,7 +26,7 @@ function ITEM:PopulateTooltip(tooltip)
 	data:SetText("Name: " .. self:GetData("citizen_name", "Unissued") .. 
 	"\nID Number: " .. self:GetData("cid", "00000") .. 
 	"\nIssue Date: " .. self:GetData("issue_date", "Unissued") ..
-	"\nOccupation: " .. self:GetData("occupation", "Unemployed"))
+	"\nPay: " .. self:GetData("paygrade", "Unemployed"))
 
 	if(self:GetData("salary")) then
 		data:SetText(data:GetText() .. "\nWage: " .. self:GetData("salary"))
