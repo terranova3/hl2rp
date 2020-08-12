@@ -178,6 +178,8 @@ function PLUGIN:HealPlayer(character, item, bIsTarget)
 
 		return empty, string.format("You have healed your %s%s for %s.", targetString, limb.name, healing)
 	end
+
+	return false, "You don't have any injuries."
 end
 
 timer.Create("ixFractureTick", 1, 0, function()
