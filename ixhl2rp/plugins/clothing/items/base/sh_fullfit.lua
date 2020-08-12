@@ -13,6 +13,7 @@ ITEM.category = "Clothing";
 ITEM.description = "A suitcase full of clothes.";
 ITEM.width = 2
 ITEM.height = 2
+ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.outfitCategory = "model"
 ITEM.maxArmor = 10;
 ITEM.noBusiness = true

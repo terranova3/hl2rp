@@ -12,6 +12,7 @@ ITEM.replacements = "models/ma/hla/terranovapolice.mdl";
 ITEM.category = "Clothing";
 ITEM.outfitCategory = "model"
 ITEM.description = "A suitcase full of clothes.";
+ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.width = 2
 ITEM.height = 2
 ITEM.iconCam = {
