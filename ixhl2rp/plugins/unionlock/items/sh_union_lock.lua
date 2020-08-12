@@ -1,5 +1,5 @@
 
-ITEM.name = "Union Lock"
+ITEM.name = "MCS Lock"
 ITEM.description = "A metal apparatus applied to doors."
 ITEM.model = Model("models/props_combine/combine_lock01.mdl")
 ITEM.category = "Utilities"
