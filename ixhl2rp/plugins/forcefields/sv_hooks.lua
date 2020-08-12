@@ -41,23 +41,3 @@ function PLUGIN:KeyPress(player, key)
 		entity:Use(player, player, USE_ON, 1);
 	end;
 end;
-
-function PLUGIN:EntityFireBullets(ent, bullet)
-	if ent.FiredBullet then return; end;
-
-	for i = 1, (bullet.Num or 1) do
-		local trace = util.QuickTrace(bullet.Src, bullet.Dir * 10000, ent);
-
-		if (IsValid(trace.Entity) and trace.Entity:GetClass() == "ix_forcefield") then
-			local newbullet = table.Copy(bullet);
-			newbullet.Src = trace.HitPos + trace.Normal * 1;
-			newbullet.Attacker = ent;
-
-			ent.FiredBullet = true;
-			ent:FireBullets(newbullet);
-			ent.FiredBullet = false;
-
-			return false;
-		end;
-	end;
-end;
