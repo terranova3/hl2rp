@@ -6,7 +6,7 @@
 local PLUGIN = PLUGIN;
 
 FACTION.name = "Scanner"
-FACTION.description = "A scanner unit belonging to the Civil Protection"
+FACTION.description = "The flying eyes and ears of the Combine occupation."
 FACTION.color = Color(50, 100, 150)
 FACTION.isDefault = false
 FACTION.isGloballyRecognized = true
