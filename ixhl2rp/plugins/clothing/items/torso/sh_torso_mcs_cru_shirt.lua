@@ -4,7 +4,7 @@
 --]]
 
 ITEM.base = "base_torso";
-ITEM.name = "MCS Restoration Specialist Shirt";
+ITEM.name = "MCS Restoration Shirt";
 ITEM.model = "models/fty/items/mcslogotop.mdl"
 ITEM.price = 10
 ITEM.description = "A tan-colored cotton shirt worn by CRU Specialists. Its symbol sits on the right patch of the shirt, adjacenent to the MCS ensignia.";
