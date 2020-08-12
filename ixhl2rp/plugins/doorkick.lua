@@ -1,5 +1,6 @@
 PLUGIN.name = "Doorkick"
 PLUGIN.author = "Ayreborne"
+PLUGIN.description = "Enhanced doorkick, self explanatory."
 
 ix.command.Add("Doorkick", {
     description = "Kick the door.",
