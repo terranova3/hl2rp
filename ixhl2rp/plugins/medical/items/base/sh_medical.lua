@@ -6,6 +6,7 @@
 ITEM.name = "Medical Base"
 ITEM.model = Model("models/bloocobalt/l4d/items/w_eq_pills.mdl")
 ITEM.description = "A bottle of antibiotics used to treat bacterial complications."
+ITEM.backgroundColor = Color(76, 37, 29, 100)
 ITEM.category = "Medical"
 ITEM.flag = "m"
 ITEM.price = 20
@@ -38,6 +39,6 @@ ITEM.functions.Give = {
 function ITEM:PopulateTooltip(tooltip)
 	local data = tooltip:AddRow("data")
 	data:SetBackgroundColor(Color(190, 62, 39, 120))
-	data:SetText("This item will only restore your health.")
+	data:SetText("This item will restore your health for " .. self.restoreHealth or 0 .. ". Has one use.")
 	data:SizeToContents()
 end
