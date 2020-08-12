@@ -40,8 +40,6 @@ function PANEL:Rebuild()
 
 		local shouldShow = hook.Run("ShouldShowOnScoreboard", v)
 
-		print(shouldShow)
-
 		if(character and shouldShow) then
 			local class = character:GetCustomClass() or character:GetClassName() or "ERROR"
 			local priority = character:GetClassScoreboardPriority()
