@@ -7,10 +7,10 @@
 
 local PLUGIN = PLUGIN;
 
-ITEM.name = "Blue Cap";
+ITEM.name = "CRU Cap";
 ITEM.model = "models/fty/items/bluecap.mdl"
 ITEM.price = 12
-ITEM.description = "A slick, blue brimmed piece of headwear.";
+ITEM.description = "A slick, blue brimmed hat for members of the Civil Restoration Union.";
 ITEM.flag = "a"
 ITEM.bodyGroups = {
 	["headgear"] = 5,

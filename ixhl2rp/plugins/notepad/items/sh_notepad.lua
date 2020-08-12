@@ -5,7 +5,7 @@
 
 ITEM.name = "Notepad";
 ITEM.cost = 5;
-ITEM.model = "models/props_lab/clipboard.mdl";
+ITEM.model = "models/props_office/notepad_terranova.mdl";
 ITEM.weight = 0.1;
 ITEM.flag = "g"
 ITEM.category = "Other"
