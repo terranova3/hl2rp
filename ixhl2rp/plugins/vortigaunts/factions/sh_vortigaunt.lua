@@ -11,7 +11,7 @@ FACTION.weapons = {"ix_vortbeam", "ix_vortheal"}
 FACTION.walkSounds = FACTION.runSounds
 FACTION.isDefault = false
 FACTION.models = {
-	"models/vortigaunt.mdl"
+	"models/terranovavortigaunt.mdl"
 }
 
 function FACTION:OnCharacterCreated(client, character)

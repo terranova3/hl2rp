@@ -11,7 +11,7 @@ FACTION.weapons = {"ix_vortsweep"}
 FACTION.walkSounds = FACTION.runSounds
 FACTION.isDefault = false
 FACTION.models = {
-	"models/vortigaunt_slave.mdl"
+	"models/terranovavortigauntslave.mdl"
 }
 
 function FACTION:OnTransferred(client)
