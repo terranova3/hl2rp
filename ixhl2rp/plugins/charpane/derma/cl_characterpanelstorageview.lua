@@ -89,7 +89,7 @@ function PANEL:Init()
 	self.storageInventory:ShowCloseButton(true)
 	self.storageInventory:SetTitle("Storage")
 	self.storageInventory.Close = function(this)
-		net.Start("ixStorageClose")
+		net.Start("ixStorageCloseCharPanel")
 		net.SendToServer()
 		self:Remove()
 	end
@@ -109,7 +109,7 @@ function PANEL:Init()
 	ix.gui.inv1.bNoBackgroundBlur = true
 	ix.gui.inv1:ShowCloseButton(true)
 	ix.gui.inv1.Close = function(this)
-		net.Start("ixStorageClose")
+		net.Start("ixStorageCloseCharPanel")
 		net.SendToServer()
 		self:Remove()
 	end

@@ -5,7 +5,8 @@
 
 if(SERVER) then
     util.AddNetworkString("ixStorageOpenCharPanel")
-
+	util.AddNetworkString("ixStorageCloseCharPanel")
+	
     function ix.storage.OpenPlayer(client, inventory, charPanel, info)
 		assert(IsValid(client) and client:IsPlayer(), "expected valid player")
         assert(getmetatable(inventory) == ix.meta.inventory, "expected valid inventory")
@@ -35,7 +36,7 @@ if(SERVER) then
                 charPanel:AddReceiver(client)
 
                 client.ixOpenStorage = inventory
-                client.ixOpenStorageCharPanel = inventory
+                client.ixOpenStorageCharPanel = charPanel
 
                 -- update receivers for any bags this inventory might have
                 for _, v in pairs(charPanel:GetItems()) do
@@ -59,7 +60,34 @@ if(SERVER) then
 		end
 
 		return false
-    end
+	end
+
+	function ix.storage.RemoveCharPanelReceiver(client, inventory, charPanel, bDontRemove)
+		if (inventory.storageInfo) then
+			charPanel:RemoveReceiver(client)
+			inventory:RemoveReceiver(client)
+
+			for _, v in pairs(charPanel:GetItems()) do
+				if (v.isBag and v:GetInventory()) then
+					v:GetInventory():AddReceiver(client)
+				end
+			end
+
+			-- update receivers for any bags this inventory might have
+			for _, v in pairs(inventory:GetItems()) do
+				if (v.isBag and v:GetInventory()) then
+					v:GetInventory():RemoveReceiver(client)
+				end
+			end
+
+			client.ixOpenStorage = nil
+			client.ixOpenStorageCharPanel = nil
+
+			return true
+		end
+
+		return false
+	end
     
 	function ix.storage.SyncCharPanel(client, inventory, charPanel)
 		local info = inventory.storageInfo
@@ -85,11 +113,20 @@ if(SERVER) then
                 net.WriteTable(info.data)
             net.Send(client)
         end
-    end
+	end
+
+	net.Receive("ixStorageCloseCharPanel", function(length, client)
+		local charPanel = client.ixOpenStorageCharPanel
+		local inventory = client.ixOpenStorage
+
+		if(charPanel or inventory) then
+			ix.storage.RemoveCharPanelReceiver(client, inventory, charPanel)
+		end
+	end)
 else
     net.Receive("ixStorageOpenCharPanel", function()
 		if (IsValid(ix.gui.menu)) then
-			net.Start("ixStorageClose")
+			net.Start("ixStorageCloseCharPanel")
 			net.SendToServer()
 			return
 		end
