@@ -4,7 +4,7 @@
 --]]
 
 FACTION.name = "Biotic"
-FACTION.description = "An alien race not from this planet."
+FACTION.description = "Enslaved and chained, these Vortigaunts do not live free. Their bodies are weakened, and those responsible attempt to crush their will."
 FACTION.color = Color(0, 255, 200, 255);
 FACTION.runSounds = {[0] = "NPC_Vortigaunt.FootstepLeft", [1] = "NPC_Vortigaunt.FootstepRight"}
 FACTION.weapons = {"ix_vortsweep"}

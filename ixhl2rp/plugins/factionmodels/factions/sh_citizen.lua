@@ -1,6 +1,6 @@
 
 FACTION.name = "Citizen"
-FACTION.description = "A regular human citizen enslaved by the Universal Union."
+FACTION.description = "What remains of humanity. These citizens occupy Earth's last remaining cities and live under a harsh, cruel occupation."
 FACTION.color = Color(150, 125, 100, 255)
 FACTION.isDefault = true
 FACTION.models = {
