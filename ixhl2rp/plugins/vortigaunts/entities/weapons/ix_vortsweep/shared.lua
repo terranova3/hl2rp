@@ -22,6 +22,7 @@ SWEP.Weight					= 5
 SWEP.Spawnable     			= true
 SWEP.AdminSpawnable			= false;
 SWEP.HoldType 				= "beam"
+SWEP.WorldModel 			= ""
 
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= -1
