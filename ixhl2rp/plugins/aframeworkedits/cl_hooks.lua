@@ -49,3 +49,7 @@ end
 timer.Create("DisableEyeMove", 60, 0, function()
 	RunConsoleCommand("r_eyemove", 0)
 end)
+
+netstream.Hook("ixPlaySound", function(sound)
+	surface.PlaySound(sound);
+end);

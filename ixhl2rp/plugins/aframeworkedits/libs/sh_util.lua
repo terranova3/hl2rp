@@ -23,3 +23,21 @@ function ix.util.Chance(chance)
 
     return false
 end
+
+function ix.util.TableToString(array)
+    if(!array) then
+        return ""
+    end
+    
+    local output = ""
+
+    for i = 1, #array do
+        if(i == 1) then
+            output = output .. array[i]
+        else
+            output = output .. ", " .. array[i]
+        end
+    end
+
+    return output
+end
