@@ -5,10 +5,6 @@ end;
 local PLUGIN = PLUGIN;
 local material = Material("effects/com_shield003a");
 
-local function IsCombine(client)
-	return client:IsCombine()
-end
-
 ENT.Type 			= "anim";
 ENT.Base 			= "base_anim";
 ENT.PrintName		= "HL2RP Field";
@@ -124,7 +120,7 @@ if (SERVER) then
 		if !(self.on) then return; end;
 
 		if (ent:IsPlayer()) then
-			if !(IsCombine(player)) then
+			if !(ent:IsCombine()) then
 				if (!ent.ShieldTouch) then
 					ent.ShieldTouch = CreateSound(ent, "ambient/machines/combine_shield_touch_loop1.wav");
 					ent.ShieldTouch:Play();
@@ -141,7 +137,7 @@ if (SERVER) then
 		if !(self.on) then return; end;
 
 		if (ent:IsPlayer()) then
-			if !(IsCombine(player)) then
+			if !(ent:IsCombine()) then
 				if ent.ShieldTouch then
 					ent.ShieldTouch:ChangeVolume(0.3, 0);
 				end;
@@ -153,7 +149,7 @@ if (SERVER) then
 		if !(self.on) then return; end;
 
 		if (ent:IsPlayer()) then
-			if !(IsCombine(ent)) then
+			if !(ent:IsCombine()) then
 				if (ent.ShieldTouch) then
 					ent.ShieldTouch:FadeOut(0.5);
 				end;
@@ -184,7 +180,7 @@ if (SERVER) then
 			return;
 		end;
 
-		if (IsCombine(act)) then
+		if (act:IsCombine()) then
 			self.mode = (self.mode or 1) + 1;
 			self:SetDTInt(0, self.mode);
 
