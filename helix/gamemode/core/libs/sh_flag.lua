@@ -211,4 +211,5 @@ do
 	ix.flag.Add("G", "Access to contraband", "Business")
 	ix.flag.Add("b", "Access to bread related goods", "Business")
 	ix.flag.Add("z", "Access to Australian goods.", "Business")
+	ix.flag.Add("X", "Access to items from Xen.", "Business")
 end

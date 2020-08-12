@@ -11,4 +11,4 @@ ITEM.description = "A profoundly bizare red flower with an entoxicatingly beauti
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

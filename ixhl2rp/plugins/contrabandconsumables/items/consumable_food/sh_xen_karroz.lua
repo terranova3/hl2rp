@@ -11,4 +11,4 @@ ITEM.description = "Xen flower with a pungent smell that hits you at a distance.
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

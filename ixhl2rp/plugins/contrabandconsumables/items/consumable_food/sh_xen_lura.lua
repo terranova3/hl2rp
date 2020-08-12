@@ -11,4 +11,4 @@ ITEM.description = "A long tendril with the smell and physical attributes of ano
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

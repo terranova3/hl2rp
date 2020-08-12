@@ -11,4 +11,4 @@ ITEM.description = "A vibrant orange Xen flower with a sticky core."
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

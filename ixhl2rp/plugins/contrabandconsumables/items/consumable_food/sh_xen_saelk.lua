@@ -11,4 +11,4 @@ ITEM.description = "A long tendriled green mushroom from a Xen dimension."
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

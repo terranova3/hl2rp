@@ -11,4 +11,4 @@ ITEM.description = "Xen flora resembling a flower lilly and a stringey noodle cu
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

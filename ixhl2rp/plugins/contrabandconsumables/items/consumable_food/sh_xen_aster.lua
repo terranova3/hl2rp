@@ -11,4 +11,4 @@ ITEM.description = "A strange Xen flower with a wide purple top and a strange sm
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

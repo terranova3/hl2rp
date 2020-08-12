@@ -11,4 +11,4 @@ ITEM.description = "A purple and blue flower from another dimension with matchin
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

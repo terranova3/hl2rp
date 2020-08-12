@@ -11,4 +11,4 @@ ITEM.description = "A small Xen flora strapped with pods of strange seeds."
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

@@ -11,4 +11,4 @@ ITEM.description = "A Xen flora that flourishes in a variety of colours dependin
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"

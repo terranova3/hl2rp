@@ -11,4 +11,4 @@ ITEM.description = "A strange round Xen..Sponge? It has an orange hue and a roug
 ITEM.category = "Contraband"
 ITEM.price = 25;
 ITEM.restoreHealth = 20
-ITEM.flag = "G"
+ITEM.flag = "X"
