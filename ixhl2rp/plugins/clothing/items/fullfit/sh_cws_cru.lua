@@ -6,9 +6,9 @@
 local PLUGIN = PLUGIN;
 
 ITEM.base = "base_fullfit";
-ITEM.name = "Civil Restoration Uniform";
+ITEM.name = "CRU XHMS Suit";
 ITEM.category = "Clothing";
-ITEM.description = "A complete uniform kit that includes a vulcanized rubber jacket, contamination suit, air canister,gas mask, steel toed jackboots, rubber gloves and more.";
+ITEM.description = "CRU Xen Hazardous Materials suit. A complete uniform kit that includes a vulcanized rubber jacket, contamination suit, air canister,gas mask, steel toed jackboots, rubber gloves and more.";
 ITEM.maxArmor = 25;
 ITEM.gasImmunity = true
 ITEM.replacements = "models/hlvr/characters/hazmat_worker/npc/hazmat_worker_citizen.mdl"
