@@ -13,7 +13,7 @@ net.Receive("ixCharPanelSync", function()
 
 	if (character) then
 		local charPanel = ix.charPanel.CreatePanel(id)
-		charPanel:SetOwner(character:GetID())
+
 		charPanel.slots = {}
 		charPanel.vars = vars
 
