@@ -31,7 +31,7 @@ ITEM.functions.Give = {
         local client = itemTable.player   
 		local target = client:GetEyeTraceNoCursor().Entity;
 
-        if (!target or !target:GetCharacter() or target:GetPos():Distance(client:GetShootPos() ) >= 192) then
+        if (!target or !target:IsPlayer() or !target:GetCharacter() or target:GetPos():Distance(client:GetShootPos() ) >= 192) then
             return false
         end
 
