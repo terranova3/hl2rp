@@ -1,6 +1,6 @@
 
 FACTION.name = "Overwatch Transhuman Arm"
-FACTION.description = "A serving member of the Overwatch Transhuman Arm. The Arm is made up of drafted military personel from just after the war, and in recent years, post-war volunteers. These individuals serve the Combine collective ruthlessly."
+FACTION.description = "Either drafted or volunteered, members of the Overwatch Transhuman Arm today serve the Combine as eager suppressors of humanity, and their new lords ruthless exterminators."
 FACTION.color = Color(150, 50, 50, 255)
 FACTION.models = {"models/overwatch/terranova/overwatchepsilon.mdl"}
 FACTION.isDefault = false
