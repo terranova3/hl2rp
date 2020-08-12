@@ -21,7 +21,7 @@ SWEP.Purpose = "Immediately kills the target that you fire it at.";
 SWEP.Contact = "";
 SWEP.Author	= "RJ";
 
-SWEP.ViewModel = "models/weapons/v_punch.mdl";
+SWEP.ViewModel = "";
 SWEP.WorldModel 			= ""
 SWEP.HoldType = "normal";
 
