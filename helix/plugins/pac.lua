@@ -175,7 +175,7 @@ else
 	local function RemovePart(client, uniqueID)
 		local pacData = ix.pac.list[uniqueID]
 
-		if (pacData) then
+		if (pacData and IsValid(client)) then
 			if(client:IsFemale() and pacData.female) then
 				pacData = pacData.female
 			elseif(pacData.male) then
