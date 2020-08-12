@@ -42,7 +42,7 @@ function PLUGIN:ShouldCollide(a, b)
 	end;
 
 	if (IsValid(entity) and entity:GetClass() == "ix_forcefield") then
-		if (IsValid(client)) then
+		if (IsValid(client) and client:GetCharacter()) then
 			local faction = client:GetCharacter():GetFaction()
 
 			if (client:IsCombine() or faction == FACTION_ADMIN) then
