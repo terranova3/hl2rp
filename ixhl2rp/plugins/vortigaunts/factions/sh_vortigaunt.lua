@@ -14,6 +14,10 @@ FACTION.models = {
 	"models/vortigaunt.mdl"
 }
 
+function FACTION:OnCharacterCreated(client, character)
+	character:SetCustomClass("Xenian");
+end
+
 function FACTION:OnTransferred(client)
 	local character = client:GetCharacter()
 	character:SetModel(self.models[1])
