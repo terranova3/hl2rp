@@ -4,7 +4,6 @@ PLUGIN.description = "Enhanced doorkick, self explanatory."
 
 ix.command.Add("Doorkick", {
     description = "Kick the door.",
-    adminOnly = true,
 	OnRun = function(self, client)
 		local entity = client:GetEyeTrace().Entity
 		local current = client:GetLocalVar("stm", 0)
