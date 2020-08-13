@@ -12,3 +12,4 @@ ITEM.permit = "consumables";
 ITEM.price = 10;
 ITEM.capacity = 355
 ITEM.restoreStamina = 20;
+ITEM.rarity = "Common"
