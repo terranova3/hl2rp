@@ -35,6 +35,7 @@ if(SERVER) then
                 inventory:AddReceiver(client)
                 charPanel:AddReceiver(client)
 
+				client.realCharPanel = client:GetCharPanel()
                 client.ixOpenStorage = inventory
                 client.ixOpenStorageCharPanel = charPanel
 
@@ -65,6 +66,7 @@ if(SERVER) then
 	function ix.storage.RemoveCharPanelReceiver(client, inventory, charPanel, bDontRemove)
 		charPanel:RemoveReceiver(client)
 		inventory:RemoveReceiver(client)
+		client:SetCharPanel(client.realCharPanel)
 
 		for _, v in pairs(charPanel:GetItems()) do
 			if (v.isBag and v:GetInventory()) then
@@ -81,6 +83,7 @@ if(SERVER) then
 
 		client.ixOpenStorage = nil
 		client.ixOpenStorageCharPanel = nil
+		client.realCharPanel = nil
 
 		return true
 
