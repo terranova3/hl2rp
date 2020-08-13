@@ -325,6 +325,10 @@ function PANEL:Init()
 		end;
 	end;
 
+	table.sort(classes, function(a, b)
+		return a.priority < b.priority;
+	end);
+	
 	if (table.Count(classes) > 0) then
 		for k, v in pairs(classes) do
 			local panel = self:Add("ixScoreboardClass")
