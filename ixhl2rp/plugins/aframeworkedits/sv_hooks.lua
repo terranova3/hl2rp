@@ -15,8 +15,9 @@ function PLUGIN:PlayerModelChanged(client, model)
 end;
 
 function PLUGIN:InventoryItemAdded(oldInv, inventory, item)
-	if(oldInv:GetID() == 0) then
-		local client = inventory:GetOwner()
+	local client = inventory:GetOwner()
+
+	if(oldInv:GetID() == 0 and !client:InObserver()) then
 		local entity = item.entity
 
 		if(IsValid(client) and IsValid(entity)) then
