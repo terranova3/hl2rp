@@ -1,69 +1,7 @@
-
-local PANEL = {}
-
-AccessorFunc(PANEL, "money", "Money", FORCE_NUMBER)
-
-function PANEL:Init()
-	self:DockPadding(1, 1, 1, 1)
-	self:SetTall(64)
-	self:Dock(BOTTOM)
-
-	self.moneyLabel = self:Add("DLabel")
-	self.moneyLabel:Dock(TOP)
-	self.moneyLabel:SetFont("ixGenericFont")
-	self.moneyLabel:SetText("")
-	self.moneyLabel:SetTextInset(2, 0)
-	self.moneyLabel:SizeToContents()
-	self.moneyLabel.Paint = function(panel, width, height)
-		derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ix.config.Get("color"))
-	end
-
-	self.amountEntry = self:Add("ixTextEntry")
-	self.amountEntry:Dock(FILL)
-	self.amountEntry:SetFont("ixGenericFont")
-	self.amountEntry:SetNumeric(true)
-	self.amountEntry:SetValue("0")
-
-	self.transferButton = self:Add("DButton")
-	self.transferButton:SetFont("ixIconsMedium")
-	self:SetLeft(false)
-	self.transferButton.DoClick = function()
-		local amount = math.max(0, math.Round(tonumber(self.amountEntry:GetValue()) or 0))
-		self.amountEntry:SetValue("0")
-
-		if (amount != 0) then
-			self:OnTransfer(amount)
-		end
-	end
-
-	self.bNoBackgroundBlur = true
-end
-
-function PANEL:SetLeft(bValue)
-	if (bValue) then
-		self.transferButton:Dock(LEFT)
-		self.transferButton:SetText("s")
-	else
-		self.transferButton:Dock(RIGHT)
-		self.transferButton:SetText("t")
-	end
-end
-
-function PANEL:SetMoney(money)
-	local name = string.gsub(ix.util.ExpandCamelCase(ix.currency.plural), "%s", "")
-
-	self.money = math.max(math.Round(tonumber(money) or 0), 0)
-	self.moneyLabel:SetText(string.format("%s: %d", name, money))
-end
-
-function PANEL:OnTransfer(amount)
-end
-
-function PANEL:Paint(width, height)
-	derma.SkinFunc("PaintBaseFrame", self, width, height)
-end
-
-vgui.Register("ixStorageMoney", PANEL, "EditablePanel")
+--[[
+	© 2020 TERRANOVA do not share, re-distribute or modify
+	without permission of its author.
+--]]
 
 DEFINE_BASECLASS("Panel")
 PANEL = {}
@@ -93,7 +31,7 @@ function PANEL:Init()
 		net.SendToServer()
 		self:Remove()
 	end
-
+	
 	self.storageMoney = self.storageInventory:Add("ixStorageMoney")
 	self.storageMoney:SetVisible(false)
 	self.storageMoney.OnTransfer = function(_, amount)
