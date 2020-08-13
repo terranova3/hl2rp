@@ -15,6 +15,7 @@ SWEP.Instructions 			= "Primary Fire: Heal";
 SWEP.Purpose 				= "To healing people.";
 SWEP.Contact 				= ""
 
+SWEP.Primary.IsAlwaysRaised = true;
 SWEP.Category				= "Vort Swep" 
 SWEP.Slot					= 5
 SWEP.SlotPos				= 5
@@ -23,7 +24,7 @@ SWEP.Spawnable     			= true
 SWEP.AdminSpawnable			= false;
 -- SWEP.ViewModel 				= "models/weapons/v_vortbeamvm.mdl"
 SWEP.WorldModel 			= ""
-SWEP.HoldType 				= "heal"
+SWEP.HoldType = "normal";
 
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= -1

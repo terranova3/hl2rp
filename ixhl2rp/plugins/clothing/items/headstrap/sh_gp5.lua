@@ -7,10 +7,12 @@
 ITEM.base = "base_headstrap";
 ITEM.name = "GP-5 Gasmask";
 ITEM.model = "models/hardbass/gp5.mdl"
+ITEM.category = "Contraband"
 ITEM.description = "A Soviet gas mask, given to both the military and civilian population."
 ITEM.price = 25
-ITEM.flag = "A"
+ITEM.flag = "G"
 ITEM.gasImmunity = true
+
 
 ITEM.pacData = {
     male = {
