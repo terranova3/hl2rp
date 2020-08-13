@@ -12,6 +12,12 @@ ix.util.Include("cl_hooks.lua")
 ix.util.Include("sh_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
+ix.anim.SetModelClass("models/terranovavortigaunt.mdl", "vortigaunt")
+ix.anim.SetModelClass("models/terranovavortigauntslave.mdl", "vortigaunt")
+ix.anim.SetModelClass("models/vortigaunt.mdl", "vortigaunt")
+ix.anim.SetModelClass("models/vortigaunt_blue.mdl", "vortigaunt")
+ix.anim.SetModelClass("models/vortigaunt_doctor.mdl", "vortigaunt")
+ix.anim.SetModelClass("models/vortigaunt_slave.mdl", "vortigaunt")
 
 ALWAYS_RAISED["swep_vortigaunt_sweep"] = true
 ALWAYS_RAISED["swep_vortigaunt_heal"] = true
