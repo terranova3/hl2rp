@@ -32,7 +32,7 @@ SWEP.Primary.IsAlwaysRaised = true;
 SWEP.Primary.DefaultClip = 0;
 SWEP.Primary.Automatic = false;
 SWEP.Primary.ClipSize = -1;
-SWEP.Primary.Damage = 90;
+SWEP.Primary.Damage = 55;
 SWEP.Primary.Delay = 3;
 SWEP.Primary.Ammo = "";
 
