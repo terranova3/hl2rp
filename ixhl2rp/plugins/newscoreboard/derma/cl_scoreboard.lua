@@ -1,35 +1,298 @@
-local PANEL = {};
+local rowPaintFunctions = {
+	function(width, height)
+	end,
 
--- Called when the panel is initialized.
+	function(width, height)
+		surface.SetDrawColor(30, 30, 30, 25)
+		surface.DrawRect(0, 0, width, height)
+	end
+}
+
+-- character icon
+-- we can't customize the rendering of ModelImage so we have to do it ourselves
+local PANEL = {}
+local BODYGROUPS_EMPTY = "000000000"
+
+AccessorFunc(PANEL, "model", "Model", FORCE_STRING)
+AccessorFunc(PANEL, "bHidden", "Hidden", FORCE_BOOL)
+
+function PANEL:Init()
+	self:SetSize(64, 64)
+	self.bodygroups = BODYGROUPS_EMPTY
+end
+
+function PANEL:SetModel(model, skin, bodygroups)
+	model = model:gsub("\\", "/")
+
+	if (isstring(bodygroups)) then
+		if (bodygroups:len() == 9) then
+			for i = 1, bodygroups:len() do
+				self:SetBodygroup(i, tonumber(bodygroups[i]) or 0)
+			end
+		else
+			self.bodygroups = BODYGROUPS_EMPTY
+		end
+	end
+
+	self.model = model
+	self.skin = skin
+	self.path = "materials/spawnicons/" ..
+		model:sub(1, #model - 4) .. -- remove extension
+		((isnumber(skin) and skin > 0) and ("_skin" .. tostring(skin)) or "") .. -- skin number
+		(self.bodygroups != BODYGROUPS_EMPTY and ("_" .. self.bodygroups) or "") .. -- bodygroups
+		".png"
+
+	local material = Material(self.path, "smooth")
+
+	-- we don't have a cached spawnicon texture, so we need to forcefully generate one
+	if (material:IsError()) then
+		self.id = "ixScoreboardIcon" .. self.path
+		self.renderer = self:Add("ModelImage")
+		self.renderer:SetVisible(false)
+		self.renderer:SetModel(model, skin, self.bodygroups)
+		self.renderer:RebuildSpawnIcon()
+
+		-- this is the only way to get a callback for generated spawn icons, it's bad but it's only done once
+		hook.Add("SpawniconGenerated", self.id, function(lastModel, filePath, modelsLeft)
+			filePath = filePath:gsub("\\", "/"):lower()
+
+			if (filePath == self.path) then
+				hook.Remove("SpawniconGenerated", self.id)
+
+				self.material = Material(filePath, "smooth")
+				self.renderer:Remove()
+			end
+		end)
+	else
+		self.material = material
+	end
+end
+
+function PANEL:SetBodygroup(k, v)
+	if (k < 0 or k > 8 or v < 0 or v > 9) then
+		return
+	end
+
+	self.bodygroups = self.bodygroups:SetChar(k + 1, v)
+end
+
+function PANEL:GetModel()
+	return self.model or "models/error.mdl"
+end
+
+function PANEL:GetSkin()
+	return self.skin or 1
+end
+
+function PANEL:DoClick()
+end
+
+function PANEL:DoRightClick()
+end
+
+function PANEL:OnMouseReleased(key)
+	if (key == MOUSE_LEFT) then
+		self:DoClick()
+	elseif (key == MOUSE_RIGHT) then
+		self:DoRightClick()
+	end
+end
+
+function PANEL:Paint(width, height)
+	if (!self.material) then
+		return
+	end
+
+	surface.SetMaterial(self.material)
+	surface.SetDrawColor(self.bHidden and color_black or color_white)
+	surface.DrawTexturedRect(0, 0, width, height)
+end
+
+function PANEL:Remove()
+	if (self.id) then
+		hook.Remove("SpawniconGenerated", self.id)
+	end
+end
+
+vgui.Register("ixScoreboardIcon", PANEL, "Panel")
+
+-- player row
+PANEL = {}
+
+AccessorFunc(PANEL, "paintFunction", "BackgroundPaintFunction")
+
+function PANEL:Init()
+	self:SetTall(64)
+
+	self.icon = self:Add("ixScoreboardIcon")
+	self.icon:Dock(LEFT)
+	self.icon.DoRightClick = function()
+		local client = self.player
+
+		if (!IsValid(client)) then
+			return
+		end
+
+		local menu = DermaMenu()
+
+		menu:AddOption(L("viewProfile"), function()
+			client:ShowProfile()
+		end)
+
+		menu:AddOption(L("copySteamID"), function()
+			SetClipboardText(client:IsBot() and client:EntIndex() or client:SteamID())
+		end)
+
+		hook.Run("PopulateScoreboardPlayerMenu", client, menu)
+		menu:Open()
+	end
+
+	self.icon:SetHelixTooltip(function(tooltip)
+		local client = self.player
+
+		if (IsValid(self) and IsValid(client)) then
+			ix.hud.PopulatePlayerTooltip(tooltip, client)
+		end
+	end)
+
+	self.name = self:Add("DLabel")
+	self.name:DockMargin(4, 4, 0, 0)
+	self.name:Dock(TOP)
+	self.name:SetTextColor(color_white)
+	self.name:SetFont("ixGenericFont")
+
+	self.description = self:Add("DLabel")
+	self.description:DockMargin(5, 0, 0, 0)
+	self.description:Dock(TOP)
+	self.description:SetTextColor(color_white)
+	self.description:SetFont("ixSmallFont")
+
+	self.paintFunction = rowPaintFunctions[1]
+	self.nextThink = CurTime() + 1
+end
+
+function PANEL:Update()
+	local client = self.player
+	local model = client:GetModel()
+	local skin = client:GetSkin()
+	local name = client:GetName()
+	local description = hook.Run("GetCharacterDescription", client) or
+		(client:GetCharacter() and client:GetCharacter():GetDescription()) or ""
+
+	local bRecognize = false
+	local localCharacter = LocalPlayer():GetCharacter()
+	local character = IsValid(self.player) and self.player:GetCharacter()
+
+	if (localCharacter and character) then
+		bRecognize = hook.Run("IsCharacterRecognized", localCharacter, character:GetID())
+			or hook.Run("IsPlayerRecognized", self.player)
+	end
+
+	self.icon:SetHidden(!bRecognize)
+	self:SetZPos(bRecognize and 1 or 2)
+
+	-- no easy way to check bodygroups so we'll just set them anyway
+	for _, v in pairs(client:GetBodyGroups()) do
+		self.icon:SetBodygroup(v.id, client:GetBodygroup(v.id))
+	end
+
+	if (self.icon:GetModel() != model or self.icon:GetSkin() != skin) then
+		self.icon:SetModel(model, skin)
+		self.icon:SetTooltip(nil)
+	end
+
+	if (self.name:GetText() != name) then
+		self.name:SetText(name)
+		self.name:SizeToContents()
+	end
+
+	if (self.description:GetText() != description) then
+		self.description:SetText(description)
+		self.description:SizeToContents()
+	end
+end
+
+function PANEL:Think()
+	if (CurTime() >= self.nextThink) then
+		local client = self.player
+
+		if (!IsValid(client) or !client:GetCharacter() or self.character != client:GetCharacter() or self.team != client:Team()) then
+			self:Remove()
+			self:GetParent():SizeToContents()
+		end
+
+		self.nextThink = CurTime() + 1
+	end
+end
+
+function PANEL:SetPlayer(client)
+	self.player = client
+	self.team = client:Team()
+	self.character = client:GetCharacter()
+
+	self:Update()
+end
+
+function PANEL:Paint(width, height)
+	self.paintFunction(width, height)
+end
+
+vgui.Register("ixScoreboardRow", PANEL, "EditablePanel")
+
+-- faction grouping
+PANEL = {}
+
+AccessorFunc(PANEL, "class", "Class")
+
+function PANEL:Init()
+	self:DockMargin(0, 0, 0, 16)
+	self:SetTall(32)
+
+	self.nextThink = 0
+end
+
+function PANEL:AddPlayer(client, index)
+	if (!IsValid(client) or !client:GetCharacter() or hook.Run("ShouldShowPlayerOnScoreboard", client) == false) then
+		return false
+	end
+
+	local panel = self:Add("ixScoreboardRow")
+	panel:SetPlayer(client)
+	panel:Dock(TOP)
+	panel:SetZPos(2)
+	panel:SetBackgroundPaintFunction(rowPaintFunctions[1])
+
+	self:SizeToContents()
+	client.ixScoreboardSlot = panel
+
+	return true
+end
+
+function PANEL:SetClass(class)
+	self:SetColor(class.classColor)
+	self:SetText(L(class.name))
+
+	self.class = class
+
+	for k, v in pairs(class.players) do
+		if(IsValid(v)) then
+			self:AddPlayer(v)
+		end
+	end
+end
+
+vgui.Register("ixScoreboardClass", PANEL, "ixCategoryPanel")
+
+-- main scoreboard panel
+PANEL = {}
+
 function PANEL:Init()
 	if (IsValid(ix.gui.scoreboard)) then
 		ix.gui.scoreboard:Remove()
 	end
 
-	self:SetWide(800);
-	self:SetTall(400);
-	self:Dock(LEFT);
+	self:Dock(FILL)
 	self.nextThink = 0
-	self.maxWidth = ScrW() * 0.2
-	
-	self.panelList = self:Add("DPanelList")
-	self.panelList:Dock(FILL)
-	self.panelList:EnableVerticalScrollbar();
- 	self.panelList:SetPadding(2);
- 	self.panelList:SetSpacing(2);
- 	self.panelList:SizeToContents();
-	
-
-	function self.panelList:Paint()
-	end;
-
-	ix.gui.scoreboard = self;
-	ix.gui.scoreboard:Rebuild();
-end;
-
--- A function to rebuild the panel.
-function PANEL:Rebuild()
-	self.panelList:Clear();
 
 	local availableClasses = {};
 	local classes = {};
@@ -51,7 +314,7 @@ function PANEL:Rebuild()
 					classColor = character:GetClassColor()
 				};
 			end;
-				
+			
 			table.insert(availableClasses[class].players, v)
 		end;
 	end;
@@ -61,170 +324,34 @@ function PANEL:Rebuild()
 			classes[#classes + 1] = {name = k, priority = v.priority, players = v.players, classColor = v.classColor};
 		end;
 	end;
-	
-	table.sort(classes, function(a, b)
-		return a.priority < b.priority;
-	end);
 
 	if (table.Count(classes) > 0) then
 		for k, v in pairs(classes) do
-			local characterForm = vgui.Create("DForm", self);
-			local panelList = vgui.Create("DPanelList", self);
-			
-			for k2, v2 in pairs(v.players) do
-				self.playerData = {
-					avatarImage = true,
-					steamName = v2:SteamName(),
-					faction = v2:GetCharacter():GetFaction(),
-					player = v2,
-					model = v2:GetModel(),
-					skin = v2:GetSkin(),
-					name = v2:Name()
-				};
-				
-				panelList:AddItem(vgui.Create("ixScoreboardItem", self)) ;
-			end;
-			
-			self.panelList:AddItem(characterForm);
-			--self.panelList:SetPos(0, -10)
-			
-			panelList:SetAutoSize(true);
-			panelList:SetSpacing(2);
-			
-			characterForm:SetName("");
-			characterForm:AddItem(panelList)
-			characterForm:SetPadding(4);
-			characterForm.Think = function()
-				if(!characterForm:GetExpanded()) then
-					characterForm.Header:SetSize(30, 30)
-				else
-					characterForm.Header:SetSize(20, 20)
-				end
-			end
+			local panel = self:Add("ixScoreboardClass")
+			panel:SetClass(v)
+			panel:Dock(TOP)
+		end
+	end
 
-			--characterForm.Header:SetSize( 30, 30 )
-
-			function characterForm:Paint(w, h)
-				derma.SkinFunc("PaintCategoryPanel", self, "", v.classColor)
-				surface.SetDrawColor(0, 0, 0, 50);	
-				surface.DrawRect(0, 0, w, h)
-
-				surface.SetTextColor(Color(255,255,255,255))
-				surface.SetTextPos(4, 4)
-				surface.DrawText(v.name)
-			end;
-		end;
-	end;
-	
-	self.panelList:InvalidateLayout(true);
-	self:SizeToContents();
-end;
-
--- Called when the panel is painted.
-function PANEL:Paint(w, h)
-    surface.SetDrawColor(80, 80, 80, 80);	
-end;
-
-function PANEL:Think()
-	self:InvalidateLayout(true);
+	ix.gui.scoreboard = self
 end
 
-vgui.Register("ixScoreboard", PANEL, "EditablePanel")
+function PANEL:Think()
+	if (CurTime() >= self.nextThink) then
+		--for i = 1, #self.factions do
+			--local factionPanel = self.factions[i]
 
-PANEL = {}
+			--factionPanel:Update()
+	--	end
 
--- Called when the panel is initialized.
-function PANEL:Init()
-	self:SetSize(self:GetParent():GetWide(), 64);
+		self.nextThink = CurTime() + 0.5
+	end
+end
 
-	local playerData = self:GetParent().playerData;
-
-	local info = {
-		avatarImage = playerData.avatarImage,
-		steamName = playerData.steamName,
-		faction = playerData.faction,
-		player = playerData.player,
-		doesRecognise = true,
-		model = playerData.model,
-		skin = playerData.skin,
-		name = playerData.name
-	};
-
-	self.toolTip = info.toolTip;
-	self.player = info.player;
-
-	local localCharacter = LocalPlayer():GetCharacter();
-	local character = playerData.player:GetCharacter();
-
-	info.doesRecognize = hook.Run("IsCharacterRecognized", localCharacter, character:GetID()) or hook.Run("IsPlayerRecognized", self.player)
-	info.text = playerData.player:GetCharacter():GetDescription(); 
-	
-	self.spawnIcon = vgui.Create("ixScoreboardIcon", self);
-
-	self.name = vgui.Create("DLabel", self);
-	self.name:SetFont("ixGenericFont")
-	self.name:SetText(info.name);
-	self.name:SetDark(true);
-	self.name:SizeToContents();
-	self.name:SetTextColor(Color(255,255,255,180))
-
-	self.description = vgui.Create("DLabel", self); 
-	self.description:SetText(info.text);
-	self.description:SetFont("ixSmallFont")
-	self.description:SizeToContents();
-	self.description:SetDark(true);
-	self.description:SetTextColor(Color(255,255,255,180))
-	
-
-	--if (info.doesRecognize) then
-		self.spawnIcon:SetModel(info.model, info.skin);
-
-		for _, v in pairs(info.player:GetBodyGroups()) do
-			self.spawnIcon:SetBodygroup(v.id, info.player:GetBodygroup(v.id))
-		end
-	--else
-	--	self.spawnIcon:SetImage("terranova/ui/scoreboard/unknown.png");
-	--end;
-	
-	self.spawnIcon:SetHelixTooltip(function(tooltip)
-		local client = self.player
-
-		if (IsValid(self) and IsValid(client)) then
-			ix.hud.PopulatePlayerTooltip(tooltip, client)
-		end
-	end)
-
-	-- Called when the spawn icon is clicked.
-	function self.spawnIcon.DoClick(spawnIcon)	
-		local client = self.player;
-		local menu = DermaMenu();
-
-		hook.Run("PopulateScoreboardPlayerMenu", client, menu);
-		menu:Open();
-	end;
-end;
-
--- Called when the layout should be performed.
-function PANEL:PerformLayout(w, h)
-	self.description:SizeToContents();
-	
-	self.spawnIcon:SetPos(4, 8);
-	self.spawnIcon:SetSize(48, 48);
-	self.name:SetPos(58, 16);
-	self.description:SetPos(58, 32); 
-end;
-
-vgui.Register("ixScoreboardItem", PANEL, "Panel");
+vgui.Register("ixScoreboard", PANEL, "DScrollPanel")
 
 hook.Add("CreateMenuButtons", "ixScoreboard", function(tabs)
-	tabs["scoreboard"] = {
-		Create = function(info, container)
-			local panel = container:Add("ixScoreboard")	
-		end,
-		OnSelected = function(info, container)
-			if(ix.gui.scoreboard) then
-				ix.gui.scoreboard:Rebuild()
-			end
-		end
-	}
+	tabs["scoreboard"] = function(container)
+		container:Add("ixScoreboard")
+	end
 end)
