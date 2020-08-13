@@ -63,28 +63,26 @@ if(SERVER) then
 	end
 
 	function ix.storage.RemoveCharPanelReceiver(client, inventory, charPanel, bDontRemove)
-		if (inventory.storageInfo) then
-			charPanel:RemoveReceiver(client)
-			inventory:RemoveReceiver(client)
+		charPanel:RemoveReceiver(client)
+		inventory:RemoveReceiver(client)
 
-			for _, v in pairs(charPanel:GetItems()) do
-				if (v.isBag and v:GetInventory()) then
-					v:GetInventory():RemoveReceiver(client)
-				end
+		for _, v in pairs(charPanel:GetItems()) do
+			if (v.isBag and v:GetInventory()) then
+				v:GetInventory():RemoveReceiver(client)
 			end
-
-			-- update receivers for any bags this inventory might have
-			for _, v in pairs(inventory:GetItems()) do
-				if (v.isBag and v:GetInventory()) then
-					v:GetInventory():RemoveReceiver(client)
-				end
-			end
-
-			client.ixOpenStorage = nil
-			client.ixOpenStorageCharPanel = nil
-
-			return true
 		end
+
+		-- update receivers for any bags this inventory might have
+		for _, v in pairs(inventory:GetItems()) do
+			if (v.isBag and v:GetInventory()) then
+				v:GetInventory():RemoveReceiver(client)
+			end
+		end
+
+		client.ixOpenStorage = nil
+		client.ixOpenStorageCharPanel = nil
+
+		return true
 
 		return false
 	end
