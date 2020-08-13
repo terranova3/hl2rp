@@ -10,7 +10,6 @@ ITEM.height = 2
 ITEM.description = "A high-grade, well packaged meal filled with various luxury, hearty meals, including real vegetables and meat. There's a CCA logo on the front."
 ITEM.category = "Rations"
 ITEM.noBusiness = true
-ITEM.rarity = "Common"
 ITEM.functions.Eat = {
 	OnRun = function(itemTable)
 		local client = itemTable.player

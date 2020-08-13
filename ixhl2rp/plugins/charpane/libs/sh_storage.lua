@@ -31,62 +31,60 @@ if(SERVER) then
 		local info = inventory.storageInfo
 
         if (info) then
-            if(client:GetCharacter():GetCharPanel():GetID() != charPanel:GetID()) then			
-                inventory:AddReceiver(client)
-                charPanel:AddReceiver(client)
+			inventory:AddReceiver(client)
+			charPanel:AddReceiver(client)
 
-                client.ixOpenStorage = inventory
-                client.ixOpenStorageCharPanel = charPanel
+			client.realCharPanel = client:GetCharacter():GetCharPanel()
+			client.realInventory = client:GetCharacter():GetInventory()
 
-                -- update receivers for any bags this inventory might have
-                for _, v in pairs(charPanel:GetItems()) do
-                    if (v.isBag and v:GetInventory()) then
-                        v:GetInventory():AddReceiver(client)
-                    end
-                end
-                
-                for _, v in pairs(inventory:GetItems()) do
-                    if (v.isBag and v:GetInventory()) then
-                        v:GetInventory():AddReceiver(client)
-                    end
-                end
-            end
+			client.ixOpenStorage = inventory
+			client.ixOpenStorageCharPanel = charPanel
 
-            if (!bDontSync) then
-				ix.storage.SyncCharPanel(client, inventory, charPanel)
-			end
-
-			return true
-		end
-
-		return false
-	end
-
-	function ix.storage.RemoveCharPanelReceiver(client, inventory, charPanel, bDontRemove)
-		if (inventory.storageInfo) then
-			charPanel:RemoveReceiver(client)
-			inventory:RemoveReceiver(client)
-
+			-- update receivers for any bags this inventory might have
 			for _, v in pairs(charPanel:GetItems()) do
 				if (v.isBag and v:GetInventory()) then
 					v:GetInventory():AddReceiver(client)
 				end
 			end
-
-			-- update receivers for any bags this inventory might have
+			
 			for _, v in pairs(inventory:GetItems()) do
 				if (v.isBag and v:GetInventory()) then
-					v:GetInventory():RemoveReceiver(client)
+					v:GetInventory():AddReceiver(client)
 				end
 			end
 
-			client.ixOpenStorage = nil
-			client.ixOpenStorageCharPanel = nil
+            if (!bDontSync) then
+				ix.storage.SyncCharPanel(client, inventory, charPanel)
+			end
+		end
+	end
 
-			return true
+	function ix.storage.RemoveCharPanelReceiver(client, inventory, charPanel, bDontRemove)
+		charPanel:RemoveReceiver(client)
+		inventory:RemoveReceiver(client)
+
+		client:GetCharacter():SetCharPanel(client.realCharPanel)
+		client.realCharPanel:AddReceiver(client)
+		client.realInventory:AddReceiver(client)
+
+		for _, v in pairs(charPanel:GetItems()) do
+			if (v.isBag and v:GetInventory()) then
+				v:GetInventory():RemoveReceiver(client)
+			end
 		end
 
-		return false
+		-- update receivers for any bags this inventory might have
+		for _, v in pairs(inventory:GetItems()) do
+			if (v.isBag and v:GetInventory()) then
+				v:GetInventory():RemoveReceiver(client)
+			end
+		end
+
+		client.ixOpenStorage = nil
+		client.ixOpenStorageCharPanel = nil
+		client.realCharPanel = nil
+
+		return true
 	end
     
 	function ix.storage.SyncCharPanel(client, inventory, charPanel)
@@ -111,14 +109,14 @@ if(SERVER) then
                 net.WriteEntity(info.entity)
                 net.WriteString(info.name)
                 net.WriteTable(info.data)
-            net.Send(client)
-        end
+			net.Send(client)
+		end
 	end
 
 	net.Receive("ixStorageCloseCharPanel", function(length, client)
 		local charPanel = client.ixOpenStorageCharPanel
 		local inventory = client.ixOpenStorage
-
+		
 		if(charPanel or inventory) then
 			ix.storage.RemoveCharPanelReceiver(client, inventory, charPanel)
 		end

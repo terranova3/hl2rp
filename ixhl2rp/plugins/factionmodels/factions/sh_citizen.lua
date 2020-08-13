@@ -63,12 +63,12 @@ function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 
 	character:SetData("cid", id)
-
-	inventory:Add("transfer_papers", 1, {
+	inventory:Add("cid", 1, {
 		citizen_name = character:GetName(),
 		cid = character:GetData("cid", id),
-		unique = math.random(0000000,999999999),
-		issue_date = tostring(os.date( "%H:%M:%S - %d/%m/%Y", os.time()))
+		paygrade = "Unemployed",
+		salary = 0,
+		issue_date = ix.date.GetFormatted("%A, %B %d, %Y. %H:%M:%S"),
 	})
 end
 

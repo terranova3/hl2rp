@@ -1,133 +1,27 @@
-local RECEIVER_NAME = "ixInventoryItem"
-local gradient = surface.GetTextureID("vgui/gradient-d")
-
--- The queue for the rendered icons.
-ICON_RENDER_QUEUE = ICON_RENDER_QUEUE or {}
-
--- To make making inventory variant, This must be followed up.
-local function RenderNewIcon(panel, itemTable)
-	local model = itemTable:GetModel()
-
-	-- re-render icons
-	if ((itemTable.iconCam and !ICON_RENDER_QUEUE[string.lower(model)]) or itemTable.forceRender) then
-		local iconCam = itemTable.iconCam
-		iconCam = {
-			cam_pos = iconCam.pos,
-			cam_ang = iconCam.ang,
-			cam_fov = iconCam.fov,
-		}
-		ICON_RENDER_QUEUE[string.lower(model)] = true
-
-		panel.Icon:RebuildSpawnIconEx(
-			iconCam
-		)
-	end
-end
+--[[
+	© 2020 TERRANOVA do not share, re-distribute or modify
+	without permission of its author.
+--]]
 
 local PANEL = {}
-
-AccessorFunc(PANEL, "itemTable", "ItemTable")
-AccessorFunc(PANEL, "panelID", "PanelID")
-
-function PANEL:Init()
-	self:Droppable(RECEIVER_NAME)
-end
-
-function PANEL:OnMousePressed(code)
-	if (code == MOUSE_LEFT and self:IsDraggable()) then
-		self:MouseCapture(true)
-		self:DragMousePress(code)
-		local item = self:GetItemTable()
-
-		self.clickX, self.clickY = input.GetCursorPos()
-	end
-end
-
-function PANEL:OnMouseReleased(code)
-	-- move the item into the world if we're dropping on something that doesn't handle inventory item drops
-	if (!dragndrop.m_ReceiverSlot or dragndrop.m_ReceiverSlot.Name != RECEIVER_NAME) then
-		self:OnDrop(dragndrop.IsDragging())
-	end
-
-	self:DragMouseRelease(code)
-	self:SetZPos(99)
-	self:SetSize(64,64)
-	self:MouseCapture(false)
-end
-
-function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
-	local item = self.itemTable
-
-	if (!item or !bDragging) then
-		return
-	end
-
-	local invID = 0
-
-	if (IsValid(inventoryPanel) and inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
-		invID = inventoryPanel.invID
-	end
-
-	net.Start("ixCharPanelTransfer")
-		net.WriteUInt(item.id, 32)
-		net.WriteUInt(invID, 32)
-		net.WriteUInt(self:GetPanelID(), 32)
-		net.WriteUInt(gridX or 0, 6)
-		net.WriteUInt(gridY or 0, 6)
-	net.SendToServer()
-
-	if(ix.gui.charpanel.slots[item.outfitCategory]) then
-		ix.gui.charpanel.slots[item.outfitCategory].isEmpty = true
-	end
-end
-
-function PANEL:PaintOver(width, height)
-	local itemTable = self.itemTable
-
-	if (itemTable and itemTable.PaintOver) then
-		itemTable.PaintOver(self, itemTable, width, height)
-	end
-end
-
-function PANEL:ExtraPaint(width, height)
-end
-
-function PANEL:Paint(width, height)
-	local background = Color(74, 74, 74, 130)
-
-	surface.SetDrawColor(0, 0, 0, 85)
-	surface.DrawRect(2, 2, width - 4, height - 4)
-
-	surface.SetDrawColor(Color(100, 100, 100, 60))
-	surface.DrawOutlinedRect(0, 0, width, height)
-
-	if(self.itemTable.backgroundColor) then
-		background = self.itemTable.backgroundColor
-	end
-
-	surface.SetDrawColor(background)
-	surface.DrawRect(2, 2, width - 4, height - 4)
-
-	self:ExtraPaint(width, height)
-end
-
-vgui.Register("ixCharPanelItemIcon", PANEL, "SpawnIcon")
-
-local PANEL = {}
+local PLUGIN = PLUGIN
 
 function PANEL:Init()
 	ix.gui.charpanel = self
 
 	self:SetSize(360, 525)
+	self.showModel = true
 
 	local character = LocalPlayer():GetCharacter()
 
-	self.model = self:Add("ixModelPanel")
-	self.model:Dock(FILL)
-	self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
-	self.model:SetFOV(50)
-	self.model.alpha = 255
-	self.model:SetAlpha(255)
+	if(self.showModel) then
+		self.model = self:Add("ixModelPanel")
+		self.model:Dock(FILL)
+		self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
+		self.model:SetFOV(50)
+		self.model.alpha = 255
+		self.model:SetAlpha(255)
+	end
 
 	self.panels = {}
 	self.slotPlacements = {
@@ -283,7 +177,7 @@ function PANEL:AddIcon(item, model, category, skin)
 			end
 		end
 	else
-		RenderNewIcon(panel, item)
+		PLUGIN:RenderNewIcon(panel, item)
 	end
 
 	local slot = self.slots[category]
@@ -307,120 +201,6 @@ end;
 
 vgui.Register("ixCharacterPane", PANEL, "DPanel")
 
-local PANEL = {}
-
-function PANEL:Init()
-	self.parent = self:GetParent()
-	self.previewPanel = nil;
-	self.equipment = true;
-	self.isEmpty = true;
-	self.iconSize = 64;
-
-	self.text = "N/A";
-	self:SetSize(self.iconSize, self.iconSize);
-	self:SetPos(0,0)
-	self:Receiver("ixInventoryItem", self.ReceiveDrop)
-end;
-
-function PANEL:Populate()
-	local picture = string.format("materials/terranova/ui/charpane/slot_%s.png", self.category)
-
-	self.mat = vgui.Create("Material", self)
-	self.mat:SetPos(0, 0)
-	self.mat:SetSize(64, 64)
-	self.mat:SetMaterial(picture)
-	self.mat.AutoSize = false
-end
-
-function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
-	local iconSize = 64
-	local item = itemPanel:GetItemTable()
-
-	if (item) then
-		if(item.outfitCategory == string.lower(self.category)) then
-			if(self.isEmpty) then
-				surface.SetDrawColor(0, 255, 0, 40)
-			else
-				surface.SetDrawColor(255, 255, 0, 10)
-			end
-		else
-			surface.SetDrawColor(255, 0, 0, 40)
-		end;
-
-		surface.DrawRect(0, 0, 64, 64)
-	end
-end
-
-function PANEL:Think()
-	if(self.isEmpty) then
-		self.mat:SetVisible(true)
-	else
-		self.mat:SetVisible(false)
-	end
-end
-
-function PANEL:PaintOver(width, height)
-	local panel = self.previewPanel
-
-	if (IsValid(panel)) then
-		local itemPanel = (dragndrop.GetDroppable() or {})[1]
-
-		if (IsValid(itemPanel)) then
-			self:PaintDragPreview(width, height, self.previewX, self.previewY, itemPanel)
-		end
-	end
-
-	self.previewPanel = nil
-end;
-
-function PANEL:Paint(w, h)
-	surface.SetDrawColor(25, 25, 25, 225)
-	surface.DrawRect(0, 0, w, h)
-
-    surface.SetDrawColor(90, 90, 90, 125)
-    surface.DrawOutlinedRect(0, 0, w, h)
-end
-
-function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
-	local panel = panels[1]
-
-	if (!IsValid(panel)) then
-		self.previewPanel = nil
-		return
-	end
-
-	if (bDropped) then
-		if (panel.OnDrop) then
-			local item = panels[1].itemTable;
-			local invID = LocalPlayer():GetCharacter():GetInventory():GetID();
-			local panelID = self.parent.panelID;
-
-			if (!item) then
-				return false
-			end
-	
-			if(item.outfitCategory != string.lower(self.category)) then
-				return false, "notAllowed"
-			end
-
-			net.Start("ixCharPanelReceiveItem")
-				net.WriteUInt(item.id, 32)
-				net.WriteUInt(invID, 32)
-				net.WriteUInt(panelID, 32)
-				net.WriteTable({})
-			net.SendToServer()
-
-			self.isEmpty = false
-		end
-
-		self.previewPanel = nil
-	else
-		self.previewPanel = panel
-		self.previewX = x
-		self.previewY = y
-	end
-end
-
 netstream.Hook("ShowCharacterPanel", function(show)
 	local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
 
@@ -442,5 +222,3 @@ netstream.Hook("ShowCharacterPanel", function(show)
 		ix.gui.charPanel:SetCharPanel(charPanel)
 	end
 end)
-
-vgui.Register("ixCharacterEquipmentSlot", PANEL, "DPanel")

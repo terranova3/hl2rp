@@ -18,6 +18,10 @@ function GM:PlayerInitialSpawn(client)
 		inventory:SetOwner(botID)
 		inventory.noSave = true
 
+		local charPanel = ix.charPanel.CreatePanel(botID)
+		charPanel:SetOwner(botID)	
+
+		character.vars.charPanel = {charPanel}
 		character.vars.inv = {inventory}
 
 		ix.char.loaded[botID] = character

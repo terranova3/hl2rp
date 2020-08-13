@@ -14,6 +14,27 @@ function PLUGIN:PlayerModelChanged(client, model)
 	end;
 end;
 
+function PLUGIN:InventoryItemAdded(oldInv, inventory, item)
+	local client = inventory:GetOwner()
+
+	if(oldInv and oldInv:GetID() == 0 and !client:InObserver()) then
+		local entity = item.entity
+
+		if(IsValid(client) and IsValid(entity)) then
+			local entityPosition = entity:GetPos();
+			local shootPosition = client:GetShootPos();
+			local feetDistance = client:GetPos():Distance(entityPosition);
+			local armsDistance = shootPosition:Distance(entityPosition);
+
+			if (feetDistance < armsDistance) then
+				client:ForceSequence("pickup", nil, 1.2, true)
+			else
+				client:ForceSequence("gunrack", nil, 1.2, true)
+			end;
+		end
+	end
+end
+
 function PLUGIN:PlayerSetHandsModel(client, entity, model)
 	if(!model) then
 		model = client:GetModel()

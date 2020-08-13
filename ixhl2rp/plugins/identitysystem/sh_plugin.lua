@@ -6,6 +6,16 @@ ix.util.Include("sv_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 
 local PLUGIN = PLUGIN
+PLUGIN.paygrades = {
+	["Unemployed"] = 0,
+	["Paygrade - 1"] = 5,
+	["Paygrade - 2"] = 10,
+	["Paygrade - 3"] = 15,
+	["Paygrade - 4"] = 20,
+	["Paygrade - 5"] = 25,
+	["Paygrade - 6"] = 30,
+	["Paygrade - 7"] = 35,
+}
 
 if CLIENT then
 	netstream.Hook("OpenCIDMenu", function(data)
@@ -26,10 +36,6 @@ else
 				return
 			end
 
-			if(data[4] == 0) then
-				data[4] = nil
-			end
-
 			if(data[5]) then
 				inventory:Remove(data[5])
 			end
@@ -48,7 +54,7 @@ else
 			inventory:Add("cid", 1, {
 				citizen_name = data[1],
 				cid = data[2],
-				occupation = data[3],
+				paygrade = data[3],
 				salary = data[4],
 				issue_date = ix.date.GetFormatted(format),
 				officer = client:Name(),

@@ -7,6 +7,9 @@ PLUGIN.name = "Consumables";
 PLUGIN.description = "Stores all the consumable items that are used in TERRANOVA.";
 PLUGIN.author = "Specky";
 
+ix.util.Include("sv_hooks.lua")
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true);
+
 if(SERVER) then
 	local PLUGIN = PLUGIN
 

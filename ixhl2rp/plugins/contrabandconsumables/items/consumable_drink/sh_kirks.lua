@@ -13,5 +13,4 @@ ITEM.price = 15;
 ITEM.capacity = 375
 ITEM.category = "Australian"
 ITEM.restoreStamina = 15;
-ITEM.rarity = "Rare"
 ITEM.flag = "z"
