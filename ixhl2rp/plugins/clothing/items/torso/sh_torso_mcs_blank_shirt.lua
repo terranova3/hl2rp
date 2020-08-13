@@ -8,7 +8,8 @@ ITEM.name = "MCS Blank Shirt";
 ITEM.model = "models/fty/items/mcslogotop.mdl"
 ITEM.price = 10
 ITEM.description = "A button-up cotton shirt worn by all non-specialist MCS workers.";
-ITEM.flag = "A"
+ITEM.flag = "M"
+ITEM.category = "MCS Clothing";
 ITEM.bodyGroups = {
     ["torso"] = 3
 }

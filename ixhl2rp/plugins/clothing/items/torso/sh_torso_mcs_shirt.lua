@@ -8,7 +8,8 @@ ITEM.name = "MCS Shirt";
 ITEM.model = "models/fty/items/mcslogotop.mdl"
 ITEM.price = 10
 ITEM.description = "A tan-colored cotton shirt worn by administrative workers of the MCS. It's ensignia sits proudly on the front of the shirt, unpaired with a Union.";
-ITEM.flag = "A"
+ITEM.flag = "M"
+ITEM.category = "MCS Clothing";
 ITEM.bodyGroups = {
     ["torso"] = 25
 }

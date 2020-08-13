@@ -8,7 +8,8 @@ ITEM.name = "MCS Volunteer Shirt";
 ITEM.model = "models/fty/items/mcslogotop.mdl"
 ITEM.price = 10
 ITEM.description = "A tan-colored cotton shirt worn by volunteer workers of the MCS.";
-ITEM.flag = "A"
+ITEM.flag = "M"
+ITEM.category = "MCS Clothing";
 ITEM.bodyGroups = {
     ["torso"] = 2
 }
