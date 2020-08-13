@@ -5,22 +5,6 @@ PLUGIN.description = "Adds scoreboard options for admins."
 hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 	local options = {}
 
-	options["View Profile"] = {
-		function()
-			if (IsValid(client)) then
-				client:ShowProfile()
-			end
-		end
-	}
-
-	options["Copy Steam ID"] = {
-		function()
-			if (IsValid(client)) then
-				SetClipboardText(client:SteamID())
-			end
-		end
-	}
-
 	if(LocalPlayer():IsAdmin()) then
 		options["Give Whitelist"] = {
 			function()

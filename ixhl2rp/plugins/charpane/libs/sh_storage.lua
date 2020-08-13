@@ -69,7 +69,7 @@ if(SERVER) then
 
 			for _, v in pairs(charPanel:GetItems()) do
 				if (v.isBag and v:GetInventory()) then
-					v:GetInventory():AddReceiver(client)
+					v:GetInventory():RemoveReceiver(client)
 				end
 			end
 
