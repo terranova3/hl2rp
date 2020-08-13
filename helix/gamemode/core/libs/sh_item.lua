@@ -346,7 +346,7 @@ function ix.item.New(uniqueID, id)
 
 		return item
 	else
-		ErrorNoHalt("[Helix] Attempt to index unknown item '"..uniqueID.."'\n")
+		--ErrorNoHalt("[Helix] Attempt to index unknown item '"..uniqueID.."'\n")
 	end
 end
 
