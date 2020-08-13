@@ -86,8 +86,6 @@ if(SERVER) then
 		client.realCharPanel = nil
 
 		return true
-
-		return false
 	end
     
 	function ix.storage.SyncCharPanel(client, inventory, charPanel)
@@ -112,8 +110,8 @@ if(SERVER) then
                 net.WriteEntity(info.entity)
                 net.WriteString(info.name)
                 net.WriteTable(info.data)
-            net.Send(client)
-        end
+			net.Send(client)
+		end
 	end
 
 	net.Receive("ixStorageCloseCharPanel", function(length, client)

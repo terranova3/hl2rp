@@ -119,15 +119,18 @@ function PANEL:Init()
 	ix.gui.charpanel = self
 
 	self:SetSize(360, 525)
+	self.showModel = true
 
 	local character = LocalPlayer():GetCharacter()
 
-	self.model = self:Add("ixModelPanel")
-	self.model:Dock(FILL)
-	self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
-	self.model:SetFOV(50)
-	self.model.alpha = 255
-	self.model:SetAlpha(255)
+	if(self.showModel) then
+		self.model = self:Add("ixModelPanel")
+		self.model:Dock(FILL)
+		self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
+		self.model:SetFOV(50)
+		self.model.alpha = 255
+		self.model:SetAlpha(255)
+	end
 
 	self.panels = {}
 	self.slotPlacements = {
