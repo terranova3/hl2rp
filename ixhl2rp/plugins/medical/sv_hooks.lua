@@ -145,13 +145,13 @@ function PLUGIN:HealPlayer(character, item, bIsTarget)
 		local empty = false
 
 		if(amount >= healingRequired) then
-			item:SetData("currentAmount", item:GetData("currentAmount") - healing)
+			item:SetData("currentAmount", item:GetData("currentAmount", 0) - healing)
 		else
-			healing = item:GetData("currentAmount")
+			healing = item:GetData("currentAmount", 0)
 			empty = true
 		end
 
-		client:SetHealth(client:Health() + healing)
+		client:SetHealth(client:Health() + (healing or 0))
 		client:EmitSound("items/medshot4.wav", 80)
 
 		return empty, string.format("You have healed your %shealth for %s.", targetString, healing)
