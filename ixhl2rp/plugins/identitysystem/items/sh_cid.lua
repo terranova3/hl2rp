@@ -28,6 +28,10 @@ function ITEM:PopulateTooltip(tooltip)
 	"\nIssue Date: " .. self:GetData("issue_date", "Unissued") ..
 	"\nPay: " .. self:GetData("paygrade", "Unemployed"))
 
+	if(self:GetData("employment")) then
+		data:SetText(data:GetText() .. "\nEmployment: " .. self:GetData("employment"))
+	end
+
 	if(self:GetData("salary")) then
 		data:SetText(data:GetText() .. "\nWage: " .. self:GetData("salary"))
 	end
