@@ -14,5 +14,6 @@ ITEM.combine = function(item, targetItem)
 
 	if(targetItem.uniqueID == "water_dirty") then
 	   inventory:Add("unionwater", 2)
+	   return true
 	end
 end

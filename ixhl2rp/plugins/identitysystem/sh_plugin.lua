@@ -36,8 +36,8 @@ else
 				return
 			end
 
-			if(data[5]) then
-				inventory:Remove(data[5])
+			if(data.item) then
+				inventory:Remove(data.item)
 			end
 
 			local isCombine = false
@@ -56,6 +56,7 @@ else
 				cid = data[2],
 				paygrade = data[3],
 				salary = data[4],
+				employment = data[5],
 				issue_date = ix.date.GetFormatted(format),
 				officer = client:Name(),
 				cca = isCombine

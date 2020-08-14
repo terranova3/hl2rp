@@ -11,4 +11,3 @@ ITEM.description = "Russian military meal kit. It comes with a set of cutlery.";
 ITEM.permit = "consumables";
 ITEM.price = 35;
 ITEM.restoreHealth = 10;
-ITEM.rarity = "Rare"

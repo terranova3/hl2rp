@@ -117,26 +117,4 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	end
 end
 
-netstream.Hook("ShowCharacterPanel", function(show)
-	local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
-
-	if(!show) then
-		if(IsValid(ix.gui.charPanel)) then
-			ix.gui.charPanel:Remove()
-		end
-
-		return
-	end
-
-	if(!IsValid(ix.gui.charPanel) and IsValid(ix.gui.containerCharPanel)) then
-		local cPanel = ix.gui.containerCharPanel:Add("ixCharacterPane")
-
-		ix.gui.charPanel = cPanel
-	end
-
-	if (charPanel and ix.gui.charPanel and IsValid(ix.gui.charPanel)) then
-		ix.gui.charPanel:SetCharPanel(charPanel)
-	end
-end)
-
 vgui.Register("ixCharacterEquipmentSlot", PANEL, "DPanel")

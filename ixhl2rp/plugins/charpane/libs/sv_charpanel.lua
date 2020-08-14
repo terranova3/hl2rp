@@ -129,8 +129,8 @@ net.Receive("ixCharPanelTransfer", function(length, client)
 
 	if(ix.charPanel.HasIntegrity(client, item, invID, panelID, false)) then
 		local charPanel = ix.charPanels[panelID];
-		item = ix.item.instances[item]
-
+        item = ix.item.instances[item]
+        
 		charPanel:Transfer(item.id, invID, x, y)
 	else
 		return

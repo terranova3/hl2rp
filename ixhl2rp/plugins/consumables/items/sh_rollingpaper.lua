@@ -18,5 +18,6 @@ ITEM.combine = function(item, targetItem)
 
 	if(targetItem.uniqueID == "rollingtobaco") then
 	   inventory:Add("handmadecigarettes", 1)
+	   return true
 	end
 end

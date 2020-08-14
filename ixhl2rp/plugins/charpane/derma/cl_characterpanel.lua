@@ -11,6 +11,7 @@ function PANEL:Init()
 
 	self:SetSize(360, 525)
 	self.showModel = true
+	self.isOwn = true
 
 	local character = LocalPlayer():GetCharacter()
 
@@ -61,10 +62,12 @@ function PANEL:Init()
 
 		Legs.LegEnt:SetBodygroup(index, bodygroup)
 	end)
-
-	netstream.Start("CharacterPanelUpdate")
 	
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
+end
+
+function PANEL:Validate()
+	netstream.Start("CharacterPanelUpdate", self.isOwn)
 end
 
 function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
@@ -77,6 +80,10 @@ function PANEL:Think()
 		if(self.model) then
 			self.model:Remove()
 		end
+	end
+
+	if(IsValid(self.model) and !self.isOwn) then
+		self.model:Remove()
 	end
 end
 

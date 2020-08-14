@@ -47,6 +47,11 @@ function PANEL:Init()
 
 	self.nameText = self:AddLabel("Employment", true)
 
+	self.idtext = self:AddLabel("Job Title")
+	self.jobTitle = self:Add("DTextEntry")
+	self.jobTitle:Dock(TOP)
+	self.jobTitle:DockMargin(16, 0, 16, 8)
+
 	self.paygrade = self:Add("DComboBox")
 	self.paygrade:Dock(TOP)
 	self.paygrade:SetValue("Select a paygrade")
@@ -93,6 +98,11 @@ function PANEL:Init()
 
 		ix.gui.cidcreator.nameinput:SetText(item:GetData("citizen_name", "error"))
 		ix.gui.cidcreator.idinput:SetValue(item:GetData("cid", 99999))
+
+		if(item:GetData("employment")) then
+			ix.gui.cidcreator.jobTitle:SetValue(item:GetData("employment"))
+		end
+
 		ix.gui.cidcreator.salary = salary
 		ix.gui.cidcreator.paygrade:ChooseOptionID(GetIndex(item))
 		ix.gui.cidcreator.item = item
@@ -124,7 +134,11 @@ function PANEL:Init()
 		}
 
 		if(ix.gui.cidcreator.item) then
-			table.insert(data, ix.gui.cidcreator.item.id)
+			data.item = ix.gui.cidcreator.item.id
+		end
+
+		if(string.len(ix.gui.cidcreator.jobTitle:GetText()) >= 1) then
+			table.insert(data, ix.gui.cidcreator.jobTitle:GetText())
 		end
 
 		netstream.Start("SubmitNewCID", data)
