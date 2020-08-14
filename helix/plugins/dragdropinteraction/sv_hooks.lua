@@ -31,7 +31,7 @@ function ix.item.PerformDragCombine(client, item, targetItem, invID)
         return
     end
     
-    if (item.combine) then
+    if (item.Combine) then
         local destroy = item:Call("Combine", client, nil, targetItem) or false
 
         if(destroy) then
