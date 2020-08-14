@@ -31,7 +31,7 @@ function ix.charPanel.Update(client, isOwn)
 
     netstream.Start(client, "ShowCharacterPanel", show)
 
-    if((show and isOwn == true) or isOwn == false) then
+    if(show) then
         net.Start("ixCharPanelLoadModel")
             net.WriteString(client:GetModel(), 16)
             net.WriteTable(bodygroups or {})

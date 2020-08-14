@@ -221,7 +221,6 @@ netstream.Hook("ShowCharacterPanel", function(show)
 
 	if(!IsValid(ix.gui.charPanel) and IsValid(ix.gui.containerCharPanel)) then
 		local cPanel = ix.gui.containerCharPanel:Add("ixCharacterPane")
-		cPanel:Validate()
 
 		ix.gui.charPanel = cPanel
 	end
