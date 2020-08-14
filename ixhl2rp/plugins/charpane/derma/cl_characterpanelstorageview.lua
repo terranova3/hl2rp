@@ -110,7 +110,7 @@ function PANEL:SetStorageCharPanel(charPanel)
 	x = (x - self.storageInventory:GetWide()) - 2
     self.storageCharPanel:SetPos(x,y )
     
-    ix.gui["cpanel" .. charPanel:GetID()] = self.storageCharPanel
+    ix.gui.charPanel = self.storageCharPanel
 end
 
 function PANEL:SetStorageMoney(money)
