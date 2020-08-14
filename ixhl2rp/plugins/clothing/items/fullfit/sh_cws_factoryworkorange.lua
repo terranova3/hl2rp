@@ -14,7 +14,7 @@ ITEM.gasImmunity = true
 ITEM.replacements = "models/hlvr/characters/worker/npc/worker_citizen.mdl"
 ITEM.newSkin = 1
 ITEM.bodyGroups = {
-	["Uniform Varient"] = 1
+	["Uniform Variant"] = 1
 }
 ITEM.functions.Issue = {
 	OnRun = function(itemTable)
