@@ -30,7 +30,7 @@ ix.anim.SetModelClass("models/overwatch/terranova/overwatchnomad.mdl", "overwatc
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchscalpel.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchking.mdl", "overwatch");
 
-ix.anim:AddCombineHands("overwatchepsilon.mdl.mdl");
+ix.anim:AddCombineHands("overwatchepsilon.mdl");
 ix.anim:AddCombineHands("overwatchgamma.mdl");
 ix.anim:AddCombineHands("overwatchdelta.mdl");
 ix.anim:AddCombineHands("overwatchalpha.mdl");
