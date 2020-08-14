@@ -30,6 +30,13 @@ ix.container.Register("models/props_wasteland/controlroom_storagecloset001a.mdl"
 	height = 5,
 })
 
+ix.container.Register("models/hlvr/combine_hazardprops/combinehazardprops_container.mdl", {
+	name = "CRU Footlocker",
+	description = "A large, durable footlocker designed for keeping CRU decontamination equipment and hazardous wares.",
+	width = 6,
+	height = 4,
+})
+
 ix.container.Register("models/props_wasteland/controlroom_storagecloset001b.mdl", {
 	name = "Metal Cabinet",
 	description = "A green metal cabinet.",
@@ -142,8 +149,15 @@ ix.container.Register("models/props/de_nuke/crate_small.mdl", {
 ix.container.Register("models/kali/props/cases/hard case c.mdl", {
 	name = "Footlocker",
 	description = "An extremely durable armoured footlocker.",
-	width = 5,
+	width = 6,
 	height = 3
+})
+
+ix.container.Register("models/kali/props/cases/hard case a.mdl", {
+	name = "Footlocker",
+	description = "A large and extremely durable armoured footlocker.",
+	width = 6,
+	height = 5
 })
 
 ix.container.Register("models/props_c17/streetsign001c.mdl", {
