@@ -22,6 +22,7 @@ ix.util.Include("meta/sh_character.lua")
 
 ix.flag.Add("v", "Access to light blackmarket goods.", "Business")
 ix.flag.Add("V", "Access to heavy blackmarket goods.", "Business")
+ix.flag.Add("B", "Access to broadcast.", "Access")
 
 ix.anim.SetModelClass("models/eliteghostcp.mdl", "metrocop")
 ix.anim.SetModelClass("models/eliteshockcp.mdl", "metrocop")
@@ -157,21 +158,21 @@ do
 end
 
 do
-	local CLASS = {}
-	CLASS.color = Color(150, 125, 175)
-	CLASS.format = "%s broadcasts \"%s\""
+    local CLASS = {}
+    CLASS.color = Color(150, 125, 175)
+    CLASS.format = "%s broadcasts \"%s\""
 
-	function CLASS:CanSay(speaker, text)
-		if (speaker:Team() != FACTION_ADMIN) then
-			speaker:NotifyLocalized("notAllowed")
+    function CLASS:CanSay(speaker, text)
+        if (speaker:Team() != FACTION_ADMIN and !speaker:GetCharacter():HasFlags("B")) then
+            speaker:NotifyLocalized("notAllowed")
 
-			return false
-		end
-	end
+            return false
+        end
+    end
 
-	function CLASS:OnChatAdd(speaker, text)
-		chat.AddText(self.color, string.format(self.format, speaker:Name(), text))
-	end
+    function CLASS:OnChatAdd(speaker, text)
+        chat.AddText(self.color, string.format(self.format, speaker:Name(), text))
+    end
 
-	ix.chat.Register("broadcast", CLASS)
+    ix.chat.Register("broadcast", CLASS)
 end
