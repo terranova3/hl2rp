@@ -13,8 +13,8 @@ ITEM.price = 5
 ITEM.category = "Crafting"
 ITEM.noBusiness = true
 
-ITEM.combine = function(item, targetItem)
-    local client = item:GetOwner()
+function ITEM:Combine(targetItem)
+    local client = self.player
     local inventory = client:GetCharacter():GetInventory()
 
 	if(targetItem.uniqueID == "water_purifytab") then

@@ -30,9 +30,9 @@ function ix.item.PerformDragCombine(client, item, targetItem, invID)
     if (!inventory:GetItemByID(item.id) and !inventory:GetItemByID(targetItem.id)) then
         return
     end
-
+    
     if (item.combine) then
-        local destroy = item.combine(item, targetItem) or false
+        local destroy = item:Call("Combine", client, nil, targetItem) or false
 
         if(destroy) then
             item:Remove()

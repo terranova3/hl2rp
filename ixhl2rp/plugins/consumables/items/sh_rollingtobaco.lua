@@ -12,13 +12,12 @@ ITEM.category = "Contraband"
 ITEM.flag = "F"
 ITEM.price = 4;
 
-ITEM.combine = function(item, targetItem)
-    local client = item:GetOwner()
+function ITEM:Combine(targetItem)
+	local client = self.player
 	local inventory = client:GetCharacter():GetInventory()
-	
+
     if(targetItem.uniqueID == "rollingpaper") then
-	   inventory:Add("handmadecigarettes", 1)
+		inventory:Add("handmadecigarettes", 1)
 		return true
 	end
 end
-

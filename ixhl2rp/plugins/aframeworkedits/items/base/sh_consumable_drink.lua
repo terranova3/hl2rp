@@ -74,12 +74,24 @@ ITEM.drinkEffects = function(itemTable, modifier)
         client:SetHealth(math.Clamp(client:Health() + (itemTable.restoreHealth * modifier), 0, client:GetMaxHealth()))
     end
 end
-ITEM.combine = function(item, item2)
-    local client = item:GetOwner()
+ITEM.suppressed = function(itemTable, name)
+    if(name == "drop") then
+        return
+    end
+    
+	if(itemTable:GetData("currentAmount", 0) <= 0) then
+		return true, name, "This drink is empty."
+	end
 
-    if(item2.capacity and item:GetLiquid() and item2.isContainer) then
-        local hasSpace, spaceLeft = item2:GetSpace()
-        local hasLiquid, liquid = item2:GetLiquidType()
+	return false
+end
+
+function ITEM:Combine(targetItem)
+    local client = self.player
+
+    if(targetItem.capacity and item:GetLiquid() and targetItem.isContainer) then
+        local hasSpace, spaceLeft = targetItem:GetSpace()
+        local hasLiquid, liquid = targetItem:GetLiquidType()
 
         if(hasSpace) then
             if(!hasLiquid or liquid == item.uniqueID) then
@@ -91,29 +103,17 @@ ITEM.combine = function(item, item2)
                     amountToGive = spaceLeft
                 end
 
-                item2:SetData("currentAmount", item2:GetData("currentAmount") + amountToGive)
-                item2:SetData("currentLiquid", item.uniqueID)
+                targetItem:SetData("currentAmount", targetItem:GetData("currentAmount") + amountToGive)
+                targetItem:SetData("currentLiquid", item.uniqueID)
                 item:SetData("currentAmount", math.Clamp(item:GetData("currentAmount") - amountToGive, 0, 9999))
             else
                 client:Notify(string.format("%s currently is holding a different liquid! You cannot mix different liquids."))
             end
         else
-            client:Notify(string.format("%s has reached its maximum capacity.", item2.name))
+            client:Notify(string.format("%s has reached its maximum capacity.", targetItem.name))
         end
     end
 
-    return false
-end
-ITEM.suppressed = function(itemTable, name)
-    if(name == "drop") then
-        return
-    end
-    
-	if(itemTable:GetData("currentAmount", 0) <= 0) then
-		return true, name, "This drink is empty."
-	end
-
-	return false
 end
 
 -- Called when a new instance of this item has been made.
