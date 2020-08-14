@@ -62,10 +62,12 @@ function PANEL:Init()
 
 		Legs.LegEnt:SetBodygroup(index, bodygroup)
 	end)
-
-	netstream.Start("CharacterPanelUpdate", self.isOwn)
 	
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
+end
+
+function PANEL:Validate()
+	netstream.Start("CharacterPanelUpdate", self.isOwn)
 end
 
 function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
@@ -219,6 +221,7 @@ netstream.Hook("ShowCharacterPanel", function(show)
 
 	if(!IsValid(ix.gui.charPanel) and IsValid(ix.gui.containerCharPanel)) then
 		local cPanel = ix.gui.containerCharPanel:Add("ixCharacterPane")
+		cPanel:Validate()
 
 		ix.gui.charPanel = cPanel
 	end

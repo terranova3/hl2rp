@@ -26,7 +26,8 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 				
 			if(show) then 
 				local cPanel = characterPanel:Add("ixCharacterPane")
-
+				cPanel:Validate()
+				
 				ix.gui.charPanel = cPanel
 			end
 

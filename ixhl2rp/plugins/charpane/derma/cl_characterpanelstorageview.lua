@@ -41,7 +41,7 @@ function PANEL:Init()
 		net.SendToServer()
     end
     
-    self.storageCharPanel = self:Add("ixCharacterPane")
+	self.storageCharPanel = self:Add("ixCharacterPane")
 
 	ix.gui.inv1 = self:Add("ixInventory")
 	ix.gui.inv1.bNoBackgroundBlur = true
@@ -104,6 +104,8 @@ function PANEL:SetStorageInventory(inventory)
 end
 
 function PANEL:SetStorageCharPanel(charPanel)
+	self.storageCharPanel.isOwn = false
+	self.storageCharPanel:Validate()
 	self.storageCharPanel:SetCharPanel(charPanel)
 	
 	local x, y = self.storageInventory:GetPos()
