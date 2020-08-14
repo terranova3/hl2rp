@@ -77,7 +77,7 @@ local function GetBoxLine(min, max)
 end
 
 if SERVER then
-    timer.Create("GasTick", 0.5, 0, function()
+    timer.Create("GasTick", 0.15, 0, function()
         for idx, gasBox in pairs(PLUGIN.positions) do
             if PLUGIN.smokeStacks[idx] == nil then
                 local min, max = gasBox.min, gasBox.max
