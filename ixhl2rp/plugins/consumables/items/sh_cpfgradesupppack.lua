@@ -10,7 +10,6 @@ ITEM.height = 1
 ITEM.description = "This supplement packet contains some decent gum, some tasty bars, and a handful of various pills for necessary minerals and vitamins."
 ITEM.category = "Rations"
 ITEM.noBusiness = true
-ITEM.rarity = "Common"
 ITEM.functions.Eat = {
 	OnRun = function(itemTable)
 		local client = itemTable.player

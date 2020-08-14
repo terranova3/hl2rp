@@ -12,5 +12,4 @@ ITEM.permit = "consumables";
 ITEM.category = "Civil-Approved Food";
 ITEM.price = 12;
 ITEM.restoreHealth = 5;
-ITEM.rarity = "Common"
 ITEM.flag = "f"

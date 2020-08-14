@@ -14,4 +14,3 @@ ITEM.flag = "f"
 ITEM.price = 12;
 ITEM.capacity = 375
 ITEM.restoreStamina = 15;
-ITEM.rarity = "Common"
