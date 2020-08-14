@@ -20,14 +20,14 @@ PLUGIN.config.voiceTypes = {
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
 
-ix.anim.SetModelClass("models/overwatch/terranova/overwatchepsilon.mdl", "overwatch");
-ix.anim.SetModelClass("models/overwatch/terranova/overwatchgamma.mdl", "overwatch");
-ix.anim.SetModelClass("models/overwatch/terranova/overwatchdelta.mdl", "overwatch");
-ix.anim.SetModelClass("models/overwatch/terranova/overwatchalpha.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchantibodyepsilon.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchantibodycaptain.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchnomad.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchscalpel.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchepsilon.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchgamma.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchdelta.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchalpha.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchking.mdl", "overwatch");
 
 ix.anim:AddCombineHands("overwatchepsilon.mdl");
