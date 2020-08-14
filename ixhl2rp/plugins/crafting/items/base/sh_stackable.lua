@@ -11,6 +11,34 @@ ITEM.description = "No description avaliable.";
 ITEM.maxStack = 5;
 ITEM.defaultStack = 1;
 
+-- Called when this item is dragged onto another one.
+function ITEM:Combine(targetItem)
+    if(targetItem.uniqueID == self.uniqueID) then
+        local sentStacks = 0
+
+        -- Evaluating how many stacks we need to transfer between the two items.
+        if((targetItem:GetStacks() + self:GetStacks()) <= targetItem.maxStack) then
+            sentStacks = self:GetStacks()
+        else
+            sentStacks = (targetItem.maxStack - targetItem:GetStacks())
+        end
+
+        -- Adding the stacks together.
+        targetItem:SetData("stack", targetItem:GetStacks() + sentStacks)
+        self:SetData("stack", math.Clamp(self:GetStacks() - sentStacks, 0, self.maxStack))
+
+        -- If the original item has no more stacks, we need to delete it.
+        if(self:GetStacks() <= 0) then
+            self:Remove()
+        end
+    end
+end
+
+-- Called as a get method when we need to get the item stacks.
+function ITEM:GetStacks()
+    return self:GetData("stack", 1)
+end
+
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)
     self:SetData("stack", self.defaultStack)
@@ -23,4 +51,13 @@ function ITEM:CanSplit()
     end
 
     return false
+end
+
+-- Use this as a debug to display our stacks.
+function ITEM:PopulateTooltip(tooltip)
+    local data = tooltip:AddRow("data")
+
+    data:SetText("Stacks: " .. self:GetData("stack", self.defaultStack) .. "/" .. self.maxStack)
+    data:SetFont("ixPluginCharSubTitleFont")
+	data:SizeToContents()
 end
