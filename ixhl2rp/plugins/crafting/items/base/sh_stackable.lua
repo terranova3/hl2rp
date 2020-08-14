@@ -8,6 +8,9 @@
 
 ITEM.name = "Stackable Item Base";
 ITEM.description = "No description avaliable.";
+ITEM.model = "models/mark2580/gtav/barstuff/Beer_AM.mdl";
+ITEM.width = 1;
+ITEM.height = 1;
 ITEM.maxStack = 5;
 ITEM.defaultStack = 1;
 
@@ -60,4 +63,11 @@ function ITEM:PopulateTooltip(tooltip)
     data:SetText("Stacks: " .. self:GetData("stack", self.defaultStack) .. "/" .. self.maxStack)
     data:SetFont("ixPluginCharSubTitleFont")
 	data:SizeToContents()
+end
+
+-- Clientside inventory paintover
+if (CLIENT) then
+    function ITEM:PaintOver(item, w, h)
+		ix.util.DrawText(item:GetStacks(), w-12, h-19, Color(218,171,3,255), 0, 0, "ixSmallFont")
+	end
 end
