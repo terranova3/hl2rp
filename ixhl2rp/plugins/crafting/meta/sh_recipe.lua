@@ -15,6 +15,8 @@ RECIPE.name = "undefined"
 RECIPE.description = "undefined"
 RECIPE.uniqueID = "undefined"
 RECIPE.category = "Crafting"
+RECIPE.profession = nil
+RECIPE.isMastery = false
 
 function RECIPE:GetName()
 	return self.name
@@ -32,20 +34,15 @@ function RECIPE:GetModel()
 	return self.model
 end
 
-function RECIPE:OnCanSee(client)
+function RECIPE:CanAccess(client)
 	local character = client:GetCharacter()
 
 	if (!character) then
 		return false
 	end
 
-	return true
-end
-
-function RECIPE:OnCanCraft(client)
-	local character = client:GetCharacter()
-
-	if (!character) then
+	-- If this recipe is a mastery only recipe and the character doesn't have that mastery, then don't allow them to access it.
+	if(self.isMastery and character:GetMastery() != self.profession) then
 		return false
 	end
 

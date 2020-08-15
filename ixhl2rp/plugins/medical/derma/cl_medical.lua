@@ -82,7 +82,7 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			},
 			crafting = {
 				Create = function(info, container)
-					ix.gui.craftingMenu = container:Add("ixCrafting")
+					container:Add("ixCraftingPanel")
 				end,
 			}
 		}

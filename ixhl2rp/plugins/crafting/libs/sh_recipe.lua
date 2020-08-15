@@ -8,25 +8,25 @@
 
 local PLUGIN = PLUGIN;
 
-ix.profession = {}
-ix.profession.stored = {}
+ix.recipe = {}
+ix.recipe.stored = {}
 
-function ix.profession.LoadFromDir(directory)
+function ix.recipe.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
 		
-		PROFESSION = setmetatable({uniqueID = niceName}, PLUGIN.meta.profession)
+		RECIPE = setmetatable({uniqueID = niceName}, PLUGIN.meta.recipe)
 
 		ix.util.Include(directory.."/"..v, "shared")
-		ix.profession.stored[niceName] = PROFESSION
+		ix.recipe.stored[niceName] = RECIPE
 
-		PROFESSION = nil
+		RECIPE = nil
 	end
 end
 
-function ix.profession.Get(uniqueID)
-	if(ix.profession.stored[uniqueID]) then
-		return ix.profession.stored[uniqueID]
+function ix.recipe.Get(uniqueID)
+	if(ix.recipe.stored[uniqueID]) then
+		return ix.recipe.stored[uniqueID]
 	end
 
 	return nil

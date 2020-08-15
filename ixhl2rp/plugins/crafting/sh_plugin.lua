@@ -12,9 +12,11 @@ PLUGIN.author = "Adolphus & Ayreborne"
 PLUGIN.recipes = {}
 
 ix.util.IncludeFolder(PLUGIN, "meta")
+ix.util.Include("sv_hooks.lua")
 
 function PLUGIN:OnLoaded()
 	for _, path in ipairs(self.paths or {}) do
 		ix.professions.LoadFromDir(path.."/professions/")
+		ix.recipe.LoadFromDir(path.."/professions/")
 	end
 end
