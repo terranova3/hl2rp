@@ -25,7 +25,7 @@ CAMI.RegisterPrivilege({
 if (SERVER) then
 	ix.log.AddType("contextMenuAdmin", function(client, ...)
 		local arg = {...}
-		return L("%s has used context menu option '%s' on player %s (%s)", client:SteamName().." ("..client:SteamID()..")", arg[1], arg[2], arg[3])
+		return string.format("%s has used context menu option '%s' on player %s (%s)", client:SteamName().." ("..client:SteamID()..")", arg[1], arg[2], arg[3])
 	end)
 end
 
