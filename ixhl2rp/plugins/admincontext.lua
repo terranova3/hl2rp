@@ -22,6 +22,13 @@ CAMI.RegisterPrivilege({
 	MinAccess = "admin"
 })
 
+if (SERVER) then
+	ix.log.AddType("contextMenuAdmin", function(client, ...)
+		local arg = {...}
+		return L("%s has used context menu option '%s' on player %s (%s)", client:SteamName().." ("..client:SteamID()..")", arg[1], arg[2], arg[3])
+	end)
+end
+
 properties.Add("ixViewPlayerProperty", {
 	MenuLabel = "#View Player",
 	Order = 1,
@@ -60,8 +67,10 @@ properties.Add("ixSetHealthProperty", {
 		local submenu = option:AddSubMenu()
 		local target = IsValid( ent.AttachedEntity ) and ent.AttachedEntity or ent
 
-		for i = 100, 0, -25 do
-			local option = submenu:AddOption(i, function() self:SetHealth( ent, i ) end )
+		local hpchoices = {100,75,50,25,1,0}
+
+		for i,v in ipairs(a) do
+			local option = submenu:AddOption(v, function() self:SetHealth( ent, v ) end )
 		end
 
 	end,
@@ -84,6 +93,9 @@ properties.Add("ixSetHealthProperty", {
 
 			entity:SetHealth(health)
 			if (entity:Health() == 0) then entity:Kill() end
+			
+			ix.log.Add(client, "contextMenuAdmin", "SetHealth", entity:Name(), "HP->"..health)
+			
 		end
 	end
 })
@@ -125,6 +137,9 @@ properties.Add("ixSetArmorProperty", {
 			local armor = net.ReadUInt(8)
 
 			entity:SetArmor(armor)
+			
+			ix.log.Add(client, "contextMenuAdmin", "SetArmor", entity:Name(), "Armor->"..armor)
+			
 		end
 	end
 })
@@ -150,6 +165,9 @@ properties.Add("ixSetDescriptionProperty", {
 			client:RequestString("Set the character's description.", "New Description", function(text)
 				entity:GetCharacter():SetDescription(text)
 			end, entity:GetCharacter():GetDescription())
+			
+			ix.log.Add(client, "contextMenuAdmin", "SetDescription", entity:Name(), text)
+			
 		end
 	end
 })
@@ -186,6 +204,34 @@ properties.Add("ixViewTraits", {
 	
 
 			client:NotifyLocalized("This players traits are: " .. traitString)
+		end
+	end
+})
+
+properties.Add("ixSendToBrazil", {
+	MenuLabel = "#Send to Brazil",
+	Order = 5,
+	MenuIcon = "icon16/world_go.png",
+
+	Filter = function(self, entity, client)
+		return CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil) and entity:IsPlayer()
+	end,
+
+	Action = function(self, entity)
+		self:MsgStart()
+			net.WriteEntity(entity)
+		self:MsgEnd()
+	end,
+
+	Receive = function(self, length, client)
+		if (CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil)) then
+			local entity = net.ReadEntity()
+			
+			entity:Ignite(2)
+			timer.Create(entity:GetName().."brazilTimer"..math.random(1,100), 2, 1, function() entity:Kill() end)
+			
+			ix.log.Add(client, "contextMenuAdmin", "BrazilianAirlines", entity:Name(), "cinzas às Cinzas")
+			
 		end
 	end
 })
