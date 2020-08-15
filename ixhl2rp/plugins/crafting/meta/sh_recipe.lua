@@ -32,4 +32,24 @@ function RECIPE:GetModel()
 	return self.model
 end
 
+function RECIPE:OnCanSee(client)
+	local character = client:GetCharacter()
+
+	if (!character) then
+		return false
+	end
+
+	return true
+end
+
+function RECIPE:OnCanCraft(client)
+	local character = client:GetCharacter()
+
+	if (!character) then
+		return false
+	end
+
+	return true
+end
+
 PLUGIN.meta.recipe = RECIPE
