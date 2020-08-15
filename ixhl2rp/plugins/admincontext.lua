@@ -69,7 +69,7 @@ properties.Add("ixSetHealthProperty", {
 
 		local hpchoices = {100,75,50,25,1,0}
 
-		for i,v in ipairs(a) do
+		for i,v in ipairs(hpchoices) do
 			local option = submenu:AddOption(v, function() self:SetHealth( ent, v ) end )
 		end
 
