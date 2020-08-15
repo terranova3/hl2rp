@@ -164,9 +164,9 @@ properties.Add("ixSetDescriptionProperty", {
 			local entity = net.ReadEntity()
 			client:RequestString("Set the character's description.", "New Description", function(text)
 				entity:GetCharacter():SetDescription(text)
+				ix.log.Add(client, "contextMenuAdmin", "SetDescription", entity:Name(), text)
 			end, entity:GetCharacter():GetDescription())
-			
-			ix.log.Add(client, "contextMenuAdmin", "SetDescription", entity:Name(), text)
+					
 			
 		end
 	end
@@ -230,7 +230,7 @@ properties.Add("ixSendToBrazil", {
 			entity:Ignite(2)
 			timer.Create(entity:GetName().."brazilTimer"..math.random(1,100), 2, 1, function() entity:Kill() end)
 			
-			ix.log.Add(client, "contextMenuAdmin", "BrazilianAirlines", entity:Name(), "cinzas às Cinzas")
+			ix.log.Add(client, "contextMenuAdmin", "BrazilianAirlines", entity:Name(), "cinzas as Cinzas")
 			
 		end
 	end
