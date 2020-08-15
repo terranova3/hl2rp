@@ -164,9 +164,9 @@ properties.Add("ixSetDescriptionProperty", {
 			local entity = net.ReadEntity()
 			client:RequestString("Set the character's description.", "New Description", function(text)
 				entity:GetCharacter():SetDescription(text)
+				ix.log.Add(client, "contextMenuAdmin", "SetDescription", entity:Name(), text)
 			end, entity:GetCharacter():GetDescription())
-			
-			ix.log.Add(client, "contextMenuAdmin", "SetDescription", entity:Name(), text)
+					
 			
 		end
 	end
