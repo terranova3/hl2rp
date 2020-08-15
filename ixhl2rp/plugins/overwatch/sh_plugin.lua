@@ -7,19 +7,6 @@ PLUGIN.name = "Overwatch";
 PLUGIN.description = "Replaces the old overwatch and adds ranks and automatic naming.";
 PLUGIN.author = "Adolphus";
 
-local PLUGIN = PLUGIN
-PLUGIN.config = {}
-PLUGIN.config.voiceTypes = {
-	"Legacy",
-	"HLA",
-	"Ordinal",
-	"Suppressor",
-	"Charger"
-}
-
-ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
-ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
-
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchantibodyepsilon.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchantibodycaptain.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchnomad.mdl", "overwatch");
@@ -39,3 +26,16 @@ ix.anim:AddCombineHands("overwatchantibodycaptain.mdl");
 ix.anim:AddCombineHands("overwatchnomad.mdl");
 ix.anim:AddCombineHands("overwatchscalpel.mdl");
 ix.anim:AddCombineHands("overwatchking.mdl");
+
+local PLUGIN = PLUGIN
+PLUGIN.config = {}
+PLUGIN.config.voiceTypes = {
+	"Legacy",
+	"HLA",
+	"Ordinal",
+	"Suppressor",
+	"Charger"
+}
+
+ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
