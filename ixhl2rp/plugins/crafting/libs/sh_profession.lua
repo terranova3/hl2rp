@@ -40,7 +40,7 @@ function ix.profession.GetDisplayable()
 
 	for k, v in pairs(ix.profession.stored) do
 		if(v:ShouldDisplay()) then
-			table.insert(v, displayable)
+			table.insert(displayable, v)
 		end
 	end
 

@@ -8,6 +8,7 @@
 
 PROFESSION.name = "Cooking"
 PROFESSION.description = "Placeholder description, this needs to be set."
+PROFESSION.mastery = false
 
 -- This is the hook we can use to implement custom mastery effects.
 function PROFESSION:GetMasteryEffects()

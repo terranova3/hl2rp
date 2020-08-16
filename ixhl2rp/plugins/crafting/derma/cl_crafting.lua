@@ -43,6 +43,7 @@ function PANEL:Init()
 	local width = self:GetWide() - 58
 	local count = table.Count(ix.profession.GetDisplayable())
 
+	PrintTable(ix.profession.GetDisplayable())
 	-- Iterating through all of the displayable professions and adding them to the menu.
 	for k, v in pairs(ix.profession.GetDisplayable()) do
 		if(v:ShouldDisplay()) then
