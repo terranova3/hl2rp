@@ -31,3 +31,23 @@ function ix.profession.Get(uniqueID)
 
 	return nil
 end
+
+function ix.profession.GetDisplayable()
+	local displayable = {}
+
+	for k, v in pairs(ix.profession.stored) do
+		if(v:ShouldDisplay()) then
+			table.insert(v, displayable)
+		end
+	end
+
+	return displayable
+end
+
+hook.Add("DoPluginIncludes", "ixCrafting", function(path, pluginTable)
+	if (!PLUGIN.paths) then
+		PLUGIN.paths = {}
+	end
+
+	table.insert(PLUGIN.paths, path)
+end)

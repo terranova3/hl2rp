@@ -6,7 +6,7 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-PROFESSION.name = "Armorsmithing"
+PROFESSION.name = "Engineering"
 PROFESSION.description = "Placeholder description, this needs to be set."
 
 -- This is the hook we can use to implement custom mastery effects.

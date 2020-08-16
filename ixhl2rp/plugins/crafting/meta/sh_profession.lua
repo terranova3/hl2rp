@@ -24,6 +24,10 @@ function PROFESSION:GetDescription()
 	return self.description
 end
 
+function PROFESSION:ShouldDisplay()
+	return self.mastery
+end
+
 function PROFESSION:Call(method, client, ...)
 	local oldPlayer = self.player
 
