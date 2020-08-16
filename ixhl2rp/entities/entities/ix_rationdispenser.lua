@@ -85,8 +85,6 @@ if (SERVER) then
 			itemUniqueID = "ration_cpf"
 		elseif(character:GetClass() == CLASS_CWU or character:GetCustomClass() == "Civil Services") then
 			itemUniqueID = "ration_loyalist"
-		elseif character:GetFaction() == FACTION_BIOTIC then
-			itemUniqueID = "ration_biotic"
 		end
 
 		local itemTable = ix.item.Get(itemUniqueID)
