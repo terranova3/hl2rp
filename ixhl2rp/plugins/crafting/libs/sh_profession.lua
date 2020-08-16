@@ -11,6 +11,7 @@ local PLUGIN = PLUGIN;
 ix.profession = {}
 ix.profession.stored = {}
 
+-- Called when we are adding a new profession.
 function ix.profession.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
@@ -24,6 +25,7 @@ function ix.profession.LoadFromDir(directory)
 	end
 end
 
+-- Called when we need to get a profession object with a uniqueID
 function ix.profession.Get(uniqueID)
 	if(ix.profession.stored[uniqueID]) then
 		return ix.profession.stored[uniqueID]
@@ -32,6 +34,7 @@ function ix.profession.Get(uniqueID)
 	return nil
 end
 
+-- Returns all the displayable professions in the crafting menu.
 function ix.profession.GetDisplayable()
 	local displayable = {}
 
@@ -44,6 +47,7 @@ function ix.profession.GetDisplayable()
 	return displayable
 end
 
+-- Adds all the plugins subdirectories into its object.
 hook.Add("DoPluginIncludes", "ixCrafting", function(path, pluginTable)
 	if (!PLUGIN.paths) then
 		PLUGIN.paths = {}

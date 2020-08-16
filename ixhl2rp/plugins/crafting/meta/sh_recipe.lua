@@ -18,22 +18,27 @@ RECIPE.category = "Crafting"
 RECIPE.profession = nil
 RECIPE.isMastery = false
 
+-- Called when the name of the recipe is needed.
 function RECIPE:GetName()
 	return self.name
 end
 
+-- Called when the description of the recipe is needed.
 function RECIPE:GetDescription()
 	return self.description
 end
 
+-- Called when the skin of the recipe is needed.
 function RECIPE:GetSkin()
 	return self.skin
 end
 
+-- Called when the model of the recipe is needed.
 function RECIPE:GetModel()
 	return self.model
 end
 
+-- Called when we need to know if a client can access a recipe.
 function RECIPE:CanAccess(client)
 	local character = client:GetCharacter()
 

@@ -11,6 +11,7 @@ local PLUGIN = PLUGIN;
 ix.recipe = {}
 ix.recipe.stored = {}
 
+-- Called when we are adding a new recipe.
 function ix.recipe.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
@@ -24,6 +25,7 @@ function ix.recipe.LoadFromDir(directory)
 	end
 end
 
+-- Returns the recipe object
 function ix.recipe.Get(uniqueID)
 	if(ix.recipe.stored[uniqueID]) then
 		return ix.recipe.stored[uniqueID]

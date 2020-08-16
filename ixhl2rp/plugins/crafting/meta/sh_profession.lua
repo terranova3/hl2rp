@@ -16,18 +16,22 @@ PROFESSION.description = "undefined"
 PROFESSION.uniqueID = "undefined"
 PROFESSION.mastery = true
 
+-- Called when the name of a profession is needed.
 function PROFESSION:GetName()
 	return self.name
 end
 
+-- Called when the description of a profession is needed.
 function PROFESSION:GetDescription()
 	return self.description
 end
 
+-- Called when we need to know if a profession should show in the crafting menu
 function PROFESSION:ShouldDisplay()
 	return self.mastery
 end
 
+-- Called as a helper function to access a method tied to the specific profession object.
 function PROFESSION:Call(method, client, ...)
 	local oldPlayer = self.player
 

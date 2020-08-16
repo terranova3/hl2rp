@@ -14,6 +14,7 @@ function PANEL:Init()
 		ix.gui.crafting:Remove()
 	end
 
+	-- Put this on a global so other files can index this instance.
 	ix.gui.crafting = self;
 
 	self.professionButtons = {}
@@ -35,11 +36,14 @@ function PANEL:Init()
 	self.topDock:DockMargin(4,4,4,4)
 	self.topDock:SetTall(192)
 
+	-- We can't grab the width of a docked panel without first invalidating it's parent.
 	self:InvalidateParent(true)
 
+	-- The width is that of the parent panel, with '58' being a static value that won't change with resolution.
 	local width = self:GetWide() - 58
 	local count = table.Count(ix.profession.GetDisplayable())
 
+	-- Iterating through all of the displayable professions and adding them to the menu.
 	for k, v in pairs(ix.profession.GetDisplayable()) do
 		if(v:ShouldDisplay()) then
 			local button = self.topDock:Add("ixProfessionButton")
@@ -56,6 +60,7 @@ function PANEL:Init()
 	self.topDock:SizeToContents()
 end;
 
+-- Adding all the recipes for the selected profession into a scroll list.
 function PANEL:BuildRecipes(profession)
 	if(self.scroll and IsValid(self.scroll)) then
 		self.scroll:Remove()
@@ -67,6 +72,7 @@ function PANEL:BuildRecipes(profession)
 	self.scroll:Dock(FILL)
 end
 
+-- Called every frame
 function PANEL:Paint()
 	surface.SetDrawColor(30, 30, 30, 150)
 	surface.DrawRect(0, 0, self:GetWide(), self:GetTall())

@@ -14,6 +14,7 @@ PLUGIN.recipes = {}
 ix.util.IncludeFolder(PLUGIN, "meta")
 ix.util.Include("sv_hooks.lua")
 
+-- Called when the plugins are being loaded and we need to include any recipes or professions.
 function PLUGIN:OnLoaded()
 	for _, path in ipairs(self.paths or {}) do
 		ix.profession.LoadFromDir(path.."/professions")
