@@ -39,8 +39,8 @@ function PANEL:Init()
 	-- We can't grab the width of a docked panel without first invalidating it's parent.
 	self:InvalidateParent(true)
 
-	-- The width is that of the parent panel, with '58' being a static value that won't change with resolution.
-	local width = self:GetWide() - 58
+	-- The width is that of the parent panel, with '56' being a static value that won't change with resolution.
+	local width = self:GetWide() - 56
 	local count = table.Count(ix.profession.GetDisplayable())
 
 	-- Iterating through all of the displayable professions and adding them to the menu.
