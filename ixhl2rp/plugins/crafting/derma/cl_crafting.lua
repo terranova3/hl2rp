@@ -43,7 +43,6 @@ function PANEL:Init()
 	local width = self:GetWide() - 58
 	local count = table.Count(ix.profession.GetDisplayable())
 
-	PrintTable(ix.profession.GetDisplayable())
 	-- Iterating through all of the displayable professions and adding them to the menu.
 	for k, v in pairs(ix.profession.GetDisplayable()) do
 		if(v:ShouldDisplay()) then
@@ -63,14 +62,32 @@ end;
 
 -- Adding all the recipes for the selected profession into a scroll list.
 function PANEL:BuildRecipes(profession)
-	if(self.scroll and IsValid(self.scroll)) then
-		self.scroll:Remove()
+	if(self.categoryList) then
+		self.categoryList:Remove()
 	end
 
-	PrintTable(profession)
+	self.categoryList = self:Add("DScrollPanel")
+	self.categoryList:Dock(FILL)
+	self.categoryList:DockMargin(4,4,4,4)
 
-	self.scroll = self:Add("DScrollPanel")
-	self.scroll:Dock(FILL)
+	-- Get all the recipes into their categories for the selected profession.
+	local categories = ix.recipe.GetCategories(ix.profession.GetRecipes(profession.uniqueID))
+
+	-- Iterate through all the categories within this profession
+	for title, v in pairs(categories) do
+		local category = vgui.Create("ixCraftingCategory", self);
+		category:SetTitle(title)
+		category:DockMargin(0, 0, 0, 16)
+
+		self.categoryList:AddItem(category)
+
+		for k, v in pairs(v.recipes) do
+			local recipe = vgui.Create("ixRecipePanel")
+			recipe:SetRecipe(v)
+
+			category.list:AddItem(recipe)
+		end
+	end
 end
 
 -- Called every frame

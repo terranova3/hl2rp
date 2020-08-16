@@ -20,7 +20,7 @@ function PLUGIN:OnLoaded()
 		ix.profession.LoadFromDir(path.."/professions")
 
 		for k, v in pairs(ix.profession.stored) do
-			ix.recipe.LoadFromDir(path.."/recipes/".. v.uniqueID)
+			ix.recipe.LoadFromDir(path.."/recipes/".. v.uniqueID, v.uniqueID)
 		end
 	end
 end

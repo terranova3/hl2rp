@@ -47,6 +47,19 @@ function ix.profession.GetDisplayable()
 	return displayable
 end
 
+-- Returns all the recipes for a profession
+function ix.profession.GetRecipes(uniqueID)
+	local recipes = {}
+
+	for k, v in pairs(ix.recipe.stored) do
+		if(v.profession == uniqueID) then
+			table.insert(recipes, v)
+		end
+	end
+
+	return recipes
+end
+
 -- Adds all the plugins subdirectories into its object.
 hook.Add("DoPluginIncludes", "ixCrafting", function(path, pluginTable)
 	if (!PLUGIN.paths) then
