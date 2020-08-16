@@ -47,9 +47,6 @@ function RECIPE:CanAccess(client)
 		return false
 	end
 
-	if (inventory and inventory:HasItem("flashlight")) then
-		return true
-	end
 	-- If this recipe is a mastery only recipe and the character doesn't have that mastery, then don't allow them to access it.
 	if(self.isMastery and character:GetMastery() != self.profession) then
 		return false
