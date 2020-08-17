@@ -342,14 +342,14 @@ LANGUAGE = {
 	optdCheapBlur = "Replaces UI blurring with simple dimming.",
 	optObserverTeleportBack = "Return to previous location",
 	optdObserverTeleportBack = "Returns you to the location that you entered observer mode.",
-	optObserverESP = "Show ESP",
+	optObserverESP = "ESP - Show",
 	optdObserverESP = "Shows the names and locations of each player in the server.",
-	optObserverShowItemESP = "Show items on ESP",
+	optObserverShowItemESP = "ESP - Items",
 	optdObserverShowItemESP = "Shows the names and locations of each item on the server",
 
-	optObserverShowVendor = "Show vendor on ESP",
+	optObserverShowVendor = "ESP - Vendors",
 	optdObserverShowVendor = "Shows the names and locations of each vendor on the server",
-	optObserverHideLiterature = "Show notepads and paper on ESP",
+	optObserverHideLiterature = "ESP - Notepads & Paper",
 	optdObserverHideLiterature = "Shows the names and locations of each notepad/paper item on the server",
 
 
