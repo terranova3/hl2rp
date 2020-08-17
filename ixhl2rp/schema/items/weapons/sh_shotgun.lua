@@ -1,5 +1,5 @@
-ITEM.name = "Shotgun"
-ITEM.description = "A powerful pump-action shotgun."
+ITEM.name = "SPAS-12"
+ITEM.description = "A powerful pump-action shotgun using 12 gauge shells."
 ITEM.model = "models/weapons/tnmmod/w_shotgun.mdl"
 ITEM.class = "arccw_spas12terra"
 ITEM.weaponCategory = "primary"
