@@ -71,3 +71,11 @@ ix.chat.Register("itC", {
 	indicator = "chatPerforming",
 	deadCanChat = true
 })
+
+if(CLIENT) then
+	CHAT_RECOGNIZED = CHAT_RECOGNIZED or {}
+	CHAT_RECOGNIZED["itC"] = true
+	CHAT_RECOGNIZED["itL"] = true
+	CHAT_RECOGNIZED["meC"] = true
+	CHAT_RECOGNIZED["meL"] = true
+end
