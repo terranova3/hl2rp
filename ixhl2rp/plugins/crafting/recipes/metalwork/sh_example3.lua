@@ -14,7 +14,7 @@ RECIPE.requirements = {
 	["reclaimed_metal"] = 1
 }
 RECIPE.results = {
-	["screws"] = 1
+	["union_card"] = 1
 }
 RECIPE.tools = {
 	"blow_torch"

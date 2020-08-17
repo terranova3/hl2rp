@@ -17,9 +17,21 @@ function ix.recipe.LoadFromDir(directory, category)
 		local niceName = v:sub(4, -5)
 		
 		RECIPE = setmetatable({uniqueID = niceName, profession = category}, PLUGIN.meta.recipe)
+		
+		local shouldInclude = true
 
-		ix.util.Include(directory.."/"..v, "shared")
-		ix.recipe.stored[niceName] = RECIPE
+		for k, v in pairs(RECIPE.results) do
+			if(!ix.item.list[k]) then
+				shouldInclude = false
+				ErrorNoHalt(k .. "is not a valid item uniqueID in recipe " .. RECIPE.name)
+				break
+			end
+		end
+
+		if(shouldInclude) then
+			ix.util.Include(directory.."/"..v, "shared")
+			ix.recipe.stored[niceName] = RECIPE
+		end
 
 		RECIPE = nil
 	end

@@ -10,23 +10,52 @@ local PANEL = {};
 
 -- Called when this derma is first created.
 function PANEL:Init()
-    self:SetFont("ixSmallFont")
-    self:SetTextColor(Color(225,225,225,255))
+    self:SetTall(64)
 
     self.drawColor = Color(25, 25, 25, 180)
-end
-
--- Called when the button is clicked.
-function PANEL:DoClick()
-    if(self:IsEnabled()) then
-        LocalPlayer():EmitSound(unpack({"buttons/button14.wav", 35, 255}))
-    end
 end
 
 -- Called when we need to attach a 'recipe' object onto this derma.
 function PANEL:SetRecipe(recipe)
     self.profession = recipe
-    self:SetText(recipe.name)
+
+    local item = ix.item.list[recipe:GetFirstResult()]
+
+    self.icon = self:Add("SpawnIcon")
+    self.icon:InvalidateLayout(true)
+	self.icon:Dock(LEFT)
+	self.icon:DockMargin(2, 2, 2, 2)
+	self.icon:SetModel(recipe:GetModel(), recipe:GetSkin())
+	self.icon.PaintOver = function(this)
+		if (item and item.PaintOver) then
+			local w, h = this:GetSize()
+
+			item.PaintOver(this, item, w, h)
+		end
+	end
+
+	if ((item.iconCam and !ICON_RENDER_QUEUE[item.uniqueID]) or item.forceRender) then
+		local iconCam = item.iconCam
+		iconCam = {
+			cam_pos = iconCam.pos,
+			cam_fov = iconCam.fov,
+			cam_ang = iconCam.ang,
+		}
+		ICON_RENDER_QUEUE[item.uniqueID] = true
+
+		self.icon:RebuildSpawnIconEx(
+			iconCam
+		)
+    end
+    
+	self.name = self:Add("DLabel")
+	self.name:Dock(FILL)
+    self.name:SetContentAlignment(4)
+    self.name:DockMargin(4, 0, 0, 0)
+	self.name:SetTextColor(color_white)
+	self.name:SetFont("ixMenuButtonFont")
+	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
+	self.name:SetText(recipe:GetName())
 end
 
 -- Called when a player's cursor has entered the button.
@@ -58,4 +87,4 @@ function PANEL:Paint()
     surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
 end
 
-vgui.Register("ixRecipePanel", PANEL, "DButton")
+vgui.Register("ixRecipePanel", PANEL, "DPanel")

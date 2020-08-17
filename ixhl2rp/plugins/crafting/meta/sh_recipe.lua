@@ -17,7 +17,8 @@ RECIPE.uniqueID = "undefined"
 RECIPE.category = "Crafting"
 RECIPE.profession = nil
 RECIPE.isMastery = false
-RECIPE.requirements = nil
+RECIPE.requirements = {}
+RECIPE.results = {}
 
 -- Called when the name of the recipe is needed.
 function RECIPE:GetName()
@@ -39,6 +40,18 @@ function RECIPE:GetModel()
 	return self.model
 end
 
+-- Returns the results of a recipe
+function RECIPE:GetResults()
+	return self.results
+end
+
+-- Returns the first result of a recipe array.
+function RECIPE:GetFirstResult()
+	for k, v in pairs(self.results) do
+		return k, v
+	end
+end
+
 -- Called when we need to know if a client can access a recipe.
 function RECIPE:CanAccess(client)
 	local character = client:GetCharacter()
@@ -53,6 +66,31 @@ function RECIPE:CanAccess(client)
 	end
 
 	return true
+end
+
+-- Called when we need to get the requirements string of a recipe.
+function RECIPE:GetRequirements()
+	local count = table.Count(self.requirements)
+	local i = 1
+	local string = ""
+
+	for k, v in pairs(self.requirements) do
+		local item = ix.item.list[v]
+
+		if(item) then
+			if(item.capacity) then
+				string = string .. string.format("%s (%smL)", item.name, item:GetData("currentAmount"))
+			elseif(item.maxStack) then
+				string = string .. string.format("%s (%s stacks)", item.name, item:GetStacks())
+			else
+				string = string .. item.name
+			end
+		end
+
+		if(i != count) then
+			string = string .. ", "
+		end
+	end
 end
 
 -- Called when we need to see if a client has the correct materials to finish a recipe.
