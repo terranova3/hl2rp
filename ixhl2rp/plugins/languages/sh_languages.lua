@@ -28,6 +28,5 @@ ix.language.Add("esp", "Esperanto")
 ix.language.Add("nor", "Norwegian")
 ix.language.Add("swe", "Swedish")
 ix.language.Add("ita", "Italian")
-ix.language.Add("aus", "Australian")
 
 ix.language.Register()
