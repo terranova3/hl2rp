@@ -114,9 +114,70 @@ function RECIPE:CanCraft(client)
 	return true
 end
 
--- Called after a recipe can be crafted and we need to remove the correct materials and add the result.
-function RECIPE:OnCraft(client)
+if(SERVER) then
+	-- Called after a recipe can be crafted and we need to remove the correct materials and add the result.
+	function RECIPE:OnCraft(client)
+		local character = client:GetCharacter()
+		local inventory = character and character:GetInventory()
 
+		if (!character or !inventory) then
+			return false
+		end
+
+		-- Removing all the recipe requirements from the player
+		for uniqueID, vars in pairs(self.requirements or {}) do
+			local item = ix.item.list[uniqueID]
+
+			if(!item) then
+				return false
+			end
+
+			-- Grabbing all of the instances of this uniqueID in a character's inventory.
+			local items = inventory:GetItemsByID(uniqueID)
+
+			if(item.capacity) then
+				local neededLiquid = vars.amount
+
+				-- Iterate through all the liquid items to see if we have the liquid needed
+				for k, v in pairs(items) do
+					if(v:GetData("currentAmount", 0) >= neededLiquid) then
+						v:SetData("currentAmount", v:GetData("currentAmount") - neededLiquid)
+					else
+						neededLiquid = neededLiquid - v:GetData("currentAmount", 0)
+						v:SetData("currentAmount", 0)
+					end
+
+					if(neededLiquid <= 0) then
+						break
+					end
+				end
+			elseif(item.maxStack) then
+				local neededStacks = vars.amount
+
+				for k, v in pairs(items) do
+					if(v:GetStacks() > neededStacks) then
+						v:SetData("stacks", v:GetStacks() - neededStacks)
+					else
+						neededStacks = neededStacks - (v:GetStacks() or 0)
+						v:Remove()
+					end
+
+					if(neededStacks <= 0) then
+						break
+					end
+				end
+			else
+				for k, v in pairs(items) do
+					v:Remove()
+				end
+			end
+		end
+
+		-- Add the resultant items from the recipe into the player's inventory.
+		for k, v in pairs(self.results or {}) do
+			inventory:Add(k, (v or 1))
+		end
+	end
 end
 
 PLUGIN.meta.recipe = RECIPE
