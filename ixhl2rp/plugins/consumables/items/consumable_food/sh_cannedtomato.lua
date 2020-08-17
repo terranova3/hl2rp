@@ -11,5 +11,5 @@ ITEM.description = "An aluminium can filled with diced tomato. You could eat the
 ITEM.permit = "consumables";
 ITEM.category = "Civil-Approved Food";
 ITEM.price = 12;
-ITEM.restoreHealth = 5;
+ITEM.restoreHealth = 15;
 ITEM.flag = "f"

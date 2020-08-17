@@ -11,4 +11,6 @@ ITEM.description = "Fit for a prince. It says so on the label.";
 ITEM.permit = "consumables";
 ITEM.price = 35;
 ITEM.capacity = 500
-ITEM.restoreStamina = 25;
+ITEM.restoreStamina = 30;
+ITEM.category = "Alcohol"
+ITEM.flag = "R"

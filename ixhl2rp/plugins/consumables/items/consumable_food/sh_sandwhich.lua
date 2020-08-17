@@ -11,7 +11,7 @@ ITEM.description = "A mouth-watering sandwich with various meat slices, fresh cr
 ITEM.permit = "consumables";
 ITEM.category = "Bread";
 ITEM.price = 10
-ITEM.restoreHealth = 5
+ITEM.restoreHealth = 10
 ITEM.flag = "b"
 
 ITEM.iconCam = {

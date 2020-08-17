@@ -11,5 +11,5 @@ ITEM.description = "An aluminium can filled with a mix of black, red and normal 
 ITEM.category = "Civil-Approved Food";
 ITEM.permit = "consumables";
 ITEM.price = 12;
-ITEM.restoreHealth = 5;
+ITEM.restoreHealth = 15;
 ITEM.flag = "f"

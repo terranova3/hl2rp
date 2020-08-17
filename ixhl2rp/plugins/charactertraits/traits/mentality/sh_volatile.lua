@@ -7,5 +7,5 @@ TRAIT.name = "Volatile";
 TRAIT.opposite = "Calm";
 TRAIT.description = "Quick to anger and potentially dangerous.";
 TRAIT.category = "Mentality";
-TRAIT.icon = "materials/terranova/ui/traits/cruel.png";
+TRAIT.icon = "materials/terranova/ui/traits/volatile.png";
 TRAIT.negative = true;

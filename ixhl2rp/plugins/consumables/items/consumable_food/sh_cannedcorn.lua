@@ -11,5 +11,5 @@ ITEM.description = "An aluminium can filled with corn.";
 ITEM.permit = "consumables";
 ITEM.price = 12;
 ITEM.category = "Civil-Approved Food";
-ITEM.restoreHealth = 5;
+ITEM.restoreHealth = 15;
 ITEM.flag = "f"

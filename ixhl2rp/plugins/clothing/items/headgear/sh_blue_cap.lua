@@ -12,7 +12,7 @@ ITEM.model = "models/fty/items/bluecap.mdl"
 ITEM.price = 12
 ITEM.description = "A slick, blue brimmed hat for members of the Civil Restoration Union, with small writing on the inside of the cap revealing as much.";
 ITEM.flag = "M"
-ITEM.category = "MCS Clothing";
+ITEM.category = "Clothing - MCS";
 ITEM.bodyGroups = {
 	["headgear"] = 5,
 }
