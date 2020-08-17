@@ -65,7 +65,7 @@ function ix.language.Register()
             CHAT_RECOGNIZED[abbreviation] = true
         end
 
-        ix.language.RegisterItem(abbreviation, language)
+        --ix.language.RegisterItem(abbreviation, language)
     end
 end
 
