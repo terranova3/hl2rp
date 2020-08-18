@@ -36,7 +36,12 @@ end
 -- Called when we need to attach a 'profession' object onto this derma.
 function PANEL:SetProfession(profession)
     self.profession = profession
-    self:SetText(profession.name)
+
+    if(!self.profession.image) then
+        self:SetText(profession.name)
+    else
+        self:SetText("")
+    end
 end
 
 -- Called when a player's cursor has entered the button.
@@ -56,6 +61,12 @@ end
 
 -- Called every frame
 function PANEL:Paint()
+    if(self.profession and self.profession.image) then
+        surface.SetMaterial(ix.util.GetMaterial("materials/" .. self.profession.image))
+        surface.SetDrawColor(255, 255, 255, 255)
+        surface.DrawTexturedRect(0, 0, self:GetWide(), self:GetTall())
+    end
+
     if(self.isSelected) then
         surface.SetDrawColor(90, 90, 90, 180)
         surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())

@@ -25,8 +25,8 @@ function PANEL:Init()
 	self.header = self:Add("DPanel")
 	self.header:Dock(TOP)
 	self.header:DockMargin(4,4,4,4)
+	self.header.Paint = function() end
 	self.header:Add(self:AddLabel("Crafting", true, true))
-	self.header:Add(self:AddLabel("Placeholder description, this still needs to be set."))
 
 	self.header:InvalidateLayout(true)
 	self.header:SizeToChildren(false, true)

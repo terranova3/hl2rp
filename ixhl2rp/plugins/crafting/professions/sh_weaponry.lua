@@ -6,8 +6,9 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-PROFESSION.name = "Weapon Crafting"
+PROFESSION.name = "Weaponry"
 PROFESSION.description = "Placeholder description, this needs to be set."
+PROFESSION.image = "terranova/ui/crafting/weaponry.png"
 
 -- This is the hook we can use to implement custom mastery effects.
 function PROFESSION:GetMasteryEffects()

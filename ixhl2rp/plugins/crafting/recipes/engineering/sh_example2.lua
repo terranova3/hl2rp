@@ -11,7 +11,9 @@ RECIPE.description = "Craft a handful of bolts with metal pieces."
 RECIPE.model = "models/props_lab/box01a.mdl"
 RECIPE.category = "Crafting"
 RECIPE.requirements = {
-	["reclaimed_metal"] = 1
+	["union_card"] = 1,
+	["cocacola"] = 300,
+	["scrap_metal"] = 250
 }
 RECIPE.results = {
 	["union_card"] = 1

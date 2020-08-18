@@ -48,14 +48,41 @@ function PANEL:SetRecipe(recipe)
 		)
     end
     
-	self.name = self:Add("DLabel")
-	self.name:Dock(FILL)
+    self.description = self:Add("DPanel")
+    self.description:Dock(LEFT)
+    self.description.Paint = function() end
+
+	self.name = self.description:Add("DLabel")
+	self.name:Dock(TOP)
     self.name:SetContentAlignment(4)
-    self.name:DockMargin(4, 0, 0, 0)
+    self.name:DockMargin(4, 8, 0, 0)
 	self.name:SetTextColor(color_white)
-	self.name:SetFont("ixMenuButtonFont")
+	self.name:SetFont("ixMenuButtonFontSmall")
 	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
-	self.name:SetText(recipe:GetName())
+    self.name:SetText(recipe:GetName())
+
+    self.requirements = self.description:Add("DLabel")
+	self.requirements:Dock(TOP)
+    self.requirements:SetContentAlignment(4)
+    self.requirements:DockMargin(4, 0, 0, 0)
+	self.requirements:SetTextColor(color_white)
+	self.requirements:SetFont("ixMenuMiniFont")
+    self.requirements:SetText(recipe:GetRequirements() or "Invalid requirements for this recipe.")
+
+    local width = self.requirements:GetTextSize()
+
+    if(self.name:GetTextSize() > width) then
+        width = self.name:GetTextSize()
+    end
+
+    self.description:SetWide(width + 16)
+
+    self.create = self:Add("ixNewButton")
+    self.create:Dock(RIGHT)
+    self.create:SetWide(64)
+    self.create:SetFont("ixMenuMiniFont")
+    self.create:SetText("Craft")
+    self.create:DockMargin(4, 4, 4, 4)
 end
 
 -- Called when a player's cursor has entered the button.

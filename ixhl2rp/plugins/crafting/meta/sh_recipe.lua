@@ -72,25 +72,29 @@ end
 function RECIPE:GetRequirements()
 	local count = table.Count(self.requirements)
 	local i = 1
-	local string = ""
+	local string = "Requires: "
 
 	for k, v in pairs(self.requirements) do
-		local item = ix.item.list[v]
+		local item = ix.item.list[k]
 
 		if(item) then
 			if(item.capacity) then
-				string = string .. string.format("%s (%smL)", item.name, item:GetData("currentAmount"))
+				string = string .. string.format("%s (%smL)", item.name, v)
 			elseif(item.maxStack) then
-				string = string .. string.format("%s (%s stacks)", item.name, item:GetStacks())
+				string = string .. string.format("%s (%s stacks)", item.name, v)
 			else
-				string = string .. item.name
+				string = string .. v .. "x " .. item.name
 			end
 		end
 
 		if(i != count) then
 			string = string .. ", "
 		end
+
+		i=i+1
 	end
+
+	return string
 end
 
 -- Called when we need to see if a client has the correct materials to finish a recipe.
@@ -102,7 +106,7 @@ function RECIPE:CanCraft(client)
 		return false
 	end
 
-	for uniqueID, vars in pairs(self.requirements or {}) do
+	for uniqueID, value in pairs(self.requirements or {}) do
 		local item = ix.item.list[uniqueID]
 
 		if(!item) then
@@ -113,7 +117,7 @@ function RECIPE:CanCraft(client)
 		local items = inventory:GetItemsByID(uniqueID)
 
 		if(item.capacity) then
-			local neededLiquid = vars.amount
+			local neededLiquid = value
 
 			-- Iterate through all the liquid items to see if we have the liquid needed
 			for k, v in pairs(items) do
@@ -129,7 +133,7 @@ function RECIPE:CanCraft(client)
 				return false
 			end
 		elseif(item.maxStack) then
-			local neededStacks = vars.amount
+			local neededStacks = value
 
 			for k, v in pairs(items) do
 				neededStacks = math.Clamp(neededStacks - v:GetData("stack", 0), 0, 9999)
@@ -163,7 +167,7 @@ if(SERVER) then
 		end
 
 		-- Removing all the recipe requirements from the player
-		for uniqueID, vars in pairs(self.requirements or {}) do
+		for uniqueID, value in pairs(self.requirements or {}) do
 			local item = ix.item.list[uniqueID]
 
 			if(!item) then
@@ -174,7 +178,7 @@ if(SERVER) then
 			local items = inventory:GetItemsByID(uniqueID)
 
 			if(item.capacity) then
-				local neededLiquid = vars.amount
+				local neededLiquid = value
 
 				-- Iterate through all the liquid items to see if we have the liquid needed
 				for k, v in pairs(items) do
@@ -190,7 +194,7 @@ if(SERVER) then
 					end
 				end
 			elseif(item.maxStack) then
-				local neededStacks = vars.amount
+				local neededStacks = value
 
 				for k, v in pairs(items) do
 					if(v:GetStacks() > neededStacks) then

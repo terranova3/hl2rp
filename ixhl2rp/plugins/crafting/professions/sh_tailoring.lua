@@ -8,6 +8,7 @@
 
 PROFESSION.name = "Tailoring"
 PROFESSION.description = "Placeholder description, this needs to be set."
+PROFESSION.image = "terranova/ui/crafting/tailoring.png"
 
 -- This is the hook we can use to implement custom mastery effects.
 function PROFESSION:GetMasteryEffects()
