@@ -11,6 +11,7 @@ local PLUGIN = PLUGIN
 ITEM.name = "Razor"
 ITEM.description = "Useful for fixing up your facial hair."
 ITEM.model = "models/props_c17/TrapPropeller_Lever.mdl"
+ITEM.noBusiness = true
 ITEM.functions.Style = {
 	name = "Style",
 	icon = "icon16/book_edit.png",
