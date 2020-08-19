@@ -5,6 +5,11 @@
 
 local PLUGIN = PLUGIN
 
+CAMI.RegisterPrivilege({
+	Name = "Helix - Spawn Containers",
+	MinAccess = "admin"
+})
+
 -- Called when a player's model has changed.
 function PLUGIN:PlayerModelChanged(client, model)
 	local hands = client:GetHands();
@@ -115,3 +120,9 @@ function PLUGIN:PlayerSpawn(client)
 		end
 	end
 end
+
+function PLUGIN:CanPlayerSpawnContainer(client, model, entity)
+	if(CAMI.PlayerHasAccess(client, "Helix - Spawn Containers", nil)) then
+		return true
+	end
+ end

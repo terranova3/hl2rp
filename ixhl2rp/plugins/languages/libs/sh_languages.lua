@@ -47,6 +47,10 @@ function ix.language.Register()
                 return true
             end,
             OnChatAdd = function(self, speaker, text, bAnonymous, data)   
+                local name = anonymous and
+				L"someone" or hook.Run("GetCharacterName", speaker, chatType) or
+                (IsValid(speaker) and speaker:Name() or "Console")
+                
                 if (LocalPlayer():GetCharacter():HasLanguage(language)) then
                     chat.AddText(self.color, string.format(self.format, speaker:GetName(), text))
                 else
@@ -55,7 +59,13 @@ function ix.language.Register()
             end
         })
         
-        ix.language.RegisterItem(abbreviation, language)
+        if(CLIENT) then
+            CHAT_RECOGNIZED = CHAT_RECOGNIZED or {}
+            CHAT_RECOGNIZED[language] = true
+            CHAT_RECOGNIZED[abbreviation] = true
+        end
+
+        --ix.language.RegisterItem(abbreviation, language)
     end
 end
 

@@ -7,7 +7,8 @@ local PLUGIN = PLUGIN;
 
 ITEM.base = "base_fullfit";
 ITEM.name = "CRU XHMS Suit";
-ITEM.category = "MCS Clothing";
+ITEM.category = "Clothing - MCS";
+ITEM.flag = "M"
 ITEM.description = "CRU Xen Hazardous Materials Suit. A complete uniform kit that includes a vulcanized rubber jacket, contamination suit, air canister,gas mask, steel toed jackboots, rubber gloves and more.";
 ITEM.maxArmor = 25;
 ITEM.gasImmunity = true

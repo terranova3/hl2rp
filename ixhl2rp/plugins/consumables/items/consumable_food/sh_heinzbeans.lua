@@ -11,5 +11,5 @@ ITEM.description = "An aluminium can containing baked beans in a thick, deliciou
 ITEM.permit = "consumables";
 ITEM.category = "Civil-Approved Food";
 ITEM.price = 12;
-ITEM.restoreHealth = 10;
+ITEM.restoreHealth = 15;
 ITEM.flag = "f"

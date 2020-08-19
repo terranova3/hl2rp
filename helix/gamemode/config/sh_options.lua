@@ -16,7 +16,7 @@ if (CLIENT) then
 		category = "appearance"
 	})
 
-	ix.option.Add("minimalTooltips", ix.type.bool, false, {
+	ix.option.Add("minimalTooltips", ix.type.bool, true, {
 		category = "appearance"
 	})
 

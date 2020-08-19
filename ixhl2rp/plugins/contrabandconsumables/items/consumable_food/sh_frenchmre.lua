@@ -11,3 +11,4 @@ ITEM.description = "A french meal kit ready to eat. Probably filled with snails.
 ITEM.permit = "consumables";
 ITEM.price = 35;
 ITEM.restoreHealth = 10;
+ITEM.category = "Non-Approved Food";

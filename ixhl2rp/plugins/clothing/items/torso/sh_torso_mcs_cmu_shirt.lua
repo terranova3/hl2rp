@@ -9,7 +9,7 @@ ITEM.model = "models/fty/items/mcslogotop.mdl"
 ITEM.price = 10
 ITEM.description = "A tan-colored cotton shirt worn by CMU workers and specialists. It's symbol sits on the left shoulder of the wearer, adjacenent to the MCS ensignia.";
 ITEM.flag = "M"
-ITEM.category = "MCS Clothing";
+ITEM.category = "Clothing - MCS";
 ITEM.bodyGroups = {
     ["torso"] = 27
 }

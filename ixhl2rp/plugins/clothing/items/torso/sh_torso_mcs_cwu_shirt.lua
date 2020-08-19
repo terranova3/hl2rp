@@ -9,7 +9,7 @@ ITEM.model = "models/fty/items/mcslogotop.mdl"
 ITEM.price = 10
 ITEM.description = "A tan-colored cotton shirt worn by all Civil Worker's Union employees. There sits an ensignia of the MCS on the left patch, with the CWU's logo on the right.";
 ITEM.flag = "M"
-ITEM.category = "MCS Clothing";
+ITEM.category = "Clothing - MCS";
 ITEM.bodyGroups = {
     ["torso"] = 26
 }

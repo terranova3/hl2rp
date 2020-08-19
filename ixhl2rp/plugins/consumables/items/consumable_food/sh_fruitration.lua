@@ -3,13 +3,13 @@
 	without permission of its author.
 --]]
 
-ITEM.name = "Mints";
-ITEM.model = "models/kek1ch/dev_mint.mdl";
+ITEM.name = "Fruit Flavoured Ration";
+ITEM.model = "models/terranova/fruitration.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
-ITEM.description = "A small tin of peppermint flavoured breath mints.";
+ITEM.description = "Easily manufactured ration package that espouses to be flavoured.";
 ITEM.category = "Civil-Approved Food";
 ITEM.permit = "consumables";
-ITEM.price = 10;
-ITEM.restoreStamina = 16;
+ITEM.price = 6;
+ITEM.restoreHealth = 9;
 ITEM.flag = "f"

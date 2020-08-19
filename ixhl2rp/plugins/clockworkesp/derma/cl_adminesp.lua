@@ -158,6 +158,10 @@ function PLUGIN.esp:GetAdminESPInfo(info)
 					local itemTable = v:GetItemTable()
 
 					if (itemTable) then
+						if(ix.option.Get("observerHideLiterature", true) and (itemTable.uniqueID == "notepad" or itemTable.uniqueID == "paper")) then
+							continue
+						end
+
 						local itemName = itemTable:GetName()
 						local color = Color(0, 255, 255, 255);
 
@@ -165,7 +169,7 @@ function PLUGIN.esp:GetAdminESPInfo(info)
 							position = position,
 							text = {
 								{
-									text = "[Item]",
+									text = "Item",
 									color = color
 								},
 								{
@@ -175,6 +179,32 @@ function PLUGIN.esp:GetAdminESPInfo(info)
 							}
 						});
 					end;
+				end;
+			end;
+		end;
+	end;
+
+	if (ix.option.Get("observerShowVendor", true)) then
+		for k, v in pairs (ents.GetAll()) do 
+			if (v:GetClass() == "ix_vendor") then
+				if (v:IsValid()) then
+					local position = v:GetPos();
+
+					local color = Color(100, 180, 255, 255);
+
+					table.insert(info, {
+						position = position,
+						text = {
+							{
+								text = "Vendor",
+								color = color
+							},
+							{
+								text = v:GetDisplayName(),
+								color = color
+							}
+						}
+					})
 				end;
 			end;
 		end;

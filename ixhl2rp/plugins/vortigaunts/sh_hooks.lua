@@ -55,7 +55,7 @@ ix.chat.Register("Vortigese", {
 		if (speaker:GetCharacter():IsVortigaunt()) then
 			return true
 		else
-			speaker:NotifyLocalized("You don't know Vortigese!")
+			speaker:NotifyLocalized("You are not capable of comprehending Vortigese.")
 			return false
 		end
 	end,

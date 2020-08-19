@@ -39,8 +39,12 @@ function ix.quickmenu.IsAdmin()
 	return false
 end
 
-ix.quickmenu:AddCallback("Edit Physical Description", "icon16/book_edit.png", function()
+ix.quickmenu:AddCallback("Edit Physical Description", "icon16/note_edit.png", function()
 	ix.command.Send("CharPhysDesc")
+end);
+
+ix.quickmenu:AddCallback("Edit Detailed Description", "icon16/book_edit.png", function()
+	ix.command.Send("CharDetDesc")
 end);
 
 ix.quickmenu:AddCallback("Drop Tokens", "icon16/money_delete.png", function()
