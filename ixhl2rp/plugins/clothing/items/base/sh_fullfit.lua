@@ -38,7 +38,8 @@ function ITEM:OnUnequipped()
 	self.player:SetArmor(0)
 
 	self.player:ResetBodygroups()
-	ix.charPanel.Update(self.player) 
+	ix.charPanel.Update(self.player)
+	ix.plugin.list.facialhair:RestoreFacialHair(self.player:GetCharacter())
 end
 
 function ITEM:Repair(amount)
