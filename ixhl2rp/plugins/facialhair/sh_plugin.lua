@@ -10,7 +10,7 @@ PLUGIN.name = "Facial Hair"
 PLUGIN.description = "Adds facial hair growth and razors for HL2 RP"
 PLUGIN.author = "Adolphus"
 
-ix.util.IncludeFolder(PLUGIN, "meta")
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
 ix.util.Include("sv_hooks.lua")
 
 ix.config.Add("facialHairChangeTime", 30, "The time between being allowed to change facial hair, in minutes.", nil, {
