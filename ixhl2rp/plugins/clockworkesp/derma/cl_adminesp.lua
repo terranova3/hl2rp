@@ -137,7 +137,7 @@ function PLUGIN.esp:GetAdminESPInfo(info)
 			local text = {
 				{
 					text = table.concat(topText, " "), 
-					color = team.GetColor(v:Team())
+					color = v:GetCharacter():GetClassColor()
 				}
 			};
 
