@@ -13,11 +13,19 @@ ix.config.Add("yellRange", 280, "The maximum distance a person's IC chat message
 })
 
 ix.chat.Register("meL", {
-	format = "*** %s %s",
-	GetColor = function(self, speaker, text)
-		local color = ix.chat.classes.ic:GetColor(speaker, text)
+	OnChatAdd = function(self, speaker, text)
+		if (!IsValid(speaker)) then
+			return
+		end
 
-		return Color(color.r + 35, color.g + 35, color.b + 35)
+		local chatColor = ix.config.Get("chatColor")
+		chatColor = Color(chatColor.r + 35, chatColor.g + 35, chatColor.b + 35)
+
+		if(ix.option.Get("factionNameColor", false)) then
+			chat.AddText(chatColor, "*** ", speaker:GetCharacter():GetClassColor(), speaker:GetName(), chatColor, " ", text)
+		else
+			chat.AddText(chatColor, "*** ", speaker:GetName(), " ", text)
+		end
 	end,
 	CanHear = ix.config.Get("yellRange", 280) * 2,
 	prefix = {"/MeL", "/ActionL"},
@@ -27,11 +35,19 @@ ix.chat.Register("meL", {
 })
 
 ix.chat.Register("meC", {
-	format = "* %s %s",
-	GetColor = function(self, speaker, text)
-		local color = ix.chat.classes.ic:GetColor(speaker, text)
+	OnChatAdd = function(self, speaker, text)
+		if (!IsValid(speaker)) then
+			return
+		end
 
-		return Color(color.r - 35, color.g - 35, color.b - 35)
+		local chatColor = ix.config.Get("chatColor")
+		chatColor = Color(chatColor.r - 35, chatColor.g - 35, chatColor.b - 35)
+
+		if(ix.option.Get("factionNameColor", false)) then
+			chat.AddText(chatColor, "* ", speaker:GetCharacter():GetClassColor(), speaker:GetName(), chatColor, " ", text)
+		else
+			chat.AddText(chatColor, "* ", speaker:GetName(), " ", text)
+		end
 	end,
 	CanHear = ix.config.Get("chatRange", 280) * 0.25,
 	prefix = {"/MeC", "/ActionC"},
@@ -42,7 +58,7 @@ ix.chat.Register("meC", {
 
 ix.chat.Register("itL", {
 	GetColor = function(self, speaker, text)
-		local color = ix.chat.classes.ic:GetColor(speaker, text)
+		local color = ix.config.Get("chatColor")
 
 		return Color(color.r + 35, color.g + 35, color.b + 35)
 	end,
@@ -58,7 +74,7 @@ ix.chat.Register("itL", {
 
 ix.chat.Register("itC", {
 	GetColor = function(self, speaker, text)
-		local color = ix.chat.classes.ic:GetColor(speaker, text)
+		local color = ix.config.Get("chatColor")
 
 		return Color(color.r - 35, color.g - 35, color.b - 35)
 	end,

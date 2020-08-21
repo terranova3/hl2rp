@@ -23,7 +23,6 @@ end
 function ix.language.Register()
     for abbreviation, language in pairs(ix.language.stored) do
         ix.chat.Register(abbreviation, {
-			format = "%s speaks in " .. language .. ": \"%s\"",
 			indicator = "chatTalking",
 			GetColor = function(self, speaker, text)
 				-- If you are looking at the speaker, make it greener to easier identify who is talking.
@@ -50,11 +49,19 @@ function ix.language.Register()
                 local name = anonymous and
 				L"someone" or hook.Run("GetCharacterName", speaker, chatType) or
                 (IsValid(speaker) and speaker:Name() or "Console")
-                
-                if (LocalPlayer():GetCharacter():HasLanguage(language)) then
-                    chat.AddText(self.color, string.format(self.format, speaker:GetName(), text))
+
+                if(ix.option.Get("factionNameColor", false)) then
+                    if (LocalPlayer():GetCharacter():HasLanguage(language)) then
+                        chat.AddText(speaker:GetCharacter():GetClassColor(), speaker:GetName(), self.color, " speaks in " .. language .. ": ", string.format("\"%s\"", text))
+                    else
+                        chat.AddText(speaker:GetCharacter():GetClassColor(), speaker:GetName(), self.color, " says something unintelligible in " .. language .. ".")
+                    end
                 else
-                    chat.AddText(self.color, string.format("%s says something unintelligible in %s.", speaker:GetName(), language))
+                    if (LocalPlayer():GetCharacter():HasLanguage(language)) then
+                        chat.AddText(self.color, speaker:GetName(), " speaks in ".. language ..": ", string.format("\"%s\"", text))
+                    else
+                        chat.AddText(self.color, string.format("%s says something unintelligible in %s.", speaker:GetName(), language))
+                    end
                 end
             end
         })
