@@ -352,6 +352,8 @@ LANGUAGE = {
 	optObserverHideLiterature = "ESP - Notepads & Paper",
 	optdObserverHideLiterature = "Shows the names and locations of each notepad/paper item on the server",
 
+	optFactionNameColor = "Show name as class color",
+	optdFactionNameColor = "A character's name will use its class color.",
 
 	opt24hourTime = "Use 24-hour time",
 	optd24hourTime = "Show timestamps in 24-hour time, rather than 12-hour time (AM/PM).",
