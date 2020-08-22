@@ -176,6 +176,7 @@ function ITEM:Equip(client, bNoSelect, bNoSound)
 			client:SetAmmo(0, ammoType)
 		else
 			weapon:SetClip1(self:GetData("ammo", 0))
+			client:SetAmmo(9999, ammoType)
 		end
 
 		weapon.ixItem = self
