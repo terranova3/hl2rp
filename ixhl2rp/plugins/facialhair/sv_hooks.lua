@@ -26,8 +26,8 @@ function PLUGIN:CanChangeFacialHair(character)
         return false, "You can't style your character while wearing a uniform."
     end
 
-    if(character:GetData("facialHairChange", 0) > CurTime()) then
-        local waitTime = math.ceil(character:GetData("facialHairChange", 0) - CurTime())
+    if((character.facialHairChange or 0) > CurTime()) then
+        local waitTime = math.ceil((character.facialHairChange or 0) - CurTime())
         return false, "You must wait " .. waitTime .. " seconds before changing your facial hair again."
     end
 
@@ -41,7 +41,7 @@ function PLUGIN:UpdateFacialHair(character, value)
     groups[index] = value
 
     character:SetData("groups", groups)
-    character:SetData("facialHairChange", CurTime() + (ix.config.Get("facialHairChangeTime", 0) * 60))
+    character.facialHairChange = CurTime() + (ix.config.Get("facialHairChangeTime", 0) * 60)
     
     self:RestoreFacialHair(character)
 end

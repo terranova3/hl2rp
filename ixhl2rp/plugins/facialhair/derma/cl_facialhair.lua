@@ -54,6 +54,7 @@ function PANEL:Init()
         button:DockMargin(2,2,2,2)
         button.selected = false
         button:SetText(v.name)
+        --[[
         button:SetHelixTooltip(function(tooltip)
             local name = tooltip:AddRow("description")
             name:SetText(v.name)
@@ -64,7 +65,7 @@ function PANEL:Init()
             description:SetText(v.description)
             description:SetFont("ixPluginTooltipDescFont")
             description:SizeToContents()
-        end)
+        end)--]]
 
         function button:DoClick()
             parent.model.Entity:SetBodygroup(LocalPlayer():FindBodygroupByName("facialhair"), self.group)

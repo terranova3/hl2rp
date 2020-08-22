@@ -15,7 +15,7 @@ ix.util.Include("sv_hooks.lua")
 
 ix.config.Add("facialHairChangeTime", 30, "The time between being allowed to change facial hair, in minutes.", nil, {
 	data = {min = 1, max = 1440},
-	category = "cosmetics"
+	category = "Cosmetics"
 })
 
 PLUGIN.facialHair = {

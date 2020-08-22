@@ -9,8 +9,8 @@
 local PLUGIN = PLUGIN
 
 ITEM.name = "Razor"
-ITEM.description = "Useful for fixing up your facial hair."
-ITEM.model = "models/props_c17/TrapPropeller_Lever.mdl"
+ITEM.description = "An old worn out razor that you can use to trim unwanted hair."
+ITEM.model = "models/razer/razer.mdl"
 ITEM.noBusiness = true
 ITEM.functions.Style = {
 	name = "Style",
