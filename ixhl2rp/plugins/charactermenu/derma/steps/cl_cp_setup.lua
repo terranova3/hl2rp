@@ -195,7 +195,7 @@ function PANEL:GetTaglines()
 		data[v] = {}
 		data[v].id = {}
 
-		for i = 1, 9 do
+		for i = 1, 20 do
 			table.insert(data[v].id, false)
 		end
 	end
