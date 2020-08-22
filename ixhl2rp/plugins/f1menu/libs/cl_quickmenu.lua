@@ -44,7 +44,52 @@ ix.quickmenu:AddCallback("Edit Physical Description", "icon16/note_edit.png", fu
 end);
 
 ix.quickmenu:AddCallback("Edit Detailed Description", "icon16/book_edit.png", function()
-	ix.command.Send("CharDetDesc")
+	local Frame = vgui.Create("DFrame")
+	Frame:Center()
+	Frame:SetPos(Frame:GetPos() - 150, 250, 0)
+	Frame:SetSize(350, 500)
+	Frame:SetTitle("Edit Detailed Description")
+	Frame:MakePopup()
+
+	local List = vgui.Create("DListView", Frame)
+	List:Dock( FILL )
+	List:DockMargin( 0, 0, 0, 5 )
+	List:SetMultiSelect(false)
+	
+	local textEntry = vgui.Create("DTextEntry", List)
+	textEntry:Dock( FILL )
+	textEntry:DockMargin( 0, 0, 0, 0 )
+	textEntry:SetMultiline(true)
+	textEntry:SetVerticalScrollbarEnabled(true)
+	
+	if (LocalPlayer():GetCharacter():GetData("textDetDescData")) then
+		textEntry:SetText(LocalPlayer():GetCharacter():GetData("textDetDescData"))
+	end
+	
+	local DButton = vgui.Create("DButton", List)
+	DButton:DockMargin( 0, 0, 0, 0 )
+	DButton:Dock( BOTTOM )
+	DButton:SetText("Edit")
+	DButton:SetTextColor(Color(0, 0, 0, 255))
+	
+	local textEntryURL = vgui.Create("DTextEntry", List)
+	textEntryURL:Dock( BOTTOM )
+	textEntryURL:DockMargin( 0, 0, 0, 0 )
+	textEntryURL:SetValue("Reference Image URL")
+	
+	if (LocalPlayer():GetCharacter():GetData("textDetDescDataURL")) then
+		textEntryURL:SetValue(LocalPlayer():GetCharacter():GetData("textDetDescDataURL"))
+		textEntryURL:SetText(LocalPlayer():GetCharacter():GetData("textDetDescDataURL"))
+	end
+	
+	DButton.DoClick = function()
+		net.Start("ixEditDetailedDescriptions")
+			net.WriteString(textEntryURL:GetValue())
+			net.WriteString(textEntry:GetValue())
+			net.WriteString(LocalPlayer():SteamName())
+		net.SendToServer()
+		Frame:Remove()
+	end
 end);
 
 ix.quickmenu:AddCallback("Drop Tokens", "icon16/money_delete.png", function()
