@@ -216,5 +216,4 @@ do
 	ix.flag.Add("b", "Access to bread related goods", "Business")
 	ix.flag.Add("z", "Access to Australian goods", "Business")
 	ix.flag.Add("X", "Access to items from Xen", "Business")
-	ix.flag.Add("M", "Access to items related to the MCS and it's Unions", "Business")
 end
