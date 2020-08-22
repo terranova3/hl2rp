@@ -22,7 +22,7 @@ end;
 function PLUGIN:InventoryItemAdded(oldInv, inventory, item)
 	local client = inventory:GetOwner()
 
-	if(oldInv and oldInv:GetID() == 0 and !client:InObserver()) then
+	if(oldInv and oldInv:GetID() == 0 and !client:InObserver() and client.ixUntimedSequence == nil) then
 		local entity = item.entity
 
 		if(IsValid(client) and IsValid(entity)) then
