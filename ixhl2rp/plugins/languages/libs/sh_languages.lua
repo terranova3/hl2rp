@@ -47,20 +47,20 @@ function ix.language.Register()
             end,
             OnChatAdd = function(self, speaker, text, bAnonymous, data)   
                 local name = anonymous and
-				L"someone" or hook.Run("GetCharacterName", speaker, chatType) or
+				L"someone" or hook.Run("GetCharacterName", speaker, language) or
                 (IsValid(speaker) and speaker:Name() or "Console")
 
                 if(ix.option.Get("factionNameColor", false)) then
                     if (LocalPlayer():GetCharacter():HasLanguage(language)) then
-                        chat.AddText(speaker:GetCharacter():GetClassColor(), speaker:GetName(), self.color, " speaks in " .. language .. ": ", string.format("\"%s\"", text))
+                        chat.AddText(speaker:GetCharacter():GetClassColor(), name, self.color, " speaks in " .. language .. ": ", string.format("\"%s\"", text))
                     else
-                        chat.AddText(speaker:GetCharacter():GetClassColor(), speaker:GetName(), self.color, " says something unintelligible in " .. language .. ".")
+                        chat.AddText(speaker:GetCharacter():GetClassColor(), name, self.color, " says something unintelligible in " .. language .. ".")
                     end
                 else
                     if (LocalPlayer():GetCharacter():HasLanguage(language)) then
-                        chat.AddText(self.color, speaker:GetName(), " speaks in ".. language ..": ", string.format("\"%s\"", text))
+                        chat.AddText(self.color, name, " speaks in ".. language ..": ", string.format("\"%s\"", text))
                     else
-                        chat.AddText(self.color, string.format("%s says something unintelligible in %s.", speaker:GetName(), language))
+                        chat.AddText(self.color, string.format("%s says something unintelligible in %s.", name, language))
                     end
                 end
             end
