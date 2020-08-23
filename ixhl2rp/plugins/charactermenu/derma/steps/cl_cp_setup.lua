@@ -195,14 +195,16 @@ function PANEL:GetTaglines()
 		data[v] = {}
 		data[v].id = {}
 
-		for i = 1, 9 do
+		for i = 1, 20 do
 			table.insert(data[v].id, false)
 		end
 	end
 
 	for k, v in pairs(cpSystem.cache.taglines or {}) do
 		if(v.tagline and v.id) then
-			data[v.tagline].id[v.id] = true
+			if(data[v.tagline]) then
+				data[v.tagline].id[v.id] = true
+			end
 		end	
 	end
 

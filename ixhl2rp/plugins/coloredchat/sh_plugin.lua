@@ -15,10 +15,14 @@ hook.Add("InitializedConfig", "ixChatTypes", function()
     ix.chat.Register("ic", {
         format = "%s says \"%s\"",
         indicator = "chatTalking",
-        OnChatAdd = function(self, speaker, text)
+        OnChatAdd = function(self, speaker, text, anonymous)
             if (!IsValid(speaker)) then
                 return
             end
+
+            local name = anonymous and
+            L"someone" or hook.Run("GetCharacterName", speaker, "me") or
+            (IsValid(speaker) and speaker:Name() or "Console")
 
             local chatColor = ix.config.Get("chatColor")
 
@@ -27,9 +31,9 @@ hook.Add("InitializedConfig", "ixChatTypes", function()
             end
 
             if(ix.option.Get("factionNameColor", false)) then
-                chat.AddText(speaker:GetCharacter():GetClassColor(), speaker:GetName(), chatColor, " says ", string.format("\"%s\"", text))
+                chat.AddText(speaker:GetCharacter():GetClassColor(), name, chatColor, " says ", string.format("\"%s\"", text))
             else
-                chat.AddText(chatColor, speaker:GetName(), " says ", string.format("\"%s\"", text))
+                chat.AddText(chatColor, name, " says ", string.format("\"%s\"", text))
             end
         end,
         CanHear = ix.config.Get("chatRange", 280)
@@ -38,17 +42,21 @@ hook.Add("InitializedConfig", "ixChatTypes", function()
     -- Actions and such.
     ix.chat.Register("me", {
         CanHear = ix.config.Get("chatRange", 280) * 2,
-        OnChatAdd = function(self, speaker, text)
+        OnChatAdd = function(self, speaker, text, anonymous)
             if (!IsValid(speaker)) then
                 return
             end
 
+            local name = anonymous and
+            L"someone" or hook.Run("GetCharacterName", speaker, "me") or
+            (IsValid(speaker) and speaker:Name() or "Console")
+
             local chatColor = ix.config.Get("chatColor")
 
             if(ix.option.Get("factionNameColor", false)) then
-                chat.AddText(chatColor, "** ", speaker:GetCharacter():GetClassColor(), speaker:GetName(), chatColor, " ", text)
+                chat.AddText(chatColor, "** ", speaker:GetCharacter():GetClassColor(), name, chatColor, " ", text)
             else
-                chat.AddText(chatColor, "** ", speaker:GetName(), " ", text)
+                chat.AddText(chatColor, "** ", name, " ", text)
             end
         end,
         prefix = {"/Me", "/Action"},
@@ -59,7 +67,7 @@ hook.Add("InitializedConfig", "ixChatTypes", function()
 
     -- Actions and such.
     ix.chat.Register("it", {
-        OnChatAdd = function(self, speaker, text)
+        OnChatAdd = function(self, speaker, text, anonymous)
             chat.AddText(ix.config.Get("chatColor"), "** "..text)
         end,
         CanHear = ix.config.Get("chatRange", 280) * 2,
@@ -71,18 +79,21 @@ hook.Add("InitializedConfig", "ixChatTypes", function()
 
     -- Whisper chat.
     ix.chat.Register("w", {
-        OnChatAdd = function(self, speaker, text)
+        OnChatAdd = function(self, speaker, text, anonymous)
             if (!IsValid(speaker)) then
                 return
             end
+            local name = anonymous and
+            L"someone" or hook.Run("GetCharacterName", speaker, "me") or
+            (IsValid(speaker) and speaker:Name() or "Console")
 
             local chatColor = ix.config.Get("chatColor")
             chatColor = Color(chatColor.r - 35, chatColor.g - 35, chatColor.b - 35)
 
             if(ix.option.Get("factionNameColor", false)) then
-                chat.AddText(speaker:GetCharacter():GetClassColor(), speaker:GetName(), chatColor, " whispers ", string.format("\"%s\"", text))
+                chat.AddText(speaker:GetCharacter():GetClassColor(), name, chatColor, " whispers ", string.format("\"%s\"", text))
             else
-                chat.AddText(chatColor, speaker:GetName(), " whispers ", string.format("\"%s\"", text))
+                chat.AddText(chatColor, name, " whispers ", string.format("\"%s\"", text))
             end
         end,
         CanHear = ix.config.Get("chatRange", 280) * 0.25,
@@ -93,18 +104,21 @@ hook.Add("InitializedConfig", "ixChatTypes", function()
 
     -- Yelling out loud.
     ix.chat.Register("y", {
-        OnChatAdd = function(self, speaker, text)
+        OnChatAdd = function(self, speaker, text, anonymous)
             if (!IsValid(speaker)) then
                 return
             end
+            local name = anonymous and
+            L"someone" or hook.Run("GetCharacterName", speaker, "me") or
+            (IsValid(speaker) and speaker:Name() or "Console")
 
             local chatColor = ix.config.Get("chatColor")
             chatColor = Color(chatColor.r + 35, chatColor.g + 35, chatColor.b + 35)
 
             if(ix.option.Get("factionNameColor", false)) then
-                chat.AddText(speaker:GetCharacter():GetClassColor(), speaker:GetName(), chatColor, " yells ", string.format("\"%s\"", text))
+                chat.AddText(speaker:GetCharacter():GetClassColor(), name, chatColor, " yells ", string.format("\"%s\"", text))
             else
-                chat.AddText(chatColor, speaker:GetName(), " yells ", string.format("\"%s\"", text))
+                chat.AddText(chatColor, name, " yells ", string.format("\"%s\"", text))
             end
         end,
         CanHear = ix.config.Get("chatRange", 280) * 2,
