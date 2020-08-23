@@ -17,7 +17,8 @@ ix.anim.SetModelClass("models/overwatch/terranova/overwatchdelta.mdl", "overwatc
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchalpha.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchking.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchprospekt.mdl", "overwatch");
-ix.anim.SetModelClass("models/overwatch/terranova/overwatchvortcaptureunit.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchvortcaptureunitlead.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchvortcaptureunitregular.mdl", "overwatch");
 
 ix.anim:AddCombineHands("overwatchepsilon.mdl");
 ix.anim:AddCombineHands("overwatchgamma.mdl");
@@ -29,7 +30,8 @@ ix.anim:AddCombineHands("overwatchnomad.mdl");
 ix.anim:AddCombineHands("overwatchscalpel.mdl");
 ix.anim:AddCombineHands("overwatchking.mdl");
 ix.anim:AddCombineHands("overwatchprospekt.mdl");
-ix.anim:AddCombineHands("overwatchvortcaptureunit.mdl");
+ix.anim:AddCombineHands("overwatchvortcaptureunitlead.mdl");
+ix.anim:AddCombineHands("overwatchvortcaptureunitregular.mdl");
 
 local PLUGIN = PLUGIN
 PLUGIN.config = {}
