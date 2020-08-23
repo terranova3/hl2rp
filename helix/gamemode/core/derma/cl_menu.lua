@@ -41,6 +41,13 @@ function PANEL:Init()
 	self.buttons:Dock(LEFT)
 	self.buttons:SetPaintedManually(true)
 
+	local infoLabel = self:Add("DLabel")
+	infoLabel:SetTextColor(Color(255, 255, 255, 25))
+	infoLabel:SetFont("ixMenuMiniFont")
+	infoLabel:SetText("1.1.3")
+	infoLabel:SizeToContents()
+	infoLabel:SetPos(ScrW() - infoLabel:GetWide() - 4, ScrH() - infoLabel:GetTall() - 4)
+
 	local close = self.buttons:Add("ixMenuButton")
 	close:SetText("return")
 	close:SizeToContents()
