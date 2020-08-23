@@ -7,7 +7,7 @@ PLUGIN.name = "Faction Colored Chat";
 PLUGIN.description = "Adds an option for enabling character names to be based on their faction colour for the chatbox.";
 PLUGIN.author = "Adolphus";
 
-ix.option.Add("factionNameColor", ix.type.bool, false, {
+ix.option.Add("factionNameColor", ix.type.bool, true, {
     category = "Chat"
 })
 

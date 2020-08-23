@@ -30,6 +30,10 @@ function PLUGIN:SetInfoMenuData(character, faction)
 		ix.infoMenu.Add("Citizen ID: #" .. character:GetData("cid"))
 	end
 
+	if(character:GetWage()) then
+		ix.infoMenu.Add(string.format("Wage: %s tokens", character:GetWage()))
+	end
+
 	ix.infoMenu.Add("Tokens: " .. ix.currency.Get(character:GetMoney()))
 
 	if(faction.name == "Civil Protection") then

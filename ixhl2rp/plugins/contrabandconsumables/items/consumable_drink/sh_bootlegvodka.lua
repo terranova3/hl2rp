@@ -13,4 +13,4 @@ ITEM.price = 5;
 ITEM.capacity = 500
 ITEM.restoreStamina = 13;
 ITEM.category = "Alcohol"
-ITEM.flag = "B"
+ITEM.flag = "M"

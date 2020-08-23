@@ -105,7 +105,15 @@ function PANEL:Populate()
     local name = LocalPlayer():GetName()
 
     self.name = self.infoBox:Add(self:AddLabel(4, name, true))
-    self.faction = self.infoBox:Add(self:AddLabel(8, faction.name, true))
+
+    local subname = faction.name
+    local job = LocalPlayer():GetCharacter():GetJob()
+
+    if(job) then
+        subname = job
+    end
+
+    self.faction = self.infoBox:Add(self:AddLabel(8, subname, true))
 
     for k, v in pairs(ix.infoMenu.stored) do
         self.infoBox:Add(self:AddLabel(0, v))

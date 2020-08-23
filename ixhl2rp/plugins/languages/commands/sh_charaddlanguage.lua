@@ -16,7 +16,7 @@ ix.command.Add("CharAddLanguage", {
 
 		if(result) then
 			client:Notify(string.format("You added the language %s to %s.", text, target:GetName()))
-			target:Notify(string.format("You have been given the %s language.", text))
+			target:GetPlayer():Notify(string.format("You have been given the %s language.", text))
 		elseif(error) then
 			client:Notify(error)
 		end

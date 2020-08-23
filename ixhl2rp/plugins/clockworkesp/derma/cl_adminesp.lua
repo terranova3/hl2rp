@@ -158,7 +158,7 @@ function PLUGIN.esp:GetAdminESPInfo(info)
 					local itemTable = v:GetItemTable()
 
 					if (itemTable) then
-						if(ix.option.Get("observerHideLiterature", true) and (itemTable.uniqueID == "notepad" or itemTable.uniqueID == "paper")) then
+						if(!ix.option.Get("observerHideLiterature", true) and (itemTable.uniqueID == "notepad" or itemTable.uniqueID == "paper")) then
 							continue
 						end
 

@@ -19,6 +19,7 @@ function PLUGIN:PlayerModelChanged(client, model)
 	end;
 end;
 
+-- Implements the animation for picking up items.
 function PLUGIN:InventoryItemAdded(oldInv, inventory, item)
 	local client = inventory:GetOwner()
 
@@ -40,6 +41,7 @@ function PLUGIN:InventoryItemAdded(oldInv, inventory, item)
 	end
 end
 
+-- This function is used to set the c_hands of a character's model.
 function PLUGIN:PlayerSetHandsModel(client, entity, model)
 	if(!model) then
 		model = client:GetModel()
@@ -68,6 +70,7 @@ function PLUGIN:PlayerSetHandsModel(client, entity, model)
 	end;
 end;
 
+-- Used to set the relationship of an entity based on the data in the faction tables.
 function PLUGIN:OnEntityCreated(entity)
 	if (IsValid(entity) and entity:IsNPC()) then
 		local class = entity:GetClass()
@@ -99,6 +102,7 @@ function PLUGIN:OnEntityCreated(entity)
 	end
 end
 
+-- Sets the relationship between entities once a new player spawns.
 function PLUGIN:PlayerSpawn(client)
 	local character = client:GetCharacter()
 
@@ -121,6 +125,7 @@ function PLUGIN:PlayerSpawn(client)
 	end
 end
 
+-- Restricts container spawning access to players with the CAMI permission.
 function PLUGIN:CanPlayerSpawnContainer(client, model, entity)
 	if(CAMI.PlayerHasAccess(client, "Helix - Spawn Containers", nil)) then
 		return true
