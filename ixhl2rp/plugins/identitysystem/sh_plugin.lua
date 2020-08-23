@@ -4,6 +4,7 @@ PLUGIN.description = "A comprehensive identity system to allow for deeper espion
 
 ix.util.Include("sv_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
 
 local PLUGIN = PLUGIN
 PLUGIN.paygrades = {
