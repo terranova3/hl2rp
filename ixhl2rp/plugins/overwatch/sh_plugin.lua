@@ -37,38 +37,53 @@ local PLUGIN = PLUGIN
 PLUGIN.config = {}
 PLUGIN.config.otaTypes = {
 	[1] = {
-		name = "[PH] Overwatch Type 1",
-		description = "[PH] Needs description",
+		name = "DAGGER",
+		description = "Standard armor with basic ballistic protection.",
 		model = "models/overwatch/terranova/overwatchepsilon.mdl"
 	},
 	[2] = {
-		name = "[PH] Overwatch Type 2",
-		description = "[PH] Needs description",
-		model = "models/overwatch/terranova/overwatchscalpel.mdl"
-	},
-	[3] = {
-		name = "[PH] Overwatch Type 3",
-		description = "[PH] Needs description",
-		model = "models/overwatch/terranova/overwatchnomad.mdl"
-	},
-	[4] = {
-		name = "[PH] Overwatch Type 4",
-		description = "[PH] Needs description",
-		model = "models/overwatch/terranova/overwatchdelta.mdl"
-	},
-	[5] = {
-		name = "[PH] Overwatch Type 5",
-		description = "[PH] Needs description",
+		name = "ORDINAL",
+		description = "Standard armor with an improved ballistic protection system.",
 		model = "models/overwatch/terranova/overwatchalpha.mdl"
 	},
+	[3] = {
+		name = "BLADEWALL",
+		description = "Experimental light-weight armor used for area control.",
+		model = "models/overwatch/terranova/overwatchdelta.mdl"
+	},
+	[4] = {
+		name = "HAMMER",
+		description = "Extremely durable armour protective system design for locking down urban environments.",
+		model = "models/overwatch/terranova/overwatchgamma.mdl"
+	},
+	[5] = {
+		name = "Antibody - ORDINAL",
+		description = "Basic uniform which provides protection from gas, but not ballistics.",
+		model = "models/overwatch/terranova/overwatchantibodycaptain.mdl"
+	},
 	[6] = {
-		name = "[PH] Overwatch Type 6",
-		description = "[PH] Needs description",
-		model = "models/overwatch/terranova/overwatchking.mdl"
+		name = "Antibody - DAGGER",
+		description = "Little to no armour, useful exclusively for xen removal.",
+		model = "models/overwatch/terranova/overwatchantibodyepsilon.mdl"
 	},
 	[7] = {
-		name = "[PH] Overwatch Type 7",
-		description = "[PH] Needs description",
+		name = "SCALPEL",
+		description = "Standard overwatch ballistic protection covered with a ghillie suit.",
+		model = "models/overwatch/terranova/overwatchscalpel.mdl"
+	},
+	[8] = {
+		name = "NOMAD",
+		description = "Equipped with standard overwatch ballistic protection with goggles.",
+		model = "models/overwatch/terranova/overwatchnomad.mdl"
+	},
+	[9] = {
+		name = "SWORD",
+		description = "Elite honor guards donning a white uniform to represent their status.",
+		model = "models/overwatch/terranova/overwatchking.mdl"
+	},
+	[10] = {
+		name = "PROSPEKT",
+		description = "Prison guards with little external protection aside from a chest-situated kevlar.",
 		model = "models/overwatch/terranova/overwatchprospekt.mdl"
 	},
 }
