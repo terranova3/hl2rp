@@ -18,14 +18,14 @@ surface.CreateFont("ixInfoPanelFont", {
 surface.CreateFont("ixInfoPanelTitleFont", {
     font = font,
     weight = 200,
-    size = ScreenScale(10),
+    size = 28,
     additive = true
 })
 
 surface.CreateFont("ixInfoPanelTimeFont", {
     font = font,
     weight = 200,
-    size = ScreenScale(16),
+    size = 32,
     additive = true
 })
 
