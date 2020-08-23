@@ -9,4 +9,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "Something resembling the original deliciously flavoured death-sticks of time past. It's okay."
 ITEM.category = "Other"
-ITEM.flag = "n"
+ITEM.flag = "g"
+ITEM.price = 3;
+ITEM.time = 60
