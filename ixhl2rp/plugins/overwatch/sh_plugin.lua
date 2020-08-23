@@ -35,6 +35,43 @@ ix.anim:AddCombineHands("overwatchvortcaptureunitregular.mdl");
 
 local PLUGIN = PLUGIN
 PLUGIN.config = {}
+PLUGIN.config.otaTypes = {
+	[1] = {
+		name = "[PH] Overwatch Type 1",
+		description = "[PH] Needs description",
+		model = "models/overwatch/terranova/overwatchepsilon.mdl"
+	},
+	[2] = {
+		name = "[PH] Overwatch Type 2",
+		description = "[PH] Needs description",
+		model = "models/overwatch/terranova/overwatchscalpel.mdl"
+	},
+	[3] = {
+		name = "[PH] Overwatch Type 3",
+		description = "[PH] Needs description",
+		model = "models/overwatch/terranova/overwatchnomad.mdl"
+	},
+	[4] = {
+		name = "[PH] Overwatch Type 4",
+		description = "[PH] Needs description",
+		model = "models/overwatch/terranova/overwatchdelta.mdl"
+	},
+	[5] = {
+		name = "[PH] Overwatch Type 5",
+		description = "[PH] Needs description",
+		model = "models/overwatch/terranova/overwatchalpha.mdl"
+	},
+	[6] = {
+		name = "[PH] Overwatch Type 6",
+		description = "[PH] Needs description",
+		model = "models/overwatch/terranova/overwatchking.mdl"
+	},
+	[7] = {
+		name = "[PH] Overwatch Type 7",
+		description = "[PH] Needs description",
+		model = "models/overwatch/terranova/overwatchprospekt.mdl"
+	},
+}
 PLUGIN.config.voiceTypes = {
 	"Legacy",
 	"HLA",
@@ -43,5 +80,6 @@ PLUGIN.config.voiceTypes = {
 	"Charger"
 }
 
+ix.util.Include("sv_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
