@@ -3,9 +3,11 @@ ITEM.description = "Battle rifle designed by Belgian small arms designer Dieudon
 ITEM.model = "models/weapons/arccw_ins2/w_fal.mdl"
 ITEM.class = "arccw_ins2_fal"
 ITEM.weaponCategory = "primary"
-ITEM.classes = {CLASS_EOW}
 ITEM.width = 4
 ITEM.height = 2
+ITEM.flag = "Z"
+ITEM.price = 390;
+
 
 ITEM.pacData = {
 	[1] = {

@@ -3,10 +3,11 @@ ITEM.description = "Classic 9x19 sub-machine gun used worldwide. Or, was."
 ITEM.model = "models/weapons/w_mp5.mdl"
 ITEM.class = "arccw_mp5_tn"
 ITEM.weaponCategory = "primary"
-ITEM.classes = {CLASS_EMP, CLASS_EOW}
-ITEM.flag = "V"
+ITEM.flag = "Z"
 ITEM.width = 3
 ITEM.height = 2
+ITEM.price = 285;
+
 ITEM.pacData = {
 	[1] = {
 		["children"] = {

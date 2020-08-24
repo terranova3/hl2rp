@@ -3,9 +3,10 @@ ITEM.description = "Pump-action shotgun manufactured by the Tula Arms Plant."
 ITEM.model = "models/weapons/arccw_ins2/w_toz.mdl"
 ITEM.class = "arccw_ins2_toz"
 ITEM.weaponCategory = "primary"
-ITEM.classes = {CLASS_EOW}
 ITEM.width = 3
 ITEM.height = 1
+ITEM.flag = "Z"
+ITEM.price = 200;
 
 ITEM.pacData = {
 	[1] = {

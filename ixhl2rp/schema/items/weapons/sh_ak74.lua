@@ -3,9 +3,10 @@ ITEM.description = "A classic 5.45mm calibre Russian assault rifle."
 ITEM.model = "models/weapons/arccw_insurgency/w_ak74.mdl"
 ITEM.class = "arccw_ins_ak74_tn"
 ITEM.weaponCategory = "primary"
-ITEM.classes = {CLASS_EOW}
 ITEM.width = 4
 ITEM.height = 2
+ITEM.flag = "Z"
+ITEM.price = 385;
 
 ITEM.pacData = {
 	[1] = {

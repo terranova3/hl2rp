@@ -3,9 +3,12 @@ ITEM.description = "Prewar United States military standard handgun of choice. Re
 ITEM.model = "models/weapons/arccw_ins2/w_m9.mdl"
 ITEM.class = "arccw_ins2_m9_tn"
 ITEM.weaponCategory = "sidearm"
-ITEM.flag = "V"
+ITEM.flag = "Z"
 ITEM.width = 2
 ITEM.height = 1
+ITEM.price = 185;
+
+
 ITEM.iconCam = {
 	pos = Vector(-2.5, 248.36601257324, 3.4),
 	ang = Angle(0, 270, 0),

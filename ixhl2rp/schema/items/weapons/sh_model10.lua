@@ -3,9 +3,11 @@ ITEM.description = "Concealable Smith & Wesson .38 revolver for the aspiring Ant
 ITEM.model = "models/weapons/arccw_ins2/w_38rev.mdl"
 ITEM.class = "arccw_ins2_model10_tn"
 ITEM.weaponCategory = "sidearm"
-ITEM.flag = "V"
+ITEM.flag = "Z"
 ITEM.width = 2
 ITEM.height = 1
+ITEM.price = 145;
+
 ITEM.iconCam = {
 	pos = Vector(-2.8, 248.36601257324, 3.65),
 	ang = Angle(0, 270, 0),

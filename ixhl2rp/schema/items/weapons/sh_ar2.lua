@@ -6,6 +6,7 @@ ITEM.weaponCategory = "primary"
 ITEM.classes = {CLASS_EOW}
 ITEM.width = 4
 ITEM.height = 2
+ITEM.noBusiness = true
 
 ITEM.pacData = {
 	[1] = {

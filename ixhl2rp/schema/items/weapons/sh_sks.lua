@@ -3,9 +3,10 @@ ITEM.description = "Classic Soviet carbine chambered in 7.62x39."
 ITEM.model = "models/weapons/fas2wm/rifles/w_sks.mdl"
 ITEM.class = "arccw_sks_tn"
 ITEM.weaponCategory = "primary"
-ITEM.classes = {CLASS_EOW}
 ITEM.width = 4
 ITEM.height = 1
+ITEM.flag = "Z"
+ITEM.price = 300;
 
 ITEM.pacData = {
 	[1] = {
