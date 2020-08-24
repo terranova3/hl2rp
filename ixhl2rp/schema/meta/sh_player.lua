@@ -6,7 +6,6 @@ function playerMeta:IsCombine()
 end
 
 function playerMeta:IsDispatch()
-	local name = self:Name()
 	local faction = self:Team()
 	local bStatus = faction == FACTION_OTA
 

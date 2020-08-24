@@ -3,8 +3,6 @@
 	without permission of its author (kurozael@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
-
 netstream.Hook("EditNotepad", function(client, text, id)
 	local item = ix.item.instances[id]
 

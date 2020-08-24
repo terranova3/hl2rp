@@ -51,7 +51,6 @@ end;
 -- Called when the player attempts to primary fire.
 function SWEP:PrimaryAttack()
 	if (SERVER) then
-		local previouslyActivated = self.Activated;
 		local ent = ents.Create("ix_nvlight");
 		
 		if (!self.Activated) then

@@ -73,9 +73,3 @@ else
 		end
 	end)
 end
-
-function PLUGIN:OnCharacterCreated(client, character)
-	if(character:GetFaction() == FACTION_CITIZEN) then
-		local inventory = character:GetInventory()
-	end
-end

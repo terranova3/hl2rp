@@ -4,7 +4,6 @@
 --]]
 
 local font = "Futura Std Medium"
-local fontTight = "Futura Std Condensed"
 
 -- Character Background
 

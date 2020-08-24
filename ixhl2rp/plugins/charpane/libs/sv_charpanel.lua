@@ -40,7 +40,6 @@ function ix.charPanel.RestoreCharPanel(panelID, callback)
                         continue
                     end
 
-                    local charPanel = ix.charPanels[itemPanelID]
                     local itemID = tonumber(item.item_id)
                     local data = util.JSONToTable(item.data or "[]")
                     local characterID, playerID = tonumber(item.character_id), tostring(item.player_id)
@@ -110,7 +109,6 @@ net.Receive("ixCharPanelReceiveItem", function(length, client)
 	local item = net.ReadUInt(32)
 	local invID = net.ReadUInt(32)
 	local panelID = net.ReadUInt(32)
-	local data = net.ReadTable()
 
 	if(ix.charPanel.HasIntegrity(client, item, invID, panelID, true)) then
 		local charPanel = ix.charPanels[panelID];

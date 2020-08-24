@@ -15,8 +15,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN;
-
 surface.CreateFont("ixESPMainText", {
     font = "Arial",
     weight = 700,

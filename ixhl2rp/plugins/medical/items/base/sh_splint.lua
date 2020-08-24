@@ -82,14 +82,10 @@ ITEM.functions.Give = {
 	end
 }
 
-
-
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)
     self:SetData("currentUses", self.uses)
 end
-
-local font = font
 
 if (CLIENT) then
     function ITEM:PaintOver(item, w, h)

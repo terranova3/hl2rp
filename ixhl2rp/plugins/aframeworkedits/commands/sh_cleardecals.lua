@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("ClearDecals", {
     description = "Clears all decals for all players.",
     adminOnly = true,

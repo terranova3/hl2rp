@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("PlaySound", {
     description = "Plays a sound to players in talking range.",
     adminOnly = true,

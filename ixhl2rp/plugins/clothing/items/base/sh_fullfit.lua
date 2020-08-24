@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
-
 ITEM.base = "base_outfit"
 ITEM.name = "Uniform";
 ITEM.model = "models/mark2580/gtav/garage_stuff/smallplasticbox.mdl";

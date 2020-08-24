@@ -33,7 +33,7 @@ end
 
 function PANEL:OnCursorMoved(x, y)
 	if (not self.Enabled or not self.Dragging) then return end
-	local x = self:ScreenToLocal(gui.MouseX(), 0)
+	x = self:ScreenToLocal(gui.MouseX(), 0)
 	x = x - self.btnLeft:GetWide() - self.HoldPos
 
 	local height = self:GetHideButtons() and 0 or self:GetTall()

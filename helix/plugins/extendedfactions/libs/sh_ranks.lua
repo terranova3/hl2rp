@@ -85,7 +85,6 @@ end
 -- Checks if a client can promote their target
 function ix.ranks.CanPromote(character, target)
 	local rank = target:GetRank()
-	local faction = target:GetFaction()
 
 	if(character:HasOverride() or target:GetFaction() == character:GetFaction()) then
 		if(character:GetRank().order > target:GetRank().order or character:HasOverride()) then
@@ -109,7 +108,6 @@ end
 -- Checks if a client can demote their target.
 function ix.ranks.CanDemote(character, target)
 	local rank = target:GetRank()
-	local faction = target:GetFaction()
 
 	if(character:HasOverride() or target:GetFaction() == character:GetFaction()) then
 		if(character:GetRank().order >= target:GetRank().order or character:HasOverride()) then

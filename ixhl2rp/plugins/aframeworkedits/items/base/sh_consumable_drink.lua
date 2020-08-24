@@ -63,8 +63,6 @@ ITEM.functions.Sip = {
 }
 ITEM.drinkEffects = function(itemTable, modifier)
     local client = itemTable.player
-    
-    if(itemTable.alcoholPercentage) then end
 
     if(itemTable.restoreStamina) then
         client:RestoreStamina(itemTable.restoreStamina * modifier)

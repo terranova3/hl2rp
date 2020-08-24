@@ -3,7 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN;
 local font = "Futura Std Medium"
 local fontTight = "Futura Std Condensed"
 

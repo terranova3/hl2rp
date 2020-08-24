@@ -10,9 +10,18 @@ ignore = {
 	"212", -- unused argument
 	"213", -- unused loop variable
 	"314", -- mutating unitalized local variable
+	"421", -- shadowing a local variable
+	"422", -- shadowing an argument
+	"423", -- shadowing a loop variable
+	"431", -- shadowing an upvalue
+	"432", -- shadowing an upvalue argument
+	"433", -- shadowing an upvalue loop variable
+	"512", -- loop can be executed at most once
 	"611", -- line contains only whitespace
 	"612", -- a line contains trailing whitespace
+	"613", -- trailing whitespace in a string
 	"614", -- trailing whitespace in a comment.
+	"621", -- Inconsistent indentation
 	"631", -- line is too long
 }
 
@@ -118,7 +127,8 @@ files = {
 
 -- ignore third party files
 exclude_files = {
-	"helix/gamemode/core/libs/thirdparty/**/*.lua"
+	"helix/gamemode/core/libs/thirdparty/**/*.lua",
+	"ixhl2rp/schema/libs/thirdparty/**/*.lua"
 }
 
 -- gmod

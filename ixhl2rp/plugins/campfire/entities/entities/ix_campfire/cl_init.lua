@@ -21,7 +21,6 @@ function ENT:Think()
 	end;
 	
 	if ( dlight ) then
-		local r, g, b, a = self:GetColor();
 		dlight.Pos = self:GetPos();
 		dlight.r = 250;
 		dlight.g = 255;

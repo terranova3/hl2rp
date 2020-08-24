@@ -1,5 +1,3 @@
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharTakeCustomClass", {
 	adminOnly = true,
 	arguments = {

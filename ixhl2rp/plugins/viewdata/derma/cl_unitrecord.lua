@@ -3,7 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
 local PANEL = {}
 
 -- Called when the panel is first initialized.

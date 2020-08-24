@@ -9,7 +9,6 @@ PLUGIN.author = "TERRANOVA";
 
 ix.util.Include("sv_hooks.lua")
 ix.util.Include("cl_hooks.lua")
-ix.util.Include("cl_fonts.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 
 -- Look Range/Distance

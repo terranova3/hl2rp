@@ -10,7 +10,6 @@ PLUGIN.description = "Adds an all encompassing way to describe your character.";
 PLUGIN.author = "Adolphus";
 
 ix.util.Include("meta/sh_trait.lua")
-ix.util.Include("sv_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
 
 PLUGIN.categories = {

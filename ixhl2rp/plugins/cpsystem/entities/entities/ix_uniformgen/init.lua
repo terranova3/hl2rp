@@ -2,10 +2,8 @@
 	© 2017 Terra Nova do not use, share, re-distribute or modify without 
 	permission of its author(zacharyenriquee@gmail.com) (Adolphus). 
 --]]
-local PLUGIN = PLUGIN;
 
 include("shared.lua");
-
 AddCSLuaFile("cl_init.lua");
 AddCSLuaFile("shared.lua");
 

@@ -154,8 +154,6 @@ if (SERVER) then
 		end
 
 		if (isnumber(uniqueID)) then
-			local oldInvID = item.invID
-
 			if (category) then
 				targetCharPanel.slots[category] = item
 
@@ -214,9 +212,7 @@ if (SERVER) then
 					return false, "invalidItem"
 				end
 				
-				if (isnumber(uniqueID)) then
-					local oldInvID = item.invID
-		
+				if (isnumber(uniqueID)) then		
 					if (!x and !y) then
 						x, y, bagInv = inventory:FindEmptySlot(item.width, item.height)
 					end

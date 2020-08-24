@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("AdminSearch", {
     description = "Allows an admin to search a player.",
     adminOnly = true,

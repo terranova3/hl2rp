@@ -3,8 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
-
 ITEM.name = "Churchill Cigar"
 ITEM.model = Model("models/polievka/cigar.mdl")
 ITEM.width = 1

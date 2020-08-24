@@ -188,7 +188,6 @@ function Promise:_handle(value)
     end
     self.handlers = {}
     if (isRejected and not DEBUG_IGNOREUNHANDLED) then
-        local trace = debug.traceback()
         timer.Simple(0.1, function()
             if (
                 UNHANDLED_PROMISES[self.rejectionHandlerID] and

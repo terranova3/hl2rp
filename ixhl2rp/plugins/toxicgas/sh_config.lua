@@ -1,6 +1,4 @@
 
-local PLUGIN = PLUGIN
-
 -- Toxic Gas Tick Timer
 ix.config.Add("gasDmgTick", 5, "The time between each tick of damage.", nil, {
 	category = "Toxic Gas",

@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CheckEdicts", {
     description = "Displays how many entities there are on the map.",
     adminOnly = true,

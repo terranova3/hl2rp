@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
-
 netstream.Hook("ixViewData", function(target, cid, data)
 	if(!target) then
 		return

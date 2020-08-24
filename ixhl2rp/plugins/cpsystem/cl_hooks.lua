@@ -52,7 +52,6 @@ function PLUGIN:HUDPaintForeground()
 		for _, v in pairs(player.GetAll() ) do
 			if (v:IsCombine() and v:Alive() and clientEyePos:Distance(v:GetPos()) <= self.maximumDistance and not v:GetMoveType() == MOVETYPE_NOCLIP) then
 		        local Position = ( v:GetPos() + Vector( 0,0,80 ) ):ToScreen()
-			    local model = v:GetModel()
 			
 			    if (v:IsCombine()) then
 					draw.DrawText( v:Name(), "NameFont", Position.x, Position.y + 15, cpSystem.color, 1 )		        
@@ -100,7 +99,7 @@ function PLUGIN:HUDPaintForeground()
 		end;	   
 
  	    for k,ent in pairs (ents.FindByClass("ix_item")) do	
-		    if LocalPlayer():Alive() then			
+		    if LocalPlayer():Alive() then	
 				local item = ent:GetItemTable();
 				
 		        local itemCategory = item.category

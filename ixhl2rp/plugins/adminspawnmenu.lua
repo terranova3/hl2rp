@@ -35,7 +35,6 @@ ix.command.Add("adminspawnmenu", {
 if (CLIENT) then
 	net.Receive("adminSpawnMenu",function()
 		local background = vgui.Create("DFrame")
-		local backgroundColor = Color(0, 0, 0, 66)
 		background:SetSize(ScrW() / 2, ScrH() / 2)
 		background:Center()
 		background:SetTitle("Admin Spawn Menu")

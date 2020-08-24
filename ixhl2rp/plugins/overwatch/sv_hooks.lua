@@ -10,8 +10,6 @@ util.AddNetworkString("ixUpdateOverwatchModel")
 
 -- Returns if a character is allowed to change facial hair.
 function PLUGIN:CanChangeOverwatchModel(character)
-    local client = character:GetPlayer()
-
     if(character:GetFaction() != FACTION_OTA) then
         return false, "Only members of the overwatch faction can change their faction model."
     end

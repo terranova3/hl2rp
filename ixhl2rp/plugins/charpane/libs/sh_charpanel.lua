@@ -3,8 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.charPanel = ix.charPanel or {}
 ix.charPanels = ix.charPanels or {
 	[0] = {}

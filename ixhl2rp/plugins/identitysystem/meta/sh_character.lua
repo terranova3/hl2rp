@@ -6,7 +6,6 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-local PLUGIN = PLUGIN
 local CHAR = ix.meta.character
 
 function CHAR:GetJob()

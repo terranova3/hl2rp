@@ -31,8 +31,6 @@ ITEM.functions.Smoke = {
 }
 ITEM.functions.PutOut = {
 	OnRun = function(itemTable)
-		local client = itemTable.player
-
 		if(!itemTable:IsLit()) then
 			return false
 		end

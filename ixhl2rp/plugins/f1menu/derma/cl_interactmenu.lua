@@ -3,7 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
 local PANEL = {}
 
 function PANEL:Init()
@@ -66,12 +65,6 @@ function PANEL:AddOption(k, v)
     end
 
     table.insert(self.options, option)
-end
-
-function PANEL:Think()
-    if(!IsValid(ix.gui.inv1) or (ix.gui.menu and ix.gui.menu.bClosing)) then
-        --self:Destroy()
-    end
 end
 
 function PANEL:Destroy()

@@ -7,7 +7,7 @@ ITEM.functions.Deploy = {
 	OnRun = function(item)
         if item.entityName then
             local pos = item.entity:GetPos()
-            pos:Add(Vector(0, 0, 5)) //prevention for stuck ents inside  world
+            pos:Add(Vector(0, 0, 5)) --prevention for stuck ents inside  world
             local spawned = ents.Create(item.entityName)
             spawned:SetAngles(item.player:GetAngles())
             spawned:SetPos(pos)

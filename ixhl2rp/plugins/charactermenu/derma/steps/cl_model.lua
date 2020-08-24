@@ -26,10 +26,6 @@ function PANEL:Display()
 	self.subtitle:SetTextColor(faction.color)
 	self.subtitle:SetText(faction.selectModelText or "Select a model")
 
-	local function PaintIcon(icon, w, h)
-		self:PaintIcon(icon, w, h)
-	end
-
 	for k, v in SortedPairs(faction.models) do
 		local icon = self.models:Add("SpawnIcon")
 		icon:SetSize(64, 128)

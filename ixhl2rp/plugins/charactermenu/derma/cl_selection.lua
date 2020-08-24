@@ -1,5 +1,4 @@
 local PANEL = {}
-local PLUGIN = PLUGIN;
 
 function PANEL:Init()
 	self:Dock(FILL)

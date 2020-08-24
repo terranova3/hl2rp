@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
-
 ITEM.base = "base_fullfit";
 ITEM.name = "Civil Factory Supervisor Uniform";
 ITEM.category = "Clothing - MCS";

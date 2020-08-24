@@ -246,8 +246,6 @@ function PANEL:OnKeyCodePressed(key)
 end
 
 function PANEL:Think()
-	local curTime = CurTime()
-
     -- If the selector no longer exists, exit.
     if(!IsValid(self.menu)) then
         ix.infoMenu.Remove()

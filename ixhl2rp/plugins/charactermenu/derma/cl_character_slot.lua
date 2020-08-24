@@ -1,5 +1,4 @@
 local PANEL = {}
-local PLUGIN = PLUGIN;
 local STRIP_HEIGHT = 4
 
 function PANEL:isCursorWithinBounds()

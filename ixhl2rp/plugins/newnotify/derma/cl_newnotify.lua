@@ -45,7 +45,7 @@ function PANEL:Populate(data)
     local picture = factionMaterials[data.faction] or factionMaterials[1];
 
     sound.PlayFile(data.sound, "", function(station, errCode, errStr)
-    	if ( IsValid( station ) ) then
+        if(IsValid(station)) then
             station:Play()
         end
     end);

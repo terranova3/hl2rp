@@ -3,8 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharAddLanguage", {
 	adminOnly = true,
 	arguments = {

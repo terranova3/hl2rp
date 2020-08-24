@@ -3,7 +3,6 @@ local PLUGIN = PLUGIN
 local tickmat = Material("terranova/ui/medical/tickmat.png")
 local damagepanel = Material("terranova/ui/medical/damagepanel.png")
 local brokenmat = Material("terranova/ui/medical/fracture.png")
-local bleedingmat = Material("terranova/ui/medical/bleeding.png")
 
 function PLUGIN:HUDPaintBackground()
     local character = LocalPlayer():GetCharacter()

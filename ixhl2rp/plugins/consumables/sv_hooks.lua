@@ -33,7 +33,7 @@ function PLUGIN:StartHealTick(character)
             self:StopHealTick(character)
         end
 
-        local healing = 0
+        local healing
         local client = character:GetPlayer()
 
         if(character.curHealTick >= ix.config.Get("healTick", 5)) then

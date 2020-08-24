@@ -3,7 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
 local PANEL = {}
 
 -- Called when the panel is first initialized.
@@ -89,7 +88,7 @@ function PANEL:BuildRecordAdd(editMode)
 	self.recordAdd = self:Add("DPanel")
 	self.recordAdd:Dock(FILL)
 
-	local backHeader = self.recordAdd:Add(ix.gui.record:AddBackHeader(function()
+	self.recordAdd:Add(ix.gui.record:AddBackHeader(function()
 		self.recordAdd:Remove()
 		self.main:SetVisible(true)
 	end))
@@ -105,7 +104,7 @@ function PANEL:BuildRecordAdd(editMode)
 	titleTextEntry:Dock(TOP)
 	titleTextEntry:DockMargin(4,0,4,0)
 
-	local pointsLabel = self.recordAdd:Add(ix.gui.record:BuildLabel("Loyalty Points"))
+	self.recordAdd:Add(ix.gui.record:BuildLabel("Loyalty Points"))
 	recordName:DockMargin(0,0,0,4)
 
 	local points = self.recordAdd:Add("DNumberWang")

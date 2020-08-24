@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
-
 ITEM.name = "Civil Protection Adjutant Uniform";
 ITEM.base = "base_cp_uniform"
 ITEM.category = "Clothing";

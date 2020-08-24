@@ -34,7 +34,6 @@ ix.chat.Register("adminchat", {
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text)
-		local color = team.GetColor(speaker:Team())
 		icon = Material(hook.Run("GetPlayerIcon", speaker) or icon)
 
 		if(CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Admin Chat", nil) and CAMI.PlayerHasAccess(speaker, "Helix - Admin Chat", nil)) then

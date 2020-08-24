@@ -8,11 +8,8 @@ local PLUGIN = PLUGIN;
 -- Called when screen space effects should be rendered.
 function PLUGIN:RenderScreenspaceEffects()
 	local nvActive = LocalPlayer():GetData("nvActive");
-	local modulation = {1, 1, 1};
 	
-	if (nvActive) then
-		modulation = {0, 1, 0};
-		
+	if (nvActive) then	
 		local colorModify = {};
 			colorModify["$pp_colour_brightness"] = 0.1;
 			colorModify["$pp_colour_contrast"] = 0.9;

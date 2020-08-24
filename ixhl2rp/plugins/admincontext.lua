@@ -34,17 +34,14 @@ properties.Add("ixViewPlayerProperty", {
 	Order = 1,
 	MenuIcon = "icon16/user.png",
 	Format = "%s | %s\nHealth: %s\nArmor: %s",
-
 	Filter = function(self, entity, client)
 		return CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil) and entity:IsPlayer()
 	end,
-
 	Action = function(self, entity)
 		self:MsgStart()
 			net.WriteEntity(entity)
 		self:MsgEnd()
 	end,
-
 	Receive = function(self, length, client)
 		if (CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil)) then
 			local entity = net.ReadEntity()
@@ -57,35 +54,23 @@ properties.Add("ixSetHealthProperty", {
 	MenuLabel = "#Health",
 	Order = 2,
 	MenuIcon = "icon16/heart.png",
-
 	Filter = function(self, entity, client)
 		return CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil) and entity:IsPlayer()
 	end,
-
 	MenuOpen = function( self, option, ent, tr )
-
 		local submenu = option:AddSubMenu()
-		local target = IsValid( ent.AttachedEntity ) and ent.AttachedEntity or ent
-
 		local hpchoices = {100,75,50,25,1,0}
 
 		for i,v in ipairs(hpchoices) do
-			local option = submenu:AddOption(v, function() self:SetHealth( ent, v ) end )
+			submenu:AddOption(v, function() self:SetHealth( ent, v ) end )
 		end
-
 	end,
-
-	Action = function(self, entity)
-		-- not used
-	end,
-
 	SetHealth = function(self, target, health)
 		self:MsgStart()
 			net.WriteEntity(target)
 			net.WriteUInt(health, 8)
 		self:MsgEnd()
 	end,
-
 	Receive = function(self, length, client)
 		if (CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil)) then
 			local entity = net.ReadEntity()
@@ -95,7 +80,6 @@ properties.Add("ixSetHealthProperty", {
 			if (entity:Health() == 0) then entity:Kill() end
 			
 			ix.log.Add(client, "contextMenuAdmin", "SetHealth", entity:Name(), "HP->"..health)
-			
 		end
 	end
 })
@@ -104,33 +88,22 @@ properties.Add("ixSetArmorProperty", {
 	MenuLabel = "#Armor",
 	Order = 3,
 	MenuIcon = "icon16/shield.png",
-
 	Filter = function(self, entity, client)
 		return CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil) and entity:IsPlayer()
 	end,
-
 	MenuOpen = function( self, option, ent, tr )
-
 		local submenu = option:AddSubMenu()
-		local target = IsValid( ent.AttachedEntity ) and ent.AttachedEntity or ent
 
 		for i = 100, 0, -25 do
-			local option = submenu:AddOption(i, function() self:SetArmor( ent, i ) end )
+			submenu:AddOption(i, function() self:SetArmor( ent, i ) end )
 		end
-
 	end,
-
-	Action = function(self, entity)
-		-- not used
-	end,
-
 	SetArmor = function(self, target, armor)
 		self:MsgStart()
 			net.WriteEntity(target)
 			net.WriteUInt(armor, 8)
 		self:MsgEnd()
 	end,
-
 	Receive = function(self, length, client)
 		if (CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil)) then
 			local entity = net.ReadEntity()
@@ -165,9 +138,7 @@ properties.Add("ixSetDescriptionProperty", {
 			client:RequestString("Set the character's description.", "New Description", function(text)
 				entity:GetCharacter():SetDescription(text)
 				ix.log.Add(client, "contextMenuAdmin", "SetDescription", entity:Name(), text)
-			end, entity:GetCharacter():GetDescription())
-					
-			
+			end, entity:GetCharacter():GetDescription())	
 		end
 	end
 })

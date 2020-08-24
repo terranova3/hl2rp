@@ -60,8 +60,6 @@ net.Receive("ixCharPanelSet", function()
 
 			charPanel.slots[category] = item or {}
 
-			panelID = panelID == LocalPlayer():GetCharacter():GetCharPanel():GetID() and 1 or panelID
-
 			local panel = ix.gui.charPanel
 
 			if (IsValid(ix.gui.charPanel)) then
@@ -93,8 +91,6 @@ net.Receive("ixCharPanelRemove", function()
 	end
 
 	charPanel:Remove(id)
-
-	panelID = panelID == LocalPlayer():GetCharacter():GetCharPanel():GetID() and 1 or panelID
 
 	local panel = ix.gui.charPanel
 

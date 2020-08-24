@@ -47,8 +47,6 @@ function ITEM:OnInstanced(invID, x, y)
     self:SetData("currentAmount", self.charge)
 end
 
-local font = font
-
 if (CLIENT) then
     function ITEM:PaintOver(item, w, h)
         local amount = item:GetData("currentAmount", 0)

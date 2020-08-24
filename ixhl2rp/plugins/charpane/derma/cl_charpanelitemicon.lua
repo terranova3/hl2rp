@@ -4,7 +4,6 @@
 --]]
 
 local RECEIVER_NAME = "ixInventoryItem"
-local gradient = surface.GetTextureID("vgui/gradient-d")
 local PLUGIN = PLUGIN
 
 -- The queue for the rendered icons.
@@ -43,7 +42,6 @@ function PANEL:OnMousePressed(code)
 	if (code == MOUSE_LEFT and self:IsDraggable()) then
 		self:MouseCapture(true)
 		self:DragMousePress(code)
-		local item = self:GetItemTable()
 
 		self.clickX, self.clickY = input.GetCursorPos()
 	end

@@ -226,8 +226,8 @@ function PLUGIN:GetPlayerESPInfo(player, text)
 		local armor = player:Armor();
 		local colorWhite = Color(255, 255, 255, 255);
 		local colorRed = Color(255, 0, 0, 255);
-		local colorHealth = colorWhite;
-		local colorArmor = colorWhite;
+		local colorHealth = self:GetValueColor(health);
+		local colorArmor = self:GetValueColor(armor);
 		
 		table.insert(text, {
 			text = player:SteamName(), 
@@ -236,9 +236,6 @@ function PLUGIN:GetPlayerESPInfo(player, text)
 		});
 
 		if (player:Alive() and health > 0) then
-			colorHealth = self:GetValueColor(health);
-			colorArmor = self:GetValueColor(armor);
-
 			table.insert(text, {
 				text = "Health: ["..health.."]", 
 				color = colorHealth, 

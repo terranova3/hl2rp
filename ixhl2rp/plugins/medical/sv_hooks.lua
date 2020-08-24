@@ -32,7 +32,6 @@ local function FindAttackLocation(player, dmgInfo)
 end
 
 function PLUGIN:EntityTakeDamage(target, info)
-	local inflictor = info:GetInflictor()
 	local attacker = info:GetAttacker()
 
 	if(info:GetDamage() == 0) then
@@ -103,13 +102,6 @@ local legBroken = {
 }
 
 function PLUGIN:PlayerFootstep(client, pos, foot)
-	local character = client:GetCharacter()
-
-	if(IsValid(client) and client:IsPlayer() and client:Alive() and !client:LimbsImmune()) then
-		if(ix.limb.HasFracture(character, legBroken[foot][1])) then
-			--client:ViewPunch(Angle(0, legBroken[foot][2], legBroken[foot][2]))
-		end
-	end
 end
 
 function PLUGIN:HealPlayer(character, item, bIsTarget)

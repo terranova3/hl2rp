@@ -299,7 +299,6 @@ function PANEL:Init()
 
 	for k, v in pairs(player.GetAll()) do
 		local character = v:GetCharacter()
-		local faction = ix.faction.Get(v:Team())
 
 		local shouldShow = hook.Run("ShouldShowOnScoreboard", v)
 

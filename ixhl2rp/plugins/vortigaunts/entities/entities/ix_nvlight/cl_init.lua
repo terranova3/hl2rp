@@ -7,7 +7,6 @@ function ENT:Think()
 		for k, v in ipairs( player.GetAll() ) do
 			if (v:Alive()) then
 				if ( dlight and v == self.Owner  ) then
-					local r, g, b, a = self:GetColor();
 					local lightVector = self:GetPos();							
 					lightVector:Add(Vector(0,2,0));
 					

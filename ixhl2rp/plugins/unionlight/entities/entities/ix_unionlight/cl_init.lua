@@ -13,7 +13,6 @@ end
 function ENT:Think()
     local dlight = DynamicLight( self:EntIndex() )
 	if ( dlight ) then
-		local r, g, b, a = self:GetColor()
 		dlight.Pos = self:GetPos()
 		dlight.r = 125
 		dlight.g = 200

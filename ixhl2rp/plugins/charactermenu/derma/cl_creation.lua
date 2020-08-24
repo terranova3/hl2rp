@@ -1,5 +1,4 @@
 local PANEL = {}
-local PLUGIN = PLUGIN;
 local steps = {
 	"ixCharacterFaction",
 	"ixCharacterModel",
@@ -141,9 +140,6 @@ function PANEL:Init()
 
 	net.Receive("ixCharacterAuthFailed", function()
 		timer.Remove("ixCharacterCreateTimeout")
-
-		local fault = net.ReadString()
-		local args = net.ReadTable()
 
 		self.awaitingResponse = false
 		self.content:SetVisible(true)

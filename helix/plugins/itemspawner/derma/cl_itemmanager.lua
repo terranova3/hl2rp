@@ -1,6 +1,3 @@
-
-local PLUGIN = PLUGIN
-
 local PANEL = {}
 
 function PANEL:Init()

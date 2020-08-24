@@ -7,7 +7,6 @@ local PLUGIN = PLUGIN;
 
 function PLUGIN:PlayerFootstep(client, position, foot, soundName, volume)
 	local factionTable = ix.faction.Get(client:Team());
-	local character = client:GetCharacter();
 
 	if (factionTable.walkSounds) then
 		client:EmitSound(factionTable.walkSounds[foot]);

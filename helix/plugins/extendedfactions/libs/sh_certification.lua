@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
-
 ix.certs = {}
 ix.certs.stored = {}
 
@@ -50,9 +48,6 @@ end
 
 -- Checks if a client can demote their target.
 function ix.certs.CanChangeCert(character, target, cert)
-	local rank = target:GetRank()
-	local faction = target:GetFaction()
-
 	if(character:HasOverride() or target:GetFaction() == character:GetFaction()) then
 		if(character:GetRank().order >= target:GetRank().order or character:HasOverride()) then
 			if(!cert or cert.faction == target:GetFaction()) then

@@ -2,7 +2,6 @@
 	© 2020 TERRANOVA do not share, re-distribute or modify
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
-local PLUGIN = PLUGIN;
 
 ix.command.Add("ViewData", {
 	arguments = {
@@ -21,7 +20,6 @@ ix.command.Add("ViewData", {
 
 		local data = target:GetData("record", {})
 		local cid = target:GetData("cid", 00000)
-		local oldModel = target:GetData("oldModel")
 
 		netstream.Start(client, "ixViewData", target:GetPlayer(), cid, data)
 	end;

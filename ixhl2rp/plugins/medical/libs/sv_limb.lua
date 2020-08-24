@@ -53,19 +53,9 @@ function ix.limb.TakeDamage(client, group, info, diff)
         hook.Run("LimbTakeDamage", client, group, damage, health, info)
     end
 end
+
 -- A function to instantly kill the player if their limbs are gone.
 function ix.limb.RunDamage(character, attacker, hitgroup)
-    local limbHP = character:GetLimbHP(hitgroup)
-    local limbType = ix.limb.GetName(hitgroup)
-    local weapon = attacker:IsPlayer() and attacker:GetActiveWeapon()
-
-    if(limbType == "Chest" or limbType == "Head") then
-        --if(limbHP <= 0) then
-           -- character:GetPlayer():Kill()
-           -- ix.log.Add(character:GetPlayer(), "playerDeath",
-			--attacker:GetName() ~= "" and attacker:GetName() or attacker:GetClass(), IsValid(weapon) and weapon:GetClass())
-        --end
-    end
 end
 
 -- A function to subtract or add to a limb's health
@@ -108,7 +98,6 @@ function ix.limb.FractureTick()
         end
 
         local client = v
-        local character = client:GetCharacter()
 
 		local leftLeg = ix.limb.GetHealthPercentage(client, HITGROUP_LEFTLEG, true) / 100
 		local rightLeg = ix.limb.GetHealthPercentage(client, HITGROUP_RIGHTLEG, true) / 100

@@ -29,7 +29,6 @@ function PANEL:Populate()
 end
 
 function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
-	local iconSize = 64
 	local item = itemPanel:GetItemTable()
 
 	if (item) then

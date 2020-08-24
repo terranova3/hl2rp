@@ -11,9 +11,7 @@ ITEM.description = "[PH] Needs description."
 ITEM.category = "Contraband"
 ITEM.price = 4;
 ITEM.flag = "G"
-ITEM.combine = function(item, targetItem)
-	local client = item:GetOwner()
-	
+ITEM.combine = function(item, targetItem)	
 	if(targetItem.base == "cigarettes") then
 		targetItem:SetData("lit", true)
 	end

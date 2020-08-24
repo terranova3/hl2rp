@@ -3,8 +3,6 @@
 	without permission of the author.
 --]]
 
-local PLUGIN = PLUGIN;
-
 ITEM.name = "Legs";
 ITEM.model = "models/props_junk/cardboard_box004a.mdl";
 ITEM.outfitCategory = "legs";

@@ -31,10 +31,6 @@ function PANEL:Display()
 
 	self.skins:InvalidateLayout(true)
 
-	local function PaintIcon(icon, w, h)
-		self:PaintIcon(icon, w, h)
-	end
-
 	for i = 0, skins-1 do
 		local icon = self.skins:Add("SpawnIcon")
 		icon:SetSize(64, 128)
@@ -57,7 +53,6 @@ end
 
 function PANEL:ShouldSkip()
 	local faction = ix.faction.indices[self:GetPayload("faction")]
-	local model = faction.models[self:GetPayload("model")]
 	local skins = self:GetModelPanel().Entity:SkinCount()
 
 	if(skins < 2) then

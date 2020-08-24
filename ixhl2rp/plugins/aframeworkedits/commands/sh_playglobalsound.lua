@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("PlaySoundGlobal", {
     description = "Plays a sound to all players.",
     adminOnly = true,

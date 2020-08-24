@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("GetFlags", {
     description = "Returns a character's flags.",
     adminOnly = true,
