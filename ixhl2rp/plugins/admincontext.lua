@@ -230,6 +230,11 @@ properties.Add("ixSendTo", {
 			net.WriteEntity(entity)
 			net.WriteInt(2)
 		self:MsgEnd() end )
+		
+		submenu:AddOption("Bosnia", function() self:MsgStart()
+			net.WriteEntity(entity)
+			net.WriteInt(3)
+		self:MsgEnd() end )
 
 	end,
 
@@ -251,6 +256,23 @@ properties.Add("ixSendTo", {
 							
 				ix.log.Add(client, "contextMenuAdmin", "BermudaAirlines", entity:Name(), "Kicked")
 				entity:Kick("Kicked for Minging. Kicked by: ".. client:SteamName())				
+			else if(option==3)
+							
+				ix.log.Add(client, "contextMenuAdmin", "BosnianAirlines", entity:Name(), "happy new year")
+				
+
+				entity:SetVelocity(Vector(0,0,10000))
+				timer.Simple(1, function()
+					
+					if(IsValid(entity))
+						local effectdata = EffectData()
+						effectdata:SetOrigin(entity:GetPos())
+						
+						util.Effect("Explosion", effectdata)
+						entity:Kill()
+					end
+				end)
+				
 			end
 			
 		end
