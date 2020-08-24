@@ -9,6 +9,7 @@
 PROFESSION.name = "Weaponry"
 PROFESSION.description = "Placeholder description, this needs to be set."
 PROFESSION.image = "terranova/ui/crafting/weaponry.png"
+PROFESSION.color = Color(202, 81, 81, 255)
 
 -- This is the hook we can use to implement custom mastery effects.
 function PROFESSION:GetMasteryEffects()

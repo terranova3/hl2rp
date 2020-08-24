@@ -31,6 +31,11 @@ function PROFESSION:ShouldDisplay()
 	return self.mastery
 end
 
+-- Returns the profession's color.
+function PROFESSION:GetColor()
+	return self.color or Color(255,255,255,255)
+end
+
 -- Called as a helper function to access a method tied to the specific profession object.
 function PROFESSION:Call(method, client, ...)
 	local oldPlayer = self.player
