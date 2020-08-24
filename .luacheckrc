@@ -3,6 +3,11 @@ max_line_length = 256
 std = "luajit+gmod+helix"
 ignore = {
 	"212", -- unused argument
+	"314", -- mutating unitalized local variable
+	"611", -- line contains only whitespace
+	"612", -- a line contains trailing whitespace
+	"614", -- trailing whitespace in a comment.
+	"631", -- line is too long
 }
 
 -- helix

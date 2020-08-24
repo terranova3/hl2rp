@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN;
-
 ix.ranks = {}
 ix.ranks.stored = {}
 
@@ -12,7 +10,7 @@ ix.ranks.stored = {}
 function ix.ranks.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
 		local niceName = (v:sub(4, -5)):lower()
-		
+
 		RANK = setmetatable({uniqueID = niceName}, ix.meta.rank)
 
 		ix.util.Include(directory.."/"..v, "shared")
