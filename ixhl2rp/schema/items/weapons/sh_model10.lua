@@ -7,9 +7,9 @@ ITEM.flag = "V"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.iconCam = {
-	pos = Vector(2, 0.5, 200),
-	ang = Angle(90, 108, 0),
-	fov = 4.1,
+	pos = Vector(-2.8, 248.36601257324, 3.65),
+	ang = Angle(0, 270, 0),
+	fov = 3.9411764705882,
 }
 ITEM.cpArmory = true
 	ITEM.pacData = {
