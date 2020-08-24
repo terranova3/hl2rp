@@ -96,11 +96,6 @@ function PLUGIN:CalculateFallDamage(target, hitgroup, info)
 	ix.limb.TakeDamage(target, HITGROUP_LEFTLEG, info, dmgShareLeft / 100)
 end
 
-local legBroken = { 
-	[0] = {HITGROUP_LEFTLEG, -1},
-	[1] = {HITGROUP_RIGHTLEG, 1}
-}
-
 function PLUGIN:PlayerFootstep(client, pos, foot)
 end
 

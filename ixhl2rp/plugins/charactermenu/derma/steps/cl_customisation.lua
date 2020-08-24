@@ -52,7 +52,6 @@ function PANEL:Display()
 end
 
 function PANEL:ShouldSkip()
-	local faction = ix.faction.indices[self:GetPayload("faction")]
 	local skins = self:GetModelPanel().Entity:SkinCount()
 
 	if(skins < 2) then

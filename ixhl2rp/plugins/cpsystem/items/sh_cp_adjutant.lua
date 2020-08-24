@@ -12,7 +12,7 @@ ITEM.maxArmor = 100;
 function ITEM:OnGetReplacement()
 	local client = self:GetOwner()
 	local model = client:GetModel()
-	local newModel = ""
+	local newModel
 
 	if(string.find(model, "models/ug/new/citizens/")) then
 		newModel = string.Replace(model, "models/ug/new/citizens/", "models/cmbofficers/")

@@ -3,8 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN;
-
 do  
 	ix.char.RegisterVar("skin", {
 		fieldType = ix.type.number,

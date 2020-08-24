@@ -6,10 +6,15 @@ ignore = {
 	"112", -- mutating non-standard global variable
 	"113", -- accessing undefined variable
 	"121", -- setting readonly global variable
+	"122", -- setting readonly field
 	"131", -- unused global variable
 	"212", -- unused argument
 	"213", -- unused loop variable
+	"312", -- value of an argument is unused
+	"313", -- value of a loop variable is unused
 	"314", -- mutating unitalized local variable
+	"411", -- value was previously defined
+	"412", -- value previously defined as an argument
 	"421", -- shadowing a local variable
 	"422", -- shadowing an argument
 	"423", -- shadowing a loop variable

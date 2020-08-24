@@ -13,8 +13,6 @@ ITEM.gasImmunity = true
 ITEM.replacements = "models/hlvr/characters/hazmat_worker/npc/hazmat_worker_citizen.mdl"
 ITEM.functions.Issue = {
 	OnRun = function(itemTable)
-		local client = itemTable.player
-
 		netstream.Start(itemTable.player, "IssueItem", itemTable.id)
 		return false
 	end,

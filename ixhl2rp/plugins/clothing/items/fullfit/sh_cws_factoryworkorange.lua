@@ -17,8 +17,6 @@ ITEM.bodyGroups = {
 }
 ITEM.functions.Issue = {
 	OnRun = function(itemTable)
-		local client = itemTable.player
-
 		netstream.Start(itemTable.player, "IssueItem", itemTable.id)
 		return false
 	end,

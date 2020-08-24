@@ -11,7 +11,6 @@ ITEM.maxArmor = 100;
 
 function ITEM:OnGetReplacement()
 	local client = self:GetOwner()
-	local model = client:GetModel()
 	local newModel = "models/ma/hla/terranovapolice.mdl"
 
 	return newModel

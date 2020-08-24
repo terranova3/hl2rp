@@ -1,6 +1,4 @@
 
-local PLUGIN = PLUGIN
-
 -- Item Spawner Toggle [On/Off]
 ix.config.Add("spawnerActive", true, "Toggle the item spawner.", nil, {
 	category = "Item Spawner"
