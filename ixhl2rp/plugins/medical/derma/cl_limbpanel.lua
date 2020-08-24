@@ -82,7 +82,6 @@ function PANEL:DrawDamagedLimb(intLimbID)
         surface.SetMaterial(Material(icon))
         surface.SetDrawColor(hook.Run("GetLimbAlp"))
         surface.DrawTexturedRect(0, 0, 405 * self.scale, 699 * self.scale) -- # 505, 699
-        icon = nil
     end	
 end
 

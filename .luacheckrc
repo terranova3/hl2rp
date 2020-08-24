@@ -10,6 +10,7 @@ ignore = {
 	"131", -- unused global variable
 	"212", -- unused argument
 	"213", -- unused loop variable
+	"311", -- value assigned to x is unused
 	"312", -- value of an argument is unused
 	"313", -- value of a loop variable is unused
 	"314", -- mutating unitalized local variable

@@ -10,7 +10,6 @@ ITEM.description = "A complete uniform kit that includes a vulcanized rubber fla
 ITEM.maxArmor = 100;
 
 function ITEM:OnGetReplacement()
-	local client = self:GetOwner()
 	local newModel = "models/ma/hla/terranovapolice.mdl"
 
 	return newModel
