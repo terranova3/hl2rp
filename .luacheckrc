@@ -2,7 +2,13 @@
 max_line_length = 256
 std = "luajit+gmod+helix"
 ignore = {
+	"111", -- setting non-standard global variable
+	"112", -- mutating non-standard global variable
+	"113", -- accessing undefined variable
+	"121", -- setting readonly global variable
+	"131", -- unused global variable
 	"212", -- unused argument
+	"213", -- unused loop variable
 	"314", -- mutating unitalized local variable
 	"611", -- line contains only whitespace
 	"612", -- a line contains trailing whitespace
@@ -15,7 +21,6 @@ stds.helix = {}
 stds.helix.globals = {
 	"ix",
 	"Schema",
-
 	"ITEM",
 	"PLUGIN",
 	"ATTRIBUTE",
