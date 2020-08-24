@@ -1,5 +1,5 @@
 
-max_line_length = 128
+max_line_length = 256
 std = "luajit+gmod+helix"
 ignore = {
 	"212", -- unused argument

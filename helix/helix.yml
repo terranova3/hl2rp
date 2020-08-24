@@ -1,0 +1,7 @@
+database:
+  adapter: "mysqloo"
+  hostname: "localhost"
+  username: "root"
+  password: "root"
+  database: "helix"
+  port: 3306
