@@ -98,17 +98,17 @@ PLUGIN.config.otaTypes = {
 	},
 	[12] = {
 		name = "vortkilllead",
-		description = "temp name & description",
+		description = "A suit befit for anti-Xenian activities. Its resistance to Vortessence based abilities and shock is astounding, but it sarcifices ballistic protection in exchange. This one comes with compatibility for a standard Ordinal radiopack, and metal pauldrons.",
 		model = "models/overwatch/terranova/overwatchvortcaptureunitlead.mdl"
 	},
 	[13] = {
 		name = "vortkillregular",
-		description = "temp name & description",
+		description = "A suit befit for anti-Xenian activities. Its resistance to Vortessence based abilities and shock is astounding, but it sarcifices ballistic protection in exchange.",
 		model = "models/overwatch/terranova/overwatchvortcaptureunitregular.mdl"
 	},
 	[14] = {
 		name = "vortkillsuppressor",
-		description = "temp name & description",
+		description = "Experimental light-weight armor used for area control. Underlay suit made out of a material for resistance to Vortessence based abilities and shock.",
 		model = "models/overwatch/terranova/overwatchkillcapturesuppressor.mdl"
 	},
 }
