@@ -89,13 +89,13 @@ stds.helix.read_globals = {
 
 files = {
 	-- some phrases are unavoidably long, so we'll ignore the max line length for language files
-	["gamemode/languages/**/*.lua"] = {
+	["helix/gamemode/languages/**/*.lua"] = {
 		ignore = {
 			"631"
 		}
 	},
 
-	["plugins/**/languages/*.lua"] = {
+	["helix/plugins/**/languages/*.lua"] = {
 		ignore = {
 			"631"
 		}
@@ -104,7 +104,7 @@ files = {
 
 -- ignore third party files
 exclude_files = {
-	"gamemode/core/libs/thirdparty/**/*.lua"
+	"helix/gamemode/core/libs/thirdparty/**/*.lua"
 }
 
 -- gmod

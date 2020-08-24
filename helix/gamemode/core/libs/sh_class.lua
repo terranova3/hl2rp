@@ -46,7 +46,7 @@ function ix.class.LoadFromDir(directory)
 			CLASS.description = "No description available."
 			CLASS.limit = 0
 			CLASS.color = Color(150, 125, 100, 255)
-			
+
 			-- For future use with plugins.
 			if (PLUGIN) then
 				CLASS.plugin = PLUGIN.uniqueID
