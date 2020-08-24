@@ -1,6 +1,15 @@
-# Terra Nova HL2 RP
+<p align="center">
+	<img src="https://i.gyazo.com/0cf9d6d0b18b672fb6c7e636b35af93c.png" alt="TERRANOVA" />
+</p>
 
-Highly customised version of HELIX for Garry's Mod, designed for TERRA NOVA.
+<p align="center">
+	<a href="https://discord.gg/4Sh9gbW">
+		<img alt="Discord" src="https://img.shields.io/discord/703480712854241686">
+	</a>
+	<a href="https://github.com/terranova3/hl2rp-issues">
+		<img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/terranova3/hl2rp-issues">
+	</a>
+</p>
 
 ## Features
 
