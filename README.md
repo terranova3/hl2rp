@@ -1,5 +1,7 @@
 <p align="center">
-	<img src="https://i.gyazo.com/0cf9d6d0b18b672fb6c7e636b35af93c.png" alt="TERRANOVA" />
+	<a href="https://github.com/terranova3/hl2rp/">
+		<img src="https://i.gyazo.com/fd67bfc54cdca73f9d8f7629fa1a6698.png" alt="TERRANOVA" />
+	</a>
 </p>
 
 <p align="center">
@@ -8,6 +10,9 @@
 	</a>
 	<a href="https://github.com/terranova3/hl2rp-issues">
 		<img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/terranova3/hl2rp-issues">
+	</a>
+	<a href="https://github.com/terranova3/hl2rp-suggestions">
+		<img alt="GitHub suggestions" src="https://img.shields.io/github/issues-raw/terranova3/hl2rp-suggestions?label=open%20suggestions">
 	</a>
 </p>
 
