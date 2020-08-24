@@ -208,8 +208,8 @@ properties.Add("ixViewTraits", {
 	end
 })
 
-properties.Add("ixSendToBrazil", {
-	MenuLabel = "#Send to Brazil",
+properties.Add("ixSendTo", {
+	MenuLabel = "#Send to",
 	Order = 5,
 	MenuIcon = "icon16/world_go.png",
 
@@ -217,20 +217,63 @@ properties.Add("ixSendToBrazil", {
 		return CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil) and entity:IsPlayer()
 	end,
 
-	Action = function(self, entity)
-		self:MsgStart()
+	MenuOpen = function( self, option, ent, tr )
+
+		local submenu = option:AddSubMenu()
+		
+		submenu:AddOption("Brazil", function() self:MsgStart()
 			net.WriteEntity(entity)
-		self:MsgEnd()
+			net.WriteInt(1)
+		self:MsgEnd() end )
+		
+		submenu:AddOption("Bermuda", function() self:MsgStart()
+			net.WriteEntity(entity)
+			net.WriteInt(2)
+		self:MsgEnd() end )
+		
+		submenu:AddOption("Bosnia", function() self:MsgStart()
+			net.WriteEntity(entity)
+			net.WriteInt(3)
+		self:MsgEnd() end )
+
+	end,
+
+	Action = function(self, entity)
+		-- not used
 	end,
 
 	Receive = function(self, length, client)
 		if (CAMI.PlayerHasAccess(client, "Helix - Admin Context Options", nil)) then
 			local entity = net.ReadEntity()
+			local option = net.ReadUInt(8)
 			
-			entity:Ignite(2)
-			timer.Create(entity:GetName().."brazilTimer"..math.random(1,100), 2, 1, function() entity:Kill() end)
+			if(option==1)
+				entity:Ignite(2)
+				timer.Create(entity:GetName().."brazilTimer"..math.random(1,100), 2, 1, function() entity:Kill() end)
 			
-			ix.log.Add(client, "contextMenuAdmin", "BrazilianAirlines", entity:Name(), "cinzas as Cinzas")
+				ix.log.Add(client, "contextMenuAdmin", "BrazilianAirlines", entity:Name(), "cinzas as Cinzas")
+			else if(option==2)
+							
+				ix.log.Add(client, "contextMenuAdmin", "BermudaAirlines", entity:Name(), "Kicked")
+				entity:Kick("Kicked for Minging. Kicked by: ".. client:SteamName())				
+			else if(option==3)
+							
+				ix.log.Add(client, "contextMenuAdmin", "BosnianAirlines", entity:Name(), "happy new year")
+				
+
+				entity:SetVelocity(Vector(0,0,10000))
+				timer.Simple(1, function()
+					
+					if(IsValid(entity))
+						local effectdata = EffectData()
+						effectdata:SetOrigin(entity:GetPos())
+						
+						util.Effect("Explosion", effectdata)
+						entity:Kill()
+					end
+				end)
+				
+			end
 			
 		end
 	end
