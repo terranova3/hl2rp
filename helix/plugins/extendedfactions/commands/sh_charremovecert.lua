@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharRemoveCert", {
     description = "Removes a certification from a character.",
     permission = "Remove cert",
@@ -22,7 +20,7 @@ ix.command.Add("CharRemoveCert", {
                 if(canChangeCert) then
                     if(target:HasCert(cert.uniqueID)) then
                         local certs = target:GetData("certs", {})
-                        
+  
                         for k, v in pairs(certs) do
                             if(v == cert.uniqueID) then
                                 certs[k] = nil

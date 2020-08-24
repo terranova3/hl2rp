@@ -14,7 +14,7 @@ function ix.item.PerformDragCombine(client, item, targetItem, invID)
 
     local inventory = ix.item.inventories[invID or 0]
 
-    if (hook.Run("CanPlayerInteractItem", client, action, item, {}) == false) then
+    if (hook.Run("CanPlayerInteractItem", client, nil, item, {}) == false) then
         return
     end
 

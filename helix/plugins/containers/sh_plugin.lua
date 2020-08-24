@@ -202,7 +202,6 @@ if (SERVER) then
 
 		local key = net.ReadString()
 		local data = net.ReadType()
-		local feedback = true
 
 		if (key == "faction") then
 			local faction = ix.faction.teams[data]
@@ -247,7 +246,7 @@ if (SERVER) then
 				receivers[#receivers + 1] = v
 			end
 		end
-		
+
 		net.Start("ixContainerEditFinish")
 			net.WriteEntity(entity)
 			net.WriteString(key)

@@ -19,7 +19,7 @@ if (SERVER) then
 		self.receivers = {}
 		self.factions = {}
 		self.classes = {}
-		
+
 		local definition = ix.container.stored[self:GetModel():lower()]
 
 		if (definition) then

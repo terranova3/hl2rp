@@ -62,9 +62,9 @@ function PANEL:Build(itemTable, inventory)
     end
 
     local newHeight = self:GetTall()
-    local easing = direction == "up" and "outQuint" or "outElastic"
-    
-    for k, v in pairs(self.options) do
+    local easing = "outElastic"
+
+    for _, _ in pairs(self.options) do
        newHeight = newHeight+24
     end
 
@@ -97,7 +97,7 @@ function PANEL:AddOption(k, v)
 
     surface.SetFont("ixSmallFont")
     local textWidth, _ = surface.GetTextSize((v.name or k))
-    
+
     if(self:GetWide() < (textWidth + 48)) then
         self:SetWide(self:GetWide() + ((textWidth + 48) - self:GetWide()))
     end
@@ -105,7 +105,7 @@ function PANEL:AddOption(k, v)
     if(self.itemTable.suppressed) then
         local isSuppressed, func, tip = self.itemTable.suppressed(self.itemTable, (v.name or k))
 
-        if(isSuppressed and (v.name or k) == func) then 
+        if(isSuppressed and (v.name or k) == func) then
             textColor = Color(120, 120, 120, 180)
             tooltip = tip
         end
@@ -114,12 +114,12 @@ function PANEL:AddOption(k, v)
     option:SetText("")
     option:Dock(TOP)
     option:SetTall(24)
-    option.Paint = function() 
+    option.Paint = function()
         if(option:IsHovered()) then
             surface.SetDrawColor(90, 90, 90, 150)
             surface.DrawRect(0, 0, option:GetWide(), option:GetTall())
         end
-    
+
         ix.util.DrawText(L(v.name or k), 24, 4, textColor, 0, 0, "ixSmallFont")
     end
     option.DoClick = function()
@@ -162,7 +162,7 @@ function PANEL:AddOption(k, v)
     end
 
     self.icon = option:Add("Material")
-    self.icon:SetSize(12, 12)   
+    self.icon:SetSize(12, 12)
     self.icon:SetPos(4, 6)
     self.icon:SetMaterial(v.icon or "icon16/brick.png")
     self.icon.AutoSize = false

@@ -11,7 +11,6 @@ function PLUGIN:DrawDoorInfo(door, width, position, angles, scale, clientPositio
 	local name = door:GetNetVar("title", door:GetNetVar("name", IsValid(owner) and L"dTitleOwned" or L"dTitle"))
 	local faction = door:GetNetVar("faction")
 	local class = door:GetNetVar("class")
-	local color = ix.config.Get("color")
 	local alpha = math.max((1 - clientPosition:DistToSqr(door:GetPos()) / 65536) * 255, 0)
 	local text
 

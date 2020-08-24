@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharAddCert", {
     description = "Adds a certification to a player.",
     permission = "Add cert",
@@ -25,7 +23,7 @@ ix.command.Add("CharAddCert", {
                         table.insert(certs, cert.uniqueID)
 
                         target:SetData("certs", certs)
-                        
+                
                         client:Notify(string.format("You have given %s the %s certification.", target:GetName(), cert.name))
                     else
                         client:Notify(string.format("Your target already has the %s certification.", cert.name))

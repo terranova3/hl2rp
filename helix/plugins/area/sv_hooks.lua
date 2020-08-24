@@ -70,12 +70,12 @@ function PLUGIN:AreaThink()
 		end
 	end
 
-	for k, v in ipairs(ents.FindByClass("prop_ragdoll")) do
-		for id, info in pairs(ix.area.stored) do
+	for _, v in ipairs(ents.FindByClass("prop_ragdoll")) do
+		for _, info in pairs(ix.area.stored) do
 			if(info.type != "ragdolldelete") then continue end
 
 			local position = v:GetPos() + v:OBBCenter()
-	
+
 			if (position:WithinAABox(info.startPosition, info.endPosition)) then
 				v:Remove()
 			end

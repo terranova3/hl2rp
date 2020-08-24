@@ -1,28 +1,5 @@
 local RECEIVER_NAME = "ixInventoryItem"
 
--- The queue for the rendered icons.
-ICON_RENDER_QUEUE = ICON_RENDER_QUEUE or {}
-
--- To make making inventory variant, This must be followed up.
-local function RenderNewIcon(panel, itemTable)
-	local model = itemTable:GetModel()
-
-	-- re-render icons
-	if ((itemTable.iconCam and !ICON_RENDER_QUEUE[string.lower(model)]) or itemTable.forceRender) then
-		local iconCam = itemTable.iconCam
-		iconCam = {
-			cam_pos = iconCam.pos,
-			cam_ang = iconCam.ang,
-			cam_fov = iconCam.fov,
-		}
-		ICON_RENDER_QUEUE[string.lower(model)] = true
-
-		panel.Icon:RebuildSpawnIconEx(
-			iconCam
-		)
-	end
-end
-
 local function InventoryAction(action, itemID, invID, data)
 	net.Start("ixInventoryAction")
 		net.WriteString(action)

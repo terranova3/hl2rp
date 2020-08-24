@@ -73,7 +73,7 @@ net.Receive("ixBuildContainerFactionEditor", function()
 	ix.gui.containerFaction = vgui.Create("ixContainerFactionEditor")
 	ix.gui.containerFaction.entity = entity
 	ix.gui.containerFaction.entity.factions = factions
-	ix.gui.containerFaction.entity.classes = classes	
+	ix.gui.containerFaction.entity.classes = classes
 	ix.gui.containerFaction:Setup()
 end)
 

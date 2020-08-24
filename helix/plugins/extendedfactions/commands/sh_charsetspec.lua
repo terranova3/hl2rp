@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharSetSpec", {
     description = "Adds a certification specialization to a character.",
     permission = "Set spec",
@@ -21,10 +19,10 @@ ix.command.Add("CharSetSpec", {
         if(cert) then
             if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then
                 if(canChangeCert) then
-                    for k, v in pairs(certs) do 
+                    for k, v in pairs(certs) do
                         if(v == text) then
                             certs[k] = nil
-                        end 
+                        end
                     end
 
                     target:SetData("certs", certs)

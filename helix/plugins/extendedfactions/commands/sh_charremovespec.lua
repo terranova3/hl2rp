@@ -3,8 +3,6 @@
 	without permission of its author (zacharyenriquee@gmail.com).
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharRemoveSpec", {
     description = "Removes a certification specialization from a civil protection unit.",
     permission = "Remove spec",
@@ -13,7 +11,7 @@ ix.command.Add("CharRemoveSpec", {
 	},
     OnRun = function(self, client, target)
         local character = client:GetCharacter()
-        local canChangeCert, error = ix.certs.CanChangeCert(character, target, cert)
+        local canChangeCert, error = ix.certs.CanChangeCert(character, target)
 
         if(target:GetData("spec")) then
             if(character:HasOverride() or ix.ranks.HasPermission(character:GetRank().uniqueID, "Remove cert")) then

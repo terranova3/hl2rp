@@ -153,7 +153,7 @@ function ITEM:Equip(client, bNoSelect, bNoSound)
 
 		client.carryWeapons[self.weaponCategory] = weapon
 		client:SelectWeapon(weapon:GetClass())
-		
+
 		if(!bNoSound) then
 			client:EmitSound(self.useSound, 80)
 		end
