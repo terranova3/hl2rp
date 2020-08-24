@@ -8,10 +8,10 @@
 	<a href="https://discord.gg/4Sh9gbW">
 		<img alt="Discord" src="https://img.shields.io/discord/703480712854241686">
 	</a>
-	<a href="https://github.com/terranova3/hl2rp-issues">
+	<a href="https://github.com/terranova3/hl2rp-issues/issues">
 		<img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/terranova3/hl2rp-issues">
 	</a>
-	<a href="https://github.com/terranova3/hl2rp-suggestions">
+	<a href="https://github.com/terranova3/hl2rp-suggestions/issues">
 		<img alt="GitHub suggestions" src="https://img.shields.io/github/issues-raw/terranova3/hl2rp-suggestions?label=open%20suggestions">
 	</a>
 </p>
