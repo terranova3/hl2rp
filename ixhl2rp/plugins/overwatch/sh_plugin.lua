@@ -19,6 +19,9 @@ ix.anim.SetModelClass("models/overwatch/terranova/overwatchking.mdl", "overwatch
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchprospekt.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchvortcaptureunitlead.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchvortcaptureunitregular.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchkillcapturesuppressor.mdl", "overwatch");
+ix.anim.SetModelClass("models/overwatch/terranova/overwatchsuppressorregular.mdl", "overwatch");
+
 
 ix.anim:AddCombineHands("overwatchepsilon.mdl");
 ix.anim:AddCombineHands("overwatchgamma.mdl");
@@ -32,6 +35,8 @@ ix.anim:AddCombineHands("overwatchking.mdl");
 ix.anim:AddCombineHands("overwatchprospekt.mdl");
 ix.anim:AddCombineHands("overwatchvortcaptureunitlead.mdl");
 ix.anim:AddCombineHands("overwatchvortcaptureunitregular.mdl");
+ix.anim:AddCombineHands("overwatchkillcapturesuppressor.mdl");
+ix.anim:AddCombineHands("overwatchsuppressorregular.mdl");
 
 local PLUGIN = PLUGIN
 PLUGIN.config = {}
@@ -52,39 +57,59 @@ PLUGIN.config.otaTypes = {
 		model = "models/overwatch/terranova/overwatchdelta.mdl"
 	},
 	[4] = {
+		name = "BLADEWALL - REGULAR VARIANT",
+		description = "Experimental light-weight armor used for area control.",
+		model = "models/overwatch/terranova/overwatchsuppressorregular.mdl"
+	},
+	[5] = {
 		name = "HAMMER",
 		description = "Extremely durable armour protective system design for locking down urban environments.",
 		model = "models/overwatch/terranova/overwatchgamma.mdl"
 	},
-	[5] = {
+	[6] = {
 		name = "Antibody - ORDINAL",
 		description = "Basic uniform which provides protection from gas, but not ballistics.",
 		model = "models/overwatch/terranova/overwatchantibodycaptain.mdl"
 	},
-	[6] = {
+	[7] = {
 		name = "Antibody - DAGGER",
 		description = "Little to no armour, useful exclusively for xen removal.",
 		model = "models/overwatch/terranova/overwatchantibodyepsilon.mdl"
 	},
-	[7] = {
+	[8] = {
 		name = "SCALPEL",
 		description = "Standard overwatch ballistic protection covered with a ghillie suit.",
 		model = "models/overwatch/terranova/overwatchscalpel.mdl"
 	},
-	[8] = {
+	[9] = {
 		name = "NOMAD",
 		description = "Equipped with standard overwatch ballistic protection with goggles.",
 		model = "models/overwatch/terranova/overwatchnomad.mdl"
 	},
-	[9] = {
+	[10] = {
 		name = "SWORD",
 		description = "Elite honor guards donning a white uniform to represent their status.",
 		model = "models/overwatch/terranova/overwatchking.mdl"
 	},
-	[10] = {
+	[11] = {
 		name = "PROSPEKT",
 		description = "Prison guards with little external protection aside from a chest-situated kevlar.",
 		model = "models/overwatch/terranova/overwatchprospekt.mdl"
+	},
+	[12] = {
+		name = "vortkilllead",
+		description = "temp name & description",
+		model = "models/overwatch/terranova/overwatchvortcaptureunitlead.mdl"
+	},
+	[13] = {
+		name = "vortkillregular",
+		description = "temp name & description",
+		model = "models/overwatch/terranova/overwatchvortcaptureunitregular.mdl"
+	},
+	[14] = {
+		name = "vortkillsuppressor",
+		description = "temp name & description",
+		model = "models/overwatch/terranova/overwatchkillcapturesuppressor.mdl"
 	},
 }
 PLUGIN.config.voiceTypes = {
