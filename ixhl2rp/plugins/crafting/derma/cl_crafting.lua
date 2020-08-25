@@ -46,6 +46,8 @@ function PANEL:Init()
 
 	-- The width is that of the parent panel, with '56' being a static value that won't change with resolution.
 	local width = self:GetWide() - 56
+	self.actualWidth = self:GetWide()
+
 	local count = table.Count(ix.profession.GetDisplayable())
 
 	-- Iterating through all of the displayable professions and adding them to the menu.
@@ -87,16 +89,30 @@ function PANEL:BuildRecipes(profession)
 	for title, v in pairs(categories) do
 		local category = vgui.Create("ixCraftingCategory", self);
 		category:SetTitle(title)
-		category:DockMargin(0, 0, 0, 16)
+		category:DockMargin(0, 0, 0, 8)
 
-		self.categoryList:AddItem(category)
+		self.categoryList:Add(category)
+
+		local layout = vgui.Create("DIconLayout")
+		layout:Dock(TOP)
+		layout:DockMargin(4, 14, 4, 4) -- We need this to offset because the title of the collapsible category is bigger than normal
+		layout:DockPadding(2,2,2,2)
+		layout:SetSpaceX(4)
+		layout:SetSpaceY(4)
+		layout:SetDrawBackground(false)
+
+		-- Subtracting because of the hard coded margin
+		local width = (self.actualWidth - 35) / 3
 
 		for k, v in pairs(v.recipes) do
 			local recipe = vgui.Create("ixRecipePanel")
 			recipe:SetRecipe(v)
+			recipe:SetWide(width)
 
-			category.list:AddItem(recipe)
+			layout:Add(recipe)
 		end
+		
+		category:SetContents(layout)
 	end
 end
 

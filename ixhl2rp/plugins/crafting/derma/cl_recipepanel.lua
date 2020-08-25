@@ -10,20 +10,28 @@ local PANEL = {};
 
 -- Called when this derma is first created.
 function PANEL:Init()
-    self:SetTall(64)
+    self:SetText("")
+    self:SetTall(128)
 
     self.drawColor = Color(25, 25, 25, 180)
 end
 
 -- Called when we need to attach a 'recipe' object onto this derma.
 function PANEL:SetRecipe(recipe)
+    local parent = self
+
     self.profession = recipe
+    self.header = self:Add("DPanel")
+    self.header:Dock(TOP)
+    self.header:DockMargin(2,2,2,2)
+    self.header:SetTall(32)
 
     local item = ix.item.list[recipe:GetFirstResult()]
 
-    self.icon = self:Add("SpawnIcon")
+    self.icon = self.header:Add("SpawnIcon")
     self.icon:InvalidateLayout(true)
-	self.icon:Dock(LEFT)
+    self.icon:Dock(LEFT)
+    self.icon:SetSize(32, 32)
 	self.icon:DockMargin(2, 2, 2, 2)
 	self.icon:SetModel(recipe:GetModel(), recipe:GetSkin())
 	self.icon.PaintOver = function(this)
@@ -47,42 +55,23 @@ function PANEL:SetRecipe(recipe)
 			iconCam
 		)
     end
-    
-    self.description = self:Add("DPanel")
-    self.description:Dock(LEFT)
-    self.description.Paint = function() end
 
-	self.name = self.description:Add("DLabel")
-	self.name:Dock(TOP)
+	self.name = self.header:Add("DLabel")
+	self.name:Dock(FILL)
     self.name:SetContentAlignment(4)
-    self.name:DockMargin(4, 8, 0, 0)
 	self.name:SetTextColor(color_white)
 	self.name:SetFont("ixMenuButtonFontSmall")
 	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
     self.name:SetText(recipe:GetName())
 
-    self.requirements = self.description:Add("DLabel")
-	self.requirements:Dock(TOP)
-    self.requirements:SetContentAlignment(4)
-    self.requirements:DockMargin(4, 0, 0, 0)
+    self.requirements = self:Add("DLabel")
+	self.requirements:Dock(FILL)
+    self.requirements:SetContentAlignment(7)
+    self.requirements:DockMargin(8, 4, 0, 0)
 	self.requirements:SetTextColor(color_white)
-	self.requirements:SetFont("ixMenuMiniFont")
+    self.requirements:SetFont("ixMenuMiniFont")
     self.requirements:SetText(recipe:GetRequirements() or "Invalid requirements for this recipe.")
-
-    local width = self.requirements:GetTextSize()
-
-    if(self.name:GetTextSize() > width) then
-        width = self.name:GetTextSize()
-    end
-
-    self.description:SetWide(width + 16)
-
-    self.create = self:Add("ixNewButton")
-    self.create:Dock(RIGHT)
-    self.create:SetWide(64)
-    self.create:SetFont("ixMenuMiniFont")
-    self.create:SetText("Craft")
-    self.create:DockMargin(4, 4, 4, 4)
+    --self.requirements:SetWrap(true)
 end
 
 -- Called when a player's cursor has entered the button.
@@ -114,4 +103,4 @@ function PANEL:Paint()
     surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
 end
 
-vgui.Register("ixRecipePanel", PANEL, "DPanel")
+vgui.Register("ixRecipePanel", PANEL, "DButton")

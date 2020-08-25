@@ -72,18 +72,26 @@ end
 function RECIPE:GetRequirements()
 	local count = table.Count(self.requirements)
 	local i = 1
-	local string = "Requires: "
+	local string = ""
 
 	for k, v in pairs(self.requirements) do
 		local item = ix.item.list[k]
 
+		if(i != 1) then
+			string = string .. "\n"
+		end
+		
 		if(item) then
 			if(item.capacity) then
-				string = string .. string.format("%s (%smL)", item.name, v)
+				string = string .. string.format("%smL %s", v, item.name)
 			elseif(item.maxStack) then
-				string = string .. string.format("%s (%s stacks)", item.name, v)
+				string = string .. string.format("%s (%s)", item.name, v)
 			else
-				string = string .. v .. "x " .. item.name
+				if(v > 1) then
+					string = string .. v .. "x " .. item.name
+				else
+					string = string .. item.name
+				end
 			end
 		end
 

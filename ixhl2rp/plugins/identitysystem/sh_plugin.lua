@@ -1,6 +1,6 @@
-PLUGIN.name = "Identity System"
-PLUGIN.author = "ZeMysticalTaco, Adolphus"
-PLUGIN.description = "A comprehensive identity system to allow for deeper espionage roleplay."
+PLUGIN.name = "Employment"
+PLUGIN.author = "Adolphus"
+PLUGIN.description = "Adds a basic employment system using ID terminals to give paygrades and occupation names."
 
 ix.util.Include("sv_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)

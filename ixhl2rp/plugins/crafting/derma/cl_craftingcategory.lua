@@ -13,15 +13,6 @@ function PANEL:Init()
     self:SetPadding(4);
     self:SetLabel("");
     self:Dock(TOP)
-     
-	self.list = vgui.Create("DPanelList", self)
-    self.list:Dock(FILL)
-    self.list:DockMargin(0, 10, 0, 0)-- We need this to offset because the title of the collapsible category is bigger than normal
-	self.list:EnableVerticalScrollbar()
-	self.list:SetSpacing(5)
-    self.list:SetPadding(5)
-    
-    self:SetContents(self.list)	
 end
 
 -- Called every frame.
