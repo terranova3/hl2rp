@@ -1,4 +1,4 @@
-ITEM.name = "Pulse-Rifle"
+ITEM.name = "OSIPR"
 ITEM.description = "A dark energy powered assault rifle."
 ITEM.model = "models/weapons/tnmmod/w_irifle.mdl"
 ITEM.class = "arccw_osipr"
