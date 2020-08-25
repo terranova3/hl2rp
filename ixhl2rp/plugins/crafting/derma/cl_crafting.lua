@@ -22,19 +22,24 @@ function PANEL:Init()
 	self:Dock(FILL);
 	self:DockPadding(4 ,4, 4, 4)
 
-	self.header = self:Add("DPanel")
-	self.header:Dock(TOP)
-	self.header:DockMargin(4,4,4,4)
-	self.header.Paint = function() end
-	self.header:Add(self:AddLabel("Crafting", true, true))
-
-	self.header:InvalidateLayout(true)
-	self.header:SizeToChildren(false, true)
-
 	self.topDock = self:Add("DPanel")
 	self.topDock:Dock(TOP)
 	self.topDock:DockMargin(4,4,4,4)
 	self.topDock:SetTall(192)
+	
+	function self.topDock:Paint(w, h)
+		surface.SetDrawColor(30, 30, 30, 150)
+		surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+	
+		local outlineColor = Color(100, 170, 220, 80)
+	
+		if(ix.gui.selectedProfession) then
+			outlineColor = ix.gui.selectedProfession:GetColor()
+		end
+	
+		surface.SetDrawColor(outlineColor)
+		surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
+	end
 
 	-- We can't grab the width of a docked panel without first invalidating it's parent.
 	self:InvalidateParent(true)
@@ -51,6 +56,11 @@ function PANEL:Init()
 			button:SetWide(width / count)
 			button:DockMargin(4, 4, 4, 4)
 			button:Dock(LEFT)
+
+			-- We have to hard code this value because of the way docking works.
+			button.actualWidth = width / count
+
+			-- This comes last because we need all the data previously, first.
 			button:SetProfession(v)
 
 			table.insert(self.professionButtons, button)
@@ -95,7 +105,13 @@ function PANEL:Paint()
 	surface.SetDrawColor(30, 30, 30, 150)
 	surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
 
-	surface.SetDrawColor(Color(100, 170, 220, 80))
+	local outlineColor = Color(100, 170, 220, 80)
+
+	if(ix.gui.selectedProfession) then
+		outlineColor = ix.gui.selectedProfession:GetColor()
+	end
+
+	surface.SetDrawColor(outlineColor)
 	surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
 end
 

@@ -24,12 +24,19 @@ function PANEL:DoClick()
 
     if(ix.gui.crafting) then
         for k, v in pairs(ix.gui.crafting.professionButtons) do
-            v.isSelected = false
+            if(v != self) then
+                v.isSelected = false
+                v:HideHeader()
+            end
         end
 
         self.isSelected = true
 
         ix.gui.crafting:BuildRecipes(self.profession)
+    end
+
+    if(self.profession) then
+        ix.gui.selectedProfession = self.profession
     end
 end
 
@@ -42,6 +49,24 @@ function PANEL:SetProfession(profession)
     else
         self:SetText("")
     end
+
+    self.header = self:Add("DButton")
+	self.header:SetTall(30)
+	self.header:SetFont("ixPluginCharSubTitleFont")
+	self.header:SetText(profession.name or "")
+	self.header:SetWide(self.actualWidth)
+	self.header.Paint = function(header, w, h)
+		surface.SetDrawColor(profession:GetColor())
+		surface.DrawRect(0, 0, w, h)
+	end
+    self.header:SetPos(0, -self.header:GetTall())
+    
+    -- Loading the selected category before panel close.
+    if(ix.gui.selectedProfession == self.profession) then
+        self.isSelected = true
+        self:ShowHeader()  
+        ix.gui.crafting:BuildRecipes(self.profession)
+    end
 end
 
 -- Called when a player's cursor has entered the button.
@@ -50,12 +75,32 @@ function PANEL:OnCursorEntered()
         LocalPlayer():EmitSound(unpack({"buttons/button15.wav", 35, 250}))
         self.drawColor = Color(40, 40, 40, 180)
     end
+
+    self:ShowHeader()
 end
 
 -- Called when a player's cursor has exited the button.
 function PANEL:OnCursorExited()
     if(self:IsEnabled()) then
         self.drawColor = Color(25, 25, 25, 180)
+    end
+
+    if(!self.isSelected) then
+        self:HideHeader()
+    end
+end
+
+-- Called when the header needs to be hidden.
+function PANEL:HideHeader()
+    if(IsValid(self.header)) then
+        self.header:MoveTo(0, -self.header:GetTall(), 0.25)
+    end
+end
+
+-- Called when the header must be shown.
+function PANEL:ShowHeader()
+    if(IsValid(self.header)) then
+        self.header:MoveTo(0, 0, 0.25)
     end
 end
 
@@ -67,8 +112,8 @@ function PANEL:Paint()
         surface.DrawTexturedRect(0, 0, self:GetWide(), self:GetTall())
     end
 
-    if(self.isSelected) then
-        surface.SetDrawColor(90, 90, 90, 180)
+    if(self.isSelected and self.profession.color) then
+        surface.SetDrawColor(self.profession:GetColor())
         surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
         
         surface.SetDrawColor(Color(40, 40, 40, 180))

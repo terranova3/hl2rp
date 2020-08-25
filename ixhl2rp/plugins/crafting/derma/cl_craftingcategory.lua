@@ -40,7 +40,13 @@ end
 
 -- Called every frame
 function PANEL:Paint(w, h)
-    derma.SkinFunc("PaintCategoryPanel", self, "")
+    local outlineColor = nil
+
+	if(ix.gui.selectedProfession) then
+		outlineColor = ix.gui.selectedProfession:GetColor()
+    end
+    
+    derma.SkinFunc("PaintCategoryPanel", self, "", outlineColor)
     surface.SetDrawColor(0, 0, 0, 50);	
     surface.DrawRect(0, 0, w, h)
 
