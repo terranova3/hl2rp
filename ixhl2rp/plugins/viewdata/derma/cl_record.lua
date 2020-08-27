@@ -168,7 +168,7 @@ function PANEL:AddRecord(data, bNetwork)
 	-- Initializing the data table we will send to the server.
 	local row = {
 		title = data.title,
-		creator = LocalPlayer():GetName(),
+		creator = data.creator or LocalPlayer():GetName(),
 		points = data.points or 0
 	}
 
