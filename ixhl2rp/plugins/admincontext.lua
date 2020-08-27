@@ -247,16 +247,16 @@ properties.Add("ixSendTo", {
 			local entity = net.ReadEntity()
 			local option = net.ReadUInt(8)
 			
-			if(option==1)
+			if (option==1) then
 				entity:Ignite(2)
 				timer.Create(entity:GetName().."brazilTimer"..math.random(1,100), 2, 1, function() entity:Kill() end)
 			
 				ix.log.Add(client, "contextMenuAdmin", "BrazilianAirlines", entity:Name(), "cinzas as Cinzas")
-			else if(option==2)
+			elseif (option==2) then
 							
 				ix.log.Add(client, "contextMenuAdmin", "BermudaAirlines", entity:Name(), "Kicked")
 				entity:Kick("Kicked for Minging. Kicked by: ".. client:SteamName())				
-			else if(option==3)
+			elseif (option==3) then
 							
 				ix.log.Add(client, "contextMenuAdmin", "BosnianAirlines", entity:Name(), "happy new year")
 				
@@ -264,7 +264,7 @@ properties.Add("ixSendTo", {
 				entity:SetVelocity(Vector(0,0,10000))
 				timer.Simple(1, function()
 					
-					if(IsValid(entity))
+					if (IsValid(entity)) then
 						local effectdata = EffectData()
 						effectdata:SetOrigin(entity:GetPos())
 						
