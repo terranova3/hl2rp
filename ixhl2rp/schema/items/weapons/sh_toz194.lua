@@ -1,7 +1,7 @@
 ITEM.name = "TOZ-194"
 ITEM.description = "Pump-action shotgun manufactured by the Tula Arms Plant."
 ITEM.model = "models/weapons/arccw_ins2/w_toz.mdl"
-ITEM.class = "arccw_ins2_toz"
+ITEM.class = "arccw_ins2_toz_tn"
 ITEM.weaponCategory = "primary"
 ITEM.width = 3
 ITEM.height = 1

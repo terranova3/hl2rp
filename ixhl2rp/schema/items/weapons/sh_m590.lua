@@ -1,7 +1,7 @@
 ITEM.name = "M590"
 ITEM.description = "Pump action shotguns manufactured by O.F. Mossberg & Sons."
 ITEM.model = "models/weapons/arccw_ins2/w_m590.mdl"
-ITEM.class = "arccw_ins2_m590"
+ITEM.class = "arccw_ins2_m590_tn"
 ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.height = 1

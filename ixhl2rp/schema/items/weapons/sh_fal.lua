@@ -1,7 +1,7 @@
 ITEM.name = "FAL"
 ITEM.description = "Battle rifle designed by Belgian small arms designer Dieudonné Saive and manufactured by FN Herstal. Chambered in 7.62x51mm."
 ITEM.model = "models/weapons/arccw_ins2/w_fal.mdl"
-ITEM.class = "arccw_ins2_fal"
+ITEM.class = "arccw_ins2_fal_tn"
 ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.height = 2
