@@ -167,8 +167,14 @@ else
 			end
 		end
 
+		local desc
+
+		if(definition and definition.description) then
+			desc = definition.description
+		end
+
 		local description = tooltip:AddRow("description")
-		description:SetText(definition.description)
+		description:SetText(desc or "")
 		description:SizeToContents()
 	end
 end
