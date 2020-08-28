@@ -9,6 +9,9 @@ PLUGIN.author = "Adolphus";
 
 local PLUGIN = PLUGIN
 PLUGIN.config = {}
+PLUGIN.config.abbreviation = "OTA"
+PLUGIN.config.defaultDivision = "EPISLON"
+PLUGIN.config.namingScheme = "abbreviation:rank.division-id"
 PLUGIN.config.voiceTypes = {
 	"Legacy",
 	"HLA",

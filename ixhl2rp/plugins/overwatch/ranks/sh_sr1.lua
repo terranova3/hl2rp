@@ -4,11 +4,11 @@
 --]]
 
 -- Name that could be used in the name of the player.
-RANK.name = "EOWS";
+RANK.name = "SR1";
 
 -- Name and description for user interface.
-RANK.displayName = "Elite Overwatch Soldier"
-RANK.description = "One of the biggest and baddest guns the UU is able to throw out onto their foes. Completely transhumanized and modified for total combat effectiveness and loyalty assurance. Easily withstanding small arms and light weapons. "
+RANK.displayName = "Standard Rank 1"
+RANK.description = "todo"
 
 -- Used for promotion/demotion in the hierarchy.
 RANK.order = 1
@@ -17,8 +17,5 @@ RANK.order = 1
 RANK.faction = FACTION_OTA
 
 -- Permissions the rank has access to.
-RANK.permissions = {
-    "Promote",
-    "Demote"
-}
+RANK.permissions = {}
 

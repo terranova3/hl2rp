@@ -1,3 +1,9 @@
+--[[
+	© 2020 TERRANOVA do not share, re-distribute or modify
+    without permission of its author.
+--]]
+
+local PLUGIN = PLUGIN
 
 FACTION.name = "Overwatch Transhuman Arm"
 FACTION.description = "Either drafted or volunteered, members of the Overwatch Transhuman Arm today serve the Combine as eager suppressors of humanity, and their new lords ruthless exterminators."
@@ -31,16 +37,25 @@ FACTION.npcRelations = {
 }
 
 function FACTION:OnCharacterCreated(client, character)
-	local inventory = character:GetInventory()
+    local inventory = character:GetInventory()
+    local rand = Schema:ZeroNumber(math.random(1, 99999), 5)
 
 	character:SetData("cpVoiceType", "HLA")
+    character:SetData("division", PLUGIN.config.defaultDivision)
+	character:SetData("id", client.storedOtaName or rand)
     character:SetCustomClass("Overwatch Transhuman Arm")
 
-	inventory:Add("handheld_radio", 1)
+    inventory:Add("handheld_radio", 1)
+    
+    -- Cleanup
+    client.storedOtaName = nil
 end
 
 function FACTION:GetDefaultName(client)
-	return "OTA:SR5.EPSILON-" .. Schema:ZeroNumber(math.random(1, 99999), 5), true
+    -- Store this on the client object so we can access it later
+    client.storedOtaName = Schema:ZeroNumber(math.random(1, 99999), 5)
+
+	return "OTA:SR5.EPSILON-" .. client.storedOtaName, true
 end
 
 FACTION_OTA = FACTION.index
