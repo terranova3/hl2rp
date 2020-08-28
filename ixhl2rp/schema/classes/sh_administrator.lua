@@ -1,4 +1,4 @@
-CLASS.name = "Administrator"
+CLASS.name = "Administration"
 CLASS.faction = FACTION_ADMIN
 CLASS.color = Color(255, 200, 100, 255)
 CLASS.isDefault = true
