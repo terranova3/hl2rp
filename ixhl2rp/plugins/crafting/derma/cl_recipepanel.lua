@@ -84,9 +84,22 @@ end
 
 -- Called when the panel has been clicked.
 function PANEL:DoClick()
-    ix.gui.selectedRecipe:SetVisible(true)
-    ix.gui.selectedRecipe:SetRecipe(recipe:GetRecipe())
+    local client = LocalPlayer()
+
+    if(self:GetRecipe()) then
+        local canCraft, error = self.recipe:CanCraft(client)
+
+        if(canCraft) then
+            client:NotifyLocalized("Craft success!")
+        else
+            client:NotifyLocalized(error)
+        end
+    end
 end
+
+-- old: using selector
+--ix.gui.selectedRecipe:SetVisible(true)
+--ix.gui.selectedRecipe:SetRecipe(self:GetRecipe())
             
 -- Called when a player's cursor has entered the button.
 function PANEL:OnCursorEntered()

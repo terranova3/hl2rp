@@ -85,4 +85,4 @@ function PANEL:GetRecipe()
     return nil
 end
 
-vgui.Register("ixSelectedRecipe", PANEL, "DButton")
+vgui.Register("ixSelectedRecipe", PANEL, "DPanel")

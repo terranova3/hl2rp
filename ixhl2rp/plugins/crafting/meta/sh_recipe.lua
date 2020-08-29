@@ -123,7 +123,7 @@ function RECIPE:CanCraft(client)
 		end
 
 		-- Grabbing all of the instances of this uniqueID in a character's inventory.
-		local items = inventory:GetItemsByID(uniqueID)
+		local items = inventory:GetItemsByUniqueID(uniqueID)
 
 		if(item.capacity) then
 			local neededLiquid = value
@@ -156,7 +156,7 @@ function RECIPE:CanCraft(client)
 				return false, string.format("You need more %s.", item.name)
 			end
 		else
-			if(!items[v.amount]) then
+			if(!items[value]) then
 				return false, string.format("You don't have the right amount of %s!", item.name)
 			end
 		end
