@@ -10,7 +10,7 @@ ix.command.Add("PlaySoundY", {
 		ix.type.text
 	},
     OnRun = function(self, client, sound)
-        local range = math.pow(ix.config.Get("yellRange", 280) * 2, 2)
+        local range = ix.config.Get("yellRange", 280) * 2
         local playerList = {}
 
         range = range * range

@@ -10,7 +10,7 @@ ix.command.Add("PlaySoundW", {
 		ix.type.text
 	},
     OnRun = function(self, client, sound)
-        local range = math.pow(ix.config.Get("chatRange", 280) * 0.25, 2)
+        local range = ix.config.Get("chatRange", 280) * 0.25
         local playerList = {}
 
         range = range * range
