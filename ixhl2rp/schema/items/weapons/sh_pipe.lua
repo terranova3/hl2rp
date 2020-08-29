@@ -1,7 +1,7 @@
 ITEM.name = "Pipe"
 ITEM.description = "A large rusty metal pipe, it feels heavy."
 ITEM.model = "models/props_canal/mattpipe.mdl"
-ITEM.class = "weapon_hl2pipe"
+ITEM.class = "arccw_pipe_tn"
 ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "V"

@@ -1,7 +1,7 @@
 ITEM.name = "Pan"
 ITEM.description = "A large standard iron fryin pan, heavy and durable."
 ITEM.model = "models/weapons/hl2meleepack/w_pan.mdl"
-ITEM.class = "weapon_hl2pan"
+ITEM.class = "arccw_pan_tn"
 ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "V"

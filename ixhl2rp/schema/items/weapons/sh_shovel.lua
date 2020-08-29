@@ -1,7 +1,7 @@
 ITEM.name = "Shovel"
 ITEM.description = "A old large digging shovel with blunt edges and a decaying handle."
 ITEM.model = "models/weapons/hl2meleepack/w_shovel.mdl"
-ITEM.class = "weapon_hl2shovel"
+ITEM.class = "arccw_shovel_tn"
 ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "V"

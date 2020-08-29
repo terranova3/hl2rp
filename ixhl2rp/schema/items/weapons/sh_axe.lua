@@ -1,7 +1,7 @@
 ITEM.name = "Axe"
 ITEM.description = "A sharp foresters axe."
 ITEM.model = "models/weapons/hl2meleepack/w_axe.mdl"
-ITEM.class = "weapon_hl2axe"
+ITEM.class = "arccw_axe_tn"
 ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "V"
