@@ -8,11 +8,11 @@
 
 local PLUGIN = PLUGIN;
 
-ix.station = {}
-ix.station.stored = {}
+ix.stations = {}
+ix.stations.stored = {}
 
 -- Called when we are adding a new recipe.
-function ix.station.LoadFromDir(directory)
+function ix.stations.LoadFromDir(directory)
 	for _, v in ipairs(file.Find(directory.."/sh_*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
         STATION = setmetatable({uniqueID = niceName}, PLUGIN.meta.station)
@@ -28,15 +28,15 @@ function ix.station.LoadFromDir(directory)
             scripted_ents.Register(STATION_ENT, "ix_station_"..niceName)
         end
 
-        PLUGIN.craft.stations[niceName] = STATION
+        ix.stations[niceName] = STATION
         STATION = nil
 	end
 end
 
 -- Returns the recipe object
-function ix.station.Get(uniqueID)
-	if(ix.station.stored[uniqueID]) then
-		return ix.station.stored[uniqueID]
+function ix.stations.Get(uniqueID)
+	if(ix.stations.stored[uniqueID]) then
+		return ix.stations.stored[uniqueID]
 	end
 
 	return nil
