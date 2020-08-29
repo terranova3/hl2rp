@@ -13,10 +13,9 @@ RECIPE.category = "test"
 RECIPE.requirements = {
 	["union_card"] = 1,
 	["cocacola"] = 300,
-	["scrap_metal"] = 250
 }
 RECIPE.results = {
-	["union_card"] = 1
+	["pepsi"] = 1
 }
 RECIPE.tools = {
 	"blow_torch"

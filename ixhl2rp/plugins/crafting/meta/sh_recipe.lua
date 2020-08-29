@@ -45,6 +45,11 @@ function RECIPE:GetResults()
 	return self.results
 end
 
+-- Returns the uniqueid of a recipe.
+function RECIPE:GetUniqueID()
+	return self.uniqueID
+end
+
 -- Returns the first result of a recipe array.
 function RECIPE:GetFirstResult()
 	for k, v in pairs(self.results) do
@@ -184,7 +189,7 @@ if(SERVER) then
 			end
 
 			-- Grabbing all of the instances of this uniqueID in a character's inventory.
-			local items = inventory:GetItemsByID(uniqueID)
+			local items = inventory:GetItemsByUniqueID(uniqueID)
 
 			if(item.capacity) then
 				local neededLiquid = value

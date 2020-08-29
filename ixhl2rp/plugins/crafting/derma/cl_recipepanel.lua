@@ -91,6 +91,10 @@ function PANEL:DoClick()
 
         if(canCraft) then
             client:NotifyLocalized("Craft success!")
+
+            net.Start("ixRecipeCraft")
+                net.WriteString(self.recipe:GetUniqueID())
+            net.SendToServer()
         else
             client:NotifyLocalized(error)
         end

@@ -6,6 +6,22 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
+util.AddNetworkString("ixRecipeCraft")
+
+net.Receive("ixRecipeCraft", function(length, client)
+    local uniqueID = net.ReadString(16)
+    local character = client:GetCharacter()
+    local recipe = ix.recipe.Get(uniqueID)
+    
+    if(!character or !recipe) then
+        return
+    end
+
+    if(recipe:CanCraft(client)) then
+        recipe:OnCraft(client)
+    end
+end)
+
 local PLUGIN = PLUGIN
 
 -- Called when we need to add a blueprint to a character.
