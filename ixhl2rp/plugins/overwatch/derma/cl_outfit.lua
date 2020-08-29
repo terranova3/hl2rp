@@ -11,28 +11,39 @@ function PANEL:Init()
     
     self.updateButton = self:Add("ixNewButton")
     self.updateButton:Dock(BOTTOM)
+    self.updateButton:SetTall(64)
     self.updateButton:DockMargin(2,2,2,2)
     self.updateButton:SetText("Update Model")
 
     self.character = LocalPlayer():GetCharacter()
 
-	self:SetSize(600, 400)
+    self:Dock(FILL)
     
-    self.leftDock = self:Add("DPanel")
-    self.leftDock:Dock(LEFT)
-    self.leftDock:SetWide(256)
+    self.modelDock = self:Add("DPanel")
+    self.modelDock:Dock(FILL)
+    self.modelDock:DockMargin(2,2,2,2)
 
-    self.model = self.leftDock:Add("ixModelPanel")
+    function self.modelDock:Paint()
+        surface.SetDrawColor(30, 30, 30, 150)
+        surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+    
+        surface.SetDrawColor(Color(100, 170, 220, 80))
+        surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
+    end
+
+    self.model = self.modelDock:Add("ixModelPanel")
     self.model:Dock(FILL)
-    self.model:SetFOV(45)
+    self.model:SetFOV(55)
 
-    self.rightDock = self:Add("DScrollPanel")
-    self.rightDock:Dock(FILL)
+    self.buttonDock = self:Add("DScrollPanel")
+    self.buttonDock:Dock(LEFT)
+    self.buttonDock:SetWide(512)
+    self.buttonDock:DockMargin(2,2,2,2)
 
     local buttons = {}
 
     for k, v in pairs(PLUGIN.config.otaTypes) do
-        local button = self.rightDock:Add("ixNewButton")
+        local button = self.buttonDock:Add("ixNewButton")
         button.model = v.model
         button.arrayIndex = k
         button:Dock(TOP)
@@ -43,13 +54,21 @@ function PANEL:Init()
         button:SetHelixTooltip(function(tooltip)
             local name = tooltip:AddRow("description")
             name:SetText(v.name)
-            name:SetFont("ixPluginTooltipDescFont")
+            name:SetImportant()
+            name:SetFont("ixMediumFont")
             name:SizeToContents()
 
             local description = tooltip:AddRow("description")
             description:SetText(v.description)
             description:SetFont("ixPluginTooltipDescFont")
             description:SizeToContents()
+
+            if(v.division) then
+                local division = tooltip:AddRow("description")
+                division:SetText(string.format("\nThis will set you to the '%s' division.", v.division))
+                division:SetFont("ixPluginTooltipDescFont")
+                division:SizeToContents()
+            end
         end)
 
         function button:DoClick()    
@@ -84,6 +103,14 @@ function PANEL:Init()
             ix.gui.menu:Remove()
         end
     end
+end
+
+function PANEL:Paint()
+	surface.SetDrawColor(30, 30, 30, 150)
+	surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
+
+	surface.SetDrawColor(Color(100, 170, 220, 80))
+	surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
 end
 
 -- Basically a fix to remove the janky model staying on the screen when the menu is closing
