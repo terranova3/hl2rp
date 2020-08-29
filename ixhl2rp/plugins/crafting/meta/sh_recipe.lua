@@ -18,6 +18,7 @@ RECIPE.category = "Crafting"
 RECIPE.profession = nil
 RECIPE.isMastery = false
 RECIPE.requirements = {}
+RECIPE.station = nil
 RECIPE.results = {}
 
 -- Called when the name of the recipe is needed.
@@ -77,15 +78,13 @@ end
 function RECIPE:GetRequirements()
 	local count = table.Count(self.requirements)
 	local i = 1
-	local string = ""
+	local string = "Requirements:"
 
 	for k, v in pairs(self.requirements) do
 		local item = ix.item.list[k]
-
-		if(i != 1) then
-			string = string .. "\n"
-		end
 		
+		string = string .. "\n"
+
 		if(item) then
 			if(item.capacity) then
 				string = string .. string.format("%smL %s", v, item.name)
@@ -98,6 +97,39 @@ function RECIPE:GetRequirements()
 					string = string .. item.name
 				end
 			end
+		end
+
+		if(i != count) then
+			string = string .. ", "
+		end
+
+		i=i+1
+	end
+
+	return string
+end
+
+-- Returns the tools required for this recipe as a single string.
+function RECIPE:GetTools()
+	local tools = table.Copy(self.tools)
+	local string = "Tools:"
+	
+	if(self.station) then
+		table.insert(tools, self.station)
+	end
+
+	local count = table.Count(tools)
+	local i = 1
+
+	for k, v in pairs(tools) do
+		local item = ix.item.list[v]
+
+		string = string .. "\n"
+
+		if(item) then
+			string = string .. item.name
+		else
+			string = string .. v
 		end
 
 		if(i != count) then

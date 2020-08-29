@@ -21,11 +21,16 @@ function PANEL:SetRecipe(recipe)
     local parent = self
     self.recipe = recipe
 
-    self.header = self:Add("DPanel")
+    self.header = self:Add("DButton")
+    self.header:SetText("")
+    self.header.DoClick = function() parent:DoClick() end
+    self.header.OnCursorEntered = function() parent:OnCursorEntered() end
+    self.header.OnCursorExited = function() parent:OnCursorExited() end
     self.header:Dock(TOP)
     self.header:DockMargin(2,2,2,2)
     self.header:SetTall(32)
-
+    self.header:SetDrawBackground(false)
+    
     local item = ix.item.list[recipe:GetFirstResult()]
 
     self.icon = self.header:Add("SpawnIcon")
@@ -57,13 +62,30 @@ function PANEL:SetRecipe(recipe)
 	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
     self.name:SetText(recipe:GetName())
 
-    self.requirements = self:Add("DLabel")
-	self.requirements:Dock(FILL)
+    self.requirementsPanel = self:Add("DButton")
+    self.requirementsPanel:SetText("")
+    self.requirementsPanel.DoClick = function() parent:DoClick() end
+    self.requirementsPanel.OnCursorEntered = function() parent:OnCursorEntered() end
+    self.requirementsPanel.OnCursorExited = function() parent:OnCursorExited() end
+    self.requirementsPanel:Dock(FILL)
+    self.requirementsPanel:SetPaintBackground(false)
+
+    self.requirements = self.requirementsPanel:Add("DLabel")
+    self.requirements:Dock(LEFT)
+    self.requirements:SetWide(self.actualWidth / 2)
     self.requirements:SetContentAlignment(7)
     self.requirements:DockMargin(8, 4, 0, 0)
 	self.requirements:SetTextColor(color_white)
     self.requirements:SetFont("ixMenuMiniFont")
     self.requirements:SetText(recipe:GetRequirements() or "Invalid requirements for this recipe.")
+
+    self.tools = self.requirementsPanel:Add("DLabel")
+	self.tools:Dock(FILL)
+    self.tools:SetContentAlignment(7)
+    self.tools:DockMargin(8, 4, 0, 0)
+	self.tools:SetTextColor(color_white)
+    self.tools:SetFont("ixMenuMiniFont")
+    self.tools:SetText(recipe:GetTools() or "No tools required.")
 end
 
 -- Returns the recipe tied to this panel.

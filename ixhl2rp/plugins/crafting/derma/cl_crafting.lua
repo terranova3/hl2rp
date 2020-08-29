@@ -112,8 +112,9 @@ function PANEL:BuildRecipes(profession)
 
 		for k, v in pairs(v.recipes) do
 			local recipe = vgui.Create("ixRecipePanel")
-			recipe:SetRecipe(v)
+			recipe.actualWidth = width
 			recipe:SetWide(width)
+			recipe:SetRecipe(v)
 
 			layout:Add(recipe)
 		end
