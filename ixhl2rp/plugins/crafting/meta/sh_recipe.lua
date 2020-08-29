@@ -118,7 +118,7 @@ function RECIPE:CanCraft(client)
 		local item = ix.item.list[uniqueID]
 
 		if(!item) then
-			return false
+			return false, "Internal error! An item required for this recipe doesn't exist."
 		end
 
 		-- Grabbing all of the instances of this uniqueID in a character's inventory.
@@ -138,7 +138,7 @@ function RECIPE:CanCraft(client)
 			end
 
 			if(neededLiquid != 0) then
-				return false
+				return false, string.format("You're missing the required liquid for %s.", item.name)
 			end
 		elseif(item.maxStack) then
 			local neededStacks = value
@@ -152,11 +152,11 @@ function RECIPE:CanCraft(client)
 			end
 
 			if(neededStacks != 0) then
-				return false
+				return false, string.format("You need more %s.", item.name)
 			end
 		else
 			if(!items[v.amount]) then
-				return false
+				return false, string.format("You don't have the right amount of %s!", item.name)
 			end
 		end
 	end
