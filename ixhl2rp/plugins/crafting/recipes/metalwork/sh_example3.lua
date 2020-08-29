@@ -8,7 +8,6 @@
 
 RECIPE.name = "Example Recipe 3"
 RECIPE.description = "Craft a handful of bolts with metal pieces."
-RECIPE.model = "models/props_lab/box01a.mdl"
 RECIPE.category = "Crafting"
 RECIPE.requirements = {
 	["union_card"] = 1,
