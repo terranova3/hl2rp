@@ -10,14 +10,18 @@ local PANEL = {};
 
 -- Called when this derma is first created.
 function PANEL:Init()
-    self:SetText("")
+    ix.gui.selectedRecipe = self
+    
+	self:Dock(TOP)
+	self:DockMargin(4,4,4,4)
     self:SetTall(128)
-
-    self.drawColor = Color(25, 25, 25, 180)
+    self:SetVisible(false)
 end
 
 -- Called when we need to attach a 'recipe' object onto this derma.
 function PANEL:SetRecipe(recipe)
+    self:Clear()
+
     local parent = self
     self.recipe = recipe
 
@@ -73,7 +77,6 @@ function PANEL:SetRecipe(recipe)
     self.requirements:SetText(recipe:GetRequirements() or "Invalid requirements for this recipe.")
 end
 
--- Returns the recipe tied to this panel.
 function PANEL:GetRecipe()
     if(self.recipe) then
         return self.recipe
@@ -82,39 +85,4 @@ function PANEL:GetRecipe()
     return nil
 end
 
--- Called when the panel has been clicked.
-function PANEL:DoClick()
-    ix.gui.selectedRecipe:SetVisible(true)
-    ix.gui.selectedRecipe:SetRecipe(recipe:GetRecipe())
-end
-            
--- Called when a player's cursor has entered the button.
-function PANEL:OnCursorEntered()
-    if(self:IsEnabled()) then
-        LocalPlayer():EmitSound(unpack({"buttons/button15.wav", 35, 250}))
-        self.drawColor = Color(40, 40, 40, 180)
-    end
-end
-
--- Called when a player's cursor has exited the button.
-function PANEL:OnCursorExited()
-    if(self:IsEnabled()) then
-        self.drawColor = Color(25, 25, 25, 180)
-    end
-end
-
--- Called every frame
-function PANEL:Paint()
-    if(self:IsEnabled()) then
-        surface.SetDrawColor(90, 90, 90, 120)
-        surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
-        
-        surface.SetDrawColor(self.drawColor)
-    else
-        surface.SetDrawColor(Color(25,25,25,80))
-    end
-
-    surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
-end
-
-vgui.Register("ixRecipePanel", PANEL, "DButton")
+vgui.Register("ixSelectedRecipe", PANEL, "DButton")

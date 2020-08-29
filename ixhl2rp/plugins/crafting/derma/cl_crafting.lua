@@ -74,9 +74,15 @@ end;
 
 -- Adding all the recipes for the selected profession into a scroll list.
 function PANEL:BuildRecipes(profession)
+	if(self.selectedRecipe) then
+		self.selectedRecipe:Remove()
+	end
+
 	if(self.categoryList) then
 		self.categoryList:Remove()
 	end
+
+	self.selectedRecipe = self:Add("ixSelectedRecipe")
 
 	self.categoryList = self:Add("DScrollPanel")
 	self.categoryList:Dock(FILL)
@@ -102,7 +108,7 @@ function PANEL:BuildRecipes(profession)
 		layout:SetDrawBackground(false)
 
 		-- Subtracting because of the hard coded margin
-		local width = (self.actualWidth - 35) / 3
+		local width = (self.actualWidth - 50) / 3
 
 		for k, v in pairs(v.recipes) do
 			local recipe = vgui.Create("ixRecipePanel")

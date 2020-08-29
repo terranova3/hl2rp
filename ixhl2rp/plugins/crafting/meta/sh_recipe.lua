@@ -117,6 +117,7 @@ function RECIPE:CanCraft(client)
 	for uniqueID, value in pairs(self.requirements or {}) do
 		local item = ix.item.list[uniqueID]
 
+		-- todo: if an item doesn't exist we just shouldn't register the recipe.
 		if(!item) then
 			return false, "Internal error! An item required for this recipe doesn't exist."
 		end
