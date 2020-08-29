@@ -64,6 +64,7 @@ PLUGIN.config.otaTypes = {
 	[4] = {
 		name = "BLADEWALL - REGULAR VARIANT",
 		division = "BLADEWALL",
+		voiceType = "SUPPRESSOR",
 		description = "Experimental light-weight armor used for area control.",
 		model = "models/overwatch/terranova/overwatchsuppressorregular.mdl"
 	},
