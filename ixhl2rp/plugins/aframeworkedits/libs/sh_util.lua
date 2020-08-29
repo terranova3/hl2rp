@@ -14,6 +14,7 @@ function ix.util.NewInstance(obj, seen)
     return res
 end
 
+-- Creats a dice roll
 function ix.util.Chance(chance)
     local rand = math.random(0, 100)
 
@@ -24,6 +25,7 @@ function ix.util.Chance(chance)
     return false
 end
 
+-- Converts a table into a string list
 function ix.util.TableToString(array)
     if(!array) then
         return ""
@@ -40,4 +42,8 @@ function ix.util.TableToString(array)
     end
 
     return output
+end
+
+function ix.util.IncludeFolder(plugin, text)
+    ix.util.IncludeDir(plugin.folder .. "/" .. text, true);
 end

@@ -121,4 +121,30 @@ function PANEL:SetVisible(visible)
 	end
 end
 
+function PANEL:AddTextEntry(payloadName)
+	local entry = self:Add("DTextEntry")
+	entry:Dock(TOP)
+	entry:SetFont("ixPluginCharButtonFont")
+	entry.Paint = self.PaintTextEntry
+	entry:DockMargin(0, 4, 0, 16)
+	entry.OnValueChange = function(_, value)
+	end
+	entry.payloadName = payloadName
+	entry.OnKeyCodeTyped = function(name, keyCode)
+		if (keyCode == KEY_TAB) then
+			entry:onTabPressed()
+			return true
+		end
+	end
+	entry:SetUpdateOnType(true)
+	return entry
+end
+
+-- self refers to the text entry
+function PANEL:PaintTextEntry(w, h)
+	surface.SetDrawColor(0, 0, 0, 100)
+	surface.DrawRect(0, 0, w, h)
+	self:DrawTextEntryText(color_white, HIGHLIGHT, HIGHLIGHT)
+end
+
 vgui.Register("ixStagePanel", PANEL, "DPanel")

@@ -12,8 +12,8 @@ ITEM.category = "Contraband"
 ITEM.flag = "F"
 ITEM.price = 4;
 
-ITEM.combine = function(item, targetItem)
-    local client = item:GetOwner()
+function ITEM:Combine(targetItem)
+	local client = item.player
     local inventory = client:GetCharacter():GetInventory()
 
 	if(targetItem.uniqueID == "rollingtobaco") then

@@ -11,10 +11,11 @@ ITEM.description = "[PH] Needs description."
 ITEM.category = "Contraband"
 ITEM.price = 4;
 ITEM.flag = "G"
-ITEM.combine = function(item, targetItem)	
+
+function ITEM:Combine(targetItem)
+	local client = self.player
+	
 	if(targetItem.base == "cigarettes") then
 		targetItem:SetData("lit", true)
 	end
-
-    return false
 end

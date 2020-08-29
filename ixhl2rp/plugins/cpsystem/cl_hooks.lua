@@ -97,29 +97,6 @@ function PLUGIN:HUDPaintForeground()
 				end;					
 			end;
 		end;	   
-
- 	    for k,ent in pairs (ents.FindByClass("ix_item")) do	
-		    if LocalPlayer():Alive() then	
-				local item = ent:GetItemTable();
-				
-		        local itemCategory = item.category
-		        local Position = ( ent:GetPos() + Vector( 0,0,0 ) ):ToScreen();
-		        local distance = ent:GetPos():Distance(LocalPlayer():GetPos()); 
-				
-		        if (ent:GetPos():Distance(LocalPlayer():GetPos()) <= self.maximumDistance) then				
-	                if (itemCategory == "Weapons") then	
-		                draw.DrawText( "<:: !ATT: "..item.name, self.font, Position.x, Position.y, Color(255, 0, 10, 255), 1 );
-		                draw.DrawText( "<:: Distance: " .. math.floor(distance), self.font, Position.x, Position.y + 10, Color(255, 0, 10, 255), 1 );		
-	                elseif (itemCategory == "Ammunition") then
-		                draw.DrawText( "<:: !POT: "..item.name, "HUDFont", Position.x, Position.y, Color(10, 80, 255, 255), 1 );
-		                draw.DrawText( "<:: Distance: " .. math.floor(distance), self.font, Position.x, Position.y + 10, Color(10, 80, 255, 255), 1 );					
-	                elseif (itemCategory == "Medical") then
-		                draw.DrawText( "<:: "..item.name, "HUDFont", Position.x, Position.y, Color(0, 255, 10, 255), 1 );
-                        draw.DrawText( "<:: Distance: " .. math.floor(distance), self.font, Position.x, Position.y + 10, Color(0, 255, 10, 255), 1 );
-	                end;
-				end;
-			end;
-		end;
     end;	
 end;
 
