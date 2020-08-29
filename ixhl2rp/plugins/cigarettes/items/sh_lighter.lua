@@ -13,8 +13,6 @@ ITEM.price = 4;
 ITEM.flag = "G"
 
 function ITEM:Combine(targetItem)
-	local client = self.player
-	
 	if(targetItem.base == "cigarettes") then
 		targetItem:SetData("lit", true)
 	end

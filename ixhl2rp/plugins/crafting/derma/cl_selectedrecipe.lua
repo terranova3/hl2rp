@@ -21,8 +21,6 @@ end
 -- Called when we need to attach a 'recipe' object onto this derma.
 function PANEL:SetRecipe(recipe)
     self:Clear()
-
-    local parent = self
     self.recipe = recipe
 
     self.header = self:Add("DPanel")
