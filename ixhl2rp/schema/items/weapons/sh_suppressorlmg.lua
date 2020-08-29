@@ -1,4 +1,4 @@
-ITEM.name = "OSIPC"
+ITEM.name = "OSIPS"
 ITEM.description = "Comically oversized and intimidating suppressive weapon deployed by members of Overwatch."
 ITEM.model = "models/hlvr/weapons/w_suppressor/suppressor_weapon_hlvr.mdl"
 ITEM.class = "arccw_pulselmg_tn"

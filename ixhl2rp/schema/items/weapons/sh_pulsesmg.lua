@@ -1,4 +1,4 @@
-ITEM.name = "OSIPSMG"
+ITEM.name = "OSIPS"
 ITEM.description = "A dark energy powered sub-machine gun."
 ITEM.model = "models/weapons/w_ipistolterranovaprop.mdl"
 ITEM.class = "arccw_pulsesmg"
