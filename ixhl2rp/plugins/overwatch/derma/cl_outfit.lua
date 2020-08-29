@@ -41,8 +41,8 @@ function PANEL:Init()
     self.buttonDock:DockMargin(2,2,2,2)
 
     local buttons = {}
-
-    for k, v in pairs(PLUGIN.config.otaTypes) do
+    
+    for k, v in ipairs(PLUGIN.config.otaTypes) do
         local button = self.buttonDock:Add("ixNewButton")
         button.model = v.model
         button.arrayIndex = k
