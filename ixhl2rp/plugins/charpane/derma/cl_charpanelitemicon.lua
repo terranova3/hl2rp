@@ -105,7 +105,7 @@ function PANEL:Paint(width, height)
 	surface.SetDrawColor(Color(100, 100, 100, 60))
 	surface.DrawOutlinedRect(0, 0, width, height)
 
-	if(self.itemTable.backgroundColor) then
+	if(self.itemTable and self.itemTable.backgroundColor) then
 		background = self.itemTable.backgroundColor
 	end
 

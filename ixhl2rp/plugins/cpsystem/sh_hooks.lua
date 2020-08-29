@@ -8,7 +8,7 @@ local PLUGIN = PLUGIN;
 
 -- Called when the client wants to view the combine data for the given target
 function Schema:CanPlayerViewData(client, target)
-	return client:IsCombine() and (target:Team() != FACTION_ADMIN)
+	return (client:IsCombine() or client:Team() == FACTION_ADMIN) and (target:Team() != FACTION_ADMIN)
 end
 
 -- Called when the client wants to edit the combine data for the given target

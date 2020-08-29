@@ -310,3 +310,5 @@ hook.Add("EntityRemoved", "ixRemoveGrenade", function(entity)
 		end
 	end
 end)
+
+

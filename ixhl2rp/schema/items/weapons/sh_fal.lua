@@ -1,12 +1,13 @@
-ITEM.name = "SKS"
-ITEM.description = "Classic Soviet carbine chambered in 7.62x39."
-ITEM.model = "models/weapons/fas2wm/rifles/w_sks.mdl"
-ITEM.class = "arccw_sks_tn"
+ITEM.name = "FAL"
+ITEM.description = "Battle rifle designed by Belgian small arms designer Dieudonné Saive and manufactured by FN Herstal. Chambered in 7.62x51mm."
+ITEM.model = "models/weapons/arccw_ins2/w_fal.mdl"
+ITEM.class = "arccw_ins2_fal_tn"
 ITEM.weaponCategory = "primary"
 ITEM.width = 4
-ITEM.height = 1
+ITEM.height = 2
 ITEM.flag = "Z"
-ITEM.price = 300;
+ITEM.price = 390;
+
 
 ITEM.pacData = {
 	[1] = {
@@ -33,12 +34,12 @@ ITEM.pacData = {
 					["Alpha"] = 1,
 					["Material"] = "",
 					["Bone"] = "spine",
-					["UniqueID"] = "3264878277",
+					["UniqueID"] = "3955494487",
 					["BoneMerge"] = false,
 					["EyeTargetUID"] = "",
-					["Position"] = Vector(3.822265625, -4.9462524414063, 2.0389709472656),
+					["Position"] = Vector(4.4104919433594, -3.2929999828339, 0.28570556640625),
 					["BlendMode"] = "",
-					["Angles"] = Angle(36.454326629639, 3.1711353063583, -6.9382472038269),
+					["Angles"] = Angle(35.397720336914, 6.2540001869202, 5.5118503570557),
 					["Hide"] = false,
 					["EyeAngles"] = false,
 					["Scale"] = Vector(1, 1, 1),
@@ -49,13 +50,13 @@ ITEM.pacData = {
 					["ClassName"] = "model2",
 					["IsDisturbing"] = false,
 					["ModelModifiers"] = "",
-					["Model"] = "models/weapons/fas2wm/rifles/w_sks.mdl",
+					["Model"] = "models/weapons/arccw_ins2/w_fal.mdl",
 				},
 			},
 		},
 		["self"] = {
 			["DrawOrder"] = 0,
-			["UniqueID"] = "3498749371",
+			["UniqueID"] = "4155247001",
 			["AimPartUID"] = "",
 			["Hide"] = false,
 			["Duplicate"] = false,
@@ -70,7 +71,7 @@ ITEM.pacData = {
 
 
 ITEM.iconCam = {
-	pos = Vector(-2, 200, 0),
+	pos = Vector(-9.5, 200, 2.5),
 	ang = Angle(0, 270, 0),
-	fov = 14.705882352941,
+	fov = 14.9976470588235,
 }

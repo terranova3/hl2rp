@@ -1,14 +1,20 @@
-ITEM.name = "SKS"
-ITEM.description = "Classic Soviet carbine chambered in 7.62x39."
-ITEM.model = "models/weapons/fas2wm/rifles/w_sks.mdl"
-ITEM.class = "arccw_sks_tn"
-ITEM.weaponCategory = "primary"
-ITEM.width = 4
-ITEM.height = 1
+ITEM.name = "Model 10"
+ITEM.description = "Concealable Smith & Wesson .38 revolver for the aspiring Anti-Citizen."
+ITEM.model = "models/weapons/arccw_ins2/w_38rev.mdl"
+ITEM.class = "arccw_ins2_model10_tn"
+ITEM.weaponCategory = "sidearm"
 ITEM.flag = "Z"
-ITEM.price = 300;
+ITEM.width = 2
+ITEM.height = 1
+ITEM.price = 145;
 
-ITEM.pacData = {
+ITEM.iconCam = {
+	pos = Vector(-2.8, 248.36601257324, 3.65),
+	ang = Angle(0, 270, 0),
+	fov = 3.9411764705882,
+}
+ITEM.cpArmory = true
+	ITEM.pacData = {
 	[1] = {
 		["children"] = {
 			[1] = {
@@ -32,13 +38,13 @@ ITEM.pacData = {
 					["DrawOrder"] = 0,
 					["Alpha"] = 1,
 					["Material"] = "",
-					["Bone"] = "spine",
-					["UniqueID"] = "3264878277",
+					["Bone"] = "pelvis",
+					["UniqueID"] = "4251342202",
 					["BoneMerge"] = false,
 					["EyeTargetUID"] = "",
-					["Position"] = Vector(3.822265625, -4.9462524414063, 2.0389709472656),
+					["Position"] = Vector(-7.2545166015625, 2.3027777671814, -5.39306640625),
 					["BlendMode"] = "",
-					["Angles"] = Angle(36.454326629639, 3.1711353063583, -6.9382472038269),
+					["Angles"] = Angle(6.790819644928, -88.49681854248, 3.8541214466095),
 					["Hide"] = false,
 					["EyeAngles"] = false,
 					["Scale"] = Vector(1, 1, 1),
@@ -49,13 +55,13 @@ ITEM.pacData = {
 					["ClassName"] = "model2",
 					["IsDisturbing"] = false,
 					["ModelModifiers"] = "",
-					["Model"] = "models/weapons/fas2wm/rifles/w_sks.mdl",
+					["Model"] = "models/weapons/arccw_ins2/w_38rev.mdl",
 				},
 			},
 		},
 		["self"] = {
 			["DrawOrder"] = 0,
-			["UniqueID"] = "3498749371",
+			["UniqueID"] = "3557420388",
 			["AimPartUID"] = "",
 			["Hide"] = false,
 			["Duplicate"] = false,
@@ -68,9 +74,6 @@ ITEM.pacData = {
 	},
 }
 
+ITEM.bDropOnDeath = true
 
-ITEM.iconCam = {
-	pos = Vector(-2, 200, 0),
-	ang = Angle(0, 270, 0),
-	fov = 14.705882352941,
-}
+

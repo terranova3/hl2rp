@@ -5,8 +5,8 @@
 
 ITEM.name = "Bootleg Moonshine";
 ITEM.model = "models/props_junk/glassjug01.mdl";
-ITEM.width = 2;
-ITEM.height = 1;
+ITEM.width = 1;
+ITEM.height = 2;
 ITEM.description = "If only Boss Hogg could see you now! You'll be lucky if you can SEE in the morning let alone stand.";
 ITEM.permit = "consumables";
 ITEM.price = 5;

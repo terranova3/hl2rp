@@ -3,9 +3,11 @@ ITEM.description = "A rare double-action revolver."
 ITEM.model = "models/weapons/tnmmod/w_357.mdl"
 ITEM.class = "arccw_357"
 ITEM.weaponCategory = "sidearm"
-ITEM.flag = "V"
+ITEM.flag = "Z"
 ITEM.width = 2
 ITEM.height = 1
+ITEM.price = 200;
+
 ITEM.pacData = {
 	[1] = {
 		["children"] = {

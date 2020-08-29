@@ -3,10 +3,11 @@ ITEM.description = "A powerful pump-action shotgun using 12 gauge shells."
 ITEM.model = "models/weapons/tnmmod/w_shotgun.mdl"
 ITEM.class = "arccw_spas12terra"
 ITEM.weaponCategory = "primary"
-ITEM.classes = {CLASS_EOW}
-ITEM.flag = "V"
+ITEM.flag = "Z"
 ITEM.width = 4
 ITEM.height = 1
+ITEM.price = 275;
+
 ITEM.pacData = {
 	[1] = {
 		["children"] = {

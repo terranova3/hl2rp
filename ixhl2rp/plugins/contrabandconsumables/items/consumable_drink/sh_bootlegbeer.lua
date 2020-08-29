@@ -5,8 +5,8 @@
 
 ITEM.name = "Bootleg Beer";
 ITEM.model = "models/props_junk/garbage_glassbottle003a.mdl";
-ITEM.width = 2;
-ITEM.height = 1;
+ITEM.width = 1;
+ITEM.height = 2;
 ITEM.description = "It's grimy, bitter and flat, it's also beer, alcoholic and cheap.";
 ITEM.permit = "consumables";
 ITEM.price = 4;

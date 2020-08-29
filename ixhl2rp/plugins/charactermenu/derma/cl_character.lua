@@ -303,4 +303,9 @@ function PANEL:OnCharacterDeleted(character)
 	hook.Run("CharacterListUpdated", ix.characters)
 end;
 
+function PANEL:OnCharacterLoadFailed(err)
+	ix.util.NotifyLocalized(err)
+end
+
+
 vgui.Register("ixCharMenu", PANEL, "EditablePanel")

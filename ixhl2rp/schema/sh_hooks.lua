@@ -18,18 +18,8 @@ function Schema:CanPlayerUseBusiness(client, uniqueID)
 	end
 end--]]
 
--- called when the client wants to view the combine data for the given target
-function Schema:CanPlayerViewData(client, target)
-	return client:IsCombine() and (!target:IsCombine() and target:Team() != FACTION_ADMIN)
-end
-
--- called when the client wants to edit the combine data for the given target
-function Schema:CanPlayerEditData(client, target)
-	return client:IsCombine() and (!target:IsCombine() and target:Team() != FACTION_ADMIN)
-end
-
 function Schema:CanPlayerViewObjectives(client)
-	return client:IsCombine()
+	return client:IsCombine() or client:Team() == FACTION_ADMIN
 end
 
 function Schema:CanPlayerEditObjectives(client)

@@ -3,9 +3,12 @@ ITEM.description = "A German pistol appropriated by the Combine. It now sees usa
 ITEM.model = "models/weapons/tnmmod/w_pistol.mdl"
 ITEM.class = "arccw_uspmatch2"
 ITEM.weaponCategory = "sidearm"
-ITEM.flag = "V"
 ITEM.width = 2
 ITEM.height = 1
+ITEM.flag = "Z"
+ITEM.price = 188;
+
+
 ITEM.iconCam = {
 	pos = Vector(2, 0.5, 200),
 	ang = Angle(90, 108, 0),
