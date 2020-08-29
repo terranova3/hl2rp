@@ -33,6 +33,13 @@ function PLUGIN:CanChangeOverwatchModel(character)
     return true
 end
 
+-- Called when a unit's rank has been changed.
+function PLUGIN:OnCharacterRankChanged(character)
+	if(character:GetFaction() == FACTION_OTA) then
+		self:UpdateOverwatchName(character)
+	end;
+end
+
 net.Receive("ixUpdateOverwatchModel", function(length, client)
     local value = net.ReadInt(8)
     local character = client:GetCharacter()
