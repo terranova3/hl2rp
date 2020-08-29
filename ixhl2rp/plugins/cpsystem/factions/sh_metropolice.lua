@@ -95,6 +95,5 @@ end;
 
 -- [[ Override default functions ]] --
 function FACTION:GetDefaultName(client) end;
-function FACTION:OnNameChanged(client, oldValue, value) end;
 
 FACTION_MPF = FACTION.index

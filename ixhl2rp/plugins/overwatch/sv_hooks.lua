@@ -10,7 +10,29 @@ util.AddNetworkString("ixUpdateOverwatchModel")
 -- Called when a character has been loaded.
 function PLUGIN:CharacterLoaded(character)
     if(character:GetFaction() == FACTION_OTA) then
+        self:LoadDefaults(character)
         self:UpdateOverwatchName(character)
+    end
+end
+
+-- Called when we need to check if a unit has their data set and if not, set it.
+function PLUGIN:LoadDefaults(character)
+	local faction = character:GetFaction()
+
+    -- Grab the units previous name and turn the last 5 digits into an actual id.
+    if(!character:GetData("id")) then
+        local nameLength = string.len(character:GetName())
+        local oldID = string.sub(character:GetName(), nameLength-4, nameLength)
+
+		character:SetData("id", oldID or "ERROR");
+    end
+    
+    if(!character:GetData("division")) then
+        character:SetData("division", PLUGIN.config.defaultDivision)
+    end
+
+    if(!character:GetData("rank")) then
+        character:SetData("rank", ix.ranks.GetDefaultRank(faction))
     end
 end
 

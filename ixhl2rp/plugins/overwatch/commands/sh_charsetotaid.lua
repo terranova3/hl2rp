@@ -11,9 +11,7 @@ ix.command.Add("CharSetOTAID", {
 		ix.type.character,
 		ix.type.number
 	},
-    OnRun = function(self, client, target, text)
-        local character = client:GetCharacter()
-        
+    OnRun = function(self, client, target, text)        
         if(text < 0 or text > 99999) then
             client:Notify("You must enter a number from 0-99999.")
             return
