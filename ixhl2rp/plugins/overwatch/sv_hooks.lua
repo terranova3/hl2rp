@@ -9,7 +9,9 @@ util.AddNetworkString("ixUpdateOverwatchModel")
 
 -- Called when a character has been loaded.
 function PLUGIN:CharacterLoaded(character)
-    self:UpdateOverwatchName(character)
+    if(character:GetFaction() == FACTION_OTA) then
+        self:UpdateOverwatchName(character)
+    end
 end
 
 -- Called when we need to update an overwatch character's name.
@@ -55,7 +57,7 @@ net.Receive("ixUpdateOverwatchModel", function(length, client)
 
     -- 15 second cooldown on changing model.
     character.otaModelChange = CurTime() + 15
-    character:SetModel(value)
+    character:SetModel(otaType.model)
 
     if(otaType.division) then
         character:SetData("division", otaType.division)
