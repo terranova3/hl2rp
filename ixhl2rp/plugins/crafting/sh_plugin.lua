@@ -18,6 +18,7 @@ ix.util.Include("sv_hooks.lua")
 function PLUGIN:OnLoaded()
 	for _, path in ipairs(self.paths or {}) do
 		ix.profession.LoadFromDir(path.."/professions")
+		ix.station.LoadFromDir(path.."/stations")
 
 		for k, v in pairs(ix.profession.stored) do
 			ix.recipe.LoadFromDir(path.."/recipes/".. v.uniqueID, v.uniqueID)
