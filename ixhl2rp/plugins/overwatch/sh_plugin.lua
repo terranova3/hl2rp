@@ -22,7 +22,6 @@ ix.anim.SetModelClass("models/overwatch/terranova/overwatchvortcaptureunitregula
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchkillcapturesuppressor.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchsuppressorregular.mdl", "overwatch");
 
-
 ix.anim:AddCombineHands("overwatchepsilon.mdl");
 ix.anim:AddCombineHands("overwatchgamma.mdl");
 ix.anim:AddCombineHands("overwatchdelta.mdl");

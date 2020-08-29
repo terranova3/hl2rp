@@ -7,6 +7,15 @@ local PLUGIN = PLUGIN
 
 util.AddNetworkString("ixUpdateOverwatchModel")
 
+-- Called when a character has been loaded.
+function PLUGIN:CharacterLoaded(character)
+    self:UpdateOverwatchName(character)
+end
+
+-- Called when we need to update an overwatch character's name.
+function PLUGIN:UpdateOverwatchName(character)
+    character:SetName(character:GetOTAName())
+end
 
 -- Returns if a character is allowed to change facial hair.
 function PLUGIN:CanChangeOverwatchModel(character)
@@ -23,11 +32,17 @@ function PLUGIN:CanChangeOverwatchModel(character)
 end
 
 net.Receive("ixUpdateOverwatchModel", function(length, client)
-    local value = net.ReadString(32)
+    local value = net.ReadInt(8)
     local character = client:GetCharacter()
+    local otaType = PLUGIN.config.otaTypes[value]
 
     if(!character) then
         client:Notify("Your character does not exist.")
+        return
+    end
+
+    if(!otaType) then
+        client:Notify("That overwatch type does not exist!")
         return
     end
 
@@ -41,5 +56,12 @@ net.Receive("ixUpdateOverwatchModel", function(length, client)
     -- 15 second cooldown on changing model.
     character.otaModelChange = CurTime() + 15
     character:SetModel(value)
+
+    if(otaType.division) then
+        character:SetData("division", otaType.division)
+    end
+
+    PLUGIN:UpdateOverwatchName(character)
+
     ix.log.AddRaw(client:Name() .. " has updated their overwatch model to " .. value .. ".")
 end)

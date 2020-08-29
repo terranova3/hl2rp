@@ -34,6 +34,7 @@ function PANEL:Init()
     for k, v in pairs(PLUGIN.config.otaTypes) do
         local button = self.rightDock:Add("ixNewButton")
         button.model = v.model
+        button.arrayIndex = k
         button:Dock(TOP)
         button:SetHeight(64)
         button:DockMargin(2,2,2,2)
@@ -56,7 +57,7 @@ function PANEL:Init()
                 v.selected = false
             end
 
-            parent.selectedModel = self.model
+            parent.arrayIndex = self.arrayIndex
             parent.model:SetModel(self.model)
 
             self.selected = true
@@ -73,9 +74,9 @@ function PANEL:Init()
     end
     
     function self.updateButton:DoClick()        
-        if(parent.selectedModel) then
+        if(parent.arrayIndex) then
             net.Start("ixUpdateOverwatchModel")
-                net.WriteString(parent.selectedModel, 32)
+                net.WriteInt(parent.arrayIndex, 8)
             net.SendToServer()
         end
 
