@@ -33,14 +33,7 @@ function PANEL:SetRecipe(recipe)
     self.icon:Dock(LEFT)
     self.icon:SetSize(32, 32)
 	self.icon:DockMargin(2, 2, 2, 2)
-	self.icon:SetModel(recipe:GetModel(), recipe:GetSkin())
-	self.icon.PaintOver = function(this)
-		if (item and item.PaintOver) then
-			local w, h = this:GetSize()
-
-			item.PaintOver(this, item, w, h)
-		end
-	end
+	self.icon:SetModel(recipe:GetModel() or item:GetModel(), recipe:GetSkin() or item:GetSkin())
 
 	if ((item.iconCam and !ICON_RENDER_QUEUE[item.uniqueID]) or item.forceRender) then
 		local iconCam = item.iconCam
