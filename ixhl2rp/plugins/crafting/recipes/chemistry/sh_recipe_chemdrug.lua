@@ -6,19 +6,16 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Example Recipe 1"
-RECIPE.description = "Craft a handful of bolts with metal pieces."
-RECIPE.category = "Crafting"
+RECIPE.name = "Drug Base"
+RECIPE.description = "Desc Update When?"
+RECIPE.category = "Distilling"
 RECIPE.station = "distillery"
 RECIPE.requirements = {
-	["union_card"] = 1,
-	["cocacola"] = 300,
-	["scrap_metal"] = 250
+	["chemical_base"] = 375,
+	["xen_karroz"] = 1
 }
 RECIPE.results = {
-	["union_card"] = 1
+	["chemical_drug"] = 1
 }
-RECIPE.tools = {
-	"blow_torch"
-}
+
 

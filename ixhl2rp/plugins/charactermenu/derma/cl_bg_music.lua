@@ -8,21 +8,23 @@ function PANEL:Init()
 
 	self.volume = 0
 
-	local path = "sound/" .. ix.config.Get("music")
-	local url = path:match("http[s]?://.+")
-	local play = url and sound.PlayURL or sound.PlayFile
-	path = url and url or path
+	if(ix.config.Get("music", "") != "") then
+		local path = "sound/" .. ix.config.Get("music")
+		local url = path:match("http[s]?://.+")
+		local play = url and sound.PlayURL or sound.PlayFile
+		path = url and url or path
 
-	play(path, "noplay", function(channel, error, message)
-		if (!IsValid(channel)) then
-			return
-		end
+		play(path, "noplay", function(channel, error, message)
+			if (!IsValid(channel)) then
+				return
+			end
 
-		channel:SetVolume(0.25)
-		channel:Play()
+			channel:SetVolume(0.25)
+			channel:Play()
 
-		ix.gui.music = channel
-	end)
+			ix.gui.music = channel
+		end)
+	end
 end
 
 -- We don't want the panel to be seen, because we're only using it to play music.
