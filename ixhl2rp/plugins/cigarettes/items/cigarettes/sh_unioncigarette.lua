@@ -3,8 +3,6 @@
 	without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
-
 ITEM.name = "Approved Cigarette"
 ITEM.model = Model("models/phycitnew.mdl")
 ITEM.width = 1

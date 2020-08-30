@@ -17,8 +17,6 @@ ITEM.pacDataAlternate = PLUGIN.pacData.lit
 ITEM.functions.Equip = {
 	icon = "icon16/tick.png",
 	OnRun = function(item)
-		local client = item.player
-
 		item:SetData("equip", true)
 		item.player:AddPart(item.uniqueID, item)
 
