@@ -3,6 +3,8 @@
 	without permission of its author.
 --]]
 
+local PLUGIN = PLUGIN
+
 ITEM.name = "Approved Cigarette"
 ITEM.model = Model("models/phycitnew.mdl")
 ITEM.width = 1
@@ -11,4 +13,4 @@ ITEM.description = "Something resembling the original deliciously flavoured deat
 ITEM.category = "Other"
 ITEM.flag = "g"
 ITEM.price = 3;
-ITEM.time = 60
+ITEM.time = 90

@@ -13,7 +13,11 @@ ITEM.price = 4;
 ITEM.flag = "G"
 
 function ITEM:Combine(targetItem)
-	if(targetItem.base == "cigarettes") then
-		targetItem:SetData("lit", true)
+	if(targetItem.Light) then
+		local error = targetItem:Light()
+
+		if(error) then
+			self:GetOwner():Notify(error)
+		end
 	end
 end
