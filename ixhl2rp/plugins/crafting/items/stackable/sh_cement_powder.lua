@@ -1,7 +1,7 @@
 
-ITEM.name = "Filtered Charcoal"
+ITEM.name = "Cement Powder"
 ITEM.model = Model("models/props_junk/garbage_metalcan002a.mdl")
-ITEM.description = "A can of powdered activated charcoal from xen material and charcoal."
+ITEM.description = "A can of cement powder."
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 20

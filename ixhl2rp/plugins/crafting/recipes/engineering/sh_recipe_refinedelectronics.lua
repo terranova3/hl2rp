@@ -6,16 +6,18 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Filtered Charcoal"
+RECIPE.name = "Refined Electronics"
 RECIPE.description = "Desc Update When?"
-RECIPE.category = "Smelting"
-RECIPE.station = "furnace"
+RECIPE.category = "Crafting"
+RECIPE.station = "workbench"
 RECIPE.requirements = {
-	["chemical_acidic"] = 275,
-	["Charocal"] = 2
+    ["scrap_electronics"] = 5,
+    ["screws"] = 1,
+    ["plastic_sheet"] = 2
 }
 RECIPE.results = {
-	["charcoal_filter"] = 2
+	["refined_electronics"] = 1
 }
-
-
+RECIPE.tools = {
+	"screwdriver"
+}

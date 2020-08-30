@@ -6,16 +6,14 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Filtered Charcoal"
+RECIPE.name = "Treated Glass"
 RECIPE.description = "Desc Update When?"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
-	["chemical_acidic"] = 275,
-	["Charocal"] = 2
+	["scrap_glass"] = 1,
+	["chemical_alkaline"] = 300
 }
 RECIPE.results = {
-	["charcoal_filter"] = 2
+	["treated_glass"] = 1
 }
-
-
