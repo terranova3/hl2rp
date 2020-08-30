@@ -116,7 +116,9 @@ function ITEM:CanTransfer(oldInventory, newInventory)
 		self:SetData("equip", false)
 		self:SetData("lit", false)
 
-		client:RemovePart(self.uniqueID)
+		if(client) then
+			client:RemovePart(self.uniqueID)
+		end
 	end
 
 	return true
