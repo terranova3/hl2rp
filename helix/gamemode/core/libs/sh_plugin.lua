@@ -38,12 +38,14 @@ function ix.plugin.Load(uniqueID, path, isSingleFile, variable)
 	_G[variable] = PLUGIN
 	PLUGIN.loading = true
 
+
 	if (!isSingleFile) then
 		ix.lang.LoadFromDir(path.."/languages")
 		ix.util.IncludeDir(path.."/libs", true)
 		ix.attributes.LoadFromDir(path.."/attributes")
 		ix.faction.LoadFromDir(path.."/factions")
 		ix.class.LoadFromDir(path.."/classes")
+		ix.util.Include(isSingleFile and path or path.."/sh_"..variable:lower()..".lua", "shared")
 		ix.item.LoadFromDir(path.."/items")
 		ix.plugin.LoadFromDir(path.."/plugins")
 		ix.util.IncludeDir(path.."/derma", true)
@@ -52,7 +54,10 @@ function ix.plugin.Load(uniqueID, path, isSingleFile, variable)
 		hook.Run("DoPluginIncludes", path, PLUGIN)
 	end
 
-	ix.util.Include(isSingleFile and path or path.."/sh_"..variable:lower()..".lua", "shared")
+	if(isSingleFile) then
+		ix.util.Include(isSingleFile and path or path.."/sh_"..variable:lower()..".lua", "shared")
+	end
+
 	PLUGIN.loading = false
 
 	local uniqueID2 = uniqueID
