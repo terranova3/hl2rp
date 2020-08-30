@@ -46,6 +46,8 @@ function FACTION:OnCharacterCreated(client, character)
     character:SetCustomClass("Overwatch Transhuman Arm")
 
     inventory:Add("handheld_radio", 1)
+
+    PLUGIN:UpdateOverwatchName(character)
     
     -- Cleanup
     client.storedOtaName = nil
