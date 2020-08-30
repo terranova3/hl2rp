@@ -1,12 +1,13 @@
-ITEM.name = "OSIPC"
-ITEM.description = "A dark energy powered sub-machine gun."
-ITEM.model = "models/weapons/w_ipistolterranovaprop.mdl"
-ITEM.class = "arccw_pulsesmg"
-ITEM.weaponCategory = "primary"
-ITEM.classes = {CLASS_EOW}
+ITEM.name = "Riot Shield"
+ITEM.description = "Civil Protection issued shield for riot control, with a clipped on stunbaton in the interior."
+ITEM.model = "models/pg_props/pg_weapons/pg_cp_shield_w.mdl"
+ITEM.class = "riot_shield"
+ITEM.category = "Melee"
+ITEM.weaponCategory = "melee2"
+ITEM.flag = "V"
 ITEM.width = 3
-ITEM.height = 2
-ITEM.noBusiness = true
+ITEM.height = 4
+ITEM.bDropOnDeath = false
 
 ITEM.pacData = {
 	[1] = {
@@ -33,12 +34,12 @@ ITEM.pacData = {
 					["Alpha"] = 1,
 					["Material"] = "",
 					["Bone"] = "spine",
-					["UniqueID"] = "3287900349",
+					["UniqueID"] = "925170552",
 					["BoneMerge"] = false,
 					["EyeTargetUID"] = "",
-					["Position"] = Vector(9.1181640625, -5.1506958007813, -0.56466674804688),
+					["Position"] = Vector(-51.775390625, -18.325927734375, -10.964004516602),
 					["BlendMode"] = "",
-					["Angles"] = Angle(43.014465332031, -2.9775412258459e-05, -1.1676632311719e-05),
+					["Angles"] = Angle(-2.343567609787, 87.496086120605, 85.586875915527),
 					["Hide"] = false,
 					["EyeAngles"] = false,
 					["Scale"] = Vector(1, 1, 1),
@@ -49,13 +50,13 @@ ITEM.pacData = {
 					["ClassName"] = "model2",
 					["IsDisturbing"] = false,
 					["ModelModifiers"] = "",
-					["Model"] = "models/weapons/w_ipistolterranovaprop.mdl",
+					["Model"] = "models/pg_props/pg_weapons/pg_cp_shield_w.mdl",
 				},
 			},
 		},
 		["self"] = {
 			["DrawOrder"] = 0,
-			["UniqueID"] = "1675364068",
+			["UniqueID"] = "124371722",
 			["AimPartUID"] = "",
 			["Hide"] = false,
 			["Duplicate"] = false,
@@ -68,8 +69,10 @@ ITEM.pacData = {
 	},
 }
 
+
+
 ITEM.iconCam = {
-	ang	= Angle(-0.70499622821808, 268.25439453125, 0),
-	fov	= 12.085652091515,
-	pos	= Vector(7, 200, -4.2)
+	pos = Vector(1014.3101196289, 848.28552246094, 664.38171386719),
+	ang = Angle(24.4, 220, 0),
+	fov = 2.7,
 }

@@ -6,5 +6,5 @@ ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "V"
 ITEM.width = 1
-ITEM.height = 3
+ITEM.height = 4
 ITEM.bDropOnDeath = true

@@ -5,6 +5,12 @@ ITEM.class = "arccw_axe_tn"
 ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "V"
-ITEM.width = 2
-ITEM.height = 1
+ITEM.width = 1
+ITEM.height = 4
 ITEM.bDropOnDeath = true
+
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, 0),
+	fov = 4.176470588235,
+}

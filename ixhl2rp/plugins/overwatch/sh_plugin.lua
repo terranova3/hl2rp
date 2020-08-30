@@ -40,78 +40,78 @@ ix.anim:AddCombineHands("overwatchsuppressorregular.mdl");
 
 local PLUGIN = PLUGIN
 PLUGIN.config = {}
-PLUGIN.config.abbreviation = "OTA"
-PLUGIN.config.defaultDivision = "EPISLON"
+PLUGIN.config.abbreviation = "OTA-S17"
+PLUGIN.config.defaultDivision = "PHANTOM"
 PLUGIN.config.namingScheme = "abbreviation:rank.division-id"
 PLUGIN.config.otaTypes = {
 	[1] = {
-		name = "DAGGER",
-		description = "Standard armor with basic ballistic protection.",
+		name = "SCOT-M",
+		description = "Standard Overwatch armor, providing basic ballistic protection.",
 		model = "models/overwatch/terranova/overwatchepsilon.mdl"
 	},
 	[2] = {
-		name = "ORDINAL",
-		description = "Standard armor with an improved ballistic protection system.",
+		name = "SCOT-O",
+		description = "Standard Overwatch armor with an improved ballistic protection system and communications systems.",
 		model = "models/overwatch/terranova/overwatchalpha.mdl"
 	},
 	[3] = {
-		name = "BLADEWALL",
-		description = "Experimental light-weight armor used for area control.",
+		name = "SUPPRESSOR",
+		description = "Experimental light-weight armor used for maneuverability during area control.",
 		model = "models/overwatch/terranova/overwatchdelta.mdl"
 	},
 	[4] = {
-		name = "BLADEWALL - REGULAR VARIANT",
-		description = "Experimental light-weight armor used for area control.",
+		name = "SRAT-S",
+		description = "Experimental light-weight armor used for maneuverability during area control.",
 		model = "models/overwatch/terranova/overwatchsuppressorregular.mdl"
 	},
 	[5] = {
 		name = "HAMMER",
-		description = "Extremely durable armour protective system design for locking down urban environments.",
+		description = "Extremely durable armour protective system, designed for locking down urban and close-quarters environments.",
 		model = "models/overwatch/terranova/overwatchgamma.mdl"
 	},
 	[6] = {
-		name = "Antibody - ORDINAL",
-		description = "Basic uniform which provides protection from gas, but not ballistics.",
+		name = "SRAT-O",
+		description = "Stripped down Overwatch kit with lesser ballistic protection, but a dedicated breathing apparatus and gas tank.",
 		model = "models/overwatch/terranova/overwatchantibodycaptain.mdl"
 	},
 	[7] = {
-		name = "Antibody - DAGGER",
-		description = "Little to no armour, useful exclusively for xen removal.",
+		name = "SRAT-M",
+		description = "Stripped down Overwatch kit with lesser ballistic protection, but a dedicated breathing apparatus and gas tank.",
 		model = "models/overwatch/terranova/overwatchantibodyepsilon.mdl"
 	},
 	[8] = {
 		name = "SCALPEL",
-		description = "Standard overwatch ballistic protection covered with a ghillie suit.",
+		description = "Standard Overwatch armor with ghillie covering.",
 		model = "models/overwatch/terranova/overwatchscalpel.mdl"
 	},
 	[9] = {
-		name = "NOMAD",
-		description = "Equipped with standard overwatch ballistic protection with goggles.",
+		name = "AIRWATCH",
+		description = "Standard Overwatch armor, modified for usage by Transhumanized pilots.",
 		model = "models/overwatch/terranova/overwatchnomad.mdl"
 	},
 	[10] = {
-		name = "SWORD",
-		description = "Elite honor guards donning a white uniform to represent their status.",
+		name = "SRET",
+		description = "The finest the Transhuman Arm has to offer. Advanced ballistics systems, improved optics systems and fierce tactics.",
 		model = "models/overwatch/terranova/overwatchking.mdl"
 	},
 	[11] = {
-		name = "PROSPEKT",
-		description = "Prison guards with little external protection aside from a chest-situated kevlar.",
+		name = "SDOT",
+		description = "Detention processing team, equipped with ballistic protection and additional protection from stabbing and blunt trauma.",
 		model = "models/overwatch/terranova/overwatchprospekt.mdl"
 	},
 	[12] = {
-		name = "vortkilllead",
-		description = "A suit befit for anti-Xenian activities. Its resistance to Vortessence based abilities and shock is astounding, but it sarcifices ballistic protection in exchange. This one comes with compatibility for a standard Ordinal radiopack, and metal pauldrons.",
+		name = "SRBCT-O",
+		description = "A suit rigged for anti-Biotic activities. Less ballistic protection, but more resistance towards Biotic energy attacks.",
 		model = "models/overwatch/terranova/overwatchvortcaptureunitlead.mdl"
 	},
 	[13] = {
-		name = "vortkillregular",
-		description = "A suit befit for anti-Xenian activities. Its resistance to Vortessence based abilities and shock is astounding, but it sarcifices ballistic protection in exchange.",
+		name = "SRBCT-M",
+		description = "A suit rigged for anti-Biotic activities. Less ballistic protection, but more resistance towards Biotic energy attacks.",
 		model = "models/overwatch/terranova/overwatchvortcaptureunitregular.mdl"
 	},
 	[14] = {
-		name = "vortkillsuppressor",
-		description = "Experimental light-weight armor used for area control. Underlay suit made out of a material for resistance to Vortessence based abilities and shock.",
+		name = "SRBCT-S",
+		description = "Experimental light-weight armor used for maneuverability during area control. Less ballistic protection, but more resistance towards Biotic energy attacks.",
 		model = "models/overwatch/terranova/overwatchkillcapturesuppressor.mdl"
 	},
 }
