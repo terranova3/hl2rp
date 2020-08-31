@@ -30,7 +30,7 @@ end
 
 function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 	local item = itemPanel:GetItemTable()
-	local canUse = hook.Run("CharPanelCanUse", LocalPlayer())
+	local canUse = hook.Run("CharPanelCanUse", self.parent:GetCharacter():GetPlayer())
 
 	if (item) then
 		if(item.outfitCategory == string.lower(self.category) and canUse != false) then
@@ -99,7 +99,7 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 				return false, "notAllowed"
 			end
 
-			if(hook.Run("CharPanelCanUse", LocalPlayer()) == false) then
+			if(hook.Run("CharPanelCanUse", self.parent:GetCharacter():GetPlayer()) == false) then
 				return false, "You cannot currently use the character panel!"
 			end
 

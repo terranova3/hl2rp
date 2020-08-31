@@ -41,7 +41,12 @@ if(SERVER) then
 
 		-- bags are automatically sync'd when the owning inventory is sync'd
         inventory:Sync(client)
-        charPanel:Sync(client)
+		charPanel:Sync(client)
+		
+		local charData = {
+			groups = target:GetData("groups", {}),
+			skin = target:GetData("skin", 0)
+		}
 
         if(target) then
             net.Start("ixStorageOpenCharPanel")
@@ -50,6 +55,7 @@ if(SERVER) then
                 net.WriteEntity(target:GetPlayer())
 				net.WriteString(info.name)
 				net.WriteTable(info.data)
+				net.WriteTable(charData)
 			net.Send(client)
 		end
     end
@@ -105,10 +111,14 @@ else
 		local entity = net.ReadEntity()
 		local name = net.ReadString()
 		local data = net.ReadTable()
+		local charData = net.ReadTable()
 
         local inventory = ix.item.inventories[id]
 		local charPanel = ix.charPanels[charID]
 		local character = ix.char.loaded[charID]
+
+		character.vars.data.groups = charData.groups
+		character.vars.data.skin = charData.skin
 
 		if (IsValid(entity) and inventory and inventory.slots and charPanel) then
 			local localInventory = LocalPlayer():GetCharacter():GetInventory()
