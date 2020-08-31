@@ -152,9 +152,4 @@ function PLUGIN:UpdateBodygroup(client, outfitCategory, bodygroup)
 
 	character:SetData("groups", groups)
 	client:SetBodygroup(index, bodygroup)
-	
-	net.Start("ixCharPanelUpdateModel")
-		net.WriteUInt(index, 8)
-		net.WriteUInt(bodygroup, 8)
-	net.Send(client)
 end

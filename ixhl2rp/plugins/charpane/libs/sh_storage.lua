@@ -107,7 +107,8 @@ else
 		local data = net.ReadTable()
 
         local inventory = ix.item.inventories[id]
-        local charPanel = ix.charPanels[charID]
+		local charPanel = ix.charPanels[charID]
+		local character = ix.char.loaded[charID]
 
 		if (IsValid(entity) and inventory and inventory.slots and charPanel) then
 			local localInventory = LocalPlayer():GetCharacter():GetInventory()
@@ -120,7 +121,7 @@ else
 			panel:SetStorageID(id)
 			panel:SetStorageTitle(name)
             panel:SetStorageInventory(inventory)
-            panel:SetStorageCharPanel(charPanel)
+            panel:SetStorageCharPanel(character, charPanel)
 
 			if (data.money) then
 				if (localInventory) then
