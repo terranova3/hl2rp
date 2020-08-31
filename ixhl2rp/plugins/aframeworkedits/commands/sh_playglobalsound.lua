@@ -12,6 +12,7 @@ ix.command.Add("PlaySoundGlobal", {
     OnRun = function(self, client, sound)
         for _, target in pairs(player.GetAll()) do
             netstream.Start(target, "ixPlaySound", sound)
+            table.insert(playerList, target:Name())
         end
 
         client:Notify("Playing sound '" .. sound .. "' to all players.")

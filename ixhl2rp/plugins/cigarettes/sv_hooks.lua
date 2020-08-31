@@ -20,28 +20,11 @@ end
 function PLUGIN:StartSmoking(character, item)
     local smokeTick = string.format("%s%s", "SmokeTick", character:GetID())
 
-    self:DestroyTimer(character)
-
-    timer.Create(smokeTick, 1, 0, function()
-        if(!item) then
-            self:DestroyTimer(character)
-            return
-        end
-
-        local newTime = math.Clamp(item:GetData("time") - 1, 0, 99999)
-        item:SetData("time", newTime)
-
-        if(item:GetData("time") <= 0) then
-            item:Remove()
-            self:DestroyTimer(character)
-        end
-    end)
-end
-
-function PLUGIN:DestroyTimer(character)
-    local smokeTick = string.format("%s%s", "SmokeTick", character:GetID())
-
     if(timer.Exists(smokeTick)) then
         timer.Destroy(smokeTick)
     end
+
+    timer.Create(smokeTick, 1, 0, function()
+        print("tick!")
+    end)
 end

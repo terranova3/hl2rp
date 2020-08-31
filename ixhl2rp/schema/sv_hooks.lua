@@ -102,6 +102,12 @@ function Schema:PostPlayerLoadout(client)
 		else
 			client:SetArmor(self:IsCombineRank(client:Name(), "RCT") and 50 or 100)
 		end
+
+		local factionTable = ix.faction.Get(client:Team())
+
+		if (factionTable.OnNameChanged) then
+			factionTable:OnNameChanged(client, "", client:GetCharacter():GetName())
+		end
 	end
 end
 
@@ -118,6 +124,17 @@ function Schema:PlayerLoadedCharacter(client, character, oldCharacter)
 		self:AddCombineDisplayMessage("@cCitizenLoaded", Color(255, 100, 255, 255))
 	elseif (client:IsCombine()) then
 		client:AddCombineDisplayMessage("@cCombineLoaded")
+	end
+end
+
+function Schema:CharacterVarChanged(character, key, oldValue, value)
+	local client = character:GetPlayer()
+	if (key == "name") then
+		local factionTable = ix.faction.Get(client:Team())
+
+		if (factionTable.OnNameChanged) then
+			factionTable:OnNameChanged(client, oldValue, value)
+		end
 	end
 end
 
