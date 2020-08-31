@@ -16,7 +16,7 @@ surface.CreateFont("ix_book_typewriter_italic",{
 	italic = true
 })
 
-// Character count excluding pages that are curently open.
+-- Character count excluding pages that are curently open.
 local function GetChrCntExcludingCurPages(textArray, pageIndexLeft)
 	local totalChrCount = 0
 	for i=1, #textArray do
@@ -50,7 +50,7 @@ local function CreateDTextEntry(parent, xPos, yPos)
 	dtext.AllowInput = function(slf, character)
 		local otherPagesChrCnt = GetChrCntExcludingCurPages(parent.textArray, parent.pageNumberLeft)
 		local totalCharacterCnt = otherPagesChrCnt + parent.pageLeft:GetText():len() + parent.pageRight:GetText():len()
-		// TRUE to don't allow value.
+		-- TRUE to don't allow value.
 		return totalCharacterCnt >= PLUGIN.characterLimit
 	end
 
