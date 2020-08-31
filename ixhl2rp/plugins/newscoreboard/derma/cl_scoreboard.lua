@@ -42,8 +42,6 @@ function PANEL:SetModel(model, skin, bodygroups)
 		(self.bodygroups != BODYGROUPS_EMPTY and ("_" .. self.bodygroups) or "") .. -- bodygroups
 		".png"
 
-
-	print(self.path)
 	local material = Material(self.path, "smooth")
 
 	-- we don't have a cached spawnicon texture, so we need to forcefully generate one
