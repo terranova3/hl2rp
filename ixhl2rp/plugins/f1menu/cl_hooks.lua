@@ -46,4 +46,10 @@ function PLUGIN:SetInfoMenuData(character, faction)
 			ix.infoMenu.Add("Specialization: " .. character:GetSpec().name)
 		end
 	end
+
+	if(character:GetFaction() == FACTION_OTA) then
+		ix.infoMenu.Add("Rank: " .. character:GetRank().displayName)
+		ix.infoMenu.Add("Division: " .. character:GetData("division", "EPSILON"))
+		ix.infoMenu.Add("ID: " .. character:GetData("id", "ERROR"))
+	end
 end

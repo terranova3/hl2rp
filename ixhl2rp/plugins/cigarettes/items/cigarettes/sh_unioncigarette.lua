@@ -11,4 +11,4 @@ ITEM.description = "Something resembling the original deliciously flavoured deat
 ITEM.category = "Other"
 ITEM.flag = "g"
 ITEM.price = 3;
-ITEM.time = 60
+ITEM.time = 90

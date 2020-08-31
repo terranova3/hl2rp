@@ -901,4 +901,8 @@ terrortown/icon24.png
 terrortown/logo.png
 ixhl2rp/ixhl2rp.zip
 helix/helix.zip
+<<<<<<< HEAD
 ixhl2rp/plugins/serverguard.lua
+=======
+*.yml
+>>>>>>> c2991b7c7c35f3c5ead9f31b8652e0affd4be764

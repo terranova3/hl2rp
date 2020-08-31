@@ -1,8 +1,7 @@
-
 database:
-  adapter: "sqlite"
-  hostname: "example.com"
-  username: "example"
-  password: "example"
+  adapter: "mysqloo"
+  hostname: "localhost"
+  username: "root"
+  password: "root"
   database: "helix"
   port: 3306

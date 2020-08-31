@@ -66,7 +66,7 @@ if (SERVER) then
 	util.AddNetworkString("ixPartRemove")
 	util.AddNetworkString("ixPartReset")
 
-	function meta:AddPart(uniqueID, item, bAlternate)
+	function meta:AddPart(uniqueID, item, data)
 		if (!pac) then return end
 
 		local curParts = self:GetParts()
@@ -75,7 +75,7 @@ if (SERVER) then
 		net.Start("ixPartWear")
 			net.WriteEntity(self)
 			net.WriteString(uniqueID)
-			net.WriteBool(bAlternate)
+			net.WriteTable(data or {})
 		net.Broadcast()
 
 		curParts[uniqueID] = true
@@ -83,7 +83,7 @@ if (SERVER) then
 		self:SetNetVar("parts", curParts)
 	end
 
-	function meta:RemovePart(uniqueID, bAlternate)
+	function meta:RemovePart(uniqueID)
 		if (!pac) then return end
 
 		local curParts = self:GetParts()
@@ -92,7 +92,6 @@ if (SERVER) then
 		net.Start("ixPartRemove")
 			net.WriteEntity(self)
 			net.WriteString(uniqueID)
-			net.WriteBool(bAlternate)
 		net.Broadcast()
 
 		curParts[uniqueID] = nil
@@ -144,18 +143,15 @@ if (SERVER) then
 		end
 	end
 else
-	local function AttachPart(client, uniqueID, bAlternate)
+	local function AttachPart(client, uniqueID, data)
 		local itemTable = ix.item.list[uniqueID]
-		local pacData = ix.pac.list[uniqueID].normal
+		local pacData = ix.pac.list[uniqueID]
 
-		if(bAlternate and ix.pac.list[uniqueID].alternate) then
-			pacData = ix.pac.list[uniqueID].alternate
-		end
-		
 		if (pacData) then
 			if (itemTable and itemTable.pacAdjust) then
+				print("Adjust")
 				pacData = table.Copy(pacData)
-				pacData = itemTable:pacAdjust(pacData, client)
+				pacData = itemTable:pacAdjust(pacData, client, data)
 			end
 
 			if (isfunction(client.AttachPACPart)) then
@@ -172,12 +168,8 @@ else
 		end
 	end
 
-	local function RemovePart(client, uniqueID, bAlternate)
-		local pacData = ix.pac.list[uniqueID].normal
-
-		if(bAlternate and ix.pac.list[uniqueID].alternate) then
-			pacData = ix.pac.list[uniqueID].alternate
-		end
+	local function RemovePart(client, uniqueID)
+		local pacData = ix.pac.list[uniqueID]
 
 		if (pacData) then
 			if (isfunction(client.RemovePACPart)) then
@@ -216,13 +208,13 @@ else
 
 		local wearer = net.ReadEntity()
 		local uid = net.ReadString()
-		local bAlternate = net.ReadBool()
+		local data = net.ReadTable()
 
 		if (!wearer.pac_owner) then
 			pac.SetupENT(wearer)
 		end
 
-		AttachPart(wearer, uid, bAlternate)
+		AttachPart(wearer, uid, data)
 	end)
 
 	net.Receive("ixPartRemove", function(length)
@@ -230,13 +222,12 @@ else
 
 		local wearer = net.ReadEntity()
 		local uid = net.ReadString()
-		local bAlternate = net.ReadBool()
 
 		if (!wearer.pac_owner) then
 			pac.SetupENT(wearer)
 		end
 
-		RemovePart(wearer, uid, bAlternate)
+		RemovePart(wearer, uid)
 	end)
 
 	net.Receive("ixPartReset", function(length)
@@ -335,12 +326,7 @@ function PLUGIN:InitializedPlugins()
 
 	for _, v in pairs(items) do
 		if (v.pacData) then
-			ix.pac.list[v.uniqueID] = {}
-			ix.pac.list[v.uniqueID].normal = v.pacData
-		end
-
-		if (v.pacDataAlternate) then
-			ix.pac.list[v.uniqueID].alternate = v.pacDataAlternate
+			ix.pac.list[v.uniqueID] = v.pacData
 		end
 	end
 end
