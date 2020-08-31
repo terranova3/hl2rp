@@ -11,6 +11,6 @@ ITEM.functions.Apply = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
 
-		client:SetArmor(math.min(client:Armor() + 20, client:GetMaxArmor))
+		client:SetArmor(math.min(client:Armor() + 20, client:GetMaxArmor()))
 	end
 }
