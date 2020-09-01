@@ -1,6 +1,4 @@
 
-local PLUGIN = PLUGIN
-
 resource.AddFile("materials/terranova/ui/books/blankbook.png")
 
 netstream.Hook("ixSaveBookChanges", function(client, itemID, text)

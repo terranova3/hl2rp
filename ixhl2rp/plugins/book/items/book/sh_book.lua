@@ -28,7 +28,7 @@ function ITEM:GetCharacterCount()
 end
 
 function ITEM:SetText(textArray, character)
-	// Trimming last empty pages.
+	-- Trimming last empty pages.
 	for i = 1, #textArray do
 		if textArray[#textArray + 1 - i] == "" then
 			textArray[#textArray + 1 - i] = nil
@@ -37,16 +37,16 @@ function ITEM:SetText(textArray, character)
 		end
 	end
 
-	// Making sure no line passes the character per page limit
+	-- Making sure no line passes the character per page limit
 	for i=1, #textArray do
 		if textArray[i]:len() > PLUGIN.characterLimitPerPage then
 			textArray[i] = string.sub(textArray[i],1,PLUGIN.characterLimitPerPage)
 		end
 	end
 
-	// Removing last pages if the character count exceeds the limit.
-	// In normal conditions, this procedure should not happen as it's checked on clientside.
-	// firstTime bool is to prevent getting character count twice.
+	-- Removing last pages if the character count exceeds the limit.
+	-- In normal conditions, this procedure should not happen as it's checked on clientside.
+	-- firstTime bool is to prevent getting character count twice.
 	local chrCount = self:GetCharacterCount()
 	local chrCountChanged = false
 
@@ -59,7 +59,7 @@ function ITEM:SetText(textArray, character)
 	chrCount = chrCountChanged and self:GetCharacterCount() or chrCount
 
 	self:SetData("text", textArray, nil, false, true)
-	// If the book is empty, make it unowned.
+	-- If the book is empty, make it unowned.
 	self:SetData("owner", (character and self:GetCharacterCount() != 0) and character:GetID() or 0)
 end
 
