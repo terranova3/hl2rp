@@ -111,7 +111,7 @@ end
 
 -- Returns the tools required for this recipe as a single string.
 function RECIPE:GetTools()
-	local tools = table.Copy(self.tools)
+	local tools = table.Copy(self.tools) or {}
 	local string = "Tools:"
 	
 	if(self.station) then

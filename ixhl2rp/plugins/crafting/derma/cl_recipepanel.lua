@@ -33,6 +33,11 @@ function PANEL:SetRecipe(recipe)
     
     local item = ix.item.list[recipe:GetFirstResult()]
 
+    if(!item) then
+        self:Remove()
+        return
+    end
+
     self.icon = self.header:Add("SpawnIcon")
     self.icon:InvalidateLayout(true)
     self.icon:Dock(LEFT)
