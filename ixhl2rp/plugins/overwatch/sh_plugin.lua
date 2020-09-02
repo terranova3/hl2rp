@@ -22,7 +22,6 @@ ix.anim.SetModelClass("models/overwatch/terranova/overwatchvortcaptureunitregula
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchkillcapturesuppressor.mdl", "overwatch");
 ix.anim.SetModelClass("models/overwatch/terranova/overwatchsuppressorregular.mdl", "overwatch");
 
-
 ix.anim:AddCombineHands("overwatchepsilon.mdl");
 ix.anim:AddCombineHands("overwatchgamma.mdl");
 ix.anim:AddCombineHands("overwatchdelta.mdl");
@@ -40,78 +39,93 @@ ix.anim:AddCombineHands("overwatchsuppressorregular.mdl");
 
 local PLUGIN = PLUGIN
 PLUGIN.config = {}
-PLUGIN.config.abbreviation = "OTA-S17"
-PLUGIN.config.defaultDivision = "PHANTOM"
+PLUGIN.config.abbreviation = "OTA"
+PLUGIN.config.defaultDivision = "EPSILON"
 PLUGIN.config.namingScheme = "abbreviation:rank.division-id"
 PLUGIN.config.otaTypes = {
 	[1] = {
-		name = "SCOT-M",
-		description = "Standard Overwatch armor, providing basic ballistic protection.",
+		name = "DAGGER",
+		division = "DAGGER",
+		description = "Standard armor with basic ballistic protection.",
 		model = "models/overwatch/terranova/overwatchepsilon.mdl"
 	},
 	[2] = {
-		name = "SCOT-O",
-		description = "Standard Overwatch armor with an improved ballistic protection system and communications systems.",
+		name = "ORDINAL",
+		division = "ORDINAL",
+		description = "Standard armor with an improved ballistic protection system.",
 		model = "models/overwatch/terranova/overwatchalpha.mdl"
 	},
 	[3] = {
-		name = "SUPPRESSOR",
-		description = "Experimental light-weight armor used for maneuverability during area control.",
+		name = "BLADEWALL",
+		division = "BLADEWALL",
+		description = "Experimental light-weight armor used for area control.",
 		model = "models/overwatch/terranova/overwatchdelta.mdl"
 	},
 	[4] = {
-		name = "SRAT-S",
-		description = "Experimental light-weight armor used for maneuverability during area control.",
+		name = "BLADEWALL - REGULAR VARIANT",
+		division = "BLADEWALL",
+		voiceType = "SUPPRESSOR",
+		description = "Experimental light-weight armor used for area control.",
 		model = "models/overwatch/terranova/overwatchsuppressorregular.mdl"
 	},
 	[5] = {
 		name = "HAMMER",
-		description = "Extremely durable armour protective system, designed for locking down urban and close-quarters environments.",
+		division = "HAMMER",
+		description = "Extremely durable armour protective system design for locking down urban environments.",
 		model = "models/overwatch/terranova/overwatchgamma.mdl"
 	},
 	[6] = {
-		name = "SRAT-O",
-		description = "Stripped down Overwatch kit with lesser ballistic protection, but a dedicated breathing apparatus and gas tank.",
+		name = "Antibody - ORDINAL",
+		division = "ORDINAL",
+		description = "Basic uniform which provides protection from gas, but not ballistics.",
 		model = "models/overwatch/terranova/overwatchantibodycaptain.mdl"
 	},
 	[7] = {
-		name = "SRAT-M",
-		description = "Stripped down Overwatch kit with lesser ballistic protection, but a dedicated breathing apparatus and gas tank.",
+		name = "Antibody - DAGGER",
+		division = "DAGGER",
+		description = "Little to no armour, useful exclusively for xen removal.",
 		model = "models/overwatch/terranova/overwatchantibodyepsilon.mdl"
 	},
 	[8] = {
 		name = "SCALPEL",
-		description = "Standard Overwatch armor with ghillie covering.",
+		division = "SCALPEL",
+		description = "Standard overwatch ballistic protection covered with a ghillie suit.",
 		model = "models/overwatch/terranova/overwatchscalpel.mdl"
 	},
 	[9] = {
-		name = "AIRWATCH",
-		description = "Standard Overwatch armor, modified for usage by Transhumanized pilots.",
+		name = "NOMAD",
+		division = "NOMAD",
+		description = "Equipped with standard overwatch ballistic protection with goggles.",
 		model = "models/overwatch/terranova/overwatchnomad.mdl"
 	},
 	[10] = {
-		name = "SRET",
-		description = "The finest the Transhuman Arm has to offer. Advanced ballistics systems, improved optics systems and fierce tactics.",
+		name = "SWORD",
+		division = "SWORD",
+		description = "Elite honor guards donning a white uniform to represent their status.",
 		model = "models/overwatch/terranova/overwatchking.mdl"
 	},
 	[11] = {
-		name = "SDOT",
-		description = "Detention processing team, equipped with ballistic protection and additional protection from stabbing and blunt trauma.",
+		name = "PROSPEKT",
+		division = "PROSPEKT",
+		description = "Prison guards with little external protection aside from a chest-situated kevlar.",
 		model = "models/overwatch/terranova/overwatchprospekt.mdl"
 	},
 	[12] = {
-		name = "SRBCT-O",
-		description = "A suit rigged for anti-Biotic activities. Less ballistic protection, but more resistance towards Biotic energy attacks.",
+		name = "vortkilllead",
+		division = "SPECKY",
+		description = "A suit befit for anti-Xenian activities. Its resistance to Vortessence based abilities and shock is astounding, but it sarcifices ballistic protection in exchange. This one comes with compatibility for a standard Ordinal radiopack, and metal pauldrons.",
 		model = "models/overwatch/terranova/overwatchvortcaptureunitlead.mdl"
 	},
 	[13] = {
-		name = "SRBCT-M",
-		description = "A suit rigged for anti-Biotic activities. Less ballistic protection, but more resistance towards Biotic energy attacks.",
+		name = "vortkillregular",
+		division = "SPECKY",
+		description = "A suit befit for anti-Xenian activities. Its resistance to Vortessence based abilities and shock is astounding, but it sarcifices ballistic protection in exchange.",
 		model = "models/overwatch/terranova/overwatchvortcaptureunitregular.mdl"
 	},
 	[14] = {
-		name = "SRBCT-S",
-		description = "Experimental light-weight armor used for maneuverability during area control. Less ballistic protection, but more resistance towards Biotic energy attacks.",
+		name = "vortkillsuppressor",
+		division = "SPECKY",
+		description = "Experimental light-weight armor used for area control. Underlay suit made out of a material for resistance to Vortessence based abilities and shock.",
 		model = "models/overwatch/terranova/overwatchkillcapturesuppressor.mdl"
 	},
 }
