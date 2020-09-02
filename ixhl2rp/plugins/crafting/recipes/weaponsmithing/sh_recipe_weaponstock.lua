@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Weapon Stock"
-RECIPE.description = "Desc Update When?"
 RECIPE.category = "Machining"
 RECIPE.station = "machining_table"
 RECIPE.requirements = {

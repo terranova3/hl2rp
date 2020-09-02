@@ -7,9 +7,9 @@
 --]]
 
 RECIPE.name = "Blueprint Refine Metal"
-RECIPE.description = "Desc Update When?"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
+RECIPE.blueprint "refinedmetal1"
 RECIPE.requirements = {
     ["scrap_metal"] = 5
 }

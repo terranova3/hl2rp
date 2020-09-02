@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Mending Kit"
-RECIPE.description = "Desc When."
 RECIPE.category = "Armored Clothing"
 RECIPE.station = "workbench"
 RECIPE.requirements = {

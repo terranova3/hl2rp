@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Zipties"
-RECIPE.description = "Desc Update When?"
 RECIPE.category = "Crafting"
 RECIPE.station = "workbench"
 RECIPE.requirements = {

@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Bandana"
-RECIPE.description = "Tie a piece of cloth into a bandana."
 RECIPE.category = "Clothing"
 RECIPE.requirements = {
     ["sewn_cloth"] = 1

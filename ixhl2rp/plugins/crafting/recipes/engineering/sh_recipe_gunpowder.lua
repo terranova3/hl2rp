@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Gunpowder"
-RECIPE.description = "Desc Update When?"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {

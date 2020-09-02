@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Clothing Dye"
-RECIPE.description = "Tie a piece of cloth into a bandana."
 RECIPE.category = "Distilling"
 RECIPE.station = "distillery"
 RECIPE.requirements = {
