@@ -1,7 +1,7 @@
 
 ITEM.name = "Water Filter"
-ITEM.model = Model("models/props_interiors/pot01a.mdl")
-ITEM.description = "Uses a charcoal filter to purify liquids."
+ITEM.model = Model("models/illusion/eftcontainers/waterfilter.mdl")
+ITEM.description = "Small portable filter designed to purify liquids for consumption."
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 75

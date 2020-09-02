@@ -1,6 +1,6 @@
 
 ITEM.name = "Old Newspaper"
-ITEM.model = Model("models/props_junk/garbage_newspaper001a.mdl")
+ITEM.model = Model("models/props_hla/props/newspaper.mdl")
 ITEM.description = "An old issue of the City Times, dated a couple years ago."
 ITEM.width = 1
 ITEM.height = 1

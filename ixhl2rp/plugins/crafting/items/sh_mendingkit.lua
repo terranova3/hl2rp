@@ -1,7 +1,7 @@
 
-ITEM.name = "Mending Kit"
+ITEM.name = "Armour Mending Kit"
 ITEM.model = Model("models/Items/battery.mdl")
-ITEM.description = "Desc When"
+ITEM.description = "Various tools to repair ballistic armour."
 ITEM.category = "Medical"
 ITEM.price = 35
 ITEM.flag = "Z"

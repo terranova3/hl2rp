@@ -1,7 +1,7 @@
 
 ITEM.name = "Gunpowder"
 ITEM.model = Model("models/props_lab/jar01b.mdl")
-ITEM.description = "Black powder as it's commonly called, is one of the primary ingredients of weaponry."
+ITEM.description = "Earliest known chemical explosive. It consists of a mixture of sulfur, charcoal, and potassium nitrate."
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0

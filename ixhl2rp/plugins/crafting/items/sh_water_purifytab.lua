@@ -1,6 +1,6 @@
 
 ITEM.name = "Civil-Approved Purfication Tablets"
-ITEM.model = Model("models/props_lab/jar01b.mdl")
+ITEM.model = Model("models/mark2580/gtav/garage_stuff/oilbot02.mdl")
 ITEM.description = "A plastic jar with large tablets, it has a biohazard symbol labled onto the jar."
 ITEM.width = 1
 ITEM.height = 1

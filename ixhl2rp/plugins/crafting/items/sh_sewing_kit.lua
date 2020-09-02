@@ -1,7 +1,7 @@
 
 ITEM.name = "Sewing Kit"
-ITEM.model = Model("models/props_lab/partsbin01.mdl")
-ITEM.description = "Sewing Kits containing a variety of useful tailoring tools."
+ITEM.model = Model("models/zworld_health/healkit.mdl")
+ITEM.description = "Various tools for cutting, stitching or tailoring fabrics and clothes."
 ITEM.width = 2
 ITEM.height = 2
 ITEM.price = 150
