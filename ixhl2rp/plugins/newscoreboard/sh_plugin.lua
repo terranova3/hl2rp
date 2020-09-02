@@ -10,10 +10,10 @@ PLUGIN.author = "Adolphus";
 local PLUGIN = PLUGIN
 
 if(CLIENT) then
-	function PLUGIN:ShouldShowOnScoreboard(client)
-		local faction = ix.faction.Get(client:Team())
+	function PLUGIN:ShouldShowOnScoreboard(target)
+		local faction = ix.faction.Get(target:Team())
 
-		if(faction and faction.HideOnScoreboard) then
+		if(faction and faction.HideOnScoreboard and faction != ix.faction.Get(LocalPlayer():Team())) then
 			return false
 		end
 
