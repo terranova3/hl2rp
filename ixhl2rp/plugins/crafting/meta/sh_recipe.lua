@@ -68,7 +68,11 @@ function RECIPE:CanAccess(client)
 
 	-- If this recipe is a mastery only recipe and the character doesn't have that mastery, then don't allow them to access it.
 	if(self.isMastery and character:GetMastery() != self.profession) then
-		return false
+		return false, "Mastery"
+	end
+
+	if(self.blueprint and !character:HasBlueprint(self.blueprint)) then
+		return false, "Blueprint"
 	end
 
 	return true
@@ -114,8 +118,8 @@ function RECIPE:GetTools()
 	local tools = table.Copy(self.tools) or {}
 	local string = "Tools:"
 	
-	if(self.station) then
-		table.insert(tools, self.station)
+	if(self.station and ix.stations.Get(self.station)) then
+		table.insert(tools, ix.stations.Get(self.station).name)
 	end
 
 	local count = table.Count(tools)
