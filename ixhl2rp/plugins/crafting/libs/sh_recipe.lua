@@ -33,6 +33,10 @@ function ix.recipe.LoadFromDir(directory, category)
 			ix.recipe.stored[niceName] = RECIPE
 		end
 
+		if(RECIPE.blueprint) then
+			ix.recipe.GenerateBlueprint(RECIPE.blueprint)
+		end
+
 		RECIPE = nil
 	end
 end
@@ -65,3 +69,44 @@ function ix.recipe.GetCategories(recipes)
 
 	return categories
 end
+
+function ix.recipe.GenerateBlueprint(blueprint)
+	if(ix.item.list["blueprint_"..blueprint]) then
+		return
+	end
+
+	local ITEM = ix.item.Register( "blueprint_" .. blueprint, nil, nil, nil, true)
+    ITEM.name = "Blueprint: " .. blueprint
+    ITEM.description = "\n Unlocks access to craft this item."
+    ITEM.model = "models/gibs/props_office/books_3_gib1.mdl"
+    ITEM.category = "Blueprint"
+	ITEM.noBusiness = true
+	ITEM.blueprint = blueprint
+    ITEM.functions.learn = {
+        name = "Learn Blueprint",
+        icon = "icon16/book_open.png",
+        OnRun = function(itemTable, data)
+            local character = itemTable.player:GetCharacter()
+
+            if(character:HasBlueprint(itemTable.blueprint)) then
+                itemTable.player:Notify("You already know this blueprint.")
+
+                return false
+            end
+
+            PLUGIN:AddBlueprint(character, itemTable.blueprint)
+            itemTable.player:Notify(string.format("You have learned the %s blueprint.", itemTable.blueprint))
+        end
+    }
+
+    function ITEM:GetModel()
+        local models = {
+            "models/gibs/props_office/books_3_gib2.mdl",
+            "models/gibs/props_office/books_3_gib3.mdl",
+            self.model
+        }
+
+        return models[math.random(1, 3)]
+    end
+end
+

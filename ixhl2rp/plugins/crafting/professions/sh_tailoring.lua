@@ -9,6 +9,7 @@
 PROFESSION.name = "Tailoring"
 PROFESSION.description = "Placeholder description, this needs to be set."
 PROFESSION.image = "terranova/ui/crafting/tailoring.png"
+PROFESSION.icon = "terranova/ui/crafting/icons/tailoring.png"
 PROFESSION.color = Color(118, 154, 216, 255)
 
 -- This is the hook we can use to implement custom mastery effects.

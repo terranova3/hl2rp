@@ -28,7 +28,7 @@ function ix.stations.LoadFromDir(directory)
             scripted_ents.Register(STATION_ENT, "ix_station_"..niceName)
         end
 
-        ix.stations[niceName] = STATION
+        ix.stations.stored[niceName] = STATION
         STATION = nil
 	end
 end

@@ -25,13 +25,11 @@ end)
 local PLUGIN = PLUGIN
 
 -- Called when we need to add a blueprint to a character.
-function PLUGIN:AddBlueprint(character, uniqueID)
-    local recipe = ix.recipe.Get(uniqueID)
-
-    if(recipe and !character:HasBlueprint(uniqueID)) then
+function PLUGIN:AddBlueprint(character, blueprint)
+    if(!character:HasBlueprint(blueprint)) then
         local blueprints = character:GetVar("blueprints", {})
 
-        table.insert(blueprints, uniqueID)
+        table.insert(blueprints, blueprint)
         character:SetVar("blueprints", blueprints)
     end
 end
