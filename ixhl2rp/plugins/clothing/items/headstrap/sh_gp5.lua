@@ -9,7 +9,7 @@ ITEM.name = "GP-5 Gasmask";
 ITEM.model = "models/hardbass/gp5.mdl"
 ITEM.category = "Clothing - Contraband";
 ITEM.description = "A Soviet gas mask, given to both the military and civilian population."
-ITEM.price = 55
+ITEM.price = 85
 ITEM.flag = "G"
 ITEM.gasImmunity = true
 
