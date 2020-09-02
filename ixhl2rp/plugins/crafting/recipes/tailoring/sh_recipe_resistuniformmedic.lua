@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Armored Medic Uniform"
-RECIPE.description = "Desc When."
 RECIPE.category = "Armored Clothing"
 RECIPE.requirements = {
     ["kevlarvest"] = 1,

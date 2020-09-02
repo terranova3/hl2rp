@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Chemical Base"
-RECIPE.description = "Desc Update When?"
 RECIPE.category = "Distilling"
 RECIPE.station = "distillery"
 RECIPE.requirements = {

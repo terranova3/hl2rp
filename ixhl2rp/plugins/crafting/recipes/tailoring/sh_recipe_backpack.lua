@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Backpack"
-RECIPE.description = "Dye When"
 RECIPE.category = "Sewing"
 RECIPE.station = "workbench"
 RECIPE.requirements = {

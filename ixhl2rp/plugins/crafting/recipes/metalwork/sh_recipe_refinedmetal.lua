@@ -7,9 +7,9 @@
 --]]
 
 RECIPE.name = "Refine Metal"
-RECIPE.description = "Desc Update When?"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
+RECIPE.mastery = true
 RECIPE.requirements = {
     ["scrap_metal"] = 3
 }

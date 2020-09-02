@@ -7,7 +7,6 @@
 --]]
 
 RECIPE.name = "Pre-War Cap"
-RECIPE.description = "Desc When."
 RECIPE.category = "Clothing"
 RECIPE.station = "workbench"
 RECIPE.requirements = {
