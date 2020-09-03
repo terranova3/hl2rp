@@ -1,0 +1,10 @@
+ITEM.name = "Knife"
+ITEM.description = "A sharp knife capable of slashing and dicing."
+ITEM.model = "models/weapons/w_knife_t.mdl"
+ITEM.class = "arccw_melee_knife_tn"
+ITEM.category = "Melee"
+ITEM.weaponCategory = "melee"
+ITEM.flag = "V"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.bDropOnDeath = true

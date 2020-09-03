@@ -9,3 +9,13 @@ ITEM.category = "Crafting"
 ITEM.rarity = "Common"
 ITEM.noBusiness = true
 -- No stack
+
+function ITEM:Combine(targetItem)
+    local client = item.player
+    local inventory = client:GetCharacter():GetInventory()
+
+    if(targetItem.uniqueID == "empty_glass_bottle") then
+       inventory:Add("scrap_glass", 1)
+       targetItem:Remove()
+    end
+end

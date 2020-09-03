@@ -1,0 +1,10 @@
+ITEM.name = "Machete"
+ITEM.description = "A large blade capable of hacking and slashing."
+ITEM.model = "models/weapons/arccw/w_machete.mdl"
+ITEM.class = "arccw_melee_machete_tn"
+ITEM.category = "Melee"
+ITEM.weaponCategory = "melee"
+ITEM.flag = "V"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.bDropOnDeath = true
