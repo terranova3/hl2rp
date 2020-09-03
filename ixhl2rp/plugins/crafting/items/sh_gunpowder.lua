@@ -1,6 +1,6 @@
 
 ITEM.name = "Gunpowder"
-ITEM.model = Model("models/props_lab/jar01b.mdl")
+ITEM.model = Model("models/illusion/eftcontainers/gpgreen.mdl")
 ITEM.description = "Earliest known chemical explosive. It consists of a mixture of sulfur, charcoal, and potassium nitrate."
 ITEM.width = 1
 ITEM.height = 1

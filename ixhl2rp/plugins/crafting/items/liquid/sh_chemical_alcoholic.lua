@@ -4,7 +4,7 @@
 --]]
 
 ITEM.name = "Alcoholic Base";
-ITEM.model = "models/mark2580/gtav/barstuff/wine_white.mdl";
+ITEM.model = "models/mark2580/gtav/garage_stuff/oilbot03.mdl";
 ITEM.width = 1;
 ITEM.height	= 1;
 ITEM.description = "Desc Here.";
