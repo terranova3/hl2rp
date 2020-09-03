@@ -58,7 +58,7 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 					return IsValid(item.entity)
 				end
             }
-            ITEM.functions.Breakdown = {
+            ITEM.functions.Breakdown = ITEM.functions.Breakdown or {
                 icon = "icon16/cut_red.png",
                 OnRun = function(itemTable)
                     local client = itemTable.player
