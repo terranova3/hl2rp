@@ -15,7 +15,7 @@ ITEM.bodyGroups = {
 	["headstrap"] = 2
 }
 ITEM.iconCam = {
-	pos = Vector(0, -1.4703034162521, 138.77143859863),
-	ang = Angle(90, 0, -87.058822631836),
-	fov = 2.9411764705882,
+	pos = Vector(0, 200, 0),
+	ang = Angle(0, 270, 0),
+	fov = 1.7647058823529,
 }

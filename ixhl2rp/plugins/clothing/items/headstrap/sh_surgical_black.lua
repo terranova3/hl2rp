@@ -4,7 +4,7 @@
 --]]
 
 ITEM.base = "base_headstrap";
-ITEM.name = "Surgical Mask";
+ITEM.name = "Black Surgical Mask";
 ITEM.model = "models/rebs/maske/maske.mdl"
 ITEM.price = 5
 ITEM.description = "Protects you from potentially dangerous particles, ensuring you stay safe of disease... or so they say."
@@ -156,7 +156,7 @@ ITEM.pacData = {
 }
 
 ITEM.iconCam = {
-	pos = Vector(98.616066, 1.792942, -0.307430),
-	ang = Angle(-0.333, 181.065, 0.000),
-	fov = 0.90251118195476,
+	pos = Vector(66.800003051758, 58.045433044434, 42.030426025391),
+	ang = Angle(25, 222, 0),
+	fov = 5.2941176470588,
 }
