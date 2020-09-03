@@ -56,6 +56,14 @@ function PLUGIN:IsGasImmune(client)
         end
     end
 
+    if (character:IsMetropolice() and !character:IsUndercover() or character:GetFaction() == FACTION_OTA) then 
+        return true
+    end
+
+    if(client:IsVortigaunt() or client:InObserver()) then 
+        return true
+    end
+
     return false
 end
 
@@ -128,14 +136,6 @@ if SERVER then
             
             local pos = client:EyePos()
             local canBreathe = false
-
-            if (character:IsMetropolice() and !character:IsUndercover() or character:GetFaction() == FACTION_OTA) then 
-                canBreathe = true 
-            end
-
-            if(client:IsVortigaunt() or client:InObserver()) then 
-                canBreathe = true
-            end
             
             if(!canBreathe) then
                 canBreathe = PLUGIN:IsGasImmune(client)
