@@ -13,7 +13,7 @@ ITEM.price = 4;
 ITEM.flag = "G"
 
 function ITEM:Combine(targetItem)
-	if(targetItem.base == "cigarettes") then
+	if(targetItem.base == "base_cigarettes") then
 		targetItem:SetData("lit", true)
 	end
 end

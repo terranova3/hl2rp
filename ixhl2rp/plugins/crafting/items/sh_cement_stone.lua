@@ -11,7 +11,7 @@ ITEM.noBusiness = true
 -- No stack
 
 function ITEM:Combine(targetItem)
-    local client = item.player
+    local client = self:GetOwner()
     local inventory = client:GetCharacter():GetInventory()
 
     if(targetItem.uniqueID == "empty_glass_bottle") then

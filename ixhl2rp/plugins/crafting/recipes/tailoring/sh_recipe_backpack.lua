@@ -11,7 +11,7 @@ RECIPE.category = "Sewing"
 RECIPE.station = "workbench"
 RECIPE.requirements = {
     ["sewn_cloth"] = 5,
-    ["cardboard_scrap"] = 1
+    ["cardboard_scraps"] = 1
 }
 RECIPE.results = {
 	["backpack"] = 1
