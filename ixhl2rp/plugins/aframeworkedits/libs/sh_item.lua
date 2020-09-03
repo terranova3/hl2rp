@@ -91,11 +91,11 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
                 OnCanRun = function(itemTable)
                     local client = itemTable.player
                     
-                    if(!itemTable.tool) then
+                    if(!itemTable.breakdown) then
                         return false
                     end
 
-                    if(!client:GetCharacter():GetInventory():HasItem(itemTable.tool)) then
+                    if(itemTable.tool and !client:GetCharacter():GetInventory():HasItem(itemTable.tool)) then
                         return false
                     end
                 end
