@@ -1,6 +1,6 @@
 
 ITEM.name = "Cables"
-ITEM.model = Model("models/Items/CrossbowRounds.mdl")
+ITEM.model = Model("models/illusion/eftcontainers/wires.mdl")
 ITEM.description = "Some metal cables."
 ITEM.width = 1
 ITEM.height = 1

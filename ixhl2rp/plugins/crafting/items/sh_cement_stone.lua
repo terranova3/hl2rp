@@ -10,12 +10,12 @@ ITEM.rarity = "Common"
 ITEM.noBusiness = true
 -- No stack
 
-function ITEM:Combine(targetItem)
-    local client = self:GetOwner()
-    local inventory = client:GetCharacter():GetInventory()
+-- function ITEM:Combine(targetItem)
+--    local client = self:GetOwner()
+ --   local inventory = client:GetCharacter():GetInventory()
 
-    if(targetItem.uniqueID == "empty_glass_bottle") then
-       inventory:Add("scrap_glass", 1)
-       targetItem:Remove()
-    end
-end
+  --  if(targetItem.uniqueID == "empty_glass_bottle") then
+  --     inventory:Add("scrap_glass", 1)
+  --     targetItem:Remove()
+  --  end
+--end

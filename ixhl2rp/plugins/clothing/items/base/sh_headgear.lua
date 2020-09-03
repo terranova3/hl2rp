@@ -17,3 +17,11 @@ ITEM.iconCam = {
 	ang = Angle(89.083892822266, -89.995094299316, 0),
 	fov = 8.8235294117647
 }
+ITEM.tool = "knife"
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "cloth_scrap",
+        amount = 1,
+        data = {}
+    }
+}

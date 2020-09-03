@@ -1,7 +1,7 @@
 
 ITEM.name = "Cement Powder"
-ITEM.model = Model("models/props_junk/garbage_metalcan002a.mdl")
-ITEM.description = "A can of cement powder."
+ITEM.model = Model("models/mark2580/gtav/garage_stuff/oilbot02.mdl")
+ITEM.description = "A small jar of cement powder."
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 20

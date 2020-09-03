@@ -15,7 +15,7 @@ RECIPE.requirements = {
     ["plastic_sheet"] = 3
 }
 RECIPE.results = {
-	["gun_chambering"] = 1
+	["gun_chamber"] = 1
 }
 RECIPE.tools = {
 	"screwdriver"

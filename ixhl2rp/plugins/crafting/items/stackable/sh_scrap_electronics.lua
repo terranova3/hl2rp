@@ -1,6 +1,6 @@
 
 ITEM.name = "Components"
-ITEM.model = Model("models/props_lab/reciever01c.mdl")
+ITEM.model = Model("models/illusion/eftcontainers/circuitboard.mdl")
 ITEM.description = "A small assorted set of Electronics, useless unless broken down into individual components or combined with other items."
 ITEM.width = 2
 ITEM.height = 1

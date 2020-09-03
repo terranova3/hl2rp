@@ -17,3 +17,13 @@ ITEM.iconCam = {
 	fov = 7.6470588235294
 }
 ITEM.backgroundColor = Color(19, 72, 96, 100)
+ITEM.tool = "knife"
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "cloth_scrap",
+        amount = 1,
+        data = {
+			["stack"] = 3
+		}
+    }
+}

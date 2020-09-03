@@ -7,7 +7,7 @@
 --]]
 
 ITEM.name = "Scrap Metal"
-ITEM.model = Model("models/props_c17/oildrumchunk01d.mdl")
+ITEM.model = Model("models/illusion/eftcontainers/weaponparts.mdl")
 ITEM.description = "A small chunk of scrap metal, useless unless combined with other items."
 ITEM.price = 10
 ITEM.category = "Crafting"

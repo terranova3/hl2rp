@@ -1,6 +1,6 @@
 
 ITEM.name = "Glass Shards"
-ITEM.model = Model("models/props_junk/garbage_glassbottle003a_chunk03.mdl")
+ITEM.model = Model("models/props_junk/glassjug01_chunk03.mdl")
 ITEM.description = "Some salvagable pieces of glass."
 ITEM.width = 1
 ITEM.height = 1

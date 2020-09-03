@@ -6,7 +6,7 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Screws"
+RECIPE.name = "Cable"
 RECIPE.category = "Crafting"
 RECIPE.station = "workbench"
 RECIPE.requirements = {

@@ -11,7 +11,7 @@ RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
 	["chemical_acidic"] = 275,
-	["Charocal"] = 2
+	["charcoal"] = 2
 }
 RECIPE.results = {
 	["charcoal_filter"] = 2

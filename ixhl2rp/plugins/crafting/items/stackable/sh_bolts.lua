@@ -1,6 +1,6 @@
 
 ITEM.name = "Bolts"
-ITEM.model = Model("models/props_lab/box01a.mdl")
+ITEM.model = Model("models/illusion/eftcontainers/nuts.mdl")
 ITEM.description = "A handful of bolts in a box."
 ITEM.width = 1
 ITEM.height = 1
