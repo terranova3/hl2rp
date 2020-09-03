@@ -14,3 +14,11 @@ ITEM.capacity = 500
 ITEM.restoreStamina = 13;
 ITEM.category = "Alcohol"
 ITEM.flag = "M"
+ITEM.tool = "cement_stone"
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "scrap_glass",
+        amount = 1,
+        data = {}
+    }
+}

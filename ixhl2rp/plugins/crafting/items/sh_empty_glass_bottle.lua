@@ -12,7 +12,7 @@ ITEM.noBusiness = true
 ITEM.tool = "cement_stone"
 ITEM.breakdown = {
     [1] = {
-        uniqueID = "chunk_of_plastic",
+        uniqueID = "scrap_glass",
         amount = 1,
         data = {}
     }

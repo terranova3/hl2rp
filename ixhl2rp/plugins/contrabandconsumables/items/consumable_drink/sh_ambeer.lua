@@ -14,3 +14,11 @@ ITEM.flag = "R"
 ITEM.price = 10;
 ITEM.capacity = 355
 ITEM.restoreStamina = 20;
+ITEM.tool = "cement_stone"
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "scrap_glass",
+        amount = 1,
+        data = {}
+    }
+}
