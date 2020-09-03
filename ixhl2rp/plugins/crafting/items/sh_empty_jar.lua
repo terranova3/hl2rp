@@ -9,3 +9,11 @@ ITEM.category = "Crafting"
 ITEM.rarity = "Common"
 ITEM.noBusiness = true
 -- Junk Items Dont stack
+ITEM.tool = "knife"
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "chunk_of_plastic",
+        amount = 1,
+        data = {}
+    }
+}
