@@ -13,7 +13,16 @@ ITEM.price = 4;
 ITEM.flag = "G"
 
 function ITEM:Combine(targetItem)
+<<<<<<< HEAD
 	if(targetItem.base == "base_cigarettes") then
 		targetItem:SetData("lit", true)
+=======
+	if(targetItem.Light) then
+		local error = targetItem:Light()
+
+		if(error) then
+			self:GetOwner():Notify(error)
+		end
+>>>>>>> parent of 80d9e45e... Revert "UPDATE: new trait icon for calm"
 	end
 end
