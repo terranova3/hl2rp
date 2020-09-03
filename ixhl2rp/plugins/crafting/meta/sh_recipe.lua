@@ -146,6 +146,64 @@ function RECIPE:GetTools()
 	return string
 end
 
+-- Called when checking if a character has liquid items that a recipe requires.
+function RECIPE:HaveLiquid(value, uniqueID, inventory)
+	if(CLIENT and !inventory) then
+		inventory = LocalPlayer():GetCharacter():GetInventory()
+	end
+
+	local items = inventory:GetItemsByUniqueID(uniqueID)
+	local neededLiquid = value
+
+	for k, v in pairs(items) do
+		neededLiquid = math.Clamp(neededLiquid - v:GetData("currentAmount", 0), 0, 9999)
+
+		-- If we have all the liquid we needed, we no longer need to iterate.
+		if(neededLiquid == 0) then
+			break
+		end
+	end
+
+	if(neededLiquid != 0) then
+		return false
+	end
+end
+
+-- Called when checking if a character has stackable items that a recipe requires.
+function RECIPE:HaveStackables(value, uniqueID, inventory)
+	if(CLIENT and !inventory) then
+		inventory = LocalPlayer():GetCharacter():GetInventory()
+	end
+
+	local items = inventory:GetItemsByUniqueID(uniqueID)
+	local neededStacks = value
+
+	for k, v in pairs(items) do
+		neededStacks = math.Clamp(neededStacks - v:GetData("stack", 0), 0, 9999)
+
+		if(neededStacks == 0) then
+			break
+		end
+	end
+
+	if(neededStacks != 0) then
+		return false
+	end
+end
+
+-- Called when checking if a character has regular items that a recipe requires.
+function RECIPE:HaveItems(value, uniqueID, inventory)
+	if(CLIENT and !inventory) then
+		inventory = LocalPlayer():GetCharacter():GetInventory()
+	end
+
+	local items = inventory:GetItemsByUniqueID(uniqueID)
+
+	if(!items[value]) then
+		return false
+	end
+end
+
 -- Called when we need to see if a client has the correct materials to finish a recipe.
 function RECIPE:CanCraft(client)
 	local character = client:GetCharacter()
@@ -163,43 +221,12 @@ function RECIPE:CanCraft(client)
 			return false, "Internal error! An item required for this recipe doesn't exist."
 		end
 
-		-- Grabbing all of the instances of this uniqueID in a character's inventory.
-		local items = inventory:GetItemsByUniqueID(uniqueID)
-
-		if(item.capacity) then
-			local neededLiquid = value
-
-			-- Iterate through all the liquid items to see if we have the liquid needed
-			for k, v in pairs(items) do
-				neededLiquid = math.Clamp(neededLiquid - v:GetData("currentAmount", 0), 0, 9999)
-
-				-- If we have all the liquid we needed, we no longer need to iterate.
-				if(neededLiquid == 0) then
-					break
-				end
-			end
-
-			if(neededLiquid != 0) then
-				return false, string.format("You're missing the required liquid for %s.", item.name)
-			end
-		elseif(item.maxStack) then
-			local neededStacks = value
-
-			for k, v in pairs(items) do
-				neededStacks = math.Clamp(neededStacks - v:GetData("stack", 0), 0, 9999)
-
-				if(neededStacks == 0) then
-					break
-				end
-			end
-
-			if(neededStacks != 0) then
-				return false, string.format("You need more %s.", item.name)
-			end
-		else
-			if(!items[value]) then
-				return false, string.format("You don't have the right amount of %s!", item.name)
-			end
+		if(item.capacity and !self:HaveLiquid(value, uniqueID, inventory)) then
+			return false, string.format("You're missing the required liquid for %s.", item.name)
+		elseif(item.maxStack and !self:HaveStackables(value, uniqueID, inventory)) then
+			return false, string.format("You don't have the right amount of %s!", item.name)
+		elseif(!self:HaveItems(value, uniqueID, inventory)) then
+			return false, string.format("You need more %s.", item.name)
 		end
 	end
 
