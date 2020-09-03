@@ -11,6 +11,7 @@ ITEM.description = "Breakdown base";
 ITEM.category = "Breakdown";
 ITEM.noBusiness = true
 ITEM.functions.Breakdown = {
+    icon = "icon16/cut_red.png",
     OnRun = function(itemTable)
         local client = itemTable.player
         
@@ -40,8 +41,10 @@ ITEM.functions.Breakdown = {
         end
     end,
     OnCanRun = function(itemTable)
+        local client = itemTable.player
+
         if(itemTable.tool and !client:GetCharacter():GetInventory():HasItem(itemTable.tool)) then
-            return
+            return false
         end
     end
 }

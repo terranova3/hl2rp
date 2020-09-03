@@ -9,3 +9,10 @@ ITEM.category = "Crafting"
 ITEM.rarity = "Common"
 ITEM.noBusiness = true
 -- No stack Unique
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "paper",
+        amount = 1,
+        data = {}
+    }
+}
