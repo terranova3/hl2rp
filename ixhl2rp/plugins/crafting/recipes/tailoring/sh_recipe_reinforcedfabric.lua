@@ -12,7 +12,7 @@ RECIPE.station = "workbench"
 RECIPE.requirements = {
     ["sewn_cloth"] = 3,
     ["scrap_metal"] = 2,
-    ["cardboard_scrap"] = 1
+    ["cardboard_scraps"] = 1
 }
 RECIPE.results = {
 	["reinforced_cloth"] = 1
