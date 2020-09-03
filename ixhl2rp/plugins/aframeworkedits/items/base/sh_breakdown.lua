@@ -3,6 +3,13 @@
 	without permission of its author.
 --]]
 
+ITEM.name = "Breakdown Base";
+ITEM.model = "models/props_junk/garbage_coffeemug001a.mdl";
+ITEM.width = 1;
+ITEM.height	= 1;
+ITEM.description = "Breakdown base";
+ITEM.category = "Breakdown";
+ITEM.noBusiness = true
 ITEM.functions.Breakdown = {
     OnRun = function(itemTable)
         local client = itemTable.player
