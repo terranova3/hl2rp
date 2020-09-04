@@ -135,7 +135,7 @@ if (CLIENT) then
 				self.LegEnt:ResetSequence(self.Sequence)
 			end
 
-			self.LegEnt:FrameAdvance(CurTime() - self.LegEnt.LastTick)
+			self.LegEnt:FrameAdvance(CurTime() - (self.LegEnt.LastTick or 0))
 			self.LegEnt.LastTick = CurTime()
 
 			Legs.BreathScale = sharpeye and sharpeye.GetStamina and math.Clamp(math.floor(sharpeye.GetStamina() * 5 * 10) / 10, 0.5, 5) or 0.5
