@@ -9,6 +9,7 @@
 RECIPE.name = "Backpack"
 RECIPE.category = "Sewing"
 RECIPE.station = "workbench"
+RECIPE.mastery = true
 RECIPE.requirements = {
     ["sewn_cloth"] = 5,
     ["cardboard_scraps"] = 1

@@ -9,6 +9,7 @@
 RECIPE.name = "Reinforced Fabric"
 RECIPE.category = "Sewing"
 RECIPE.station = "workbench"
+RECIPE.mastery = true
 RECIPE.requirements = {
     ["sewn_cloth"] = 3,
     ["scrap_metal"] = 2,

@@ -9,6 +9,7 @@
 RECIPE.name = "Weapon Frame"
 RECIPE.category = "Machining"
 RECIPE.station = "machining_table"
+RECIPE.blueprint = true
 RECIPE.requirements = {
     ["refined_metal"] = 2,
     ["screws"] = 1,

@@ -9,6 +9,7 @@
 RECIPE.name = "Refined Electronics"
 RECIPE.category = "Crafting"
 RECIPE.station = "workbench"
+RECIPE.mastery = true
 RECIPE.requirements = {
     ["scrap_electronics"] = 5,
     ["screws"] = 1,
