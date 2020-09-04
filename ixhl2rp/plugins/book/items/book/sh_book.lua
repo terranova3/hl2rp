@@ -27,6 +27,10 @@ function ITEM:GetCharacterCount()
 	return totalChrCount
 end
 
+function ITEM:SetMarker(markerPos)
+	self:SetData("marker", markerPos)
+end
+
 function ITEM:SetText(textArray, character)
 	-- Trimming last empty pages.
 	for i = 1, #textArray do
@@ -39,6 +43,7 @@ function ITEM:SetText(textArray, character)
 
 	-- Making sure no line passes the character per page limit
 	for i=1, #textArray do
+		textArray[i] = textArray[i] == nil and "" or textArray[i]
 		if textArray[i]:len() > PLUGIN.characterLimitPerPage then
 			textArray[i] = string.sub(textArray[i],1,PLUGIN.characterLimitPerPage)
 		end
@@ -46,7 +51,6 @@ function ITEM:SetText(textArray, character)
 
 	-- Removing last pages if the character count exceeds the limit.
 	-- In normal conditions, this procedure should not happen as it's checked on clientside.
-	-- firstTime bool is to prevent getting character count twice.
 	local chrCount = self:GetCharacterCount()
 	local chrCountChanged = false
 
@@ -65,7 +69,7 @@ end
 
 ITEM.functions.View = {
 	OnRun = function(item)
-		netstream.Start(item.player, "ixViewBook", item:GetID(), item:GetData("text", {}), 0)
+		netstream.Start(item.player, "ixViewBook", item:GetID(), item:GetData("text", {}), 0, item:GetData("marker", -1))
 		return false
 	end,
 
@@ -76,7 +80,7 @@ ITEM.functions.View = {
 
 ITEM.functions.Edit = {
 	OnRun = function(item)
-		netstream.Start(item.player, "ixViewBook", item:GetID(), item:GetData("text", {}), 1)
+		netstream.Start(item.player, "ixViewBook", item:GetID(), item:GetData("text", {}), 1, item:GetData("marker", -1))
 		return false
 	end,
 
