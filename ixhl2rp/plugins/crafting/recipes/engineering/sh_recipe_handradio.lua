@@ -6,13 +6,19 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Treated Glass"
-RECIPE.category = "Smelting"
-RECIPE.station = "furnace"
+RECIPE.name = "Handheld Radio"
+RECIPE.category = "Electronics"
+RECIPE.station = "workbench"
+RECIPE.blueprint = true
 RECIPE.requirements = {
-	["scrap_glass"] = 1,
-	["chemical_base"] = 375
+    ["refined_electronics"] = 1,
+    ["screws"] = 2,
+    ["plastic_sheet"] = 2
 }
 RECIPE.results = {
-	["treated_glass"] = 1
+	["handheld_radio"] = 1
+}
+RECIPE.tools = {
+    "screwdriver"
+    "pliers"
 }

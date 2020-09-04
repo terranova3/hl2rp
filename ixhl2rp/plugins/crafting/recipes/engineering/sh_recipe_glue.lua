@@ -6,13 +6,13 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Treated Glass"
-RECIPE.category = "Smelting"
-RECIPE.station = "furnace"
+RECIPE.name = "Glue"
+RECIPE.category = "Crafting"
+RECIPE.station = "workbench"
 RECIPE.requirements = {
-	["scrap_glass"] = 1,
+	["cement_powder"] = 1,
 	["chemical_base"] = 375
 }
 RECIPE.results = {
-	["treated_glass"] = 1
+	["glue"] = 1
 }

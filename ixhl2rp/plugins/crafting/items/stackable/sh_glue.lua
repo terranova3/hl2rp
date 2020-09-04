@@ -1,7 +1,7 @@
 
-ITEM.name = "Tube of Glue"
-ITEM.model = Model("models/props_junk/garbage_carboard002a.mdl")
-ITEM.description = "Desc Here."
+ITEM.name = "Bottle of Glue"
+ITEM.model = Model("models/props_hla/props/glue_bottle.mdl")
+ITEM.description = "A tube of what appears to be PVA glue."
 ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 5

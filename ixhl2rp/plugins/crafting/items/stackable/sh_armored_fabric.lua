@@ -9,3 +9,10 @@ ITEM.category = "Crafting"
 ITEM.noBusiness = true
 ITEM.maxStack = 5;
 ITEM.defaultStack = 1;
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "refined_metal",
+        amount = 1,
+        data = {}
+    }
+}

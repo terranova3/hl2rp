@@ -55,3 +55,11 @@ ITEM.functions.take.OnCanRun = function(item)
 
 	return IsValid(item.entity) and (owner == 0 or owner == item.player:GetCharacter():GetID())
 end
+
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "rollingpaper",
+        amount = 2,
+        data = {}
+    }
+}

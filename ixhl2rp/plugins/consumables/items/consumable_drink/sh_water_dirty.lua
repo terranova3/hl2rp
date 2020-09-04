@@ -12,6 +12,14 @@ ITEM.height = 1
 ITEM.price = 5
 ITEM.category = "Crafting"
 ITEM.noBusiness = true
+ITEM.tool = "water_filter"
+ITEM.breakdown = {
+    [1] = {
+        uniqueID = "bottleofwater",
+        amount = 1,
+        data = {}
+    }
+}
 
 function ITEM:Combine(targetItem)
     local client = self.player
@@ -22,3 +30,4 @@ function ITEM:Combine(targetItem)
 	   return true
 	end
 end
+
