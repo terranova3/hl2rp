@@ -30,6 +30,48 @@ function PANEL:SetRecipe(recipe)
     self.header:DockMargin(2,2,2,2)
     self.header:SetTall(32)
     self.header:SetDrawBackground(false)
+
+    if(recipe:GetMastery()) then
+        self.masteryIcon = self.header:Add("Material")
+        self.masteryIcon:Dock(RIGHT)
+        self.masteryIcon:DockMargin(4, 4, 4, 4)
+        self.masteryIcon:SetWide(28)
+        self.masteryIcon:SetMaterial("terranova/ui/crafting/icons/" .. recipe:GetProfession() ..".png")
+        self.masteryIcon.AutoSize = false
+        self.masteryIcon:SetHelixTooltip(function(tooltip)
+            local name = tooltip:AddRow("description")
+            name:SetText("Mastery")
+            name:SetImportant()
+            name:SetFont("ixMediumFont")
+            name:SizeToContents()
+
+            local description = tooltip:AddRow("description")
+            description:SetText("This recipe requires that you have it's profession mastered in order to use it.")
+            description:SetFont("ixPluginTooltipDescFont")
+            description:SizeToContents()
+        end)
+    end
+    
+    if(recipe:GetBlueprint()) then
+        self.blueprintIcon = self.header:Add("Material")
+        self.blueprintIcon:Dock(RIGHT)
+        self.blueprintIcon:DockMargin(4, 4, 4, 4)
+        self.blueprintIcon:SetWide(28)
+        self.blueprintIcon:SetMaterial("terranova/ui/crafting/blueprint.png")
+        self.blueprintIcon.AutoSize = false
+        self.blueprintIcon:SetHelixTooltip(function(tooltip)
+            local name = tooltip:AddRow("description")
+            name:SetText("Blueprint")
+            name:SetImportant()
+            name:SetFont("ixMediumFont")
+            name:SizeToContents()
+
+            local description = tooltip:AddRow("description")
+            description:SetText("This recipe requires that you have a blueprint unlocked in order to use it.")
+            description:SetFont("ixPluginTooltipDescFont")
+            description:SizeToContents()
+        end)
+    end
     
     local item = ix.item.list[recipe:GetFirstResult()]
 

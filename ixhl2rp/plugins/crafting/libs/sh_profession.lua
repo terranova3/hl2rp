@@ -34,19 +34,6 @@ function ix.profession.Get(uniqueID)
 	return nil
 end
 
--- Returns all the displayable professions in the crafting menu.
-function ix.profession.GetDisplayable()
-	local displayable = {}
-
-	for k, v in pairs(ix.profession.stored) do
-		if(v:ShouldDisplay()) then
-			table.insert(displayable, v)
-		end
-	end
-
-	return displayable
-end
-
 -- Returns all the recipes for a profession
 function ix.profession.GetRecipes(uniqueID)
 	local recipes = {}

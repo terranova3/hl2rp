@@ -7,6 +7,9 @@
 --]]
 
 util.AddNetworkString("ixRecipeCraft")
+util.AddNetworkString("ixMasterProfession")
+
+local PLUGIN = PLUGIN
 
 net.Receive("ixRecipeCraft", function(length, client)
     local uniqueID = net.ReadString(16)
@@ -22,7 +25,20 @@ net.Receive("ixRecipeCraft", function(length, client)
     end
 end)
 
-local PLUGIN = PLUGIN
+net.Receive("ixMasterProfession", function(length, client)
+    local uniqueID = net.ReadString(16)
+    local character = client:GetCharacter()
+
+    if(!character or !uniqueID) then
+        return
+    end
+
+    if(character:GetMastery()) then
+        -- return (commented out for testing)
+    end
+
+    PLUGIN:SetMastery(character, uniqueID)
+end)
 
 -- Called when we need to add a blueprint to a character.
 function PLUGIN:AddBlueprint(character, blueprint)

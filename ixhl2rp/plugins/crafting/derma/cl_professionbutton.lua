@@ -18,25 +18,30 @@ end
 
 -- Called when the button is clicked.
 function PANEL:DoClick()
+    local professionButtons = self.otherButtons or ix.gui.crafting.professionButtons
+
     if(self:IsEnabled()) then
         LocalPlayer():EmitSound(unpack({"buttons/button14.wav", 35, 255}))
     end
 
-    if(ix.gui.crafting) then
-        for k, v in pairs(ix.gui.crafting.professionButtons) do
-            if(v != self) then
-                v.isSelected = false
-                v:HideHeader()
-            end
+    for k, v in pairs(professionButtons) do
+        if(v != self) then
+            v.isSelected = false
+            v:HideHeader()
         end
+    end
 
-        self.isSelected = true
-
+    self.isSelected = true
+        if(IsValid(ix.gui.crafting)) then
         ix.gui.crafting:BuildRecipes(self.profession)
     end
 
     if(self.profession) then
         ix.gui.selectedProfession = self.profession
+    end
+
+    if(self.PostClick) then
+        self:PostClick()
     end
 end
 
@@ -67,6 +72,14 @@ function PANEL:SetProfession(profession)
         self:ShowHeader()  
         ix.gui.crafting:BuildRecipes(self.profession)
     end
+end
+
+function PANEL:GetProfession()
+    if(self.profession) then
+        return self.profession
+    end
+
+    return nil
 end
 
 -- Called when a player's cursor has entered the button.

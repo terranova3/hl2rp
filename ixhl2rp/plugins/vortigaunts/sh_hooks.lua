@@ -82,7 +82,7 @@ ix.chat.Register("Vortigese", {
 	end,	
 	prefix = {"/v", "/vort"},
 	description = "Says in vortigaunt language",
-	indicator = "Vortigesing",
+	indicator = "chatTalking",
 	deadCanChat = false
 })
 

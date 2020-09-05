@@ -16,7 +16,8 @@ RECIPE.description = "undefined"
 RECIPE.uniqueID = "undefined"
 RECIPE.category = "Crafting"
 RECIPE.profession = nil
-RECIPE.isMastery = false
+RECIPE.mastery = false
+RECIPE.blueprint = false
 RECIPE.requirements = {}
 RECIPE.station = nil
 RECIPE.results = {}
@@ -41,6 +42,11 @@ function RECIPE:GetModel()
 	return self.model
 end
 
+-- Returns the profession this recipe is attached to.
+function RECIPE:GetProfession()
+	return self.profession
+end
+
 -- Returns the results of a recipe
 function RECIPE:GetResults()
 	return self.results
@@ -49,6 +55,16 @@ end
 -- Returns the uniqueid of a recipe.
 function RECIPE:GetUniqueID()
 	return self.uniqueID
+end
+
+-- Returns if a recipe is for blueprints only.
+function RECIPE:GetBlueprint()
+	return self.blueprint
+end
+
+-- Returns if a recipe is mastery only.
+function RECIPE:GetMastery()
+	return self.mastery
 end
 
 -- Returns the first result of a recipe array.
@@ -211,6 +227,14 @@ function RECIPE:CanCraft(client)
 
 	if (!character or !inventory) then
 		return false
+	end
+
+	if(self:GetMastery() and !character:GetMastery(self:GetProfession())) then
+		return false, string.format("You require a mastery in the %s profession to use this recipe.", self:GetProfession())
+	end
+
+	if(self:GetBlueprint() and !character:HasBlueprint(self:GetUniqueID())) then
+		return false, "You don't have the blueprint for this recipe unlocked!"
 	end
 
 	for uniqueID, value in pairs(self.requirements or {}) do
