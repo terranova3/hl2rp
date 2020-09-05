@@ -52,7 +52,7 @@ end
 
 -- Called when we are setting the mastery of a character.
 function PLUGIN:SetMastery(character, uniqueID)
-    local profession = ix.profression.Get(uniqueID)
+    local profession = ix.profession.Get(uniqueID)
 
     if(profession) then
         character:SetVar("mastery", uniqueID)
