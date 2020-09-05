@@ -33,9 +33,9 @@ net.Receive("ixMasterProfession", function(length, client)
         return
     end
 
-    if(character:GetMastery()) then
+    --if(character:GetMastery()) then
         -- return (commented out for testing)
-    end
+    --end
 
     PLUGIN:SetMastery(character, uniqueID)
 end)
