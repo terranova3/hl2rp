@@ -3,8 +3,6 @@
     without permission of its author.
 --]]
 
-local PLUGIN = PLUGIN
-
 FACTION.name = "Overwatch Transhuman Arm"
 FACTION.description = "Either drafted or volunteered, members of the Overwatch Transhuman Arm today serve the Combine as eager suppressors of humanity, and their new lords ruthless exterminators."
 FACTION.color = Color(150, 50, 50, 255)
@@ -38,7 +36,6 @@ FACTION.npcRelations = {
 
 function FACTION:OnCharacterCreated(client, character)
     local inventory = character:GetInventory()
-    local rand = Schema:ZeroNumber(math.random(1, 99999), 5)
 
 	character:SetData("cpVoiceType", "HLA")
     character:SetCustomClass("Overwatch Transhuman Arm")
