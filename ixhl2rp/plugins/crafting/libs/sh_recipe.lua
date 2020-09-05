@@ -34,7 +34,7 @@ function ix.recipe.LoadFromDir(directory, category)
 		end
 
 		if(RECIPE.blueprint) then
-			ix.recipe.GenerateBlueprint(RECIPE.blueprint)
+			ix.recipe.GenerateBlueprint(RECIPE)
 		end
 
 		RECIPE = nil
@@ -70,18 +70,18 @@ function ix.recipe.GetCategories(recipes)
 	return categories
 end
 
-function ix.recipe.GenerateBlueprint(blueprint)
-	if(ix.item.list["blueprint_"..blueprint]) then
+function ix.recipe.GenerateBlueprint(recipe)
+	if(ix.item.list["blueprint_"..recipe.uniqueID]) then
 		return
 	end
 
-	local ITEM = ix.item.Register( "blueprint_" .. blueprint, nil, nil, nil, true)
-    ITEM.name = "Blueprint: " .. blueprint
+	local ITEM = ix.item.Register( "blueprint_" .. recipe.uniqueID, nil, nil, nil, true)
+    ITEM.name = "Blueprint: " .. recipe.name
     ITEM.description = "\n Unlocks access to craft this item."
     ITEM.model = "models/gibs/props_office/books_3_gib1.mdl"
     ITEM.category = "Blueprint"
 	ITEM.noBusiness = true
-	ITEM.blueprint = blueprint
+	ITEM.blueprint = recipe.uniqueID
     ITEM.functions.learn = {
         name = "Learn Blueprint",
         icon = "icon16/book_open.png",
