@@ -63,9 +63,9 @@ function PANEL:Init()
             description:SetFont("ixPluginTooltipDescFont")
             description:SizeToContents()
 
-            if(v.division) then
+            if(v.voiceType) then
                 local division = tooltip:AddRow("description")
-                division:SetText(string.format("\nThis will set you to the '%s' division.", v.division))
+                division:SetText(string.format("\nThis will set your voice type to '%s'.", v.voiceType))
                 division:SetFont("ixPluginTooltipDescFont")
                 division:SizeToContents()
             end

@@ -39,9 +39,6 @@ ix.anim:AddCombineHands("overwatchsuppressorregular.mdl");
 
 local PLUGIN = PLUGIN
 PLUGIN.config = {}
-PLUGIN.config.abbreviation = "OTA-S17"
-PLUGIN.config.defaultDivision = "PHANTOM"
-PLUGIN.config.namingScheme = "abbreviation:rank.division-id"
 PLUGIN.config.otaTypes = {
 	[1] = {
 		name = "SCOT-M",

@@ -41,16 +41,9 @@ function FACTION:OnCharacterCreated(client, character)
     local rand = Schema:ZeroNumber(math.random(1, 99999), 5)
 
 	character:SetData("cpVoiceType", "HLA")
-    character:SetData("division", PLUGIN.config.defaultDivision)
-	character:SetData("id", client.storedOtaName or rand)
     character:SetCustomClass("Overwatch Transhuman Arm")
 
     inventory:Add("handheld_radio", 1)
-
-    PLUGIN:UpdateOverwatchName(character)
-    
-    -- Cleanup
-    client.storedOtaName = nil
 end
 
 function FACTION:GetDefaultName(client)
