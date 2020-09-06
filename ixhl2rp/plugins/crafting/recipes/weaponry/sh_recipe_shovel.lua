@@ -6,16 +6,20 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Weapon Magazine"
-RECIPE.category = "Machining"
-RECIPE.station = "machining_table"
+RECIPE.name = "Shovel"
+RECIPE.category = "Melee"
+RECIPE.station = "workbench"
+RECIPE.blueprint = true
 RECIPE.requirements = {
-    ["refined_metal"] = 1,
-    ["plastic_sheet"] = 1
+    ["refined_metal"] = 4,
+    ["screws"] = 1,
+    ["glue"] = 2,
+    ["plank"] = 1
 }
 RECIPE.results = {
-	["gun_trigger"] = 1
+	["axe"] = 1
 }
 RECIPE.tools = {
-	"pliers"
+    "hammer"
+    "screwdriver"
 }

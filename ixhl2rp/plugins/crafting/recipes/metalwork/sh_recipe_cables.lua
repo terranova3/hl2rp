@@ -10,8 +10,8 @@ RECIPE.name = "Cable"
 RECIPE.category = "Crafting"
 RECIPE.station = "workbench"
 RECIPE.requirements = {
-    ["scrap_metal"] = 2,
-    ["plastic_sheet"] = 1
+    ["scrap_metal"] = 4,
+    ["plastic_sheet"] = 2
 }
 RECIPE.results = {
 	["cable"] = 1

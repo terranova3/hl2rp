@@ -10,8 +10,8 @@ RECIPE.name = "Battery"
 RECIPE.category = "Crafting"
 RECIPE.station = "workbench"
 RECIPE.requirements = {
-    ["scrap_electronics"] = 3,
-    ["scrap_metal"] = 1
+    ["scrap_electronics"] = 5,
+    ["scrap_metal"] = 3
 }
 RECIPE.results = {
 	["battery_h"] = 1

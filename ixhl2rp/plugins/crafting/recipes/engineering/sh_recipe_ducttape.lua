@@ -10,7 +10,7 @@ RECIPE.name = "Duct Tape"
 RECIPE.category = "Crafting"
 RECIPE.station = "workbench"
 RECIPE.requirements = {
-	["glue"] = 1,
+	["glue"] = 2,
 	["plastic_sheet"] = 1
 }
 RECIPE.results = {

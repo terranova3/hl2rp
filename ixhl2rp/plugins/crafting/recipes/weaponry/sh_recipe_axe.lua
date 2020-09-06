@@ -9,14 +9,16 @@
 RECIPE.name = "Axe"
 RECIPE.category = "Melee"
 RECIPE.station = "workbench"
+RECIPE.blueprint = true
 RECIPE.requirements = {
-    ["refined_metal"] = 1,
-    ["glue"] = 1,
+    ["refined_metal"] = 2,
+    ["glue"] = 2,
     ["plank"] = 1
 }
 RECIPE.results = {
 	["axe"] = 1
 }
 RECIPE.tools = {
-	"hammer"
+    "hammer"
+    "grind_stone"
 }

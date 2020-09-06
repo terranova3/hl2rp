@@ -12,7 +12,7 @@ RECIPE.station = "workbench"
 RECIPE.mastery = true
 RECIPE.requirements = {
     ["scrap_electronics"] = 5,
-    ["screws"] = 1,
+    ["screws"] = 2,
     ["plastic_sheet"] = 2
 }
 RECIPE.results = {

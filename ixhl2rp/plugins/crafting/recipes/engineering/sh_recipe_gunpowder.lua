@@ -12,7 +12,7 @@ RECIPE.station = "furnace"
 RECIPE.blueprint = true
 RECIPE.requirements = {
     ["nitre"] = 3,
-    ["charcoal"] = 2
+    ["charcoal"] = 3
 }
 RECIPE.results = {
 	["gunpowder"] = 1

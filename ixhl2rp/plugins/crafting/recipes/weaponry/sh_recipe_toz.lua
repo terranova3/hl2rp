@@ -10,6 +10,7 @@ RECIPE.name = "Toz-194"
 RECIPE.category = "Weaponry"
 RECIPE.station = "machining_table"
 RECIPE.blueprint = true
+RECIPE.mastery = true
 RECIPE.requirements = {
     ["gun_frame"] = 2,
     ["gun_barrel"] = 2,

@@ -6,13 +6,22 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Refine Metal"
-RECIPE.category = "Smelting"
-RECIPE.station = "furnace"
+RECIPE.name = "Fal"
+RECIPE.category = "Weaponry"
+RECIPE.station = "machining_table"
+RECIPE.blueprint = true
 RECIPE.mastery = true
 RECIPE.requirements = {
-    ["scrap_metal"] = 5
+    ["gun_frame"] = 2,
+    ["gun_barrel"] = 1,
+    ["gun_trigger"] = 1,
+    ["gun_unique"] = 5,
+    ["gun_chamber"] = 2
 }
 RECIPE.results = {
-	["refine_metal"] = 1
+	["fal"] = 1
+}
+RECIPE.tools = {
+    "screwdriver",
+    "hammer"
 }

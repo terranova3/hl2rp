@@ -6,16 +6,17 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Weapon Stock"
+RECIPE.name = "Weapon Chambering"
 RECIPE.category = "Machining"
 RECIPE.station = "machining_table"
+RECIPE.blueprint = true
 RECIPE.requirements = {
-    ["refined_metal"] = 2,
-    ["screws"] = 1,
-    ["plastic_sheet"] = 2
+    ["refined_metal"] = 5,
+    ["screws"] = 2,
+    ["plastic_sheet"] = 3
 }
 RECIPE.results = {
-	["gun_stock"] = 1
+	["gun_chamber"] = 1
 }
 RECIPE.tools = {
 	"screwdriver"

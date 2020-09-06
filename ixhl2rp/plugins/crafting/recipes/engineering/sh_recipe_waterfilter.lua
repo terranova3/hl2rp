@@ -10,7 +10,7 @@ RECIPE.name = "Water Filter"
 RECIPE.category = "Crafting"
 RECIPE.station = "workbench"
 RECIPE.requirements = {
-    ["plastic_sheet"] = 2,
+    ["plastic_sheet"] = 5,
     ["charcoal_filter"] = 2
 }
 RECIPE.results = {

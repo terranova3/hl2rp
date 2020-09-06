@@ -6,16 +6,19 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Weapon Barrel"
+RECIPE.name = "Weapon Magazine"
 RECIPE.category = "Machining"
 RECIPE.station = "machining_table"
 RECIPE.requirements = {
-    ["refined_metal"] = 2,
-    ["bolts"] = 1
+    ["refined_metal"] = 3,
+    ["screws"] = 2,
+    ["plastic_sheet"] = 2
+    ["empty_ammo_box"] = 1
+    ["gunpowder"] = 3
 }
 RECIPE.results = {
-	["gun_barrel"] = 1
+	["gun_magazine"] = 1
 }
 RECIPE.tools = {
-	"wrench"
+	"screwdriver"
 }

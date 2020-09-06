@@ -11,9 +11,9 @@ RECIPE.category = "Machining"
 RECIPE.station = "machining_table"
 RECIPE.blueprint = true
 RECIPE.requirements = {
-    ["refined_metal"] = 2,
-    ["screws"] = 1,
-    ["plastic_sheet"] = 4
+    ["refined_metal"] = 3,
+    ["screws"] = 2,
+    ["plastic_sheet"] = 5
 }
 RECIPE.results = {
 	["gun_frame"] = 1

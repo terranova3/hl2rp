@@ -10,7 +10,7 @@ RECIPE.name = "Treated Glass"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
-	["scrap_glass"] = 1,
+	["scrap_glass"] = 5,
 	["chemical_base"] = 375
 }
 RECIPE.results = {

@@ -11,7 +11,7 @@ RECIPE.category = "Electronics"
 RECIPE.station = "workbench"
 RECIPE.blueprint = true
 RECIPE.requirements = {
-    ["refined_electronics"] = 1,
+    ["refined_electronics"] = 2,
     ["screws"] = 2,
     ["plastic_sheet"] = 2
 }

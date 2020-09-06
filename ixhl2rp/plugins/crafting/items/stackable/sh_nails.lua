@@ -8,5 +8,5 @@ ITEM.price = 15
 ITEM.category = "Crafting"
 ITEM.rarity = "Common"
 ITEM.noBusiness = true
-ITEM.maxStack = 10;
+ITEM.maxStack = 25;
 ITEM.defaultStack = 1;

@@ -10,7 +10,7 @@ RECIPE.name = "Plastic Sheet"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
-    ["chunk_of_plastic"] = 2
+    ["chunk_of_plastic"] = 3
 }
 RECIPE.results = {
 	["plastic_sheet"] = 1

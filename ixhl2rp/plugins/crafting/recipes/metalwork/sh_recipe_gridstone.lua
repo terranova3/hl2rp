@@ -6,13 +6,17 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Refine Metal"
-RECIPE.category = "Smelting"
-RECIPE.station = "furnace"
-RECIPE.mastery = true
+RECIPE.name = "Grind Stone"
+RECIPE.category = "Crafting"
+RECIPE.station = "workbench"
 RECIPE.requirements = {
-    ["scrap_metal"] = 5
+    ["scrap_metal"] = 3,
+    ["cement_stone"] = 1
 }
 RECIPE.results = {
-	["refine_metal"] = 1
+	["grind_stone"] = 1
+}
+RECIPE.tools = {
+    "hammer"
+    "screwdriver"
 }

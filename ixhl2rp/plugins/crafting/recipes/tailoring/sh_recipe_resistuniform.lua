@@ -9,6 +9,7 @@
 RECIPE.name = "Armored Uniform"
 RECIPE.category = "Armored Clothing"
 RECIPE.station = "workbench"
+RECIPE.blueprint = true
 RECIPE.mastery = true
 RECIPE.requirements = {
     ["sewn_cloth"] = 5,

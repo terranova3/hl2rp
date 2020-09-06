@@ -10,10 +10,10 @@ RECIPE.name = "Flashlight"
 RECIPE.category = "Electronics"
 RECIPE.station = "workbench"
 RECIPE.requirements = {
-    ["scrap_metal"] = 1,
-    ["battery_h"] = 1,
+    ["scrap_metal"] = 3,
+    ["battery_h"] = 2,
     ["treated_glass"] = 1,
-    ["plastic_sheet"] = 2
+    ["plastic_sheet"] = 4
 }
 RECIPE.results = {
 	["flashlight"] = 1

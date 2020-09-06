@@ -7,5 +7,5 @@ ITEM.height = 1
 ITEM.price = 55
 ITEM.category = "Crafting"
 ITEM.noBusiness = true
-ITEM.maxStack = 5;
+ITEM.maxStack = 10;
 ITEM.defaultStack = 1;

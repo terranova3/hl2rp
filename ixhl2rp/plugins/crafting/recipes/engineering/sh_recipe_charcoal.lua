@@ -10,7 +10,7 @@ RECIPE.name = "Charcoal"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
-	["wood_piece"] = 3
+	["wood_piece"] = 5
 }
 RECIPE.results = {
 	["charcoal"] = 2

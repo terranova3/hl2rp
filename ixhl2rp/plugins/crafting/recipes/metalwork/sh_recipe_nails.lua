@@ -10,7 +10,7 @@ RECIPE.name = "Screws"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
-    ["scrap_metal"] = 2
+    ["scrap_metal"] = 5
 }
 RECIPE.results = {
 	["nails"] = 1

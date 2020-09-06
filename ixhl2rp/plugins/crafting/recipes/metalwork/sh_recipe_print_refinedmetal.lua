@@ -10,8 +10,9 @@ RECIPE.name = "Blueprint Refine Metal"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.blueprint = true
+RECIPE.mastery = true
 RECIPE.requirements = {
-    ["scrap_metal"] = 5
+    ["scrap_metal"] = 3
 }
 RECIPE.results = {
 	["refine_metal"] = 1
