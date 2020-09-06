@@ -19,6 +19,6 @@ RECIPE.results = {
 	["axe"] = 1
 }
 RECIPE.tools = {
-    "blow_torch"
+    "blow_torch",
     "grind_stone"
 }

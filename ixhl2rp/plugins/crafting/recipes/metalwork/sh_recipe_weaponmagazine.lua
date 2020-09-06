@@ -13,8 +13,8 @@ RECIPE.mastery = true
 RECIPE.requirements = {
     ["refined_metal"] = 3,
     ["screws"] = 2,
-    ["plastic_sheet"] = 2
-    ["empty_ammo_box"] = 1
+    ["plastic_sheet"] = 2,
+    ["empty_ammo_box"] = 1,
     ["gunpowder"] = 3
 }
 RECIPE.results = {
