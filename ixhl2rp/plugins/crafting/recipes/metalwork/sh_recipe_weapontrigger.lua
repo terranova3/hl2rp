@@ -9,6 +9,7 @@
 RECIPE.name = "Weapon Magazine"
 RECIPE.category = "Machining"
 RECIPE.station = "machining_table"
+RECIPE.mastery = true
 RECIPE.requirements = {
     ["refined_metal"] = 1,
     ["bolts"] = 1,

@@ -9,6 +9,7 @@
 RECIPE.name = "Weapon Stock"
 RECIPE.category = "Machining"
 RECIPE.station = "machining_table"
+RECIPE.mastery = true
 RECIPE.requirements = {
     ["refined_metal"] = 2,
     ["screws"] = 1,
