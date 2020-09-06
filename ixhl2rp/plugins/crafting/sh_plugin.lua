@@ -12,7 +12,13 @@ PLUGIN.author = "Adolphus & Ayreborne"
 PLUGIN.recipes = {}
 
 ix.util.IncludeFolder(PLUGIN, "meta")
+ix.util.IncludeFolder(PLUGIN, "commands")
 ix.util.Include("sv_hooks.lua")
+
+CAMI.RegisterPrivilege({
+	Name = "Helix - Request Character Blueprints",
+	MinAccess = "admin"
+})
 
 -- Called when the plugins are being loaded and we need to include any recipes or professions.
 function PLUGIN:OnLoaded()

@@ -120,6 +120,22 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 			end
 		}
 
+		options["Manage Blueprints"] = {
+			function()
+				if LocalPlayer():IsAdmin() == false then 
+					ix.util.Notify("This function is only available for admins.") 
+					return 
+				end
+
+				if(IsValid(ix.gui.menu)) then
+					ix.gui.menu:Remove()
+				end
+
+				local management = vgui.Create("ixBlueprintManagement")
+				management:MakePopup()
+				management:SetCharacter(client:GetCharacter():GetID())
+			end
+		}
 		options["Give Item"] = {
 		function()
 			if LocalPlayer():IsAdmin() == false then ix.util.Notify("This function is only available for admins.") return end

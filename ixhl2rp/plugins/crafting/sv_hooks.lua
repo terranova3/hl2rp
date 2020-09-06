@@ -6,10 +6,34 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
+local PLUGIN = PLUGIN
+
 util.AddNetworkString("ixRecipeCraft")
 util.AddNetworkString("ixMasterProfession")
+util.AddNetworkString("ixRequestBlueprints")
+util.AddNetworkString("ixSendBlueprints")
+util.AddNetworkString("ixManageBlueprints")
 
-local PLUGIN = PLUGIN
+net.Receive("ixRequestBlueprints", function(length, client)
+    local charID = net.ReadInt(32)
+    local target = ix.char.loaded[charID]
+
+    if(!CAMI.PlayerHasAccess(client, "Helix - Request Character Blueprints", nil)) then
+        return
+    end
+
+    if(!client:GetCharacter() or !target) then
+        return
+    end
+
+    local blueprints = target:GetVar("blueprints", {})
+
+    PrintTable(blueprints)
+    net.Start("ixSendBlueprints")
+        net.WriteString(target:GetName(), 32)
+        net.WriteTable(blueprints)
+    net.Send(client)
+end)
 
 net.Receive("ixRecipeCraft", function(length, client)
     local uniqueID = net.ReadString(16)
