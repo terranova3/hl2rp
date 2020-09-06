@@ -7,7 +7,7 @@ ITEM.flag = "Z"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 185;
-
+ITEM.noBusiness = true
 
 ITEM.iconCam = {
 	pos = Vector(-2.5, 248.36601257324, 3.4),

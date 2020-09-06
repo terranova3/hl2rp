@@ -12,3 +12,4 @@ ITEM.bodyGroups = {
 	["kevlar"] = 5
 }
 ITEM.category = "Clothing - Contraband";
+ITEM.noBusiness = true

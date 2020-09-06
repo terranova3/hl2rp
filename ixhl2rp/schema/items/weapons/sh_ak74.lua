@@ -7,6 +7,7 @@ ITEM.width = 4
 ITEM.height = 2
 ITEM.flag = "Z"
 ITEM.price = 385;
+ITEM.noBusiness = true
 
 ITEM.pacData = {
 	[1] = {

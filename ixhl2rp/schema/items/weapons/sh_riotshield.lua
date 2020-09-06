@@ -8,6 +8,7 @@ ITEM.flag = "V"
 ITEM.width = 3
 ITEM.height = 4
 ITEM.bDropOnDeath = false
+ITEM.noBusiness = true
 
 ITEM.pacData = {
 	[1] = {

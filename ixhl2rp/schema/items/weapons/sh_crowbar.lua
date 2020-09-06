@@ -7,6 +7,8 @@ ITEM.weaponCategory = "melee"
 ITEM.flag = "v"
 ITEM.width = 3
 ITEM.height = 1
+ITEM.noBusiness = true
+
 ITEM.iconCam = {
 	ang	= Angle(-0.23955784738064, 270.44906616211, 0),
 	fov	= 10.780103254469,

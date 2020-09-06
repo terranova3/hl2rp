@@ -8,6 +8,7 @@ ITEM.flag = "V"
 ITEM.width = 1
 ITEM.height = 3
 ITEM.bDropOnDeath = true
+ITEM.noBusiness = true
 
 
 ITEM.iconCam = {

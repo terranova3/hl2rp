@@ -8,3 +8,4 @@ ITEM.flag = "V"
 ITEM.width = 1
 ITEM.height = 2
 ITEM.bDropOnDeath = true
+ITEM.noBusiness = true
