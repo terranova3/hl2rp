@@ -14,6 +14,12 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 			ITEM.hooks = ITEM.hooks or {}
 			ITEM.postHooks = ITEM.postHooks or {}
 			ITEM.functions = ITEM.functions or {}
+			ITEM.dropSound = {
+				"terranova/ui/move1.wav",
+				"terranova/ui/move2.wav",
+				"terranova/ui/move3.wav",
+				"terranova/ui/move4.wav"
+			}
 			ITEM.functions.drop = ITEM.functions.drop or {
 				tip = "dropTip",
 				icon = "icon16/world.png",

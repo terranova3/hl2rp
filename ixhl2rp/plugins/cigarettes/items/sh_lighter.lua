@@ -18,6 +18,8 @@ function ITEM:Combine(targetItem)
 
 		if(error) then
 			self:GetOwner():Notify(error)
+		else
+			self:GetOwner():GetCharacter():PlaySound("terranova/ui/smoke.wav")
 		end
 	end
 end

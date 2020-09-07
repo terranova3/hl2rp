@@ -17,6 +17,6 @@ RECIPE.results = {
 	["grind_stone"] = 1
 }
 RECIPE.tools = {
-    "hammer"
+    "hammer",
     "screwdriver"
 }

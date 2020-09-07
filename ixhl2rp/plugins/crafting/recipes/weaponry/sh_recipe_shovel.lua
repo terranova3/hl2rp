@@ -20,6 +20,6 @@ RECIPE.results = {
 	["axe"] = 1
 }
 RECIPE.tools = {
-    "hammer"
+    "hammer",
     "screwdriver"
 }

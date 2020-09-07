@@ -17,6 +17,18 @@ ITEM.pacDataAlternate = PLUGIN.pacData.lit
 ITEM.functions.Equip = {
 	icon = "icon16/tick.png",
 	OnRun = function(item)
+		local character = item.player:GetCharacter()
+
+		for k, v in pairs(character:GetInventory():GetItems()) do
+			if(v.Light and v:GetData("equip", false) == true) then
+				return "You already have a cigarette equipped."
+			end
+		end 
+
+		if(ix.plugin.list.toxicgas:IsGasImmune(item.player)) then
+			return "You can't equip a cigarette right now."
+		end
+
 		item:SetData("equip", true)
 		item.player:AddPart(item.uniqueID, item)
 

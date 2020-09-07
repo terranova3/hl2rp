@@ -54,11 +54,17 @@ function PANEL:SetProfession(profession)
     else
         self:SetText("")
     end
+    
+    local professionText = profession.name
+
+    if(LocalPlayer():GetCharacter():GetMastery() == profession.uniqueID) then
+        professionText = professionText .. " (Mastered)"
+    end
 
     self.header = self:Add("DButton")
 	self.header:SetTall(30)
 	self.header:SetFont("ixPluginCharSubTitleFont")
-	self.header:SetText(profession.name or "")
+	self.header:SetText(professionText)
 	self.header:SetWide(self.actualWidth)
 	self.header.Paint = function(header, w, h)
 		surface.SetDrawColor(profession:GetColor())
@@ -87,9 +93,8 @@ function PANEL:OnCursorEntered()
     if(self:IsEnabled()) then
         LocalPlayer():EmitSound(unpack({"buttons/button15.wav", 35, 250}))
         self.drawColor = Color(40, 40, 40, 180)
+        self:ShowHeader()
     end
-
-    self:ShowHeader()
 end
 
 -- Called when a player's cursor has exited the button.

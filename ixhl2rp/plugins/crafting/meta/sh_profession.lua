@@ -15,10 +15,15 @@ PROFESSION.name = "undefined"
 PROFESSION.description = "undefined"
 PROFESSION.uniqueID = "undefined"
 PROFESSION.mastery = true
+PROFESSION.enabled = true
 
 -- Called when the name of a profession is needed.
 function PROFESSION:GetName()
 	return self.name
+end
+
+function PROFESSION:IsEnabled()
+	return self.enabled
 end
 
 -- Called when the description of a profession is needed.
