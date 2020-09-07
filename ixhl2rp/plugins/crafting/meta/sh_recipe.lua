@@ -97,14 +97,11 @@ end
 -- Called when we need to get the requirements string of a recipe.
 function RECIPE:GetRequirements()
 	local count = table.Count(self.requirements)
-	local i = 1
-	local string = "Requirements:"
+	local string = ""
 
 	for k, v in pairs(self.requirements) do
 		local item = ix.item.list[k]
 		
-		string = string .. "\n"
-
 		if(item) then
 			if(item.capacity) then
 				string = string .. string.format("%smL %s", v, item.name)
@@ -119,11 +116,7 @@ function RECIPE:GetRequirements()
 			end
 		end
 
-		if(i != count) then
-			string = string .. ", "
-		end
-
-		i=i+1
+		string = string .. "\n"
 	end
 
 	return string
@@ -132,19 +125,16 @@ end
 -- Returns the tools required for this recipe as a single string.
 function RECIPE:GetTools()
 	local tools = table.Copy(self.tools) or {}
-	local string = "Tools:"
+	local string = ""
 	
 	if(self.station and ix.stations.Get(self.station)) then
 		table.insert(tools, ix.stations.Get(self.station).name)
 	end
 
 	local count = table.Count(tools)
-	local i = 1
 
 	for k, v in pairs(tools) do
 		local item = ix.item.list[v]
-
-		string = string .. "\n"
 
 		if(item) then
 			string = string .. item.name
@@ -152,11 +142,7 @@ function RECIPE:GetTools()
 			string = string .. v
 		end
 
-		if(i != count) then
-			string = string .. ", "
-		end
-
-		i=i+1
+		string = string .. "\n"
 	end
 
 	return string
@@ -235,6 +221,26 @@ function RECIPE:CanCraft(client)
 
 	if(self:GetBlueprint() and !character:HasBlueprint(self:GetUniqueID())) then
 		return false, "You don't have the blueprint for this recipe unlocked!"
+	end
+
+	for k, v in pairs(self.tools or {}) do
+		local item = ix.item.list[v]
+
+		if(!item) then
+			return false, "Internal error! A tool required for this recipe doesn't exist."
+		end
+
+		if(!character:HasTool(item)) then
+			return false, string.format("You don't have the %s tool in your inventory.", item:GetName())
+		end
+	end
+
+	if(self.station) then
+		local station = ix.stations.Get(self.station)
+		
+		if(station and !character:IsNearEnt(station.uniqueID)) then
+			return false, string.format("You need to be near the %s entity for this recipe to work.", station.name)
+		end
 	end
 
 	for uniqueID, value in pairs(self.requirements or {}) do
