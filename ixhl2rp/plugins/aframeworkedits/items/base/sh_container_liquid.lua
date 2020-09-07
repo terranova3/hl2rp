@@ -33,6 +33,7 @@ ITEM.functions.Drink = {
 
             if(liquid.drinkEffects) then
                 liquid.drinkEffects(itemTable, modifier)
+                client:GetCharacter():PlaySound("terranova/ui/liquidtransfer.wav")
             end
         end
 
@@ -70,6 +71,7 @@ ITEM.functions.Sip = {
 
             if(liquid.drinkEffects) then
                 liquid.drinkEffects(itemTable, modifier)
+                client:GetCharacter():PlaySound("terranova/ui/liquidtransfer.wav")
             end
         end
 
