@@ -17,3 +17,15 @@ ix.config.Add("LookRange", 160, "The distance in which you can see stuff. Defaul
 	category = "Interaction",
 	data = { min = 100, max = 1600 }
 })
+
+ix.option.Add("toggleInventorySound", ix.type.bool, true, {
+    category = "Sound"
+})
+
+ix.option.Add("toggleAmbientMusic", ix.type.bool, true, {
+    category = "Sound"
+})
+
+ix.option.Add("toggleAmbientFadeout", ix.type.bool, true, {
+    category = "Sound"
+})

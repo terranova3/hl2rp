@@ -72,7 +72,7 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		invID = inventoryPanel.invID
 	end
 
-	if(item.dropSound) then
+	if(item.dropSound and ix.option.Get("toggleInventorySound", false)) then
 		if(istable(item.dropSound)) then
 			local randomSound = item.dropSound[math.random(1, table.Count(item.dropSound))]
 			surface.PlaySound(randomSound)
