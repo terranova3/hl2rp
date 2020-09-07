@@ -128,9 +128,10 @@ function PANEL:ShowRecipes(profession)
 	self.categoryList:Dock(FILL)
 	self.categoryList:DockMargin(4,4,4,4)
 
-	local category = vgui.Create("ixCraftingCategory", self);
+	local category = vgui.Create("ixCollapsibleCategory", self);
 	category:SetTitle("Unlocked Recipes")
 	category:DockMargin(0, 0, 0, 8)
+	category.crafting = true
 
 	self.categoryList:Add(category)
 

@@ -10,7 +10,7 @@ RECIPE.name = "Bolts"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
-    ["refine_metal"] = 2
+    ["refined_metal"] = 2
 }
 RECIPE.results = {
 	["bolts"] = 1
