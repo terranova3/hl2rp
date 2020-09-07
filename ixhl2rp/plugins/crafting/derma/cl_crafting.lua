@@ -29,10 +29,9 @@ function PANEL:Init()
 	self.notificationDock.Paint = function() end
 	self.notificationDock:SetVisible(false)
 
-	-- Commented for testing.
-	--if(!self.character:GetMastery()) then
+	if(!self.character:GetMastery()) then
 		self:CreateNotification("You don't have a mastery selected. Click this notification to select one.")
-	--end
+	end
 
 	self.topDock = self:Add("DPanel")
 	self.topDock:Dock(TOP)
@@ -69,6 +68,10 @@ function PANEL:Init()
 		button:SetWide(width / count)
 		button:DockMargin(4, 4, 4, 4)
 		button:Dock(LEFT)
+
+		if(!v:IsEnabled()) then
+			button:SetEnabled(false)
+		end
 
 		-- We have to hard code this value because of the way docking works.
 		button.actualWidth = width / count
@@ -163,6 +166,8 @@ function PANEL:BuildRecipes(profession)
 		
 		category:SetContents(layout)
 	end
+
+	self:ResumeScroll()
 end
 
 -- Called every frame
@@ -178,6 +183,21 @@ function PANEL:Paint()
 
 	surface.SetDrawColor(outlineColor)
 	surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
+end
+
+
+function PANEL:ResumeScroll()
+	local scrollValue = ix.gui.craftScrollValue or 0 -- Localise this value instead of referencing a value that'll change
+	local scrollbar = self.categoryList:GetVBar()
+
+	-- AnimateTo is the only method that'll consistantly reach its destination because of InvalidateLayout
+	scrollbar:AnimateTo(scrollValue, 0.01, 0)
+end
+
+function PANEL:Think()
+	if(IsValid(self.categoryList)) then
+		ix.gui.craftScrollValue = self.categoryList:GetVBar():GetScroll()
+	end
 end
 
 vgui.Register("ixCraftingPanel", PANEL, "ixStagePanel")

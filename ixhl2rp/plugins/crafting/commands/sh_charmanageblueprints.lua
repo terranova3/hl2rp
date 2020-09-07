@@ -6,8 +6,6 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharManageBlueprints", {
     description = "Manages a character's blueprints.",
     adminOnly = true,

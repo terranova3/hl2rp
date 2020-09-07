@@ -6,8 +6,6 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharRemoveBlueprint", {
     description = "Remove a blueprint from a character.",
     adminOnly = true,

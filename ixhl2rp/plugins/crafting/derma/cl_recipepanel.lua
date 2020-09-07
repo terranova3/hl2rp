@@ -11,7 +11,7 @@ local PANEL = {};
 -- Called when this derma is first created.
 function PANEL:Init()
     self:SetText("")
-    self:SetTall(128)
+    self:SetTall(150)
 
     self.drawColor = Color(25, 25, 25, 180)
 end
@@ -123,7 +123,7 @@ function PANEL:SetRecipe(recipe)
     self.requirements:SetContentAlignment(7)
     self.requirements:DockMargin(8, 4, 0, 0)
 	self.requirements:SetTextColor(color_white)
-    self.requirements:SetFont("ixMenuMiniFont")
+    self.requirements:SetFont("ixRecipeDescription")
     self.requirements:SetText(recipe:GetRequirements() or "Invalid requirements for this recipe.")
 
     self.tools = self.requirementsPanel:Add("DLabel")
@@ -131,7 +131,7 @@ function PANEL:SetRecipe(recipe)
     self.tools:SetContentAlignment(7)
     self.tools:DockMargin(8, 4, 0, 0)
 	self.tools:SetTextColor(color_white)
-    self.tools:SetFont("ixMenuMiniFont")
+    self.tools:SetFont("ixRecipeDescription")
     self.tools:SetText(recipe:GetTools() or "No tools required.")
 end
 

@@ -6,8 +6,6 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-local PLUGIN = PLUGIN
-
 ix.command.Add("CharResetMastery", {
     description = "Resets a character's mastery.",
     adminOnly = true,
