@@ -31,3 +31,14 @@ function PLUGIN:OnLoaded()
 		end
 	end
 end
+
+if(CLIENT) then
+	local font = "Futura Std Medium"
+	
+	surface.CreateFont("ixRecipeDescription", {
+		font = font,
+		weight = 200,
+		size = 16,
+		additive = true
+	})
+end
