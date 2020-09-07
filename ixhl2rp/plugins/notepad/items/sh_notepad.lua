@@ -41,8 +41,6 @@ ITEM.functions.View = {
 ITEM.functions.Lock = {
 	icon = "icon16/lock.png",
 	OnRun = function(item)
-		local client = item.player
-
 		item:SetData("locked", false)
 
 		return false
@@ -65,8 +63,6 @@ ITEM.functions.Lock = {
 ITEM.functions.Unlock = {
 	icon = "icon16/lock_open.png",
 	OnRun = function(item)
-		local client = item.player
-
 		item:SetData("locked", true)
 
 		return false

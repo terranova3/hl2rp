@@ -138,7 +138,8 @@ function PANEL:BuildRecipes(profession)
 
 	-- Iterate through all the categories within this profession
 	for title, v in pairs(categories) do
-		local category = vgui.Create("ixCraftingCategory", self);
+		local category = vgui.Create("ixCollapsibleCategory", self);
+		category.crafting = true
 		category:SetTitle(title)
 		category:DockMargin(0, 0, 0, 8)
 

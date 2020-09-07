@@ -13,6 +13,7 @@ function PANEL:Init()
     self:SetPadding(4);
     self:SetLabel("");
     self:Dock(TOP)
+    self.crafting = false
 end
 
 -- Called every frame.
@@ -33,7 +34,7 @@ end
 function PANEL:Paint(w, h)
     local outlineColor = nil
 
-	if(ix.gui.selectedProfession) then
+	if(ix.gui.selectedProfession and self.crafting) then
 		outlineColor = ix.gui.selectedProfession:GetColor()
     end
     
@@ -46,4 +47,4 @@ function PANEL:Paint(w, h)
     surface.DrawText(self.title or "")
 end;
 
-vgui.Register("ixCraftingCategory", PANEL, "DCollapsibleCategory")
+vgui.Register("ixCollapsibleCategory", PANEL, "DCollapsibleCategory")
