@@ -14,12 +14,6 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 			ITEM.hooks = ITEM.hooks or {}
 			ITEM.postHooks = ITEM.postHooks or {}
 			ITEM.functions = ITEM.functions or {}
-			ITEM.dropSound = ITEM.dropSound or {
-				"terranova/ui/move1.wav",
-				"terranova/ui/move2.wav",
-				"terranova/ui/move3.wav",
-				"terranova/ui/move4.wav"
-			}
 			ITEM.functions.drop = ITEM.functions.drop or {
 				tip = "dropTip",
 				icon = "icon16/world.png",
@@ -159,6 +153,12 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 			ITEM.width = ITEM.width or 1
 			ITEM.height = ITEM.height or 1
 			ITEM.category = ITEM.category or "misc"
+			ITEM.dropSound = ITEM.dropSound or {
+				"terranova/ui/move1.wav",
+				"terranova/ui/move2.wav",
+				"terranova/ui/move3.wav",
+				"terranova/ui/move4.wav"
+			}
 
 			if (ITEM.OnRegistered) then
 				ITEM:OnRegistered()
