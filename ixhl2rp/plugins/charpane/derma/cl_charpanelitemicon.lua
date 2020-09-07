@@ -72,6 +72,15 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		invID = inventoryPanel.invID
 	end
 
+	if(item.dropSound) then
+		if(istable(item.dropSound)) then
+			local randomSound = item.dropSound[math.random(1, table.Count(item.dropSound))]
+			surface.PlaySound(randomSound)
+		else
+			surface.PlaySound(item.dropSound)
+		end
+	end
+	
 	net.Start("ixCharPanelTransfer")
 		net.WriteUInt(item.id, 32)
 		net.WriteUInt(invID, 32)
