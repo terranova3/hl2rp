@@ -14,29 +14,3 @@ function ix.charPanel.CreatePanel(id)
 
     return panel
 end
-
-function ix.charPanel.CharPanelShow(client)
-    if(hook.Run("CharPanelShouldShow", client) != nil) then 
-        return hook.Run("CharPanelShouldShow", client)
-    else
-        return true
-    end
-end	
-
-function ix.charPanel.Update(client, isOwn)
-    local bodygroups = client:GetCharacter():GetData("groups", nil)
-    local show = ix.charPanel.CharPanelShow(client)
-
-    netstream.Start(client, "ShowCharacterPanel", show)
-
-    if(show) then
-        net.Start("ixCharPanelLoadModel")
-            net.WriteString(client:GetModel(), 16)
-            net.WriteTable(bodygroups or {})
-        net.Send(client)
-    end
-end
-
-netstream.Hook("CharacterPanelUpdate", function(client, isOwn)
-    ix.charPanel.Update(client, isOwn)
-end)

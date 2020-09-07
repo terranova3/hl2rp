@@ -42,7 +42,7 @@ function PLUGIN:PlayerTick(player)
 end
 
 -- Called when the client is checking if it has access to see the character panel
-function PLUGIN:CharPanelShouldShow(client)
+function PLUGIN:CharPanelCanUse(client)
 	if (client:IsCombine()) then
 		return false
 	end

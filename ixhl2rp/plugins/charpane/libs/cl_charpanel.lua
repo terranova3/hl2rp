@@ -75,6 +75,8 @@ net.Receive("ixCharPanelSet", function()
 					icon.itemID = item.id
 					panel.panels[item.id] = icon
 				end
+
+				panel:UpdateModel()
 			end
 		end
 	end
@@ -106,5 +108,7 @@ net.Receive("ixCharPanelRemove", function()
 
 			icon:Remove()
 		end
+
+		panel:UpdateModel()
 	end
 end)

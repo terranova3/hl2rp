@@ -89,8 +89,8 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		net.WriteUInt(gridY or 0, 6)
 	net.SendToServer()
 
-	if(ix.gui.charpanel.slots[item.outfitCategory]) then
-		ix.gui.charpanel.slots[item.outfitCategory].isEmpty = true
+	if(ix.gui.charPanel.slots[item.outfitCategory]) then
+		ix.gui.charPanel.slots[item.outfitCategory].isEmpty = true
 	end
 end
 
