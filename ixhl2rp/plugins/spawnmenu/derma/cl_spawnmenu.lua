@@ -90,7 +90,6 @@ function PANEL:Init()
 	self:InvalidateParent(true)
 
 	-- The width is that of the parent panel, with '56' being a static value that won't change with resolution.
-	local width = self:GetWide() - 56
 	self.actualWidth = self:GetWide()
 
 	self:BuildButtons()
@@ -107,6 +106,10 @@ function PANEL:BuildButtons()
 		button:SetWide(96)
 		button:SetText(k)
 		button.group = groups[k]
+
+		if(k == "All") then
+			button.highlighted = true
+		end
 
 		function button:DoClick()
 			if(k == "All") then
@@ -162,7 +165,7 @@ function PANEL:BuildItems(array)
     end
 
 	-- Iterate through all the categories within this profession
-	for category, realName in SortedPairs(categoryPanels) do
+	for _, realName in SortedPairs(categoryPanels) do
 		local category = vgui.Create("ixCollapsibleCategory", self);
 		category:SetTitle(realName)
 		category:DockMargin(0, 0, 0, 8)

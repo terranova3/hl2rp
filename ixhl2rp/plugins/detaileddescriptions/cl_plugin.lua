@@ -63,7 +63,7 @@ net.Receive("ixSetDetailedDescriptions", function()
 		textEntry:SetText(LocalPlayer():GetCharacter():GetData("textDetDescData"))
 	end
 	
-	local DButton = vgui.Create("DButton", List)
+	local DButton = vgui.Create("ixNewButton", List)
 	DButton:DockMargin( 0, 0, 0, 0 )
 	DButton:Dock( BOTTOM )
 	DButton:SetText("Edit")
