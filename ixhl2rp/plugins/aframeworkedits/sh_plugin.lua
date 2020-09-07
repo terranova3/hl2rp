@@ -10,6 +10,7 @@ PLUGIN.author = "TERRANOVA";
 ix.util.Include("sv_hooks.lua")
 ix.util.Include("cl_hooks.lua")
 ix.util.IncludeDir(PLUGIN.folder .. "/commands", true)
+ix.util.IncludeDir(PLUGIN.folder .. "/meta", true)
 
 -- Look Range/Distance
 ix.config.Add("LookRange", 160, "The distance in which you can see stuff. Default 160.", nil, {

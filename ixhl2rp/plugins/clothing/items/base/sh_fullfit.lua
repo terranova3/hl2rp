@@ -16,7 +16,8 @@ ITEM.outfitCategory = "model"
 ITEM.maxArmor = 10;
 ITEM.noBusiness = true
 ITEM.suppressed = function(itemTable)
-	local charPanel = itemTable.player:GetCharacter():GetCharPanel()
+	local character = itemtable.player:GetCharacter()
+	local charPanel = character:GetCharPanel()
 
 	if(charPanel:HasEquipped()) then
 		return true, "Equip", "You can't equip a uniform with items in your character panel!"

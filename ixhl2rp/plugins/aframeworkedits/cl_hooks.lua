@@ -13,6 +13,16 @@ PLUGIN.rankIcons = {
 	["gamemaster"] = "icon16/asterisk_yellow.png",
 }
 
+net.Receive("ixStartSound", function()
+	local sound = net.ReadString(32)
+
+	if(!sound) then
+		return
+	end
+
+	surface.PlaySound(sound)
+end)
+
 -- Disables ammo interface in bottom right.
 function PLUGIN:CanDrawAmmoHUD(weapon)
     return false;

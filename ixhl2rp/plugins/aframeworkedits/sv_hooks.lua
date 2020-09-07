@@ -10,6 +10,8 @@ CAMI.RegisterPrivilege({
 	MinAccess = "admin"
 })
 
+util.AddNetworkString("ixStartSound")
+
 -- Called when a player's model has changed.
 function PLUGIN:PlayerModelChanged(client, model)
 	local hands = client:GetHands();
