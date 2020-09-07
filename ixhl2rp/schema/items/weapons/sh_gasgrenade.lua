@@ -6,3 +6,4 @@ ITEM.weaponCategory = "grenade"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.noBusiness = true
+ITEM.isGrenade = true
