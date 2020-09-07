@@ -26,7 +26,7 @@ net.Receive("ixRequestBlueprints", function(length, client)
         return
     end
 
-    local blueprints = target:GetVar("blueprints", {})
+    local blueprints = target:GetData("blueprints", {})
 
     PrintTable(blueprints)
     net.Start("ixSendBlueprints")
@@ -57,9 +57,9 @@ net.Receive("ixMasterProfession", function(length, client)
         return
     end
 
-    --if(character:GetMastery()) then
-        -- return (commented out for testing)
-    --end
+    if(character:GetMastery()) then
+        return
+    end
 
     PLUGIN:SetMastery(character, uniqueID)
 end)
@@ -67,10 +67,10 @@ end)
 -- Called when we need to add a blueprint to a character.
 function PLUGIN:AddBlueprint(character, blueprint)
     if(!character:HasBlueprint(blueprint)) then
-        local blueprints = character:GetVar("blueprints", {})
+        local blueprints = character:GetData("blueprints", {})
 
         table.insert(blueprints, blueprint)
-        character:SetVar("blueprints", blueprints)
+        character:SetData("blueprints", blueprints)
     end
 end
 
@@ -79,6 +79,6 @@ function PLUGIN:SetMastery(character, uniqueID)
     local profession = ix.profession.Get(uniqueID)
 
     if(profession) then
-        character:SetVar("mastery", uniqueID)
+        character:SetData("mastery", uniqueID)
     end
 end

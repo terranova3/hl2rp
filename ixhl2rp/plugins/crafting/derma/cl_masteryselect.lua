@@ -69,6 +69,11 @@ function PANEL:Init()
 		-- This comes last because we need all the data previously, first.
 		button:SetProfession(v)
 		
+		
+		if(!v:IsEnabled()) then
+			button:SetEnabled(false)
+		end
+		
 		function button:PostClick()
 			LocalPlayer().selectedMastery = v
 			ix.gui.masterySelect:ShowRecipes(v)
