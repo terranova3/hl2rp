@@ -29,6 +29,7 @@ ITEM.functions.Drink = {
         if(hasLiquid) then
             itemTable:SetData("currentAmount", 0)
             itemTable.drinkEffects(itemTable, modifier)
+            client:GetCharacter():PlaySound("terranova/ui/drinkingsound.wav")
         end
 
         return false
@@ -57,6 +58,7 @@ ITEM.functions.Sip = {
 
             itemTable:SetData("currentAmount", math.Clamp(newAmount, 0, 9999))
             itemTable.drinkEffects(itemTable, modifier)
+            client:GetCharacter():PlaySound("terranova/ui/drinkingsound.wav")
         end
 
         return false
@@ -105,6 +107,7 @@ function ITEM:Combine(targetItem)
                 targetItem:SetData("currentAmount", targetItem:GetData("currentAmount") + amountToGive)
                 targetItem:SetData("currentLiquid", self.uniqueID)
                 self:SetData("currentAmount", math.Clamp(self:GetData("currentAmount") - amountToGive, 0, 9999))
+                client:GetCharacter():PlaySound("terranova/ui/liquidtransfer.wav")
             else
                 client:Notify(string.format("%s currently is holding a different liquid! You cannot mix different liquids."))
             end
