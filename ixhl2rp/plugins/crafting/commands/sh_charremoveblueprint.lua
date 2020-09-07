@@ -16,7 +16,7 @@ ix.command.Add("CharRemoveBlueprint", {
         ix.type.text
 	},
     OnRun = function(self, client, target, text)
-        local blueprints = target:GetVar("blueprints", {})
+        local blueprints = target:GetData("blueprints", {})
 
         for k, v in pairs(blueprints) do
             if(v == text) then
@@ -24,7 +24,7 @@ ix.command.Add("CharRemoveBlueprint", {
             end
         end
 
-        target:SetVar("blueprints", blueprints)
+        target:SetData("blueprints", blueprints)
 
         client:Notify(string.format("You've removed the %s blueprint from %s", text, target:GetName()))
 
