@@ -60,6 +60,7 @@ function ix.currency.Spawn(pos, amount, angle)
 	money:SetAmount(math.Round(math.abs(amount)))
 	money:SetAngles(angle or angle_zero)
 	money:Activate()
+	money:AdaptModel()
 
 	return money
 end
