@@ -11,6 +11,7 @@ ITEM.description = "Drink Consumable base";
 ITEM.category = "Drinks";
 ITEM.flag = "F"
 ITEM.capacity = 500
+ITEM.bAllowContainer = false
 ITEM.functions.Drink = {
     icon = "icon16/drink.png",
 	OnRun = function(itemTable)
@@ -87,23 +88,23 @@ end
 function ITEM:Combine(targetItem)
     local client = self.player
 
-    if(targetItem.capacity and item:GetLiquid() and targetItem.isContainer) then
+    if(targetItem.capacity and self:GetLiquid() and targetItem.isContainer) then
         local hasSpace, spaceLeft = targetItem:GetSpace()
         local hasLiquid, liquid = targetItem:GetLiquidType()
 
         if(hasSpace) then
-            if(!hasLiquid or liquid == item.uniqueID) then
+            if(!hasLiquid or liquid == self.uniqueID) then
                 local amountToGive
                 
-                if(spaceLeft >= item:GetData("currentAmount", 0)) then
-                    amountToGive = item:GetData("currentAmount", 0)
+                if(spaceLeft >= self:GetData("currentAmount", 0)) then
+                    amountToGive = self:GetData("currentAmount", 0)
                 else
                     amountToGive = spaceLeft
                 end
 
                 targetItem:SetData("currentAmount", targetItem:GetData("currentAmount") + amountToGive)
-                targetItem:SetData("currentLiquid", item.uniqueID)
-                item:SetData("currentAmount", math.Clamp(item:GetData("currentAmount") - amountToGive, 0, 9999))
+                targetItem:SetData("currentLiquid", self.uniqueID)
+                self:SetData("currentAmount", math.Clamp(self:GetData("currentAmount") - amountToGive, 0, 9999))
             else
                 client:Notify(string.format("%s currently is holding a different liquid! You cannot mix different liquids."))
             end
