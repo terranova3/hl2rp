@@ -184,7 +184,7 @@ function PANEL:BuildItems(array)
 		-- Subtracting because of the hard coded margin
 		local width = (self.actualWidth - 50) / 3
 
-        for k, v in pairs(ix.item.list) do
+        for k, v in SortedPairs(ix.item.list) do
             if (v.category) == realName then
                 local item = category:Add("DButton")
                 item:SetText(v.name)
