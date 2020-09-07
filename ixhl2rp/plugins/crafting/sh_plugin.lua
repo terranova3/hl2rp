@@ -7,13 +7,14 @@
 --]]
 
 PLUGIN.name = "Crafting"
-PLUGIN.description = "Description has not been completed yet."
+PLUGIN.description = "Complete overhaul to regular crafting which includes blueprints, professions, masteries, stackables and liquid integration."
 PLUGIN.author = "Adolphus & Ayreborne"
 PLUGIN.recipes = {}
 
 ix.util.IncludeFolder(PLUGIN, "meta")
 ix.util.IncludeFolder(PLUGIN, "commands")
 ix.util.Include("sv_hooks.lua")
+ix.util.Include("cl_hooks.lua")
 
 CAMI.RegisterPrivilege({
 	Name = "Helix - Request Character Blueprints",
@@ -30,15 +31,4 @@ function PLUGIN:OnLoaded()
 			ix.recipe.LoadFromDir(path.."/recipes/".. v.uniqueID, v.uniqueID)
 		end
 	end
-end
-
-if(CLIENT) then
-	local font = "Futura Std Medium"
-	
-	surface.CreateFont("ixRecipeDescription", {
-		font = font,
-		weight = 200,
-		size = 16,
-		additive = true
-	})
 end

@@ -96,7 +96,6 @@ end
 
 -- Called when we need to get the requirements string of a recipe.
 function RECIPE:GetRequirements()
-	local count = table.Count(self.requirements)
 	local string = ""
 
 	for k, v in pairs(self.requirements) do
@@ -130,8 +129,6 @@ function RECIPE:GetTools()
 	if(self.station and ix.stations.Get(self.station)) then
 		table.insert(tools, ix.stations.Get(self.station).name)
 	end
-
-	local count = table.Count(tools)
 
 	for k, v in pairs(tools) do
 		local item = ix.item.list[v]

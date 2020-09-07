@@ -53,7 +53,7 @@ else
 		local stationTable = self:GetStationTable()
 
 		if (stationTable) then
-			--PLUGIN:PopulateStationTooltip(tooltip, stationTable)
+			PLUGIN:PopulateStationTooltip(tooltip, stationTable)
 		end
 	end
 

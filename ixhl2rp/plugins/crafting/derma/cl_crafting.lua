@@ -185,7 +185,6 @@ function PANEL:Paint()
 	surface.DrawOutlinedRect(0, 0, self:GetWide(), self:GetTall())
 end
 
-
 function PANEL:ResumeScroll()
 	local scrollValue = ix.gui.craftScrollValue or 0 -- Localise this value instead of referencing a value that'll change
 	local scrollbar = self.categoryList:GetVBar()
