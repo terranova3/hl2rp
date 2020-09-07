@@ -13,3 +13,6 @@ ITEM.permit = "consumables";
 ITEM.price = 9;
 ITEM.restoreHealth = 9;
 ITEM.flag = "f"
+ITEM.dropSound = {
+"terranova/ui/movingchips.wav",
+}

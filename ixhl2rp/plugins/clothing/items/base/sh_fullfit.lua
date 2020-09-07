@@ -14,6 +14,12 @@ ITEM.height = 2
 ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.outfitCategory = "model"
 ITEM.maxArmor = 10;
+ITEM.dropSound = {
+"terranova/ui/clothes1.wav",
+"terranova/ui/clothes2.wav",
+"terranova/ui/clothes3.wav",
+}
+
 ITEM.noBusiness = true
 ITEM.suppressed = function(itemTable)
 	local character = itemtable.player:GetCharacter()

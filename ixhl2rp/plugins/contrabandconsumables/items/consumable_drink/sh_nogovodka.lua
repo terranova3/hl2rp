@@ -14,3 +14,8 @@ ITEM.capacity = 750
 ITEM.restoreStamina = 22;
 ITEM.category = "Alcohol"
 ITEM.flag = "R"
+ITEM.dropSound = {
+"terranova/ui/movingalcohol1.wav",
+"terranova/ui/movingalcohol2.wav",
+"terranova/ui/movingalcohol3.wav",
+}

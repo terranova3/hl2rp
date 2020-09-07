@@ -14,3 +14,9 @@ ITEM.flag = "f"
 ITEM.price = 10;
 ITEM.capacity = 355
 ITEM.restoreStamina = 4;
+
+ITEM.dropSound = {
+"terranova/ui/movingalcohol1.wav",
+"terranova/ui/movingalcohol2.wav",
+"terranova/ui/movingalcohol3.wav",
+}

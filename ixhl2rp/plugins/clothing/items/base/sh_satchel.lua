@@ -19,6 +19,12 @@ ITEM.height = 2
 ITEM.invWidth = 4
 ITEM.invHeight = 2
 ITEM.isBag = true
+ITEM.dropSound = {
+"terranova/ui/clothes1.wav",
+"terranova/ui/clothes2.wav",
+"terranova/ui/clothes3.wav",
+}
+
 ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.functions.View = {
 	icon = "icon16/briefcase.png",

@@ -16,6 +16,13 @@ ITEM.iconCam = {
 	ang = Angle(90, -90, 0),
 	fov = 7.6470588235294
 }
+
+ITEM.dropSound = {
+"terranova/ui/clothes1.wav",
+"terranova/ui/clothes2.wav",
+"terranova/ui/clothes3.wav",
+}
+
 ITEM.backgroundColor = Color(19, 72, 96, 100)
 ITEM.tool = "knife"
 ITEM.breakdown = {
