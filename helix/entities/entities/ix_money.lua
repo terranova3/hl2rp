@@ -32,6 +32,67 @@ if (SERVER) then
 		end
 	end
 
+	local skinArray = {
+		[1] = 0,
+		[5] = 1,
+		[10] = 2,
+		[20] = 3,
+		[50] = 4,
+		[100] = 5,
+		[200] = 6,
+		[500] = 7
+	}
+
+	function ENT:AdaptModel()
+		local amount = self:GetAmount()
+
+		if(amount == 1) then
+			self:SetCustomModel("single", 1)
+		elseif(amount < 5) then
+			self:SetCustomModel("stack", 1)
+		elseif(amount == 5) then
+			self:SetCustomModel("single", 5)
+		elseif(amount < 9) then
+			self:SetCustomModel("stack", 1)
+		elseif(amount == 10) then
+			self:SetCustomModel("single", 10)
+		elseif(amount < 20) then
+			self:SetCustomModel("stack", 5)
+		elseif(amount == 20) then
+			self:SetCustomModel("single", 20)
+		elseif(amount < 50) then
+			self:SetCustomModel("stack", 10)
+		elseif(amount == 50) then
+			self:SetCustomModel("single", 50)
+		elseif(amount < 100) then
+			self:SetCustomModel("stack", 20)
+		elseif(amount == 100) then
+			self:SetCustomModel("single", 100)
+		elseif(amount < 200) then
+			self:SetCustomModel("stack", 50)
+		elseif(amount == 200) then
+			self:SetCustomModel("single", 200)
+		elseif(amount < 500) then
+			self:SetCustomModel("stack", 100)
+		elseif(amount == 500) then
+			self:SetCustomModel("single", 500)
+		elseif(amount < 2000) then
+			self:SetCustomModel("stack", 200)
+		else
+			self:SetCustomModel("stack", 500)
+		end
+	end
+
+	function ENT:SetCustomModel(modelType, skin)
+		if(modelType == "stack") then
+			self:SetModel("models/notes/stack.mdl")
+		else
+			self:SetModel("models/notes/singlenote.mdl")
+		end
+
+		self:SetSkin(skinArray[skin])
+	end
+
 	function ENT:Use(activator)
 		if (self.ixSteamID and self.ixCharID) then
 			local char = activator:GetCharacter()

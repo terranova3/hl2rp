@@ -77,7 +77,7 @@ function ix.recipe.GenerateBlueprint(recipe)
 
 	local ITEM = ix.item.Register( "blueprint_" .. recipe.uniqueID, nil, nil, nil, true)
     ITEM.name = "Blueprint: " .. recipe.name
-    ITEM.description = "\n Unlocks access to craft this item."
+    ITEM.description = "\nUnlocks access to craft this item."
     ITEM.model = "models/gibs/props_office/books_3_gib1.mdl"
     ITEM.category = "Blueprint"
 	ITEM.noBusiness = true

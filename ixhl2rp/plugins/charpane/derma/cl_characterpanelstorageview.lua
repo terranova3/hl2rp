@@ -103,10 +103,8 @@ function PANEL:SetStorageInventory(inventory)
 	ix.gui["inv" .. inventory:GetID()] = self.storageInventory
 end
 
-function PANEL:SetStorageCharPanel(charPanel)
-	self.storageCharPanel.isOwn = false
-	self.storageCharPanel:Validate()
-	self.storageCharPanel:SetCharPanel(charPanel)
+function PANEL:SetStorageCharPanel(character, charPanel)
+	self.storageCharPanel:SetCharacter(character)
 	
 	local x, y = self.storageInventory:GetPos()
 	x = (x - self.storageInventory:GetWide()) - 2

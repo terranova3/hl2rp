@@ -44,7 +44,7 @@ function PANEL:Init()
 	local infoLabel = self:Add("DLabel")
 	infoLabel:SetTextColor(Color(255, 255, 255, 25))
 	infoLabel:SetFont("ixMenuMiniFont")
-	infoLabel:SetText("1.1.3")
+	infoLabel:SetText("1.2.0")
 	infoLabel:SizeToContents()
 	infoLabel:SetPos(ScrW() - infoLabel:GetWide() - 4, ScrH() - infoLabel:GetTall() - 4)
 

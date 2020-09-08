@@ -160,15 +160,14 @@ if (SERVER) then
 				item:Transfer(nil, nil, nil, item.player, nil, true, true)
 				item.panelID = targetCharPanel:GetID()
 
-				targetCharPanel:SendSlot(category, item)
-
 				local query = mysql:Update("ix_items")
 					query:Update("panel_id", targetCharPanel:GetID())
 					query:Where("item_id", item.id)
 				query:Execute()
 
-
 				hook.Run("CharPanelItemEquipped", client, item)
+
+				targetCharPanel:SendSlot(category, item)
 
 				return category, targetCharPanel:GetID()
 			else
@@ -186,10 +185,10 @@ if (SERVER) then
 		if (charPanel) then
 			client = charPanel:GetOwner() or nil
 
-			charPanel:Remove(item.id)
 			item.panelID = world
 
 			hook.Run("CharPanelItemUnequipped", client, item)
+			charPanel:Remove(item.id)
 			
 			if(invID == world) then
 				item.invID = world

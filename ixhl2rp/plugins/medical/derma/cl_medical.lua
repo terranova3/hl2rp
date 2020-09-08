@@ -14,22 +14,8 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 			inventoryPanel:SetSize(container:GetWide(), container:GetTall());
 			inventoryPanel:Dock(FILL)
 
-			local show = true
-
-			if(hook.Run("CharPanelShouldShow", LocalPlayer()) != nil) then 
-				show = (hook.Run("CharPanelShouldShow", LocalPlayer()))
-			end
-
-			if(IsValid(ix.gui.charPanel)) then
-				ix.gui.charPanel:Remove()
-			end
-				
-			if(show) then 
-				local cPanel = characterPanel:Add("ixCharacterPane")
-				cPanel:Validate()
-				
-				ix.gui.charPanel = cPanel
-			end
+			local charPanel = characterPanel:Add("ixCharacterPane")
+			charPanel:SetCharacter(LocalPlayer():GetCharacter())
 
 			local canvas = inventoryPanel:Add("DTileLayout")
 

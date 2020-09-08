@@ -149,7 +149,6 @@ else
 
 		if (pacData) then
 			if (itemTable and itemTable.pacAdjust) then
-				print("Adjust")
 				pacData = table.Copy(pacData)
 				pacData = itemTable:pacAdjust(pacData, client, data)
 			end

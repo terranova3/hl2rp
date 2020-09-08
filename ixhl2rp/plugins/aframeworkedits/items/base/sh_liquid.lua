@@ -11,6 +11,7 @@ ITEM.description = "liquid base";
 ITEM.category = "Liquid";
 ITEM.noBusiness = true
 ITEM.capacity = 500
+ITEM.bAllowContainer = false
 
 -- Called when a new instance of this item has been made.
 function ITEM:OnInstanced(invID, x, y)

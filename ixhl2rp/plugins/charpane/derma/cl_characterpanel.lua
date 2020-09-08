@@ -6,70 +6,52 @@
 local PANEL = {}
 local PLUGIN = PLUGIN
 
+-- This tells the UI where to render the slots in the panel.
+PLUGIN.slotPlacements = {
+	["headgear"] = {x = 5, y = 100},
+	["headstrap"] = {x = 291, y = 170},
+	["glasses"] = {x = 291, y = 100},
+	["torso"] = {x = 5, y = 170},
+	["kevlar"] = {x = 5, y = 240},
+	["hands"] = {x = 291, y = 300},
+	["legs"] = {x = 291, y = 370},
+	["bag"] = {x = 5, y = 310},
+	["satchel"] = {x = 5, y = 380},
+}
+
+-- Called when this panel has been created.
 function PANEL:Init()
-	ix.gui.charpanel = self
+	ix.gui.charPanel = self
 
 	self:SetSize(360, 525)
-	self.showModel = true
-	self.isOwn = true
-
-	local character = LocalPlayer():GetCharacter()
-
-	if(self.showModel) then
-		self.model = self:Add("ixModelPanel")
-		self.model:Dock(FILL)
-		self.model:SetModel(LocalPlayer():GetModel(), character:GetData("skin", 0))
-		self.model:SetFOV(50)
-		self.model.alpha = 255
-		self.model:SetAlpha(255)
-	end
-
 	self.panels = {}
-	self.slotPlacements = {
-		["headgear"] = {x = 5, y = 100},
-		["headstrap"] = {x = 291, y = 170},
-		["glasses"] = {x = 291, y = 100},
-		["torso"] = {x = 5, y = 170},
-		["kevlar"] = {x = 5, y = 240},
-		["hands"] = {x = 291, y = 300},
-		["legs"] = {x = 291, y = 370},
-		["bag"] = {x = 5, y = 310},
-		["satchel"] = {x = 5, y = 380},
-	}
-
-	net.Receive("ixCharPanelLoadModel", function()
-		local model = net.ReadString(16)
-		local bodygroups = net.ReadTable()
-		
-		if(IsValid(self.model)) then
-			self.model:SetModel(model, character:GetData("skin", 0))
-
-			if(bodygroups) then 
-				for k, v in pairs(bodygroups) do
-					self.model.Entity:SetBodygroup(k, v)
-				end
-			end
-		end
-	end)
-
-	net.Receive("ixCharPanelUpdateModel", function()
-		local index = net.ReadUInt(8)
-		local bodygroup = net.ReadUInt(8)
-
-		if(IsValid(self.model) and self.model.Entity) then
-			self.model.Entity:SetBodygroup(index, bodygroup)
-		end
-
-		Legs.LegEnt:SetBodygroup(index, bodygroup)
-	end)
 	
 	self:Receiver("ixInventoryItem", self.ReceiveDrop)
 end
 
-function PANEL:Validate()
-	netstream.Start("CharacterPanelUpdate", self.isOwn)
+-- Called when we are setting the target of the character panel
+function PANEL:SetCharacter(character)
+	self.model = self:Add("ixModelPanel")
+	self.model:Dock(FILL)
+	self.model:SetFOV(50)
+	self.model:SetAlpha(255)
+
+	self.character = character
+
+	self:UpdateModel()
+	self:SetCharPanel(self:GetCharacter():GetCharPanel())
 end
 
+-- Returns the character tied to this character panel.
+function PANEL:GetCharacter()
+	if(self.character) then
+		return self.character
+	end
+
+	return nil
+end
+
+-- Called when the panel receives a drop. Used to stop items from dropping to world if they are dropped on the panel's empty space.
 function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	return 
 end
@@ -82,12 +64,43 @@ function PANEL:Think()
 		end
 	end
 
-	if(IsValid(self.model) and !self.isOwn) then
-		self.model:Remove()
+	local character = self:GetCharacter()
+
+	if(character and IsValid(self.model)) then
+		if(character:GetPlayer():GetModel() != self.model:GetModel()) then
+			self:UpdateModel()
+		end
+
+		local showSlots = hook.Run("CharPanelCanUse", character:GetPlayer())
+
+		if(showSlots != false) then
+			showSlots = true
+		end
+
+		self:ToggleSlots(showSlots)
 	end
 end
 
-function PANEL:SetCharPanel(charPanel, bFitParent)
+-- Helper function to set the visibility of the slots.
+function PANEL:ToggleSlots(bShow)
+	for k, v in pairs(self.slots) do
+		if(IsValid(v)) then
+			v:SetVisible(bShow)
+		end
+	end
+end
+
+-- Called when we need to update the model in the character panel.
+function PANEL:UpdateModel()
+	self.model:SetModel(self:GetCharacter():GetPlayer():GetModel(), self:GetCharacter():GetData("skin", 0))
+
+	for k, v in pairs(self:GetCharacter():GetData("groups", {})) do
+        self.model.Entity:SetBodygroup(k, v)
+    end
+end
+
+-- Called when we are assigning all the character panel data to this panel.
+function PANEL:SetCharPanel(charPanel)
 	self.panelID = charPanel:GetID()
 
 	self:BuildSlots();
@@ -116,14 +129,16 @@ function PANEL:SetCharPanel(charPanel, bFitParent)
 	end
 end
 
+-- Returns a slot's placement inside the panel.
 function PANEL:GetIconPlacement(category)
-	return self.slotPlacements[category];
+	return PLUGIN.slotPlacements[category];
 end;
 
+-- Called when we need to build all the UI slots for the panel.
 function PANEL:BuildSlots()
 	self.slots = self.slots or {}
 
-	for k, v in pairs(self.slotPlacements) do
+	for k, v in pairs(PLUGIN.slotPlacements) do
 		if(v.condition or v.condition == nil) then
 			local slot = self:Add("ixCharacterEquipmentSlot");
 			slot.category = k;
@@ -136,6 +151,7 @@ function PANEL:BuildSlots()
 	end;
 end
 
+-- Called when we are adding items into their slots.
 function PANEL:AddIcon(item, model, category, skin)
 	local panel = self:Add("ixCharPanelItemIcon")
 	local pos = self:GetIconPlacement(category);
@@ -196,6 +212,7 @@ function PANEL:AddIcon(item, model, category, skin)
 	return panel
 end;
 
+-- Called every frame.
 function PANEL:Paint()
 	derma.SkinFunc("PaintCategoryPanel", self, "", ix.config.Get("color") or color_white)
 	surface.SetDrawColor(0, 0, 0, 50);	
@@ -207,25 +224,3 @@ function PANEL:Paint()
 end;
 
 vgui.Register("ixCharacterPane", PANEL, "DPanel")
-
-netstream.Hook("ShowCharacterPanel", function(show)
-	local charPanel = LocalPlayer():GetCharacter():GetCharPanel()
-
-	if(!show) then
-		if(IsValid(ix.gui.charPanel)) then
-			ix.gui.charPanel:Remove()
-		end
-
-		return
-	end
-
-	if(!IsValid(ix.gui.charPanel) and IsValid(ix.gui.containerCharPanel)) then
-		local cPanel = ix.gui.containerCharPanel:Add("ixCharacterPane")
-
-		ix.gui.charPanel = cPanel
-	end
-
-	if (charPanel and ix.gui.charPanel and IsValid(ix.gui.charPanel)) then
-		ix.gui.charPanel:SetCharPanel(charPanel)
-	end
-end)

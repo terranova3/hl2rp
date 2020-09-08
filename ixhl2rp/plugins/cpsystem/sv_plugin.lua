@@ -21,8 +21,6 @@ function PLUGIN:AdjustPlayer(event, client)
             character:SetCustomClass("Civil Protection");
             netstream.Start(client, "RecalculateHUDObjectives", PLUGIN.socioStatus)
         end;
-
-        ix.charPanel.Update(client)
         
         client:ResetBodygroups()
         character:UpdateCPStatus();

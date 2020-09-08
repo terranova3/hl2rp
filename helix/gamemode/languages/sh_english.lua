@@ -346,15 +346,18 @@ LANGUAGE = {
 	optdObserverESP = "Shows the names and locations of each player in the server.",
 	optObserverShowItemESP = "ESP - Items",
 	optdObserverShowItemESP = "Shows the names and locations of each item on the server",
-
 	optObserverShowVendor = "ESP - Vendors",
 	optdObserverShowVendor = "Shows the names and locations of each vendor on the server",
 	optObserverHideLiterature = "ESP - Notepads & Paper",
 	optdObserverHideLiterature = "Shows the names and locations of each notepad/paper item on the server",
-
 	optFactionNameColor = "Show name as class color",
 	optdFactionNameColor = "A character's name will use its class color.",
-
+	optToggleAmbientFadeout = "Ambient Music Fadeout",
+	optdToggleAmbientFadeout = "Blends ambient music into idle music.",
+	optToggleAmbientMusic = "Ambient Music",
+	optdToggleAmbientMusic = "Enables ambient music.",
+	optToggleInventorySound = "Play inventory move sounds",
+	optdToggleInventorySound = "Toggles the inventory item moving sounds.",
 	opt24hourTime = "Use 24-hour time",
 	optd24hourTime = "Show timestamps in 24-hour time, rather than 12-hour time (AM/PM).",
 	optChatNotices = "Show notices in chat",

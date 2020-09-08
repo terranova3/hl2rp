@@ -24,7 +24,7 @@ function PLUGIN:GetPlayerDeathSound(client)
 end
 
 -- Called when the client is checking if it has access to see the character panel
-function PLUGIN:CharPanelShouldShow(client)
+function PLUGIN:CharPanelCanUse(client)
 	local faction = client:GetCharacter():GetFaction()
 
 	if(faction == FACTION_VORT or faction == FACTION_BIOTIC) then

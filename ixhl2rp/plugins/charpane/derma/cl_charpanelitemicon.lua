@@ -72,6 +72,15 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		invID = inventoryPanel.invID
 	end
 
+	if(item.dropSound and ix.option.Get("toggleInventorySound", false)) then
+		if(istable(item.dropSound)) then
+			local randomSound = item.dropSound[math.random(1, table.Count(item.dropSound))]
+			surface.PlaySound(randomSound)
+		else
+			surface.PlaySound(item.dropSound)
+		end
+	end
+	
 	net.Start("ixCharPanelTransfer")
 		net.WriteUInt(item.id, 32)
 		net.WriteUInt(invID, 32)
@@ -80,8 +89,8 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		net.WriteUInt(gridY or 0, 6)
 	net.SendToServer()
 
-	if(ix.gui.charpanel.slots[item.outfitCategory]) then
-		ix.gui.charpanel.slots[item.outfitCategory].isEmpty = true
+	if(ix.gui.charPanel.slots[item.outfitCategory]) then
+		ix.gui.charPanel.slots[item.outfitCategory].isEmpty = true
 	end
 end
 

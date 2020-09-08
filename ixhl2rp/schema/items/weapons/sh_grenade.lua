@@ -7,3 +7,4 @@ ITEM.classes = {CLASS_EOW}
 ITEM.width = 1
 ITEM.height = 1
 ITEM.noBusiness = true
+ITEM.isGrenade = true
