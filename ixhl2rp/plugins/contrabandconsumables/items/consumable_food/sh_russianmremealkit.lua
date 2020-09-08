@@ -5,8 +5,8 @@
 
 ITEM.name = "Russian MRE";
 ITEM.model = "models/kek1ch/ration_ru.mdl";
-ITEM.width = 1;
-ITEM.height = 2;
+ITEM.width = 2;
+ITEM.height = 1;
 ITEM.description = "Russian military meal kit. It comes with a set of cutlery.";
 ITEM.permit = "consumables";
 ITEM.price = 35;

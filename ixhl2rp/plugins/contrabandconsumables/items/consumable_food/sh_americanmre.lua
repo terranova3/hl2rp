@@ -5,8 +5,8 @@
 
 ITEM.name = "American MRE";
 ITEM.model = "models/mre_box_t3/mre_box_t3.mdl";
-ITEM.width = 1;
-ITEM.height	= 2;
+ITEM.width = 2;
+ITEM.height	= 1;
 ITEM.description = "An American mealkit, and boy, they know how to eat.";
 ITEM.permit = "consumables";
 ITEM.price = 30;
