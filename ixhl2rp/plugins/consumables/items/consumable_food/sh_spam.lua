@@ -13,3 +13,8 @@ ITEM.price = 10;
 ITEM.category = "Civil-Approved Food";
 ITEM.restoreHealth = 11;
 ITEM.flag = "f"
+ITEM.dropSound = {
+"terranova/ui/cannedfood1.wav",
+"terranova/ui/cannedfood2.wav",
+"terranova/ui/cannedfood3.wav",
+}

@@ -14,3 +14,9 @@ ITEM.capacity = 375
 ITEM.category = "Australian"
 ITEM.restoreStamina = 15;
 ITEM.flag = "z"
+
+ITEM.dropSound = {
+"terranova/ui/can1.wav",
+"terranova/ui/can2.wav",
+"terranova/ui/can3.wav",
+}

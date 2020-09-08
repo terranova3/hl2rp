@@ -12,3 +12,9 @@ ITEM.permit = "consumables";
 ITEM.price = 35;
 ITEM.restoreHealth = 10;
 ITEM.category = "Non-Approved Food";
+
+ITEM.dropSound = {
+"terranova/ui/movingchips1.wav",
+"terranova/ui/movingchips2.wav",
+"terranova/ui/movingchips3.wav",
+}

@@ -31,3 +31,8 @@ function ITEM:Combine(targetItem)
 	end
 end
 
+ITEM.dropSound = {
+"terranova/ui/movingalcohol1.wav",
+"terranova/ui/movingalcohol2.wav",
+"terranova/ui/movingalcohol3.wav",
+}
