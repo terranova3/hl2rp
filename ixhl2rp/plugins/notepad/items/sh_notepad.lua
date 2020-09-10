@@ -87,13 +87,3 @@ ITEM.functions.take.OnCanRun = function(item)
 
 	return IsValid(item.entity) and ((owner == 0 or owner == item.player:GetCharacter():GetID() or item:GetData("locked", false)))
 end
-
-function ITEM:PopulateTooltip(tooltip)
-	if(self:GetData("locked", true) == false) then
-		local data = tooltip:AddRow("data")
-		data:SetText("This notepad is unlocked, meaning other players can pick it up!")
-		data:SetBackgroundColor(derma.GetColor("Warning", data))
-		data:SetFont("ixPluginCharSubTitleFont")
-		data:SizeToContents()
-	end
-end
