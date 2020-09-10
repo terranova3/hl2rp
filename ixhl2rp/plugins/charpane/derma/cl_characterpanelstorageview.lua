@@ -104,7 +104,7 @@ function PANEL:SetStorageInventory(inventory)
 end
 
 function PANEL:SetStorageCharPanel(character, charPanel)
-	self.storageCharPanel:SetCharacter(character)
+	self.storageCharPanel:SetCharacter(character, charPanel)
 	
 	local x, y = self.storageInventory:GetPos()
 	x = (x - self.storageInventory:GetWide()) - 2

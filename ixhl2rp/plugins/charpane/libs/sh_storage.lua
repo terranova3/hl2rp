@@ -108,19 +108,19 @@ else
 
         local id = net.ReadUInt(32)
         local charID = net.ReadUInt(32)
-		local entity = net.ReadEntity()
+		local target = net.ReadEntity()
 		local name = net.ReadString()
 		local data = net.ReadTable()
 		local charData = net.ReadTable()
 
         local inventory = ix.item.inventories[id]
 		local charPanel = ix.charPanels[charID]
-		local character = ix.char.loaded[charID]
+		
+		local character = target:GetCharacter()
+		character.vars.groups = charData.groups
+		character.vars.skin = charData.skin
 
-		character.vars.data.groups = charData.groups
-		character.vars.data.skin = charData.skin
-
-		if (IsValid(entity) and inventory and inventory.slots and charPanel) then
+		if (IsValid(target) and inventory and inventory.slots and charPanel) then
 			local localInventory = LocalPlayer():GetCharacter():GetInventory()
 			local panel = vgui.Create("ixCharPanelStorageView")
 

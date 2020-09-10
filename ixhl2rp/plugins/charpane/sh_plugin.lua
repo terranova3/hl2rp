@@ -14,8 +14,13 @@ ix.util.IncludeDir(PLUGIN.folder .. "/meta", true);
 -- Called when the client is checking if it has access to see the character panel
 function PLUGIN:CharPanelCanUse(client)
 	local character = client:GetCharacter()
+	local inventoryItems = {}
 
-	for k, v in pairs(character:GetInventory():GetItems()) do
+	if(character:GetInventory()) then
+		inventoryItems = character:GetInventory():GetItems()
+	end
+
+	for k, v in pairs(inventoryItems) do
 		if(v.outfitCategory and v:GetData("equip") == true) then
 			return false
 		end
