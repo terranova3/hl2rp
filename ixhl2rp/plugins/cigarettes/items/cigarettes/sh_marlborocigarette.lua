@@ -11,4 +11,4 @@ ITEM.description = "Delicious, authentic, lung-killing addiction sticks. There's
 ITEM.category = "Contraband"
 ITEM.price = 5;
 ITEM.flag = "G"
-ITEM.time = 60
+ITEM.time = 300

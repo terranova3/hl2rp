@@ -123,9 +123,6 @@ function ITEM:CanTransfer(oldInventory, newInventory)
 	if (newInventory) then
 		local client = self:GetOwner()
 
-		self:SetData("equip", false)
-		self:SetData("lit", false)
-
 		if(client) then
 			client:RemovePart(self.uniqueID)
 		end

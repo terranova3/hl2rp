@@ -28,7 +28,7 @@ function PLUGIN:StartSmoking(character, item)
             return
         end
 
-        local newTime = math.Clamp(item:GetData("time") - 1, 0, 99999)
+        local newTime = math.Clamp(item:GetData("time", 0) - 1, 0, 99999)
         item:SetData("time", newTime)
 
         if(item:GetData("time") <= 0) then

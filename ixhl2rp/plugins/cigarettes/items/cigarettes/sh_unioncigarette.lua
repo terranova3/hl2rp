@@ -17,7 +17,7 @@ ITEM.description = "Something resembling the original deliciously flavoured deat
 ITEM.category = "Other"
 ITEM.flag = "g"
 ITEM.price = 3;
-ITEM.time = 90
+ITEM.time = 300
 ITEM.pacData = unlit
 ITEM.pacDataAlternate = lit
 
