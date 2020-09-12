@@ -119,18 +119,6 @@ if (CLIENT) then
 	end
 end
 
-function ITEM:CanTransfer(oldInventory, newInventory)
-	if (newInventory) then
-		local client = self:GetOwner()
-
-		if(client) then
-			client:RemovePart(self.uniqueID)
-		end
-	end
-
-	return true
-end
-
 function ITEM:OnRemoved()
 	local client = self:GetOwner()
 	
