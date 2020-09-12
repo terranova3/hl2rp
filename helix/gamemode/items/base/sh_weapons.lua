@@ -173,7 +173,7 @@ function ITEM:Equip(client, bNoSelect, bNoSound)
 
 		if (self.isGrenade) then
 			weapon:SetClip1(1)
-			client:SetAmmo(0, ammoType)
+			client:SetAmmo(1, ammoType)
 		else
 			weapon:SetClip1(self:GetData("ammo", 0))
 			client:SetAmmo(9999, ammoType)
