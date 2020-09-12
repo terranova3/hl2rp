@@ -1,6 +1,6 @@
 ITEM.name = "OSIPMR"
 ITEM.description = "A dark energy powered sniper rifle."
-ITEM.model = "models/weapons/w_assaultsniper.mdl"
+ITEM.model = "models/weapons/w_heavysniper.mdl"
 ITEM.class = "arccw_pulsesniper_tn"
 ITEM.weaponCategory = "primary"
 ITEM.classes = {CLASS_EOW}
