@@ -83,7 +83,7 @@ end
 
 -- Helper function to set the visibility of the slots.
 function PANEL:ToggleSlots(bShow)
-	for k, v in pairs(self.slots) do
+	for k, v in pairs(self.slots or {}) do
 		if(IsValid(v)) then
 			v:SetVisible(bShow)
 		end
