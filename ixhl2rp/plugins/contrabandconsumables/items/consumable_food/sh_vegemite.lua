@@ -13,3 +13,9 @@ ITEM.category = "Australian"
 ITEM.price = 20;
 ITEM.restoreHealth = 5;
 ITEM.flag = "z"
+
+ITEM.dropSound = {
+"terranova/ui/cannedfood1.wav",
+"terranova/ui/cannedfood2.wav",
+"terranova/ui/cannedfood3.wav",
+}

@@ -13,3 +13,9 @@ ITEM.category = "Australian"
 ITEM.price = 20;
 ITEM.restoreHealth = 5;
 ITEM.flag = "z"
+
+ITEM.dropSound = {
+"terranova/ui/movingchips1.wav",
+"terranova/ui/movingchips2.wav",
+"terranova/ui/movingchips3.wav",
+}

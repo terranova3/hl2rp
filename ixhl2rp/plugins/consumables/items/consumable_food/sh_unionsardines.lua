@@ -13,3 +13,8 @@ ITEM.permit = "consumables";
 ITEM.price = 9;
 ITEM.restoreHealth = 9;
 ITEM.flag = "f"
+ITEM.dropSound = {
+"terranova/ui/cannedfood1.wav",
+"terranova/ui/cannedfood2.wav",
+"terranova/ui/cannedfood3.wav",
+}

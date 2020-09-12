@@ -12,3 +12,9 @@ ITEM.permit = "consumables";
 ITEM.price = 3;
 ITEM.restoreStamina = 3;
 ITEM.category = "Non-Approved Food";
+
+ITEM.dropSound = {
+"terranova/ui/cannedfood1.wav",
+"terranova/ui/cannedfood2.wav",
+"terranova/ui/cannedfood3.wav",
+}
