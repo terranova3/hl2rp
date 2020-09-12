@@ -6,7 +6,7 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Scrap Metal"
+RECIPE.name = "Scrap Metal Can"
 RECIPE.category = "Smelting"
 RECIPE.station = "furnace"
 RECIPE.requirements = {
