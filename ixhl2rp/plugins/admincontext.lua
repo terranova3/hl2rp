@@ -193,17 +193,17 @@ properties.Add("ixSendTo", {
 		local submenu = option:AddSubMenu()
 		
 		submenu:AddOption("Brazil", function() self:MsgStart()
-			net.WriteEntity(entity)
+			net.WriteEntity(ent)
 			net.WriteInt(1,32)
 		self:MsgEnd() end )
 		
 		submenu:AddOption("Bermuda", function() self:MsgStart()
-			net.WriteEntity(entity)
+			net.WriteEntity(ent)
 			net.WriteInt(2,32)
 		self:MsgEnd() end )
 		
 		submenu:AddOption("Bosnia", function() self:MsgStart()
-			net.WriteEntity(entity)
+			net.WriteEntity(ent)
 			net.WriteInt(3,32)
 		self:MsgEnd() end )
 
