@@ -6,7 +6,7 @@
     Half-Life 2 Roleplay server. Please respect the developers.
 --]]
 
-RECIPE.name = "Axe"
+RECIPE.name = "Machete"
 RECIPE.category = "Melee"
 RECIPE.station = "workbench"
 RECIPE.blueprint = true
@@ -16,7 +16,7 @@ RECIPE.requirements = {
     ["plank"] = 1
 }
 RECIPE.results = {
-	["axe"] = 1
+	["machete"] = 1
 }
 RECIPE.tools = {
     "blow_torch",

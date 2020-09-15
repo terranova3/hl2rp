@@ -152,7 +152,7 @@ function PANEL:DoClick()
         local canCraft, error = self.recipe:CanCraft(client)
 
         if(canCraft) then
-            client:NotifyLocalized("Craft success!")
+            client:NotifyLocalized("Item has been crafted.")
 
             net.Start("ixRecipeCraft")
                 net.WriteString(self.recipe:GetUniqueID())

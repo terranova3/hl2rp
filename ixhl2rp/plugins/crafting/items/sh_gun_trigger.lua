@@ -1,5 +1,5 @@
 
-ITEM.name = "Tigger Part"
+ITEM.name = "Trigger Part"
 ITEM.model = Model("models/props_c17/utilityconnecter005.mdl")
 ITEM.description = "Parts for setting up the trigger for a firearm."
 ITEM.width = 1

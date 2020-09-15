@@ -30,7 +30,7 @@ ix.chat.Register("meL", {
 			chat.AddText(chatColor, "*** ", name, " ", text)
 		end
 	end,
-	CanHear = ix.config.Get("yellRange", 280) * 2,
+	CanHear = ix.config.Get("chatRange", 280) * 2,
 	prefix = {"/MeL", "/ActionL"},
 	description = "Perform a physical action loudly.",
 	indicator = "chatPerforming",
@@ -72,7 +72,7 @@ ix.chat.Register("itL", {
 	OnChatAdd = function(self, speaker, text)
 		chat.AddText(ix.config.Get("chatColor"), "*** "..text)
 	end,
-	CanHear = ix.config.Get("yellRange", 280) * 2,
+	CanHear = ix.config.Get("chatRange", 280) * 2,
 	prefix = {"/ItL"},
 	description = "Make something around you perform an action loudly.",
 	indicator = "chatPerforming",

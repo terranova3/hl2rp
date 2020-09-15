@@ -11,7 +11,7 @@ netstream.Hook("ixSaveBookChanges", function(client, itemID, text, markerOnly, m
 	local item = ix.item.instances[itemID]
  
 	-- we don't check for entity since data can be changed in the player's inventory
-	if (character and item and item.base == "base_book") then
+	if (character and item and item.base == "base_writablebook") then
 
 		if markerOnly then
 			local numberMarkerPos = tonumber(markerPos)
