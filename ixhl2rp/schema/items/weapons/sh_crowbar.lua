@@ -1,7 +1,7 @@
 ITEM.name = "Crowbar"
 ITEM.description = "A slightly rusty looking crowbar."
 ITEM.model = "models/weapons/w_crowbar.mdl"
-ITEM.class = "arccw_bottle_tn"
+ITEM.class = "arccw_crowbar_tn"
 ITEM.category = "Melee"
 ITEM.weaponCategory = "melee"
 ITEM.flag = "v"
