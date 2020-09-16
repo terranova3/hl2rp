@@ -68,7 +68,7 @@ function PANEL:InitCWU()
 	self.workerCount:SetFont("Trebuchet18")
 	self.workerCount:SetSortItems(false)
 	for i=1, PLUGIN.MaxWorkerCount do
-		// Add choices, select the first option.
+		-- Add choices, select the first option.
 		self.workerCount:AddChoice(i,i, i==1)
 	end
 
