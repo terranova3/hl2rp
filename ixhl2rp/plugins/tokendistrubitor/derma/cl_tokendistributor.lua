@@ -22,7 +22,7 @@ function PANEL:Init()
 	self.headerLbl:SetFont("ix_tokendistr_21")
 	self.headerLbl:SetText("Token Distributor")
 	self.headerLbl:SizeToContents()
-	local x,y = self.headerLbl:GetSize()
+	local x = self.headerLbl:GetSize()
 	self.headerLbl:SetPos(230-x/2, 40)
 	-- END -----------------------------------------------------------------
 end
@@ -119,7 +119,7 @@ function PANEL:Think()
 	self.statusLbl:SetText("Token Distributor is currently "..(isActive and "ONLINE" or "OFFLINE"))
 	self.statusLbl:SizeToContents()
 
-	local x,y = self.statusLbl:GetSize()
+	local x = self.statusLbl:GetSize()
 	self.statusLbl:SetPos(230-x/2, 100)
 
 	self.toggleBtn:SetText("Turn "..(isActive and "OFF" or "ON"))
