@@ -50,7 +50,7 @@ ITEM.pacData = {
 					["ClassName"] = "model2",
 					["IsDisturbing"] = false,
 					["ModelModifiers"] = "",
-					["Model"] = "models/weapons/arccw_ins2/w_m590.mdl",
+					["Model"] = "models/weapons/arccw_ins2/w_toz.mdl",
 				},
 			},
 		},

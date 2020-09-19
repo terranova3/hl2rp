@@ -49,7 +49,7 @@ ITEM.pacData = {
 					["ClassName"] = "model2",
 					["IsDisturbing"] = false,
 					["ModelModifiers"] = "",
-					["Model"] = "models/weapons/w_assaultsniper.mdl",
+					["Model"] = "models/weapons/w_heavysniper.mdl",
 				},
 			},
 		},
