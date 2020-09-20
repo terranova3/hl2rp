@@ -22,7 +22,7 @@ ITEM.dropSound = {
 
 ITEM.noBusiness = true
 ITEM.suppressed = function(itemTable)
-	local character = itemtable.player:GetCharacter()
+	local character = itemTable.player:GetCharacter()
 	local charPanel = character:GetCharPanel()
 
 	if(charPanel:HasEquipped()) then
