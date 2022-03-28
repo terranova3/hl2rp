@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://github.com/terranova3/hl2rp/">
-		<img src="https://i.gyazo.com/0ff1e7f57b5354f962b6d1a502f849db.png" alt="TERRANOVA" />
+		<img src="https://i.gyazo.com/fd67bfc54cdca73f9d8f7629fa1a6698.png" alt="TERRANOVA" />
 	</a>
 </p>
 
