@@ -53,24 +53,23 @@ Item-specific inventory move sounds
 Item pickup animations
 Languages
 Liquid items
-Variation token drop models
 Medical and Limb system
 New introduction
 New scoreboard
 Overhauled character menu and creation
-Overhauled viewdata
 Overwatch outfit change interface
 Permits
 Property system
 Scoreboard uses class names
 Shootable door handles
 Stackable items
-Smokeable Cigarettes
+Smokeable cigarettes
 Shaving and beard styling
 Toggleable faction-coloured chat
 Token distributor with different paygrades
 Undercover Civil Protection
 Vortigaunts
+Variation token drop models
 View data and unit records
 Writable books
 ```
