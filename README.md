@@ -16,16 +16,26 @@
 	</a>
 </p>
 
+
+## Why is this open-source?
+I don't really care for Garry's Mod anymore. There was alot of personal hard work that I put into this server and a lot of custom features that I think would benefit the rest of the community with the limited life left in the game. I can't guarantee code quality, interopability with other plugins or maintenence of any of the features present within the gamemode. Most of it is as-is, and I won't be providing support for it.
+
+There was a few framework edits required to achieve optional functionality. The HL2 RP gamemode should work with any latest version of HELIX, since any major changes such as the character panel, traits, liquids and character creation were baked directly with the schema.
+
 ## Features
 
-Rough list of custom features include:
+A list of custom features (but not limited to) include:
 
 ```bash
+Alternative PACData support
+Advanced crafting with blueprints and masteries
 Bodygroup slot support
 Books
 Character Panel
 Clothing
+Card identity system with job titles and wages
 Character traits
+Clockwork Admin ESP
 Civil Protection System
 Civil Protection Armory
 Custom notification framework
@@ -34,21 +44,35 @@ Custom item interact UI
 Drag and drop item interaction
 Enterprises and businesses
 Extended Factions
+Extended RP commands
 F1 menu
 Half-Life Alyx Voicelines
 Inventory UI updates
 Item icon UI extensions
+Item-specific inventory move sounds
+Item pickup animations
 Languages
 Liquid items
+Variation token drop models
 Medical and Limb system
 New introduction
 New scoreboard
 Overhauled character menu and creation
+Overhauled viewdata
+Overwatch outfit change interface
 Permits
 Property system
 Scoreboard uses class names
+Shootable door handles
+Stackable items
+Smokeable Cigarettes
+Shaving and beard styling
+Toggleable faction-coloured chat
+Token distributor for different paygrades
+Undercover Civil Protection
 Vortigaunts
 View data and unit records
+Writable books
 ```
 
 ## Usage
@@ -60,10 +84,10 @@ Any contributions to this repository should have proper commit names. Make use o
 
 ## License
 
+Copyright © 2022 Adolphus
 
-Copyright © 2020 Adolphus (<zacharyenriquee@gmail.com>)
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-This github repository is a part of the 'TERRA NOVA HL2RP' project.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-The project can not be copied, used and/or redistributed without the express
-permission of Adolphus. Any permission to copy, use and/or redistribute can be revoked at any time by the author.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
