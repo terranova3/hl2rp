@@ -68,7 +68,7 @@ Stackable items
 Smokeable Cigarettes
 Shaving and beard styling
 Toggleable faction-coloured chat
-Token distributor for different paygrades
+Token distributor with different paygrades
 Undercover Civil Protection
 Vortigaunts
 View data and unit records
