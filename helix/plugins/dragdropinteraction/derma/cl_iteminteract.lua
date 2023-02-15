@@ -14,9 +14,9 @@ local function InventoryAction(action, itemID, invID, data)
 	net.SendToServer()
 end
 
-function PLUGIN:CreateItemInteractionMenu(icon, menu, itemTable, inventory)
+function PLUGIN:CreateItemInteractionMenu(icon, menu, itemTable, inventory, isCharPanel)
     local interact = vgui.Create("ixItemInteract")
-    interact:Build(itemTable, inventory)
+    interact:Build(itemTable, inventory, isCharPanel or false)
 
     return true
 end
@@ -35,9 +35,11 @@ function PANEL:Init()
     self.options = {}
 end
 
-function PANEL:Build(itemTable, inventory)
+function PANEL:Build(itemTable, inventory, isCharPanel)
+    self.isCharPanel = isCharPanel
     self.inventory = inventory
     self.itemTable = itemTable
+    
     self.itemTable.player = LocalPlayer()
 
     local w = 128
@@ -134,7 +136,17 @@ function PANEL:AddOption(k, v)
         end
 
         if (send != false) then
-            InventoryAction(k, self.itemTable.id, self.inventory)
+            if(self.isCharPanel) then
+            	net.Start("ixCharPanelTransfer")
+                    net.WriteUInt(self.itemTable.id, 32)
+                    net.WriteUInt(0, 32)
+                    net.WriteUInt(self.inventory, 32)
+                    net.WriteUInt(gridX or 0, 6)
+                    net.WriteUInt(gridY or 0, 6)
+                net.SendToServer()
+            else
+                InventoryAction(k, self.itemTable.id, self.inventory)
+            end
         end
 
         self:Destroy()

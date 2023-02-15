@@ -44,6 +44,9 @@ function PANEL:OnMousePressed(code)
 		self:DragMousePress(code)
 
 		self.clickX, self.clickY = input.GetCursorPos()
+	elseif (code == MOUSE_RIGHT and self.DoRightClick) then
+		print("test")
+		self:DoRightClick()
 	end
 end
 
@@ -122,6 +125,26 @@ function PANEL:Paint(width, height)
 	surface.DrawRect(2, 2, width - 4, height - 4)
 
 	self:ExtraPaint(width, height)
+end
+
+function PANEL:DoRightClick()
+	local itemTable = self.itemTable
+	local charPanel = self.panelID
+
+	if (itemTable and charPanel) then
+		itemTable.player = LocalPlayer()
+
+		local menu = DermaMenu()
+		local override = hook.Run("CreateItemInteractionMenu", self, menu, itemTable, charPanel, true)
+
+		if (override == true) then
+			if (menu.Remove) then
+				menu:Remove()
+			end
+
+			return
+		end
+	end
 end
 
 vgui.Register("ixCharPanelItemIcon", PANEL, "SpawnIcon")
