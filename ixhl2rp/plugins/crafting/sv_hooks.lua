@@ -13,6 +13,34 @@ util.AddNetworkString("ixMasterProfession")
 util.AddNetworkString("ixRequestBlueprints")
 util.AddNetworkString("ixSendBlueprints")
 util.AddNetworkString("ixManageBlueprints")
+util.AddNetworkString("ixSplitStack")
+util.AddNetworkString("ixProcessSplit")
+
+function PLUGIN:SplitStack(client, id)
+    net.Start("ixSplitStack")
+        net.WriteInt(id, 32)
+    net.Send(client)
+end
+
+net.Receive("ixProcessSplit", function(length, client)
+	local id = net.ReadUInt(32)
+	local stacks = net.ReadUInt(8)
+
+    local character = client:GetCharacter()
+    local inventory = character:GetInventory()
+    
+    if(inventory:GetItemByID(id)) then
+        local item = inventory:GetItemByID(id)
+
+        stacks = math.Clamp(stacks, 1, item.maxStack-1)
+
+        item:RemoveStacks(stacks)
+
+        if (!inventory:Add(item.uniqueID, 1, {stack = stacks})) then
+            ix.item.Spawn(item.uniqueID, client, nil, nil, {stack = stacks})
+        end
+    end
+end)
 
 net.Receive("ixRequestBlueprints", function(length, client)
     local charID = net.ReadInt(32)
