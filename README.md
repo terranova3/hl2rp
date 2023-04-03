@@ -76,7 +76,7 @@ Writable books
 
 ## Usage
 
-Can be used in both Singleplayer and Multiplayer. Database can be ran through SQLite or a MySQL server w/ mysqloo modules installed.
+Can be used in both Singleplayer and Multiplayer. Database can only utillise a MySQL server w/ mysqloo modules installed. SQLite is not compatible.
 
 ## Contribution
 Any contributions to this repository should have proper commit names. Make use of the appropriate tags 'FIX, UPDATE or ADDITION' before any commit you push.
